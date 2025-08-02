@@ -1052,7 +1052,9 @@
             .attr("fill", "#fff")
             .attr("stroke", "#333")
             .attr("stroke-width", 1)
-            .attr("cursor", "pointer");
+            .attr("cursor", "pointer")
+            .append("title")
+            .text("Collapse module");
             
             group.append("text")
             .attr("class", "collapse-icon_${unique_id}")
@@ -1316,7 +1318,9 @@
             .attr("fill", "#fff")
             .attr("stroke", "#333")
             .attr("stroke-width", 1)
-            .attr("cursor", "pointer");
+            .attr("cursor", "pointer")
+            .append("title")
+            .text("Expand module");
         
             nodeGroup.append("text")
             .attr("class", "collapse-icon_${unique_id}")
@@ -1364,7 +1368,9 @@
             .attr("fill", "#fff")
             .attr("stroke", "#333")
             .attr("stroke-width", 1)
-            .attr("cursor", "pointer");
+            .attr("cursor", "pointer")
+            .append("title")
+            .text("Show info");
 
             // Add info button icon
             nodeGroup.append("text")
