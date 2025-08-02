@@ -713,7 +713,7 @@ def plot_graph(adj_list, module_info, func_info, node_to_module_path, parent_mod
         'jsoneditor_source': jsoneditor_source,
         'collapse_modules_after_depth': collapse_modules_after_depth,
         'node_to_module_path': node_to_module_path,
-        'height': height if not generate_image else 0,
+        'height': f'{height}px' if not generate_image else '0px',
         'generate_image': 'true' if generate_image else 'false',
     })
     display(HTML(output))
@@ -738,15 +738,15 @@ def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_dept
         exception = e
 
     unique_id = str(uuid.uuid4())
-    template_str = resources.read_text('torchvista.templates', 'demo-graph.html')
+    graph_template_str = resources.read_text('torchvista.templates', 'graph.html')
     d3_source = resources.read_text('torchvista.assets', 'd3.min.js')
     viz_source = resources.read_text('torchvista.assets', 'viz-standalone.js')
     jsoneditor_css = resources.read_text('torchvista.assets', 'jsoneditor-10.2.0.min.css')
     jsoneditor_source = resources.read_text('torchvista.assets', 'jsoneditor-10.2.0.min.js')
 
-    template = Template(template_str)
-        
-    output = template.safe_substitute({
+    template = Template(graph_template_str)
+    
+    graph_output = template.safe_substitute({
         'adj_list_json': json.dumps(adj_list),
         'module_info_json': json.dumps(module_info),
         'func_info_json': json.dumps(func_info),
@@ -757,13 +757,24 @@ def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_dept
         'unique_id': unique_id,
         'd3_source': d3_source,
         'viz_source': viz_source,
-        'code_contents': code_contents,
-        'error_contents': str(exception) if exception else "",
         'jsoneditor_css': jsoneditor_css,
         'jsoneditor_source': jsoneditor_source,
         'collapse_modules_after_depth': collapse_modules_after_depth,
         'node_to_module_path': node_to_module_path,
+        'generate_image': 'false',
+        'height': '95%',
     })
+
+    template_str = resources.read_text('torchvista.templates', 'demo-graph.html')
+    template = Template(template_str)
+    output = template.safe_substitute({
+        'graph_html': graph_output,
+        'code_contents': code_contents,
+        'error_contents': str(exception) if exception else "",
+    })
+    # write output to a tmp file
+    # with open(f'torchvista_demo_{unique_id}.html', 'w') as f:
+    #     f.write(output)
     return output, exception
 
 
