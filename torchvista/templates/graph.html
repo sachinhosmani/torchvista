@@ -183,27 +183,44 @@
                 font-size: 4px;
                 font-family: "'Roboto', sans-serif";
             }
-            
-            .collapse-button_${unique_id}:hover {
+                        
+            .collapse-button_${unique_id}, .info-button_${unique_id} {
+                fill: #fff;
+                stroke: #333;
+                stroke-width: 1px;
+                cursor: pointer;
+            }
+
+            .collapse-button_${unique_id}:hover, .info-button_${unique_id}:hover {
                 fill: #eee;
                 cursor: pointer;
             }
-            .collapse-icon_${unique_id} {
+
+            .collapse-icon_${unique_id}, .info-icon_${unique_id} {
                 pointer-events: none;
                 user-select: none;
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
                 fill: rgb(51, 51, 51);
             }
 
-            .info-button_${unique_id}:hover {
-                fill: #eee;
-                cursor: pointer;
+            .collapse-button-disabled_${unique_id} {
+                fill: #eee5;
+                stroke: #3333334f;
+                stroke-width: 1px;
+                cursor: not-allowed;
             }
-            .info-icon_${unique_id} {
+
+            .collapse-button-disabled_${unique_id}:hover {
+                fill: #eee6;
+                cursor: not-allowed;
+            }
+
+            .collapse-icon-disabled_${unique_id} {
                 pointer-events: none;
                 user-select: none;
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                fill: rgb(51, 51, 51);
+                fill: #3333334f;
+                cursor: not-allowed;
             }
 
             /* Edge hover styles */
@@ -1048,11 +1065,7 @@
             .attr("class", "collapse-button_${unique_id}")
             .attr("cx", x1 + 10)
             .attr("cy", y1 + 10)
-            .attr("r", 6)
-            .attr("fill", "#fff")
-            .attr("stroke", "#333")
-            .attr("stroke-width", 1)
-            .attr("cursor", "pointer")
+            .attr("r", 5.5)
             .append("title")
             .text("Collapse module");
             
@@ -1063,7 +1076,6 @@
             .attr("text-anchor", "middle")
             .attr("dominant-baseline", "middle")
             .attr("font-size", "10px")
-            .attr("cursor", "pointer")
             .text("-");
         });
 
@@ -1300,55 +1312,6 @@
             return (adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName)) ? "Module" : "Tensor Op";
         });
 
-        // Add collapse/expand buttons to collapsed container nodes
-        inner.selectAll(".node_${unique_id}")
-        .filter(function([nodeName]) {
-            return collapsedContainers.has(nodeName);
-        })
-        .each(function([nodeName, nodeData]) {
-            const nodeGroup = d3.select(this);
-            const width = nodeData.width;
-            const height = nodeData.height;        
-            // Add collapse/expand button (with "+" since it's collapsed)
-            nodeGroup.append("circle")
-            .attr("class", "collapse-button_${unique_id}")
-            .attr("cx", -width/2 + 8)
-            .attr("cy", -height/2 + 8)
-            .attr("r", 6)
-            .attr("fill", "#fff")
-            .attr("stroke", "#333")
-            .attr("stroke-width", 1)
-            .attr("cursor", "pointer")
-            .append("title")
-            .text("Expand module");
-        
-            nodeGroup.append("text")
-            .attr("class", "collapse-icon_${unique_id}")
-            .attr("x", -width/2 + 8)
-            .attr("y", -height/2 + 8) 
-            .attr("text-anchor", "middle")
-            .attr("dominant-baseline", "middle")
-            .attr("font-size", "10px")
-            .attr("cursor", "pointer")
-            .text("+");
-            
-            // Add click handler using the existing reloadGraph function
-            nodeGroup.selectAll(".collapse-button_${unique_id}, .collapse-icon_${unique_id}")
-            .on("click", function(event) {
-                event.stopPropagation();
-                
-                // Always expanding when clicked (since these are collapsed containers)
-                collapsedContainers.delete(nodeName);
-
-                // Track this container and operation for centering after reload
-                lastModifiedContainer = nodeName;
-                lastOperation = "expand";
-                
-                // Use the existing reloadGraph function
-                reloadGraph();
-            });
-        });    
-
         // Add info buttons to nodes (except input, output, constant)
         inner.selectAll(".node_${unique_id}")
         .filter(function([nodeName]) {
@@ -1362,26 +1325,21 @@
             // Add info button circle
             nodeGroup.append("circle")
             .attr("class", "info-button_${unique_id}")
-            .attr("cx", width/2 - 8)
-            .attr("cy", -height/2 + 8)
-            .attr("r", 6)
-            .attr("fill", "#fff")
-            .attr("stroke", "#333")
-            .attr("stroke-width", 1)
-            .attr("cursor", "pointer")
+            .attr("cx", width/2 - 7)
+            .attr("cy", -height/2 + 7)
+            .attr("r", 5.5)
             .append("title")
             .text("Show info");
 
             // Add info button icon
             nodeGroup.append("text")
             .attr("class", "info-icon_${unique_id}")
-            .attr("x", width/2 - 8)
+            .attr("x", width/2 - 7)
             .attr("y", -height/2 + 8)
             .attr("text-anchor", "middle")
             .attr("dominant-baseline", "middle")
             .attr("font-size", "8px")
             .attr("font-weight", "bold")
-            .attr("cursor", "pointer")
             .text("i");
             
         // Add click handler to info button
@@ -1393,6 +1351,68 @@
             });
         });
 
+        // Add expand buttons to all module nodes (including non-expandable ones)
+        inner.selectAll(".node_${unique_id}")
+        .filter(function([nodeName]) {
+            return (adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || collapsedContainers.has(nodeName);
+        })
+        .each(function([nodeName, nodeData]) {
+            const nodeGroup = d3.select(this);
+            const width = nodeData.width;
+            const height = nodeData.height;
+            
+            // Check if this module is expandable (has children)
+            const isExpandable = collapsedContainers.has(nodeName);
+            
+            // Calculate depth of this node
+            let depth = 0;
+            let currentNode = nodeName;
+            while (ancestor_map[currentNode]) {
+                depth++;
+                currentNode = ancestor_map[currentNode];
+            }
+            
+            // Add expand button circle
+            const expandButton = nodeGroup.append("circle")
+            .attr("class", isExpandable ? "collapse-button_${unique_id}" : "collapse-button-disabled_${unique_id}")
+            .attr("cx", -width / 2 + 7)
+            .attr("cy", -height / 2 + 7)
+            .attr("r", 5.5)
+            .attr("stroke-width", 1);
+
+
+            // Add expand button icon
+            nodeGroup.append("text")
+            .attr("class", isExpandable ? "collapse-icon_${unique_id}" : "collapse-icon-disabled_${unique_id}")
+            .attr("x", -width / 2 + 7)
+            .attr("y", -height / 2 + 7)
+            .attr("text-anchor", "middle")
+            .attr("dominant-baseline", "middle")
+            .attr("font-size", "10px")
+            .text("+");
+
+            expandButton.append("title")
+            .text(isExpandable ? "Expand module" : `Call with forced_module_tracing_depth = ${depth + 1} or more to expand this module`);
+            
+            // Only add click handler for expandable modules
+            if (isExpandable) {
+                nodeGroup.selectAll(".collapse-button_${unique_id}, .collapse-icon_${unique_id}")
+                .on("click", function(event) {
+                    event.stopPropagation();
+                    
+                    // Expand the module
+                    collapsedContainers.delete(nodeName);
+
+                    // Track this container and operation for centering after reload
+                    lastModifiedContainer = nodeName;
+                    lastOperation = "expand";
+                    
+                    // Use the existing reloadGraph function
+                    reloadGraph();
+                });
+            }
+        });
+        
         // Add hover effects
         nodes.each(function() {
             const nodeGroup = d3.select(this);
