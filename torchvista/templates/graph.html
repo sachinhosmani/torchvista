@@ -27,319 +27,335 @@
     </div>
 
     <style>
-            .node_${unique_id} rect {
-                stroke: #333;
-                fill: #fff;
-            }
-            text.node-label_${unique_id} {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                cursor: default;
-                user-select: none;
-            }
-            text.type-indicator_${unique_id} {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                cursor: default;
-                user-select: none;
-            }
-            text.collapse-icon_${unique_id} {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                font-size: 14px
-                cursor: default;
-                user-select: none;
-            }
-            .edge_${unique_id} {
-                stroke: #797979;
-                fill: none;
-            }
-            .node_${unique_id} rect.input_${unique_id} { fill: #FF9AFF; }
-            .node_${unique_id} rect.constant_${unique_id} { fill: rgb(235 235 235); }
+        .node_${unique_id} rect {
+            stroke: #333;
+            fill: #fff;
+        }
+        text.node-label_${unique_id} {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            cursor: default;
+            user-select: none;
+        }
+        text.type-indicator_${unique_id} {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            cursor: default;
+            user-select: none;
+        }
+        text.collapse-icon_${unique_id} {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 14px
+            cursor: default;
+            user-select: none;
+        }
+        .edge_${unique_id} {
+            stroke: #797979;
+            fill: none;
+        }
+        .node_${unique_id} rect.input_${unique_id} { fill: #FF9AFF; }
+        .node_${unique_id} rect.constant_${unique_id} { fill: rgb(235 235 235); }
 
-            .node_${unique_id} rect.output_${unique_id} { fill: #74e071; }
-            .node_${unique_id} rect.failed_${unique_id} { fill: rgb(224 15 15); }
-            .node_${unique_id} rect.module_${unique_id} { fill: #8BDEDB; }
-            .node_${unique_id} rect.operation_${unique_id} { fill: #FEBC5A; }
-            .edgeLabelGroup_${unique_id} {
-                pointer-events: none;
-            }
-            #arrowhead_${unique_id} path {
-                fill: #333333;;
-            }
-            .node_${unique_id} rect,
-            .node_${unique_id} ellipse {
-                transition: fill 0.3s ease;
-            }
+        .node_${unique_id} rect.output_${unique_id} { fill: #74e071; }
+        .node_${unique_id} rect.failed_${unique_id} { fill: rgb(224 15 15); }
+        .node_${unique_id} rect.module_${unique_id} { fill: #8BDEDB; }
+        .node_${unique_id} rect.operation_${unique_id} { fill: #FEBC5A; }
+        .edgeLabelGroup_${unique_id} {
+            pointer-events: none;
+        }
+        #arrowhead_${unique_id} path {
+            fill: #333333;;
+        }
+        .node_${unique_id} rect,
+        .node_${unique_id} ellipse {
+            transition: fill 0.3s ease;
+        }
 
-            .node_${unique_id} .type-indicator_${unique_id} {
-                font-size: 5px;
-                fill: rgba(0, 0, 0, 1.0);  /* Dark grey, semi-transparent */
-                pointer-events: none;
-            }
+        .node_${unique_id} .type-indicator_${unique_id} {
+            font-size: 5px;
+            fill: rgba(0, 0, 0, 1.0);  /* Dark grey, semi-transparent */
+            pointer-events: none;
+        }
 
-            .node_${unique_id}.error_${unique_id} rect {
-                stroke: black;
+        .node_${unique_id}.error_${unique_id} rect {
+            stroke: black;
+            stroke-width: 1px;
+        }
+
+        .boundary-box_${unique_id}.error_${unique_id} > rect:first-of-type {
+            fill: red;
+            fill-opacity: 0.2;
+        }
+
+        #graph-container_${unique_id} {
+            position: relative;
+            height: ${height};
+            overflow: hidden;
+        }
+
+        #graph_${unique_id} {
+            height: 100%;
+        }
+        
+        .popup_${unique_id} {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            width: 500px;
+            resize: horizontal;
+            overflow: auto;
+            max-height: 70%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .popup-header_${unique_id} {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 5px 10px;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .popup_${unique_id} h3 {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .popup-content_${unique_id} {
+            padding: 10px;
+            padding-bottom: 10px;
+            overflow-y: auto;
+            overflow-x: auto;
+            flex-grow: 1;
+        }
+
+        .popup_${unique_id} pre {
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        .popup-close_${unique_id} {
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        #popup-title_${unique_id} {
+            font-size: 16px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: black;
+        }
+
+        #graph-container_${unique_id} {
+            position: relative;
+        }
+
+        #graph-container_${unique_id} pre {
+            margin-bottom: 0;
+        }
+
+        .boundary-box_${unique_id} rect {
+            pointer-events: none;
+        }
+        .boundary-box_${unique_id} text {
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .boundary-box_${unique_id} rect {
+            pointer-events: none;
+        }
+        .boundary-box_${unique_id} text {
+            pointer-events: none;
+            user-select: none;
+            font-weight: bold;
+        }
+        .edge-label_${unique_id} text {
+            pointer-events: none;
+            user-select: none;
+            font-size: 4px;
+            font-family: "'Roboto', sans-serif";
+        }
+                    
+        .collapse-button_${unique_id}, .info-button_${unique_id} {
+            fill: #fff;
+            stroke: #333;
+            stroke-width: 1px;
+            cursor: pointer;
+        }
+
+        .collapse-button_${unique_id}:hover, .info-button_${unique_id}:hover {
+            fill: #eee;
+            cursor: pointer;
+        }
+
+        .collapse-icon_${unique_id}, .info-icon_${unique_id} {
+            pointer-events: none;
+            user-select: none;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            fill: rgb(51, 51, 51);
+        }
+
+        .collapse-button-disabled_${unique_id} {
+            fill: #eee5;
+            stroke: #3333334f;
+            stroke-width: 1px;
+            cursor: not-allowed;
+        }
+
+        .collapse-button-disabled_${unique_id}:hover {
+            fill: #eee6;
+            cursor: not-allowed;
+        }
+
+        .collapse-icon-disabled_${unique_id} {
+            pointer-events: none;
+            user-select: none;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            fill: #3333334f;
+            cursor: not-allowed;
+        }
+
+        /* Edge hover styles */
+        .edge-group_${unique_id} path {
+            pointer-events: stroke;
+        }
+
+        .edge-label_${unique_id} {
+            pointer-events: all;
+        }
+
+        @keyframes containerHighlight {
+            0% { 
+                filter: drop-shadow(0 0 0px rgba(255, 215, 0, 0));
+            }
+            25% { 
+                filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
+            }
+            50% { 
+                filter: drop-shadow(0 0 0px rgba(255, 215, 0, 0));
+            }
+            75% { 
+                filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
+            }
+            100% { 
+                filter: drop-shadow(0 0 0px rgba(255, 215, 0, 0));
+            }
+        }
+
+        @keyframes containerStrokeHighlight {
+            0% { 
                 stroke-width: 1px;
             }
-
-            .boundary-box_${unique_id}.error_${unique_id} > rect:first-of-type {
-                fill: red;
-                fill-opacity: 0.2;
+            25% { 
+                stroke-width: 3px;
             }
-
-            #graph-container_${unique_id} {
-                position: relative;
-                height: ${height};
-                overflow: hidden;
-            }
-
-            #graph_${unique_id} {
-                height: 100%;
-            }
-            
-            .popup_${unique_id} {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                position: absolute;
-                background: white;
-                border: 1px solid #ccc;
-                width: 500px;
-                resize: horizontal;
-                overflow: auto;
-                max-height: 70%;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-                display: none;
-                display: flex;
-                flex-direction: column;
-            }
-
-            .popup-header_${unique_id} {
-                position: sticky;
-                top: 0;
-                background: white;
-                padding: 5px 10px;
-                border-bottom: 1px solid #ccc;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                z-index: 1;
-            }
-
-            .popup_${unique_id} h3 {
-                margin: 0;
-                font-size: 16px;
-            }
-
-            .popup-content_${unique_id} {
-                padding: 10px;
-                padding-bottom: 10px;
-                overflow-y: auto;
-                overflow-x: auto;
-                flex-grow: 1;
-            }
-
-            .popup_${unique_id} pre {
-                white-space: pre;
-                overflow-x: auto;
-            }
-
-            .popup-close_${unique_id} {
-                cursor: pointer;
-                font-size: 24px;
-                font-weight: bold;
-                line-height: 1;
-            }
-
-            #popup-title_${unique_id} {
-                font-size: 16px;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                color: black;
-            }
-
-            #graph-container_${unique_id} {
-                position: relative;
-            }
-
-            #graph-container_${unique_id} pre {
-                margin-bottom: 0;
-            }
-
-            .boundary-box_${unique_id} rect {
-                pointer-events: none;
-            }
-            .boundary-box_${unique_id} text {
-                pointer-events: none;
-                user-select: none;
-            }
-
-            .boundary-box_${unique_id} rect {
-                pointer-events: none;
-            }
-            .boundary-box_${unique_id} text {
-                pointer-events: none;
-                user-select: none;
-                font-weight: bold;
-            }
-            .edge-label_${unique_id} text {
-                pointer-events: none;
-                user-select: none;
-                font-size: 4px;
-                font-family: "'Roboto', sans-serif";
-            }
-                        
-            .collapse-button_${unique_id}, .info-button_${unique_id} {
-                fill: #fff;
-                stroke: #333;
+            50% { 
                 stroke-width: 1px;
-                cursor: pointer;
             }
-
-            .collapse-button_${unique_id}:hover, .info-button_${unique_id}:hover {
-                fill: #eee;
-                cursor: pointer;
+            75% { 
+                stroke-width: 3px;
             }
-
-            .collapse-icon_${unique_id}, .info-icon_${unique_id} {
-                pointer-events: none;
-                user-select: none;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                fill: rgb(51, 51, 51);
-            }
-
-            .collapse-button-disabled_${unique_id} {
-                fill: #eee5;
-                stroke: #3333334f;
+            100% { 
                 stroke-width: 1px;
-                cursor: not-allowed;
             }
+        }
 
-            .collapse-button-disabled_${unique_id}:hover {
-                fill: #eee6;
-                cursor: not-allowed;
-            }
+        .highlight-cluster_${unique_id} > rect:first-of-type {
+            animation: 
+                containerStrokeHighlight 2.0s ease-in-out forwards;
+        }
 
-            .collapse-icon-disabled_${unique_id} {
-                pointer-events: none;
-                user-select: none;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                fill: #3333334f;
-                cursor: not-allowed;
-            }
+        .highlight-node_${unique_id} rect {
+            animation: 
+                containerStrokeHighlight 2.0s ease-in-out forwards;
+        }
 
-            /* Edge hover styles */
-            .edge-group_${unique_id} path {
-               pointer-events: stroke;
-            }
+        text.node-label_${unique_id} {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 0.8rem;  /* Base size using rem units for accessibility */
+            cursor: default;
+            user-select: none;
+        }
 
-            .edge-label_${unique_id} {
-                pointer-events: all;
-            }
+        .node_${unique_id}.constant_${unique_id} .node-label_${unique_id} {
+            font-size: 0.7rem;
+        }
 
-            @keyframes containerHighlight {
-                0% { 
-                    filter: drop-shadow(0 0 0px rgba(255, 215, 0, 0));
-                }
-                25% { 
-                    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
-                }
-                50% { 
-                    filter: drop-shadow(0 0 0px rgba(255, 215, 0, 0));
-                }
-                75% { 
-                    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
-                }
-                100% { 
-                    filter: drop-shadow(0 0 0px rgba(255, 215, 0, 0));
-                }
-            }
+        .popup-content_${unique_id} summary {
+            cursor: pointer;
+            margin: 5px;
+            user-select: none;
+        }
 
-            @keyframes containerStrokeHighlight {
-                0% { 
-                    stroke-width: 1px;
-                }
-                25% { 
-                    stroke-width: 3px;
-                }
-                50% { 
-                    stroke-width: 1px;
-                }
-                75% { 
-                    stroke-width: 3px;
-                }
-                100% { 
-                    stroke-width: 1px;
-                }
-            }
+        .node_${unique_id}.input_${unique_id} rect,
+        .node_${unique_id}.output_${unique_id} rect,
+        .node_${unique_id}.constant_${unique_id} rect {
+            stroke-width: 1px;
+            rx: 8px;
+            ry: 8px;
+            stroke-dasharray: none;
+        }
 
-            .highlight-cluster_${unique_id} > rect:first-of-type {
-                animation: 
-                    containerStrokeHighlight 2.0s ease-in-out forwards;
-            }
+        #png-error-container_${unique_id} {
+            text-align: center;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            font-size: 14px;
+        }
 
-            .highlight-node_${unique_id} rect {
-                animation: 
-                    containerStrokeHighlight 2.0s ease-in-out forwards;
-            }
+        #png-error-message_${unique_id} {
+            padding: 8px 16px;
+            background-color: #dc3545;
+            color: white;
+            border-radius: 4px;
+            display: inline-block;
+            font-family: monospace;
+            white-space: pre-wrap;
+            text-align: left;
+        }
 
-            text.node-label_${unique_id} {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                font-size: 0.8rem;  /* Base size using rem units for accessibility */
-                cursor: default;
-                user-select: none;
-            }
+        #png-link-container_${unique_id} {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            font-size: 18px;
+        }
 
-            .node_${unique_id}.constant_${unique_id} .node-label_${unique_id} {
-                font-size: 0.7rem;
-            }
+        #png-download-button_${unique_id} {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
 
-            .popup-content_${unique_id} summary {
-                cursor: pointer;
-                margin: 5px;
-                user-select: none;
-            }
+        #png-download-button_${unique_id}:hover {
+            background-color: #0056b3;
+        }
 
-            .node_${unique_id}.input_${unique_id} rect,
-            .node_${unique_id}.output_${unique_id} rect,
-            .node_${unique_id}.constant_${unique_id} rect {
-                stroke-width: 1px;
-                rx: 8px;
-                ry: 8px;
-                stroke-dasharray: none;
-            }
-
-            #png-error-container_${unique_id} {
-                text-align: center;
-                padding: 10px;
-                border-bottom: 1px solid #ccc;
-                font-size: 14px;
-            }
-
-            #png-error-message_${unique_id} {
-                padding: 8px 16px;
-                background-color: #dc3545;
-                color: white;
-                border-radius: 4px;
-                display: inline-block;
-                font-family: monospace;
-                white-space: pre-wrap;
-                text-align: left;
-            }
-
-            #png-link-container_${unique_id} {
-                padding: 10px;
-                border-bottom: 1px solid #ccc;
-                font-size: 18px;
-            }
-
-            #png-download-button_${unique_id} {
-                display: inline-block;
-                padding: 8px 16px;
-                background-color: #007bff;
-                color: white;
-                text-decoration: none;
-                border-radius: 4px;
-            }
-
-            #png-download-button_${unique_id}:hover {
-                background-color: #0056b3;
-            }
+        .custom-tooltip_${unique_id} {
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 6px 8px;
+            font-size: 12px;
+            font-family: inherit;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            pointer-events: none;
+            max-width: 250px;
+            word-wrap: break-word;
+            display: none;
+        }
     </style>
     
     <script>
@@ -425,6 +441,57 @@
             });
         } else {
             setTimeout(function() { waitForLibs(callback) }, 400);
+        }
+    }
+
+    let currentTooltip = null;
+
+    function createTooltip(text) {
+        removeTooltip();
+        
+        const tooltip = document.createElement('div');
+        tooltip.className = `custom-tooltip_${unique_id}`;
+        tooltip.textContent = text;
+        
+        const container = document.getElementById(`graph-container_${unique_id}`);
+        container.appendChild(tooltip);
+        currentTooltip = tooltip;
+        
+        return tooltip;
+    }
+
+    function positionTooltip(tooltip, buttonElement) {
+        // Get the button's position in screen coordinates
+        const buttonRect = buttonElement.getBoundingClientRect();
+        
+        // Get the container's position in screen coordinates
+        const containerRect = document.getElementById(`graph-container_${unique_id}`).getBoundingClientRect();
+        
+        // Calculate position relative to container
+        const buttonX = buttonRect.left + (buttonRect.width / 2) - containerRect.left;
+        const buttonY = buttonRect.top - containerRect.top;
+        
+        // Show tooltip to measure its size
+        tooltip.style.display = 'block';
+        const tooltipRect = tooltip.getBoundingClientRect();
+        
+        // Position tooltip centered above button
+        const left = buttonX - (tooltipRect.width / 2);
+        const top = buttonY - tooltipRect.height - 6; // 6px gap above button
+        
+        tooltip.style.left = `${left}px`;
+        tooltip.style.top = `${top}px`;
+    }
+
+    function showTooltip(buttonElement, text) {
+        const tooltip = createTooltip(text);
+        positionTooltip(tooltip, buttonElement);
+    }
+
+    function removeTooltip() {
+        if (currentTooltip) {
+            currentTooltip.remove();
+            currentTooltip = null;
         }
     }
 
@@ -993,6 +1060,7 @@
 
         // Add zoom behavior
         const zoom = d3.zoom().on("zoom", function(event) {
+            removeTooltip();
             inner.attr("transform", event.transform);
             closePopup();
         });
@@ -1061,14 +1129,12 @@
             .attr("stroke-linejoin", "round");
                         
             // Add collapse/expand button
-            group.append("circle")
+            const collapseButton = group.append("circle")
             .attr("class", "collapse-button_${unique_id}")
             .attr("cx", x1 + 10)
             .attr("cy", y1 + 10)
-            .attr("r", 5.5)
-            .append("title")
-            .text("Collapse module");
-            
+            .attr("r", 5.5);
+
             group.append("text")
             .attr("class", "collapse-icon_${unique_id}")
             .attr("x", x1 + 10)
@@ -1077,12 +1143,19 @@
             .attr("dominant-baseline", "middle")
             .attr("font-size", "10px")
             .text("-");
+
+            // Add custom tooltip events
+            collapseButton.on("mouseenter", function() {
+                showTooltip(this, "Collapse module");
+            })
+            .on("mouseleave", removeTooltip);
         });
 
         // Add click event handler for collapse buttons
         clusters.selectAll(".collapse-button_${unique_id}, .collapse-icon_${unique_id}")
         .on("click", function(event, [clusterName, clusterData]) {
             event.stopPropagation(); // Prevent event from bubbling to SVG
+            removeTooltip();
             // Collapse the container
             collapsedContainers.add(clusterName);
             
@@ -1091,7 +1164,6 @@
             lastOperation = "collapse";
             reloadGraph();
         });
-
         
         // Create edges using the path points from Graphviz
         const edges = inner.selectAll(".edge_${unique_id}")
@@ -1322,26 +1394,30 @@
             const width = nodeData.width;
             const height = nodeData.height;
             
-            // Add info button circle
-            nodeGroup.append("circle")
-            .attr("class", "info-button_${unique_id}")
-            .attr("cx", width/2 - 7)
-            .attr("cy", -height/2 + 7)
-            .attr("r", 5.5)
-            .append("title")
-            .text("Show info");
+        // Add info button circle
+        const infoButton = nodeGroup.append("circle")
+        .attr("class", "info-button_${unique_id}")
+        .attr("cx", width/2 - 7)
+        .attr("cy", -height/2 + 7)
+        .attr("r", 5.5);
 
-            // Add info button icon
-            nodeGroup.append("text")
-            .attr("class", "info-icon_${unique_id}")
-            .attr("x", width/2 - 7)
-            .attr("y", -height/2 + 8)
-            .attr("text-anchor", "middle")
-            .attr("dominant-baseline", "middle")
-            .attr("font-size", "8px")
-            .attr("font-weight", "bold")
-            .text("i");
-            
+        // Add info button icon
+        nodeGroup.append("text")
+        .attr("class", "info-icon_${unique_id}")
+        .attr("x", width/2 - 7)
+        .attr("y", -height/2 + 8)
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "middle")
+        .attr("font-size", "8px")
+        .attr("font-weight", "bold")
+        .text("i");
+
+        // Add custom tooltip
+        infoButton.on("mouseenter", function() {
+            showTooltip(this, "Show info");
+        })
+        .on("mouseleave", removeTooltip);
+
         // Add click handler to info button
             nodeGroup.selectAll(".info-button_${unique_id}, .info-icon_${unique_id}")
             .on("click", function(event) {
@@ -1391,14 +1467,22 @@
             .attr("font-size", "10px")
             .text("+");
 
-            expandButton.append("title")
-            .text(isExpandable ? "Expand module" : `Call with forced_module_tracing_depth = ${depth + 1} or more to expand this module`);
-            
+            // Add custom tooltip
+            const tooltipText = isExpandable ? 
+                "Expand module" : 
+                `Call with forced_module_tracing_depth=${depth + 1} or more to make this module expandable`;
+
+            expandButton.on("mouseenter", function() {
+                showTooltip(this, tooltipText);
+            })
+            .on("mouseleave", removeTooltip);
+
             // Only add click handler for expandable modules
             if (isExpandable) {
                 nodeGroup.selectAll(".collapse-button_${unique_id}, .collapse-icon_${unique_id}")
                 .on("click", function(event) {
                     event.stopPropagation();
+                    removeTooltip();
                     
                     // Expand the module
                     collapsedContainers.delete(nodeName);
