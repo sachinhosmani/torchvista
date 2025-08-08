@@ -203,10 +203,10 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
             "keyword_args": formatted_kwargs
         }
 
-    def pre_trace_op(op_name, node_type, inputs, *args, **kwargs):        
+    def pre_trace_op(op_name, node_type, *args, **kwargs):        
         nonlocal current_op, last_successful_op, last_tensor_input_id, last_np_array_input_id, last_numeric_input_id
 
-        input_tensors = extract_tensors_from_obj(inputs) + extract_tensors_from_obj(args) + extract_tensors_from_obj(kwargs)
+        input_tensors = extract_tensors_from_obj(args) + extract_tensors_from_obj(kwargs)
         # This can happen in some discovered operations which don't take any inputs. For these, we don't
         # have to put nodes in the graph.
         if len(input_tensors) == 0:
@@ -234,7 +234,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 last_tensor_input_id += 1
 
         if show_non_gradient_nodes:
-            for inp in inputs:
+            for inp in args:
                 if isinstance(inp, np.ndarray):
                     dims = format_dims(tuple(inp.shape))
                     adj_list[f'np_array_{last_np_array_input_id}'] = {
@@ -372,7 +372,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 module_name, node_type = get_unique_op_name(type(module).__name__, module)
                 graph_node_name_to_without_suffix[module_name] = type(module).__name__
                 node_to_module_path[module_name] = type(module).__module__
-                pre_trace_op(module_name, node_type, args, *args, **kwargs)
+                pre_trace_op(module_name, node_type, *args, **kwargs)
                 module_stack.append(module_name)
                 output = orig_forward(*args, **kwargs)
                 module_stack.pop()
@@ -433,7 +433,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                     node_name, node_type = get_unique_op_name(func_name)
                     graph_node_name_to_without_suffix[node_name] = func_name
                     node_to_module_path[node_name] = namespace
-                    pre_trace_op(node_name, node_type, args, *args, **kwargs)
+                    pre_trace_op(node_name, node_type, *args, **kwargs)
                     output = orig_func(*args, **kwargs)
                     current_executing_function = None
                     output = trace_op(node_name, output)
