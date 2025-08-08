@@ -195,331 +195,364 @@ trace_model(model, example_input, forced_module_tracing_depth=4)
     
             <div class="graph-view" id="graphContainer" style="height: 100%">
                 <div class="graph-box-header">Visualized Interactive Graph</div>
-                <div id="graph-container_cc50079d-30ec-4fae-8306-8885d7080383">
-    <div id="graph_cc50079d-30ec-4fae-8306-8885d7080383"></div>
-    <div id="popup_cc50079d-30ec-4fae-8306-8885d7080383" class="popup_cc50079d-30ec-4fae-8306-8885d7080383" style="display: none;">
-        <div class="popup-header_cc50079d-30ec-4fae-8306-8885d7080383">
-            <h3 id="popup-title_cc50079d-30ec-4fae-8306-8885d7080383"></h3>
-            <span class="popup-close_cc50079d-30ec-4fae-8306-8885d7080383">✕</span>
+                <div id="graph-container_7b9196f8-6084-4f7c-bb4a-405216ef3cfa">
+    <div id="graph_7b9196f8-6084-4f7c-bb4a-405216ef3cfa"></div>
+    <div id="popup_7b9196f8-6084-4f7c-bb4a-405216ef3cfa" class="popup_7b9196f8-6084-4f7c-bb4a-405216ef3cfa" style="display: none;">
+        <div class="popup-header_7b9196f8-6084-4f7c-bb4a-405216ef3cfa">
+            <h3 id="popup-title_7b9196f8-6084-4f7c-bb4a-405216ef3cfa"></h3>
+            <span class="popup-close_7b9196f8-6084-4f7c-bb4a-405216ef3cfa">✕</span>
         </div>
-        <div id="popup-content_cc50079d-30ec-4fae-8306-8885d7080383" class="popup-content_cc50079d-30ec-4fae-8306-8885d7080383">
-            <div id="common-info_cc50079d-30ec-4fae-8306-8885d7080383">
+        <div id="popup-content_7b9196f8-6084-4f7c-bb4a-405216ef3cfa" class="popup-content_7b9196f8-6084-4f7c-bb4a-405216ef3cfa">
+            <div id="common-info_7b9196f8-6084-4f7c-bb4a-405216ef3cfa">
             </div>
-            <div id="module-template_cc50079d-30ec-4fae-8306-8885d7080383" style="display:none;">
-                <details open id="module-parameters-details_cc50079d-30ec-4fae-8306-8885d7080383">
+            <div id="module-template_7b9196f8-6084-4f7c-bb4a-405216ef3cfa" style="display:none;">
+                <details open id="module-parameters-details_7b9196f8-6084-4f7c-bb4a-405216ef3cfa">
                     <summary style="color: black"><strong>forward() Parameters</strong></summary>
-                    <div id="module-parameters_cc50079d-30ec-4fae-8306-8885d7080383" class="json-viewer_cc50079d-30ec-4fae-8306-8885d7080383"></div>
+                    <div id="module-parameters_7b9196f8-6084-4f7c-bb4a-405216ef3cfa" class="json-viewer_7b9196f8-6084-4f7c-bb4a-405216ef3cfa"></div>
                 </details>
-                <details open id="module-attributes-details_cc50079d-30ec-4fae-8306-8885d7080383">
+                <details open id="module-attributes-details_7b9196f8-6084-4f7c-bb4a-405216ef3cfa">
                     <summary style="color: black"><strong>Attributes</strong></summary>
-                    <div id="module-attributes_cc50079d-30ec-4fae-8306-8885d7080383" class="json-viewer_cc50079d-30ec-4fae-8306-8885d7080383"></div>
+                    <div id="module-attributes_7b9196f8-6084-4f7c-bb4a-405216ef3cfa" class="json-viewer_7b9196f8-6084-4f7c-bb4a-405216ef3cfa"></div>
                 </details>
             </div>
-            <div id="tensor-op-template_cc50079d-30ec-4fae-8306-8885d7080383" style="display:none;">
+            <div id="tensor-op-template_7b9196f8-6084-4f7c-bb4a-405216ef3cfa" style="display:none;">
                 <summary><strong>Parameters</strong></summary>
-                <div id="tensor-op-parameters_cc50079d-30ec-4fae-8306-8885d7080383" class="json-viewer_cc50079d-30ec-4fae-8306-8885d7080383"></div>
+                <div id="tensor-op-parameters_7b9196f8-6084-4f7c-bb4a-405216ef3cfa" class="json-viewer_7b9196f8-6084-4f7c-bb4a-405216ef3cfa"></div>
             </div>
-            <p id="no-info_cc50079d-30ec-4fae-8306-8885d7080383" style="display:none;">No further information available for this node.</p>
+            <p id="no-info_7b9196f8-6084-4f7c-bb4a-405216ef3cfa" style="display:none;">No further information available for this node.</p>
         </div>
     </div>
 
     <style>
-            .node_cc50079d-30ec-4fae-8306-8885d7080383 rect {
-                stroke: #333;
-                fill: #fff;
-            }
-            text.node-label_cc50079d-30ec-4fae-8306-8885d7080383 {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                cursor: default;
-                user-select: none;
-            }
-            text.type-indicator_cc50079d-30ec-4fae-8306-8885d7080383 {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                cursor: default;
-                user-select: none;
-            }
-            text.collapse-icon_cc50079d-30ec-4fae-8306-8885d7080383 {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                font-size: 14px
-                cursor: default;
-                user-select: none;
-            }
-            .edge_cc50079d-30ec-4fae-8306-8885d7080383 {
-                stroke: #797979;
-                fill: none;
-            }
-            .node_cc50079d-30ec-4fae-8306-8885d7080383 rect.input_cc50079d-30ec-4fae-8306-8885d7080383 { fill: #FF9AFF; }
-            .node_cc50079d-30ec-4fae-8306-8885d7080383 rect.constant_cc50079d-30ec-4fae-8306-8885d7080383 { fill: rgb(235 235 235); }
+        .node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa rect {
+            stroke: #333;
+            fill: #fff;
+        }
+        text.node-label_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            cursor: default;
+            user-select: none;
+        }
+        text.type-indicator_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            cursor: default;
+            user-select: none;
+        }
+        text.collapse-icon_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 14px
+            cursor: default;
+            user-select: none;
+        }
+        .edge_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            stroke: #797979;
+            fill: none;
+        }
+        .node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa rect.input_7b9196f8-6084-4f7c-bb4a-405216ef3cfa { fill: #FF9AFF; }
+        .node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa rect.constant_7b9196f8-6084-4f7c-bb4a-405216ef3cfa { fill: rgb(235 235 235); }
 
-            .node_cc50079d-30ec-4fae-8306-8885d7080383 rect.output_cc50079d-30ec-4fae-8306-8885d7080383 { fill: #74e071; }
-            .node_cc50079d-30ec-4fae-8306-8885d7080383 rect.failed_cc50079d-30ec-4fae-8306-8885d7080383 { fill: rgb(224 15 15); }
-            .node_cc50079d-30ec-4fae-8306-8885d7080383 rect.module_cc50079d-30ec-4fae-8306-8885d7080383 { fill: #8BDEDB; }
-            .node_cc50079d-30ec-4fae-8306-8885d7080383 rect.operation_cc50079d-30ec-4fae-8306-8885d7080383 { fill: #FEBC5A; }
-            .edgeLabelGroup_cc50079d-30ec-4fae-8306-8885d7080383 {
-                pointer-events: none;
-            }
-            #arrowhead_cc50079d-30ec-4fae-8306-8885d7080383 path {
-                fill: #333333;;
-            }
-            .node_cc50079d-30ec-4fae-8306-8885d7080383 rect,
-            .node_cc50079d-30ec-4fae-8306-8885d7080383 ellipse {
-                transition: fill 0.3s ease;
-            }
+        .node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa rect.output_7b9196f8-6084-4f7c-bb4a-405216ef3cfa { fill: #74e071; }
+        .node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa rect.failed_7b9196f8-6084-4f7c-bb4a-405216ef3cfa { fill: rgb(224 15 15); }
+        .node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa rect.module_7b9196f8-6084-4f7c-bb4a-405216ef3cfa { fill: #8BDEDB; }
+        .node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa rect.operation_7b9196f8-6084-4f7c-bb4a-405216ef3cfa { fill: #FEBC5A; }
+        .edgeLabelGroup_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            pointer-events: none;
+        }
+        #arrowhead_7b9196f8-6084-4f7c-bb4a-405216ef3cfa path {
+            fill: #333333;;
+        }
+        .node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa rect,
+        .node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa ellipse {
+            transition: fill 0.3s ease;
+        }
 
-            .node_cc50079d-30ec-4fae-8306-8885d7080383 .type-indicator_cc50079d-30ec-4fae-8306-8885d7080383 {
-                font-size: 5px;
-                fill: rgba(0, 0, 0, 1.0);  /* Dark grey, semi-transparent */
-                pointer-events: none;
-            }
+        .node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa .type-indicator_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            font-size: 5px;
+            fill: rgba(0, 0, 0, 1.0);  /* Dark grey, semi-transparent */
+            pointer-events: none;
+        }
 
-            .node_cc50079d-30ec-4fae-8306-8885d7080383.error_cc50079d-30ec-4fae-8306-8885d7080383 rect {
-                stroke: black;
+        .node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa.error_7b9196f8-6084-4f7c-bb4a-405216ef3cfa rect {
+            stroke: black;
+            stroke-width: 1px;
+        }
+
+        .boundary-box_7b9196f8-6084-4f7c-bb4a-405216ef3cfa.error_7b9196f8-6084-4f7c-bb4a-405216ef3cfa > rect:first-of-type {
+            fill: red;
+            fill-opacity: 0.2;
+        }
+
+        #graph-container_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            position: relative;
+            height: 95%;
+            overflow: hidden;
+        }
+
+        #graph_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            height: 100%;
+        }
+        
+        .popup_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            width: 500px;
+            resize: horizontal;
+            overflow: auto;
+            max-height: 70%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .popup-header_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 5px 10px;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .popup_7b9196f8-6084-4f7c-bb4a-405216ef3cfa h3 {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .popup-content_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            padding: 10px;
+            padding-bottom: 10px;
+            overflow-y: auto;
+            overflow-x: auto;
+            flex-grow: 1;
+        }
+
+        .popup_7b9196f8-6084-4f7c-bb4a-405216ef3cfa pre {
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        .popup-close_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        #popup-title_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            font-size: 16px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: black;
+        }
+
+        #graph-container_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            position: relative;
+        }
+
+        #graph-container_7b9196f8-6084-4f7c-bb4a-405216ef3cfa pre {
+            margin-bottom: 0;
+        }
+
+        .boundary-box_7b9196f8-6084-4f7c-bb4a-405216ef3cfa rect {
+            pointer-events: none;
+        }
+        .boundary-box_7b9196f8-6084-4f7c-bb4a-405216ef3cfa text {
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .boundary-box_7b9196f8-6084-4f7c-bb4a-405216ef3cfa rect {
+            pointer-events: none;
+        }
+        .boundary-box_7b9196f8-6084-4f7c-bb4a-405216ef3cfa text {
+            pointer-events: none;
+            user-select: none;
+            font-weight: bold;
+        }
+        .edge-label_7b9196f8-6084-4f7c-bb4a-405216ef3cfa text {
+            pointer-events: none;
+            user-select: none;
+            font-size: 4px;
+            font-family: "'Roboto', sans-serif";
+        }
+                    
+        .collapse-button_7b9196f8-6084-4f7c-bb4a-405216ef3cfa, .info-button_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            fill: #fff;
+            stroke: #333;
+            stroke-width: 1px;
+            cursor: pointer;
+        }
+
+        .collapse-button_7b9196f8-6084-4f7c-bb4a-405216ef3cfa:hover, .info-button_7b9196f8-6084-4f7c-bb4a-405216ef3cfa:hover {
+            fill: #eee;
+            cursor: pointer;
+        }
+
+        .collapse-icon_7b9196f8-6084-4f7c-bb4a-405216ef3cfa, .info-icon_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            pointer-events: none;
+            user-select: none;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            fill: rgb(51, 51, 51);
+        }
+
+        .collapse-button-disabled_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            fill: #eee5;
+            stroke: #3333334f;
+            stroke-width: 1px;
+            cursor: not-allowed;
+        }
+
+        .collapse-button-disabled_7b9196f8-6084-4f7c-bb4a-405216ef3cfa:hover {
+            fill: #eee6;
+            cursor: not-allowed;
+        }
+
+        .collapse-icon-disabled_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            pointer-events: none;
+            user-select: none;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            fill: #3333334f;
+            cursor: not-allowed;
+        }
+
+        /* Edge hover styles */
+        .edge-group_7b9196f8-6084-4f7c-bb4a-405216ef3cfa path {
+            pointer-events: stroke;
+        }
+
+        .edge-label_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            pointer-events: all;
+        }
+
+        @keyframes containerHighlight {
+            0% { 
+                filter: drop-shadow(0 0 0px rgba(255, 215, 0, 0));
+            }
+            25% { 
+                filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
+            }
+            50% { 
+                filter: drop-shadow(0 0 0px rgba(255, 215, 0, 0));
+            }
+            75% { 
+                filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
+            }
+            100% { 
+                filter: drop-shadow(0 0 0px rgba(255, 215, 0, 0));
+            }
+        }
+
+        @keyframes containerStrokeHighlight {
+            0% { 
                 stroke-width: 1px;
             }
-
-            .boundary-box_cc50079d-30ec-4fae-8306-8885d7080383.error_cc50079d-30ec-4fae-8306-8885d7080383 > rect:first-of-type {
-                fill: red;
-                fill-opacity: 0.2;
+            25% { 
+                stroke-width: 3px;
             }
-
-            #graph-container_cc50079d-30ec-4fae-8306-8885d7080383 {
-                position: relative;
-                height: 95%;
-                overflow: hidden;
-            }
-
-            #graph_cc50079d-30ec-4fae-8306-8885d7080383 {
-                height: 100%;
-            }
-            
-            .popup_cc50079d-30ec-4fae-8306-8885d7080383 {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                position: absolute;
-                background: white;
-                border: 1px solid #ccc;
-                width: 500px;
-                resize: horizontal;
-                overflow: auto;
-                max-height: 70%;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-                display: none;
-                display: flex;
-                flex-direction: column;
-            }
-
-            .popup-header_cc50079d-30ec-4fae-8306-8885d7080383 {
-                position: sticky;
-                top: 0;
-                background: white;
-                padding: 5px 10px;
-                border-bottom: 1px solid #ccc;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                z-index: 1;
-            }
-
-            .popup_cc50079d-30ec-4fae-8306-8885d7080383 h3 {
-                margin: 0;
-                font-size: 16px;
-            }
-
-            .popup-content_cc50079d-30ec-4fae-8306-8885d7080383 {
-                padding: 10px;
-                padding-bottom: 10px;
-                overflow-y: auto;
-                overflow-x: auto;
-                flex-grow: 1;
-            }
-
-            .popup_cc50079d-30ec-4fae-8306-8885d7080383 pre {
-                white-space: pre;
-                overflow-x: auto;
-            }
-
-            .popup-close_cc50079d-30ec-4fae-8306-8885d7080383 {
-                cursor: pointer;
-                font-size: 24px;
-                font-weight: bold;
-                line-height: 1;
-            }
-
-            #popup-title_cc50079d-30ec-4fae-8306-8885d7080383 {
-                font-size: 16px;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                color: black;
-            }
-
-            #graph-container_cc50079d-30ec-4fae-8306-8885d7080383 {
-                position: relative;
-            }
-
-            #graph-container_cc50079d-30ec-4fae-8306-8885d7080383 pre {
-                margin-bottom: 0;
-            }
-
-            .boundary-box_cc50079d-30ec-4fae-8306-8885d7080383 rect {
-                pointer-events: none;
-            }
-            .boundary-box_cc50079d-30ec-4fae-8306-8885d7080383 text {
-                pointer-events: none;
-                user-select: none;
-            }
-
-            .boundary-box_cc50079d-30ec-4fae-8306-8885d7080383 rect {
-                pointer-events: none;
-            }
-            .boundary-box_cc50079d-30ec-4fae-8306-8885d7080383 text {
-                pointer-events: none;
-                user-select: none;
-                font-weight: bold;
-            }
-            .edge-label_cc50079d-30ec-4fae-8306-8885d7080383 text {
-                pointer-events: none;
-                user-select: none;
-                font-size: 4px;
-                font-family: "'Roboto', sans-serif";
-            }
-            
-            .collapse-button_cc50079d-30ec-4fae-8306-8885d7080383:hover {
-                fill: #eee;
-                cursor: pointer;
-            }
-            .collapse-icon_cc50079d-30ec-4fae-8306-8885d7080383 {
-                pointer-events: none;
-                user-select: none;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                fill: rgb(51, 51, 51);
-            }
-
-            .info-button_cc50079d-30ec-4fae-8306-8885d7080383:hover {
-                fill: #eee;
-                cursor: pointer;
-            }
-            .info-icon_cc50079d-30ec-4fae-8306-8885d7080383 {
-                pointer-events: none;
-                user-select: none;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                fill: rgb(51, 51, 51);
-            }
-
-            /* Edge hover styles */
-            .edge-group_cc50079d-30ec-4fae-8306-8885d7080383 path {
-               pointer-events: stroke;
-            }
-
-            .edge-label_cc50079d-30ec-4fae-8306-8885d7080383 {
-                pointer-events: all;
-            }
-
-            @keyframes containerHighlight {
-                0% { 
-                    filter: drop-shadow(0 0 0px rgba(255, 215, 0, 0));
-                }
-                25% { 
-                    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
-                }
-                50% { 
-                    filter: drop-shadow(0 0 0px rgba(255, 215, 0, 0));
-                }
-                75% { 
-                    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
-                }
-                100% { 
-                    filter: drop-shadow(0 0 0px rgba(255, 215, 0, 0));
-                }
-            }
-
-            @keyframes containerStrokeHighlight {
-                0% { 
-                    stroke-width: 1px;
-                }
-                25% { 
-                    stroke-width: 3px;
-                }
-                50% { 
-                    stroke-width: 1px;
-                }
-                75% { 
-                    stroke-width: 3px;
-                }
-                100% { 
-                    stroke-width: 1px;
-                }
-            }
-
-            .highlight-cluster_cc50079d-30ec-4fae-8306-8885d7080383 > rect:first-of-type {
-                animation: 
-                    containerStrokeHighlight 2.0s ease-in-out forwards;
-            }
-
-            .highlight-node_cc50079d-30ec-4fae-8306-8885d7080383 rect {
-                animation: 
-                    containerStrokeHighlight 2.0s ease-in-out forwards;
-            }
-
-            text.node-label_cc50079d-30ec-4fae-8306-8885d7080383 {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                font-size: 0.8rem;  /* Base size using rem units for accessibility */
-                cursor: default;
-                user-select: none;
-            }
-
-            .node_cc50079d-30ec-4fae-8306-8885d7080383.constant_cc50079d-30ec-4fae-8306-8885d7080383 .node-label_cc50079d-30ec-4fae-8306-8885d7080383 {
-                font-size: 0.7rem;
-            }
-
-            .popup-content_cc50079d-30ec-4fae-8306-8885d7080383 summary {
-                cursor: pointer;
-                margin: 5px;
-                user-select: none;
-            }
-
-            .node_cc50079d-30ec-4fae-8306-8885d7080383.input_cc50079d-30ec-4fae-8306-8885d7080383 rect,
-            .node_cc50079d-30ec-4fae-8306-8885d7080383.output_cc50079d-30ec-4fae-8306-8885d7080383 rect,
-            .node_cc50079d-30ec-4fae-8306-8885d7080383.constant_cc50079d-30ec-4fae-8306-8885d7080383 rect {
+            50% { 
                 stroke-width: 1px;
-                rx: 8px;
-                ry: 8px;
-                stroke-dasharray: none;
             }
+            75% { 
+                stroke-width: 3px;
+            }
+            100% { 
+                stroke-width: 1px;
+            }
+        }
 
-            #png-error-container_cc50079d-30ec-4fae-8306-8885d7080383 {
-                text-align: center;
-                padding: 10px;
-                border-bottom: 1px solid #ccc;
-                font-size: 14px;
-            }
+        .highlight-cluster_7b9196f8-6084-4f7c-bb4a-405216ef3cfa > rect:first-of-type {
+            animation: 
+                containerStrokeHighlight 2.0s ease-in-out forwards;
+        }
 
-            #png-error-message_cc50079d-30ec-4fae-8306-8885d7080383 {
-                padding: 8px 16px;
-                background-color: #dc3545;
-                color: white;
-                border-radius: 4px;
-                display: inline-block;
-                font-family: monospace;
-                white-space: pre-wrap;
-                text-align: left;
-            }
+        .highlight-node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa rect {
+            animation: 
+                containerStrokeHighlight 2.0s ease-in-out forwards;
+        }
 
-            #png-link-container_cc50079d-30ec-4fae-8306-8885d7080383 {
-                padding: 10px;
-                border-bottom: 1px solid #ccc;
-                font-size: 18px;
-            }
+        text.node-label_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 0.8rem;  /* Base size using rem units for accessibility */
+            cursor: default;
+            user-select: none;
+        }
 
-            #png-download-button_cc50079d-30ec-4fae-8306-8885d7080383 {
-                display: inline-block;
-                padding: 8px 16px;
-                background-color: #007bff;
-                color: white;
-                text-decoration: none;
-                border-radius: 4px;
-            }
+        .node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa.constant_7b9196f8-6084-4f7c-bb4a-405216ef3cfa .node-label_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            font-size: 0.7rem;
+        }
 
-            #png-download-button_cc50079d-30ec-4fae-8306-8885d7080383:hover {
-                background-color: #0056b3;
-            }
+        .popup-content_7b9196f8-6084-4f7c-bb4a-405216ef3cfa summary {
+            cursor: pointer;
+            margin: 5px;
+            user-select: none;
+        }
+
+        .node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa.input_7b9196f8-6084-4f7c-bb4a-405216ef3cfa rect,
+        .node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa.output_7b9196f8-6084-4f7c-bb4a-405216ef3cfa rect,
+        .node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa.constant_7b9196f8-6084-4f7c-bb4a-405216ef3cfa rect {
+            stroke-width: 1px;
+            rx: 8px;
+            ry: 8px;
+            stroke-dasharray: none;
+        }
+
+        #png-error-container_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            text-align: center;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        #png-error-message_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            padding: 8px 16px;
+            background-color: #dc3545;
+            color: white;
+            border-radius: 4px;
+            display: inline-block;
+            font-family: monospace;
+            white-space: pre-wrap;
+            text-align: left;
+        }
+
+        #png-link-container_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            font-size: 18px;
+        }
+
+        #png-download-button_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        #png-download-button_7b9196f8-6084-4f7c-bb4a-405216ef3cfa:hover {
+            background-color: #0056b3;
+        }
+
+        .custom-tooltip_7b9196f8-6084-4f7c-bb4a-405216ef3cfa {
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 6px 8px;
+            font-size: 12px;
+            font-family: inherit;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            pointer-events: none;
+            max-width: 250px;
+            word-wrap: break-word;
+            display: none;
+        }
     </style>
     
     <script>
@@ -675,7 +708,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
 (function() {
-    const adj_list = {"input_0": {"edges": [{"target": "conv2d_1", "dims": "(1, 3, 64, 64)", "edge_data_id": 5795604112}, {"target": "conv2d_1", "dims": "(1, 3, 64, 64)", "edge_data_id": 5795604112}], "failed": false, "node_type": "Input"}, "conv2d_1": {"edges": [{"target": "batch_norm_1", "dims": "(1, 32, 64, 64)", "edge_data_id": 4353133552}, {"target": "batch_norm_1", "dims": "(1, 32, 64, 64)", "edge_data_id": 4353133552}], "failed": false, "node_type": "Operation"}, "tensor_0": {"edges": [{"target": "conv2d_1", "dims": "(32, 3, 3, 3)", "edge_data_id": 5795601520}], "failed": false, "node_type": "Constant"}, "tensor_1": {"edges": [{"target": "conv2d_1", "dims": "(32)", "edge_data_id": 5795601616}], "failed": false, "node_type": "Constant"}, "tensor_2": {"edges": [{"target": "conv2d_1", "dims": "(32, 3, 3, 3)", "edge_data_id": 5795601520}], "failed": false, "node_type": "Constant"}, "tensor_3": {"edges": [{"target": "conv2d_1", "dims": "(32)", "edge_data_id": 5795601616}], "failed": false, "node_type": "Constant"}, "scalar_0": {"edges": [{"target": "conv2d_1", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "batch_norm_1": {"edges": [{"target": "relu_1", "dims": "(1, 32, 64, 64)", "edge_data_id": 11207741360}, {"target": "relu_1", "dims": "(1, 32, 64, 64)", "edge_data_id": 11207741360}], "failed": false, "node_type": "Operation"}, "tensor_6": {"edges": [{"target": "batch_norm_1", "dims": "(32)", "edge_data_id": 4353134224}], "failed": false, "node_type": "Constant"}, "tensor_7": {"edges": [{"target": "batch_norm_1", "dims": "(32)", "edge_data_id": 5795601904}], "failed": false, "node_type": "Constant"}, "tensor_8": {"edges": [{"target": "batch_norm_1", "dims": "(32)", "edge_data_id": 5795601712}], "failed": false, "node_type": "Constant"}, "tensor_9": {"edges": [{"target": "batch_norm_1", "dims": "(32)", "edge_data_id": 5795601808}], "failed": false, "node_type": "Constant"}, "tensor_10": {"edges": [{"target": "batch_norm_1", "dims": "(32)", "edge_data_id": 4353134224}], "failed": false, "node_type": "Constant"}, "tensor_11": {"edges": [{"target": "batch_norm_1", "dims": "(32)", "edge_data_id": 5795601904}], "failed": false, "node_type": "Constant"}, "tensor_12": {"edges": [{"target": "batch_norm_1", "dims": "(32)", "edge_data_id": 5795601712}], "failed": false, "node_type": "Constant"}, "tensor_13": {"edges": [{"target": "batch_norm_1", "dims": "(32)", "edge_data_id": 5795601808}], "failed": false, "node_type": "Constant"}, "scalar_2": {"edges": [{"target": "batch_norm_1", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "scalar_3": {"edges": [{"target": "batch_norm_1", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "scalar_4": {"edges": [{"target": "batch_norm_1", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_1": {"edges": [{"target": "conv2d_2", "dims": "(1, 32, 64, 64)", "edge_data_id": 11207741360}, {"target": "conv2d_2", "dims": "(1, 32, 64, 64)", "edge_data_id": 11207741360}], "failed": false, "node_type": "Operation"}, "conv2d_2": {"edges": [{"target": "batch_norm_2", "dims": "(1, 32, 64, 64)", "edge_data_id": 4353133552}, {"target": "batch_norm_2", "dims": "(1, 32, 64, 64)", "edge_data_id": 4353133552}], "failed": false, "node_type": "Operation"}, "tensor_14": {"edges": [{"target": "conv2d_2", "dims": "(32, 32, 3, 3)", "edge_data_id": 5795602192}], "failed": false, "node_type": "Constant"}, "tensor_15": {"edges": [{"target": "conv2d_2", "dims": "(32)", "edge_data_id": 5795602288}], "failed": false, "node_type": "Constant"}, "tensor_16": {"edges": [{"target": "conv2d_2", "dims": "(32, 32, 3, 3)", "edge_data_id": 5795602192}], "failed": false, "node_type": "Constant"}, "tensor_17": {"edges": [{"target": "conv2d_2", "dims": "(32)", "edge_data_id": 5795602288}], "failed": false, "node_type": "Constant"}, "scalar_5": {"edges": [{"target": "conv2d_2", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "batch_norm_2": {"edges": [{"target": "relu_2", "dims": "(1, 32, 64, 64)", "edge_data_id": 11207741360}, {"target": "relu_2", "dims": "(1, 32, 64, 64)", "edge_data_id": 11207741360}], "failed": false, "node_type": "Operation"}, "tensor_20": {"edges": [{"target": "batch_norm_2", "dims": "(32)", "edge_data_id": 5795602096}], "failed": false, "node_type": "Constant"}, "tensor_21": {"edges": [{"target": "batch_norm_2", "dims": "(32)", "edge_data_id": 5795602576}], "failed": false, "node_type": "Constant"}, "tensor_22": {"edges": [{"target": "batch_norm_2", "dims": "(32)", "edge_data_id": 5795602384}], "failed": false, "node_type": "Constant"}, "tensor_23": {"edges": [{"target": "batch_norm_2", "dims": "(32)", "edge_data_id": 5795602480}], "failed": false, "node_type": "Constant"}, "tensor_24": {"edges": [{"target": "batch_norm_2", "dims": "(32)", "edge_data_id": 5795602096}], "failed": false, "node_type": "Constant"}, "tensor_25": {"edges": [{"target": "batch_norm_2", "dims": "(32)", "edge_data_id": 5795602576}], "failed": false, "node_type": "Constant"}, "tensor_26": {"edges": [{"target": "batch_norm_2", "dims": "(32)", "edge_data_id": 5795602384}], "failed": false, "node_type": "Constant"}, "tensor_27": {"edges": [{"target": "batch_norm_2", "dims": "(32)", "edge_data_id": 5795602480}], "failed": false, "node_type": "Constant"}, "scalar_7": {"edges": [{"target": "batch_norm_2", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "scalar_8": {"edges": [{"target": "batch_norm_2", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "scalar_9": {"edges": [{"target": "batch_norm_2", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_2": {"edges": [{"target": "conv2d_3", "dims": "(1, 32, 64, 64)", "edge_data_id": 11207741360}, {"target": "conv2d_3", "dims": "(1, 32, 64, 64)", "edge_data_id": 11207741360}], "failed": false, "node_type": "Operation"}, "conv2d_3": {"edges": [{"target": "batch_norm_3", "dims": "(1, 64, 64, 64)", "edge_data_id": 4353133552}, {"target": "batch_norm_3", "dims": "(1, 64, 64, 64)", "edge_data_id": 4353133552}], "failed": false, "node_type": "Operation"}, "tensor_28": {"edges": [{"target": "conv2d_3", "dims": "(64, 32, 3, 3)", "edge_data_id": 5795602864}], "failed": false, "node_type": "Constant"}, "tensor_29": {"edges": [{"target": "conv2d_3", "dims": "(64)", "edge_data_id": 5795602960}], "failed": false, "node_type": "Constant"}, "tensor_30": {"edges": [{"target": "conv2d_3", "dims": "(64, 32, 3, 3)", "edge_data_id": 5795602864}], "failed": false, "node_type": "Constant"}, "tensor_31": {"edges": [{"target": "conv2d_3", "dims": "(64)", "edge_data_id": 5795602960}], "failed": false, "node_type": "Constant"}, "scalar_10": {"edges": [{"target": "conv2d_3", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "batch_norm_3": {"edges": [{"target": "relu_3", "dims": "(1, 64, 64, 64)", "edge_data_id": 10791077648}, {"target": "relu_3", "dims": "(1, 64, 64, 64)", "edge_data_id": 10791077648}], "failed": false, "node_type": "Operation"}, "tensor_34": {"edges": [{"target": "batch_norm_3", "dims": "(64)", "edge_data_id": 5795602768}], "failed": false, "node_type": "Constant"}, "tensor_35": {"edges": [{"target": "batch_norm_3", "dims": "(64)", "edge_data_id": 5795603248}], "failed": false, "node_type": "Constant"}, "tensor_36": {"edges": [{"target": "batch_norm_3", "dims": "(64)", "edge_data_id": 5795603056}], "failed": false, "node_type": "Constant"}, "tensor_37": {"edges": [{"target": "batch_norm_3", "dims": "(64)", "edge_data_id": 5795603152}], "failed": false, "node_type": "Constant"}, "tensor_38": {"edges": [{"target": "batch_norm_3", "dims": "(64)", "edge_data_id": 5795602768}], "failed": false, "node_type": "Constant"}, "tensor_39": {"edges": [{"target": "batch_norm_3", "dims": "(64)", "edge_data_id": 5795603248}], "failed": false, "node_type": "Constant"}, "tensor_40": {"edges": [{"target": "batch_norm_3", "dims": "(64)", "edge_data_id": 5795603056}], "failed": false, "node_type": "Constant"}, "tensor_41": {"edges": [{"target": "batch_norm_3", "dims": "(64)", "edge_data_id": 5795603152}], "failed": false, "node_type": "Constant"}, "scalar_12": {"edges": [{"target": "batch_norm_3", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "scalar_13": {"edges": [{"target": "batch_norm_3", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "scalar_14": {"edges": [{"target": "batch_norm_3", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_3": {"edges": [{"target": "conv2d_4", "dims": "(1, 64, 64, 64)", "edge_data_id": 10791077648}, {"target": "conv2d_4", "dims": "(1, 64, 64, 64)", "edge_data_id": 10791077648}], "failed": false, "node_type": "Operation"}, "conv2d_4": {"edges": [{"target": "batch_norm_4", "dims": "(1, 64, 64, 64)", "edge_data_id": 4353133552}, {"target": "batch_norm_4", "dims": "(1, 64, 64, 64)", "edge_data_id": 4353133552}], "failed": false, "node_type": "Operation"}, "tensor_42": {"edges": [{"target": "conv2d_4", "dims": "(64, 64, 3, 3)", "edge_data_id": 5795603536}], "failed": false, "node_type": "Constant"}, "tensor_43": {"edges": [{"target": "conv2d_4", "dims": "(64)", "edge_data_id": 5795603632}], "failed": false, "node_type": "Constant"}, "tensor_44": {"edges": [{"target": "conv2d_4", "dims": "(64, 64, 3, 3)", "edge_data_id": 5795603536}], "failed": false, "node_type": "Constant"}, "tensor_45": {"edges": [{"target": "conv2d_4", "dims": "(64)", "edge_data_id": 5795603632}], "failed": false, "node_type": "Constant"}, "scalar_15": {"edges": [{"target": "conv2d_4", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "batch_norm_4": {"edges": [{"target": "relu_4", "dims": "(1, 64, 64, 64)", "edge_data_id": 10791077648}, {"target": "relu_4", "dims": "(1, 64, 64, 64)", "edge_data_id": 10791077648}], "failed": false, "node_type": "Operation"}, "tensor_48": {"edges": [{"target": "batch_norm_4", "dims": "(64)", "edge_data_id": 5795603440}], "failed": false, "node_type": "Constant"}, "tensor_49": {"edges": [{"target": "batch_norm_4", "dims": "(64)", "edge_data_id": 5795603920}], "failed": false, "node_type": "Constant"}, "tensor_50": {"edges": [{"target": "batch_norm_4", "dims": "(64)", "edge_data_id": 5795603728}], "failed": false, "node_type": "Constant"}, "tensor_51": {"edges": [{"target": "batch_norm_4", "dims": "(64)", "edge_data_id": 5795603824}], "failed": false, "node_type": "Constant"}, "tensor_52": {"edges": [{"target": "batch_norm_4", "dims": "(64)", "edge_data_id": 5795603440}], "failed": false, "node_type": "Constant"}, "tensor_53": {"edges": [{"target": "batch_norm_4", "dims": "(64)", "edge_data_id": 5795603920}], "failed": false, "node_type": "Constant"}, "tensor_54": {"edges": [{"target": "batch_norm_4", "dims": "(64)", "edge_data_id": 5795603728}], "failed": false, "node_type": "Constant"}, "tensor_55": {"edges": [{"target": "batch_norm_4", "dims": "(64)", "edge_data_id": 5795603824}], "failed": false, "node_type": "Constant"}, "scalar_17": {"edges": [{"target": "batch_norm_4", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "scalar_18": {"edges": [{"target": "batch_norm_4", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "scalar_19": {"edges": [{"target": "batch_norm_4", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_4": {"edges": [{"target": "adaptive_avg_pool2d_1", "dims": "(1, 64, 64, 64)", "edge_data_id": 10791077648}, {"target": "adaptive_avg_pool2d_1", "dims": "(1, 64, 64, 64)", "edge_data_id": 10791077648}], "failed": false, "node_type": "Operation"}, "adaptive_avg_pool2d_1": {"edges": [{"target": "squeeze_1", "dims": "(1, 64, 1, 1)", "edge_data_id": 11207741360}, {"target": "squeeze_1", "dims": "(1, 64, 1, 1)", "edge_data_id": 11207741360}], "failed": false, "node_type": "Operation"}, "squeeze_1": {"edges": [{"target": "squeeze_2", "dims": "(1, 64, 1)", "edge_data_id": 4353133552}, {"target": "squeeze_2", "dims": "(1, 64, 1)", "edge_data_id": 4353133552}], "failed": false, "node_type": "Operation"}, "scalar_20": {"edges": [{"target": "squeeze_1", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "squeeze_2": {"edges": [{"target": "linear_1", "dims": "(1, 64)", "edge_data_id": 10791076016}, {"target": "linear_1", "dims": "(1, 64)", "edge_data_id": 10791076016}], "failed": false, "node_type": "Operation"}, "scalar_21": {"edges": [{"target": "squeeze_2", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "linear_1": {"edges": [{"target": "output_0", "dims": "(1, 10)", "edge_data_id": 10791077648}], "failed": false, "node_type": "Operation"}, "tensor_56": {"edges": [{"target": "linear_1", "dims": "(10, 64)", "edge_data_id": 5795604208}], "failed": false, "node_type": "Constant"}, "tensor_57": {"edges": [{"target": "linear_1", "dims": "(10)", "edge_data_id": 5795604304}], "failed": false, "node_type": "Constant"}, "tensor_58": {"edges": [{"target": "linear_1", "dims": "(10, 64)", "edge_data_id": 5795604208}], "failed": false, "node_type": "Constant"}, "tensor_59": {"edges": [{"target": "linear_1", "dims": "(10)", "edge_data_id": 5795604304}], "failed": false, "node_type": "Constant"}, "output_0": {"edges": [], "failed": false, "node_type": "Output"}};
+    const adj_list = {"input_0": {"edges": [{"target": "conv2d_1", "dims": "(1, 3, 64, 64)", "edge_data_id": 5878396304}, {"target": "conv2d_1", "dims": "(1, 3, 64, 64)", "edge_data_id": 5878396304}], "failed": false, "node_type": "Input"}, "conv2d_1": {"edges": [{"target": "batch_norm_1", "dims": "(1, 32, 64, 64)", "edge_data_id": 4379593712}, {"target": "batch_norm_1", "dims": "(1, 32, 64, 64)", "edge_data_id": 4379593712}], "failed": false, "node_type": "Operation"}, "tensor_0": {"edges": [{"target": "conv2d_1", "dims": "(32, 3, 3, 3)", "edge_data_id": 5878393712}], "failed": false, "node_type": "Constant"}, "tensor_1": {"edges": [{"target": "conv2d_1", "dims": "(32)", "edge_data_id": 5878393808}], "failed": false, "node_type": "Constant"}, "tensor_2": {"edges": [{"target": "conv2d_1", "dims": "(32, 3, 3, 3)", "edge_data_id": 5878393712}], "failed": false, "node_type": "Constant"}, "tensor_3": {"edges": [{"target": "conv2d_1", "dims": "(32)", "edge_data_id": 5878393808}], "failed": false, "node_type": "Constant"}, "scalar_0": {"edges": [{"target": "conv2d_1", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "batch_norm_1": {"edges": [{"target": "relu_1", "dims": "(1, 32, 64, 64)", "edge_data_id": 10980379728}, {"target": "relu_1", "dims": "(1, 32, 64, 64)", "edge_data_id": 10980379728}], "failed": false, "node_type": "Operation"}, "tensor_6": {"edges": [{"target": "batch_norm_1", "dims": "(32)", "edge_data_id": 4379594384}], "failed": false, "node_type": "Constant"}, "tensor_7": {"edges": [{"target": "batch_norm_1", "dims": "(32)", "edge_data_id": 5878394096}], "failed": false, "node_type": "Constant"}, "tensor_8": {"edges": [{"target": "batch_norm_1", "dims": "(32)", "edge_data_id": 5878393904}], "failed": false, "node_type": "Constant"}, "tensor_9": {"edges": [{"target": "batch_norm_1", "dims": "(32)", "edge_data_id": 5878394000}], "failed": false, "node_type": "Constant"}, "tensor_10": {"edges": [{"target": "batch_norm_1", "dims": "(32)", "edge_data_id": 4379594384}], "failed": false, "node_type": "Constant"}, "tensor_11": {"edges": [{"target": "batch_norm_1", "dims": "(32)", "edge_data_id": 5878394096}], "failed": false, "node_type": "Constant"}, "tensor_12": {"edges": [{"target": "batch_norm_1", "dims": "(32)", "edge_data_id": 5878393904}], "failed": false, "node_type": "Constant"}, "tensor_13": {"edges": [{"target": "batch_norm_1", "dims": "(32)", "edge_data_id": 5878394000}], "failed": false, "node_type": "Constant"}, "scalar_2": {"edges": [{"target": "batch_norm_1", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "scalar_3": {"edges": [{"target": "batch_norm_1", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "scalar_4": {"edges": [{"target": "batch_norm_1", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_1": {"edges": [{"target": "conv2d_2", "dims": "(1, 32, 64, 64)", "edge_data_id": 10980379728}, {"target": "conv2d_2", "dims": "(1, 32, 64, 64)", "edge_data_id": 10980379728}], "failed": false, "node_type": "Operation"}, "conv2d_2": {"edges": [{"target": "batch_norm_2", "dims": "(1, 32, 64, 64)", "edge_data_id": 4379593712}, {"target": "batch_norm_2", "dims": "(1, 32, 64, 64)", "edge_data_id": 4379593712}], "failed": false, "node_type": "Operation"}, "tensor_14": {"edges": [{"target": "conv2d_2", "dims": "(32, 32, 3, 3)", "edge_data_id": 5878394384}], "failed": false, "node_type": "Constant"}, "tensor_15": {"edges": [{"target": "conv2d_2", "dims": "(32)", "edge_data_id": 5878394480}], "failed": false, "node_type": "Constant"}, "tensor_16": {"edges": [{"target": "conv2d_2", "dims": "(32, 32, 3, 3)", "edge_data_id": 5878394384}], "failed": false, "node_type": "Constant"}, "tensor_17": {"edges": [{"target": "conv2d_2", "dims": "(32)", "edge_data_id": 5878394480}], "failed": false, "node_type": "Constant"}, "scalar_5": {"edges": [{"target": "conv2d_2", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "batch_norm_2": {"edges": [{"target": "relu_2", "dims": "(1, 32, 64, 64)", "edge_data_id": 10980379728}, {"target": "relu_2", "dims": "(1, 32, 64, 64)", "edge_data_id": 10980379728}], "failed": false, "node_type": "Operation"}, "tensor_20": {"edges": [{"target": "batch_norm_2", "dims": "(32)", "edge_data_id": 5878394288}], "failed": false, "node_type": "Constant"}, "tensor_21": {"edges": [{"target": "batch_norm_2", "dims": "(32)", "edge_data_id": 5878394768}], "failed": false, "node_type": "Constant"}, "tensor_22": {"edges": [{"target": "batch_norm_2", "dims": "(32)", "edge_data_id": 5878394576}], "failed": false, "node_type": "Constant"}, "tensor_23": {"edges": [{"target": "batch_norm_2", "dims": "(32)", "edge_data_id": 5878394672}], "failed": false, "node_type": "Constant"}, "tensor_24": {"edges": [{"target": "batch_norm_2", "dims": "(32)", "edge_data_id": 5878394288}], "failed": false, "node_type": "Constant"}, "tensor_25": {"edges": [{"target": "batch_norm_2", "dims": "(32)", "edge_data_id": 5878394768}], "failed": false, "node_type": "Constant"}, "tensor_26": {"edges": [{"target": "batch_norm_2", "dims": "(32)", "edge_data_id": 5878394576}], "failed": false, "node_type": "Constant"}, "tensor_27": {"edges": [{"target": "batch_norm_2", "dims": "(32)", "edge_data_id": 5878394672}], "failed": false, "node_type": "Constant"}, "scalar_7": {"edges": [{"target": "batch_norm_2", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "scalar_8": {"edges": [{"target": "batch_norm_2", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "scalar_9": {"edges": [{"target": "batch_norm_2", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_2": {"edges": [{"target": "conv2d_3", "dims": "(1, 32, 64, 64)", "edge_data_id": 10980379728}, {"target": "conv2d_3", "dims": "(1, 32, 64, 64)", "edge_data_id": 10980379728}], "failed": false, "node_type": "Operation"}, "conv2d_3": {"edges": [{"target": "batch_norm_3", "dims": "(1, 64, 64, 64)", "edge_data_id": 4379593712}, {"target": "batch_norm_3", "dims": "(1, 64, 64, 64)", "edge_data_id": 4379593712}], "failed": false, "node_type": "Operation"}, "tensor_28": {"edges": [{"target": "conv2d_3", "dims": "(64, 32, 3, 3)", "edge_data_id": 5878395056}], "failed": false, "node_type": "Constant"}, "tensor_29": {"edges": [{"target": "conv2d_3", "dims": "(64)", "edge_data_id": 5878395152}], "failed": false, "node_type": "Constant"}, "tensor_30": {"edges": [{"target": "conv2d_3", "dims": "(64, 32, 3, 3)", "edge_data_id": 5878395056}], "failed": false, "node_type": "Constant"}, "tensor_31": {"edges": [{"target": "conv2d_3", "dims": "(64)", "edge_data_id": 5878395152}], "failed": false, "node_type": "Constant"}, "scalar_10": {"edges": [{"target": "conv2d_3", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "batch_norm_3": {"edges": [{"target": "relu_3", "dims": "(1, 64, 64, 64)", "edge_data_id": 10980392496}, {"target": "relu_3", "dims": "(1, 64, 64, 64)", "edge_data_id": 10980392496}], "failed": false, "node_type": "Operation"}, "tensor_34": {"edges": [{"target": "batch_norm_3", "dims": "(64)", "edge_data_id": 5878394960}], "failed": false, "node_type": "Constant"}, "tensor_35": {"edges": [{"target": "batch_norm_3", "dims": "(64)", "edge_data_id": 5878395440}], "failed": false, "node_type": "Constant"}, "tensor_36": {"edges": [{"target": "batch_norm_3", "dims": "(64)", "edge_data_id": 5878395248}], "failed": false, "node_type": "Constant"}, "tensor_37": {"edges": [{"target": "batch_norm_3", "dims": "(64)", "edge_data_id": 5878395344}], "failed": false, "node_type": "Constant"}, "tensor_38": {"edges": [{"target": "batch_norm_3", "dims": "(64)", "edge_data_id": 5878394960}], "failed": false, "node_type": "Constant"}, "tensor_39": {"edges": [{"target": "batch_norm_3", "dims": "(64)", "edge_data_id": 5878395440}], "failed": false, "node_type": "Constant"}, "tensor_40": {"edges": [{"target": "batch_norm_3", "dims": "(64)", "edge_data_id": 5878395248}], "failed": false, "node_type": "Constant"}, "tensor_41": {"edges": [{"target": "batch_norm_3", "dims": "(64)", "edge_data_id": 5878395344}], "failed": false, "node_type": "Constant"}, "scalar_12": {"edges": [{"target": "batch_norm_3", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "scalar_13": {"edges": [{"target": "batch_norm_3", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "scalar_14": {"edges": [{"target": "batch_norm_3", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_3": {"edges": [{"target": "conv2d_4", "dims": "(1, 64, 64, 64)", "edge_data_id": 10980392496}, {"target": "conv2d_4", "dims": "(1, 64, 64, 64)", "edge_data_id": 10980392496}], "failed": false, "node_type": "Operation"}, "conv2d_4": {"edges": [{"target": "batch_norm_4", "dims": "(1, 64, 64, 64)", "edge_data_id": 4379593712}, {"target": "batch_norm_4", "dims": "(1, 64, 64, 64)", "edge_data_id": 4379593712}], "failed": false, "node_type": "Operation"}, "tensor_42": {"edges": [{"target": "conv2d_4", "dims": "(64, 64, 3, 3)", "edge_data_id": 5878395728}], "failed": false, "node_type": "Constant"}, "tensor_43": {"edges": [{"target": "conv2d_4", "dims": "(64)", "edge_data_id": 5878395824}], "failed": false, "node_type": "Constant"}, "tensor_44": {"edges": [{"target": "conv2d_4", "dims": "(64, 64, 3, 3)", "edge_data_id": 5878395728}], "failed": false, "node_type": "Constant"}, "tensor_45": {"edges": [{"target": "conv2d_4", "dims": "(64)", "edge_data_id": 5878395824}], "failed": false, "node_type": "Constant"}, "scalar_15": {"edges": [{"target": "conv2d_4", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "batch_norm_4": {"edges": [{"target": "relu_4", "dims": "(1, 64, 64, 64)", "edge_data_id": 10980392496}, {"target": "relu_4", "dims": "(1, 64, 64, 64)", "edge_data_id": 10980392496}], "failed": false, "node_type": "Operation"}, "tensor_48": {"edges": [{"target": "batch_norm_4", "dims": "(64)", "edge_data_id": 5878395632}], "failed": false, "node_type": "Constant"}, "tensor_49": {"edges": [{"target": "batch_norm_4", "dims": "(64)", "edge_data_id": 5878396112}], "failed": false, "node_type": "Constant"}, "tensor_50": {"edges": [{"target": "batch_norm_4", "dims": "(64)", "edge_data_id": 5878395920}], "failed": false, "node_type": "Constant"}, "tensor_51": {"edges": [{"target": "batch_norm_4", "dims": "(64)", "edge_data_id": 5878396016}], "failed": false, "node_type": "Constant"}, "tensor_52": {"edges": [{"target": "batch_norm_4", "dims": "(64)", "edge_data_id": 5878395632}], "failed": false, "node_type": "Constant"}, "tensor_53": {"edges": [{"target": "batch_norm_4", "dims": "(64)", "edge_data_id": 5878396112}], "failed": false, "node_type": "Constant"}, "tensor_54": {"edges": [{"target": "batch_norm_4", "dims": "(64)", "edge_data_id": 5878395920}], "failed": false, "node_type": "Constant"}, "tensor_55": {"edges": [{"target": "batch_norm_4", "dims": "(64)", "edge_data_id": 5878396016}], "failed": false, "node_type": "Constant"}, "scalar_17": {"edges": [{"target": "batch_norm_4", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "scalar_18": {"edges": [{"target": "batch_norm_4", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "scalar_19": {"edges": [{"target": "batch_norm_4", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_4": {"edges": [{"target": "adaptive_avg_pool2d_1", "dims": "(1, 64, 64, 64)", "edge_data_id": 10980392496}, {"target": "adaptive_avg_pool2d_1", "dims": "(1, 64, 64, 64)", "edge_data_id": 10980392496}], "failed": false, "node_type": "Operation"}, "adaptive_avg_pool2d_1": {"edges": [{"target": "squeeze_1", "dims": "(1, 64, 1, 1)", "edge_data_id": 4379593712}, {"target": "squeeze_1", "dims": "(1, 64, 1, 1)", "edge_data_id": 4379593712}], "failed": false, "node_type": "Operation"}, "squeeze_1": {"edges": [{"target": "squeeze_2", "dims": "(1, 64, 1)", "edge_data_id": 10980379728}, {"target": "squeeze_2", "dims": "(1, 64, 1)", "edge_data_id": 10980379728}], "failed": false, "node_type": "Operation"}, "scalar_20": {"edges": [{"target": "squeeze_1", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "squeeze_2": {"edges": [{"target": "linear_1", "dims": "(1, 64)", "edge_data_id": 10980389520}, {"target": "linear_1", "dims": "(1, 64)", "edge_data_id": 10980389520}], "failed": false, "node_type": "Operation"}, "scalar_21": {"edges": [{"target": "squeeze_2", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "linear_1": {"edges": [{"target": "output_0", "dims": "(1, 10)", "edge_data_id": 10980379728}], "failed": false, "node_type": "Operation"}, "tensor_56": {"edges": [{"target": "linear_1", "dims": "(10, 64)", "edge_data_id": 5878396400}], "failed": false, "node_type": "Constant"}, "tensor_57": {"edges": [{"target": "linear_1", "dims": "(10)", "edge_data_id": 5878396496}], "failed": false, "node_type": "Constant"}, "tensor_58": {"edges": [{"target": "linear_1", "dims": "(10, 64)", "edge_data_id": 5878396400}], "failed": false, "node_type": "Constant"}, "tensor_59": {"edges": [{"target": "linear_1", "dims": "(10)", "edge_data_id": 5878396496}], "failed": false, "node_type": "Constant"}, "output_0": {"edges": [], "failed": false, "node_type": "Output"}};
     const module_info = {"ConvBlock_1": {"type": "ConvBlock", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Sequential_1": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Conv2d_1": {"type": "Conv2d", "parameters": {"weight": {"shape": [32, 3, 3, 3], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 3, "kernel_size": [3, 3], "out_channels": 32, "output_padding": [0, 0], "padding": [1, 1], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)"}, "BatchNorm2d_1": {"type": "BatchNorm2d", "parameters": {"weight": {"shape": [32], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"affine": true, "call_super_init": false, "dump_patches": false, "eps": 1e-05, "momentum": 0.1, "num_features": 32, "track_running_stats": true, "training": true}, "extra_repr": "32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True"}, "ReLU_1": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Conv2d_2": {"type": "Conv2d", "parameters": {"weight": {"shape": [32, 32, 3, 3], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 32, "kernel_size": [3, 3], "out_channels": 32, "output_padding": [0, 0], "padding": [1, 1], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)"}, "BatchNorm2d_2": {"type": "BatchNorm2d", "parameters": {"weight": {"shape": [32], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"affine": true, "call_super_init": false, "dump_patches": false, "eps": 1e-05, "momentum": 0.1, "num_features": 32, "track_running_stats": true, "training": true}, "extra_repr": "32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True"}, "ReLU_2": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "ConvBlock_2": {"type": "ConvBlock", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Sequential_2": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Conv2d_3": {"type": "Conv2d", "parameters": {"weight": {"shape": [64, 32, 3, 3], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 32, "kernel_size": [3, 3], "out_channels": 64, "output_padding": [0, 0], "padding": [1, 1], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)"}, "BatchNorm2d_3": {"type": "BatchNorm2d", "parameters": {"weight": {"shape": [64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"affine": true, "call_super_init": false, "dump_patches": false, "eps": 1e-05, "momentum": 0.1, "num_features": 64, "track_running_stats": true, "training": true}, "extra_repr": "64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True"}, "ReLU_3": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Conv2d_4": {"type": "Conv2d", "parameters": {"weight": {"shape": [64, 64, 3, 3], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 64, "kernel_size": [3, 3], "out_channels": 64, "output_padding": [0, 0], "padding": [1, 1], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)"}, "BatchNorm2d_4": {"type": "BatchNorm2d", "parameters": {"weight": {"shape": [64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"affine": true, "call_super_init": false, "dump_patches": false, "eps": 1e-05, "momentum": 0.1, "num_features": 64, "track_running_stats": true, "training": true}, "extra_repr": "64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True"}, "ReLU_4": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "AdaptiveAvgPool2d_1": {"type": "AdaptiveAvgPool2d", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "output_size": [1, 1], "training": true}, "extra_repr": "output_size=(1, 1)"}, "Linear_1": {"type": "Linear", "parameters": {"weight": {"shape": [10, 64], "requires_grad": true}, "bias": {"shape": [10], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 10, "training": true}, "extra_repr": "in_features=64, out_features=10, bias=True"}};
     const func_info = {"ConvBlock_1": {"positional_args": [{"_type": "tensor", "shape": [1, 3, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Sequential_1": {"positional_args": [{"_type": "tensor", "shape": [1, 3, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Conv2d_1": {"positional_args": [{"_type": "tensor", "shape": [1, 3, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_1": {"positional_args": [{"_type": "tensor", "shape": [1, 3, 64, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32, 3, 3, 3], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, [1, 1], [1, 1], [1, 1], 1], "keyword_args": {}}, "BatchNorm2d_1": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "dim_1": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "add__1": {"positional_args": [{"_type": "tensor", "shape": [], "dtype": "torch.int64"}, 1], "keyword_args": {}}, "batch_norm_1": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 64, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, true, 0.1, 1e-05], "keyword_args": {}}, "ReLU_1": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_1": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 64, 64], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "Conv2d_2": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_2": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 64, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32, 32, 3, 3], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, [1, 1], [1, 1], [1, 1], 1], "keyword_args": {}}, "BatchNorm2d_2": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "dim_2": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "add__2": {"positional_args": [{"_type": "tensor", "shape": [], "dtype": "torch.int64"}, 1], "keyword_args": {}}, "batch_norm_2": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 64, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, true, 0.1, 1e-05], "keyword_args": {}}, "ReLU_2": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_2": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 64, 64], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "ConvBlock_2": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Sequential_2": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Conv2d_3": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_3": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 64, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64, 32, 3, 3], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}, [1, 1], [1, 1], [1, 1], 1], "keyword_args": {}}, "BatchNorm2d_3": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "dim_3": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "add__3": {"positional_args": [{"_type": "tensor", "shape": [], "dtype": "torch.int64"}, 1], "keyword_args": {}}, "batch_norm_3": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 64, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}, true, 0.1, 1e-05], "keyword_args": {}}, "ReLU_3": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_3": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 64, 64], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "Conv2d_4": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_4": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 64, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64, 64, 3, 3], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}, [1, 1], [1, 1], [1, 1], 1], "keyword_args": {}}, "BatchNorm2d_4": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "dim_4": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "add__4": {"positional_args": [{"_type": "tensor", "shape": [], "dtype": "torch.int64"}, 1], "keyword_args": {}}, "batch_norm_4": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 64, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}, true, 0.1, 1e-05], "keyword_args": {}}, "ReLU_4": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_4": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 64, 64], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "AdaptiveAvgPool2d_1": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "adaptive_avg_pool2d_1": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 64, 64], "dtype": "torch.float32"}, [1, 1]], "keyword_args": {}}, "squeeze_1": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 1, 1], "dtype": "torch.float32"}, -1], "keyword_args": {}}, "squeeze_2": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 1], "dtype": "torch.float32"}, -1], "keyword_args": {}}, "Linear_1": {"positional_args": [{"_type": "tensor", "shape": [1, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "linear_1": {"positional_args": [{"_type": "tensor", "shape": [1, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10], "dtype": "torch.float32"}], "keyword_args": {}}};
     const parent_module_to_nodes = {"Conv2d_1": ["conv2d_1"], "Sequential_1": ["conv2d_1", "dim_1", "add__1", "batch_norm_1", "relu_1", "conv2d_2", "dim_2", "add__2", "batch_norm_2", "relu_2"], "ConvBlock_1": ["conv2d_1", "dim_1", "add__1", "batch_norm_1", "relu_1", "conv2d_2", "dim_2", "add__2", "batch_norm_2", "relu_2"], "BatchNorm2d_1": ["dim_1", "add__1", "batch_norm_1"], "ReLU_1": ["relu_1"], "Conv2d_2": ["conv2d_2"], "BatchNorm2d_2": ["dim_2", "add__2", "batch_norm_2"], "ReLU_2": ["relu_2"], "Conv2d_3": ["conv2d_3"], "Sequential_2": ["conv2d_3", "dim_3", "add__3", "batch_norm_3", "relu_3", "conv2d_4", "dim_4", "add__4", "batch_norm_4", "relu_4"], "ConvBlock_2": ["conv2d_3", "dim_3", "add__3", "batch_norm_3", "relu_3", "conv2d_4", "dim_4", "add__4", "batch_norm_4", "relu_4"], "BatchNorm2d_3": ["dim_3", "add__3", "batch_norm_3"], "ReLU_3": ["relu_3"], "Conv2d_4": ["conv2d_4"], "BatchNorm2d_4": ["dim_4", "add__4", "batch_norm_4"], "ReLU_4": ["relu_4"], "AdaptiveAvgPool2d_1": ["adaptive_avg_pool2d_1"], "Linear_1": ["linear_1"]};
@@ -705,6 +738,57 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             });
         } else {
             setTimeout(function() { waitForLibs(callback) }, 400);
+        }
+    }
+
+    let currentTooltip = null;
+
+    function createTooltip(text) {
+        removeTooltip();
+        
+        const tooltip = document.createElement('div');
+        tooltip.className = `custom-tooltip_7b9196f8-6084-4f7c-bb4a-405216ef3cfa`;
+        tooltip.textContent = text;
+        
+        const container = document.getElementById(`graph-container_7b9196f8-6084-4f7c-bb4a-405216ef3cfa`);
+        container.appendChild(tooltip);
+        currentTooltip = tooltip;
+        
+        return tooltip;
+    }
+
+    function positionTooltip(tooltip, buttonElement) {
+        // Get the button's position in screen coordinates
+        const buttonRect = buttonElement.getBoundingClientRect();
+        
+        // Get the container's position in screen coordinates
+        const containerRect = document.getElementById(`graph-container_7b9196f8-6084-4f7c-bb4a-405216ef3cfa`).getBoundingClientRect();
+        
+        // Calculate position relative to container
+        const buttonX = buttonRect.left + (buttonRect.width / 2) - containerRect.left;
+        const buttonY = buttonRect.top - containerRect.top;
+        
+        // Show tooltip to measure its size
+        tooltip.style.display = 'block';
+        const tooltipRect = tooltip.getBoundingClientRect();
+        
+        // Position tooltip centered above button
+        const left = buttonX - (tooltipRect.width / 2);
+        const top = buttonY - tooltipRect.height - 6; // 6px gap above button
+        
+        tooltip.style.left = `${left}px`;
+        tooltip.style.top = `${top}px`;
+    }
+
+    function showTooltip(buttonElement, text) {
+        const tooltip = createTooltip(text);
+        positionTooltip(tooltip, buttonElement);
+    }
+
+    function removeTooltip() {
+        if (currentTooltip) {
+            currentTooltip.remove();
+            currentTooltip = null;
         }
     }
 
@@ -1137,7 +1221,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function reloadGraph() {
-        d3.select("#graph_cc50079d-30ec-4fae-8306-8885d7080383").html("");
+        d3.select("#graph_7b9196f8-6084-4f7c-bb4a-405216ef3cfa").html("");
 
         const dotSource = generateDotSource(adj_list, ancestor_map);
 
@@ -1194,16 +1278,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function renderGraphvizImage(dotSource) {
-        d3.select("#png-link-container_cc50079d-30ec-4fae-8306-8885d7080383").remove();
+        d3.select("#png-link-container_7b9196f8-6084-4f7c-bb4a-405216ef3cfa").remove();
         
         function showErrorMessage(error) {
-            const parent = d3.select("#graph-container_cc50079d-30ec-4fae-8306-8885d7080383").node().parentNode;
+            const parent = d3.select("#graph-container_7b9196f8-6084-4f7c-bb4a-405216ef3cfa").node().parentNode;
             const errorContainer = d3.select(parent)
-                .insert("div", "#graph-container_cc50079d-30ec-4fae-8306-8885d7080383")
-                .attr("id", "png-error-container_cc50079d-30ec-4fae-8306-8885d7080383");
+                .insert("div", "#graph-container_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
+                .attr("id", "png-error-container_7b9196f8-6084-4f7c-bb4a-405216ef3cfa");
             
             errorContainer.append("div")
-                .attr("id", "png-error-message_cc50079d-30ec-4fae-8306-8885d7080383")
+                .attr("id", "png-error-message_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
                 .html(`<strong>Error:</strong><br>${error.stack || error.message || error}<br><br><strong>Note:</strong> Exporting very large models as PNG is currently not supported. Please use generate_image=False, or raise an issue on https://github.com/sachinhosmani/torchvista/issues`);
         }
         
@@ -1241,15 +1325,15 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             const pngUrl = URL.createObjectURL(pngBlob);
             
             // Create link container
-            const parent = d3.select("#graph-container_cc50079d-30ec-4fae-8306-8885d7080383").node().parentNode;
+            const parent = d3.select("#graph-container_7b9196f8-6084-4f7c-bb4a-405216ef3cfa").node().parentNode;
             const linkContainer = d3.select(parent)
-                .insert("div", "#graph-container_cc50079d-30ec-4fae-8306-8885d7080383")
-                .attr("id", "png-link-container_cc50079d-30ec-4fae-8306-8885d7080383");
+                .insert("div", "#graph-container_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
+                .attr("id", "png-link-container_7b9196f8-6084-4f7c-bb4a-405216ef3cfa");
             
             linkContainer.append("a")
                 .attr("href", pngUrl)
                 .attr("target", "_blank")
-                .attr("id", "png-download-button_cc50079d-30ec-4fae-8306-8885d7080383")
+                .attr("id", "png-download-button_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
                 .text("View PNG in New Tab");
                 
             URL.revokeObjectURL(svgUrl);
@@ -1262,7 +1346,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function createGraph(graphvizData) {
-        const svg = d3.select("#graph_cc50079d-30ec-4fae-8306-8885d7080383")
+        const svg = d3.select("#graph_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
         .append("svg")
         .attr("width", "100%")
         .attr("height", "100%")
@@ -1273,6 +1357,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
         // Add zoom behavior
         const zoom = d3.zoom().on("zoom", function(event) {
+            removeTooltip();
             inner.attr("transform", event.transform);
             closePopup();
         });
@@ -1281,7 +1366,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
         // Define arrowhead marker
         svg.append("defs").append("marker")
-        .attr("id", "arrowhead_cc50079d-30ec-4fae-8306-8885d7080383")
+        .attr("id", "arrowhead_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
         .attr("viewBox", "0 -5 10 10")
         .attr("refX", 8)
         .attr("refY", 0)
@@ -1293,11 +1378,11 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .attr("fill", "#333");
 
         // Draw clusters (container boxes) first so they're behind nodes
-        const clusters = inner.selectAll(".boundary-box_cc50079d-30ec-4fae-8306-8885d7080383")
+        const clusters = inner.selectAll(".boundary-box_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
         .data(Object.entries(graphvizData.clusters))
         .enter()
         .append("g")
-        .attr("class", "boundary-box_cc50079d-30ec-4fae-8306-8885d7080383");
+        .attr("class", "boundary-box_7b9196f8-6084-4f7c-bb4a-405216ef3cfa");
 
         const containersWithFailedNodes = identifyContainersWithFailedNodes(adj_list, ancestor_map);
 
@@ -1306,7 +1391,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             const hasFailedNodes = containersWithFailedNodes.has(clusterName);
             if (hasFailedNodes) {
-                group.classed("error_cc50079d-30ec-4fae-8306-8885d7080383", true);
+                group.classed("error_7b9196f8-6084-4f7c-bb4a-405216ef3cfa", true);
             }
 
             // Parse bounding box coordinates
@@ -1341,33 +1426,33 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             .attr("stroke-linejoin", "round");
                         
             // Add collapse/expand button
-            group.append("circle")
-            .attr("class", "collapse-button_cc50079d-30ec-4fae-8306-8885d7080383")
+            const collapseButton = group.append("circle")
+            .attr("class", "collapse-button_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
             .attr("cx", x1 + 10)
             .attr("cy", y1 + 10)
-            .attr("r", 6)
-            .attr("fill", "#fff")
-            .attr("stroke", "#333")
-            .attr("stroke-width", 1)
-            .attr("cursor", "pointer")
-            .append("title")
-            .text("Collapse module");
-            
+            .attr("r", 5.5);
+
             group.append("text")
-            .attr("class", "collapse-icon_cc50079d-30ec-4fae-8306-8885d7080383")
+            .attr("class", "collapse-icon_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
             .attr("x", x1 + 10)
             .attr("y", y1 + 10)
             .attr("text-anchor", "middle")
             .attr("dominant-baseline", "middle")
             .attr("font-size", "10px")
-            .attr("cursor", "pointer")
             .text("-");
+
+            // Add custom tooltip events
+            collapseButton.on("mouseenter", function() {
+                showTooltip(this, "Collapse module");
+            })
+            .on("mouseleave", removeTooltip);
         });
 
         // Add click event handler for collapse buttons
-        clusters.selectAll(".collapse-button_cc50079d-30ec-4fae-8306-8885d7080383, .collapse-icon_cc50079d-30ec-4fae-8306-8885d7080383")
+        clusters.selectAll(".collapse-button_7b9196f8-6084-4f7c-bb4a-405216ef3cfa, .collapse-icon_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
         .on("click", function(event, [clusterName, clusterData]) {
             event.stopPropagation(); // Prevent event from bubbling to SVG
+            removeTooltip();
             // Collapse the container
             collapsedContainers.add(clusterName);
             
@@ -1376,18 +1461,17 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             lastOperation = "collapse";
             reloadGraph();
         });
-
         
         // Create edges using the path points from Graphviz
-        const edges = inner.selectAll(".edge_cc50079d-30ec-4fae-8306-8885d7080383")
+        const edges = inner.selectAll(".edge_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
         .data(graphvizData.edges)
         .enter()
         .append("g")
-        .attr("class", "edge-group_cc50079d-30ec-4fae-8306-8885d7080383");
+        .attr("class", "edge-group_7b9196f8-6084-4f7c-bb4a-405216ef3cfa");
         
         // Add the actual path
         edges.append("path")
-        .attr("class", "edge_cc50079d-30ec-4fae-8306-8885d7080383")
+        .attr("class", "edge_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
         .attr("d", function(edge) {
             if (edge.path && edge.path.length > 0) {
                     // Create a proper SVG path using Bézier curves
@@ -1413,7 +1497,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             }
             return "";
         })
-        .attr("marker-end", "url(#arrowhead_cc50079d-30ec-4fae-8306-8885d7080383)");
+        .attr("marker-end", "url(#arrowhead_7b9196f8-6084-4f7c-bb4a-405216ef3cfa)");
         
         // Add dimension labels on edges
         edges.each(function(edge) {
@@ -1442,7 +1526,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Create a background for the text
             const labelGroup = edgeGroup.append("g")
-            .attr("class", "edge-label_cc50079d-30ec-4fae-8306-8885d7080383")
+            .attr("class", "edge-label_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
             .attr("transform", `translate(${pointAtStart.x}, ${pointAtStart.y})`);
             
             const text = labelGroup.append("text")
@@ -1477,7 +1561,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         edges.each(function() {
             const edgeGroup = d3.select(this);
             const path = edgeGroup.select("path");
-            const labelGroup = edgeGroup.select(".edge-label_cc50079d-30ec-4fae-8306-8885d7080383");
+            const labelGroup = edgeGroup.select(".edge-label_7b9196f8-6084-4f7c-bb4a-405216ef3cfa");
             const labelText = labelGroup.select("text");
             const labelBg = labelGroup.select("rect");
             const originalStrokeWidth = path.attr("stroke-width") || 1;
@@ -1542,19 +1626,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
         // Create nodes using positions from Graphviz
-        const nodes = inner.selectAll(".node_cc50079d-30ec-4fae-8306-8885d7080383")
+        const nodes = inner.selectAll(".node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
             .data(Object.entries(graphvizData.nodes))
             .enter()
             .append("g")
             // In the createGraph function, when you're creating nodes, modify the class assignment:
             .attr("class", function([nodeName, nodeData]) {
-                let classes = "node_cc50079d-30ec-4fae-8306-8885d7080383";
-                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_cc50079d-30ec-4fae-8306-8885d7080383";
-                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_cc50079d-30ec-4fae-8306-8885d7080383";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_cc50079d-30ec-4fae-8306-8885d7080383";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_cc50079d-30ec-4fae-8306-8885d7080383";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_cc50079d-30ec-4fae-8306-8885d7080383";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_cc50079d-30ec-4fae-8306-8885d7080383";
+                let classes = "node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa";
+                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_7b9196f8-6084-4f7c-bb4a-405216ef3cfa";
+                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_7b9196f8-6084-4f7c-bb4a-405216ef3cfa";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_7b9196f8-6084-4f7c-bb4a-405216ef3cfa";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_7b9196f8-6084-4f7c-bb4a-405216ef3cfa";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_7b9196f8-6084-4f7c-bb4a-405216ef3cfa";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_7b9196f8-6084-4f7c-bb4a-405216ef3cfa";
                 return classes;
             })
             .attr("transform", function([nodeName, nodeData]) {
@@ -1569,16 +1653,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .attr("x", function([nodeName, nodeData]) { return -nodeData.width / 2; })
         .attr("y", function([nodeName, nodeData]) { return -nodeData.height / 2; })
         .attr("class", function([nodeName]) { 
-            if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_cc50079d-30ec-4fae-8306-8885d7080383";
-            if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_cc50079d-30ec-4fae-8306-8885d7080383";
-            if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_cc50079d-30ec-4fae-8306-8885d7080383";
-            if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_cc50079d-30ec-4fae-8306-8885d7080383";
-            return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_cc50079d-30ec-4fae-8306-8885d7080383" : "operation_cc50079d-30ec-4fae-8306-8885d7080383";
+            if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_7b9196f8-6084-4f7c-bb4a-405216ef3cfa";
+            if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_7b9196f8-6084-4f7c-bb4a-405216ef3cfa";
+            if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_7b9196f8-6084-4f7c-bb4a-405216ef3cfa";
+            if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_7b9196f8-6084-4f7c-bb4a-405216ef3cfa";
+            return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_7b9196f8-6084-4f7c-bb4a-405216ef3cfa" : "operation_7b9196f8-6084-4f7c-bb4a-405216ef3cfa";
         });
         
         // Add labels for nodes
         nodes.append("text")
-        .attr("class", "node-label_cc50079d-30ec-4fae-8306-8885d7080383")
+        .attr("class", "node-label_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
         .text(function([nodeName]) { return graph_node_name_to_without_suffix[nodeName] || nodeName; })
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "central");
@@ -1587,7 +1671,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         nodes.filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")));
         }).append("text")
-        .attr("class", "type-indicator_cc50079d-30ec-4fae-8306-8885d7080383")
+        .attr("class", "type-indicator_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
         .attr("text-anchor", "start")
         .attr("dominant-baseline", "text-bottom")
         .attr("transform", function([nodeName, nodeData]) {
@@ -1597,57 +1681,8 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             return (adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName)) ? "Module" : "Tensor Op";
         });
 
-        // Add collapse/expand buttons to collapsed container nodes
-        inner.selectAll(".node_cc50079d-30ec-4fae-8306-8885d7080383")
-        .filter(function([nodeName]) {
-            return collapsedContainers.has(nodeName);
-        })
-        .each(function([nodeName, nodeData]) {
-            const nodeGroup = d3.select(this);
-            const width = nodeData.width;
-            const height = nodeData.height;        
-            // Add collapse/expand button (with "+" since it's collapsed)
-            nodeGroup.append("circle")
-            .attr("class", "collapse-button_cc50079d-30ec-4fae-8306-8885d7080383")
-            .attr("cx", -width/2 + 8)
-            .attr("cy", -height/2 + 8)
-            .attr("r", 6)
-            .attr("fill", "#fff")
-            .attr("stroke", "#333")
-            .attr("stroke-width", 1)
-            .attr("cursor", "pointer")
-            .append("title")
-            .text("Expand module");
-        
-            nodeGroup.append("text")
-            .attr("class", "collapse-icon_cc50079d-30ec-4fae-8306-8885d7080383")
-            .attr("x", -width/2 + 8)
-            .attr("y", -height/2 + 8) 
-            .attr("text-anchor", "middle")
-            .attr("dominant-baseline", "middle")
-            .attr("font-size", "10px")
-            .attr("cursor", "pointer")
-            .text("+");
-            
-            // Add click handler using the existing reloadGraph function
-            nodeGroup.selectAll(".collapse-button_cc50079d-30ec-4fae-8306-8885d7080383, .collapse-icon_cc50079d-30ec-4fae-8306-8885d7080383")
-            .on("click", function(event) {
-                event.stopPropagation();
-                
-                // Always expanding when clicked (since these are collapsed containers)
-                collapsedContainers.delete(nodeName);
-
-                // Track this container and operation for centering after reload
-                lastModifiedContainer = nodeName;
-                lastOperation = "expand";
-                
-                // Use the existing reloadGraph function
-                reloadGraph();
-            });
-        });    
-
         // Add info buttons to nodes (except input, output, constant)
-        inner.selectAll(".node_cc50079d-30ec-4fae-8306-8885d7080383")
+        inner.selectAll(".node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
         .filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")))
         })
@@ -1656,40 +1691,109 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             const width = nodeData.width;
             const height = nodeData.height;
             
-            // Add info button circle
-            nodeGroup.append("circle")
-            .attr("class", "info-button_cc50079d-30ec-4fae-8306-8885d7080383")
-            .attr("cx", width/2 - 8)
-            .attr("cy", -height/2 + 8)
-            .attr("r", 6)
-            .attr("fill", "#fff")
-            .attr("stroke", "#333")
-            .attr("stroke-width", 1)
-            .attr("cursor", "pointer")
-            .append("title")
-            .text("Show info");
+        // Add info button circle
+        const infoButton = nodeGroup.append("circle")
+        .attr("class", "info-button_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
+        .attr("cx", width/2 - 7)
+        .attr("cy", -height/2 + 7)
+        .attr("r", 5.5);
 
-            // Add info button icon
-            nodeGroup.append("text")
-            .attr("class", "info-icon_cc50079d-30ec-4fae-8306-8885d7080383")
-            .attr("x", width/2 - 8)
-            .attr("y", -height/2 + 8)
-            .attr("text-anchor", "middle")
-            .attr("dominant-baseline", "middle")
-            .attr("font-size", "8px")
-            .attr("font-weight", "bold")
-            .attr("cursor", "pointer")
-            .text("i");
-            
+        // Add info button icon
+        nodeGroup.append("text")
+        .attr("class", "info-icon_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
+        .attr("x", width/2 - 7)
+        .attr("y", -height/2 + 8)
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "middle")
+        .attr("font-size", "8px")
+        .attr("font-weight", "bold")
+        .text("i");
+
+        // Add custom tooltip
+        infoButton.on("mouseenter", function() {
+            showTooltip(this, "Show info");
+        })
+        .on("mouseleave", removeTooltip);
+
         // Add click handler to info button
-            nodeGroup.selectAll(".info-button_cc50079d-30ec-4fae-8306-8885d7080383, .info-icon_cc50079d-30ec-4fae-8306-8885d7080383")
+            nodeGroup.selectAll(".info-button_7b9196f8-6084-4f7c-bb4a-405216ef3cfa, .info-icon_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
             .on("click", function(event) {
                 event.stopPropagation();
-                const infoButton = nodeGroup.select(".info-button_cc50079d-30ec-4fae-8306-8885d7080383").node();
+                const infoButton = nodeGroup.select(".info-button_7b9196f8-6084-4f7c-bb4a-405216ef3cfa").node();
                 showPopupFromInfoButton.call(nodeGroup.node(), event, [nodeName], infoButton);
             });
         });
 
+        // Add expand buttons to all module nodes (including non-expandable ones)
+        inner.selectAll(".node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
+        .filter(function([nodeName]) {
+            return (adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || collapsedContainers.has(nodeName);
+        })
+        .each(function([nodeName, nodeData]) {
+            const nodeGroup = d3.select(this);
+            const width = nodeData.width;
+            const height = nodeData.height;
+            
+            // Check if this module is expandable (has children)
+            const isExpandable = collapsedContainers.has(nodeName);
+            
+            // Calculate depth of this node
+            let depth = 0;
+            let currentNode = nodeName;
+            while (ancestor_map[currentNode]) {
+                depth++;
+                currentNode = ancestor_map[currentNode];
+            }
+            
+            // Add expand button circle
+            const expandButton = nodeGroup.append("circle")
+            .attr("class", isExpandable ? "collapse-button_7b9196f8-6084-4f7c-bb4a-405216ef3cfa" : "collapse-button-disabled_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
+            .attr("cx", -width / 2 + 7)
+            .attr("cy", -height / 2 + 7)
+            .attr("r", 5.5)
+            .attr("stroke-width", 1);
+
+
+            // Add expand button icon
+            nodeGroup.append("text")
+            .attr("class", isExpandable ? "collapse-icon_7b9196f8-6084-4f7c-bb4a-405216ef3cfa" : "collapse-icon-disabled_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
+            .attr("x", -width / 2 + 7)
+            .attr("y", -height / 2 + 7)
+            .attr("text-anchor", "middle")
+            .attr("dominant-baseline", "middle")
+            .attr("font-size", "10px")
+            .text("+");
+
+            // Add custom tooltip
+            const tooltipText = isExpandable ? 
+                "Expand module" : 
+                `Call with forced_module_tracing_depth=${depth + 1} or more to make this module expandable`;
+
+            expandButton.on("mouseenter", function() {
+                showTooltip(this, tooltipText);
+            })
+            .on("mouseleave", removeTooltip);
+
+            // Only add click handler for expandable modules
+            if (isExpandable) {
+                nodeGroup.selectAll(".collapse-button_7b9196f8-6084-4f7c-bb4a-405216ef3cfa, .collapse-icon_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
+                .on("click", function(event) {
+                    event.stopPropagation();
+                    removeTooltip();
+                    
+                    // Expand the module
+                    collapsedContainers.delete(nodeName);
+
+                    // Track this container and operation for centering after reload
+                    lastModifiedContainer = nodeName;
+                    lastOperation = "expand";
+                    
+                    // Use the existing reloadGraph function
+                    reloadGraph();
+                });
+            }
+        });
+        
         // Add hover effects
         nodes.each(function() {
             const nodeGroup = d3.select(this);
@@ -1773,16 +1877,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                     .scale(currentTransform.k));
             }
 
-            clickedNodeElement.classed("highlight-node_cc50079d-30ec-4fae-8306-8885d7080383", true);
+            clickedNodeElement.classed("highlight-node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa", true);
             
             setTimeout(() => {
-                clickedNodeElement.classed("highlight-node_cc50079d-30ec-4fae-8306-8885d7080383", false);
+                clickedNodeElement.classed("highlight-node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa", false);
             }, 2000);
 
-            const popup = d3.select("#popup_cc50079d-30ec-4fae-8306-8885d7080383");
-            const moduleTemplate = d3.select("#module-template_cc50079d-30ec-4fae-8306-8885d7080383");
-            const tensorOpTemplate = d3.select("#tensor-op-template_cc50079d-30ec-4fae-8306-8885d7080383");
-            const noInfoMessage = d3.select("#no-info_cc50079d-30ec-4fae-8306-8885d7080383");
+            const popup = d3.select("#popup_7b9196f8-6084-4f7c-bb4a-405216ef3cfa");
+            const moduleTemplate = d3.select("#module-template_7b9196f8-6084-4f7c-bb4a-405216ef3cfa");
+            const tensorOpTemplate = d3.select("#tensor-op-template_7b9196f8-6084-4f7c-bb4a-405216ef3cfa");
+            const noInfoMessage = d3.select("#no-info_7b9196f8-6084-4f7c-bb4a-405216ef3cfa");
             
             const nodeData = adj_list[nodeName];
             
@@ -1790,7 +1894,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (node_to_module_path[nodeName] && graph_node_name_to_without_suffix[nodeName]) {
                 popupTitle = node_to_module_path[nodeName] + "." + graph_node_name_to_without_suffix[nodeName];
             }
-            d3.select("#popup-title_cc50079d-30ec-4fae-8306-8885d7080383").text(popupTitle);
+            d3.select("#popup-title_7b9196f8-6084-4f7c-bb4a-405216ef3cfa").text(popupTitle);
 
             moduleTemplate.style("display", "none");
             tensorOpTemplate.style("display", "none");
@@ -1798,31 +1902,31 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             if (module_info[nodeName]) {
                 const info = module_info[nodeName];
-                moduleTemplate.style("display", "block").classed("content-shown_cc50079d-30ec-4fae-8306-8885d7080383", true);
+                moduleTemplate.style("display", "block").classed("content-shown_7b9196f8-6084-4f7c-bb4a-405216ef3cfa", true);
                 
-                d3.select("#module-extra-repr_cc50079d-30ec-4fae-8306-8885d7080383").text(info.extra_repr || 'N/A');
+                d3.select("#module-extra-repr_7b9196f8-6084-4f7c-bb4a-405216ef3cfa").text(info.extra_repr || 'N/A');
 
                 const forward_info = func_info[nodeName];
-                const attributesContainer = d3.select("#module-attributes_cc50079d-30ec-4fae-8306-8885d7080383").node();
+                const attributesContainer = d3.select("#module-attributes_7b9196f8-6084-4f7c-bb4a-405216ef3cfa").node();
                 attributesContainer.innerHTML = '';
                 createJsonViewer(attributesContainer, info.attributes);
 
-                const parametersContainer = d3.select("#module-parameters_cc50079d-30ec-4fae-8306-8885d7080383").node();
+                const parametersContainer = d3.select("#module-parameters_7b9196f8-6084-4f7c-bb4a-405216ef3cfa").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, forward_info);
             } else if (!(adj_list[nodeName] && adj_list[nodeName].node_type === "Input") && func_info[nodeName]) {
                 const info = func_info[nodeName];
-                tensorOpTemplate.style("display", "block").classed("content-shown_cc50079d-30ec-4fae-8306-8885d7080383", true);
-                const parametersContainer = d3.select("#tensor-op-parameters_cc50079d-30ec-4fae-8306-8885d7080383").node();
+                tensorOpTemplate.style("display", "block").classed("content-shown_7b9196f8-6084-4f7c-bb4a-405216ef3cfa", true);
+                const parametersContainer = d3.select("#tensor-op-parameters_7b9196f8-6084-4f7c-bb4a-405216ef3cfa").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, info);
             } else {
-                noInfoMessage.style("display", "block").classed("content-shown_cc50079d-30ec-4fae-8306-8885d7080383", true);
+                noInfoMessage.style("display", "block").classed("content-shown_7b9196f8-6084-4f7c-bb4a-405216ef3cfa", true);
             }
             
             // Position popup based on info button or node center
             let boundingBox, x, y;
-            const containerRect = d3.select("#graph-container_cc50079d-30ec-4fae-8306-8885d7080383").node().getBoundingClientRect();
+            const containerRect = d3.select("#graph-container_7b9196f8-6084-4f7c-bb4a-405216ef3cfa").node().getBoundingClientRect();
             
             if (infoButtonElement) {
                 boundingBox = infoButtonElement.getBoundingClientRect();
@@ -1838,19 +1942,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             popup.style("left", `${x}px`)
             .style("top", `${y}px`)
             .style("display", "flex");
-            d3.select("#popup-content_cc50079d-30ec-4fae-8306-8885d7080383").node().scrollTop = 0;
+            d3.select("#popup-content_7b9196f8-6084-4f7c-bb4a-405216ef3cfa").node().scrollTop = 0;
         }
 
         function closePopup() {
-            d3.select("#popup_cc50079d-30ec-4fae-8306-8885d7080383").style("display", "none");
+            d3.select("#popup_7b9196f8-6084-4f7c-bb4a-405216ef3cfa").style("display", "none");
         }
         
-        d3.select(".popup-close_cc50079d-30ec-4fae-8306-8885d7080383").on("click", closePopup);
+        d3.select(".popup-close_7b9196f8-6084-4f7c-bb4a-405216ef3cfa").on("click", closePopup);
         svg.on("click", closePopup);
 
-        const popup = document.getElementById(`popup_cc50079d-30ec-4fae-8306-8885d7080383`);
+        const popup = document.getElementById(`popup_7b9196f8-6084-4f7c-bb4a-405216ef3cfa`);
         const resizeObserver = new ResizeObserver(() => {
-            const editorContainers = popup.querySelectorAll('.json-viewer_cc50079d-30ec-4fae-8306-8885d7080383');
+            const editorContainers = popup.querySelectorAll('.json-viewer_7b9196f8-6084-4f7c-bb4a-405216ef3cfa');
             for (let container of editorContainers) {
                 if (container.jsonEditor) {
                     container.jsonEditor.resize();
@@ -1929,30 +2033,30 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 // Apply highlight effect to the target container
                 if (Object.keys(graphvizData.nodes).includes(lastModifiedContainer)) {
                     // Highlight the node (collapsed container)
-                    const targetElement = inner.selectAll(".node_cc50079d-30ec-4fae-8306-8885d7080383")
+                    const targetElement = inner.selectAll(".node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
                         .filter(([nodeName]) => nodeName === lastModifiedContainer);
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-node_cc50079d-30ec-4fae-8306-8885d7080383", true);
+                        targetElement.classed("highlight-node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-node_cc50079d-30ec-4fae-8306-8885d7080383", false);
+                            targetElement.classed("highlight-node_7b9196f8-6084-4f7c-bb4a-405216ef3cfa", false);
                         }, 2000); // Match the animation duration
                     }
                 } else if (Object.keys(graphvizData.clusters).includes(lastModifiedContainer)) {
                     // Highlight the cluster (expanded container)
-                    const targetElement = inner.selectAll(".boundary-box_cc50079d-30ec-4fae-8306-8885d7080383")
+                    const targetElement = inner.selectAll(".boundary-box_7b9196f8-6084-4f7c-bb4a-405216ef3cfa")
                         .filter(function([clusterName]) {
                             return clusterName === lastModifiedContainer;
                         });
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-cluster_cc50079d-30ec-4fae-8306-8885d7080383", true);
+                        targetElement.classed("highlight-cluster_7b9196f8-6084-4f7c-bb4a-405216ef3cfa", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-cluster_cc50079d-30ec-4fae-8306-8885d7080383", false);
+                            targetElement.classed("highlight-cluster_7b9196f8-6084-4f7c-bb4a-405216ef3cfa", false);
                         }, 2000); // Match the animation duration
                     }
                 }

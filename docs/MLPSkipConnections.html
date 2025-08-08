@@ -179,331 +179,364 @@ trace_model(model, example_input)
     
             <div class="graph-view" id="graphContainer" style="height: 100%">
                 <div class="graph-box-header">Visualized Interactive Graph</div>
-                <div id="graph-container_e9e96dd6-139d-47b4-8b0f-f24e4a90387f">
-    <div id="graph_e9e96dd6-139d-47b4-8b0f-f24e4a90387f"></div>
-    <div id="popup_e9e96dd6-139d-47b4-8b0f-f24e4a90387f" class="popup_e9e96dd6-139d-47b4-8b0f-f24e4a90387f" style="display: none;">
-        <div class="popup-header_e9e96dd6-139d-47b4-8b0f-f24e4a90387f">
-            <h3 id="popup-title_e9e96dd6-139d-47b4-8b0f-f24e4a90387f"></h3>
-            <span class="popup-close_e9e96dd6-139d-47b4-8b0f-f24e4a90387f">✕</span>
+                <div id="graph-container_94601e80-de28-4425-86f9-34c4ad3eda1f">
+    <div id="graph_94601e80-de28-4425-86f9-34c4ad3eda1f"></div>
+    <div id="popup_94601e80-de28-4425-86f9-34c4ad3eda1f" class="popup_94601e80-de28-4425-86f9-34c4ad3eda1f" style="display: none;">
+        <div class="popup-header_94601e80-de28-4425-86f9-34c4ad3eda1f">
+            <h3 id="popup-title_94601e80-de28-4425-86f9-34c4ad3eda1f"></h3>
+            <span class="popup-close_94601e80-de28-4425-86f9-34c4ad3eda1f">✕</span>
         </div>
-        <div id="popup-content_e9e96dd6-139d-47b4-8b0f-f24e4a90387f" class="popup-content_e9e96dd6-139d-47b4-8b0f-f24e4a90387f">
-            <div id="common-info_e9e96dd6-139d-47b4-8b0f-f24e4a90387f">
+        <div id="popup-content_94601e80-de28-4425-86f9-34c4ad3eda1f" class="popup-content_94601e80-de28-4425-86f9-34c4ad3eda1f">
+            <div id="common-info_94601e80-de28-4425-86f9-34c4ad3eda1f">
             </div>
-            <div id="module-template_e9e96dd6-139d-47b4-8b0f-f24e4a90387f" style="display:none;">
-                <details open id="module-parameters-details_e9e96dd6-139d-47b4-8b0f-f24e4a90387f">
+            <div id="module-template_94601e80-de28-4425-86f9-34c4ad3eda1f" style="display:none;">
+                <details open id="module-parameters-details_94601e80-de28-4425-86f9-34c4ad3eda1f">
                     <summary style="color: black"><strong>forward() Parameters</strong></summary>
-                    <div id="module-parameters_e9e96dd6-139d-47b4-8b0f-f24e4a90387f" class="json-viewer_e9e96dd6-139d-47b4-8b0f-f24e4a90387f"></div>
+                    <div id="module-parameters_94601e80-de28-4425-86f9-34c4ad3eda1f" class="json-viewer_94601e80-de28-4425-86f9-34c4ad3eda1f"></div>
                 </details>
-                <details open id="module-attributes-details_e9e96dd6-139d-47b4-8b0f-f24e4a90387f">
+                <details open id="module-attributes-details_94601e80-de28-4425-86f9-34c4ad3eda1f">
                     <summary style="color: black"><strong>Attributes</strong></summary>
-                    <div id="module-attributes_e9e96dd6-139d-47b4-8b0f-f24e4a90387f" class="json-viewer_e9e96dd6-139d-47b4-8b0f-f24e4a90387f"></div>
+                    <div id="module-attributes_94601e80-de28-4425-86f9-34c4ad3eda1f" class="json-viewer_94601e80-de28-4425-86f9-34c4ad3eda1f"></div>
                 </details>
             </div>
-            <div id="tensor-op-template_e9e96dd6-139d-47b4-8b0f-f24e4a90387f" style="display:none;">
+            <div id="tensor-op-template_94601e80-de28-4425-86f9-34c4ad3eda1f" style="display:none;">
                 <summary><strong>Parameters</strong></summary>
-                <div id="tensor-op-parameters_e9e96dd6-139d-47b4-8b0f-f24e4a90387f" class="json-viewer_e9e96dd6-139d-47b4-8b0f-f24e4a90387f"></div>
+                <div id="tensor-op-parameters_94601e80-de28-4425-86f9-34c4ad3eda1f" class="json-viewer_94601e80-de28-4425-86f9-34c4ad3eda1f"></div>
             </div>
-            <p id="no-info_e9e96dd6-139d-47b4-8b0f-f24e4a90387f" style="display:none;">No further information available for this node.</p>
+            <p id="no-info_94601e80-de28-4425-86f9-34c4ad3eda1f" style="display:none;">No further information available for this node.</p>
         </div>
     </div>
 
     <style>
-            .node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f rect {
-                stroke: #333;
-                fill: #fff;
-            }
-            text.node-label_e9e96dd6-139d-47b4-8b0f-f24e4a90387f {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                cursor: default;
-                user-select: none;
-            }
-            text.type-indicator_e9e96dd6-139d-47b4-8b0f-f24e4a90387f {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                cursor: default;
-                user-select: none;
-            }
-            text.collapse-icon_e9e96dd6-139d-47b4-8b0f-f24e4a90387f {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                font-size: 14px
-                cursor: default;
-                user-select: none;
-            }
-            .edge_e9e96dd6-139d-47b4-8b0f-f24e4a90387f {
-                stroke: #797979;
-                fill: none;
-            }
-            .node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f rect.input_e9e96dd6-139d-47b4-8b0f-f24e4a90387f { fill: #FF9AFF; }
-            .node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f rect.constant_e9e96dd6-139d-47b4-8b0f-f24e4a90387f { fill: rgb(235 235 235); }
+        .node_94601e80-de28-4425-86f9-34c4ad3eda1f rect {
+            stroke: #333;
+            fill: #fff;
+        }
+        text.node-label_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            cursor: default;
+            user-select: none;
+        }
+        text.type-indicator_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            cursor: default;
+            user-select: none;
+        }
+        text.collapse-icon_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 14px
+            cursor: default;
+            user-select: none;
+        }
+        .edge_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            stroke: #797979;
+            fill: none;
+        }
+        .node_94601e80-de28-4425-86f9-34c4ad3eda1f rect.input_94601e80-de28-4425-86f9-34c4ad3eda1f { fill: #FF9AFF; }
+        .node_94601e80-de28-4425-86f9-34c4ad3eda1f rect.constant_94601e80-de28-4425-86f9-34c4ad3eda1f { fill: rgb(235 235 235); }
 
-            .node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f rect.output_e9e96dd6-139d-47b4-8b0f-f24e4a90387f { fill: #74e071; }
-            .node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f rect.failed_e9e96dd6-139d-47b4-8b0f-f24e4a90387f { fill: rgb(224 15 15); }
-            .node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f rect.module_e9e96dd6-139d-47b4-8b0f-f24e4a90387f { fill: #8BDEDB; }
-            .node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f rect.operation_e9e96dd6-139d-47b4-8b0f-f24e4a90387f { fill: #FEBC5A; }
-            .edgeLabelGroup_e9e96dd6-139d-47b4-8b0f-f24e4a90387f {
-                pointer-events: none;
-            }
-            #arrowhead_e9e96dd6-139d-47b4-8b0f-f24e4a90387f path {
-                fill: #333333;;
-            }
-            .node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f rect,
-            .node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f ellipse {
-                transition: fill 0.3s ease;
-            }
+        .node_94601e80-de28-4425-86f9-34c4ad3eda1f rect.output_94601e80-de28-4425-86f9-34c4ad3eda1f { fill: #74e071; }
+        .node_94601e80-de28-4425-86f9-34c4ad3eda1f rect.failed_94601e80-de28-4425-86f9-34c4ad3eda1f { fill: rgb(224 15 15); }
+        .node_94601e80-de28-4425-86f9-34c4ad3eda1f rect.module_94601e80-de28-4425-86f9-34c4ad3eda1f { fill: #8BDEDB; }
+        .node_94601e80-de28-4425-86f9-34c4ad3eda1f rect.operation_94601e80-de28-4425-86f9-34c4ad3eda1f { fill: #FEBC5A; }
+        .edgeLabelGroup_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            pointer-events: none;
+        }
+        #arrowhead_94601e80-de28-4425-86f9-34c4ad3eda1f path {
+            fill: #333333;;
+        }
+        .node_94601e80-de28-4425-86f9-34c4ad3eda1f rect,
+        .node_94601e80-de28-4425-86f9-34c4ad3eda1f ellipse {
+            transition: fill 0.3s ease;
+        }
 
-            .node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f .type-indicator_e9e96dd6-139d-47b4-8b0f-f24e4a90387f {
-                font-size: 5px;
-                fill: rgba(0, 0, 0, 1.0);  /* Dark grey, semi-transparent */
-                pointer-events: none;
-            }
+        .node_94601e80-de28-4425-86f9-34c4ad3eda1f .type-indicator_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            font-size: 5px;
+            fill: rgba(0, 0, 0, 1.0);  /* Dark grey, semi-transparent */
+            pointer-events: none;
+        }
 
-            .node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f.error_e9e96dd6-139d-47b4-8b0f-f24e4a90387f rect {
-                stroke: black;
+        .node_94601e80-de28-4425-86f9-34c4ad3eda1f.error_94601e80-de28-4425-86f9-34c4ad3eda1f rect {
+            stroke: black;
+            stroke-width: 1px;
+        }
+
+        .boundary-box_94601e80-de28-4425-86f9-34c4ad3eda1f.error_94601e80-de28-4425-86f9-34c4ad3eda1f > rect:first-of-type {
+            fill: red;
+            fill-opacity: 0.2;
+        }
+
+        #graph-container_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            position: relative;
+            height: 95%;
+            overflow: hidden;
+        }
+
+        #graph_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            height: 100%;
+        }
+        
+        .popup_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            width: 500px;
+            resize: horizontal;
+            overflow: auto;
+            max-height: 70%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .popup-header_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 5px 10px;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .popup_94601e80-de28-4425-86f9-34c4ad3eda1f h3 {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .popup-content_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            padding: 10px;
+            padding-bottom: 10px;
+            overflow-y: auto;
+            overflow-x: auto;
+            flex-grow: 1;
+        }
+
+        .popup_94601e80-de28-4425-86f9-34c4ad3eda1f pre {
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        .popup-close_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        #popup-title_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            font-size: 16px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: black;
+        }
+
+        #graph-container_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            position: relative;
+        }
+
+        #graph-container_94601e80-de28-4425-86f9-34c4ad3eda1f pre {
+            margin-bottom: 0;
+        }
+
+        .boundary-box_94601e80-de28-4425-86f9-34c4ad3eda1f rect {
+            pointer-events: none;
+        }
+        .boundary-box_94601e80-de28-4425-86f9-34c4ad3eda1f text {
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .boundary-box_94601e80-de28-4425-86f9-34c4ad3eda1f rect {
+            pointer-events: none;
+        }
+        .boundary-box_94601e80-de28-4425-86f9-34c4ad3eda1f text {
+            pointer-events: none;
+            user-select: none;
+            font-weight: bold;
+        }
+        .edge-label_94601e80-de28-4425-86f9-34c4ad3eda1f text {
+            pointer-events: none;
+            user-select: none;
+            font-size: 4px;
+            font-family: "'Roboto', sans-serif";
+        }
+                    
+        .collapse-button_94601e80-de28-4425-86f9-34c4ad3eda1f, .info-button_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            fill: #fff;
+            stroke: #333;
+            stroke-width: 1px;
+            cursor: pointer;
+        }
+
+        .collapse-button_94601e80-de28-4425-86f9-34c4ad3eda1f:hover, .info-button_94601e80-de28-4425-86f9-34c4ad3eda1f:hover {
+            fill: #eee;
+            cursor: pointer;
+        }
+
+        .collapse-icon_94601e80-de28-4425-86f9-34c4ad3eda1f, .info-icon_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            pointer-events: none;
+            user-select: none;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            fill: rgb(51, 51, 51);
+        }
+
+        .collapse-button-disabled_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            fill: #eee5;
+            stroke: #3333334f;
+            stroke-width: 1px;
+            cursor: not-allowed;
+        }
+
+        .collapse-button-disabled_94601e80-de28-4425-86f9-34c4ad3eda1f:hover {
+            fill: #eee6;
+            cursor: not-allowed;
+        }
+
+        .collapse-icon-disabled_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            pointer-events: none;
+            user-select: none;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            fill: #3333334f;
+            cursor: not-allowed;
+        }
+
+        /* Edge hover styles */
+        .edge-group_94601e80-de28-4425-86f9-34c4ad3eda1f path {
+            pointer-events: stroke;
+        }
+
+        .edge-label_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            pointer-events: all;
+        }
+
+        @keyframes containerHighlight {
+            0% { 
+                filter: drop-shadow(0 0 0px rgba(255, 215, 0, 0));
+            }
+            25% { 
+                filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
+            }
+            50% { 
+                filter: drop-shadow(0 0 0px rgba(255, 215, 0, 0));
+            }
+            75% { 
+                filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
+            }
+            100% { 
+                filter: drop-shadow(0 0 0px rgba(255, 215, 0, 0));
+            }
+        }
+
+        @keyframes containerStrokeHighlight {
+            0% { 
                 stroke-width: 1px;
             }
-
-            .boundary-box_e9e96dd6-139d-47b4-8b0f-f24e4a90387f.error_e9e96dd6-139d-47b4-8b0f-f24e4a90387f > rect:first-of-type {
-                fill: red;
-                fill-opacity: 0.2;
+            25% { 
+                stroke-width: 3px;
             }
-
-            #graph-container_e9e96dd6-139d-47b4-8b0f-f24e4a90387f {
-                position: relative;
-                height: 95%;
-                overflow: hidden;
-            }
-
-            #graph_e9e96dd6-139d-47b4-8b0f-f24e4a90387f {
-                height: 100%;
-            }
-            
-            .popup_e9e96dd6-139d-47b4-8b0f-f24e4a90387f {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                position: absolute;
-                background: white;
-                border: 1px solid #ccc;
-                width: 500px;
-                resize: horizontal;
-                overflow: auto;
-                max-height: 70%;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-                display: none;
-                display: flex;
-                flex-direction: column;
-            }
-
-            .popup-header_e9e96dd6-139d-47b4-8b0f-f24e4a90387f {
-                position: sticky;
-                top: 0;
-                background: white;
-                padding: 5px 10px;
-                border-bottom: 1px solid #ccc;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                z-index: 1;
-            }
-
-            .popup_e9e96dd6-139d-47b4-8b0f-f24e4a90387f h3 {
-                margin: 0;
-                font-size: 16px;
-            }
-
-            .popup-content_e9e96dd6-139d-47b4-8b0f-f24e4a90387f {
-                padding: 10px;
-                padding-bottom: 10px;
-                overflow-y: auto;
-                overflow-x: auto;
-                flex-grow: 1;
-            }
-
-            .popup_e9e96dd6-139d-47b4-8b0f-f24e4a90387f pre {
-                white-space: pre;
-                overflow-x: auto;
-            }
-
-            .popup-close_e9e96dd6-139d-47b4-8b0f-f24e4a90387f {
-                cursor: pointer;
-                font-size: 24px;
-                font-weight: bold;
-                line-height: 1;
-            }
-
-            #popup-title_e9e96dd6-139d-47b4-8b0f-f24e4a90387f {
-                font-size: 16px;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                color: black;
-            }
-
-            #graph-container_e9e96dd6-139d-47b4-8b0f-f24e4a90387f {
-                position: relative;
-            }
-
-            #graph-container_e9e96dd6-139d-47b4-8b0f-f24e4a90387f pre {
-                margin-bottom: 0;
-            }
-
-            .boundary-box_e9e96dd6-139d-47b4-8b0f-f24e4a90387f rect {
-                pointer-events: none;
-            }
-            .boundary-box_e9e96dd6-139d-47b4-8b0f-f24e4a90387f text {
-                pointer-events: none;
-                user-select: none;
-            }
-
-            .boundary-box_e9e96dd6-139d-47b4-8b0f-f24e4a90387f rect {
-                pointer-events: none;
-            }
-            .boundary-box_e9e96dd6-139d-47b4-8b0f-f24e4a90387f text {
-                pointer-events: none;
-                user-select: none;
-                font-weight: bold;
-            }
-            .edge-label_e9e96dd6-139d-47b4-8b0f-f24e4a90387f text {
-                pointer-events: none;
-                user-select: none;
-                font-size: 4px;
-                font-family: "'Roboto', sans-serif";
-            }
-            
-            .collapse-button_e9e96dd6-139d-47b4-8b0f-f24e4a90387f:hover {
-                fill: #eee;
-                cursor: pointer;
-            }
-            .collapse-icon_e9e96dd6-139d-47b4-8b0f-f24e4a90387f {
-                pointer-events: none;
-                user-select: none;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                fill: rgb(51, 51, 51);
-            }
-
-            .info-button_e9e96dd6-139d-47b4-8b0f-f24e4a90387f:hover {
-                fill: #eee;
-                cursor: pointer;
-            }
-            .info-icon_e9e96dd6-139d-47b4-8b0f-f24e4a90387f {
-                pointer-events: none;
-                user-select: none;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                fill: rgb(51, 51, 51);
-            }
-
-            /* Edge hover styles */
-            .edge-group_e9e96dd6-139d-47b4-8b0f-f24e4a90387f path {
-               pointer-events: stroke;
-            }
-
-            .edge-label_e9e96dd6-139d-47b4-8b0f-f24e4a90387f {
-                pointer-events: all;
-            }
-
-            @keyframes containerHighlight {
-                0% { 
-                    filter: drop-shadow(0 0 0px rgba(255, 215, 0, 0));
-                }
-                25% { 
-                    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
-                }
-                50% { 
-                    filter: drop-shadow(0 0 0px rgba(255, 215, 0, 0));
-                }
-                75% { 
-                    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
-                }
-                100% { 
-                    filter: drop-shadow(0 0 0px rgba(255, 215, 0, 0));
-                }
-            }
-
-            @keyframes containerStrokeHighlight {
-                0% { 
-                    stroke-width: 1px;
-                }
-                25% { 
-                    stroke-width: 3px;
-                }
-                50% { 
-                    stroke-width: 1px;
-                }
-                75% { 
-                    stroke-width: 3px;
-                }
-                100% { 
-                    stroke-width: 1px;
-                }
-            }
-
-            .highlight-cluster_e9e96dd6-139d-47b4-8b0f-f24e4a90387f > rect:first-of-type {
-                animation: 
-                    containerStrokeHighlight 2.0s ease-in-out forwards;
-            }
-
-            .highlight-node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f rect {
-                animation: 
-                    containerStrokeHighlight 2.0s ease-in-out forwards;
-            }
-
-            text.node-label_e9e96dd6-139d-47b4-8b0f-f24e4a90387f {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                font-size: 0.8rem;  /* Base size using rem units for accessibility */
-                cursor: default;
-                user-select: none;
-            }
-
-            .node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f.constant_e9e96dd6-139d-47b4-8b0f-f24e4a90387f .node-label_e9e96dd6-139d-47b4-8b0f-f24e4a90387f {
-                font-size: 0.7rem;
-            }
-
-            .popup-content_e9e96dd6-139d-47b4-8b0f-f24e4a90387f summary {
-                cursor: pointer;
-                margin: 5px;
-                user-select: none;
-            }
-
-            .node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f.input_e9e96dd6-139d-47b4-8b0f-f24e4a90387f rect,
-            .node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f.output_e9e96dd6-139d-47b4-8b0f-f24e4a90387f rect,
-            .node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f.constant_e9e96dd6-139d-47b4-8b0f-f24e4a90387f rect {
+            50% { 
                 stroke-width: 1px;
-                rx: 8px;
-                ry: 8px;
-                stroke-dasharray: none;
             }
+            75% { 
+                stroke-width: 3px;
+            }
+            100% { 
+                stroke-width: 1px;
+            }
+        }
 
-            #png-error-container_e9e96dd6-139d-47b4-8b0f-f24e4a90387f {
-                text-align: center;
-                padding: 10px;
-                border-bottom: 1px solid #ccc;
-                font-size: 14px;
-            }
+        .highlight-cluster_94601e80-de28-4425-86f9-34c4ad3eda1f > rect:first-of-type {
+            animation: 
+                containerStrokeHighlight 2.0s ease-in-out forwards;
+        }
 
-            #png-error-message_e9e96dd6-139d-47b4-8b0f-f24e4a90387f {
-                padding: 8px 16px;
-                background-color: #dc3545;
-                color: white;
-                border-radius: 4px;
-                display: inline-block;
-                font-family: monospace;
-                white-space: pre-wrap;
-                text-align: left;
-            }
+        .highlight-node_94601e80-de28-4425-86f9-34c4ad3eda1f rect {
+            animation: 
+                containerStrokeHighlight 2.0s ease-in-out forwards;
+        }
 
-            #png-link-container_e9e96dd6-139d-47b4-8b0f-f24e4a90387f {
-                padding: 10px;
-                border-bottom: 1px solid #ccc;
-                font-size: 18px;
-            }
+        text.node-label_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 0.8rem;  /* Base size using rem units for accessibility */
+            cursor: default;
+            user-select: none;
+        }
 
-            #png-download-button_e9e96dd6-139d-47b4-8b0f-f24e4a90387f {
-                display: inline-block;
-                padding: 8px 16px;
-                background-color: #007bff;
-                color: white;
-                text-decoration: none;
-                border-radius: 4px;
-            }
+        .node_94601e80-de28-4425-86f9-34c4ad3eda1f.constant_94601e80-de28-4425-86f9-34c4ad3eda1f .node-label_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            font-size: 0.7rem;
+        }
 
-            #png-download-button_e9e96dd6-139d-47b4-8b0f-f24e4a90387f:hover {
-                background-color: #0056b3;
-            }
+        .popup-content_94601e80-de28-4425-86f9-34c4ad3eda1f summary {
+            cursor: pointer;
+            margin: 5px;
+            user-select: none;
+        }
+
+        .node_94601e80-de28-4425-86f9-34c4ad3eda1f.input_94601e80-de28-4425-86f9-34c4ad3eda1f rect,
+        .node_94601e80-de28-4425-86f9-34c4ad3eda1f.output_94601e80-de28-4425-86f9-34c4ad3eda1f rect,
+        .node_94601e80-de28-4425-86f9-34c4ad3eda1f.constant_94601e80-de28-4425-86f9-34c4ad3eda1f rect {
+            stroke-width: 1px;
+            rx: 8px;
+            ry: 8px;
+            stroke-dasharray: none;
+        }
+
+        #png-error-container_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            text-align: center;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        #png-error-message_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            padding: 8px 16px;
+            background-color: #dc3545;
+            color: white;
+            border-radius: 4px;
+            display: inline-block;
+            font-family: monospace;
+            white-space: pre-wrap;
+            text-align: left;
+        }
+
+        #png-link-container_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            font-size: 18px;
+        }
+
+        #png-download-button_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        #png-download-button_94601e80-de28-4425-86f9-34c4ad3eda1f:hover {
+            background-color: #0056b3;
+        }
+
+        .custom-tooltip_94601e80-de28-4425-86f9-34c4ad3eda1f {
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 6px 8px;
+            font-size: 12px;
+            font-family: inherit;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            pointer-events: none;
+            max-width: 250px;
+            word-wrap: break-word;
+            display: none;
+        }
     </style>
     
     <script>
@@ -659,7 +692,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
 (function() {
-    const adj_list = {"input_0": {"edges": [{"target": "Linear_1", "dims": "(1, 64)", "edge_data_id": 5805932272}, {"target": "Linear_1", "dims": "(1, 64)", "edge_data_id": 5805932272}], "failed": false, "node_type": "Input"}, "Linear_1": {"edges": [{"target": "relu_1", "dims": "(1, 128)", "edge_data_id": 10791085904}, {"target": "relu_1", "dims": "(1, 128)", "edge_data_id": 10791085904}], "failed": false, "node_type": "Module"}, "relu_1": {"edges": [{"target": "Linear_2", "dims": "(1, 128)", "edge_data_id": 10791083216}, {"target": "Linear_2", "dims": "(1, 128)", "edge_data_id": 10791083216}, {"target": "__add___1", "dims": "(1, 128)", "edge_data_id": 10791083216}, {"target": "__add___1", "dims": "(1, 128)", "edge_data_id": 10791083216}], "failed": false, "node_type": "Operation"}, "Linear_2": {"edges": [{"target": "relu_2", "dims": "(1, 128)", "edge_data_id": 10791087632}, {"target": "relu_2", "dims": "(1, 128)", "edge_data_id": 10791087632}], "failed": false, "node_type": "Module"}, "relu_2": {"edges": [{"target": "__add___1", "dims": "(1, 128)", "edge_data_id": 10791081872}, {"target": "__add___1", "dims": "(1, 128)", "edge_data_id": 10791081872}], "failed": false, "node_type": "Operation"}, "__add___1": {"edges": [{"target": "Linear_3", "dims": "(1, 128)", "edge_data_id": 10791087632}, {"target": "Linear_3", "dims": "(1, 128)", "edge_data_id": 10791087632}], "failed": false, "node_type": "Operation"}, "Linear_3": {"edges": [{"target": "relu_3", "dims": "(1, 64)", "edge_data_id": 10791088496}, {"target": "relu_3", "dims": "(1, 64)", "edge_data_id": 10791088496}], "failed": false, "node_type": "Module"}, "relu_3": {"edges": [{"target": "Linear_4", "dims": "(1, 64)", "edge_data_id": 10791087632}, {"target": "Linear_4", "dims": "(1, 64)", "edge_data_id": 10791087632}], "failed": false, "node_type": "Operation"}, "Linear_4": {"edges": [{"target": "output_0", "dims": "(1, 10)", "edge_data_id": 10791086576}], "failed": false, "node_type": "Module"}, "output_0": {"edges": [], "failed": false, "node_type": "Output"}};
+    const adj_list = {"input_0": {"edges": [{"target": "Linear_1", "dims": "(1, 64)", "edge_data_id": 5880332016}, {"target": "Linear_1", "dims": "(1, 64)", "edge_data_id": 5880332016}], "failed": false, "node_type": "Input"}, "Linear_1": {"edges": [{"target": "relu_1", "dims": "(1, 128)", "edge_data_id": 10980377424}, {"target": "relu_1", "dims": "(1, 128)", "edge_data_id": 10980377424}], "failed": false, "node_type": "Module"}, "relu_1": {"edges": [{"target": "Linear_2", "dims": "(1, 128)", "edge_data_id": 10980056272}, {"target": "Linear_2", "dims": "(1, 128)", "edge_data_id": 10980056272}, {"target": "__add___1", "dims": "(1, 128)", "edge_data_id": 10980056272}, {"target": "__add___1", "dims": "(1, 128)", "edge_data_id": 10980056272}], "failed": false, "node_type": "Operation"}, "Linear_2": {"edges": [{"target": "relu_2", "dims": "(1, 128)", "edge_data_id": 10980064240}, {"target": "relu_2", "dims": "(1, 128)", "edge_data_id": 10980064240}], "failed": false, "node_type": "Module"}, "relu_2": {"edges": [{"target": "__add___1", "dims": "(1, 128)", "edge_data_id": 10980053680}, {"target": "__add___1", "dims": "(1, 128)", "edge_data_id": 10980053680}], "failed": false, "node_type": "Operation"}, "__add___1": {"edges": [{"target": "Linear_3", "dims": "(1, 128)", "edge_data_id": 10980064240}, {"target": "Linear_3", "dims": "(1, 128)", "edge_data_id": 10980064240}], "failed": false, "node_type": "Operation"}, "Linear_3": {"edges": [{"target": "relu_3", "dims": "(1, 64)", "edge_data_id": 10980054736}, {"target": "relu_3", "dims": "(1, 64)", "edge_data_id": 10980054736}], "failed": false, "node_type": "Module"}, "relu_3": {"edges": [{"target": "Linear_4", "dims": "(1, 64)", "edge_data_id": 10980064240}, {"target": "Linear_4", "dims": "(1, 64)", "edge_data_id": 10980064240}], "failed": false, "node_type": "Operation"}, "Linear_4": {"edges": [{"target": "output_0", "dims": "(1, 10)", "edge_data_id": 10980051376}], "failed": false, "node_type": "Module"}, "output_0": {"edges": [], "failed": false, "node_type": "Output"}};
     const module_info = {"Linear_1": {"type": "Linear", "parameters": {"weight": {"shape": [128, 64], "requires_grad": true}, "bias": {"shape": [128], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 128, "training": true}, "extra_repr": "in_features=64, out_features=128, bias=True"}, "Linear_2": {"type": "Linear", "parameters": {"weight": {"shape": [128, 128], "requires_grad": true}, "bias": {"shape": [128], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 128, "out_features": 128, "training": true}, "extra_repr": "in_features=128, out_features=128, bias=True"}, "Linear_3": {"type": "Linear", "parameters": {"weight": {"shape": [64, 128], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 128, "out_features": 64, "training": true}, "extra_repr": "in_features=128, out_features=64, bias=True"}, "Linear_4": {"type": "Linear", "parameters": {"weight": {"shape": [10, 64], "requires_grad": true}, "bias": {"shape": [10], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 10, "training": true}, "extra_repr": "in_features=64, out_features=10, bias=True"}};
     const func_info = {"Linear_1": {"positional_args": [{"_type": "tensor", "shape": [1, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_1": {"positional_args": [{"_type": "tensor", "shape": [1, 128], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_2": {"positional_args": [{"_type": "tensor", "shape": [1, 128], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_2": {"positional_args": [{"_type": "tensor", "shape": [1, 128], "dtype": "torch.float32"}], "keyword_args": {}}, "__add___1": {"positional_args": [{"_type": "tensor", "shape": [1, 128], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [1, 128], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_3": {"positional_args": [{"_type": "tensor", "shape": [1, 128], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_3": {"positional_args": [{"_type": "tensor", "shape": [1, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_4": {"positional_args": [{"_type": "tensor", "shape": [1, 64], "dtype": "torch.float32"}], "keyword_args": {}}};
     const parent_module_to_nodes = {};
@@ -689,6 +722,57 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             });
         } else {
             setTimeout(function() { waitForLibs(callback) }, 400);
+        }
+    }
+
+    let currentTooltip = null;
+
+    function createTooltip(text) {
+        removeTooltip();
+        
+        const tooltip = document.createElement('div');
+        tooltip.className = `custom-tooltip_94601e80-de28-4425-86f9-34c4ad3eda1f`;
+        tooltip.textContent = text;
+        
+        const container = document.getElementById(`graph-container_94601e80-de28-4425-86f9-34c4ad3eda1f`);
+        container.appendChild(tooltip);
+        currentTooltip = tooltip;
+        
+        return tooltip;
+    }
+
+    function positionTooltip(tooltip, buttonElement) {
+        // Get the button's position in screen coordinates
+        const buttonRect = buttonElement.getBoundingClientRect();
+        
+        // Get the container's position in screen coordinates
+        const containerRect = document.getElementById(`graph-container_94601e80-de28-4425-86f9-34c4ad3eda1f`).getBoundingClientRect();
+        
+        // Calculate position relative to container
+        const buttonX = buttonRect.left + (buttonRect.width / 2) - containerRect.left;
+        const buttonY = buttonRect.top - containerRect.top;
+        
+        // Show tooltip to measure its size
+        tooltip.style.display = 'block';
+        const tooltipRect = tooltip.getBoundingClientRect();
+        
+        // Position tooltip centered above button
+        const left = buttonX - (tooltipRect.width / 2);
+        const top = buttonY - tooltipRect.height - 6; // 6px gap above button
+        
+        tooltip.style.left = `${left}px`;
+        tooltip.style.top = `${top}px`;
+    }
+
+    function showTooltip(buttonElement, text) {
+        const tooltip = createTooltip(text);
+        positionTooltip(tooltip, buttonElement);
+    }
+
+    function removeTooltip() {
+        if (currentTooltip) {
+            currentTooltip.remove();
+            currentTooltip = null;
         }
     }
 
@@ -1121,7 +1205,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function reloadGraph() {
-        d3.select("#graph_e9e96dd6-139d-47b4-8b0f-f24e4a90387f").html("");
+        d3.select("#graph_94601e80-de28-4425-86f9-34c4ad3eda1f").html("");
 
         const dotSource = generateDotSource(adj_list, ancestor_map);
 
@@ -1178,16 +1262,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function renderGraphvizImage(dotSource) {
-        d3.select("#png-link-container_e9e96dd6-139d-47b4-8b0f-f24e4a90387f").remove();
+        d3.select("#png-link-container_94601e80-de28-4425-86f9-34c4ad3eda1f").remove();
         
         function showErrorMessage(error) {
-            const parent = d3.select("#graph-container_e9e96dd6-139d-47b4-8b0f-f24e4a90387f").node().parentNode;
+            const parent = d3.select("#graph-container_94601e80-de28-4425-86f9-34c4ad3eda1f").node().parentNode;
             const errorContainer = d3.select(parent)
-                .insert("div", "#graph-container_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
-                .attr("id", "png-error-container_e9e96dd6-139d-47b4-8b0f-f24e4a90387f");
+                .insert("div", "#graph-container_94601e80-de28-4425-86f9-34c4ad3eda1f")
+                .attr("id", "png-error-container_94601e80-de28-4425-86f9-34c4ad3eda1f");
             
             errorContainer.append("div")
-                .attr("id", "png-error-message_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
+                .attr("id", "png-error-message_94601e80-de28-4425-86f9-34c4ad3eda1f")
                 .html(`<strong>Error:</strong><br>${error.stack || error.message || error}<br><br><strong>Note:</strong> Exporting very large models as PNG is currently not supported. Please use generate_image=False, or raise an issue on https://github.com/sachinhosmani/torchvista/issues`);
         }
         
@@ -1225,15 +1309,15 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             const pngUrl = URL.createObjectURL(pngBlob);
             
             // Create link container
-            const parent = d3.select("#graph-container_e9e96dd6-139d-47b4-8b0f-f24e4a90387f").node().parentNode;
+            const parent = d3.select("#graph-container_94601e80-de28-4425-86f9-34c4ad3eda1f").node().parentNode;
             const linkContainer = d3.select(parent)
-                .insert("div", "#graph-container_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
-                .attr("id", "png-link-container_e9e96dd6-139d-47b4-8b0f-f24e4a90387f");
+                .insert("div", "#graph-container_94601e80-de28-4425-86f9-34c4ad3eda1f")
+                .attr("id", "png-link-container_94601e80-de28-4425-86f9-34c4ad3eda1f");
             
             linkContainer.append("a")
                 .attr("href", pngUrl)
                 .attr("target", "_blank")
-                .attr("id", "png-download-button_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
+                .attr("id", "png-download-button_94601e80-de28-4425-86f9-34c4ad3eda1f")
                 .text("View PNG in New Tab");
                 
             URL.revokeObjectURL(svgUrl);
@@ -1246,7 +1330,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function createGraph(graphvizData) {
-        const svg = d3.select("#graph_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
+        const svg = d3.select("#graph_94601e80-de28-4425-86f9-34c4ad3eda1f")
         .append("svg")
         .attr("width", "100%")
         .attr("height", "100%")
@@ -1257,6 +1341,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
         // Add zoom behavior
         const zoom = d3.zoom().on("zoom", function(event) {
+            removeTooltip();
             inner.attr("transform", event.transform);
             closePopup();
         });
@@ -1265,7 +1350,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
         // Define arrowhead marker
         svg.append("defs").append("marker")
-        .attr("id", "arrowhead_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
+        .attr("id", "arrowhead_94601e80-de28-4425-86f9-34c4ad3eda1f")
         .attr("viewBox", "0 -5 10 10")
         .attr("refX", 8)
         .attr("refY", 0)
@@ -1277,11 +1362,11 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .attr("fill", "#333");
 
         // Draw clusters (container boxes) first so they're behind nodes
-        const clusters = inner.selectAll(".boundary-box_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
+        const clusters = inner.selectAll(".boundary-box_94601e80-de28-4425-86f9-34c4ad3eda1f")
         .data(Object.entries(graphvizData.clusters))
         .enter()
         .append("g")
-        .attr("class", "boundary-box_e9e96dd6-139d-47b4-8b0f-f24e4a90387f");
+        .attr("class", "boundary-box_94601e80-de28-4425-86f9-34c4ad3eda1f");
 
         const containersWithFailedNodes = identifyContainersWithFailedNodes(adj_list, ancestor_map);
 
@@ -1290,7 +1375,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             const hasFailedNodes = containersWithFailedNodes.has(clusterName);
             if (hasFailedNodes) {
-                group.classed("error_e9e96dd6-139d-47b4-8b0f-f24e4a90387f", true);
+                group.classed("error_94601e80-de28-4425-86f9-34c4ad3eda1f", true);
             }
 
             // Parse bounding box coordinates
@@ -1325,33 +1410,33 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             .attr("stroke-linejoin", "round");
                         
             // Add collapse/expand button
-            group.append("circle")
-            .attr("class", "collapse-button_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
+            const collapseButton = group.append("circle")
+            .attr("class", "collapse-button_94601e80-de28-4425-86f9-34c4ad3eda1f")
             .attr("cx", x1 + 10)
             .attr("cy", y1 + 10)
-            .attr("r", 6)
-            .attr("fill", "#fff")
-            .attr("stroke", "#333")
-            .attr("stroke-width", 1)
-            .attr("cursor", "pointer")
-            .append("title")
-            .text("Collapse module");
-            
+            .attr("r", 5.5);
+
             group.append("text")
-            .attr("class", "collapse-icon_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
+            .attr("class", "collapse-icon_94601e80-de28-4425-86f9-34c4ad3eda1f")
             .attr("x", x1 + 10)
             .attr("y", y1 + 10)
             .attr("text-anchor", "middle")
             .attr("dominant-baseline", "middle")
             .attr("font-size", "10px")
-            .attr("cursor", "pointer")
             .text("-");
+
+            // Add custom tooltip events
+            collapseButton.on("mouseenter", function() {
+                showTooltip(this, "Collapse module");
+            })
+            .on("mouseleave", removeTooltip);
         });
 
         // Add click event handler for collapse buttons
-        clusters.selectAll(".collapse-button_e9e96dd6-139d-47b4-8b0f-f24e4a90387f, .collapse-icon_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
+        clusters.selectAll(".collapse-button_94601e80-de28-4425-86f9-34c4ad3eda1f, .collapse-icon_94601e80-de28-4425-86f9-34c4ad3eda1f")
         .on("click", function(event, [clusterName, clusterData]) {
             event.stopPropagation(); // Prevent event from bubbling to SVG
+            removeTooltip();
             // Collapse the container
             collapsedContainers.add(clusterName);
             
@@ -1360,18 +1445,17 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             lastOperation = "collapse";
             reloadGraph();
         });
-
         
         // Create edges using the path points from Graphviz
-        const edges = inner.selectAll(".edge_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
+        const edges = inner.selectAll(".edge_94601e80-de28-4425-86f9-34c4ad3eda1f")
         .data(graphvizData.edges)
         .enter()
         .append("g")
-        .attr("class", "edge-group_e9e96dd6-139d-47b4-8b0f-f24e4a90387f");
+        .attr("class", "edge-group_94601e80-de28-4425-86f9-34c4ad3eda1f");
         
         // Add the actual path
         edges.append("path")
-        .attr("class", "edge_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
+        .attr("class", "edge_94601e80-de28-4425-86f9-34c4ad3eda1f")
         .attr("d", function(edge) {
             if (edge.path && edge.path.length > 0) {
                     // Create a proper SVG path using Bézier curves
@@ -1397,7 +1481,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             }
             return "";
         })
-        .attr("marker-end", "url(#arrowhead_e9e96dd6-139d-47b4-8b0f-f24e4a90387f)");
+        .attr("marker-end", "url(#arrowhead_94601e80-de28-4425-86f9-34c4ad3eda1f)");
         
         // Add dimension labels on edges
         edges.each(function(edge) {
@@ -1426,7 +1510,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Create a background for the text
             const labelGroup = edgeGroup.append("g")
-            .attr("class", "edge-label_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
+            .attr("class", "edge-label_94601e80-de28-4425-86f9-34c4ad3eda1f")
             .attr("transform", `translate(${pointAtStart.x}, ${pointAtStart.y})`);
             
             const text = labelGroup.append("text")
@@ -1461,7 +1545,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         edges.each(function() {
             const edgeGroup = d3.select(this);
             const path = edgeGroup.select("path");
-            const labelGroup = edgeGroup.select(".edge-label_e9e96dd6-139d-47b4-8b0f-f24e4a90387f");
+            const labelGroup = edgeGroup.select(".edge-label_94601e80-de28-4425-86f9-34c4ad3eda1f");
             const labelText = labelGroup.select("text");
             const labelBg = labelGroup.select("rect");
             const originalStrokeWidth = path.attr("stroke-width") || 1;
@@ -1526,19 +1610,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
         // Create nodes using positions from Graphviz
-        const nodes = inner.selectAll(".node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
+        const nodes = inner.selectAll(".node_94601e80-de28-4425-86f9-34c4ad3eda1f")
             .data(Object.entries(graphvizData.nodes))
             .enter()
             .append("g")
             // In the createGraph function, when you're creating nodes, modify the class assignment:
             .attr("class", function([nodeName, nodeData]) {
-                let classes = "node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f";
-                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_e9e96dd6-139d-47b4-8b0f-f24e4a90387f";
-                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_e9e96dd6-139d-47b4-8b0f-f24e4a90387f";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_e9e96dd6-139d-47b4-8b0f-f24e4a90387f";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_e9e96dd6-139d-47b4-8b0f-f24e4a90387f";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_e9e96dd6-139d-47b4-8b0f-f24e4a90387f";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_e9e96dd6-139d-47b4-8b0f-f24e4a90387f";
+                let classes = "node_94601e80-de28-4425-86f9-34c4ad3eda1f";
+                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_94601e80-de28-4425-86f9-34c4ad3eda1f";
+                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_94601e80-de28-4425-86f9-34c4ad3eda1f";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_94601e80-de28-4425-86f9-34c4ad3eda1f";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_94601e80-de28-4425-86f9-34c4ad3eda1f";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_94601e80-de28-4425-86f9-34c4ad3eda1f";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_94601e80-de28-4425-86f9-34c4ad3eda1f";
                 return classes;
             })
             .attr("transform", function([nodeName, nodeData]) {
@@ -1553,16 +1637,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .attr("x", function([nodeName, nodeData]) { return -nodeData.width / 2; })
         .attr("y", function([nodeName, nodeData]) { return -nodeData.height / 2; })
         .attr("class", function([nodeName]) { 
-            if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_e9e96dd6-139d-47b4-8b0f-f24e4a90387f";
-            if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_e9e96dd6-139d-47b4-8b0f-f24e4a90387f";
-            if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_e9e96dd6-139d-47b4-8b0f-f24e4a90387f";
-            if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_e9e96dd6-139d-47b4-8b0f-f24e4a90387f";
-            return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_e9e96dd6-139d-47b4-8b0f-f24e4a90387f" : "operation_e9e96dd6-139d-47b4-8b0f-f24e4a90387f";
+            if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_94601e80-de28-4425-86f9-34c4ad3eda1f";
+            if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_94601e80-de28-4425-86f9-34c4ad3eda1f";
+            if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_94601e80-de28-4425-86f9-34c4ad3eda1f";
+            if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_94601e80-de28-4425-86f9-34c4ad3eda1f";
+            return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_94601e80-de28-4425-86f9-34c4ad3eda1f" : "operation_94601e80-de28-4425-86f9-34c4ad3eda1f";
         });
         
         // Add labels for nodes
         nodes.append("text")
-        .attr("class", "node-label_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
+        .attr("class", "node-label_94601e80-de28-4425-86f9-34c4ad3eda1f")
         .text(function([nodeName]) { return graph_node_name_to_without_suffix[nodeName] || nodeName; })
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "central");
@@ -1571,7 +1655,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         nodes.filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")));
         }).append("text")
-        .attr("class", "type-indicator_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
+        .attr("class", "type-indicator_94601e80-de28-4425-86f9-34c4ad3eda1f")
         .attr("text-anchor", "start")
         .attr("dominant-baseline", "text-bottom")
         .attr("transform", function([nodeName, nodeData]) {
@@ -1581,57 +1665,8 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             return (adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName)) ? "Module" : "Tensor Op";
         });
 
-        // Add collapse/expand buttons to collapsed container nodes
-        inner.selectAll(".node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
-        .filter(function([nodeName]) {
-            return collapsedContainers.has(nodeName);
-        })
-        .each(function([nodeName, nodeData]) {
-            const nodeGroup = d3.select(this);
-            const width = nodeData.width;
-            const height = nodeData.height;        
-            // Add collapse/expand button (with "+" since it's collapsed)
-            nodeGroup.append("circle")
-            .attr("class", "collapse-button_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
-            .attr("cx", -width/2 + 8)
-            .attr("cy", -height/2 + 8)
-            .attr("r", 6)
-            .attr("fill", "#fff")
-            .attr("stroke", "#333")
-            .attr("stroke-width", 1)
-            .attr("cursor", "pointer")
-            .append("title")
-            .text("Expand module");
-        
-            nodeGroup.append("text")
-            .attr("class", "collapse-icon_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
-            .attr("x", -width/2 + 8)
-            .attr("y", -height/2 + 8) 
-            .attr("text-anchor", "middle")
-            .attr("dominant-baseline", "middle")
-            .attr("font-size", "10px")
-            .attr("cursor", "pointer")
-            .text("+");
-            
-            // Add click handler using the existing reloadGraph function
-            nodeGroup.selectAll(".collapse-button_e9e96dd6-139d-47b4-8b0f-f24e4a90387f, .collapse-icon_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
-            .on("click", function(event) {
-                event.stopPropagation();
-                
-                // Always expanding when clicked (since these are collapsed containers)
-                collapsedContainers.delete(nodeName);
-
-                // Track this container and operation for centering after reload
-                lastModifiedContainer = nodeName;
-                lastOperation = "expand";
-                
-                // Use the existing reloadGraph function
-                reloadGraph();
-            });
-        });    
-
         // Add info buttons to nodes (except input, output, constant)
-        inner.selectAll(".node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
+        inner.selectAll(".node_94601e80-de28-4425-86f9-34c4ad3eda1f")
         .filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")))
         })
@@ -1640,40 +1675,109 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             const width = nodeData.width;
             const height = nodeData.height;
             
-            // Add info button circle
-            nodeGroup.append("circle")
-            .attr("class", "info-button_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
-            .attr("cx", width/2 - 8)
-            .attr("cy", -height/2 + 8)
-            .attr("r", 6)
-            .attr("fill", "#fff")
-            .attr("stroke", "#333")
-            .attr("stroke-width", 1)
-            .attr("cursor", "pointer")
-            .append("title")
-            .text("Show info");
+        // Add info button circle
+        const infoButton = nodeGroup.append("circle")
+        .attr("class", "info-button_94601e80-de28-4425-86f9-34c4ad3eda1f")
+        .attr("cx", width/2 - 7)
+        .attr("cy", -height/2 + 7)
+        .attr("r", 5.5);
 
-            // Add info button icon
-            nodeGroup.append("text")
-            .attr("class", "info-icon_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
-            .attr("x", width/2 - 8)
-            .attr("y", -height/2 + 8)
-            .attr("text-anchor", "middle")
-            .attr("dominant-baseline", "middle")
-            .attr("font-size", "8px")
-            .attr("font-weight", "bold")
-            .attr("cursor", "pointer")
-            .text("i");
-            
+        // Add info button icon
+        nodeGroup.append("text")
+        .attr("class", "info-icon_94601e80-de28-4425-86f9-34c4ad3eda1f")
+        .attr("x", width/2 - 7)
+        .attr("y", -height/2 + 8)
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "middle")
+        .attr("font-size", "8px")
+        .attr("font-weight", "bold")
+        .text("i");
+
+        // Add custom tooltip
+        infoButton.on("mouseenter", function() {
+            showTooltip(this, "Show info");
+        })
+        .on("mouseleave", removeTooltip);
+
         // Add click handler to info button
-            nodeGroup.selectAll(".info-button_e9e96dd6-139d-47b4-8b0f-f24e4a90387f, .info-icon_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
+            nodeGroup.selectAll(".info-button_94601e80-de28-4425-86f9-34c4ad3eda1f, .info-icon_94601e80-de28-4425-86f9-34c4ad3eda1f")
             .on("click", function(event) {
                 event.stopPropagation();
-                const infoButton = nodeGroup.select(".info-button_e9e96dd6-139d-47b4-8b0f-f24e4a90387f").node();
+                const infoButton = nodeGroup.select(".info-button_94601e80-de28-4425-86f9-34c4ad3eda1f").node();
                 showPopupFromInfoButton.call(nodeGroup.node(), event, [nodeName], infoButton);
             });
         });
 
+        // Add expand buttons to all module nodes (including non-expandable ones)
+        inner.selectAll(".node_94601e80-de28-4425-86f9-34c4ad3eda1f")
+        .filter(function([nodeName]) {
+            return (adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || collapsedContainers.has(nodeName);
+        })
+        .each(function([nodeName, nodeData]) {
+            const nodeGroup = d3.select(this);
+            const width = nodeData.width;
+            const height = nodeData.height;
+            
+            // Check if this module is expandable (has children)
+            const isExpandable = collapsedContainers.has(nodeName);
+            
+            // Calculate depth of this node
+            let depth = 0;
+            let currentNode = nodeName;
+            while (ancestor_map[currentNode]) {
+                depth++;
+                currentNode = ancestor_map[currentNode];
+            }
+            
+            // Add expand button circle
+            const expandButton = nodeGroup.append("circle")
+            .attr("class", isExpandable ? "collapse-button_94601e80-de28-4425-86f9-34c4ad3eda1f" : "collapse-button-disabled_94601e80-de28-4425-86f9-34c4ad3eda1f")
+            .attr("cx", -width / 2 + 7)
+            .attr("cy", -height / 2 + 7)
+            .attr("r", 5.5)
+            .attr("stroke-width", 1);
+
+
+            // Add expand button icon
+            nodeGroup.append("text")
+            .attr("class", isExpandable ? "collapse-icon_94601e80-de28-4425-86f9-34c4ad3eda1f" : "collapse-icon-disabled_94601e80-de28-4425-86f9-34c4ad3eda1f")
+            .attr("x", -width / 2 + 7)
+            .attr("y", -height / 2 + 7)
+            .attr("text-anchor", "middle")
+            .attr("dominant-baseline", "middle")
+            .attr("font-size", "10px")
+            .text("+");
+
+            // Add custom tooltip
+            const tooltipText = isExpandable ? 
+                "Expand module" : 
+                `Call with forced_module_tracing_depth=${depth + 1} or more to make this module expandable`;
+
+            expandButton.on("mouseenter", function() {
+                showTooltip(this, tooltipText);
+            })
+            .on("mouseleave", removeTooltip);
+
+            // Only add click handler for expandable modules
+            if (isExpandable) {
+                nodeGroup.selectAll(".collapse-button_94601e80-de28-4425-86f9-34c4ad3eda1f, .collapse-icon_94601e80-de28-4425-86f9-34c4ad3eda1f")
+                .on("click", function(event) {
+                    event.stopPropagation();
+                    removeTooltip();
+                    
+                    // Expand the module
+                    collapsedContainers.delete(nodeName);
+
+                    // Track this container and operation for centering after reload
+                    lastModifiedContainer = nodeName;
+                    lastOperation = "expand";
+                    
+                    // Use the existing reloadGraph function
+                    reloadGraph();
+                });
+            }
+        });
+        
         // Add hover effects
         nodes.each(function() {
             const nodeGroup = d3.select(this);
@@ -1757,16 +1861,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                     .scale(currentTransform.k));
             }
 
-            clickedNodeElement.classed("highlight-node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f", true);
+            clickedNodeElement.classed("highlight-node_94601e80-de28-4425-86f9-34c4ad3eda1f", true);
             
             setTimeout(() => {
-                clickedNodeElement.classed("highlight-node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f", false);
+                clickedNodeElement.classed("highlight-node_94601e80-de28-4425-86f9-34c4ad3eda1f", false);
             }, 2000);
 
-            const popup = d3.select("#popup_e9e96dd6-139d-47b4-8b0f-f24e4a90387f");
-            const moduleTemplate = d3.select("#module-template_e9e96dd6-139d-47b4-8b0f-f24e4a90387f");
-            const tensorOpTemplate = d3.select("#tensor-op-template_e9e96dd6-139d-47b4-8b0f-f24e4a90387f");
-            const noInfoMessage = d3.select("#no-info_e9e96dd6-139d-47b4-8b0f-f24e4a90387f");
+            const popup = d3.select("#popup_94601e80-de28-4425-86f9-34c4ad3eda1f");
+            const moduleTemplate = d3.select("#module-template_94601e80-de28-4425-86f9-34c4ad3eda1f");
+            const tensorOpTemplate = d3.select("#tensor-op-template_94601e80-de28-4425-86f9-34c4ad3eda1f");
+            const noInfoMessage = d3.select("#no-info_94601e80-de28-4425-86f9-34c4ad3eda1f");
             
             const nodeData = adj_list[nodeName];
             
@@ -1774,7 +1878,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (node_to_module_path[nodeName] && graph_node_name_to_without_suffix[nodeName]) {
                 popupTitle = node_to_module_path[nodeName] + "." + graph_node_name_to_without_suffix[nodeName];
             }
-            d3.select("#popup-title_e9e96dd6-139d-47b4-8b0f-f24e4a90387f").text(popupTitle);
+            d3.select("#popup-title_94601e80-de28-4425-86f9-34c4ad3eda1f").text(popupTitle);
 
             moduleTemplate.style("display", "none");
             tensorOpTemplate.style("display", "none");
@@ -1782,31 +1886,31 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             if (module_info[nodeName]) {
                 const info = module_info[nodeName];
-                moduleTemplate.style("display", "block").classed("content-shown_e9e96dd6-139d-47b4-8b0f-f24e4a90387f", true);
+                moduleTemplate.style("display", "block").classed("content-shown_94601e80-de28-4425-86f9-34c4ad3eda1f", true);
                 
-                d3.select("#module-extra-repr_e9e96dd6-139d-47b4-8b0f-f24e4a90387f").text(info.extra_repr || 'N/A');
+                d3.select("#module-extra-repr_94601e80-de28-4425-86f9-34c4ad3eda1f").text(info.extra_repr || 'N/A');
 
                 const forward_info = func_info[nodeName];
-                const attributesContainer = d3.select("#module-attributes_e9e96dd6-139d-47b4-8b0f-f24e4a90387f").node();
+                const attributesContainer = d3.select("#module-attributes_94601e80-de28-4425-86f9-34c4ad3eda1f").node();
                 attributesContainer.innerHTML = '';
                 createJsonViewer(attributesContainer, info.attributes);
 
-                const parametersContainer = d3.select("#module-parameters_e9e96dd6-139d-47b4-8b0f-f24e4a90387f").node();
+                const parametersContainer = d3.select("#module-parameters_94601e80-de28-4425-86f9-34c4ad3eda1f").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, forward_info);
             } else if (!(adj_list[nodeName] && adj_list[nodeName].node_type === "Input") && func_info[nodeName]) {
                 const info = func_info[nodeName];
-                tensorOpTemplate.style("display", "block").classed("content-shown_e9e96dd6-139d-47b4-8b0f-f24e4a90387f", true);
-                const parametersContainer = d3.select("#tensor-op-parameters_e9e96dd6-139d-47b4-8b0f-f24e4a90387f").node();
+                tensorOpTemplate.style("display", "block").classed("content-shown_94601e80-de28-4425-86f9-34c4ad3eda1f", true);
+                const parametersContainer = d3.select("#tensor-op-parameters_94601e80-de28-4425-86f9-34c4ad3eda1f").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, info);
             } else {
-                noInfoMessage.style("display", "block").classed("content-shown_e9e96dd6-139d-47b4-8b0f-f24e4a90387f", true);
+                noInfoMessage.style("display", "block").classed("content-shown_94601e80-de28-4425-86f9-34c4ad3eda1f", true);
             }
             
             // Position popup based on info button or node center
             let boundingBox, x, y;
-            const containerRect = d3.select("#graph-container_e9e96dd6-139d-47b4-8b0f-f24e4a90387f").node().getBoundingClientRect();
+            const containerRect = d3.select("#graph-container_94601e80-de28-4425-86f9-34c4ad3eda1f").node().getBoundingClientRect();
             
             if (infoButtonElement) {
                 boundingBox = infoButtonElement.getBoundingClientRect();
@@ -1822,19 +1926,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             popup.style("left", `${x}px`)
             .style("top", `${y}px`)
             .style("display", "flex");
-            d3.select("#popup-content_e9e96dd6-139d-47b4-8b0f-f24e4a90387f").node().scrollTop = 0;
+            d3.select("#popup-content_94601e80-de28-4425-86f9-34c4ad3eda1f").node().scrollTop = 0;
         }
 
         function closePopup() {
-            d3.select("#popup_e9e96dd6-139d-47b4-8b0f-f24e4a90387f").style("display", "none");
+            d3.select("#popup_94601e80-de28-4425-86f9-34c4ad3eda1f").style("display", "none");
         }
         
-        d3.select(".popup-close_e9e96dd6-139d-47b4-8b0f-f24e4a90387f").on("click", closePopup);
+        d3.select(".popup-close_94601e80-de28-4425-86f9-34c4ad3eda1f").on("click", closePopup);
         svg.on("click", closePopup);
 
-        const popup = document.getElementById(`popup_e9e96dd6-139d-47b4-8b0f-f24e4a90387f`);
+        const popup = document.getElementById(`popup_94601e80-de28-4425-86f9-34c4ad3eda1f`);
         const resizeObserver = new ResizeObserver(() => {
-            const editorContainers = popup.querySelectorAll('.json-viewer_e9e96dd6-139d-47b4-8b0f-f24e4a90387f');
+            const editorContainers = popup.querySelectorAll('.json-viewer_94601e80-de28-4425-86f9-34c4ad3eda1f');
             for (let container of editorContainers) {
                 if (container.jsonEditor) {
                     container.jsonEditor.resize();
@@ -1913,30 +2017,30 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 // Apply highlight effect to the target container
                 if (Object.keys(graphvizData.nodes).includes(lastModifiedContainer)) {
                     // Highlight the node (collapsed container)
-                    const targetElement = inner.selectAll(".node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
+                    const targetElement = inner.selectAll(".node_94601e80-de28-4425-86f9-34c4ad3eda1f")
                         .filter(([nodeName]) => nodeName === lastModifiedContainer);
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f", true);
+                        targetElement.classed("highlight-node_94601e80-de28-4425-86f9-34c4ad3eda1f", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-node_e9e96dd6-139d-47b4-8b0f-f24e4a90387f", false);
+                            targetElement.classed("highlight-node_94601e80-de28-4425-86f9-34c4ad3eda1f", false);
                         }, 2000); // Match the animation duration
                     }
                 } else if (Object.keys(graphvizData.clusters).includes(lastModifiedContainer)) {
                     // Highlight the cluster (expanded container)
-                    const targetElement = inner.selectAll(".boundary-box_e9e96dd6-139d-47b4-8b0f-f24e4a90387f")
+                    const targetElement = inner.selectAll(".boundary-box_94601e80-de28-4425-86f9-34c4ad3eda1f")
                         .filter(function([clusterName]) {
                             return clusterName === lastModifiedContainer;
                         });
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-cluster_e9e96dd6-139d-47b4-8b0f-f24e4a90387f", true);
+                        targetElement.classed("highlight-cluster_94601e80-de28-4425-86f9-34c4ad3eda1f", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-cluster_e9e96dd6-139d-47b4-8b0f-f24e4a90387f", false);
+                            targetElement.classed("highlight-cluster_94601e80-de28-4425-86f9-34c4ad3eda1f", false);
                         }, 2000); // Match the animation duration
                     }
                 }
