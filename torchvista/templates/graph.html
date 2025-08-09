@@ -356,6 +356,10 @@
             word-wrap: break-word;
             display: none;
         }
+
+        .edge_${unique_id}.implied-edge_${unique_id} {
+            stroke-dasharray: 5,5;
+        }
     </style>
     
     <script>
@@ -573,13 +577,17 @@
                 labelPos = { x: lx, y: ly };
             }
 
-            result.edges.push({
+            let edgeObj = {
                 source: sourceName,
                 target: targetName,
                 path: pathPoints,
                 edge_data_id: edge.edge_data_id,
-                labelPos: labelPos
-            });
+                labelPos: labelPos,
+            }
+            if (edge.is_implied_edge) {
+                edgeObj.is_implied_edge = true;
+            }
+            result.edges.push(edgeObj);
         }
 
         return result;
@@ -733,6 +741,7 @@
                     target: targetNode,
                     dims: edge.dims,
                     edge_data_id: edge.edge_data_id,
+                    is_implied_edge: edge.is_implied_edge
                 });
             }
         }
@@ -861,10 +870,14 @@
             for (const edge of data.edges) {
                 let edgeLabelFontSize = "10";
                 if (edge.edge_data_id) {
-                    dotSource += `  "${node}" -> "${edge.target}"[label="${edge.dims}", fontsize="${edgeLabelFontSize}", edge_data_id="${edge.edge_data_id}" ];\n`;
+                    dotSource += `  "${node}" -> "${edge.target}"[label="${edge.dims}", fontsize="${edgeLabelFontSize}", edge_data_id="${edge.edge_data_id}"`;
                 } else {
-                    dotSource += `  "${node}" -> "${edge.target}"[label="${edge.dims}", fontsize="${edgeLabelFontSize}" ];\n`;
+                    dotSource += `  "${node}" -> "${edge.target}"[label="${edge.dims}", fontsize="${edgeLabelFontSize}"`;
                 }
+                if (edge.is_implied_edge) {
+                    dotSource += `, is_implied_edge="true"`;
+                }
+                dotSource += `];\n`;
             }
         }
 
@@ -1174,8 +1187,12 @@
         
         // Add the actual path
         edges.append("path")
-        .attr("class", "edge_${unique_id}")
-        .attr("d", function(edge) {
+        .attr("class", function(edge) {
+            if (edge.is_implied_edge) {
+                return "edge_${unique_id} implied-edge_${unique_id}";
+            }
+            return "edge_${unique_id}";
+        }).attr("d", function(edge) {
             if (edge.path && edge.path.length > 0) {
                     // Create a proper SVG path using Bézier curves
                 let d = "";

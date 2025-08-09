@@ -220,7 +220,10 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
         for inp in input_tensors:
             if hasattr(inp, '_tensor_source_name'):
                 dims = format_dims(tuple(inp.shape))
-                adj_list[inp._tensor_source_name]['edges'].append({'target': op_name, 'dims': dims, 'edge_data_id': id(inp)})
+                entry = {'target': op_name, 'dims': dims, 'edge_data_id': id(inp)}
+                if hasattr(inp, '_is_implied_edge') and inp._is_implied_edge:
+                    entry['is_implied_edge'] = True
+                adj_list[inp._tensor_source_name]['edges'].append(entry)
             elif isinstance(inp, torch.Tensor) and show_non_gradient_nodes:
                 dims = format_dims(tuple(inp.shape))
                 adj_list[f'tensor_{last_tensor_input_id}'] = {
@@ -228,7 +231,10 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                     'failed': False,
                     'node_type': 'Constant',
                 }
-                adj_list[f'tensor_{last_tensor_input_id}']['edges'].append({'target': op_name, 'dims': dims, 'edge_data_id': id(inp)})
+                entry = {'target': op_name, 'dims': dims, 'edge_data_id': id(inp)}
+                if hasattr(inp, '_is_implied_edge') and inp._is_implied_edge:
+                    entry['is_implied_edge'] = True
+                adj_list[f'tensor_{last_tensor_input_id}']['edges'].append(entry)
                 node_to_ancestors[f'tensor_{last_tensor_input_id}'] = module_stack[::-1]
                 constant_node_names.append(f'tensor_{last_tensor_input_id}')
                 last_tensor_input_id += 1
@@ -325,7 +331,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
         
         return tensors
 
-    def trace_op(op_name, output):
+    def trace_op(op_name, output, is_implied_edge=False):
         # Because some discovered operations don't get added to the adj_list in pre_trace_op
         if op_name not in adj_list:
             return output
@@ -344,6 +350,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
         # Tag each tensor with the source operation
         for tensor in output_tensors:
             tensor._tensor_source_name = op_name
+            tensor._is_implied_edge = is_implied_edge
 
         # node_to_ancestors[op_name] = module_stack[::-1]
 
@@ -436,7 +443,17 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                     pre_trace_op(node_name, node_type, *args, **kwargs)
                     output = orig_func(*args, **kwargs)
                     current_executing_function = None
-                    output = trace_op(node_name, output)
+
+                    # Special case for __setitem__ to handle cases like https://github.com/sachinhosmani/torchvista/issues/14
+                    # Note: This isn't necessary for other in-place modifications like fill_() because they return the updated tensor
+                    # and before returning, they overwrite the _tensor_source_name attribute, which makes new connections to be made
+                    # from the modified tensor.
+                    is_implied_edge = False
+                    if func_name == '__setitem__' and namespace == 'torch.Tensor':
+                        if args:
+                            output = args[0]
+                        is_implied_edge = True
+                    output = trace_op(node_name, output, is_implied_edge)
                     return output
                 else:
                     return orig_func(*args, **kwargs)
@@ -655,11 +672,14 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                     dims = format_dims(tuple(output_tensor.shape))
                     target_node_name = seen_tensors[tensor_id]
                     if hasattr(output_tensor, '_tensor_source_name'):
-                        adj_list[output_tensor._tensor_source_name]['edges'].append({
+                        entry = {
                             'target': target_node_name,
                             'dims': dims,
                             'edge_data_id': id(output_tensor),
-                        })
+                        }
+                        adj_list[output_tensor._tensor_source_name]['edges'].append(entry)
+                        if hasattr(output_tensor, '_is_implied_edge') and output_tensor._is_implied_edge:
+                            entry['is_implied_edge'] = True
         
                 for output_tensor in output_tensors:
                     cleanup_tensor_attributes(output)
