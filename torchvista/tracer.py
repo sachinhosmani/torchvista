@@ -792,9 +792,6 @@ def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_dept
         'code_contents': code_contents,
         'error_contents': str(exception) if exception else "",
     })
-    # write output to a tmp file
-    # with open(f'torchvista_demo_{unique_id}.html', 'w') as f:
-    #     f.write(output)
     return output, exception
 
 
