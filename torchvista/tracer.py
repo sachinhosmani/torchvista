@@ -798,7 +798,7 @@ def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_dept
     return output, exception
 
 
-def trace_model(model, inputs, max_module_expansion_depth=None, show_non_gradient_nodes=True, collapse_modules_after_depth=1, forced_module_tracing_depth=None, height=800, generate_image=False):
+def trace_model(model, inputs, show_non_gradient_nodes=True, collapse_modules_after_depth=1, forced_module_tracing_depth=None, height=800, generate_image=False):
     adj_list = {}
     module_info = {}
     func_info = {}
@@ -807,9 +807,6 @@ def trace_model(model, inputs, max_module_expansion_depth=None, show_non_gradien
     graph_node_name_to_without_suffix = {}
     node_to_module_path = {}
     node_to_ancestors = defaultdict(list)
-    if max_module_expansion_depth is not None:
-        # hacky backwards compatibility
-        collapse_modules_after_depth = max_module_expansion_depth
     collapse_modules_after_depth = max(collapse_modules_after_depth, 0)
 
     exception = None
