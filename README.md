@@ -1,7 +1,6 @@
 # torchvista
 
 An interactive tool to visualize the forward pass of a PyTorch model directly in the notebook—with a single line of code. Works with web-based notebooks like Jupyter, Google Colab and Kaggle.
-Note: As of now, it doesn't work properly in VSCode notebooks and this is being looked into.
 
 ## ✨ Features
 
