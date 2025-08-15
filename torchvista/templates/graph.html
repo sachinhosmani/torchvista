@@ -346,6 +346,26 @@
             background-color: #0056b3;
         }
 
+        #svg-link-container_${unique_id} {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            font-size: 18px;
+        }
+
+
+        #svg-download-button_${unique_id} {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        #svg-download-button_${unique_id}:hover {
+            background-color: #0056b3;
+        }
+
         .custom-tooltip_${unique_id} {
             position: absolute;
             background: white;
@@ -369,11 +389,12 @@
         .logo_${unique_id} {
             position: absolute;
             bottom: 8px; left: 8px;
+            padding: 4px 6px;
+        }
+        .logo_${unique_id} a {
             color: #a1a1a1;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             opacity: .6;
-            padding: 4px 6px;
-            border-radius: 3px;
         }
     </style>
     
@@ -440,6 +461,7 @@
     const collapse_modules_after_depth = ${collapse_modules_after_depth};
     const node_to_module_path = ${node_to_module_path};
     const generateImage = ${generate_image};
+    const generateSvg = ${generate_svg};
     var collapsedContainers = new Set();
     const containerNodes = new Set();
     var adj_list_collapsed_nodes = {};
@@ -954,22 +976,23 @@
     function reloadGraph() {
         d3.select("#graph_${unique_id}").html("");
 
-        const dotSource = generateDotSource(adj_list, ancestor_map);
+        if (generateImage) {
+            renderGraphvizImage();
+        } else if (generateSvg) {
+            renderGraphvizSvg();
+        } else {
+            const dotSource = generateDotSource(adj_list, ancestor_map);
 
-        graphData = vizInstance.renderJSON(dotSource)
-        // Extract the graph data with positions from Graphviz
-        const extractedGraphData = extractGraphData(graphData);
-
-        if (!generateImage) {
+            graphData = vizInstance.renderJSON(dotSource)
+            // Extract the graph data with positions from Graphviz
+            const extractedGraphData = extractGraphData(graphData);
             createGraph(extractedGraphData);
 
             // Needed to get the right vp coverage when containers are expanded
             calculateContainerNodeCounts();
-        } else {
-            renderGraphvizImage(dotSource);
         }
     }
-                
+
     function initializeCollapsedContainersFromGraph() {
         const containerDepths = new Map();
         
@@ -1008,7 +1031,7 @@
         return nodes.find(node => adj_list[node].failed);
     }
 
-    function renderGraphvizImage(dotSource) {
+    function renderGraphvizImage() {
         d3.select("#png-link-container_${unique_id}").remove();
         
         function showErrorMessage(error) {
@@ -1074,6 +1097,27 @@
             console.error("Error generating PNG:", error);
             showErrorMessage(error);
         });
+    }
+
+    async function renderGraphvizSvg() {
+        processCollapsedGraph();
+        const tbDotSource = generateDotFromProcessedData('TB');
+        const svgString = vizInstance.renderString(tbDotSource, { format: 'svg' });
+        
+        const svgBlob = new Blob([svgString], { type: 'image/svg+xml' });
+        const svgUrl = URL.createObjectURL(svgBlob);
+        
+        // Create link container
+        const parent = d3.select("#graph-container_${unique_id}").node().parentNode;
+        const linkContainer = d3.select(parent)
+            .insert("div", "#graph-container_${unique_id}")
+            .attr("id", "svg-link-container_${unique_id}");
+        
+        linkContainer.append("a")
+            .attr("href", svgUrl)
+            .attr("target", "_blank")
+            .attr("id", "svg-download-button_${unique_id}")
+            .text("View SVG in New Tab");
     }
 
     function createGraph(graphvizData) {
