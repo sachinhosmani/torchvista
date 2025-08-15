@@ -708,7 +708,7 @@ def build_immediate_ancestor_map(ancestor_dict, adj_list):
     return immediate_ancestor_map
     
 
-def plot_graph(adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, ancestor_map, collapse_modules_after_depth, height, generate_image):
+def plot_graph(adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, ancestor_map, collapse_modules_after_depth, height, generate_image, generate_html):
     unique_id = str(uuid.uuid4())
     template_str = resources.read_text('torchvista.templates', 'graph.html')
     d3_source = resources.read_text('torchvista.assets', 'd3.min.js')
@@ -736,7 +736,12 @@ def plot_graph(adj_list, module_info, func_info, node_to_module_path, parent_mod
         'height': f'{height}px' if not generate_image else '0px',
         'generate_image': 'true' if generate_image else 'false',
     })
-    display(HTML(output))
+    if generate_html:
+        output_file = Path.cwd() / f'torchvista_graph_{unique_id}.html'
+        output_file.write_text(output, encoding='utf-8')
+        display(HTML(f'<div style="font-size:18px; font-weight:bold; color:black;">[torchvista] Saved HTML to {output_file.name}</div>'))
+    else:
+        display(HTML(output))
 
 
 def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_depth=1, show_non_gradient_nodes=True, forced_module_tracing_depth=None):
@@ -795,7 +800,7 @@ def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_dept
     return output, exception
 
 
-def trace_model(model, inputs, show_non_gradient_nodes=True, collapse_modules_after_depth=1, forced_module_tracing_depth=None, height=800, generate_image=False):
+def trace_model(model, inputs, show_non_gradient_nodes=True, collapse_modules_after_depth=1, forced_module_tracing_depth=None, height=800, generate_image=False, generate_html=False):
     adj_list = {}
     module_info = {}
     func_info = {}
@@ -813,7 +818,7 @@ def trace_model(model, inputs, show_non_gradient_nodes=True, collapse_modules_af
     except Exception as e:
         exception = e
 
-    plot_graph(adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, build_immediate_ancestor_map(node_to_ancestors, adj_list), collapse_modules_after_depth, height, generate_image)
+    plot_graph(adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, build_immediate_ancestor_map(node_to_ancestors, adj_list), collapse_modules_after_depth, height, generate_image, generate_html)
 
 
     if exception is not None:

@@ -1,5 +1,10 @@
 <div id="graph-container_${unique_id}">
     <div id="graph_${unique_id}"></div>
+    <div class="logo_${unique_id}">
+        <a href="https://github.com/sachinhosmani/torchvista" target="_blank" rel="noopener noreferrer">
+        torchvista
+        </a>
+    </div>
     <div id="popup_${unique_id}" class="popup_${unique_id}" style="display: none;">
         <div class="popup-header_${unique_id}">
             <h3 id="popup-title_${unique_id}"></h3>
@@ -359,6 +364,16 @@
 
         .edge_${unique_id}.implied-edge_${unique_id} {
             stroke-dasharray: 5,5;
+        }
+
+        .logo_${unique_id} {
+            position: absolute;
+            bottom: 8px; left: 8px;
+            color: #a1a1a1;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            opacity: .6;
+            padding: 4px 6px;
+            border-radius: 3px;
         }
     </style>
     
