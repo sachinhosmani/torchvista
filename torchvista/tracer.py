@@ -744,7 +744,7 @@ def plot_graph(adj_list, module_info, func_info, node_to_module_path,
         'jsoneditor_source': jsoneditor_source,
         'collapse_modules_after_depth': collapse_modules_after_depth,
         'node_to_module_path': node_to_module_path,
-        'height': f'{height}px' if not generate_image else '0px',
+        'height': f'{height}px' if not generate_image and not generate_svg else '0px',
         'generate_image': 'true' if generate_image else 'false',
         'generate_svg': 'true' if generate_svg else 'false',
     })
