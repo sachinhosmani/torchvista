@@ -252,17 +252,27 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                     constant_node_names.append(f'np_array_{last_np_array_input_id}')
                     node_to_ancestors[f'np_array_{last_np_array_input_id}'] = module_stack[::-1]
                     last_np_array_input_id += 1
-                elif isinstance(inp, numbers.Number):
-                    dims = f"{inp}"
-                    adj_list[f'scalar_{last_numeric_input_id}'] = {
-                        'edges': [],
-                        'failed': False,
-                        'node_type': NodeType.CONSTANT.value,
-                    }
-                    adj_list[f'scalar_{last_numeric_input_id}']['edges'].append({'target': op_name, 'dims': dims})
-                    constant_node_names.append(f'scalar_{last_numeric_input_id}')
-                    node_to_ancestors[f'scalar_{last_numeric_input_id}'] = module_stack[::-1]
-                    last_numeric_input_id += 1
+
+            num_scalars = len([inp for inp in args if isinstance(inp, numbers.Number)])
+            if num_scalars > 0:
+                if num_scalars == 1:
+                    scalar_node_name = f'scalar_{last_numeric_input_id}'
+                    scalar_display_name = 'scalar'
+                else:
+                    scalar_node_name = f'scalars_{last_numeric_input_id}_x_{num_scalars}'
+                    scalar_display_name = f'{num_scalars} scalars'
+
+                dims = "( )" if num_scalars == 1 else f"( ) x {num_scalars}"
+                adj_list[scalar_node_name] = {
+                    'edges': [],
+                    'failed': False,
+                    'node_type': NodeType.CONSTANT.value,
+                }
+                adj_list[scalar_node_name]['edges'].append({'target': op_name, 'dims': dims})
+                constant_node_names.append(scalar_node_name)
+                node_to_ancestors[scalar_node_name] = module_stack[::-1]
+                graph_node_name_to_without_suffix[scalar_node_name] = scalar_display_name
+                last_numeric_input_id += 1
 
         record_op_parameters(op_name, *args, **kwargs)
 
