@@ -253,7 +253,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                     node_to_ancestors[f'np_array_{last_np_array_input_id}'] = module_stack[::-1]
                     last_np_array_input_id += 1
                 elif isinstance(inp, numbers.Number):
-                    dims = "( )"
+                    dims = f"{inp}"
                     adj_list[f'scalar_{last_numeric_input_id}'] = {
                         'edges': [],
                         'failed': False,
@@ -263,7 +263,6 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                     constant_node_names.append(f'scalar_{last_numeric_input_id}')
                     node_to_ancestors[f'scalar_{last_numeric_input_id}'] = module_stack[::-1]
                     last_numeric_input_id += 1
-
 
         record_op_parameters(op_name, *args, **kwargs)
 
