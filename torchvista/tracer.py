@@ -799,6 +799,7 @@ def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_dept
         'collapse_modules_after_depth': collapse_modules_after_depth,
         'node_to_module_path': node_to_module_path,
         'generate_image': 'false',
+        'generate_svg': 'false',
         'height': '95%',
     })
 

@@ -116,6 +116,22 @@
                 width: 100%;
             }
 
+            .copy-btn {
+                background: #4CAF50;
+                color: white;
+                border: none;
+                padding: 4px 10px;
+                font-size: 12px;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-left: 10px;
+                transition: background 0.3s;
+            }
+
+            .copy-btn:hover {
+                background: #45a049;
+            }
+
         </style>
     </head>
     <body>
@@ -130,6 +146,20 @@
                     hljs.highlightBlock(block);
                 });
             });
+
+            function copyCode() {
+                const codeElement = document.getElementById("codeContent");
+                const textToCopy = codeElement.innerText;
+
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    const btn = document.querySelector(".copy-btn");
+                    btn.textContent = "Copied!";
+                    setTimeout(() => btn.textContent = "Copy", 2000);
+                }).catch(err => {
+                    console.error("Failed to copy: ", err);
+                });
+            }
+
         </script>
    
         <div class="container">
@@ -140,10 +170,12 @@
                         frameborder="0" scrolling="0" width="170" height="30" title="GitHub Star Button"></iframe>
             </div>
             <div class="left-column">
-
                 <div class="code-box" id="codeBox">
-                    <div class="code-box-header">Sample code (Not editable)</div>
-                    <pre><code class="language-python">${code_contents}</code></pre>
+                    <div class="code-box-header">
+                        Sample code (Not editable)
+                        <button class="copy-btn" onclick="copyCode()">Copy</button>
+                    </div>
+                    <pre><code class="language-python" id="codeContent">${code_contents}</code></pre>
                 </div>
 
                 <div class="error-box" id="errorBox">

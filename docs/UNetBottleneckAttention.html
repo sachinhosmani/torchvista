@@ -116,6 +116,22 @@
                 width: 100%;
             }
 
+            .copy-btn {
+                background: #4CAF50;
+                color: white;
+                border: none;
+                padding: 4px 10px;
+                font-size: 12px;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-left: 10px;
+                transition: background 0.3s;
+            }
+
+            .copy-btn:hover {
+                background: #45a049;
+            }
+
         </style>
     </head>
     <body>
@@ -130,6 +146,20 @@
                     hljs.highlightBlock(block);
                 });
             });
+
+            function copyCode() {
+                const codeElement = document.getElementById("codeContent");
+                const textToCopy = codeElement.innerText;
+
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    const btn = document.querySelector(".copy-btn");
+                    btn.textContent = "Copied!";
+                    setTimeout(() => btn.textContent = "Copy", 2000);
+                }).catch(err => {
+                    console.error("Failed to copy: ", err);
+                });
+            }
+
         </script>
    
         <div class="container">
@@ -140,10 +170,12 @@
                         frameborder="0" scrolling="0" width="170" height="30" title="GitHub Star Button"></iframe>
             </div>
             <div class="left-column">
-
                 <div class="code-box" id="codeBox">
-                    <div class="code-box-header">Sample code (Not editable)</div>
-                    <pre><code class="language-python">
+                    <div class="code-box-header">
+                        Sample code (Not editable)
+                        <button class="copy-btn" onclick="copyCode()">Copy</button>
+                    </div>
+                    <pre><code class="language-python" id="codeContent">
 import torch
 import torch.nn as nn
 from torchvista import trace_model
@@ -255,104 +287,119 @@ trace_model(model, example_input)
     
             <div class="graph-view" id="graphContainer" style="height: 100%">
                 <div class="graph-box-header">Visualized Interactive Graph</div>
-                <div id="graph-container_de804f73-aa6e-4216-ad35-84fd87a3946d">
-    <div id="graph_de804f73-aa6e-4216-ad35-84fd87a3946d"></div>
-    <div id="popup_de804f73-aa6e-4216-ad35-84fd87a3946d" class="popup_de804f73-aa6e-4216-ad35-84fd87a3946d" style="display: none;">
-        <div class="popup-header_de804f73-aa6e-4216-ad35-84fd87a3946d">
-            <h3 id="popup-title_de804f73-aa6e-4216-ad35-84fd87a3946d"></h3>
-            <span class="popup-close_de804f73-aa6e-4216-ad35-84fd87a3946d">✕</span>
+                <div id="graph-container_a8a1755b-bebf-452e-911f-b4b193d8540a">
+    <div id="graph_a8a1755b-bebf-452e-911f-b4b193d8540a"></div>
+    <div class="logo_a8a1755b-bebf-452e-911f-b4b193d8540a">
+        <a href="https://github.com/sachinhosmani/torchvista" target="_blank" rel="noopener noreferrer">
+        torchvista
+        </a>
+    </div>
+    <div id="popup_a8a1755b-bebf-452e-911f-b4b193d8540a" class="popup_a8a1755b-bebf-452e-911f-b4b193d8540a" style="display: none;">
+        <div class="popup-header_a8a1755b-bebf-452e-911f-b4b193d8540a">
+            <h3 id="popup-title_a8a1755b-bebf-452e-911f-b4b193d8540a"></h3>
+            <span class="popup-close_a8a1755b-bebf-452e-911f-b4b193d8540a">✕</span>
         </div>
-        <div id="popup-content_de804f73-aa6e-4216-ad35-84fd87a3946d" class="popup-content_de804f73-aa6e-4216-ad35-84fd87a3946d">
-            <div id="common-info_de804f73-aa6e-4216-ad35-84fd87a3946d">
+        <div id="popup-content_a8a1755b-bebf-452e-911f-b4b193d8540a" class="popup-content_a8a1755b-bebf-452e-911f-b4b193d8540a">
+            <div id="common-info_a8a1755b-bebf-452e-911f-b4b193d8540a">
             </div>
-            <div id="module-template_de804f73-aa6e-4216-ad35-84fd87a3946d" style="display:none;">
-                <details open id="module-parameters-details_de804f73-aa6e-4216-ad35-84fd87a3946d">
+            <div id="module-template_a8a1755b-bebf-452e-911f-b4b193d8540a" style="display:none;">
+                <details open id="module-parameters-details_a8a1755b-bebf-452e-911f-b4b193d8540a">
                     <summary style="color: black"><strong>forward() Parameters</strong></summary>
-                    <div id="module-parameters_de804f73-aa6e-4216-ad35-84fd87a3946d" class="json-viewer_de804f73-aa6e-4216-ad35-84fd87a3946d"></div>
+                    <div id="module-parameters_a8a1755b-bebf-452e-911f-b4b193d8540a" class="json-viewer_a8a1755b-bebf-452e-911f-b4b193d8540a"></div>
                 </details>
-                <details open id="module-attributes-details_de804f73-aa6e-4216-ad35-84fd87a3946d">
+                <details open id="module-attributes-details_a8a1755b-bebf-452e-911f-b4b193d8540a">
                     <summary style="color: black"><strong>Attributes</strong></summary>
-                    <div id="module-attributes_de804f73-aa6e-4216-ad35-84fd87a3946d" class="json-viewer_de804f73-aa6e-4216-ad35-84fd87a3946d"></div>
+                    <div id="module-attributes_a8a1755b-bebf-452e-911f-b4b193d8540a" class="json-viewer_a8a1755b-bebf-452e-911f-b4b193d8540a"></div>
                 </details>
             </div>
-            <div id="tensor-op-template_de804f73-aa6e-4216-ad35-84fd87a3946d" style="display:none;">
+            <div id="tensor-op-template_a8a1755b-bebf-452e-911f-b4b193d8540a" style="display:none;">
                 <summary><strong>Parameters</strong></summary>
-                <div id="tensor-op-parameters_de804f73-aa6e-4216-ad35-84fd87a3946d" class="json-viewer_de804f73-aa6e-4216-ad35-84fd87a3946d"></div>
+                <div id="tensor-op-parameters_a8a1755b-bebf-452e-911f-b4b193d8540a" class="json-viewer_a8a1755b-bebf-452e-911f-b4b193d8540a"></div>
             </div>
-            <p id="no-info_de804f73-aa6e-4216-ad35-84fd87a3946d" style="display:none;">No further information available for this node.</p>
+            <p id="no-info_a8a1755b-bebf-452e-911f-b4b193d8540a" style="display:none;">No further information available for this node.</p>
         </div>
     </div>
 
     <style>
-        .node_de804f73-aa6e-4216-ad35-84fd87a3946d rect {
+        .node_a8a1755b-bebf-452e-911f-b4b193d8540a rect {
             stroke: #333;
             fill: #fff;
         }
-        text.node-label_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        text.node-label_a8a1755b-bebf-452e-911f-b4b193d8540a {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.type-indicator_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        text.type-indicator_a8a1755b-bebf-452e-911f-b4b193d8540a {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.collapse-icon_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        text.collapse-icon_a8a1755b-bebf-452e-911f-b4b193d8540a {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 14px
             cursor: default;
             user-select: none;
         }
-        .edge_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        .edge_a8a1755b-bebf-452e-911f-b4b193d8540a {
             stroke: #797979;
             fill: none;
         }
-        .node_de804f73-aa6e-4216-ad35-84fd87a3946d rect.input_de804f73-aa6e-4216-ad35-84fd87a3946d { fill: #FF9AFF; }
-        .node_de804f73-aa6e-4216-ad35-84fd87a3946d rect.constant_de804f73-aa6e-4216-ad35-84fd87a3946d { fill: rgb(235 235 235); }
+        .node_a8a1755b-bebf-452e-911f-b4b193d8540a rect.input_a8a1755b-bebf-452e-911f-b4b193d8540a { fill: #FF9AFF; }
+        .node_a8a1755b-bebf-452e-911f-b4b193d8540a rect.constant_a8a1755b-bebf-452e-911f-b4b193d8540a { fill: rgb(235 235 235); }
 
-        .node_de804f73-aa6e-4216-ad35-84fd87a3946d rect.output_de804f73-aa6e-4216-ad35-84fd87a3946d { fill: #74e071; }
-        .node_de804f73-aa6e-4216-ad35-84fd87a3946d rect.failed_de804f73-aa6e-4216-ad35-84fd87a3946d { fill: rgb(224 15 15); }
-        .node_de804f73-aa6e-4216-ad35-84fd87a3946d rect.module_de804f73-aa6e-4216-ad35-84fd87a3946d { fill: #8BDEDB; }
-        .node_de804f73-aa6e-4216-ad35-84fd87a3946d rect.operation_de804f73-aa6e-4216-ad35-84fd87a3946d { fill: #FEBC5A; }
-        .edgeLabelGroup_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        .node_a8a1755b-bebf-452e-911f-b4b193d8540a rect.output_a8a1755b-bebf-452e-911f-b4b193d8540a { fill: #74e071; }
+        .node_a8a1755b-bebf-452e-911f-b4b193d8540a rect.failed_a8a1755b-bebf-452e-911f-b4b193d8540a { fill: rgb(224 15 15); }
+        .node_a8a1755b-bebf-452e-911f-b4b193d8540a rect.module_a8a1755b-bebf-452e-911f-b4b193d8540a { fill: #8BDEDB; }
+        .node_a8a1755b-bebf-452e-911f-b4b193d8540a rect.operation_a8a1755b-bebf-452e-911f-b4b193d8540a { fill: #FEBC5A; }
+
+        .node_a8a1755b-bebf-452e-911f-b4b193d8540a ellipse.input_a8a1755b-bebf-452e-911f-b4b193d8540a { fill: #FF9AFF; }
+        .node_a8a1755b-bebf-452e-911f-b4b193d8540a ellipse.constant_a8a1755b-bebf-452e-911f-b4b193d8540a { fill: rgb(235 235 235); }
+        .node_a8a1755b-bebf-452e-911f-b4b193d8540a ellipse.output_a8a1755b-bebf-452e-911f-b4b193d8540a { fill: #74e071; }
+        .node_a8a1755b-bebf-452e-911f-b4b193d8540a ellipse.failed_a8a1755b-bebf-452e-911f-b4b193d8540a { fill: rgb(224 15 15); }
+
+        .node_a8a1755b-bebf-452e-911f-b4b193d8540a ellipse {
+            stroke: #333;
+            stroke-width: 1px;
+        }
+        .edgeLabelGroup_a8a1755b-bebf-452e-911f-b4b193d8540a {
             pointer-events: none;
         }
-        #arrowhead_de804f73-aa6e-4216-ad35-84fd87a3946d path {
+        #arrowhead_a8a1755b-bebf-452e-911f-b4b193d8540a path {
             fill: #333333;;
         }
-        .node_de804f73-aa6e-4216-ad35-84fd87a3946d rect,
-        .node_de804f73-aa6e-4216-ad35-84fd87a3946d ellipse {
+        .node_a8a1755b-bebf-452e-911f-b4b193d8540a rect,
+        .node_a8a1755b-bebf-452e-911f-b4b193d8540a ellipse {
             transition: fill 0.3s ease;
         }
 
-        .node_de804f73-aa6e-4216-ad35-84fd87a3946d .type-indicator_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        .node_a8a1755b-bebf-452e-911f-b4b193d8540a .type-indicator_a8a1755b-bebf-452e-911f-b4b193d8540a {
             font-size: 5px;
             fill: rgba(0, 0, 0, 1.0);  /* Dark grey, semi-transparent */
             pointer-events: none;
         }
 
-        .node_de804f73-aa6e-4216-ad35-84fd87a3946d.error_de804f73-aa6e-4216-ad35-84fd87a3946d rect {
+        .node_a8a1755b-bebf-452e-911f-b4b193d8540a.error_a8a1755b-bebf-452e-911f-b4b193d8540a rect {
             stroke: black;
             stroke-width: 1px;
         }
 
-        .boundary-box_de804f73-aa6e-4216-ad35-84fd87a3946d.error_de804f73-aa6e-4216-ad35-84fd87a3946d > rect:first-of-type {
+        .boundary-box_a8a1755b-bebf-452e-911f-b4b193d8540a.error_a8a1755b-bebf-452e-911f-b4b193d8540a > rect:first-of-type {
             fill: red;
             fill-opacity: 0.2;
         }
 
-        #graph-container_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        #graph-container_a8a1755b-bebf-452e-911f-b4b193d8540a {
             position: relative;
             height: 95%;
             overflow: hidden;
         }
 
-        #graph_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        #graph_a8a1755b-bebf-452e-911f-b4b193d8540a {
             height: 100%;
         }
         
-        .popup_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        .popup_a8a1755b-bebf-452e-911f-b4b193d8540a {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             position: absolute;
             background: white;
@@ -367,7 +414,7 @@ trace_model(model, example_input)
             flex-direction: column;
         }
 
-        .popup-header_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        .popup-header_a8a1755b-bebf-452e-911f-b4b193d8540a {
             position: sticky;
             top: 0;
             background: white;
@@ -379,12 +426,12 @@ trace_model(model, example_input)
             z-index: 1;
         }
 
-        .popup_de804f73-aa6e-4216-ad35-84fd87a3946d h3 {
+        .popup_a8a1755b-bebf-452e-911f-b4b193d8540a h3 {
             margin: 0;
             font-size: 16px;
         }
 
-        .popup-content_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        .popup-content_a8a1755b-bebf-452e-911f-b4b193d8540a {
             padding: 10px;
             padding-bottom: 10px;
             overflow-y: auto;
@@ -392,87 +439,87 @@ trace_model(model, example_input)
             flex-grow: 1;
         }
 
-        .popup_de804f73-aa6e-4216-ad35-84fd87a3946d pre {
+        .popup_a8a1755b-bebf-452e-911f-b4b193d8540a pre {
             white-space: pre;
             overflow-x: auto;
         }
 
-        .popup-close_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        .popup-close_a8a1755b-bebf-452e-911f-b4b193d8540a {
             cursor: pointer;
             font-size: 24px;
             font-weight: bold;
             line-height: 1;
         }
 
-        #popup-title_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        #popup-title_a8a1755b-bebf-452e-911f-b4b193d8540a {
             font-size: 16px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             color: black;
         }
 
-        #graph-container_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        #graph-container_a8a1755b-bebf-452e-911f-b4b193d8540a {
             position: relative;
         }
 
-        #graph-container_de804f73-aa6e-4216-ad35-84fd87a3946d pre {
+        #graph-container_a8a1755b-bebf-452e-911f-b4b193d8540a pre {
             margin-bottom: 0;
         }
 
-        .boundary-box_de804f73-aa6e-4216-ad35-84fd87a3946d rect {
+        .boundary-box_a8a1755b-bebf-452e-911f-b4b193d8540a rect {
             pointer-events: none;
         }
-        .boundary-box_de804f73-aa6e-4216-ad35-84fd87a3946d text {
+        .boundary-box_a8a1755b-bebf-452e-911f-b4b193d8540a text {
             pointer-events: none;
             user-select: none;
         }
 
-        .boundary-box_de804f73-aa6e-4216-ad35-84fd87a3946d rect {
+        .boundary-box_a8a1755b-bebf-452e-911f-b4b193d8540a rect {
             pointer-events: none;
         }
-        .boundary-box_de804f73-aa6e-4216-ad35-84fd87a3946d text {
+        .boundary-box_a8a1755b-bebf-452e-911f-b4b193d8540a text {
             pointer-events: none;
             user-select: none;
             font-weight: bold;
         }
-        .edge-label_de804f73-aa6e-4216-ad35-84fd87a3946d text {
+        .edge-label_a8a1755b-bebf-452e-911f-b4b193d8540a text {
             pointer-events: none;
             user-select: none;
             font-size: 4px;
             font-family: "'Roboto', sans-serif";
         }
                     
-        .collapse-button_de804f73-aa6e-4216-ad35-84fd87a3946d, .info-button_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        .collapse-button_a8a1755b-bebf-452e-911f-b4b193d8540a, .info-button_a8a1755b-bebf-452e-911f-b4b193d8540a {
             fill: #fff;
             stroke: #333;
             stroke-width: 1px;
             cursor: pointer;
         }
 
-        .collapse-button_de804f73-aa6e-4216-ad35-84fd87a3946d:hover, .info-button_de804f73-aa6e-4216-ad35-84fd87a3946d:hover {
+        .collapse-button_a8a1755b-bebf-452e-911f-b4b193d8540a:hover, .info-button_a8a1755b-bebf-452e-911f-b4b193d8540a:hover {
             fill: #eee;
             cursor: pointer;
         }
 
-        .collapse-icon_de804f73-aa6e-4216-ad35-84fd87a3946d, .info-icon_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        .collapse-icon_a8a1755b-bebf-452e-911f-b4b193d8540a, .info-icon_a8a1755b-bebf-452e-911f-b4b193d8540a {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             fill: rgb(51, 51, 51);
         }
 
-        .collapse-button-disabled_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        .collapse-button-disabled_a8a1755b-bebf-452e-911f-b4b193d8540a {
             fill: #eee5;
             stroke: #3333334f;
             stroke-width: 1px;
             cursor: not-allowed;
         }
 
-        .collapse-button-disabled_de804f73-aa6e-4216-ad35-84fd87a3946d:hover {
+        .collapse-button-disabled_a8a1755b-bebf-452e-911f-b4b193d8540a:hover {
             fill: #eee6;
             cursor: not-allowed;
         }
 
-        .collapse-icon-disabled_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        .collapse-icon-disabled_a8a1755b-bebf-452e-911f-b4b193d8540a {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -481,11 +528,11 @@ trace_model(model, example_input)
         }
 
         /* Edge hover styles */
-        .edge-group_de804f73-aa6e-4216-ad35-84fd87a3946d path {
+        .edge-group_a8a1755b-bebf-452e-911f-b4b193d8540a path {
             pointer-events: stroke;
         }
 
-        .edge-label_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        .edge-label_a8a1755b-bebf-452e-911f-b4b193d8540a {
             pointer-events: all;
         }
 
@@ -525,50 +572,50 @@ trace_model(model, example_input)
             }
         }
 
-        .highlight-cluster_de804f73-aa6e-4216-ad35-84fd87a3946d > rect:first-of-type {
+        .highlight-cluster_a8a1755b-bebf-452e-911f-b4b193d8540a > rect:first-of-type {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        .highlight-node_de804f73-aa6e-4216-ad35-84fd87a3946d rect {
+        .highlight-node_a8a1755b-bebf-452e-911f-b4b193d8540a rect {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        text.node-label_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        text.node-label_a8a1755b-bebf-452e-911f-b4b193d8540a {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 0.8rem;  /* Base size using rem units for accessibility */
             cursor: default;
             user-select: none;
         }
 
-        .node_de804f73-aa6e-4216-ad35-84fd87a3946d.constant_de804f73-aa6e-4216-ad35-84fd87a3946d .node-label_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        .node_a8a1755b-bebf-452e-911f-b4b193d8540a.constant_a8a1755b-bebf-452e-911f-b4b193d8540a .node-label_a8a1755b-bebf-452e-911f-b4b193d8540a {
             font-size: 0.7rem;
         }
 
-        .popup-content_de804f73-aa6e-4216-ad35-84fd87a3946d summary {
+        .popup-content_a8a1755b-bebf-452e-911f-b4b193d8540a summary {
             cursor: pointer;
             margin: 5px;
             user-select: none;
         }
 
-        .node_de804f73-aa6e-4216-ad35-84fd87a3946d.input_de804f73-aa6e-4216-ad35-84fd87a3946d rect,
-        .node_de804f73-aa6e-4216-ad35-84fd87a3946d.output_de804f73-aa6e-4216-ad35-84fd87a3946d rect,
-        .node_de804f73-aa6e-4216-ad35-84fd87a3946d.constant_de804f73-aa6e-4216-ad35-84fd87a3946d rect {
+        .node_a8a1755b-bebf-452e-911f-b4b193d8540a.input_a8a1755b-bebf-452e-911f-b4b193d8540a rect,
+        .node_a8a1755b-bebf-452e-911f-b4b193d8540a.output_a8a1755b-bebf-452e-911f-b4b193d8540a rect,
+        .node_a8a1755b-bebf-452e-911f-b4b193d8540a.constant_a8a1755b-bebf-452e-911f-b4b193d8540a rect {
             stroke-width: 1px;
             rx: 8px;
             ry: 8px;
             stroke-dasharray: none;
         }
 
-        #png-error-container_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        #png-error-container_a8a1755b-bebf-452e-911f-b4b193d8540a {
             text-align: center;
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 14px;
         }
 
-        #png-error-message_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        #png-error-message_a8a1755b-bebf-452e-911f-b4b193d8540a {
             padding: 8px 16px;
             background-color: #dc3545;
             color: white;
@@ -579,13 +626,13 @@ trace_model(model, example_input)
             text-align: left;
         }
 
-        #png-link-container_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        #png-link-container_a8a1755b-bebf-452e-911f-b4b193d8540a {
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 18px;
         }
 
-        #png-download-button_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        #png-download-button_a8a1755b-bebf-452e-911f-b4b193d8540a {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -594,11 +641,31 @@ trace_model(model, example_input)
             border-radius: 4px;
         }
 
-        #png-download-button_de804f73-aa6e-4216-ad35-84fd87a3946d:hover {
+        #png-download-button_a8a1755b-bebf-452e-911f-b4b193d8540a:hover {
             background-color: #0056b3;
         }
 
-        .custom-tooltip_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        #svg-link-container_a8a1755b-bebf-452e-911f-b4b193d8540a {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            font-size: 18px;
+        }
+
+
+        #svg-download-button_a8a1755b-bebf-452e-911f-b4b193d8540a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        #svg-download-button_a8a1755b-bebf-452e-911f-b4b193d8540a:hover {
+            background-color: #0056b3;
+        }
+
+        .custom-tooltip_a8a1755b-bebf-452e-911f-b4b193d8540a {
             position: absolute;
             background: white;
             border: 1px solid #ccc;
@@ -614,8 +681,19 @@ trace_model(model, example_input)
             display: none;
         }
 
-        .edge_de804f73-aa6e-4216-ad35-84fd87a3946d.implied-edge_de804f73-aa6e-4216-ad35-84fd87a3946d {
+        .edge_a8a1755b-bebf-452e-911f-b4b193d8540a.implied-edge_a8a1755b-bebf-452e-911f-b4b193d8540a {
             stroke-dasharray: 5,5;
+        }
+
+        .logo_a8a1755b-bebf-452e-911f-b4b193d8540a {
+            position: absolute;
+            bottom: 8px; left: 8px;
+            padding: 4px 6px;
+        }
+        .logo_a8a1755b-bebf-452e-911f-b4b193d8540a a {
+            color: #a1a1a1;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            opacity: .6;
         }
     </style>
     
@@ -772,7 +850,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
 (function() {
-    const adj_list = {"input_0": {"edges": [{"target": "Conv2d_1", "dims": "(1, 3, 256, 256)", "edge_data_id": 5497444928}], "failed": false, "node_type": "Input"}, "Conv2d_1": {"edges": [{"target": "BatchNorm2d_1", "dims": "(1, 64, 256, 256)", "edge_data_id": 6080172976}], "failed": false, "node_type": "Module"}, "BatchNorm2d_1": {"edges": [{"target": "ReLU_1", "dims": "(1, 64, 256, 256)", "edge_data_id": 6439031968}], "failed": false, "node_type": "Module"}, "ReLU_1": {"edges": [{"target": "Conv2d_2", "dims": "(1, 64, 256, 256)", "edge_data_id": 6439031968}], "failed": false, "node_type": "Module"}, "Conv2d_2": {"edges": [{"target": "BatchNorm2d_2", "dims": "(1, 64, 256, 256)", "edge_data_id": 6439032288}], "failed": false, "node_type": "Module"}, "BatchNorm2d_2": {"edges": [{"target": "ReLU_2", "dims": "(1, 64, 256, 256)", "edge_data_id": 6439031808}], "failed": false, "node_type": "Module"}, "ReLU_2": {"edges": [{"target": "MaxPool2d_1", "dims": "(1, 64, 256, 256)", "edge_data_id": 6439031808}], "failed": false, "node_type": "Module"}, "MaxPool2d_1": {"edges": [{"target": "Conv2d_3", "dims": "(1, 64, 128, 128)", "edge_data_id": 6439030848}], "failed": false, "node_type": "Module"}, "Conv2d_3": {"edges": [{"target": "BatchNorm2d_3", "dims": "(1, 128, 128, 128)", "edge_data_id": 6439032608}], "failed": false, "node_type": "Module"}, "BatchNorm2d_3": {"edges": [{"target": "ReLU_3", "dims": "(1, 128, 128, 128)", "edge_data_id": 6439033168}], "failed": false, "node_type": "Module"}, "ReLU_3": {"edges": [{"target": "Conv2d_4", "dims": "(1, 128, 128, 128)", "edge_data_id": 6439033168}], "failed": false, "node_type": "Module"}, "Conv2d_4": {"edges": [{"target": "BatchNorm2d_4", "dims": "(1, 128, 128, 128)", "edge_data_id": 6439032608}], "failed": false, "node_type": "Module"}, "BatchNorm2d_4": {"edges": [{"target": "ReLU_4", "dims": "(1, 128, 128, 128)", "edge_data_id": 6439033168}], "failed": false, "node_type": "Module"}, "ReLU_4": {"edges": [{"target": "MaxPool2d_2", "dims": "(1, 128, 128, 128)", "edge_data_id": 6439033168}], "failed": false, "node_type": "Module"}, "MaxPool2d_2": {"edges": [{"target": "Conv2d_5", "dims": "(1, 128, 64, 64)", "edge_data_id": 6439031328}], "failed": false, "node_type": "Module"}, "Conv2d_5": {"edges": [{"target": "BatchNorm2d_5", "dims": "(1, 256, 64, 64)", "edge_data_id": 6439032448}], "failed": false, "node_type": "Module"}, "BatchNorm2d_5": {"edges": [{"target": "ReLU_5", "dims": "(1, 256, 64, 64)", "edge_data_id": 6439032768}], "failed": false, "node_type": "Module"}, "ReLU_5": {"edges": [{"target": "Conv2d_6", "dims": "(1, 256, 64, 64)", "edge_data_id": 6439032768}], "failed": false, "node_type": "Module"}, "Conv2d_6": {"edges": [{"target": "BatchNorm2d_6", "dims": "(1, 256, 64, 64)", "edge_data_id": 6439032048}], "failed": false, "node_type": "Module"}, "BatchNorm2d_6": {"edges": [{"target": "ReLU_6", "dims": "(1, 256, 64, 64)", "edge_data_id": 6439030928}], "failed": false, "node_type": "Module"}, "ReLU_6": {"edges": [{"target": "MaxPool2d_3", "dims": "(1, 256, 64, 64)", "edge_data_id": 6439030928}], "failed": false, "node_type": "Module"}, "MaxPool2d_3": {"edges": [{"target": "Conv2d_7", "dims": "(1, 256, 32, 32)", "edge_data_id": 6439033568}], "failed": false, "node_type": "Module"}, "Conv2d_7": {"edges": [{"target": "BatchNorm2d_7", "dims": "(1, 512, 32, 32)", "edge_data_id": 6439033008}], "failed": false, "node_type": "Module"}, "BatchNorm2d_7": {"edges": [{"target": "ReLU_7", "dims": "(1, 512, 32, 32)", "edge_data_id": 6079875248}], "failed": false, "node_type": "Module"}, "ReLU_7": {"edges": [{"target": "Conv2d_8", "dims": "(1, 512, 32, 32)", "edge_data_id": 6079875248}], "failed": false, "node_type": "Module"}, "Conv2d_8": {"edges": [{"target": "BatchNorm2d_8", "dims": "(1, 512, 32, 32)", "edge_data_id": 6079876528}], "failed": false, "node_type": "Module"}, "BatchNorm2d_8": {"edges": [{"target": "ReLU_8", "dims": "(1, 512, 32, 32)", "edge_data_id": 6079873488}], "failed": false, "node_type": "Module"}, "ReLU_8": {"edges": [{"target": "MaxPool2d_4", "dims": "(1, 512, 32, 32)", "edge_data_id": 6079873488}], "failed": false, "node_type": "Module"}, "MaxPool2d_4": {"edges": [{"target": "Conv2d_9", "dims": "(1, 512, 16, 16)", "edge_data_id": 6079874448}, {"target": "cat_1", "dims": "(1, 512, 16, 16)", "edge_data_id": 6079874448}], "failed": false, "node_type": "Module"}, "Conv2d_9": {"edges": [{"target": "BatchNorm2d_9", "dims": "(1, 1024, 16, 16)", "edge_data_id": 6079873168}], "failed": false, "node_type": "Module"}, "BatchNorm2d_9": {"edges": [{"target": "ReLU_9", "dims": "(1, 1024, 16, 16)", "edge_data_id": 6079873648}], "failed": false, "node_type": "Module"}, "ReLU_9": {"edges": [{"target": "Conv2d_10", "dims": "(1, 1024, 16, 16)", "edge_data_id": 6079873648}], "failed": false, "node_type": "Module"}, "Conv2d_10": {"edges": [{"target": "BatchNorm2d_10", "dims": "(1, 1024, 16, 16)", "edge_data_id": 6079874608}], "failed": false, "node_type": "Module"}, "BatchNorm2d_10": {"edges": [{"target": "ReLU_10", "dims": "(1, 1024, 16, 16)", "edge_data_id": 6079873968}], "failed": false, "node_type": "Module"}, "ReLU_10": {"edges": [{"target": "ConvTranspose2d_1", "dims": "(1, 1024, 16, 16)", "edge_data_id": 6079873968}], "failed": false, "node_type": "Module"}, "ConvTranspose2d_1": {"edges": [{"target": "cat_1", "dims": "(1, 512, 32, 32)", "edge_data_id": 6079875728}], "failed": false, "node_type": "Module"}, "cat_1": {"edges": [], "failed": true, "node_type": "Operation"}};
+    const adj_list = {"input_0": {"edges": [{"target": "Conv2d_1", "dims": "(1, 3, 256, 256)", "edge_data_id": 5219981888}], "failed": false, "node_type": "Input"}, "Conv2d_1": {"edges": [{"target": "BatchNorm2d_1", "dims": "(1, 64, 256, 256)", "edge_data_id": 5381532384}], "failed": false, "node_type": "Module"}, "BatchNorm2d_1": {"edges": [{"target": "ReLU_1", "dims": "(1, 64, 256, 256)", "edge_data_id": 5381530624}], "failed": false, "node_type": "Module"}, "ReLU_1": {"edges": [{"target": "Conv2d_2", "dims": "(1, 64, 256, 256)", "edge_data_id": 5381530624}], "failed": false, "node_type": "Module"}, "Conv2d_2": {"edges": [{"target": "BatchNorm2d_2", "dims": "(1, 64, 256, 256)", "edge_data_id": 5381531104}], "failed": false, "node_type": "Module"}, "BatchNorm2d_2": {"edges": [{"target": "ReLU_2", "dims": "(1, 64, 256, 256)", "edge_data_id": 5381532704}], "failed": false, "node_type": "Module"}, "ReLU_2": {"edges": [{"target": "MaxPool2d_1", "dims": "(1, 64, 256, 256)", "edge_data_id": 5381532704}], "failed": false, "node_type": "Module"}, "MaxPool2d_1": {"edges": [{"target": "Conv2d_3", "dims": "(1, 64, 128, 128)", "edge_data_id": 5381533024}], "failed": false, "node_type": "Module"}, "Conv2d_3": {"edges": [{"target": "BatchNorm2d_3", "dims": "(1, 128, 128, 128)", "edge_data_id": 5381524672}], "failed": false, "node_type": "Module"}, "BatchNorm2d_3": {"edges": [{"target": "ReLU_3", "dims": "(1, 128, 128, 128)", "edge_data_id": 5381522112}], "failed": false, "node_type": "Module"}, "ReLU_3": {"edges": [{"target": "Conv2d_4", "dims": "(1, 128, 128, 128)", "edge_data_id": 5381522112}], "failed": false, "node_type": "Module"}, "Conv2d_4": {"edges": [{"target": "BatchNorm2d_4", "dims": "(1, 128, 128, 128)", "edge_data_id": 5381522432}], "failed": false, "node_type": "Module"}, "BatchNorm2d_4": {"edges": [{"target": "ReLU_4", "dims": "(1, 128, 128, 128)", "edge_data_id": 5381522112}], "failed": false, "node_type": "Module"}, "ReLU_4": {"edges": [{"target": "MaxPool2d_2", "dims": "(1, 128, 128, 128)", "edge_data_id": 5381522112}], "failed": false, "node_type": "Module"}, "MaxPool2d_2": {"edges": [{"target": "Conv2d_5", "dims": "(1, 128, 64, 64)", "edge_data_id": 5381532704}], "failed": false, "node_type": "Module"}, "Conv2d_5": {"edges": [{"target": "BatchNorm2d_5", "dims": "(1, 256, 64, 64)", "edge_data_id": 5381524992}], "failed": false, "node_type": "Module"}, "BatchNorm2d_5": {"edges": [{"target": "ReLU_5", "dims": "(1, 256, 64, 64)", "edge_data_id": 5381523712}], "failed": false, "node_type": "Module"}, "ReLU_5": {"edges": [{"target": "Conv2d_6", "dims": "(1, 256, 64, 64)", "edge_data_id": 5381523712}], "failed": false, "node_type": "Module"}, "Conv2d_6": {"edges": [{"target": "BatchNorm2d_6", "dims": "(1, 256, 64, 64)", "edge_data_id": 5381522592}], "failed": false, "node_type": "Module"}, "BatchNorm2d_6": {"edges": [{"target": "ReLU_6", "dims": "(1, 256, 64, 64)", "edge_data_id": 5381523072}], "failed": false, "node_type": "Module"}, "ReLU_6": {"edges": [{"target": "MaxPool2d_3", "dims": "(1, 256, 64, 64)", "edge_data_id": 5381523072}], "failed": false, "node_type": "Module"}, "MaxPool2d_3": {"edges": [{"target": "Conv2d_7", "dims": "(1, 256, 32, 32)", "edge_data_id": 5381521952}], "failed": false, "node_type": "Module"}, "Conv2d_7": {"edges": [{"target": "BatchNorm2d_7", "dims": "(1, 512, 32, 32)", "edge_data_id": 5381521056}], "failed": false, "node_type": "Module"}, "BatchNorm2d_7": {"edges": [{"target": "ReLU_7", "dims": "(1, 512, 32, 32)", "edge_data_id": 5381518656}], "failed": false, "node_type": "Module"}, "ReLU_7": {"edges": [{"target": "Conv2d_8", "dims": "(1, 512, 32, 32)", "edge_data_id": 5381518656}], "failed": false, "node_type": "Module"}, "Conv2d_8": {"edges": [{"target": "BatchNorm2d_8", "dims": "(1, 512, 32, 32)", "edge_data_id": 5381521216}], "failed": false, "node_type": "Module"}, "BatchNorm2d_8": {"edges": [{"target": "ReLU_8", "dims": "(1, 512, 32, 32)", "edge_data_id": 5381517536}], "failed": false, "node_type": "Module"}, "ReLU_8": {"edges": [{"target": "MaxPool2d_4", "dims": "(1, 512, 32, 32)", "edge_data_id": 5381517536}], "failed": false, "node_type": "Module"}, "MaxPool2d_4": {"edges": [{"target": "Conv2d_9", "dims": "(1, 512, 16, 16)", "edge_data_id": 5381520416}, {"target": "cat_1", "dims": "(1, 512, 16, 16)", "edge_data_id": 5381520416}], "failed": false, "node_type": "Module"}, "Conv2d_9": {"edges": [{"target": "BatchNorm2d_9", "dims": "(1, 1024, 16, 16)", "edge_data_id": 5381520736}], "failed": false, "node_type": "Module"}, "BatchNorm2d_9": {"edges": [{"target": "ReLU_9", "dims": "(1, 1024, 16, 16)", "edge_data_id": 5381519936}], "failed": false, "node_type": "Module"}, "ReLU_9": {"edges": [{"target": "Conv2d_10", "dims": "(1, 1024, 16, 16)", "edge_data_id": 5381519936}], "failed": false, "node_type": "Module"}, "Conv2d_10": {"edges": [{"target": "BatchNorm2d_10", "dims": "(1, 1024, 16, 16)", "edge_data_id": 5381515200}], "failed": false, "node_type": "Module"}, "BatchNorm2d_10": {"edges": [{"target": "ReLU_10", "dims": "(1, 1024, 16, 16)", "edge_data_id": 5381514080}], "failed": false, "node_type": "Module"}, "ReLU_10": {"edges": [{"target": "ConvTranspose2d_1", "dims": "(1, 1024, 16, 16)", "edge_data_id": 5381514080}], "failed": false, "node_type": "Module"}, "ConvTranspose2d_1": {"edges": [{"target": "cat_1", "dims": "(1, 512, 32, 32)", "edge_data_id": 5381514240}], "failed": false, "node_type": "Module"}, "cat_1": {"edges": [], "failed": true, "node_type": "Operation"}};
     const module_info = {"EncoderBlock_1": {"type": "EncoderBlock", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "ConvBlock_1": {"type": "ConvBlock", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Sequential_1": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Conv2d_1": {"type": "Conv2d", "parameters": {"weight": {"shape": [64, 3, 3, 3], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 3, "kernel_size": [3, 3], "out_channels": 64, "output_padding": [0, 0], "padding": [1, 1], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)"}, "BatchNorm2d_1": {"type": "BatchNorm2d", "parameters": {"weight": {"shape": [64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"affine": true, "call_super_init": false, "dump_patches": false, "eps": 1e-05, "momentum": 0.1, "num_features": 64, "track_running_stats": true, "training": true}, "extra_repr": "64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True"}, "ReLU_1": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Conv2d_2": {"type": "Conv2d", "parameters": {"weight": {"shape": [64, 64, 3, 3], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 64, "kernel_size": [3, 3], "out_channels": 64, "output_padding": [0, 0], "padding": [1, 1], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)"}, "BatchNorm2d_2": {"type": "BatchNorm2d", "parameters": {"weight": {"shape": [64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"affine": true, "call_super_init": false, "dump_patches": false, "eps": 1e-05, "momentum": 0.1, "num_features": 64, "track_running_stats": true, "training": true}, "extra_repr": "64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True"}, "ReLU_2": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "MaxPool2d_1": {"type": "MaxPool2d", "parameters": {}, "attributes": {"call_super_init": false, "ceil_mode": false, "dilation": 1, "dump_patches": false, "kernel_size": 2, "padding": 0, "return_indices": false, "stride": 2, "training": true}, "extra_repr": "kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False"}, "EncoderBlock_2": {"type": "EncoderBlock", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "ConvBlock_2": {"type": "ConvBlock", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Sequential_2": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Conv2d_3": {"type": "Conv2d", "parameters": {"weight": {"shape": [128, 64, 3, 3], "requires_grad": true}, "bias": {"shape": [128], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 64, "kernel_size": [3, 3], "out_channels": 128, "output_padding": [0, 0], "padding": [1, 1], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)"}, "BatchNorm2d_3": {"type": "BatchNorm2d", "parameters": {"weight": {"shape": [128], "requires_grad": true}, "bias": {"shape": [128], "requires_grad": true}}, "attributes": {"affine": true, "call_super_init": false, "dump_patches": false, "eps": 1e-05, "momentum": 0.1, "num_features": 128, "track_running_stats": true, "training": true}, "extra_repr": "128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True"}, "ReLU_3": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Conv2d_4": {"type": "Conv2d", "parameters": {"weight": {"shape": [128, 128, 3, 3], "requires_grad": true}, "bias": {"shape": [128], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 128, "kernel_size": [3, 3], "out_channels": 128, "output_padding": [0, 0], "padding": [1, 1], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)"}, "BatchNorm2d_4": {"type": "BatchNorm2d", "parameters": {"weight": {"shape": [128], "requires_grad": true}, "bias": {"shape": [128], "requires_grad": true}}, "attributes": {"affine": true, "call_super_init": false, "dump_patches": false, "eps": 1e-05, "momentum": 0.1, "num_features": 128, "track_running_stats": true, "training": true}, "extra_repr": "128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True"}, "ReLU_4": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "MaxPool2d_2": {"type": "MaxPool2d", "parameters": {}, "attributes": {"call_super_init": false, "ceil_mode": false, "dilation": 1, "dump_patches": false, "kernel_size": 2, "padding": 0, "return_indices": false, "stride": 2, "training": true}, "extra_repr": "kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False"}, "EncoderBlock_3": {"type": "EncoderBlock", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "ConvBlock_3": {"type": "ConvBlock", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Sequential_3": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Conv2d_5": {"type": "Conv2d", "parameters": {"weight": {"shape": [256, 128, 3, 3], "requires_grad": true}, "bias": {"shape": [256], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 128, "kernel_size": [3, 3], "out_channels": 256, "output_padding": [0, 0], "padding": [1, 1], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)"}, "BatchNorm2d_5": {"type": "BatchNorm2d", "parameters": {"weight": {"shape": [256], "requires_grad": true}, "bias": {"shape": [256], "requires_grad": true}}, "attributes": {"affine": true, "call_super_init": false, "dump_patches": false, "eps": 1e-05, "momentum": 0.1, "num_features": 256, "track_running_stats": true, "training": true}, "extra_repr": "256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True"}, "ReLU_5": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Conv2d_6": {"type": "Conv2d", "parameters": {"weight": {"shape": [256, 256, 3, 3], "requires_grad": true}, "bias": {"shape": [256], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 256, "kernel_size": [3, 3], "out_channels": 256, "output_padding": [0, 0], "padding": [1, 1], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)"}, "BatchNorm2d_6": {"type": "BatchNorm2d", "parameters": {"weight": {"shape": [256], "requires_grad": true}, "bias": {"shape": [256], "requires_grad": true}}, "attributes": {"affine": true, "call_super_init": false, "dump_patches": false, "eps": 1e-05, "momentum": 0.1, "num_features": 256, "track_running_stats": true, "training": true}, "extra_repr": "256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True"}, "ReLU_6": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "MaxPool2d_3": {"type": "MaxPool2d", "parameters": {}, "attributes": {"call_super_init": false, "ceil_mode": false, "dilation": 1, "dump_patches": false, "kernel_size": 2, "padding": 0, "return_indices": false, "stride": 2, "training": true}, "extra_repr": "kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False"}, "EncoderBlock_4": {"type": "EncoderBlock", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "ConvBlock_4": {"type": "ConvBlock", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Sequential_4": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Conv2d_7": {"type": "Conv2d", "parameters": {"weight": {"shape": [512, 256, 3, 3], "requires_grad": true}, "bias": {"shape": [512], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 256, "kernel_size": [3, 3], "out_channels": 512, "output_padding": [0, 0], "padding": [1, 1], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)"}, "BatchNorm2d_7": {"type": "BatchNorm2d", "parameters": {"weight": {"shape": [512], "requires_grad": true}, "bias": {"shape": [512], "requires_grad": true}}, "attributes": {"affine": true, "call_super_init": false, "dump_patches": false, "eps": 1e-05, "momentum": 0.1, "num_features": 512, "track_running_stats": true, "training": true}, "extra_repr": "512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True"}, "ReLU_7": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Conv2d_8": {"type": "Conv2d", "parameters": {"weight": {"shape": [512, 512, 3, 3], "requires_grad": true}, "bias": {"shape": [512], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 512, "kernel_size": [3, 3], "out_channels": 512, "output_padding": [0, 0], "padding": [1, 1], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)"}, "BatchNorm2d_8": {"type": "BatchNorm2d", "parameters": {"weight": {"shape": [512], "requires_grad": true}, "bias": {"shape": [512], "requires_grad": true}}, "attributes": {"affine": true, "call_super_init": false, "dump_patches": false, "eps": 1e-05, "momentum": 0.1, "num_features": 512, "track_running_stats": true, "training": true}, "extra_repr": "512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True"}, "ReLU_8": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "MaxPool2d_4": {"type": "MaxPool2d", "parameters": {}, "attributes": {"call_super_init": false, "ceil_mode": false, "dilation": 1, "dump_patches": false, "kernel_size": 2, "padding": 0, "return_indices": false, "stride": 2, "training": true}, "extra_repr": "kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False"}, "ConvBlock_5": {"type": "ConvBlock", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Sequential_5": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Conv2d_9": {"type": "Conv2d", "parameters": {"weight": {"shape": [1024, 512, 3, 3], "requires_grad": true}, "bias": {"shape": [1024], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 512, "kernel_size": [3, 3], "out_channels": 1024, "output_padding": [0, 0], "padding": [1, 1], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "512, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)"}, "BatchNorm2d_9": {"type": "BatchNorm2d", "parameters": {"weight": {"shape": [1024], "requires_grad": true}, "bias": {"shape": [1024], "requires_grad": true}}, "attributes": {"affine": true, "call_super_init": false, "dump_patches": false, "eps": 1e-05, "momentum": 0.1, "num_features": 1024, "track_running_stats": true, "training": true}, "extra_repr": "1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True"}, "ReLU_9": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Conv2d_10": {"type": "Conv2d", "parameters": {"weight": {"shape": [1024, 1024, 3, 3], "requires_grad": true}, "bias": {"shape": [1024], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 1024, "kernel_size": [3, 3], "out_channels": 1024, "output_padding": [0, 0], "padding": [1, 1], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)"}, "BatchNorm2d_10": {"type": "BatchNorm2d", "parameters": {"weight": {"shape": [1024], "requires_grad": true}, "bias": {"shape": [1024], "requires_grad": true}}, "attributes": {"affine": true, "call_super_init": false, "dump_patches": false, "eps": 1e-05, "momentum": 0.1, "num_features": 1024, "track_running_stats": true, "training": true}, "extra_repr": "1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True"}, "ReLU_10": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "DecoderBlock_1": {"type": "DecoderBlock", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "ConvTranspose2d_1": {"type": "ConvTranspose2d", "parameters": {"weight": {"shape": [1024, 512, 2, 2], "requires_grad": true}, "bias": {"shape": [512], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 1024, "kernel_size": [2, 2], "out_channels": 512, "output_padding": [0, 0], "padding": [0, 0], "padding_mode": "zeros", "stride": [2, 2], "training": true, "transposed": true}, "extra_repr": "1024, 512, kernel_size=(2, 2), stride=(2, 2)"}};
     const func_info = {"EncoderBlock_1": {"positional_args": [{"_type": "tensor", "shape": [1, 3, 256, 256], "dtype": "torch.float32"}], "keyword_args": {}}, "ConvBlock_1": {"positional_args": [{"_type": "tensor", "shape": [1, 3, 256, 256], "dtype": "torch.float32"}], "keyword_args": {}}, "Sequential_1": {"positional_args": [{"_type": "tensor", "shape": [1, 3, 256, 256], "dtype": "torch.float32"}], "keyword_args": {}}, "Conv2d_1": {"positional_args": [{"_type": "tensor", "shape": [1, 3, 256, 256], "dtype": "torch.float32"}], "keyword_args": {}}, "BatchNorm2d_1": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 256, 256], "dtype": "torch.float32"}], "keyword_args": {}}, "ReLU_1": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 256, 256], "dtype": "torch.float32"}], "keyword_args": {}}, "Conv2d_2": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 256, 256], "dtype": "torch.float32"}], "keyword_args": {}}, "BatchNorm2d_2": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 256, 256], "dtype": "torch.float32"}], "keyword_args": {}}, "ReLU_2": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 256, 256], "dtype": "torch.float32"}], "keyword_args": {}}, "MaxPool2d_1": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 256, 256], "dtype": "torch.float32"}], "keyword_args": {}}, "EncoderBlock_2": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 128, 128], "dtype": "torch.float32"}], "keyword_args": {}}, "ConvBlock_2": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 128, 128], "dtype": "torch.float32"}], "keyword_args": {}}, "Sequential_2": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 128, 128], "dtype": "torch.float32"}], "keyword_args": {}}, "Conv2d_3": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 128, 128], "dtype": "torch.float32"}], "keyword_args": {}}, "BatchNorm2d_3": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 128, 128], "dtype": "torch.float32"}], "keyword_args": {}}, "ReLU_3": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 128, 128], "dtype": "torch.float32"}], "keyword_args": {}}, "Conv2d_4": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 128, 128], "dtype": "torch.float32"}], "keyword_args": {}}, "BatchNorm2d_4": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 128, 128], "dtype": "torch.float32"}], "keyword_args": {}}, "ReLU_4": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 128, 128], "dtype": "torch.float32"}], "keyword_args": {}}, "MaxPool2d_2": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 128, 128], "dtype": "torch.float32"}], "keyword_args": {}}, "EncoderBlock_3": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "ConvBlock_3": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Sequential_3": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Conv2d_5": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "BatchNorm2d_5": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "ReLU_5": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Conv2d_6": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "BatchNorm2d_6": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "ReLU_6": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "MaxPool2d_3": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 64, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "EncoderBlock_4": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 32, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "ConvBlock_4": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 32, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "Sequential_4": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 32, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "Conv2d_7": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 32, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "BatchNorm2d_7": {"positional_args": [{"_type": "tensor", "shape": [1, 512, 32, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "ReLU_7": {"positional_args": [{"_type": "tensor", "shape": [1, 512, 32, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "Conv2d_8": {"positional_args": [{"_type": "tensor", "shape": [1, 512, 32, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "BatchNorm2d_8": {"positional_args": [{"_type": "tensor", "shape": [1, 512, 32, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "ReLU_8": {"positional_args": [{"_type": "tensor", "shape": [1, 512, 32, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "MaxPool2d_4": {"positional_args": [{"_type": "tensor", "shape": [1, 512, 32, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "ConvBlock_5": {"positional_args": [{"_type": "tensor", "shape": [1, 512, 16, 16], "dtype": "torch.float32"}], "keyword_args": {}}, "Sequential_5": {"positional_args": [{"_type": "tensor", "shape": [1, 512, 16, 16], "dtype": "torch.float32"}], "keyword_args": {}}, "Conv2d_9": {"positional_args": [{"_type": "tensor", "shape": [1, 512, 16, 16], "dtype": "torch.float32"}], "keyword_args": {}}, "BatchNorm2d_9": {"positional_args": [{"_type": "tensor", "shape": [1, 1024, 16, 16], "dtype": "torch.float32"}], "keyword_args": {}}, "ReLU_9": {"positional_args": [{"_type": "tensor", "shape": [1, 1024, 16, 16], "dtype": "torch.float32"}], "keyword_args": {}}, "Conv2d_10": {"positional_args": [{"_type": "tensor", "shape": [1, 1024, 16, 16], "dtype": "torch.float32"}], "keyword_args": {}}, "BatchNorm2d_10": {"positional_args": [{"_type": "tensor", "shape": [1, 1024, 16, 16], "dtype": "torch.float32"}], "keyword_args": {}}, "ReLU_10": {"positional_args": [{"_type": "tensor", "shape": [1, 1024, 16, 16], "dtype": "torch.float32"}], "keyword_args": {}}, "DecoderBlock_1": {"positional_args": [{"_type": "tensor", "shape": [1, 1024, 16, 16], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [1, 512, 16, 16], "dtype": "torch.float32"}], "keyword_args": {}}, "ConvTranspose2d_1": {"positional_args": [{"_type": "tensor", "shape": [1, 1024, 16, 16], "dtype": "torch.float32"}], "keyword_args": {}}, "cat_1": {"positional_args": [[{"_type": "tensor", "shape": [1, 512, 32, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [1, 512, 16, 16], "dtype": "torch.float32"}]], "keyword_args": {"dim": 1}}};
     const parent_module_to_nodes = {"Sequential_1": ["Conv2d_1", "BatchNorm2d_1", "ReLU_1", "Conv2d_2", "BatchNorm2d_2", "ReLU_2"], "ConvBlock_1": ["Conv2d_1", "BatchNorm2d_1", "ReLU_1", "Conv2d_2", "BatchNorm2d_2", "ReLU_2"], "EncoderBlock_1": ["Conv2d_1", "BatchNorm2d_1", "ReLU_1", "Conv2d_2", "BatchNorm2d_2", "ReLU_2", "MaxPool2d_1"], "Sequential_2": ["Conv2d_3", "BatchNorm2d_3", "ReLU_3", "Conv2d_4", "BatchNorm2d_4", "ReLU_4"], "ConvBlock_2": ["Conv2d_3", "BatchNorm2d_3", "ReLU_3", "Conv2d_4", "BatchNorm2d_4", "ReLU_4"], "EncoderBlock_2": ["Conv2d_3", "BatchNorm2d_3", "ReLU_3", "Conv2d_4", "BatchNorm2d_4", "ReLU_4", "MaxPool2d_2"], "Sequential_3": ["Conv2d_5", "BatchNorm2d_5", "ReLU_5", "Conv2d_6", "BatchNorm2d_6", "ReLU_6"], "ConvBlock_3": ["Conv2d_5", "BatchNorm2d_5", "ReLU_5", "Conv2d_6", "BatchNorm2d_6", "ReLU_6"], "EncoderBlock_3": ["Conv2d_5", "BatchNorm2d_5", "ReLU_5", "Conv2d_6", "BatchNorm2d_6", "ReLU_6", "MaxPool2d_3"], "Sequential_4": ["Conv2d_7", "BatchNorm2d_7", "ReLU_7", "Conv2d_8", "BatchNorm2d_8", "ReLU_8"], "ConvBlock_4": ["Conv2d_7", "BatchNorm2d_7", "ReLU_7", "Conv2d_8", "BatchNorm2d_8", "ReLU_8"], "EncoderBlock_4": ["Conv2d_7", "BatchNorm2d_7", "ReLU_7", "Conv2d_8", "BatchNorm2d_8", "ReLU_8", "MaxPool2d_4"], "Sequential_5": ["Conv2d_9", "BatchNorm2d_9", "ReLU_9", "Conv2d_10", "BatchNorm2d_10", "ReLU_10"], "ConvBlock_5": ["Conv2d_9", "BatchNorm2d_9", "ReLU_9", "Conv2d_10", "BatchNorm2d_10", "ReLU_10"], "DecoderBlock_1": ["ConvTranspose2d_1", "cat_1"]};
@@ -782,6 +860,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     const collapse_modules_after_depth = 1;
     const node_to_module_path = {'EncoderBlock_1': 'tests.models.UNetBottleneckAttention', 'ConvBlock_1': 'tests.models.UNetBottleneckAttention', 'Sequential_1': 'torch.nn.modules.container', 'Conv2d_1': 'torch.nn.modules.conv', 'BatchNorm2d_1': 'torch.nn.modules.batchnorm', 'ReLU_1': 'torch.nn.modules.activation', 'Conv2d_2': 'torch.nn.modules.conv', 'BatchNorm2d_2': 'torch.nn.modules.batchnorm', 'ReLU_2': 'torch.nn.modules.activation', 'MaxPool2d_1': 'torch.nn.modules.pooling', 'EncoderBlock_2': 'tests.models.UNetBottleneckAttention', 'ConvBlock_2': 'tests.models.UNetBottleneckAttention', 'Sequential_2': 'torch.nn.modules.container', 'Conv2d_3': 'torch.nn.modules.conv', 'BatchNorm2d_3': 'torch.nn.modules.batchnorm', 'ReLU_3': 'torch.nn.modules.activation', 'Conv2d_4': 'torch.nn.modules.conv', 'BatchNorm2d_4': 'torch.nn.modules.batchnorm', 'ReLU_4': 'torch.nn.modules.activation', 'MaxPool2d_2': 'torch.nn.modules.pooling', 'EncoderBlock_3': 'tests.models.UNetBottleneckAttention', 'ConvBlock_3': 'tests.models.UNetBottleneckAttention', 'Sequential_3': 'torch.nn.modules.container', 'Conv2d_5': 'torch.nn.modules.conv', 'BatchNorm2d_5': 'torch.nn.modules.batchnorm', 'ReLU_5': 'torch.nn.modules.activation', 'Conv2d_6': 'torch.nn.modules.conv', 'BatchNorm2d_6': 'torch.nn.modules.batchnorm', 'ReLU_6': 'torch.nn.modules.activation', 'MaxPool2d_3': 'torch.nn.modules.pooling', 'EncoderBlock_4': 'tests.models.UNetBottleneckAttention', 'ConvBlock_4': 'tests.models.UNetBottleneckAttention', 'Sequential_4': 'torch.nn.modules.container', 'Conv2d_7': 'torch.nn.modules.conv', 'BatchNorm2d_7': 'torch.nn.modules.batchnorm', 'ReLU_7': 'torch.nn.modules.activation', 'Conv2d_8': 'torch.nn.modules.conv', 'BatchNorm2d_8': 'torch.nn.modules.batchnorm', 'ReLU_8': 'torch.nn.modules.activation', 'MaxPool2d_4': 'torch.nn.modules.pooling', 'ConvBlock_5': 'tests.models.UNetBottleneckAttention', 'Sequential_5': 'torch.nn.modules.container', 'Conv2d_9': 'torch.nn.modules.conv', 'BatchNorm2d_9': 'torch.nn.modules.batchnorm', 'ReLU_9': 'torch.nn.modules.activation', 'Conv2d_10': 'torch.nn.modules.conv', 'BatchNorm2d_10': 'torch.nn.modules.batchnorm', 'ReLU_10': 'torch.nn.modules.activation', 'DecoderBlock_1': 'tests.models.UNetBottleneckAttention', 'ConvTranspose2d_1': 'torch.nn.modules.conv', 'cat': 'torch', 'cat_1': 'torch'};
     const generateImage = false;
+    const generateSvg = false;
     var collapsedContainers = new Set();
     const containerNodes = new Set();
     var adj_list_collapsed_nodes = {};
@@ -811,10 +890,10 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         removeTooltip();
         
         const tooltip = document.createElement('div');
-        tooltip.className = `custom-tooltip_de804f73-aa6e-4216-ad35-84fd87a3946d`;
+        tooltip.className = `custom-tooltip_a8a1755b-bebf-452e-911f-b4b193d8540a`;
         tooltip.textContent = text;
         
-        const container = document.getElementById(`graph-container_de804f73-aa6e-4216-ad35-84fd87a3946d`);
+        const container = document.getElementById(`graph-container_a8a1755b-bebf-452e-911f-b4b193d8540a`);
         container.appendChild(tooltip);
         currentTooltip = tooltip;
         
@@ -826,7 +905,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const buttonRect = buttonElement.getBoundingClientRect();
         
         // Get the container's position in screen coordinates
-        const containerRect = document.getElementById(`graph-container_de804f73-aa6e-4216-ad35-84fd87a3946d`).getBoundingClientRect();
+        const containerRect = document.getElementById(`graph-container_a8a1755b-bebf-452e-911f-b4b193d8540a`).getBoundingClientRect();
         
         // Calculate position relative to container
         const buttonX = buttonRect.left + (buttonRect.width / 2) - containerRect.left;
@@ -1131,6 +1210,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         dotSource += '  node [shape=box, style=filled];\n';
         dotSource += '  bgcolor="#f3f3eb";\n';
         dotSource += '  ranksep=0.5;\n';
+        dotSource += '  edge [arrowhead=vee, arrowsize=0.6];\n';
         dotSource += '  nodesep=0.4;\n';
 
 
@@ -1180,9 +1260,14 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 if (!containerNodes.has(child) && adj_list_collapsed_nodes[child]) {
                     const nodeData = adj_list_collapsed_nodes[child];
                     if (nodeData.node_type === "Constant") {
-                        dotSource += `${indent}  "${child}" [width=0.7, height=0.3];\n`;
+                        const errorColor = getErrorColor(child);
+                        const fillColor = errorColor || getNodeColor(child);
+                        const childDisplayName = graph_node_name_to_without_suffix[child] || child;
+                        dotSource += `${indent}  "${child}" [label="${childDisplayName}", shape=ellipse, width=0.6, height=0.25, style="filled", fillcolor="${fillColor}"];\n`;
                     } else if (nodeData.node_type === "Input" || nodeData.node_type === "Output") {
-                        dotSource += `${indent}  "${child}" [width=1.2, height=0.5];\n`;
+                        const errorColor = getErrorColor(child);
+                        const fillColor = errorColor || getNodeColor(child);
+                        dotSource += `${indent}  "${child}" [shape=ellipse, width=1.2, height=0.5, style="filled", fillcolor="${fillColor}"];\n`;
                     } else {
                         const errorColor = getErrorColor(child);
                         const fillColor = errorColor || getNodeColor(child);
@@ -1207,12 +1292,12 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                     const errorColor = getErrorColor(node);
                     const fillColor = errorColor || getNodeColor(node);
                     const nodeDisplayName = graph_node_name_to_without_suffix[node] || node;
-                    dotSource += `  "${node}" [width=0.7, height=0.3, fillcolor="${fillColor}", label="${nodeDisplayName}"];\n`;
+                    dotSource += `  "${node}" [shape=ellipse, width=0.6, height=0.25, fillcolor="${fillColor}", label="${nodeDisplayName}", style="filled"];\n`;
                 } else if (data.node_type === "Input" || data.node_type === "Output") {
                     const errorColor = getErrorColor(node);
                     const fillColor = errorColor || getNodeColor(node);
                     const nodeDisplayName = graph_node_name_to_without_suffix[node] || node;
-                    dotSource += `  "${node}" [width=1.2, height=0.5, fillcolor="${fillColor}", label="${nodeDisplayName}"];\n`;
+                    dotSource += `  "${node}" [shape=ellipse, width=1.2, height=0.5, fillcolor="${fillColor}", label="${nodeDisplayName}", style="filled"];\n`;
                 } else {
                     const errorColor = getErrorColor(node);
                     const fillColor = errorColor || getNodeColor(node);
@@ -1294,24 +1379,25 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function reloadGraph() {
-        d3.select("#graph_de804f73-aa6e-4216-ad35-84fd87a3946d").html("");
+        d3.select("#graph_a8a1755b-bebf-452e-911f-b4b193d8540a").html("");
 
-        const dotSource = generateDotSource(adj_list, ancestor_map);
+        if (generateImage) {
+            renderGraphvizImage();
+        } else if (generateSvg) {
+            renderGraphvizSvg();
+        } else {
+            const dotSource = generateDotSource(adj_list, ancestor_map);
 
-        graphData = vizInstance.renderJSON(dotSource)
-        // Extract the graph data with positions from Graphviz
-        const extractedGraphData = extractGraphData(graphData);
-
-        if (!generateImage) {
+            graphData = vizInstance.renderJSON(dotSource)
+            // Extract the graph data with positions from Graphviz
+            const extractedGraphData = extractGraphData(graphData);
             createGraph(extractedGraphData);
 
             // Needed to get the right vp coverage when containers are expanded
             calculateContainerNodeCounts();
-        } else {
-            renderGraphvizImage(dotSource);
         }
     }
-                
+
     function initializeCollapsedContainersFromGraph() {
         const containerDepths = new Map();
         
@@ -1350,17 +1436,17 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         return nodes.find(node => adj_list[node].failed);
     }
 
-    function renderGraphvizImage(dotSource) {
-        d3.select("#png-link-container_de804f73-aa6e-4216-ad35-84fd87a3946d").remove();
+    function renderGraphvizImage() {
+        d3.select("#png-link-container_a8a1755b-bebf-452e-911f-b4b193d8540a").remove();
         
         function showErrorMessage(error) {
-            const parent = d3.select("#graph-container_de804f73-aa6e-4216-ad35-84fd87a3946d").node().parentNode;
+            const parent = d3.select("#graph-container_a8a1755b-bebf-452e-911f-b4b193d8540a").node().parentNode;
             const errorContainer = d3.select(parent)
-                .insert("div", "#graph-container_de804f73-aa6e-4216-ad35-84fd87a3946d")
-                .attr("id", "png-error-container_de804f73-aa6e-4216-ad35-84fd87a3946d");
+                .insert("div", "#graph-container_a8a1755b-bebf-452e-911f-b4b193d8540a")
+                .attr("id", "png-error-container_a8a1755b-bebf-452e-911f-b4b193d8540a");
             
             errorContainer.append("div")
-                .attr("id", "png-error-message_de804f73-aa6e-4216-ad35-84fd87a3946d")
+                .attr("id", "png-error-message_a8a1755b-bebf-452e-911f-b4b193d8540a")
                 .html(`<strong>Error:</strong><br>${error.stack || error.message || error}<br><br><strong>Note:</strong> Exporting very large models as PNG is currently not supported. Please use generate_image=False, or raise an issue on https://github.com/sachinhosmani/torchvista/issues`);
         }
         
@@ -1398,15 +1484,15 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             const pngUrl = URL.createObjectURL(pngBlob);
             
             // Create link container
-            const parent = d3.select("#graph-container_de804f73-aa6e-4216-ad35-84fd87a3946d").node().parentNode;
+            const parent = d3.select("#graph-container_a8a1755b-bebf-452e-911f-b4b193d8540a").node().parentNode;
             const linkContainer = d3.select(parent)
-                .insert("div", "#graph-container_de804f73-aa6e-4216-ad35-84fd87a3946d")
-                .attr("id", "png-link-container_de804f73-aa6e-4216-ad35-84fd87a3946d");
+                .insert("div", "#graph-container_a8a1755b-bebf-452e-911f-b4b193d8540a")
+                .attr("id", "png-link-container_a8a1755b-bebf-452e-911f-b4b193d8540a");
             
             linkContainer.append("a")
                 .attr("href", pngUrl)
                 .attr("target", "_blank")
-                .attr("id", "png-download-button_de804f73-aa6e-4216-ad35-84fd87a3946d")
+                .attr("id", "png-download-button_a8a1755b-bebf-452e-911f-b4b193d8540a")
                 .text("View PNG in New Tab");
                 
             URL.revokeObjectURL(svgUrl);
@@ -1418,8 +1504,29 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
     }
 
+    async function renderGraphvizSvg() {
+        processCollapsedGraph();
+        const tbDotSource = generateDotFromProcessedData('TB');
+        const svgString = vizInstance.renderString(tbDotSource, { format: 'svg' });
+        
+        const svgBlob = new Blob([svgString], { type: 'image/svg+xml' });
+        const svgUrl = URL.createObjectURL(svgBlob);
+        
+        // Create link container
+        const parent = d3.select("#graph-container_a8a1755b-bebf-452e-911f-b4b193d8540a").node().parentNode;
+        const linkContainer = d3.select(parent)
+            .insert("div", "#graph-container_a8a1755b-bebf-452e-911f-b4b193d8540a")
+            .attr("id", "svg-link-container_a8a1755b-bebf-452e-911f-b4b193d8540a");
+        
+        linkContainer.append("a")
+            .attr("href", svgUrl)
+            .attr("target", "_blank")
+            .attr("id", "svg-download-button_a8a1755b-bebf-452e-911f-b4b193d8540a")
+            .text("View SVG in New Tab");
+    }
+
     function createGraph(graphvizData) {
-        const svg = d3.select("#graph_de804f73-aa6e-4216-ad35-84fd87a3946d")
+        const svg = d3.select("#graph_a8a1755b-bebf-452e-911f-b4b193d8540a")
         .append("svg")
         .attr("width", "100%")
         .attr("height", "100%")
@@ -1439,7 +1546,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
         // Define arrowhead marker
         svg.append("defs").append("marker")
-        .attr("id", "arrowhead_de804f73-aa6e-4216-ad35-84fd87a3946d")
+        .attr("id", "arrowhead_a8a1755b-bebf-452e-911f-b4b193d8540a")
         .attr("viewBox", "0 -5 10 10")
         .attr("refX", 8)
         .attr("refY", 0)
@@ -1451,11 +1558,11 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .attr("fill", "#333");
 
         // Draw clusters (container boxes) first so they're behind nodes
-        const clusters = inner.selectAll(".boundary-box_de804f73-aa6e-4216-ad35-84fd87a3946d")
+        const clusters = inner.selectAll(".boundary-box_a8a1755b-bebf-452e-911f-b4b193d8540a")
         .data(Object.entries(graphvizData.clusters))
         .enter()
         .append("g")
-        .attr("class", "boundary-box_de804f73-aa6e-4216-ad35-84fd87a3946d");
+        .attr("class", "boundary-box_a8a1755b-bebf-452e-911f-b4b193d8540a");
 
         const containersWithFailedNodes = identifyContainersWithFailedNodes(adj_list, ancestor_map);
 
@@ -1464,7 +1571,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             const hasFailedNodes = containersWithFailedNodes.has(clusterName);
             if (hasFailedNodes) {
-                group.classed("error_de804f73-aa6e-4216-ad35-84fd87a3946d", true);
+                group.classed("error_a8a1755b-bebf-452e-911f-b4b193d8540a", true);
             }
 
             // Parse bounding box coordinates
@@ -1500,13 +1607,13 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                         
             // Add collapse/expand button
             const collapseButton = group.append("circle")
-            .attr("class", "collapse-button_de804f73-aa6e-4216-ad35-84fd87a3946d")
+            .attr("class", "collapse-button_a8a1755b-bebf-452e-911f-b4b193d8540a")
             .attr("cx", x1 + 10)
             .attr("cy", y1 + 10)
             .attr("r", 5.5);
 
             group.append("text")
-            .attr("class", "collapse-icon_de804f73-aa6e-4216-ad35-84fd87a3946d")
+            .attr("class", "collapse-icon_a8a1755b-bebf-452e-911f-b4b193d8540a")
             .attr("x", x1 + 10)
             .attr("y", y1 + 10)
             .attr("text-anchor", "middle")
@@ -1522,7 +1629,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add click event handler for collapse buttons
-        clusters.selectAll(".collapse-button_de804f73-aa6e-4216-ad35-84fd87a3946d, .collapse-icon_de804f73-aa6e-4216-ad35-84fd87a3946d")
+        clusters.selectAll(".collapse-button_a8a1755b-bebf-452e-911f-b4b193d8540a, .collapse-icon_a8a1755b-bebf-452e-911f-b4b193d8540a")
         .on("click", function(event, [clusterName, clusterData]) {
             event.stopPropagation(); // Prevent event from bubbling to SVG
             removeTooltip();
@@ -1536,19 +1643,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
         
         // Create edges using the path points from Graphviz
-        const edges = inner.selectAll(".edge_de804f73-aa6e-4216-ad35-84fd87a3946d")
+        const edges = inner.selectAll(".edge_a8a1755b-bebf-452e-911f-b4b193d8540a")
         .data(graphvizData.edges)
         .enter()
         .append("g")
-        .attr("class", "edge-group_de804f73-aa6e-4216-ad35-84fd87a3946d");
+        .attr("class", "edge-group_a8a1755b-bebf-452e-911f-b4b193d8540a");
         
         // Add the actual path
         edges.append("path")
         .attr("class", function(edge) {
             if (edge.is_implied_edge) {
-                return "edge_de804f73-aa6e-4216-ad35-84fd87a3946d implied-edge_de804f73-aa6e-4216-ad35-84fd87a3946d";
+                return "edge_a8a1755b-bebf-452e-911f-b4b193d8540a implied-edge_a8a1755b-bebf-452e-911f-b4b193d8540a";
             }
-            return "edge_de804f73-aa6e-4216-ad35-84fd87a3946d";
+            return "edge_a8a1755b-bebf-452e-911f-b4b193d8540a";
         }).attr("d", function(edge) {
             if (edge.path && edge.path.length > 0) {
                     // Create a proper SVG path using Bézier curves
@@ -1574,7 +1681,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             }
             return "";
         })
-        .attr("marker-end", "url(#arrowhead_de804f73-aa6e-4216-ad35-84fd87a3946d)");
+        .attr("marker-end", "url(#arrowhead_a8a1755b-bebf-452e-911f-b4b193d8540a)");
         
         // Add dimension labels on edges
         edges.each(function(edge) {
@@ -1603,7 +1710,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Create a background for the text
             const labelGroup = edgeGroup.append("g")
-            .attr("class", "edge-label_de804f73-aa6e-4216-ad35-84fd87a3946d")
+            .attr("class", "edge-label_a8a1755b-bebf-452e-911f-b4b193d8540a")
             .attr("transform", `translate(${pointAtStart.x}, ${pointAtStart.y})`);
             
             const text = labelGroup.append("text")
@@ -1638,7 +1745,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         edges.each(function() {
             const edgeGroup = d3.select(this);
             const path = edgeGroup.select("path");
-            const labelGroup = edgeGroup.select(".edge-label_de804f73-aa6e-4216-ad35-84fd87a3946d");
+            const labelGroup = edgeGroup.select(".edge-label_a8a1755b-bebf-452e-911f-b4b193d8540a");
             const labelText = labelGroup.select("text");
             const labelBg = labelGroup.select("rect");
             const originalStrokeWidth = path.attr("stroke-width") || 1;
@@ -1703,19 +1810,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
         // Create nodes using positions from Graphviz
-        const nodes = inner.selectAll(".node_de804f73-aa6e-4216-ad35-84fd87a3946d")
+        const nodes = inner.selectAll(".node_a8a1755b-bebf-452e-911f-b4b193d8540a")
             .data(Object.entries(graphvizData.nodes))
             .enter()
             .append("g")
             // In the createGraph function, when you're creating nodes, modify the class assignment:
             .attr("class", function([nodeName, nodeData]) {
-                let classes = "node_de804f73-aa6e-4216-ad35-84fd87a3946d";
-                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_de804f73-aa6e-4216-ad35-84fd87a3946d";
-                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_de804f73-aa6e-4216-ad35-84fd87a3946d";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_de804f73-aa6e-4216-ad35-84fd87a3946d";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_de804f73-aa6e-4216-ad35-84fd87a3946d";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_de804f73-aa6e-4216-ad35-84fd87a3946d";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_de804f73-aa6e-4216-ad35-84fd87a3946d";
+                let classes = "node_a8a1755b-bebf-452e-911f-b4b193d8540a";
+                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_a8a1755b-bebf-452e-911f-b4b193d8540a";
+                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_a8a1755b-bebf-452e-911f-b4b193d8540a";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_a8a1755b-bebf-452e-911f-b4b193d8540a";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_a8a1755b-bebf-452e-911f-b4b193d8540a";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_a8a1755b-bebf-452e-911f-b4b193d8540a";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_a8a1755b-bebf-452e-911f-b4b193d8540a";
                 return classes;
             })
             .attr("transform", function([nodeName, nodeData]) {
@@ -1723,23 +1830,48 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             });
         
         
-        // Add rectangles for nodes
-        nodes.append("rect")
-        .attr("width", function([nodeName, nodeData]) { return nodeData.width; })
-        .attr("height", function([nodeName, nodeData]) { return nodeData.height; })
-        .attr("x", function([nodeName, nodeData]) { return -nodeData.width / 2; })
-        .attr("y", function([nodeName, nodeData]) { return -nodeData.height / 2; })
-        .attr("class", function([nodeName]) { 
-            if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_de804f73-aa6e-4216-ad35-84fd87a3946d";
-            if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_de804f73-aa6e-4216-ad35-84fd87a3946d";
-            if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_de804f73-aa6e-4216-ad35-84fd87a3946d";
-            if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_de804f73-aa6e-4216-ad35-84fd87a3946d";
-            return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_de804f73-aa6e-4216-ad35-84fd87a3946d" : "operation_de804f73-aa6e-4216-ad35-84fd87a3946d";
+        // Add shapes for nodes (ellipses for some, rectangles for others)
+        nodes.each(function([nodeName, nodeData]) {
+            const nodeGroup = d3.select(this);
+            
+            // Check if this should be an ellipse
+            const isEllipseNode = (adj_list[nodeName] && (
+                adj_list[nodeName].node_type === "Input" || 
+                adj_list[nodeName].node_type === "Output" || 
+                adj_list[nodeName].node_type === "Constant"
+            ));
+            
+            if (isEllipseNode) {
+                // Create ellipse
+                nodeGroup.append("ellipse")
+                .attr("cx", 0)
+                .attr("cy", 0)
+                .attr("rx", nodeData.width / 2)
+                .attr("ry", nodeData.height / 2)
+                .attr("class", function() { 
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_a8a1755b-bebf-452e-911f-b4b193d8540a";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_a8a1755b-bebf-452e-911f-b4b193d8540a";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_a8a1755b-bebf-452e-911f-b4b193d8540a";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_a8a1755b-bebf-452e-911f-b4b193d8540a";
+                    return "operation_a8a1755b-bebf-452e-911f-b4b193d8540a";
+                });
+            } else {
+                // Create rectangle
+                nodeGroup.append("rect")
+                .attr("width", nodeData.width)
+                .attr("height", nodeData.height)
+                .attr("x", -nodeData.width / 2)
+                .attr("y", -nodeData.height / 2)
+                .attr("class", function() { 
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_a8a1755b-bebf-452e-911f-b4b193d8540a";
+                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_a8a1755b-bebf-452e-911f-b4b193d8540a" : "operation_a8a1755b-bebf-452e-911f-b4b193d8540a";
+                });
+            }
         });
         
         // Add labels for nodes
         nodes.append("text")
-        .attr("class", "node-label_de804f73-aa6e-4216-ad35-84fd87a3946d")
+        .attr("class", "node-label_a8a1755b-bebf-452e-911f-b4b193d8540a")
         .text(function([nodeName]) { return graph_node_name_to_without_suffix[nodeName] || nodeName; })
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "central");
@@ -1748,7 +1880,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         nodes.filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")));
         }).append("text")
-        .attr("class", "type-indicator_de804f73-aa6e-4216-ad35-84fd87a3946d")
+        .attr("class", "type-indicator_a8a1755b-bebf-452e-911f-b4b193d8540a")
         .attr("text-anchor", "start")
         .attr("dominant-baseline", "text-bottom")
         .attr("transform", function([nodeName, nodeData]) {
@@ -1759,7 +1891,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add info buttons to nodes (except input, output, constant)
-        inner.selectAll(".node_de804f73-aa6e-4216-ad35-84fd87a3946d")
+        inner.selectAll(".node_a8a1755b-bebf-452e-911f-b4b193d8540a")
         .filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")))
         })
@@ -1770,14 +1902,14 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
         // Add info button circle
         const infoButton = nodeGroup.append("circle")
-        .attr("class", "info-button_de804f73-aa6e-4216-ad35-84fd87a3946d")
+        .attr("class", "info-button_a8a1755b-bebf-452e-911f-b4b193d8540a")
         .attr("cx", width/2 - 7)
         .attr("cy", -height/2 + 7)
         .attr("r", 5.5);
 
         // Add info button icon
         nodeGroup.append("text")
-        .attr("class", "info-icon_de804f73-aa6e-4216-ad35-84fd87a3946d")
+        .attr("class", "info-icon_a8a1755b-bebf-452e-911f-b4b193d8540a")
         .attr("x", width/2 - 7)
         .attr("y", -height/2 + 8)
         .attr("text-anchor", "middle")
@@ -1793,16 +1925,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .on("mouseleave", removeTooltip);
 
         // Add click handler to info button
-            nodeGroup.selectAll(".info-button_de804f73-aa6e-4216-ad35-84fd87a3946d, .info-icon_de804f73-aa6e-4216-ad35-84fd87a3946d")
+            nodeGroup.selectAll(".info-button_a8a1755b-bebf-452e-911f-b4b193d8540a, .info-icon_a8a1755b-bebf-452e-911f-b4b193d8540a")
             .on("click", function(event) {
                 event.stopPropagation();
-                const infoButton = nodeGroup.select(".info-button_de804f73-aa6e-4216-ad35-84fd87a3946d").node();
+                const infoButton = nodeGroup.select(".info-button_a8a1755b-bebf-452e-911f-b4b193d8540a").node();
                 showPopupFromInfoButton.call(nodeGroup.node(), event, [nodeName], infoButton);
             });
         });
 
         // Add expand buttons to all module nodes (including non-expandable ones)
-        inner.selectAll(".node_de804f73-aa6e-4216-ad35-84fd87a3946d")
+        inner.selectAll(".node_a8a1755b-bebf-452e-911f-b4b193d8540a")
         .filter(function([nodeName]) {
             return (adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || collapsedContainers.has(nodeName);
         })
@@ -1824,7 +1956,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Add expand button circle
             const expandButton = nodeGroup.append("circle")
-            .attr("class", isExpandable ? "collapse-button_de804f73-aa6e-4216-ad35-84fd87a3946d" : "collapse-button-disabled_de804f73-aa6e-4216-ad35-84fd87a3946d")
+            .attr("class", isExpandable ? "collapse-button_a8a1755b-bebf-452e-911f-b4b193d8540a" : "collapse-button-disabled_a8a1755b-bebf-452e-911f-b4b193d8540a")
             .attr("cx", -width / 2 + 7)
             .attr("cy", -height / 2 + 7)
             .attr("r", 5.5)
@@ -1833,7 +1965,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Add expand button icon
             nodeGroup.append("text")
-            .attr("class", isExpandable ? "collapse-icon_de804f73-aa6e-4216-ad35-84fd87a3946d" : "collapse-icon-disabled_de804f73-aa6e-4216-ad35-84fd87a3946d")
+            .attr("class", isExpandable ? "collapse-icon_a8a1755b-bebf-452e-911f-b4b193d8540a" : "collapse-icon-disabled_a8a1755b-bebf-452e-911f-b4b193d8540a")
             .attr("x", -width / 2 + 7)
             .attr("y", -height / 2 + 7)
             .attr("text-anchor", "middle")
@@ -1853,7 +1985,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Only add click handler for expandable modules
             if (isExpandable) {
-                nodeGroup.selectAll(".collapse-button_de804f73-aa6e-4216-ad35-84fd87a3946d, .collapse-icon_de804f73-aa6e-4216-ad35-84fd87a3946d")
+                nodeGroup.selectAll(".collapse-button_a8a1755b-bebf-452e-911f-b4b193d8540a, .collapse-icon_a8a1755b-bebf-452e-911f-b4b193d8540a")
                 .on("click", function(event) {
                     event.stopPropagation();
                     removeTooltip();
@@ -1874,20 +2006,20 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         // Add hover effects
         nodes.each(function() {
             const nodeGroup = d3.select(this);
-            const rect = nodeGroup.select("rect");
-            const originalColor = rect.style("fill");
+            const shape = nodeGroup.select("rect, ellipse");
+            const originalColor = shape.style("fill");
             let isHovered = false;
             
             nodeGroup.on("mouseenter", function() {
                 if (!isHovered) {
                     isHovered = true;
-                    const currentColor = d3.color(rect.style("fill") || originalColor);
-                    rect.style("fill", currentColor.brighter(0.4));
+                    const currentColor = d3.color(shape.style("fill") || originalColor);
+                    shape.style("fill", currentColor.brighter(0.4));
                 }
             })
             .on("mouseleave", function() {
                 isHovered = false;
-                rect.style("fill", originalColor);
+                shape.style("fill", originalColor);
             });
         });
 
@@ -1954,16 +2086,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                     .scale(currentTransform.k));
             }
 
-            clickedNodeElement.classed("highlight-node_de804f73-aa6e-4216-ad35-84fd87a3946d", true);
+            clickedNodeElement.classed("highlight-node_a8a1755b-bebf-452e-911f-b4b193d8540a", true);
             
             setTimeout(() => {
-                clickedNodeElement.classed("highlight-node_de804f73-aa6e-4216-ad35-84fd87a3946d", false);
+                clickedNodeElement.classed("highlight-node_a8a1755b-bebf-452e-911f-b4b193d8540a", false);
             }, 2000);
 
-            const popup = d3.select("#popup_de804f73-aa6e-4216-ad35-84fd87a3946d");
-            const moduleTemplate = d3.select("#module-template_de804f73-aa6e-4216-ad35-84fd87a3946d");
-            const tensorOpTemplate = d3.select("#tensor-op-template_de804f73-aa6e-4216-ad35-84fd87a3946d");
-            const noInfoMessage = d3.select("#no-info_de804f73-aa6e-4216-ad35-84fd87a3946d");
+            const popup = d3.select("#popup_a8a1755b-bebf-452e-911f-b4b193d8540a");
+            const moduleTemplate = d3.select("#module-template_a8a1755b-bebf-452e-911f-b4b193d8540a");
+            const tensorOpTemplate = d3.select("#tensor-op-template_a8a1755b-bebf-452e-911f-b4b193d8540a");
+            const noInfoMessage = d3.select("#no-info_a8a1755b-bebf-452e-911f-b4b193d8540a");
             
             const nodeData = adj_list[nodeName];
             
@@ -1971,7 +2103,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (node_to_module_path[nodeName] && graph_node_name_to_without_suffix[nodeName]) {
                 popupTitle = node_to_module_path[nodeName] + "." + graph_node_name_to_without_suffix[nodeName];
             }
-            d3.select("#popup-title_de804f73-aa6e-4216-ad35-84fd87a3946d").text(popupTitle);
+            d3.select("#popup-title_a8a1755b-bebf-452e-911f-b4b193d8540a").text(popupTitle);
 
             moduleTemplate.style("display", "none");
             tensorOpTemplate.style("display", "none");
@@ -1979,31 +2111,31 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             if (module_info[nodeName]) {
                 const info = module_info[nodeName];
-                moduleTemplate.style("display", "block").classed("content-shown_de804f73-aa6e-4216-ad35-84fd87a3946d", true);
+                moduleTemplate.style("display", "block").classed("content-shown_a8a1755b-bebf-452e-911f-b4b193d8540a", true);
                 
-                d3.select("#module-extra-repr_de804f73-aa6e-4216-ad35-84fd87a3946d").text(info.extra_repr || 'N/A');
+                d3.select("#module-extra-repr_a8a1755b-bebf-452e-911f-b4b193d8540a").text(info.extra_repr || 'N/A');
 
                 const forward_info = func_info[nodeName];
-                const attributesContainer = d3.select("#module-attributes_de804f73-aa6e-4216-ad35-84fd87a3946d").node();
+                const attributesContainer = d3.select("#module-attributes_a8a1755b-bebf-452e-911f-b4b193d8540a").node();
                 attributesContainer.innerHTML = '';
                 createJsonViewer(attributesContainer, info.attributes);
 
-                const parametersContainer = d3.select("#module-parameters_de804f73-aa6e-4216-ad35-84fd87a3946d").node();
+                const parametersContainer = d3.select("#module-parameters_a8a1755b-bebf-452e-911f-b4b193d8540a").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, forward_info);
             } else if (!(adj_list[nodeName] && adj_list[nodeName].node_type === "Input") && func_info[nodeName]) {
                 const info = func_info[nodeName];
-                tensorOpTemplate.style("display", "block").classed("content-shown_de804f73-aa6e-4216-ad35-84fd87a3946d", true);
-                const parametersContainer = d3.select("#tensor-op-parameters_de804f73-aa6e-4216-ad35-84fd87a3946d").node();
+                tensorOpTemplate.style("display", "block").classed("content-shown_a8a1755b-bebf-452e-911f-b4b193d8540a", true);
+                const parametersContainer = d3.select("#tensor-op-parameters_a8a1755b-bebf-452e-911f-b4b193d8540a").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, info);
             } else {
-                noInfoMessage.style("display", "block").classed("content-shown_de804f73-aa6e-4216-ad35-84fd87a3946d", true);
+                noInfoMessage.style("display", "block").classed("content-shown_a8a1755b-bebf-452e-911f-b4b193d8540a", true);
             }
             
             // Position popup based on info button or node center
             let boundingBox, x, y;
-            const containerRect = d3.select("#graph-container_de804f73-aa6e-4216-ad35-84fd87a3946d").node().getBoundingClientRect();
+            const containerRect = d3.select("#graph-container_a8a1755b-bebf-452e-911f-b4b193d8540a").node().getBoundingClientRect();
             
             if (infoButtonElement) {
                 boundingBox = infoButtonElement.getBoundingClientRect();
@@ -2019,19 +2151,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             popup.style("left", `${x}px`)
             .style("top", `${y}px`)
             .style("display", "flex");
-            d3.select("#popup-content_de804f73-aa6e-4216-ad35-84fd87a3946d").node().scrollTop = 0;
+            d3.select("#popup-content_a8a1755b-bebf-452e-911f-b4b193d8540a").node().scrollTop = 0;
         }
 
         function closePopup() {
-            d3.select("#popup_de804f73-aa6e-4216-ad35-84fd87a3946d").style("display", "none");
+            d3.select("#popup_a8a1755b-bebf-452e-911f-b4b193d8540a").style("display", "none");
         }
         
-        d3.select(".popup-close_de804f73-aa6e-4216-ad35-84fd87a3946d").on("click", closePopup);
+        d3.select(".popup-close_a8a1755b-bebf-452e-911f-b4b193d8540a").on("click", closePopup);
         svg.on("click", closePopup);
 
-        const popup = document.getElementById(`popup_de804f73-aa6e-4216-ad35-84fd87a3946d`);
+        const popup = document.getElementById(`popup_a8a1755b-bebf-452e-911f-b4b193d8540a`);
         const resizeObserver = new ResizeObserver(() => {
-            const editorContainers = popup.querySelectorAll('.json-viewer_de804f73-aa6e-4216-ad35-84fd87a3946d');
+            const editorContainers = popup.querySelectorAll('.json-viewer_a8a1755b-bebf-452e-911f-b4b193d8540a');
             for (let container of editorContainers) {
                 if (container.jsonEditor) {
                     container.jsonEditor.resize();
@@ -2110,30 +2242,30 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 // Apply highlight effect to the target container
                 if (Object.keys(graphvizData.nodes).includes(lastModifiedContainer)) {
                     // Highlight the node (collapsed container)
-                    const targetElement = inner.selectAll(".node_de804f73-aa6e-4216-ad35-84fd87a3946d")
+                    const targetElement = inner.selectAll(".node_a8a1755b-bebf-452e-911f-b4b193d8540a")
                         .filter(([nodeName]) => nodeName === lastModifiedContainer);
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-node_de804f73-aa6e-4216-ad35-84fd87a3946d", true);
+                        targetElement.classed("highlight-node_a8a1755b-bebf-452e-911f-b4b193d8540a", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-node_de804f73-aa6e-4216-ad35-84fd87a3946d", false);
+                            targetElement.classed("highlight-node_a8a1755b-bebf-452e-911f-b4b193d8540a", false);
                         }, 2000); // Match the animation duration
                     }
                 } else if (Object.keys(graphvizData.clusters).includes(lastModifiedContainer)) {
                     // Highlight the cluster (expanded container)
-                    const targetElement = inner.selectAll(".boundary-box_de804f73-aa6e-4216-ad35-84fd87a3946d")
+                    const targetElement = inner.selectAll(".boundary-box_a8a1755b-bebf-452e-911f-b4b193d8540a")
                         .filter(function([clusterName]) {
                             return clusterName === lastModifiedContainer;
                         });
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-cluster_de804f73-aa6e-4216-ad35-84fd87a3946d", true);
+                        targetElement.classed("highlight-cluster_a8a1755b-bebf-452e-911f-b4b193d8540a", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-cluster_de804f73-aa6e-4216-ad35-84fd87a3946d", false);
+                            targetElement.classed("highlight-cluster_a8a1755b-bebf-452e-911f-b4b193d8540a", false);
                         }, 2000); // Match the animation duration
                     }
                 }
