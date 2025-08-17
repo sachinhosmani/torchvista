@@ -1016,7 +1016,7 @@ FUNCTIONS = [
 	{'namespace': 'torch', 'function': 'load'},
 	{'namespace': 'torch', 'function': 'as_tensor'},
 	{'namespace': 'torch', 'function': 'from_numpy'},
-	{'namespace': 'torch', 'function': 'tensor'},
+	# {'namespace': 'torch', 'function': 'tensor'},
 	{'namespace': 'torch', 'function': 'arange'},
 	{'namespace': 'torch', 'function': 'as_strided'},
 	{'namespace': 'torch', 'function': 'bartlett_window'},
