@@ -63,6 +63,16 @@
         .node_${unique_id} rect.failed_${unique_id} { fill: rgb(224 15 15); }
         .node_${unique_id} rect.module_${unique_id} { fill: #8BDEDB; }
         .node_${unique_id} rect.operation_${unique_id} { fill: #FEBC5A; }
+
+        .node_${unique_id} ellipse.input_${unique_id} { fill: #FF9AFF; }
+        .node_${unique_id} ellipse.constant_${unique_id} { fill: rgb(235 235 235); }
+        .node_${unique_id} ellipse.output_${unique_id} { fill: #74e071; }
+        .node_${unique_id} ellipse.failed_${unique_id} { fill: rgb(224 15 15); }
+
+        .node_${unique_id} ellipse {
+            stroke: #333;
+            stroke-width: 1px;
+        }
         .edgeLabelGroup_${unique_id} {
             pointer-events: none;
         }
@@ -811,6 +821,7 @@
         dotSource += '  node [shape=box, style=filled];\n';
         dotSource += '  bgcolor="#f3f3eb";\n';
         dotSource += '  ranksep=0.5;\n';
+        dotSource += '  edge [arrowhead=vee, arrowsize=0.6];\n';
         dotSource += '  nodesep=0.4;\n';
 
 
@@ -860,9 +871,14 @@
                 if (!containerNodes.has(child) && adj_list_collapsed_nodes[child]) {
                     const nodeData = adj_list_collapsed_nodes[child];
                     if (nodeData.node_type === "Constant") {
-                        dotSource += `${indent}  "${child}" [width=0.7, height=0.3];\n`;
+                        const errorColor = getErrorColor(child);
+                        const fillColor = errorColor || getNodeColor(child);
+                        const childDisplayName = graph_node_name_to_without_suffix[child] || child;
+                        dotSource += `${indent}  "${child}" [label="${childDisplayName}", shape=ellipse, width=0.6, height=0.25, style="filled", fillcolor="${fillColor}"];\n`;
                     } else if (nodeData.node_type === "Input" || nodeData.node_type === "Output") {
-                        dotSource += `${indent}  "${child}" [width=1.2, height=0.5];\n`;
+                        const errorColor = getErrorColor(child);
+                        const fillColor = errorColor || getNodeColor(child);
+                        dotSource += `${indent}  "${child}" [shape=ellipse, width=1.2, height=0.5, style="filled", fillcolor="${fillColor}"];\n`;
                     } else {
                         const errorColor = getErrorColor(child);
                         const fillColor = errorColor || getNodeColor(child);
@@ -887,12 +903,12 @@
                     const errorColor = getErrorColor(node);
                     const fillColor = errorColor || getNodeColor(node);
                     const nodeDisplayName = graph_node_name_to_without_suffix[node] || node;
-                    dotSource += `  "${node}" [width=0.7, height=0.3, fillcolor="${fillColor}", label="${nodeDisplayName}"];\n`;
+                    dotSource += `  "${node}" [shape=ellipse, width=0.6, height=0.25, fillcolor="${fillColor}", label="${nodeDisplayName}", style="filled"];\n`;
                 } else if (data.node_type === "Input" || data.node_type === "Output") {
                     const errorColor = getErrorColor(node);
                     const fillColor = errorColor || getNodeColor(node);
                     const nodeDisplayName = graph_node_name_to_without_suffix[node] || node;
-                    dotSource += `  "${node}" [width=1.2, height=0.5, fillcolor="${fillColor}", label="${nodeDisplayName}"];\n`;
+                    dotSource += `  "${node}" [shape=ellipse, width=1.2, height=0.5, fillcolor="${fillColor}", label="${nodeDisplayName}", style="filled"];\n`;
                 } else {
                     const errorColor = getErrorColor(node);
                     const fillColor = errorColor || getNodeColor(node);
@@ -1425,18 +1441,43 @@
             });
         
         
-        // Add rectangles for nodes
-        nodes.append("rect")
-        .attr("width", function([nodeName, nodeData]) { return nodeData.width; })
-        .attr("height", function([nodeName, nodeData]) { return nodeData.height; })
-        .attr("x", function([nodeName, nodeData]) { return -nodeData.width / 2; })
-        .attr("y", function([nodeName, nodeData]) { return -nodeData.height / 2; })
-        .attr("class", function([nodeName]) { 
-            if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_${unique_id}";
-            if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_${unique_id}";
-            if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_${unique_id}";
-            if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_${unique_id}";
-            return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_${unique_id}" : "operation_${unique_id}";
+        // Add shapes for nodes (ellipses for some, rectangles for others)
+        nodes.each(function([nodeName, nodeData]) {
+            const nodeGroup = d3.select(this);
+            
+            // Check if this should be an ellipse
+            const isEllipseNode = (adj_list[nodeName] && (
+                adj_list[nodeName].node_type === "Input" || 
+                adj_list[nodeName].node_type === "Output" || 
+                adj_list[nodeName].node_type === "Constant"
+            ));
+            
+            if (isEllipseNode) {
+                // Create ellipse
+                nodeGroup.append("ellipse")
+                .attr("cx", 0)
+                .attr("cy", 0)
+                .attr("rx", nodeData.width / 2)
+                .attr("ry", nodeData.height / 2)
+                .attr("class", function() { 
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_${unique_id}";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_${unique_id}";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_${unique_id}";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_${unique_id}";
+                    return "operation_${unique_id}";
+                });
+            } else {
+                // Create rectangle
+                nodeGroup.append("rect")
+                .attr("width", nodeData.width)
+                .attr("height", nodeData.height)
+                .attr("x", -nodeData.width / 2)
+                .attr("y", -nodeData.height / 2)
+                .attr("class", function() { 
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_${unique_id}";
+                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_${unique_id}" : "operation_${unique_id}";
+                });
+            }
         });
         
         // Add labels for nodes
@@ -1576,20 +1617,20 @@
         // Add hover effects
         nodes.each(function() {
             const nodeGroup = d3.select(this);
-            const rect = nodeGroup.select("rect");
-            const originalColor = rect.style("fill");
+            const shape = nodeGroup.select("rect, ellipse");
+            const originalColor = shape.style("fill");
             let isHovered = false;
             
             nodeGroup.on("mouseenter", function() {
                 if (!isHovered) {
                     isHovered = true;
-                    const currentColor = d3.color(rect.style("fill") || originalColor);
-                    rect.style("fill", currentColor.brighter(0.4));
+                    const currentColor = d3.color(shape.style("fill") || originalColor);
+                    shape.style("fill", currentColor.brighter(0.4));
                 }
             })
             .on("mouseleave", function() {
                 isHovered = false;
-                rect.style("fill", originalColor);
+                shape.style("fill", originalColor);
             });
         });
 
