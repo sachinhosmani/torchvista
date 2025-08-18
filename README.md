@@ -42,7 +42,9 @@ Install via pip
 pip install torchvista
 ```
 
-Run from your **web-based notebook** (Jupyter, Colab, etc)
+(Alternatively, torchvista can also be installed via conda-forge. See [here](https://github.com/conda-forge/torchvista-feedstock?tab=readme-ov-file#installing-torchvista) for instructions)
+
+Run from your **web-based notebook** (Jupyter, Colab, VSCode notebook, etc)
 
 ```
 import torch
