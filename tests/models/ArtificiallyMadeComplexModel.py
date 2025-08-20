@@ -170,7 +170,7 @@ y = torch.randn(2, 3, 32, 32)
 example_input = (x, y)
 
 
-code_contents = """
+code_contents = """\
 import torch
 import torch.nn as nn
 import torch.nn.functional as F

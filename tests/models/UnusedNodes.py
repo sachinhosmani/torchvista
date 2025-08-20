@@ -24,7 +24,7 @@ model = MainModule()
 
 example_input = torch.ones(3,  4)
 
-code_contents = """
+code_contents = """\
 import torch
 import torch.nn as nn
 from torchvista import trace_model

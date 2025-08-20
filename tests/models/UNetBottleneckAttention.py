@@ -94,7 +94,7 @@ class UNetBAM(nn.Module):
 model = UNetBAM()
 example_input = torch.randn(1, 3, 256, 256)
 
-code_contents = """
+code_contents = """\
 import torch
 import torch.nn as nn
 from torchvista import trace_model

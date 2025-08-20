@@ -20,7 +20,7 @@ class MiniInception(nn.Module):
 model = MiniInception()
 example_input = torch.randn(1, 3, 32, 32)
 
-code_contents = """
+code_contents = """\
 import torch
 import torch.nn as nn
 from torchvista import trace_model

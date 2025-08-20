@@ -21,7 +21,7 @@ class UNetPP(nn.Module):
 model = UNetPP()
 example_input = torch.randn(1, 1, 64, 64)
 
-code_contents = """
+code_contents = """\
 import torch
 import torch.nn as nn
 from torchvista import trace_model

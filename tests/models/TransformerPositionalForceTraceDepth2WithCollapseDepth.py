@@ -20,7 +20,7 @@ example_input = torch.randn(10, 1, 20)
 forced_module_tracing_depth = 2
 collapse_modules_after_depth = 2
 
-code_contents = """
+code_contents = """\
 import torch
 import torch.nn as nn
 from torchvista import trace_model

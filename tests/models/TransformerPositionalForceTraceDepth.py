@@ -19,7 +19,7 @@ model = PositionalTransformer()
 example_input = torch.randn(10, 1, 20)
 forced_module_tracing_depth = 1
 
-code_contents = """
+code_contents = """\
 import torch
 import torch.nn as nn
 from torchvista import trace_model

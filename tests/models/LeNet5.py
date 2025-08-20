@@ -22,7 +22,7 @@ example_input = torch.randn(2, 1, 28, 28)
 
 
 
-code_contents = """
+code_contents = """\
 import torch
 import torch.nn as nn
 from torchvista import trace_model

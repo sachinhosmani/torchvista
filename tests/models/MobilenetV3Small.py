@@ -6,7 +6,7 @@ example_input = torch.randn(1, 3, 224, 224)
 
 forced_module_tracing_depth = 5
 
-code_contents = """
+code_contents = """\
 import torch
 from torchvista import trace_model
 from torchvision import models

@@ -5,7 +5,7 @@ model = models.alexnet(weights=None)
 example_input = torch.randn(1, 3, 224, 224)
 
 
-code_contents = """
+code_contents = """\
 import torch
 from torchvista import trace_model
 from torchvision import models

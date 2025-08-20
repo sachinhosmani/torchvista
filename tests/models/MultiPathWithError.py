@@ -39,7 +39,7 @@ y = torch.randn(3, 10)
 z = torch.randn(3, 10)
 example_input = (x, y, z)
 
-code_contents = """
+code_contents = """\
 import torch
 import torch.nn as nn
 from torchvista import trace_model

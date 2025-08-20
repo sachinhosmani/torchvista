@@ -9,7 +9,7 @@ trace_model(model, example_input, forced_module_tracing_depth=7)
 
 forced_module_tracing_depth = 7
 
-code_contents = """
+code_contents = """\
 import torch
 from torchvista import trace_model
 from torchvision import models

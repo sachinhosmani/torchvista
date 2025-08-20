@@ -31,7 +31,7 @@ class AttentionClassifier(nn.Module):
 model = AttentionClassifier()
 example_input = torch.randn(2, 10, 32)
 
-code_contents = """
+code_contents = """\
 import torch
 import torch.nn as nn
 from torchvista import trace_model

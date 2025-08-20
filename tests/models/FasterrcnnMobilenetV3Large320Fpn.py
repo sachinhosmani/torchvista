@@ -20,7 +20,7 @@ trace_model(model,
             collapse_modules_after_depth=collapse_modules_after_depth)
 
 
-code_contents = """
+code_contents = """\
 import torch
 from torchvista import trace_model
 from torchvision.models.detection import fasterrcnn_mobilenet_v3_large_320_fpn

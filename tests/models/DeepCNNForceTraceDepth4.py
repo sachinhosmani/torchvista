@@ -40,8 +40,7 @@ example_input = torch.randn(1, 3, 64, 64)
 
 forced_module_tracing_depth = 4
 
-code_contents = """
-
+code_contents = """\
 import torch
 import torch.nn as nn
 from torchvista import trace_model

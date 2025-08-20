@@ -18,7 +18,7 @@ class PositionalTransformer(nn.Module):
 model = PositionalTransformer()
 example_input = torch.randn(10, 1, 20)  # (seq_len, batch_size, input_dim)
 
-code_contents = """
+code_contents = """\
 import torch
 import torch.nn as nn
 from torchvista import trace_model

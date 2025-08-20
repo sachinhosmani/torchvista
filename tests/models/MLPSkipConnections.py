@@ -18,7 +18,7 @@ class DeepMLP(nn.Module):
 model = DeepMLP()
 example_input = torch.randn(1, 64)
 
-code_contents = """
+code_contents = """\
 import torch
 import torch.nn as nn
 from torchvista import trace_model

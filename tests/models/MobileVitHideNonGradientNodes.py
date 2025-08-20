@@ -10,7 +10,7 @@ collapse_modules_after_depth = 2
 
 show_non_gradient_nodes = False
 
-code_contents = """
+code_contents = """\
 import torch
 from torchvision.models import squeezenet1_1
 from torchvista import trace_model
