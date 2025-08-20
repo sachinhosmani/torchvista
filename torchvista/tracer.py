@@ -716,6 +716,43 @@ def build_immediate_ancestor_map(ancestor_dict, adj_list):
                     immediate_ancestor_map[ancestors[i]] = ancestors[i + 1]
     return immediate_ancestor_map
     
+def generate_html_file_action(html_str, unique_id):
+    output_file = Path.cwd() / f'torchvista_graph_{unique_id}.html'
+    output_file.write_text(html_str, encoding='utf-8')
+    display(HTML(f"""
+        <style>
+            #torchvista-container-{unique_id} {{
+                font-family: Arial, sans-serif;
+                margin: 12px 0;
+            }}
+            #torchvista-message-{unique_id} {{
+                font-size: 14px;
+                color: #333;
+                margin-bottom: 8px;
+            }}
+            #svg-download-button-{unique_id} {{
+                display: inline-block;
+                padding: 8px 16px;
+                background-color: #007bff;
+                color: white;
+                text-decoration: none;
+                border-radius: 4px;
+                font-weight: bold;
+                font-size: 14px;
+            }}
+            #svg-download-button-{unique_id}:hover {{
+                background-color: #0056b3;
+            }}
+        </style>
+        <div id="torchvista-container-{unique_id}">
+            <div id="torchvista-message-{unique_id}">
+                ✅ Wrote to <code>{output_file.name}</code> in <code>{output_file.parent}</code>
+            </div>
+            <a id="svg-download-button-{unique_id}" href="{output_file.name}" target="_blank">
+                Open HTML
+            </a>
+        </div>
+    """))
 
 def plot_graph(adj_list, module_info, func_info, node_to_module_path,
                parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix,
@@ -749,9 +786,7 @@ def plot_graph(adj_list, module_info, func_info, node_to_module_path,
         'generate_svg': 'true' if generate_svg else 'false',
     })
     if generate_html:
-        output_file = Path.cwd() / f'torchvista_graph_{unique_id}.html'
-        output_file.write_text(output, encoding='utf-8')
-        display(HTML(f'<div style="font-size:18px; font-weight:bold; color:black;">[torchvista] Saved HTML to {output_file.name}</div>'))
+        generate_html_file_action(output, unique_id)
     else:
         display(HTML(output))
 
