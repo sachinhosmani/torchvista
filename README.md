@@ -109,7 +109,15 @@ trace_model(model, example_input)
 - **Category:** Visual control
 - **Default:** `800`
 
-#### `generate_image` (`bool`, optional)
-- If True, it generates an image of the visualization instead of displaying it as an interactive visualization in the notebook.
+#### `wifth` (`int`, optional)
+- Width in px of the visualization canvas.
 - **Category:** Visual control
-- **Default:** False
+- **Default:** 100% of the width available
+
+#### `export_format` (`str`, optional)
+- If you would like to export the graph out as a file (instead of exploring it in the notebook), use one of the following options:
+  - 'png'
+  - 'svg'
+  - 'html'
+- **Category:** Visual control
+- **Default:** `None` (graph gets shown in the notebook itself, and nothing is exported)
