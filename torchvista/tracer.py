@@ -760,7 +760,7 @@ def generate_html_file_action(html_str, unique_id):
 
 def plot_graph(adj_list, module_info, func_info, node_to_module_path,
                parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix,
-               ancestor_map, collapse_modules_after_depth, height, export_format):
+               ancestor_map, collapse_modules_after_depth, height, width, export_format):
     unique_id = str(uuid.uuid4())
     template_str = resources.read_text('torchvista.templates', 'graph.html')
     d3_source = resources.read_text('torchvista.assets', 'd3.min.js')
@@ -786,6 +786,7 @@ def plot_graph(adj_list, module_info, func_info, node_to_module_path,
         'collapse_modules_after_depth': collapse_modules_after_depth,
         'node_to_module_path': node_to_module_path,
         'height': f'{height}px' if (export_format not in (ExportFormat.PNG, ExportFormat.SVG)) else '0px',
+        'width': f'{width}px' if width is not None else '100%',
         'generate_image': 'true' if export_format is ExportFormat.PNG else 'false',
         'generate_svg': 'true' if export_format is ExportFormat.SVG else 'false',
     })
@@ -865,7 +866,7 @@ def validate_export_format(export_format):
     
     return ExportFormat(export_format)
 
-def trace_model(model, inputs, show_non_gradient_nodes=True, collapse_modules_after_depth=1, forced_module_tracing_depth=None, height=800, export_format=None):
+def trace_model(model, inputs, show_non_gradient_nodes=True, collapse_modules_after_depth=1, forced_module_tracing_depth=None, height=800, width=None, export_format=None):
     adj_list = {}
     module_info = {}
     func_info = {}
@@ -885,7 +886,7 @@ def trace_model(model, inputs, show_non_gradient_nodes=True, collapse_modules_af
     except Exception as e:
         exception = e
 
-    plot_graph(adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, build_immediate_ancestor_map(node_to_ancestors, adj_list), collapse_modules_after_depth, height, export_format)
+    plot_graph(adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, build_immediate_ancestor_map(node_to_ancestors, adj_list), collapse_modules_after_depth, height, width, export_format)
 
 
     if exception is not None:
