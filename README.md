@@ -109,7 +109,7 @@ trace_model(model, example_input)
 - **Category:** Visual control
 - **Default:** `800`
 
-#### `wifth` (`int`, optional)
+#### `width` (`int`, optional)
 - Width in px of the visualization canvas.
 - **Category:** Visual control
 - **Default:** 100% of the width available
