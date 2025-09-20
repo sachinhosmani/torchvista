@@ -393,6 +393,22 @@
             display: none;
         }
 
+        .custom-tooltip_smaller_${unique_id} {
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 6px 8px;
+            font-size: 10px;
+            font-family: inherit;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            pointer-events: none;
+            max-width: 300px;
+            word-wrap: break-word;
+            display: none;
+        }
+
         .edge_${unique_id}.implied-edge_${unique_id} {
             stroke-dasharray: 5,5;
         }
@@ -498,11 +514,11 @@
 
     let currentTooltip = null;
 
-    function createTooltip(text) {
+    function createTooltip(text, smaller = false) {
         removeTooltip();
         
         const tooltip = document.createElement('div');
-        tooltip.className = `custom-tooltip_${unique_id}`;
+        tooltip.className = !smaller ? `custom-tooltip_${unique_id}` : `custom-tooltip_smaller_${unique_id}`;
         tooltip.textContent = text;
         
         const container = document.getElementById(`graph-container_${unique_id}`);
@@ -535,8 +551,8 @@
         tooltip.style.top = `${top}px`;
     }
 
-    function showTooltip(buttonElement, text) {
-        const tooltip = createTooltip(text);
+    function showTooltip(buttonElement, text, smaller = false) {
+        const tooltip = createTooltip(text, smaller);
         positionTooltip(tooltip, buttonElement);
     }
 
@@ -1588,10 +1604,10 @@
             // Add custom tooltip
             const tooltipText = isExpandable ? 
                 "Expand module" : 
-                `Call with forced_module_tracing_depth=${depth + 1} or more to make this module expandable`;
+                `Use forced_module_tracing_depth=${depth + 1} or more to make this expandable`;
 
             expandButton.on("mouseenter", function() {
-                showTooltip(this, tooltipText);
+                showTooltip(this, tooltipText, !isExpandable);
             })
             .on("mouseleave", removeTooltip);
 
