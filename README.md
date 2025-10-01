@@ -1,6 +1,6 @@
 # torchvista
 
-An interactive tool to visualize the forward pass of a PyTorch model directly in the notebook—with a single line of code. Works with web-based notebooks like Jupyter, Google Colab and Kaggle.
+An interactive tool to visualize the forward pass of a PyTorch model directly in the notebook—with a single line of code. Works with web-based notebooks like Jupyter, Google Colab and Kaggle. Also allows you to export the visualization as image, svg and HTML.
 
 ## ✨ Features
 
@@ -90,7 +90,7 @@ trace_model(model, example_input)
 - Input(s) to be passed to the model. Can be a single input or a tuple of inputs.
 
 #### `collapse_modules_after_depth` (`int`, optional)
-- Maximum depth for expanding nested modules in the initial view. `0` means everything is collapsed.
+- Maximum depth for expanding nested modules in the initial view. `0` means everything is collapsed. Note that you can still expand nodes by clicking the '+' button even if initially collapsed by this flag.
 - **Category:** Visual control
 - **Default:** `1`
 
@@ -100,7 +100,7 @@ trace_model(model, example_input)
 - **Default:** `True`
 
 #### `forced_module_tracing_depth` (`int`, optional)
-- Maximum depth to which modules' internals are traced. `None` means only user-defined modules are traced, not pre-defined library modules.
+- Maximum depth to which modules' internals are traced. `None` means only user-defined modules are traced, not pre-defined library modules. This parameter helps with controlling the cost of tracing the model with the level of detail desired.
 - **Category:** Tracing  
 - **Default:** `None`
 
