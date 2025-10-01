@@ -4,26 +4,26 @@ An interactive tool to visualize the forward pass of a PyTorch model directly in
 
 ## ✨ Features
 
-#### Interactive graph with drag and zoom support
+### Interactive graph with drag and zoom support
 
 ![](docs/assets/interactive-graph.gif)
 
 --------
 
-#### Collapsible nodes for hierarchical modules 
+### Collapsible nodes for hierarchical modules 
 
 ![](docs/assets/collapsible-graph.gif)
 
 --------
 
-#### Error-tolerant partial visualization when errors arise
+### Error-tolerant partial visualization when errors arise
 (e.g., shape mismatches) for ease of debugging
 
 ![](docs/assets/error-graph.png)
 
 --------
 
-#### Click on nodes to view parameter and attribute info
+### Click on nodes to view parameter and attribute info
 
 ![](docs/assets/info-popup.png)
 
