@@ -750,11 +750,8 @@ def generate_html_file_action(html_str, unique_id):
         </style>
         <div id="torchvista-container-{unique_id}">
             <div id="torchvista-message-{unique_id}">
-                ✅ Wrote to <code>{output_file.name}</code> in <code>{output_file.parent}</code>
+                <b>✅ Wrote to <code>{output_file.name}</code> in <code>{output_file.parent}</code></b>
             </div>
-            <a id="svg-download-button-{unique_id}" href="{output_file.name}" target="_blank">
-                Open HTML
-            </a>
         </div>
     """))
 
