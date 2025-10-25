@@ -789,6 +789,7 @@ def plot_graph(adj_list, module_info, func_info, node_to_module_path,
         'width': f'{width}px' if width is not None else '100%',
         'generate_image': 'true' if export_format is ExportFormat.PNG else 'false',
         'generate_svg': 'true' if export_format is ExportFormat.SVG else 'false',
+        'show_modular_view': 'false',
     })
     if export_format == ExportFormat.HTML:
         generate_html_file_action(output, unique_id)

@@ -489,6 +489,7 @@
     const node_to_module_path = ${node_to_module_path};
     const generateImage = ${generate_image};
     const generateSvg = ${generate_svg};
+    const show_modular_view = ${show_modular_view};
     var collapsedContainers = new Set();
     const containerNodes = new Set();
     var adj_list_collapsed_nodes = {};
@@ -638,6 +639,10 @@
             let labelPos = null;
             if (edge.lp) {
                 const [lx, ly] = edge.lp.split(',').map(Number);
+                labelPos = { x: lx, y: ly };
+            } else if (edge.xlp) {
+                // Use xlp for xlabel positioning
+                const [lx, ly] = edge.xlp.split(',').map(Number);
                 labelPos = { x: lx, y: ly };
             }
 
@@ -836,6 +841,7 @@
             dotSource += '  rankdir=BT;\n';
         }
         dotSource += '  node [shape=box, style=filled];\n';
+        dotSource += '  compound=true;\n';
         dotSource += '  bgcolor="#f3f3eb";\n';
         dotSource += '  ranksep=0.5;\n';
         dotSource += '  edge [arrowhead=vee, arrowsize=0.6];\n';
@@ -848,6 +854,77 @@
             if (!ancestor_map[container] & !collapsedContainers.has(container)) {
                 topContainers.add(container);
             }
+        }
+
+        function findLCA(node1, node2) {
+            // Build path from node1 to root
+            const path1 = [];
+            let current = node1;
+            while (current) {
+                path1.push(current);
+                current = ancestor_map[current];
+            }
+            
+            // Build path from node2 to root
+            const path2 = [];
+            current = node2;
+            while (current) {
+                path2.push(current);
+                current = ancestor_map[current];
+            }
+            
+            // Align depths
+            while (path1.length > path2.length) {
+                path1.shift();
+            }
+            while (path2.length > path1.length) {
+                path2.shift();
+            }
+            
+            // Walk upward until common ancestor is found
+            while (
+                path1.length > 0 &&
+                path1[0] !== path2[0]
+            ) {
+                path1.shift();
+                path2.shift();
+            }
+
+            if (path1.length > 0) {
+                return path1[0];
+            }
+
+            // If no common ancestor found, return "__root__"
+            return "__root__";
+        }
+
+        function findRepresentativeNode(lca, node) {
+            // If node is the LCA itself or has no parent, it's its own representative
+            if (node === lca || !ancestor_map[node]) {
+                return node;
+            }
+
+            // Special case: if LCA is "__root__", representative is the highest ancestor
+            if (lca === "__root__") {
+                let current = node;
+                let parent = ancestor_map[current];
+                while (parent) {
+                    current = parent;
+                    parent = ancestor_map[current];
+                }
+                return current;
+            }
+
+            // Traverse up from node until we find the direct child of the LCA
+            let current = node;
+            let parent = ancestor_map[current];
+
+            while (parent && parent !== lca) {
+                current = parent;
+                parent = ancestor_map[current];
+            }
+
+            return current;
         }
 
         // Process containers recursively
@@ -936,21 +1013,52 @@
         }
 
         // Add all edges
+        const emittedEdges = new Set();
         for (const [node, data] of Object.entries(adj_list_collapsed_nodes)) {
             for (const edge of data.edges) {
+                // Compute representative pair once
+                let repSource = node;
+                let repTarget = edge.target;
+                let lca = null;
+
+                debugger;
+                if (show_modular_view) {
+                    lca = findLCA(node, edge.target);
+                    repSource = findRepresentativeNode(lca, node);
+                    repTarget = findRepresentativeNode(lca, edge.target);
+
+                    // Consolidate identical tensor edges between representative modules
+                    const key = `${repSource}->${repTarget}->${edge.edge_data_id}`;
+                    if (emittedEdges.has(key)) continue;
+                    emittedEdges.add(key);
+                }
+
                 let edgeLabelFontSize = "10";
-                if (edge.edge_data_id) {
-                    dotSource += `  "${node}" -> "${edge.target}"[label="${edge.dims}", fontsize="${edgeLabelFontSize}", edge_data_id="${edge.edge_data_id}"`;
+                let edgeAttrs = `[fontsize="${edgeLabelFontSize}"`;
+
+                if (edge.edge_data_id) edgeAttrs += `, edge_data_id="${edge.edge_data_id}"`;
+                if (edge.is_implied_edge) edgeAttrs += `, is_implied_edge="true"`;
+
+                if (show_modular_view) {
+                    edgeAttrs += `, xlabel="${edge.dims}"`;
+
+                    const hasCompound = repSource !== node || repTarget !== edge.target;
+
+                    if (hasCompound) {
+                        if (repSource !== node && !collapsedContainers.has(repSource))
+                            edgeAttrs += `, ltail="cluster_${repSource}"`;
+                        if (repTarget !== edge.target && !collapsedContainers.has(repTarget))
+                            edgeAttrs += `, lhead="cluster_${repTarget}"`;
+                        edgeAttrs += `, minlen=2`;
+                    }
                 } else {
-                    dotSource += `  "${node}" -> "${edge.target}"[label="${edge.dims}", fontsize="${edgeLabelFontSize}"`;
+                    edgeAttrs += `, label="${edge.dims}"`;
                 }
-                if (edge.is_implied_edge) {
-                    dotSource += `, is_implied_edge="true"`;
-                }
-                dotSource += `];\n`;
+
+                edgeAttrs += `]`;
+                dotSource += `  "${node}" -> "${edge.target}"${edgeAttrs};\n`;
             }
         }
-
         dotSource += '}';
         return dotSource;
     }
