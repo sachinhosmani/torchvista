@@ -73,7 +73,7 @@ trace_model(model, example_input)
 
     trace_model(
         model,
-        input,
+        inputs,
         collapse_modules_after_depth=1, # optional
         show_non_gradient_nodes=True, # optional
         forced_module_tracing_depth=None, # optional
