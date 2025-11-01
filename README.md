@@ -73,12 +73,12 @@ trace_model(model, example_input)
 
     trace_model(
         model,
-        inputs,
-        max_module_expansion_depth=3,
-        show_non_gradient_nodes=False,
-        forced_module_tracing_depth=None,
-        height=800,
-        generate_image=False
+        input,
+        collapse_modules_after_depth=1, # optional
+        show_non_gradient_nodes=True, # optional
+        forced_module_tracing_depth=None, # optional
+        height=800, # optional
+        export_format=None # optional
     )
 
 ### Parameters
