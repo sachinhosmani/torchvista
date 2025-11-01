@@ -64,10 +64,10 @@ class LinearModel(nn.Module):
 
 # Instantiate the module and tensor input
 model = LinearModel()
-example_input = torch.randn(2, 10)
+inputs = torch.randn(2, 10)
 
 # Trace!
-trace_model(model, example_input)
+trace_model(model, inputs)
 ```
 ## API Reference: `trace_model`
 
