@@ -1,21 +1,21 @@
-import torch
-import torch.nn as nn
-from collections import OrderedDict
-import torch.nn.functional as F
-from torch.overrides import get_ignored_functions
-from pathlib import Path
-from string import Template
-import uuid
-from collections import defaultdict
-from .overrides import CONTAINER_MODULES, FUNCTIONS
-import warnings
-
 import json
-from IPython.display import display, HTML
-import numpy as np
 import numbers
+import uuid
+import warnings
+from collections import OrderedDict, defaultdict
 from enum import Enum
 from importlib import resources
+from pathlib import Path
+from string import Template
+
+import numpy as np
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from IPython.display import HTML, display
+from torch.overrides import get_ignored_functions
+
+from .overrides import CONTAINER_MODULES, FUNCTIONS
 
 
 class NodeType(Enum):
@@ -25,38 +25,45 @@ class NodeType(Enum):
     OUTPUT = "Output"
     CONSTANT = "Constant"
 
+
 class ExportFormat(Enum):
     SVG = "svg"
     HTML = "html"
     PNG = "png"
 
+
 def get_all_nn_modules():
+    import importlib
     import inspect
     import pkgutil
-    import importlib
+
     import torch.nn as nn
 
     try:
         import torchvision
     except ImportError:
         torchvision = None
-    
+
     try:
         import torchaudio
     except ImportError:
         torchaudio = None
     except Exception:
-        print('[warning] torchaudio available, but import failed and hence torchvista cannot trace torchaudio operations.\
-               If you need torchaudio tracing, run `import torchaudio` separately to debug what is wrong.')
+        print(
+            '[warning] torchaudio available, but import failed and hence torchvista cannot trace torchaudio operations.\
+               If you need torchaudio tracing, run `import torchaudio` separately to debug what is wrong.'
+        )
         torchaudio = None
-    
+
     try:
         import torchtext
     except ImportError:
         torchtext = None
     except Exception:
-        print('[warning] torchtext available, but import failed and hence torchvista cannot trace torchtext operations.\
-               If you need torchtext tracing, run `import torchtext` separately to debug what is wrong.')
+        print(
+            '[warning] torchtext available, but import failed and hence torchvista cannot trace torchtext operations.\
+               If you need torchtext tracing, run `import torchtext` separately to debug what is wrong.'
+        )
         torchtext = None
 
     modules_to_scan = [nn, torchvision, torchaudio, torchtext]
@@ -78,7 +85,8 @@ def get_all_nn_modules():
 
         # Recursively explore submodules
         if hasattr(mod, '__path__'):
-            for _, subname, ispkg in pkgutil.iter_modules(mod.__path__, mod.__name__ + "."):
+            for _, subname, ispkg in pkgutil.iter_modules(
+                    mod.__path__, mod.__name__ + "."):
                 try:
                     submod = importlib.import_module(subname)
                     walk_module(submod)
@@ -91,12 +99,17 @@ def get_all_nn_modules():
 
     return module_classes
 
+
 with warnings.catch_warnings():
     warnings.simplefilter("ignore", UserWarning)
     MODULES = get_all_nn_modules() - CONTAINER_MODULES
 
 
-def process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, node_to_ancestors, show_non_gradient_nodes, forced_module_tracing_depth):
+def process_graph(model, inputs, adj_list, module_info, func_info,
+                  node_to_module_path, parent_module_to_nodes,
+                  parent_module_to_depth, graph_node_name_to_without_suffix,
+                  node_to_ancestors, show_non_gradient_nodes,
+                  forced_module_tracing_depth):
     last_successful_op = None
     current_op = None
     current_executing_module = None
@@ -117,8 +130,8 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
     constant_node_names = []
     output_node_set = set()
 
-
     def format_dims(dims):
+
         def helper():
             if isinstance(dims, tuple):
                 return f"({', '.join(map(str, dims))})"
@@ -126,8 +139,9 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 return f"[{', '.join(helper(d) for d in dims)}]"
             else:
                 return "()" if str(dims) == "()" else str(dims)
+
         result = helper()
-        return "( )" if result == "()"  else result
+        return "( )" if result == "()" else result
 
     def get_unique_op_name(op_type, module=None):
         nonlocal op_type_counters, module_to_node_name, module_info, module_reuse_count
@@ -150,7 +164,8 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
         }
 
         for attr_name in dir(module):
-            if attr_name.startswith('_') or callable(getattr(module, attr_name)):
+            if attr_name.startswith('_') or callable(getattr(
+                    module, attr_name)):
                 continue
             attr_value = getattr(module, attr_name)
             if isinstance(attr_value, (int, float, str, bool, tuple)):
@@ -168,6 +183,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
         return info
 
     def format_arg(arg):
+
         def _format(value):
             if isinstance(value, torch.Tensor):
                 return {
@@ -207,10 +223,11 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
             "keyword_args": formatted_kwargs
         }
 
-    def pre_trace_op(op_name, node_type, *args, **kwargs):        
+    def pre_trace_op(op_name, node_type, *args, **kwargs):
         nonlocal current_op, last_successful_op, last_tensor_input_id, last_np_array_input_id, last_numeric_input_id
 
-        input_tensors = extract_tensors_from_obj(args) + extract_tensors_from_obj(kwargs)
+        input_tensors = extract_tensors_from_obj(
+            args) + extract_tensors_from_obj(kwargs)
         # This can happen in some discovered operations which don't take any inputs. For these, we don't
         # have to put nodes in the graph.
         if len(input_tensors) == 0:
@@ -220,11 +237,15 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
             'failed': True,
             'node_type': node_type,
         }
-        
+
         for inp in input_tensors:
             if hasattr(inp, '_tensor_source_name'):
                 dims = format_dims(tuple(inp.shape))
-                entry = {'target': op_name, 'dims': dims, 'edge_data_id': id(inp)}
+                entry = {
+                    'target': op_name,
+                    'dims': dims,
+                    'edge_data_id': id(inp)
+                }
                 if hasattr(inp, '_is_implied_edge') and inp._is_implied_edge:
                     entry['is_implied_edge'] = True
                 adj_list[inp._tensor_source_name]['edges'].append(entry)
@@ -235,11 +256,17 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                     'failed': False,
                     'node_type': 'Constant',
                 }
-                entry = {'target': op_name, 'dims': dims, 'edge_data_id': id(inp)}
+                entry = {
+                    'target': op_name,
+                    'dims': dims,
+                    'edge_data_id': id(inp)
+                }
                 if hasattr(inp, '_is_implied_edge') and inp._is_implied_edge:
                     entry['is_implied_edge'] = True
-                adj_list[f'tensor_{last_tensor_input_id}']['edges'].append(entry)
-                node_to_ancestors[f'tensor_{last_tensor_input_id}'] = module_stack[::-1]
+                adj_list[f'tensor_{last_tensor_input_id}']['edges'].append(
+                    entry)
+                node_to_ancestors[
+                    f'tensor_{last_tensor_input_id}'] = module_stack[::-1]
                 constant_node_names.append(f'tensor_{last_tensor_input_id}')
                 last_tensor_input_id += 1
 
@@ -252,12 +279,21 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                         'failed': False,
                         'node_type': NodeType.CONSTANT.value,
                     }
-                    adj_list[f'np_array_{last_np_array_input_id}']['edges'].append({'target': op_name, 'dims': dims, 'edge_data_id': id(inp),})
-                    constant_node_names.append(f'np_array_{last_np_array_input_id}')
-                    node_to_ancestors[f'np_array_{last_np_array_input_id}'] = module_stack[::-1]
+                    adj_list[f'np_array_{last_np_array_input_id}'][
+                        'edges'].append({
+                            'target': op_name,
+                            'dims': dims,
+                            'edge_data_id': id(inp),
+                        })
+                    constant_node_names.append(
+                        f'np_array_{last_np_array_input_id}')
+                    node_to_ancestors[
+                        f'np_array_{last_np_array_input_id}'] = module_stack[::
+                                                                             -1]
                     last_np_array_input_id += 1
 
-            num_scalars = len([inp for inp in args if isinstance(inp, numbers.Number)])
+            num_scalars = len(
+                [inp for inp in args if isinstance(inp, numbers.Number)])
             if num_scalars > 0:
                 if num_scalars == 1:
                     scalar_node_name = f'scalar_{last_numeric_input_id}'
@@ -272,10 +308,14 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                     'failed': False,
                     'node_type': NodeType.CONSTANT.value,
                 }
-                adj_list[scalar_node_name]['edges'].append({'target': op_name, 'dims': dims})
+                adj_list[scalar_node_name]['edges'].append({
+                    'target': op_name,
+                    'dims': dims
+                })
                 constant_node_names.append(scalar_node_name)
                 node_to_ancestors[scalar_node_name] = module_stack[::-1]
-                graph_node_name_to_without_suffix[scalar_node_name] = scalar_display_name
+                graph_node_name_to_without_suffix[
+                    scalar_node_name] = scalar_display_name
                 last_numeric_input_id += 1
 
         record_op_parameters(op_name, *args, **kwargs)
@@ -285,7 +325,9 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
         depth = 1
         for parent in module_stack[::-1]:
             parent_module_to_nodes[parent].append(op_name)
-            parent_module_to_depth[parent] = max(depth, 0 if parent not in parent_module_to_depth else parent_module_to_depth[parent])
+            parent_module_to_depth[parent] = max(
+                depth, 0 if parent not in parent_module_to_depth else
+                parent_module_to_depth[parent])
             depth += 1
 
         node_to_ancestors[op_name] = module_stack[::-1]
@@ -294,12 +336,12 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
 
     def extract_tensors_from_obj(obj, max_depth=5, current_depth=0):
         """Recursively extracts all tensors from any object structure.
-        
+
         Args:
             obj: Any object that might contain tensors
             max_depth: Maximum recursion depth to prevent infinite loops
             current_depth: Current recursion depth
-            
+
         Returns:
             List of tensors found in the object
         """
@@ -307,42 +349,127 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
             return []
         if current_depth >= max_depth:
             return []
-        
+
         # Base case: object is a tensor
         if isinstance(obj, torch.Tensor):
             return [obj]
-        
+
         # Recursive cases
         tensors = []
-        
+
         # Handle lists, tuples, and other iterables
         if isinstance(obj, (list, tuple, set)):
             for item in obj:
-                tensors.extend(extract_tensors_from_obj(item, max_depth, current_depth + 1))
-        
+                tensors.extend(
+                    extract_tensors_from_obj(item, max_depth,
+                                             current_depth + 1))
+
         # Handle dictionaries
         elif isinstance(obj, dict):
             for value in obj.values():
-                tensors.extend(extract_tensors_from_obj(value, max_depth, current_depth + 1))
-        
+                tensors.extend(
+                    extract_tensors_from_obj(value, max_depth,
+                                             current_depth + 1))
+
         # Handle custom objects with accessible attributes
         elif hasattr(obj, '__dict__'):
             for attr_name in dir(obj):
                 # Skip private attributes and callable methods
-                if attr_name.startswith('_') or callable(getattr(obj, attr_name, None)):
+                if attr_name.startswith('_') or callable(
+                        getattr(obj, attr_name, None)):
                     continue
-                
+
                 try:
                     attr_value = getattr(obj, attr_name)
                     # Avoid problematic attributes like gradients
                     if attr_name in ['grad', 'grad_fn', '_backward_hooks']:
                         continue
-                    tensors.extend(extract_tensors_from_obj(attr_value, max_depth, current_depth + 1))
+                    tensors.extend(
+                        extract_tensors_from_obj(attr_value, max_depth,
+                                                 current_depth + 1))
                 except:
                     # Skip attributes that cause errors
                     continue
-        
+
         return tensors
+
+    def extract_tensors_with_paths(obj,
+                                   path_prefix="",
+                                   max_depth=5,
+                                   current_depth=0):
+        """Recursively extracts all tensors with their paths from any object structure.
+
+        For dict inputs/outputs, uses the dict keys as path names.
+        For other structures, uses indices or attribute names.
+
+        Args:
+            obj: Any object that might contain tensors
+            path_prefix: Current path prefix (e.g., dict key)
+            max_depth: Maximum recursion depth to prevent infinite loops
+            current_depth: Current recursion depth
+
+        Returns:
+            List of tuples: [(tensor, path), ...] where path is a string identifier
+        """
+        if obj is None:
+            return []
+        if current_depth >= max_depth:
+            return []
+
+        # Base case: object is a tensor
+        if isinstance(obj, torch.Tensor):
+            # Ensure path is not empty (fallback to 'tensor' if path_prefix is empty)
+            path = path_prefix if path_prefix else 'tensor'
+            return [(obj, path)]
+
+        # Recursive cases
+        tensors_with_paths = []
+
+        # Handle lists, tuples, and other iterables
+        if isinstance(obj, (list, tuple, set)):
+            for i, item in enumerate(obj):
+                new_path = f"{path_prefix}[{i}]" if path_prefix else f"[{i}]"
+                tensors_with_paths.extend(
+                    extract_tensors_with_paths(item, new_path, max_depth,
+                                               current_depth + 1))
+
+        # Handle dictionaries - use key as path
+        elif isinstance(obj, dict):
+            for key, value in obj.items():
+                # Sanitize key to ensure it's a valid identifier
+                # Convert key to string and handle special characters
+                key_str = str(key)
+                # Replace invalid characters with underscore
+                key_str = ''.join(c if c.isalnum() or c == '_' else '_'
+                                  for c in key_str)
+                # Fallback if key becomes empty after sanitization
+                if not key_str:
+                    key_str = 'key'
+                new_path = f"{path_prefix}.{key_str}" if path_prefix else key_str
+                tensors_with_paths.extend(
+                    extract_tensors_with_paths(value, new_path, max_depth,
+                                               current_depth + 1))
+
+        # Handle custom objects with accessible attributes
+        elif hasattr(obj, '__dict__'):
+            for attr_name in dir(obj):
+                if attr_name.startswith('_') or callable(
+                        getattr(obj, attr_name, None)):
+                    continue
+
+                try:
+                    attr_value = getattr(obj, attr_name)
+                    if attr_name in ['grad', 'grad_fn', '_backward_hooks']:
+                        continue
+                    new_path = f"{path_prefix}.{attr_name}" if path_prefix else attr_name
+                    tensors_with_paths.extend(
+                        extract_tensors_with_paths(attr_value, new_path,
+                                                   max_depth,
+                                                   current_depth + 1))
+                except:
+                    continue
+
+        return tensors_with_paths
 
     def trace_op(op_name, output, is_implied_edge=False):
         # Because some discovered operations don't get added to the adj_list in pre_trace_op
@@ -357,9 +484,9 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
             # No tensors found in the output
             nodes_to_delete.append(op_name)
             return output
-        
+
         adj_list[op_name]['failed'] = False
-        
+
         # Tag each tensor with the source operation
         for tensor in output_tensors:
             tensor._tensor_source_name = op_name
@@ -378,19 +505,23 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
 
         def wrapped_forward(*args, **kwargs):
             nonlocal current_executing_module, forced_module_tracing_depth
-            if forced_module_tracing_depth is not None and forced_module_tracing_depth < len(module_stack):
+            if forced_module_tracing_depth is not None and forced_module_tracing_depth < len(
+                    module_stack):
                 # This module might have been overriden as a false positive
                 # (because it was at a lower depth in the named_children hierarchy)
                 return orig_forward(*args, **kwargs)
             is_traced = False
             if forced_module_tracing_depth is None and type(module) in MODULES:
                 is_traced = True
-            elif forced_module_tracing_depth is not None and forced_module_tracing_depth <= len(module_stack):
+            elif forced_module_tracing_depth is not None and forced_module_tracing_depth <= len(
+                    module_stack):
                 is_traced = True
             if is_traced:
                 current_executing_module = module
-                module_name, node_type = get_unique_op_name(type(module).__name__, module)
-                graph_node_name_to_without_suffix[module_name] = type(module).__name__
+                module_name, node_type = get_unique_op_name(
+                    type(module).__name__, module)
+                graph_node_name_to_without_suffix[module_name] = type(
+                    module).__name__
                 node_to_module_path[module_name] = type(module).__module__
                 pre_trace_op(module_name, node_type, *args, **kwargs)
                 module_stack.append(module_name)
@@ -400,8 +531,10 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 current_executing_module = None
                 return result
             else:
-                module_name, _ = get_unique_op_name(type(module).__name__, module)
-                graph_node_name_to_without_suffix[module_name] = type(module).__name__
+                module_name, _ = get_unique_op_name(
+                    type(module).__name__, module)
+                graph_node_name_to_without_suffix[module_name] = type(
+                    module).__name__
                 node_to_module_path[module_name] = type(module).__module__
                 module_stack.append(module_name)
                 record_op_parameters(module_name, *args, **kwargs)
@@ -418,7 +551,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
     def traverse_model(model, depth=0, parent=None):
         for name, module in model.named_children():
             module_hierarchy[module] = parent
-            
+
             if has_forward_method(module):
                 # Some modules like ModuleList don't have forward() implemented
                 wrap_module(module)
@@ -434,17 +567,19 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 #     self.pos_embed = nn.Parameter(torch.randn(10, 1, 32))
                 #     self.encoder_layer = nn.TransformerEncoderLayer(d_model=32, nhead=4) <- gets passed below to TransformerEncoder
                 #     self.encoder = nn.TransformerEncoder(self.encoder_layer, num_layers=2)
-                # 
+                #
                 if list(module.named_children()):
                     if has_forward_method(module):
-                        traverse_model(module, depth=depth+1, parent=module)
+                        traverse_model(module, depth=depth + 1, parent=module)
                     else:
                         # If the module doesn't have a forward method this doesn't count towards the depth, and we want to traverse its children
                         # This happens to modules like ModuleList.
                         traverse_model(module, depth=depth, parent=module)
 
     def wrap_functions():
+
         def make_wrapped(orig_func, func_name, namespace):
+
             def wrapped(*args, **kwargs):
                 nonlocal current_executing_module, current_executing_function
                 if current_executing_module is None and current_executing_function is None:
@@ -470,12 +605,13 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                     return output
                 else:
                     return orig_func(*args, **kwargs)
+
             return wrapped
 
         for func in FUNCTIONS:
             namespace = func['namespace']
             func_name = func['function']
-            
+
             if namespace == 'torch':
                 module = torch
             elif namespace == 'torch.functional':
@@ -503,7 +639,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
         for func in FUNCTIONS:
             namespace = func['namespace']
             func_name = func['function']
-            
+
             if namespace == 'torch':
                 module = torch
             elif namespace == 'torch.functional':
@@ -524,7 +660,8 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
             try:
                 orig_func = getattr(module, func_name)
                 if callable(orig_func):
-                    wrapped_func = make_wrapped(orig_func, func_name, namespace)
+                    wrapped_func = make_wrapped(orig_func, func_name,
+                                                namespace)
                     setattr(module, func_name, wrapped_func)
             except AttributeError:
                 pass
@@ -572,22 +709,27 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
             if node in adj_list:
                 del adj_list[node]
             for src_node, node_data in adj_list.items():
-                node_data['edges'] = [edge for edge in node_data['edges'] if edge['target'] != node]
-    
+                node_data['edges'] = [
+                    edge for edge in node_data['edges']
+                    if edge['target'] != node
+                ]
+
         # Step a: Identify all input nodes based on node_type
-        input_nodes = [node for node, data in adj_list.items() 
-                      if data.get('node_type') == NodeType.INPUT.value]
-        
+        input_nodes = [
+            node for node, data in adj_list.items()
+            if data.get('node_type') == NodeType.INPUT.value
+        ]
+
         # Step 1: Forward DFS from all input nodes
         forward_reachable = set()
-    
+
         def dfs_forward(node):
             if node in forward_reachable:
                 return
             forward_reachable.add(node)
             for edge in adj_list.get(node, {}).get('edges', []):
                 dfs_forward(edge['target'])
-    
+
         # Run DFS from each input node
         for input_node in input_nodes:
             dfs_forward(input_node)
@@ -598,105 +740,166 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
             for edge in data.get('edges', []):
                 target = edge['target']
                 reverse_adj_list.setdefault(target, []).append(node)
-    
+
         # Step 3: Backward DFS from output nodes
         backward_reachable = set()
-    
+
         def dfs_backward(node):
             if node in backward_reachable:
                 return
             backward_reachable.add(node)
             for source in reverse_adj_list.get(node, []):
                 dfs_backward(source)
-    
+
         for output_node in output_node_set:
             if output_node in adj_list:
                 dfs_backward(output_node)
-    
+
         # Step 4: Union of forward and backward reachable sets
         base_set = forward_reachable.union(backward_reachable)
-    
+
         # Step 5: Expand to include ancestors of base set
         expanded_set = set()
-    
+
         def dfs_full_backward(node):
             if node in expanded_set:
                 return
             expanded_set.add(node)
             for source in reverse_adj_list.get(node, []):
                 dfs_full_backward(source)
-    
+
         for node in base_set:
             dfs_full_backward(node)
-    
+
         # Step 6: Prune graph to only keep expanded set
         for node in list(adj_list.keys()):
             if node not in expanded_set:
                 del adj_list[node]
-    
-        for node_data in adj_list.values():
-            node_data['edges'] = [edge for edge in node_data['edges'] if edge['target'] in adj_list]
 
-                
+        for node_data in adj_list.values():
+            node_data['edges'] = [
+                edge for edge in node_data['edges']
+                if edge['target'] in adj_list
+            ]
+
     try:
         wrap_functions()
         traverse_model(model)
 
         inputs_wrapped = (inputs)
-        input_tensors = extract_tensors_from_obj(inputs_wrapped)
-        for i, tensor in enumerate(input_tensors):
-            input_name = f'input_{i}'
-            tensor._tensor_source_name = input_name
-            graph_node_name_to_without_suffix[input_name] = input_name
-            adj_list[input_name] = {
-                'edges': [],
-                'failed': False,
-                'node_type': NodeType.INPUT.value,
-            }
-            node_to_ancestors[input_name] = []
+        # Check if input is a dict to use keys as names
+        if isinstance(inputs, dict):
+            input_tensors_with_paths = extract_tensors_with_paths(
+                inputs_wrapped)
+            input_tensors = [tensor for tensor, _ in input_tensors_with_paths]
+            for tensor, path in input_tensors_with_paths:
+                input_name = f'input_{path}'
+                tensor._tensor_source_name = input_name
+                graph_node_name_to_without_suffix[input_name] = path
+                adj_list[input_name] = {
+                    'edges': [],
+                    'failed': False,
+                    'node_type': NodeType.INPUT.value,
+                }
+                node_to_ancestors[input_name] = []
+        else:
+            input_tensors = extract_tensors_from_obj(inputs_wrapped)
+            for i, tensor in enumerate(input_tensors):
+                input_name = f'input_{i}'
+                tensor._tensor_source_name = input_name
+                graph_node_name_to_without_suffix[input_name] = input_name
+                adj_list[input_name] = {
+                    'edges': [],
+                    'failed': False,
+                    'node_type': NodeType.INPUT.value,
+                }
+                node_to_ancestors[input_name] = []
 
         exception = None
         with torch.no_grad():
-            output = model(*inputs) if isinstance(inputs, tuple) else model(inputs)
-            output_tensors = extract_tensors_from_obj(output)
-            if output_tensors:
-                output_node_name = 'output'
-                graph_node_name_to_without_suffix['output'] = 'output'
-                
-                seen_tensors = {}
-                
-                for i, output_tensor in enumerate(output_tensors):
-                    tensor_id = id(output_tensor)
-        
-                    # If we haven't seen this tensor before, create a node
-                    if tensor_id not in seen_tensors:
-                        output_node_name = f'output_{i}'
-                        seen_tensors[tensor_id] = output_node_name
-        
-                        adj_list[output_node_name] = {
-                            'edges': [],
-                            'failed': False,
-                            'node_type': NodeType.OUTPUT.value,
-                        }
-        
-                        output_node_set.add(output_node_name)
-        
-                    # Always create the edge, pointing to the *correct* output node
-                    dims = format_dims(tuple(output_tensor.shape))
-                    target_node_name = seen_tensors[tensor_id]
-                    if hasattr(output_tensor, '_tensor_source_name'):
-                        entry = {
-                            'target': target_node_name,
-                            'dims': dims,
-                            'edge_data_id': id(output_tensor),
-                        }
-                        adj_list[output_tensor._tensor_source_name]['edges'].append(entry)
-                        if hasattr(output_tensor, '_is_implied_edge') and output_tensor._is_implied_edge:
-                            entry['is_implied_edge'] = True
-        
-                for output_tensor in output_tensors:
-                    cleanup_tensor_attributes(output)
+            output = model(
+                *inputs) if isinstance(inputs, tuple) else model(inputs)
+            # Check if output is a dict to use keys as names
+            if isinstance(output, dict):
+                output_tensors_with_paths = extract_tensors_with_paths(output)
+                if output_tensors_with_paths:
+                    seen_tensors = {}
 
+                    for output_tensor, path in output_tensors_with_paths:
+                        tensor_id = id(output_tensor)
+
+                        # If we haven't seen this tensor before, create a node
+                        if tensor_id not in seen_tensors:
+                            output_node_name = f'output_{path}'
+                            seen_tensors[tensor_id] = output_node_name
+                            graph_node_name_to_without_suffix[
+                                output_node_name] = path
+
+                            adj_list[output_node_name] = {
+                                'edges': [],
+                                'failed': False,
+                                'node_type': NodeType.OUTPUT.value,
+                            }
+
+                            output_node_set.add(output_node_name)
+
+                        # Always create the edge, pointing to the *correct* output node
+                        dims = format_dims(tuple(output_tensor.shape))
+                        target_node_name = seen_tensors[tensor_id]
+                        if hasattr(output_tensor, '_tensor_source_name'):
+                            entry = {
+                                'target': target_node_name,
+                                'dims': dims,
+                                'edge_data_id': id(output_tensor),
+                            }
+                            adj_list[output_tensor._tensor_source_name][
+                                'edges'].append(entry)
+                            if hasattr(output_tensor, '_is_implied_edge'
+                                       ) and output_tensor._is_implied_edge:
+                                entry['is_implied_edge'] = True
+
+                    cleanup_tensor_attributes(output)
+            else:
+                output_tensors = extract_tensors_from_obj(output)
+                if output_tensors:
+                    output_node_name = 'output'
+                    graph_node_name_to_without_suffix['output'] = 'output'
+
+                    seen_tensors = {}
+
+                    for i, output_tensor in enumerate(output_tensors):
+                        tensor_id = id(output_tensor)
+
+                        # If we haven't seen this tensor before, create a node
+                        if tensor_id not in seen_tensors:
+                            output_node_name = f'output_{i}'
+                            seen_tensors[tensor_id] = output_node_name
+
+                            adj_list[output_node_name] = {
+                                'edges': [],
+                                'failed': False,
+                                'node_type': NodeType.OUTPUT.value,
+                            }
+
+                            output_node_set.add(output_node_name)
+
+                        # Always create the edge, pointing to the *correct* output node
+                        dims = format_dims(tuple(output_tensor.shape))
+                        target_node_name = seen_tensors[tensor_id]
+                        if hasattr(output_tensor, '_tensor_source_name'):
+                            entry = {
+                                'target': target_node_name,
+                                'dims': dims,
+                                'edge_data_id': id(output_tensor),
+                            }
+                            adj_list[output_tensor._tensor_source_name][
+                                'edges'].append(entry)
+                            if hasattr(output_tensor, '_is_implied_edge'
+                                       ) and output_tensor._is_implied_edge:
+                                entry['is_implied_edge'] = True
+
+                    for output_tensor in output_tensors:
+                        cleanup_tensor_attributes(output)
 
     except Exception as e:
         exception = e
@@ -710,6 +913,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
     if exception is not None:
         raise exception
 
+
 def build_immediate_ancestor_map(ancestor_dict, adj_list):
     immediate_ancestor_map = {}
     for node, ancestors in ancestor_dict.items():
@@ -719,11 +923,13 @@ def build_immediate_ancestor_map(ancestor_dict, adj_list):
                 if ancestors[i] not in immediate_ancestor_map:
                     immediate_ancestor_map[ancestors[i]] = ancestors[i + 1]
     return immediate_ancestor_map
-    
+
+
 def generate_html_file_action(html_str, unique_id):
     output_file = Path.cwd() / f'torchvista_graph_{unique_id}.html'
     output_file.write_text(html_str, encoding='utf-8')
-    display(HTML(f"""
+    display(
+        HTML(f"""
         <style>
             #torchvista-container-{unique_id} {{
                 font-family: Arial, sans-serif;
@@ -755,38 +961,62 @@ def generate_html_file_action(html_str, unique_id):
         </div>
     """))
 
+
 def plot_graph(adj_list, module_info, func_info, node_to_module_path,
-               parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix,
-               ancestor_map, collapse_modules_after_depth, height, width, export_format):
+               parent_module_to_nodes, parent_module_to_depth,
+               graph_node_name_to_without_suffix, ancestor_map,
+               collapse_modules_after_depth, height, width, export_format):
     unique_id = str(uuid.uuid4())
     template_str = resources.read_text('torchvista.templates', 'graph.html')
     d3_source = resources.read_text('torchvista.assets', 'd3.min.js')
     viz_source = resources.read_text('torchvista.assets', 'viz-standalone.js')
-    jsoneditor_css = resources.read_text('torchvista.assets', 'jsoneditor-10.2.0.min.css')
-    jsoneditor_source = resources.read_text('torchvista.assets', 'jsoneditor-10.2.0.min.js')
+    jsoneditor_css = resources.read_text('torchvista.assets',
+                                         'jsoneditor-10.2.0.min.css')
+    jsoneditor_source = resources.read_text('torchvista.assets',
+                                            'jsoneditor-10.2.0.min.js')
 
     template = Template(template_str)
-        
+
     output = template.safe_substitute({
-        'adj_list_json': json.dumps(adj_list),
-        'module_info_json': json.dumps(module_info),
-        'func_info_json': json.dumps(func_info),
-        'parent_module_to_nodes_json': json.dumps(parent_module_to_nodes),
-        'parent_module_to_depth_json': json.dumps(parent_module_to_depth),
-        'graph_node_name_to_without_suffix': json.dumps(graph_node_name_to_without_suffix),
-        'ancestor_map': json.dumps(ancestor_map),
-        'unique_id': unique_id,
-        'd3_source': d3_source,
-        'viz_source': viz_source,
-        'jsoneditor_css': jsoneditor_css,
-        'jsoneditor_source': jsoneditor_source,
-        'collapse_modules_after_depth': collapse_modules_after_depth,
-        'node_to_module_path': node_to_module_path,
-        'height': f'{height}px' if (export_format not in (ExportFormat.PNG, ExportFormat.SVG)) else '0px',
-        'width': f'{width}px' if width is not None else '100%',
-        'generate_image': 'true' if export_format is ExportFormat.PNG else 'false',
-        'generate_svg': 'true' if export_format is ExportFormat.SVG else 'false',
-        'show_modular_view': 'false',
+        'adj_list_json':
+        json.dumps(adj_list),
+        'module_info_json':
+        json.dumps(module_info),
+        'func_info_json':
+        json.dumps(func_info),
+        'parent_module_to_nodes_json':
+        json.dumps(parent_module_to_nodes),
+        'parent_module_to_depth_json':
+        json.dumps(parent_module_to_depth),
+        'graph_node_name_to_without_suffix':
+        json.dumps(graph_node_name_to_without_suffix),
+        'ancestor_map':
+        json.dumps(ancestor_map),
+        'unique_id':
+        unique_id,
+        'd3_source':
+        d3_source,
+        'viz_source':
+        viz_source,
+        'jsoneditor_css':
+        jsoneditor_css,
+        'jsoneditor_source':
+        jsoneditor_source,
+        'collapse_modules_after_depth':
+        collapse_modules_after_depth,
+        'node_to_module_path':
+        node_to_module_path,
+        'height':
+        f'{height}px' if
+        (export_format not in (ExportFormat.PNG, ExportFormat.SVG)) else '0px',
+        'width':
+        f'{width}px' if width is not None else '100%',
+        'generate_image':
+        'true' if export_format is ExportFormat.PNG else 'false',
+        'generate_svg':
+        'true' if export_format is ExportFormat.SVG else 'false',
+        'show_modular_view':
+        'false',
     })
     if export_format == ExportFormat.HTML:
         generate_html_file_action(output, unique_id)
@@ -794,7 +1024,12 @@ def plot_graph(adj_list, module_info, func_info, node_to_module_path,
         display(HTML(output))
 
 
-def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_depth=1, show_non_gradient_nodes=True, forced_module_tracing_depth=None):
+def _get_demo_html_str(model,
+                       inputs,
+                       code_contents,
+                       collapse_modules_after_depth=1,
+                       show_non_gradient_nodes=True,
+                       forced_module_tracing_depth=None):
     collapse_modules_after_depth = max(collapse_modules_after_depth, 0)
     adj_list = {}
     module_info = {}
@@ -808,47 +1043,83 @@ def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_dept
     exception = None
 
     try:
-        process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, node_to_ancestors, show_non_gradient_nodes=show_non_gradient_nodes, forced_module_tracing_depth=forced_module_tracing_depth)
+        process_graph(model,
+                      inputs,
+                      adj_list,
+                      module_info,
+                      func_info,
+                      node_to_module_path,
+                      parent_module_to_nodes,
+                      parent_module_to_depth,
+                      graph_node_name_to_without_suffix,
+                      node_to_ancestors,
+                      show_non_gradient_nodes=show_non_gradient_nodes,
+                      forced_module_tracing_depth=forced_module_tracing_depth)
     except Exception as e:
         exception = e
 
     unique_id = str(uuid.uuid4())
-    graph_template_str = resources.read_text('torchvista.templates', 'graph.html')
+    graph_template_str = resources.read_text('torchvista.templates',
+                                             'graph.html')
     d3_source = resources.read_text('torchvista.assets', 'd3.min.js')
     viz_source = resources.read_text('torchvista.assets', 'viz-standalone.js')
-    jsoneditor_css = resources.read_text('torchvista.assets', 'jsoneditor-10.2.0.min.css')
-    jsoneditor_source = resources.read_text('torchvista.assets', 'jsoneditor-10.2.0.min.js')
+    jsoneditor_css = resources.read_text('torchvista.assets',
+                                         'jsoneditor-10.2.0.min.css')
+    jsoneditor_source = resources.read_text('torchvista.assets',
+                                            'jsoneditor-10.2.0.min.js')
 
     template = Template(graph_template_str)
-    
+
     graph_output = template.safe_substitute({
-        'adj_list_json': json.dumps(adj_list),
-        'module_info_json': json.dumps(module_info),
-        'func_info_json': json.dumps(func_info),
-        'parent_module_to_nodes_json': json.dumps(parent_module_to_nodes),
-        'parent_module_to_depth_json': json.dumps(parent_module_to_depth),
-        'graph_node_name_to_without_suffix': json.dumps(graph_node_name_to_without_suffix),
-        'ancestor_map': json.dumps(build_immediate_ancestor_map(node_to_ancestors, adj_list)),
-        'unique_id': unique_id,
-        'd3_source': d3_source,
-        'viz_source': viz_source,
-        'jsoneditor_css': jsoneditor_css,
-        'jsoneditor_source': jsoneditor_source,
-        'collapse_modules_after_depth': collapse_modules_after_depth,
-        'node_to_module_path': node_to_module_path,
-        'generate_image': 'false',
-        'generate_svg': 'false',
-        'height': '95%',
+        'adj_list_json':
+        json.dumps(adj_list),
+        'module_info_json':
+        json.dumps(module_info),
+        'func_info_json':
+        json.dumps(func_info),
+        'parent_module_to_nodes_json':
+        json.dumps(parent_module_to_nodes),
+        'parent_module_to_depth_json':
+        json.dumps(parent_module_to_depth),
+        'graph_node_name_to_without_suffix':
+        json.dumps(graph_node_name_to_without_suffix),
+        'ancestor_map':
+        json.dumps(build_immediate_ancestor_map(node_to_ancestors, adj_list)),
+        'unique_id':
+        unique_id,
+        'd3_source':
+        d3_source,
+        'viz_source':
+        viz_source,
+        'jsoneditor_css':
+        jsoneditor_css,
+        'jsoneditor_source':
+        jsoneditor_source,
+        'collapse_modules_after_depth':
+        collapse_modules_after_depth,
+        'node_to_module_path':
+        node_to_module_path,
+        'generate_image':
+        'false',
+        'generate_svg':
+        'false',
+        'height':
+        '95%',
     })
 
-    template_str = resources.read_text('torchvista.templates', 'demo-graph.html')
+    template_str = resources.read_text('torchvista.templates',
+                                       'demo-graph.html')
     template = Template(template_str)
     output = template.safe_substitute({
-        'graph_html': graph_output,
-        'code_contents': code_contents,
-        'error_contents': str(exception) if exception else "",
+        'graph_html':
+        graph_output,
+        'code_contents':
+        code_contents,
+        'error_contents':
+        str(exception) if exception else "",
     })
     return output, exception
+
 
 def validate_export_format(export_format):
     if export_format is None:
@@ -861,10 +1132,18 @@ def validate_export_format(export_format):
         raise ValueError(
             f"Invalid export format: {export_format}. Must be one of {valid_values}."
         )
-    
+
     return ExportFormat(export_format)
 
-def trace_model(model, inputs, show_non_gradient_nodes=True, collapse_modules_after_depth=1, forced_module_tracing_depth=None, height=800, width=None, export_format=None):
+
+def trace_model(model,
+                inputs,
+                show_non_gradient_nodes=True,
+                collapse_modules_after_depth=1,
+                forced_module_tracing_depth=None,
+                height=800,
+                width=None,
+                export_format=None):
     adj_list = {}
     module_info = {}
     func_info = {}
@@ -880,12 +1159,26 @@ def trace_model(model, inputs, show_non_gradient_nodes=True, collapse_modules_af
     exception = None
 
     try:
-        process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, node_to_ancestors, show_non_gradient_nodes=show_non_gradient_nodes, forced_module_tracing_depth=forced_module_tracing_depth)
+        process_graph(model,
+                      inputs,
+                      adj_list,
+                      module_info,
+                      func_info,
+                      node_to_module_path,
+                      parent_module_to_nodes,
+                      parent_module_to_depth,
+                      graph_node_name_to_without_suffix,
+                      node_to_ancestors,
+                      show_non_gradient_nodes=show_non_gradient_nodes,
+                      forced_module_tracing_depth=forced_module_tracing_depth)
     except Exception as e:
         exception = e
 
-    plot_graph(adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, build_immediate_ancestor_map(node_to_ancestors, adj_list), collapse_modules_after_depth, height, width, export_format)
-
+    plot_graph(adj_list, module_info, func_info, node_to_module_path,
+               parent_module_to_nodes, parent_module_to_depth,
+               graph_node_name_to_without_suffix,
+               build_immediate_ancestor_map(node_to_ancestors, adj_list),
+               collapse_modules_after_depth, height, width, export_format)
 
     if exception is not None:
         raise exception
