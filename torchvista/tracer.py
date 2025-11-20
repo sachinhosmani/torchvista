@@ -85,8 +85,7 @@ def get_all_nn_modules():
 
         # Recursively explore submodules
         if hasattr(mod, '__path__'):
-            for _, subname, ispkg in pkgutil.iter_modules(
-                    mod.__path__, mod.__name__ + "."):
+            for _, subname, ispkg in pkgutil.iter_modules(mod.__path__, mod.__name__ + "."):
                 try:
                     submod = importlib.import_module(subname)
                     walk_module(submod)
@@ -105,11 +104,9 @@ with warnings.catch_warnings():
     MODULES = get_all_nn_modules() - CONTAINER_MODULES
 
 
-def process_graph(model, inputs, adj_list, module_info, func_info,
-                  node_to_module_path, parent_module_to_nodes,
-                  parent_module_to_depth, graph_node_name_to_without_suffix,
-                  node_to_ancestors, show_non_gradient_nodes,
-                  forced_module_tracing_depth):
+def process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path,
+                  parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix,
+                  node_to_ancestors, show_non_gradient_nodes, forced_module_tracing_depth):
     last_successful_op = None
     current_op = None
     current_executing_module = None
@@ -164,8 +161,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info,
         }
 
         for attr_name in dir(module):
-            if attr_name.startswith('_') or callable(getattr(
-                    module, attr_name)):
+            if attr_name.startswith('_') or callable(getattr(module, attr_name)):
                 continue
             attr_value = getattr(module, attr_name)
             if isinstance(attr_value, (int, float, str, bool, tuple)):
@@ -186,17 +182,9 @@ def process_graph(model, inputs, adj_list, module_info, func_info,
 
         def _format(value):
             if isinstance(value, torch.Tensor):
-                return {
-                    "_type": "tensor",
-                    "shape": list(value.shape),
-                    "dtype": str(value.dtype)
-                }
+                return {"_type": "tensor", "shape": list(value.shape), "dtype": str(value.dtype)}
             elif isinstance(value, np.ndarray):
-                return {
-                    "_type": "ndarray",
-                    "shape": list(value.shape),
-                    "dtype": str(value.dtype)
-                }
+                return {"_type": "ndarray", "shape": list(value.shape), "dtype": str(value.dtype)}
             elif isinstance(value, (list, tuple)):
                 return [_format(v) for v in value]
             elif isinstance(value, dict):
@@ -218,16 +206,12 @@ def process_graph(model, inputs, adj_list, module_info, func_info,
 
     def record_op_parameters(op_name, *args, **kwargs):
         formatted_args, formatted_kwargs = capture_args(*args, **kwargs)
-        func_info[op_name] = {
-            "positional_args": formatted_args,
-            "keyword_args": formatted_kwargs
-        }
+        func_info[op_name] = {"positional_args": formatted_args, "keyword_args": formatted_kwargs}
 
     def pre_trace_op(op_name, node_type, *args, **kwargs):
         nonlocal current_op, last_successful_op, last_tensor_input_id, last_np_array_input_id, last_numeric_input_id
 
-        input_tensors = extract_tensors_from_obj(
-            args) + extract_tensors_from_obj(kwargs)
+        input_tensors = extract_tensors_from_obj(args) + extract_tensors_from_obj(kwargs)
         # This can happen in some discovered operations which don't take any inputs. For these, we don't
         # have to put nodes in the graph.
         if len(input_tensors) == 0:
@@ -241,11 +225,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info,
         for inp in input_tensors:
             if hasattr(inp, '_tensor_source_name'):
                 dims = format_dims(tuple(inp.shape))
-                entry = {
-                    'target': op_name,
-                    'dims': dims,
-                    'edge_data_id': id(inp)
-                }
+                entry = {'target': op_name, 'dims': dims, 'edge_data_id': id(inp)}
                 if hasattr(inp, '_is_implied_edge') and inp._is_implied_edge:
                     entry['is_implied_edge'] = True
                 adj_list[inp._tensor_source_name]['edges'].append(entry)
@@ -256,17 +236,11 @@ def process_graph(model, inputs, adj_list, module_info, func_info,
                     'failed': False,
                     'node_type': 'Constant',
                 }
-                entry = {
-                    'target': op_name,
-                    'dims': dims,
-                    'edge_data_id': id(inp)
-                }
+                entry = {'target': op_name, 'dims': dims, 'edge_data_id': id(inp)}
                 if hasattr(inp, '_is_implied_edge') and inp._is_implied_edge:
                     entry['is_implied_edge'] = True
-                adj_list[f'tensor_{last_tensor_input_id}']['edges'].append(
-                    entry)
-                node_to_ancestors[
-                    f'tensor_{last_tensor_input_id}'] = module_stack[::-1]
+                adj_list[f'tensor_{last_tensor_input_id}']['edges'].append(entry)
+                node_to_ancestors[f'tensor_{last_tensor_input_id}'] = module_stack[::-1]
                 constant_node_names.append(f'tensor_{last_tensor_input_id}')
                 last_tensor_input_id += 1
 
@@ -279,21 +253,19 @@ def process_graph(model, inputs, adj_list, module_info, func_info,
                         'failed': False,
                         'node_type': NodeType.CONSTANT.value,
                     }
-                    adj_list[f'np_array_{last_np_array_input_id}'][
-                        'edges'].append({
-                            'target': op_name,
-                            'dims': dims,
-                            'edge_data_id': id(inp),
-                        })
-                    constant_node_names.append(
-                        f'np_array_{last_np_array_input_id}')
-                    node_to_ancestors[
-                        f'np_array_{last_np_array_input_id}'] = module_stack[::
-                                                                             -1]
+                    adj_list[f'np_array_{last_np_array_input_id}']['edges'].append({
+                        'target':
+                        op_name,
+                        'dims':
+                        dims,
+                        'edge_data_id':
+                        id(inp),
+                    })
+                    constant_node_names.append(f'np_array_{last_np_array_input_id}')
+                    node_to_ancestors[f'np_array_{last_np_array_input_id}'] = module_stack[::-1]
                     last_np_array_input_id += 1
 
-            num_scalars = len(
-                [inp for inp in args if isinstance(inp, numbers.Number)])
+            num_scalars = len([inp for inp in args if isinstance(inp, numbers.Number)])
             if num_scalars > 0:
                 if num_scalars == 1:
                     scalar_node_name = f'scalar_{last_numeric_input_id}'
@@ -308,14 +280,10 @@ def process_graph(model, inputs, adj_list, module_info, func_info,
                     'failed': False,
                     'node_type': NodeType.CONSTANT.value,
                 }
-                adj_list[scalar_node_name]['edges'].append({
-                    'target': op_name,
-                    'dims': dims
-                })
+                adj_list[scalar_node_name]['edges'].append({'target': op_name, 'dims': dims})
                 constant_node_names.append(scalar_node_name)
                 node_to_ancestors[scalar_node_name] = module_stack[::-1]
-                graph_node_name_to_without_suffix[
-                    scalar_node_name] = scalar_display_name
+                graph_node_name_to_without_suffix[scalar_node_name] = scalar_display_name
                 last_numeric_input_id += 1
 
         record_op_parameters(op_name, *args, **kwargs)
@@ -326,24 +294,31 @@ def process_graph(model, inputs, adj_list, module_info, func_info,
         for parent in module_stack[::-1]:
             parent_module_to_nodes[parent].append(op_name)
             parent_module_to_depth[parent] = max(
-                depth, 0 if parent not in parent_module_to_depth else
-                parent_module_to_depth[parent])
+                depth,
+                0 if parent not in parent_module_to_depth else parent_module_to_depth[parent])
             depth += 1
 
         node_to_ancestors[op_name] = module_stack[::-1]
 
         return op_name
 
-    def extract_tensors_from_obj(obj, max_depth=5, current_depth=0):
+    def extract_tensors_from_obj(obj,
+                                 max_depth=5,
+                                 current_depth=0,
+                                 return_paths=False,
+                                 path_prefix=""):
         """Recursively extracts all tensors from any object structure.
 
         Args:
             obj: Any object that might contain tensors
             max_depth: Maximum recursion depth to prevent infinite loops
             current_depth: Current recursion depth
+            return_paths: If True, returns list of tuples [(tensor, path), ...]
+                         If False, returns list of tensors [tensor, ...]
+            path_prefix: Current path prefix (e.g., dict key). Only used when return_paths=True
 
         Returns:
-            List of tensors found in the object
+            List of tensors or list of (tensor, path) tuples depending on return_paths
         """
         if obj is None:
             return []
@@ -352,31 +327,65 @@ def process_graph(model, inputs, adj_list, module_info, func_info,
 
         # Base case: object is a tensor
         if isinstance(obj, torch.Tensor):
-            return [obj]
+            if return_paths:
+                # Ensure path is not empty (fallback to 'tensor' if path_prefix is empty)
+                path = path_prefix if path_prefix else 'tensor'
+                return [(obj, path)]
+            else:
+                return [obj]
 
         # Recursive cases
-        tensors = []
+        results = []
 
         # Handle lists, tuples, and other iterables
         if isinstance(obj, (list, tuple, set)):
-            for item in obj:
-                tensors.extend(
-                    extract_tensors_from_obj(item, max_depth,
-                                             current_depth + 1))
+            for i, item in enumerate(obj):
+                if return_paths:
+                    new_path = f"{path_prefix}[{i}]" if path_prefix else f"[{i}]"
+                    results.extend(
+                        extract_tensors_from_obj(item,
+                                                 max_depth,
+                                                 current_depth + 1,
+                                                 return_paths=True,
+                                                 path_prefix=new_path))
+                else:
+                    results.extend(
+                        extract_tensors_from_obj(item,
+                                                 max_depth,
+                                                 current_depth + 1,
+                                                 return_paths=False))
 
         # Handle dictionaries
         elif isinstance(obj, dict):
-            for value in obj.values():
-                tensors.extend(
-                    extract_tensors_from_obj(value, max_depth,
-                                             current_depth + 1))
+            for key, value in obj.items():
+                if return_paths:
+                    # Sanitize key to ensure it's a valid identifier
+                    # Convert key to string and handle special characters
+                    key_str = str(key)
+                    # Replace invalid characters with underscore
+                    key_str = ''.join(c if c.isalnum() or c == '_' else '_' for c in key_str)
+                    # Fallback if key becomes empty after sanitization
+                    if not key_str:
+                        key_str = 'key'
+                    new_path = f"{path_prefix}.{key_str}" if path_prefix else key_str
+                    results.extend(
+                        extract_tensors_from_obj(value,
+                                                 max_depth,
+                                                 current_depth + 1,
+                                                 return_paths=True,
+                                                 path_prefix=new_path))
+                else:
+                    results.extend(
+                        extract_tensors_from_obj(value,
+                                                 max_depth,
+                                                 current_depth + 1,
+                                                 return_paths=False))
 
         # Handle custom objects with accessible attributes
         elif hasattr(obj, '__dict__'):
             for attr_name in dir(obj):
                 # Skip private attributes and callable methods
-                if attr_name.startswith('_') or callable(
-                        getattr(obj, attr_name, None)):
+                if attr_name.startswith('_') or callable(getattr(obj, attr_name, None)):
                     continue
 
                 try:
@@ -384,92 +393,25 @@ def process_graph(model, inputs, adj_list, module_info, func_info,
                     # Avoid problematic attributes like gradients
                     if attr_name in ['grad', 'grad_fn', '_backward_hooks']:
                         continue
-                    tensors.extend(
-                        extract_tensors_from_obj(attr_value, max_depth,
-                                                 current_depth + 1))
+                    if return_paths:
+                        new_path = f"{path_prefix}.{attr_name}" if path_prefix else attr_name
+                        results.extend(
+                            extract_tensors_from_obj(attr_value,
+                                                     max_depth,
+                                                     current_depth + 1,
+                                                     return_paths=True,
+                                                     path_prefix=new_path))
+                    else:
+                        results.extend(
+                            extract_tensors_from_obj(attr_value,
+                                                     max_depth,
+                                                     current_depth + 1,
+                                                     return_paths=False))
                 except:
                     # Skip attributes that cause errors
                     continue
 
-        return tensors
-
-    def extract_tensors_with_paths(obj,
-                                   path_prefix="",
-                                   max_depth=5,
-                                   current_depth=0):
-        """Recursively extracts all tensors with their paths from any object structure.
-
-        For dict inputs/outputs, uses the dict keys as path names.
-        For other structures, uses indices or attribute names.
-
-        Args:
-            obj: Any object that might contain tensors
-            path_prefix: Current path prefix (e.g., dict key)
-            max_depth: Maximum recursion depth to prevent infinite loops
-            current_depth: Current recursion depth
-
-        Returns:
-            List of tuples: [(tensor, path), ...] where path is a string identifier
-        """
-        if obj is None:
-            return []
-        if current_depth >= max_depth:
-            return []
-
-        # Base case: object is a tensor
-        if isinstance(obj, torch.Tensor):
-            # Ensure path is not empty (fallback to 'tensor' if path_prefix is empty)
-            path = path_prefix if path_prefix else 'tensor'
-            return [(obj, path)]
-
-        # Recursive cases
-        tensors_with_paths = []
-
-        # Handle lists, tuples, and other iterables
-        if isinstance(obj, (list, tuple, set)):
-            for i, item in enumerate(obj):
-                new_path = f"{path_prefix}[{i}]" if path_prefix else f"[{i}]"
-                tensors_with_paths.extend(
-                    extract_tensors_with_paths(item, new_path, max_depth,
-                                               current_depth + 1))
-
-        # Handle dictionaries - use key as path
-        elif isinstance(obj, dict):
-            for key, value in obj.items():
-                # Sanitize key to ensure it's a valid identifier
-                # Convert key to string and handle special characters
-                key_str = str(key)
-                # Replace invalid characters with underscore
-                key_str = ''.join(c if c.isalnum() or c == '_' else '_'
-                                  for c in key_str)
-                # Fallback if key becomes empty after sanitization
-                if not key_str:
-                    key_str = 'key'
-                new_path = f"{path_prefix}.{key_str}" if path_prefix else key_str
-                tensors_with_paths.extend(
-                    extract_tensors_with_paths(value, new_path, max_depth,
-                                               current_depth + 1))
-
-        # Handle custom objects with accessible attributes
-        elif hasattr(obj, '__dict__'):
-            for attr_name in dir(obj):
-                if attr_name.startswith('_') or callable(
-                        getattr(obj, attr_name, None)):
-                    continue
-
-                try:
-                    attr_value = getattr(obj, attr_name)
-                    if attr_name in ['grad', 'grad_fn', '_backward_hooks']:
-                        continue
-                    new_path = f"{path_prefix}.{attr_name}" if path_prefix else attr_name
-                    tensors_with_paths.extend(
-                        extract_tensors_with_paths(attr_value, new_path,
-                                                   max_depth,
-                                                   current_depth + 1))
-                except:
-                    continue
-
-        return tensors_with_paths
+        return results
 
     def trace_op(op_name, output, is_implied_edge=False):
         # Because some discovered operations don't get added to the adj_list in pre_trace_op
@@ -518,10 +460,8 @@ def process_graph(model, inputs, adj_list, module_info, func_info,
                 is_traced = True
             if is_traced:
                 current_executing_module = module
-                module_name, node_type = get_unique_op_name(
-                    type(module).__name__, module)
-                graph_node_name_to_without_suffix[module_name] = type(
-                    module).__name__
+                module_name, node_type = get_unique_op_name(type(module).__name__, module)
+                graph_node_name_to_without_suffix[module_name] = type(module).__name__
                 node_to_module_path[module_name] = type(module).__module__
                 pre_trace_op(module_name, node_type, *args, **kwargs)
                 module_stack.append(module_name)
@@ -531,10 +471,8 @@ def process_graph(model, inputs, adj_list, module_info, func_info,
                 current_executing_module = None
                 return result
             else:
-                module_name, _ = get_unique_op_name(
-                    type(module).__name__, module)
-                graph_node_name_to_without_suffix[module_name] = type(
-                    module).__name__
+                module_name, _ = get_unique_op_name(type(module).__name__, module)
+                graph_node_name_to_without_suffix[module_name] = type(module).__name__
                 node_to_module_path[module_name] = type(module).__module__
                 module_stack.append(module_name)
                 record_op_parameters(module_name, *args, **kwargs)
@@ -660,8 +598,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info,
             try:
                 orig_func = getattr(module, func_name)
                 if callable(orig_func):
-                    wrapped_func = make_wrapped(orig_func, func_name,
-                                                namespace)
+                    wrapped_func = make_wrapped(orig_func, func_name, namespace)
                     setattr(module, func_name, wrapped_func)
             except AttributeError:
                 pass
@@ -709,15 +646,11 @@ def process_graph(model, inputs, adj_list, module_info, func_info,
             if node in adj_list:
                 del adj_list[node]
             for src_node, node_data in adj_list.items():
-                node_data['edges'] = [
-                    edge for edge in node_data['edges']
-                    if edge['target'] != node
-                ]
+                node_data['edges'] = [edge for edge in node_data['edges'] if edge['target'] != node]
 
         # Step a: Identify all input nodes based on node_type
         input_nodes = [
-            node for node, data in adj_list.items()
-            if data.get('node_type') == NodeType.INPUT.value
+            node for node, data in adj_list.items() if data.get('node_type') == NodeType.INPUT.value
         ]
 
         # Step 1: Forward DFS from all input nodes
@@ -777,10 +710,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info,
                 del adj_list[node]
 
         for node_data in adj_list.values():
-            node_data['edges'] = [
-                edge for edge in node_data['edges']
-                if edge['target'] in adj_list
-            ]
+            node_data['edges'] = [edge for edge in node_data['edges'] if edge['target'] in adj_list]
 
     try:
         wrap_functions()
@@ -789,8 +719,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info,
         inputs_wrapped = (inputs)
         # Check if input is a dict to use keys as names
         if isinstance(inputs, dict):
-            input_tensors_with_paths = extract_tensors_with_paths(
-                inputs_wrapped)
+            input_tensors_with_paths = extract_tensors_from_obj(inputs_wrapped, return_paths=True)
             input_tensors = [tensor for tensor, _ in input_tensors_with_paths]
             for tensor, path in input_tensors_with_paths:
                 input_name = f'input_{path}'
@@ -817,11 +746,10 @@ def process_graph(model, inputs, adj_list, module_info, func_info,
 
         exception = None
         with torch.no_grad():
-            output = model(
-                *inputs) if isinstance(inputs, tuple) else model(inputs)
+            output = model(*inputs) if isinstance(inputs, tuple) else model(inputs)
             # Check if output is a dict to use keys as names
             if isinstance(output, dict):
-                output_tensors_with_paths = extract_tensors_with_paths(output)
+                output_tensors_with_paths = extract_tensors_from_obj(output, return_paths=True)
                 if output_tensors_with_paths:
                     seen_tensors = {}
 
@@ -832,8 +760,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info,
                         if tensor_id not in seen_tensors:
                             output_node_name = f'output_{path}'
                             seen_tensors[tensor_id] = output_node_name
-                            graph_node_name_to_without_suffix[
-                                output_node_name] = path
+                            graph_node_name_to_without_suffix[output_node_name] = path
 
                             adj_list[output_node_name] = {
                                 'edges': [],
@@ -852,10 +779,9 @@ def process_graph(model, inputs, adj_list, module_info, func_info,
                                 'dims': dims,
                                 'edge_data_id': id(output_tensor),
                             }
-                            adj_list[output_tensor._tensor_source_name][
-                                'edges'].append(entry)
-                            if hasattr(output_tensor, '_is_implied_edge'
-                                       ) and output_tensor._is_implied_edge:
+                            adj_list[output_tensor._tensor_source_name]['edges'].append(entry)
+                            if hasattr(output_tensor,
+                                       '_is_implied_edge') and output_tensor._is_implied_edge:
                                 entry['is_implied_edge'] = True
 
                     cleanup_tensor_attributes(output)
@@ -892,10 +818,9 @@ def process_graph(model, inputs, adj_list, module_info, func_info,
                                 'dims': dims,
                                 'edge_data_id': id(output_tensor),
                             }
-                            adj_list[output_tensor._tensor_source_name][
-                                'edges'].append(entry)
-                            if hasattr(output_tensor, '_is_implied_edge'
-                                       ) and output_tensor._is_implied_edge:
+                            adj_list[output_tensor._tensor_source_name]['edges'].append(entry)
+                            if hasattr(output_tensor,
+                                       '_is_implied_edge') and output_tensor._is_implied_edge:
                                 entry['is_implied_edge'] = True
 
                     for output_tensor in output_tensors:
@@ -962,18 +887,15 @@ def generate_html_file_action(html_str, unique_id):
     """))
 
 
-def plot_graph(adj_list, module_info, func_info, node_to_module_path,
-               parent_module_to_nodes, parent_module_to_depth,
-               graph_node_name_to_without_suffix, ancestor_map,
+def plot_graph(adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes,
+               parent_module_to_depth, graph_node_name_to_without_suffix, ancestor_map,
                collapse_modules_after_depth, height, width, export_format):
     unique_id = str(uuid.uuid4())
     template_str = resources.read_text('torchvista.templates', 'graph.html')
     d3_source = resources.read_text('torchvista.assets', 'd3.min.js')
     viz_source = resources.read_text('torchvista.assets', 'viz-standalone.js')
-    jsoneditor_css = resources.read_text('torchvista.assets',
-                                         'jsoneditor-10.2.0.min.css')
-    jsoneditor_source = resources.read_text('torchvista.assets',
-                                            'jsoneditor-10.2.0.min.js')
+    jsoneditor_css = resources.read_text('torchvista.assets', 'jsoneditor-10.2.0.min.css')
+    jsoneditor_source = resources.read_text('torchvista.assets', 'jsoneditor-10.2.0.min.js')
 
     template = Template(template_str)
 
@@ -1007,8 +929,7 @@ def plot_graph(adj_list, module_info, func_info, node_to_module_path,
         'node_to_module_path':
         node_to_module_path,
         'height':
-        f'{height}px' if
-        (export_format not in (ExportFormat.PNG, ExportFormat.SVG)) else '0px',
+        f'{height}px' if (export_format not in (ExportFormat.PNG, ExportFormat.SVG)) else '0px',
         'width':
         f'{width}px' if width is not None else '100%',
         'generate_image':
@@ -1059,14 +980,11 @@ def _get_demo_html_str(model,
         exception = e
 
     unique_id = str(uuid.uuid4())
-    graph_template_str = resources.read_text('torchvista.templates',
-                                             'graph.html')
+    graph_template_str = resources.read_text('torchvista.templates', 'graph.html')
     d3_source = resources.read_text('torchvista.assets', 'd3.min.js')
     viz_source = resources.read_text('torchvista.assets', 'viz-standalone.js')
-    jsoneditor_css = resources.read_text('torchvista.assets',
-                                         'jsoneditor-10.2.0.min.css')
-    jsoneditor_source = resources.read_text('torchvista.assets',
-                                            'jsoneditor-10.2.0.min.js')
+    jsoneditor_css = resources.read_text('torchvista.assets', 'jsoneditor-10.2.0.min.css')
+    jsoneditor_source = resources.read_text('torchvista.assets', 'jsoneditor-10.2.0.min.js')
 
     template = Template(graph_template_str)
 
@@ -1107,16 +1025,12 @@ def _get_demo_html_str(model,
         '95%',
     })
 
-    template_str = resources.read_text('torchvista.templates',
-                                       'demo-graph.html')
+    template_str = resources.read_text('torchvista.templates', 'demo-graph.html')
     template = Template(template_str)
     output = template.safe_substitute({
-        'graph_html':
-        graph_output,
-        'code_contents':
-        code_contents,
-        'error_contents':
-        str(exception) if exception else "",
+        'graph_html': graph_output,
+        'code_contents': code_contents,
+        'error_contents': str(exception) if exception else "",
     })
     return output, exception
 
@@ -1129,9 +1043,7 @@ def validate_export_format(export_format):
 
     valid_values = [e.value for e in ExportFormat]
     if export_format not in valid_values:
-        raise ValueError(
-            f"Invalid export format: {export_format}. Must be one of {valid_values}."
-        )
+        raise ValueError(f"Invalid export format: {export_format}. Must be one of {valid_values}.")
 
     return ExportFormat(export_format)
 
@@ -1174,9 +1086,8 @@ def trace_model(model,
     except Exception as e:
         exception = e
 
-    plot_graph(adj_list, module_info, func_info, node_to_module_path,
-               parent_module_to_nodes, parent_module_to_depth,
-               graph_node_name_to_without_suffix,
+    plot_graph(adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes,
+               parent_module_to_depth, graph_node_name_to_without_suffix,
                build_immediate_ancestor_map(node_to_ancestors, adj_list),
                collapse_modules_after_depth, height, width, export_format)
 
