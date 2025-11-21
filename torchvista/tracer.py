@@ -292,16 +292,19 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
 
         return op_name
 
-    def extract_tensors_from_obj(obj, max_depth=5, current_depth=0):
+    def extract_tensors_from_obj(obj, max_depth=5, current_depth=0, return_paths=False, path_prefix=""):
         """Recursively extracts all tensors from any object structure.
         
         Args:
             obj: Any object that might contain tensors
             max_depth: Maximum recursion depth to prevent infinite loops
             current_depth: Current recursion depth
+            return_paths: If True, returns list of tuples [(tensor, path), ...]
+                         If False, returns list of tensors [tensor, ...]
+            path_prefix: Current path prefix (e.g., dict key). Only used when return_paths=True
             
         Returns:
-            List of tensors found in the object
+            List of tensors or list of (tensor, path) tuples depending on return_paths
         """
         if obj is None:
             return []
@@ -310,20 +313,41 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
         
         # Base case: object is a tensor
         if isinstance(obj, torch.Tensor):
-            return [obj]
+            if return_paths:
+                # Ensure path is not empty (fallback to 'tensor' if path_prefix is empty)
+                path = path_prefix if path_prefix else 'tensor'
+                return [(obj, path)]
+            else:
+                return [obj]
         
         # Recursive cases
-        tensors = []
+        results = []
         
         # Handle lists, tuples, and other iterables
         if isinstance(obj, (list, tuple, set)):
-            for item in obj:
-                tensors.extend(extract_tensors_from_obj(item, max_depth, current_depth + 1))
+            for i, item in enumerate(obj):
+                if return_paths:
+                    new_path = f"{path_prefix}[{i}]" if path_prefix else f"[{i}]"
+                    results.extend(extract_tensors_from_obj(item, max_depth, current_depth + 1, return_paths=True, path_prefix=new_path))
+                else:
+                    results.extend(extract_tensors_from_obj(item, max_depth, current_depth + 1, return_paths=False))
         
         # Handle dictionaries
         elif isinstance(obj, dict):
-            for value in obj.values():
-                tensors.extend(extract_tensors_from_obj(value, max_depth, current_depth + 1))
+            for key, value in obj.items():
+                if return_paths:
+                    # Sanitize key to ensure it's a valid identifier
+                    # Convert key to string and handle special characters
+                    key_str = str(key)
+                    # Replace invalid characters with underscore
+                    key_str = ''.join(c if c.isalnum() or c == '_' else '_' for c in key_str)
+                    # Fallback if key becomes empty after sanitization
+                    if not key_str:
+                        key_str = 'key'
+                    new_path = f"{path_prefix}.{key_str}" if path_prefix else key_str
+                    results.extend(extract_tensors_from_obj(value, max_depth, current_depth + 1, return_paths=True, path_prefix=new_path))
+                else:
+                    results.extend(extract_tensors_from_obj(value, max_depth, current_depth + 1, return_paths=False))
         
         # Handle custom objects with accessible attributes
         elif hasattr(obj, '__dict__'):
@@ -337,12 +361,16 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                     # Avoid problematic attributes like gradients
                     if attr_name in ['grad', 'grad_fn', '_backward_hooks']:
                         continue
-                    tensors.extend(extract_tensors_from_obj(attr_value, max_depth, current_depth + 1))
+                    if return_paths:
+                        new_path = f"{path_prefix}.{attr_name}" if path_prefix else attr_name
+                        results.extend(extract_tensors_from_obj(attr_value, max_depth, current_depth + 1, return_paths=True, path_prefix=new_path))
+                    else:
+                        results.extend(extract_tensors_from_obj(attr_value, max_depth, current_depth + 1, return_paths=False))
                 except:
                     # Skip attributes that cause errors
                     continue
         
-        return tensors
+        return results
 
     def trace_op(op_name, output, is_implied_edge=False):
         # Because some discovered operations don't get added to the adj_list in pre_trace_op
@@ -643,59 +671,112 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
         traverse_model(model)
 
         inputs_wrapped = (inputs)
-        input_tensors = extract_tensors_from_obj(inputs_wrapped)
-        for i, tensor in enumerate(input_tensors):
-            input_name = f'input_{i}'
-            tensor._tensor_source_name = input_name
-            graph_node_name_to_without_suffix[input_name] = input_name
-            adj_list[input_name] = {
-                'edges': [],
-                'failed': False,
-                'node_type': NodeType.INPUT.value,
-            }
-            node_to_ancestors[input_name] = []
+        # Check if input is a dict to use keys as names
+        if isinstance(inputs, dict):
+            input_tensors_with_paths = extract_tensors_from_obj(inputs_wrapped, return_paths=True)
+            input_tensors = [tensor for tensor, _ in input_tensors_with_paths]
+            for tensor, path in input_tensors_with_paths:
+                input_name = f'input_{path}'
+                tensor._tensor_source_name = input_name
+                graph_node_name_to_without_suffix[input_name] = path
+                adj_list[input_name] = {
+                    'edges': [],
+                    'failed': False,
+                    'node_type': NodeType.INPUT.value,
+                }
+                node_to_ancestors[input_name] = []
+        else:
+            input_tensors = extract_tensors_from_obj(inputs_wrapped)
+            for i, tensor in enumerate(input_tensors):
+                input_name = f'input_{i}'
+                tensor._tensor_source_name = input_name
+                graph_node_name_to_without_suffix[input_name] = input_name
+                adj_list[input_name] = {
+                    'edges': [],
+                    'failed': False,
+                    'node_type': NodeType.INPUT.value,
+                }
+                node_to_ancestors[input_name] = []
 
         exception = None
         with torch.no_grad():
             output = model(*inputs) if isinstance(inputs, tuple) else model(inputs)
-            output_tensors = extract_tensors_from_obj(output)
-            if output_tensors:
-                output_node_name = 'output'
-                graph_node_name_to_without_suffix['output'] = 'output'
-                
-                seen_tensors = {}
-                
-                for i, output_tensor in enumerate(output_tensors):
-                    tensor_id = id(output_tensor)
+            # Check if output is a dict to use keys as names
+            if isinstance(output, dict):
+                output_tensors_with_paths = extract_tensors_from_obj(output, return_paths=True)
+                if output_tensors_with_paths:
+                    seen_tensors = {}
+                    
+                    for output_tensor, path in output_tensors_with_paths:
+                        tensor_id = id(output_tensor)
         
-                    # If we haven't seen this tensor before, create a node
-                    if tensor_id not in seen_tensors:
-                        output_node_name = f'output_{i}'
-                        seen_tensors[tensor_id] = output_node_name
+                        # If we haven't seen this tensor before, create a node
+                        if tensor_id not in seen_tensors:
+                            output_node_name = f'output_{path}'
+                            seen_tensors[tensor_id] = output_node_name
+                            graph_node_name_to_without_suffix[output_node_name] = path
         
-                        adj_list[output_node_name] = {
-                            'edges': [],
-                            'failed': False,
-                            'node_type': NodeType.OUTPUT.value,
-                        }
+                            adj_list[output_node_name] = {
+                                'edges': [],
+                                'failed': False,
+                                'node_type': NodeType.OUTPUT.value,
+                            }
         
-                        output_node_set.add(output_node_name)
+                            output_node_set.add(output_node_name)
         
-                    # Always create the edge, pointing to the *correct* output node
-                    dims = format_dims(tuple(output_tensor.shape))
-                    target_node_name = seen_tensors[tensor_id]
-                    if hasattr(output_tensor, '_tensor_source_name'):
-                        entry = {
-                            'target': target_node_name,
-                            'dims': dims,
-                            'edge_data_id': id(output_tensor),
-                        }
-                        adj_list[output_tensor._tensor_source_name]['edges'].append(entry)
-                        if hasattr(output_tensor, '_is_implied_edge') and output_tensor._is_implied_edge:
-                            entry['is_implied_edge'] = True
+                        # Always create the edge, pointing to the *correct* output node
+                        dims = format_dims(tuple(output_tensor.shape))
+                        target_node_name = seen_tensors[tensor_id]
+                        if hasattr(output_tensor, '_tensor_source_name'):
+                            entry = {
+                                'target': target_node_name,
+                                'dims': dims,
+                                'edge_data_id': id(output_tensor),
+                            }
+                            adj_list[output_tensor._tensor_source_name]['edges'].append(entry)
+                            if hasattr(output_tensor, '_is_implied_edge') and output_tensor._is_implied_edge:
+                                entry['is_implied_edge'] = True
         
-                for output_tensor in output_tensors:
                     cleanup_tensor_attributes(output)
+            else:
+                output_tensors = extract_tensors_from_obj(output)
+                if output_tensors:
+                    output_node_name = 'output'
+                    graph_node_name_to_without_suffix['output'] = 'output'
+                    
+                    seen_tensors = {}
+                    
+                    for i, output_tensor in enumerate(output_tensors):
+                        tensor_id = id(output_tensor)
+        
+                        # If we haven't seen this tensor before, create a node
+                        if tensor_id not in seen_tensors:
+                            output_node_name = f'output_{i}'
+                            seen_tensors[tensor_id] = output_node_name
+        
+                            adj_list[output_node_name] = {
+                                'edges': [],
+                                'failed': False,
+                                'node_type': NodeType.OUTPUT.value,
+                            }
+        
+                            output_node_set.add(output_node_name)
+        
+                        # Always create the edge, pointing to the *correct* output node
+                        dims = format_dims(tuple(output_tensor.shape))
+                        target_node_name = seen_tensors[tensor_id]
+                        if hasattr(output_tensor, '_tensor_source_name'):
+                            entry = {
+                                'target': target_node_name,
+                                'dims': dims,
+                                'edge_data_id': id(output_tensor),
+                            }
+                            adj_list[output_tensor._tensor_source_name]['edges'].append(entry)
+                            if hasattr(output_tensor, '_is_implied_edge') and output_tensor._is_implied_edge:
+                                entry['is_implied_edge'] = True
+        
+                    for output_tensor in output_tensors:
+                        cleanup_tensor_attributes(output)
 
 
     except Exception as e:
