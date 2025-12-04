@@ -484,8 +484,10 @@
     const parent_module_to_nodes = ${parent_module_to_nodes_json};
     const parent_module_to_depth = ${parent_module_to_depth_json};
     const graph_node_name_to_without_suffix = ${graph_node_name_to_without_suffix};
+    const graph_node_display_names = ${graph_node_display_names};
     const ancestor_map = ${ancestor_map};
     const collapse_modules_after_depth = ${collapse_modules_after_depth};
+    const show_module_attr_names = ${show_module_attr_names};
     const node_to_module_path = ${node_to_module_path};
     const generateImage = ${generate_image};
     const generateSvg = ${generate_svg};
@@ -562,6 +564,27 @@
             currentTooltip.remove();
             currentTooltip = null;
         }
+    }
+
+    function formatModuleTypeLabel(moduleType) {
+        const ellipsis = "..";
+        const innerMaxLen = 10; // parentheses take 2 chars; total capped at 12
+        let inner = moduleType || "Module";
+        if (inner.length > innerMaxLen) {
+            const keep = Math.max(0, innerMaxLen - ellipsis.length);
+            inner = inner.slice(0, keep) + ellipsis;
+        }
+        return `Module (${inner})`;
+    }
+
+    function formatContainerDisplay(containerName) {
+        const displayName = graph_node_display_names[containerName] || graph_node_name_to_without_suffix[containerName] || containerName;
+        const moduleType = graph_node_name_to_without_suffix[containerName] || containerName;
+        if (displayName !== moduleType) {
+            // can happen when the attr name is shown and it is different from the class name
+            return `${displayName} (${moduleType})`;
+        }
+        return displayName;
     }
 
     function extractGraphData(graphData) {
@@ -936,15 +959,15 @@
                 // For collapsed containers, create a normal node instead of a subgraph
                 const errorColor = getErrorColor(containerName);
                 const fillColor = errorColor || getNodeColor(containerName);
-                const displayName = graph_node_name_to_without_suffix[containerName] || containerName;
-                dotSource += `${indent}"${containerName}" [fillcolor="${fillColor}", label="${displayName}"];\n`;
-                return;
-            }
-            
-            // Start subgraph for non-collapsed containers
-            dotSource += `${indent}subgraph cluster_${containerName} {\n`;
-            const displayName = graph_node_name_to_without_suffix[containerName] || containerName;
-            dotSource += `${indent}  label="${displayName}";\n`;
+            const displayName = formatContainerDisplay(containerName);
+            dotSource += `${indent}"${containerName}" [fillcolor="${fillColor}", label="${displayName}"];\n`;
+            return;
+        }
+        
+        // Start subgraph for non-collapsed containers
+        dotSource += `${indent}subgraph cluster_${containerName} {\n`;
+        const displayName = formatContainerDisplay(containerName);
+        dotSource += `${indent}  label="${displayName}";\n`;
             dotSource += `${indent}  fontsize=10;\n`;
             dotSource += `${indent}  style=rounded;\n`;
             dotSource += `${indent}  labelloc=t;\n`;
@@ -967,7 +990,7 @@
                     if (nodeData.node_type === "Constant") {
                         const errorColor = getErrorColor(child);
                         const fillColor = errorColor || getNodeColor(child);
-                        const childDisplayName = graph_node_name_to_without_suffix[child] || child;
+                        const childDisplayName = graph_node_display_names[child] || graph_node_name_to_without_suffix[child] || child;
                         dotSource += `${indent}  "${child}" [label="${childDisplayName}", shape=ellipse, width=0.6, height=0.25, style="filled", fillcolor="${fillColor}"];\n`;
                     } else if (nodeData.node_type === "Input" || nodeData.node_type === "Output") {
                         const errorColor = getErrorColor(child);
@@ -976,7 +999,7 @@
                     } else {
                         const errorColor = getErrorColor(child);
                         const fillColor = errorColor || getNodeColor(child);
-                        const childDisplayName = graph_node_name_to_without_suffix[child] || child;
+                        const childDisplayName = graph_node_display_names[child] || graph_node_name_to_without_suffix[child] || child;
                         dotSource += `${indent}  "${child}" [fillcolor="${fillColor}", label="${childDisplayName}"];\n`;
                     }
                 }
@@ -996,17 +1019,17 @@
                 if (data.node_type === "Constant") {
                     const errorColor = getErrorColor(node);
                     const fillColor = errorColor || getNodeColor(node);
-                    const nodeDisplayName = graph_node_name_to_without_suffix[node] || node;
+                    const nodeDisplayName = graph_node_display_names[node] || graph_node_name_to_without_suffix[node] || node;
                     dotSource += `  "${node}" [shape=ellipse, width=0.6, height=0.25, fillcolor="${fillColor}", label="${nodeDisplayName}", style="filled"];\n`;
                 } else if (data.node_type === "Input" || data.node_type === "Output") {
                     const errorColor = getErrorColor(node);
                     const fillColor = errorColor || getNodeColor(node);
-                    const nodeDisplayName = graph_node_name_to_without_suffix[node] || node;
+                    const nodeDisplayName = graph_node_display_names[node] || graph_node_name_to_without_suffix[node] || node;
                     dotSource += `  "${node}" [shape=ellipse, width=1.2, height=0.5, fillcolor="${fillColor}", label="${nodeDisplayName}", style="filled"];\n`;
                 } else {
                     const errorColor = getErrorColor(node);
                     const fillColor = errorColor || getNodeColor(node);
-                    const nodeDisplayName = graph_node_name_to_without_suffix[node] || node;
+                    const nodeDisplayName = graph_node_display_names[node] || graph_node_name_to_without_suffix[node] || node;
                     dotSource += `  "${node}" [fillcolor="${fillColor}", label="${nodeDisplayName}"];\n`;
                 }
             }
@@ -1330,7 +1353,7 @@
             .attr("transform", `translate(${x1 + 10}, ${y1 + 3})`);
             
             const text = textGroup.append("text")
-            .text(graph_node_name_to_without_suffix[clusterData.label] || clusterData.label)
+            .text(formatContainerDisplay(clusterData.label))
             .attr("text-anchor", "start")
             .attr("dominant-baseline", "hanging")
             .attr("dy", "-6")
@@ -1608,7 +1631,7 @@
         // Add labels for nodes
         nodes.append("text")
         .attr("class", "node-label_${unique_id}")
-        .text(function([nodeName]) { return graph_node_name_to_without_suffix[nodeName] || nodeName; })
+        .text(function([nodeName]) { return graph_node_display_names[nodeName] || graph_node_name_to_without_suffix[nodeName] || nodeName; })
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "central");
         
@@ -1623,7 +1646,11 @@
             return `translate(${-nodeData.width / 2 + 3}, ${nodeData.height / 2 - 3})`;
         })
         .text(function([nodeName]) {
-            return (adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName)) ? "Module" : "Tensor Op";
+            if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) {
+                const moduleType = graph_node_name_to_without_suffix[nodeName] || "Module";
+                return formatModuleTypeLabel(moduleType);
+            }
+            return "Tensor Op";
         });
 
         // Add info buttons to nodes (except input, output, constant)

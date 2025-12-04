@@ -96,7 +96,7 @@ with warnings.catch_warnings():
     MODULES = get_all_nn_modules() - CONTAINER_MODULES
 
 
-def process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, node_to_ancestors, show_non_gradient_nodes, forced_module_tracing_depth):
+def process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, node_to_ancestors, show_non_gradient_nodes, forced_module_tracing_depth, show_module_attr_names=False):
     last_successful_op = None
     current_op = None
     current_executing_module = None
@@ -116,6 +116,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
     nodes_to_delete = []
     constant_node_names = []
     output_node_set = set()
+    module_to_attr_name = {}
 
 
     def format_dims(dims):
@@ -141,6 +142,14 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
             op_type_counters[op_type] += 1
             op_name = f"{op_type}_{op_type_counters[op_type]}"
             return op_name, NodeType.OPERATION.value
+
+    def get_module_display_name(module):
+        base_name = type(module).__name__
+        if show_module_attr_names:
+            attr_name = module_to_attr_name.get(module)
+            if attr_name:
+                return attr_name
+        return base_name
 
     def get_module_info(module):
         info = {
@@ -241,6 +250,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 adj_list[f'tensor_{last_tensor_input_id}']['edges'].append(entry)
                 node_to_ancestors[f'tensor_{last_tensor_input_id}'] = module_stack[::-1]
                 constant_node_names.append(f'tensor_{last_tensor_input_id}')
+                graph_node_display_names[f'tensor_{last_tensor_input_id}'] = f'tensor_{last_tensor_input_id}'
                 last_tensor_input_id += 1
 
         if show_non_gradient_nodes:
@@ -255,6 +265,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                     adj_list[f'np_array_{last_np_array_input_id}']['edges'].append({'target': op_name, 'dims': dims, 'edge_data_id': id(inp),})
                     constant_node_names.append(f'np_array_{last_np_array_input_id}')
                     node_to_ancestors[f'np_array_{last_np_array_input_id}'] = module_stack[::-1]
+                    graph_node_display_names[f'np_array_{last_np_array_input_id}'] = f'np_array_{last_np_array_input_id}'
                     last_np_array_input_id += 1
 
             num_scalars = len([inp for inp in args if isinstance(inp, numbers.Number)])
@@ -276,6 +287,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 constant_node_names.append(scalar_node_name)
                 node_to_ancestors[scalar_node_name] = module_stack[::-1]
                 graph_node_name_to_without_suffix[scalar_node_name] = scalar_display_name
+                graph_node_display_names[scalar_node_name] = scalar_display_name
                 last_numeric_input_id += 1
 
         record_op_parameters(op_name, *args, **kwargs)
@@ -419,6 +431,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 current_executing_module = module
                 module_name, node_type = get_unique_op_name(type(module).__name__, module)
                 graph_node_name_to_without_suffix[module_name] = type(module).__name__
+                graph_node_display_names[module_name] = get_module_display_name(module)
                 node_to_module_path[module_name] = type(module).__module__
                 pre_trace_op(module_name, node_type, *args, **kwargs)
                 module_stack.append(module_name)
@@ -430,6 +443,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
             else:
                 module_name, _ = get_unique_op_name(type(module).__name__, module)
                 graph_node_name_to_without_suffix[module_name] = type(module).__name__
+                graph_node_display_names[module_name] = get_module_display_name(module)
                 node_to_module_path[module_name] = type(module).__module__
                 module_stack.append(module_name)
                 record_op_parameters(module_name, *args, **kwargs)
@@ -446,6 +460,8 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
     def traverse_model(model, depth=0, parent=None):
         for name, module in model.named_children():
             module_hierarchy[module] = parent
+            if module not in module_to_attr_name:
+                module_to_attr_name[module] = name
             
             if has_forward_method(module):
                 # Some modules like ModuleList don't have forward() implemented
@@ -480,6 +496,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                     node_to_module_path[func_name] = namespace
                     node_name, node_type = get_unique_op_name(func_name)
                     graph_node_name_to_without_suffix[node_name] = func_name
+                    graph_node_display_names[node_name] = func_name
                     node_to_module_path[node_name] = namespace
                     pre_trace_op(node_name, node_type, *args, **kwargs)
                     output = orig_func(*args, **kwargs)
@@ -679,6 +696,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 input_name = f'input_{path}'
                 tensor._tensor_source_name = input_name
                 graph_node_name_to_without_suffix[input_name] = path
+                graph_node_display_names[input_name] = path
                 adj_list[input_name] = {
                     'edges': [],
                     'failed': False,
@@ -691,6 +709,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 input_name = f'input_{i}'
                 tensor._tensor_source_name = input_name
                 graph_node_name_to_without_suffix[input_name] = input_name
+                graph_node_display_names[input_name] = input_name
                 adj_list[input_name] = {
                     'edges': [],
                     'failed': False,
@@ -715,6 +734,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                             output_node_name = f'output_{path}'
                             seen_tensors[tensor_id] = output_node_name
                             graph_node_name_to_without_suffix[output_node_name] = path
+                            graph_node_display_names[output_node_name] = path
         
                             adj_list[output_node_name] = {
                                 'edges': [],
@@ -743,6 +763,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 if output_tensors:
                     output_node_name = 'output'
                     graph_node_name_to_without_suffix['output'] = 'output'
+                    graph_node_display_names['output'] = 'output'
                     
                     seen_tensors = {}
                     
@@ -753,13 +774,15 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                         if tensor_id not in seen_tensors:
                             output_node_name = f'output_{i}'
                             seen_tensors[tensor_id] = output_node_name
-        
+                            graph_node_name_to_without_suffix[output_node_name] = output_node_name
+                            graph_node_display_names[output_node_name] = output_node_name
+
                             adj_list[output_node_name] = {
                                 'edges': [],
                                 'failed': False,
                                 'node_type': NodeType.OUTPUT.value,
                             }
-        
+
                             output_node_set.add(output_node_name)
         
                         # Always create the edge, pointing to the *correct* output node
@@ -838,7 +861,7 @@ def generate_html_file_action(html_str, unique_id):
 
 def plot_graph(adj_list, module_info, func_info, node_to_module_path,
                parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix,
-               ancestor_map, collapse_modules_after_depth, height, width, export_format):
+               graph_node_display_names, ancestor_map, collapse_modules_after_depth, height, width, export_format, show_module_attr_names):
     unique_id = str(uuid.uuid4())
     template_str = resources.read_text('torchvista.templates', 'graph.html')
     d3_source = resources.read_text('torchvista.assets', 'd3.min.js')
@@ -855,6 +878,7 @@ def plot_graph(adj_list, module_info, func_info, node_to_module_path,
         'parent_module_to_nodes_json': json.dumps(parent_module_to_nodes),
         'parent_module_to_depth_json': json.dumps(parent_module_to_depth),
         'graph_node_name_to_without_suffix': json.dumps(graph_node_name_to_without_suffix),
+        'graph_node_display_names': json.dumps(graph_node_display_names),
         'ancestor_map': json.dumps(ancestor_map),
         'unique_id': unique_id,
         'd3_source': d3_source,
@@ -863,6 +887,7 @@ def plot_graph(adj_list, module_info, func_info, node_to_module_path,
         'jsoneditor_source': jsoneditor_source,
         'collapse_modules_after_depth': collapse_modules_after_depth,
         'node_to_module_path': node_to_module_path,
+        'show_module_attr_names': 'true' if show_module_attr_names else 'false',
         'height': f'{height}px' if (export_format not in (ExportFormat.PNG, ExportFormat.SVG)) else '0px',
         'width': f'{width}px' if width is not None else '100%',
         'generate_image': 'true' if export_format is ExportFormat.PNG else 'false',
@@ -875,7 +900,7 @@ def plot_graph(adj_list, module_info, func_info, node_to_module_path,
         display(HTML(output))
 
 
-def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_depth=1, show_non_gradient_nodes=True, forced_module_tracing_depth=None):
+def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_depth=1, show_non_gradient_nodes=True, forced_module_tracing_depth=None, show_module_attr_names=False):
     collapse_modules_after_depth = max(collapse_modules_after_depth, 0)
     adj_list = {}
     module_info = {}
@@ -883,13 +908,14 @@ def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_dept
     parent_module_to_nodes = defaultdict(list)
     parent_module_to_depth = {}
     graph_node_name_to_without_suffix = {}
+    graph_node_display_names = {}
     node_to_module_path = {}
     node_to_ancestors = defaultdict(list)
 
     exception = None
 
     try:
-        process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, node_to_ancestors, show_non_gradient_nodes=show_non_gradient_nodes, forced_module_tracing_depth=forced_module_tracing_depth)
+        process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, node_to_ancestors, show_non_gradient_nodes=show_non_gradient_nodes, forced_module_tracing_depth=forced_module_tracing_depth, show_module_attr_names=show_module_attr_names)
     except Exception as e:
         exception = e
 
@@ -909,6 +935,7 @@ def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_dept
         'parent_module_to_nodes_json': json.dumps(parent_module_to_nodes),
         'parent_module_to_depth_json': json.dumps(parent_module_to_depth),
         'graph_node_name_to_without_suffix': json.dumps(graph_node_name_to_without_suffix),
+        'graph_node_display_names': json.dumps(graph_node_display_names),
         'ancestor_map': json.dumps(build_immediate_ancestor_map(node_to_ancestors, adj_list)),
         'unique_id': unique_id,
         'd3_source': d3_source,
@@ -917,6 +944,7 @@ def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_dept
         'jsoneditor_source': jsoneditor_source,
         'collapse_modules_after_depth': collapse_modules_after_depth,
         'node_to_module_path': node_to_module_path,
+        'show_module_attr_names': 'true' if show_module_attr_names else 'false',
         'generate_image': 'false',
         'generate_svg': 'false',
         'height': '95%',
@@ -945,13 +973,14 @@ def validate_export_format(export_format):
     
     return ExportFormat(export_format)
 
-def trace_model(model, inputs, show_non_gradient_nodes=True, collapse_modules_after_depth=1, forced_module_tracing_depth=None, height=800, width=None, export_format=None):
+def trace_model(model, inputs, show_non_gradient_nodes=True, collapse_modules_after_depth=1, forced_module_tracing_depth=None, height=800, width=None, export_format=None, show_module_attr_names=False):
     adj_list = {}
     module_info = {}
     func_info = {}
     parent_module_to_nodes = defaultdict(list)
     parent_module_to_depth = {}
     graph_node_name_to_without_suffix = {}
+    graph_node_display_names = {}
     node_to_module_path = {}
     node_to_ancestors = defaultdict(list)
     collapse_modules_after_depth = max(collapse_modules_after_depth, 0)
@@ -961,11 +990,11 @@ def trace_model(model, inputs, show_non_gradient_nodes=True, collapse_modules_af
     exception = None
 
     try:
-        process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, node_to_ancestors, show_non_gradient_nodes=show_non_gradient_nodes, forced_module_tracing_depth=forced_module_tracing_depth)
+        process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, node_to_ancestors, show_non_gradient_nodes=show_non_gradient_nodes, forced_module_tracing_depth=forced_module_tracing_depth, show_module_attr_names=show_module_attr_names)
     except Exception as e:
         exception = e
 
-    plot_graph(adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, build_immediate_ancestor_map(node_to_ancestors, adj_list), collapse_modules_after_depth, height, width, export_format)
+    plot_graph(adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, build_immediate_ancestor_map(node_to_ancestors, adj_list), collapse_modules_after_depth, height, width, export_format, show_module_attr_names)
 
 
     if exception is not None:
