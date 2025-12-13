@@ -351,9 +351,23 @@
             color: white;
             text-decoration: none;
             border-radius: 4px;
+            margin-right: 8px;
         }
 
         #png-download-button_${unique_id}:hover {
+            background-color: #0056b3;
+        }
+
+        #png-save-button_${unique_id} {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        #png-save-button_${unique_id}:hover {
             background-color: #0056b3;
         }
 
@@ -371,9 +385,23 @@
             color: white;
             text-decoration: none;
             border-radius: 4px;
+            margin-right: 8px;
         }
 
         #svg-download-button_${unique_id}:hover {
+            background-color: #0056b3;
+        }
+
+        #svg-save-button_${unique_id} {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        #svg-save-button_${unique_id}:hover {
             background-color: #0056b3;
         }
 
@@ -1240,22 +1268,28 @@
                 canvas.toBlob(resolve, 'image/png');
             });
             
-            const pngUrl = URL.createObjectURL(pngBlob);
+        const pngUrl = URL.createObjectURL(pngBlob);
+        
+        // Create link container
+        const parent = d3.select("#graph-container_${unique_id}").node().parentNode;
+        const linkContainer = d3.select(parent)
+            .insert("div", "#graph-container_${unique_id}")
+            .attr("id", "png-link-container_${unique_id}");
+        
+        linkContainer.append("a")
+            .attr("href", pngUrl)
+            .attr("target", "_blank")
+            .attr("id", "png-download-button_${unique_id}")
+            .text("View PNG in New Tab");
+
+        linkContainer.append("a")
+            .attr("href", pngUrl)
+            .attr("download", `torchvista_graph_${unique_id}.png`)
+            .attr("id", "png-save-button_${unique_id}")
+            .text("Download PNG");
             
-            // Create link container
-            const parent = d3.select("#graph-container_${unique_id}").node().parentNode;
-            const linkContainer = d3.select(parent)
-                .insert("div", "#graph-container_${unique_id}")
-                .attr("id", "png-link-container_${unique_id}");
-            
-            linkContainer.append("a")
-                .attr("href", pngUrl)
-                .attr("target", "_blank")
-                .attr("id", "png-download-button_${unique_id}")
-                .text("View PNG in New Tab");
-                
-            URL.revokeObjectURL(svgUrl);
-        }
+        URL.revokeObjectURL(svgUrl);
+    }
         
         generatePNG().catch(error => {
             console.error("Error generating PNG:", error);
@@ -1282,6 +1316,12 @@
             .attr("target", "_blank")
             .attr("id", "svg-download-button_${unique_id}")
             .text("View SVG in New Tab");
+
+        linkContainer.append("a")
+            .attr("href", svgUrl)
+            .attr("download", `torchvista_graph_${unique_id}.svg`)
+            .attr("id", "svg-save-button_${unique_id}")
+            .text("Download SVG");
     }
 
     function createGraph(graphvizData) {

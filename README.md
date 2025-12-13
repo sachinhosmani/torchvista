@@ -78,7 +78,8 @@ trace_model(model, inputs)
         show_non_gradient_nodes=True, # optional
         forced_module_tracing_depth=None, # optional
         height=800, # optional
-        export_format=None # optional
+        export_format=None, # optional
+        export_path=None, # optional
     )
 
 ### Parameters
@@ -121,3 +122,11 @@ trace_model(model, inputs)
   - 'html'
 - **Category:** Visual control
 - **Default:** `None` (graph gets shown in the notebook itself, and nothing is exported)
+
+#### `export_path` (`str | PathLike`, optional)
+- Path for exported output (supported ONLY for HTML format).
+- If the path has an extension, it is used as the filename; if it is a directory, an auto name is generated (`torchvista_graph_<uuid>.html`).
+- If `export_format` is omitted but `export_path` is set, HTML is assumed.
+- PNG/SVG exports do not support custom paths currently and are only available for viewing in new tab or downloading via click.
+- **Category:** Visual control
+- **Default:** `None` (falls back to current working directory and generated filename)

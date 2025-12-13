@@ -824,9 +824,25 @@ def build_immediate_ancestor_map(ancestor_dict, adj_list):
                     immediate_ancestor_map[ancestors[i]] = ancestors[i + 1]
     return immediate_ancestor_map
     
-def generate_html_file_action(html_str, unique_id):
-    output_file = Path.cwd() / f'torchvista_graph_{unique_id}.html'
+def generate_html_file_action(html_str, unique_id, export_path=None):
+    renamed_to_html = False
+    if export_path is not None:
+        base_path = Path(export_path).expanduser()
+        if base_path.suffix.lower() in {".png", ".svg"}:
+            base_path = base_path.with_suffix(".html")
+            renamed_to_html = True
+        if base_path.suffix:
+            output_file = base_path
+        else:
+            output_file = base_path / f'torchvista_graph_{unique_id}.html'
+    else:
+        output_file = Path.cwd() / f'torchvista_graph_{unique_id}.html'
+
+    output_file.parent.mkdir(parents=True, exist_ok=True)
     output_file.write_text(html_str, encoding='utf-8')
+    resolved_output = output_file.resolve()
+    if renamed_to_html:
+        print(f"[warning] export_path had a non-HTML extension; saved as {resolved_output}")
     display(HTML(f"""
         <style>
             #torchvista-container-{unique_id} {{
@@ -854,14 +870,14 @@ def generate_html_file_action(html_str, unique_id):
         </style>
         <div id="torchvista-container-{unique_id}">
             <div id="torchvista-message-{unique_id}">
-                <b>✅ Wrote to <code>{output_file.name}</code> in <code>{output_file.parent}</code></b>
+                <b>Saved as <code>{resolved_output}</code></b>
             </div>
         </div>
     """))
 
 def plot_graph(adj_list, module_info, func_info, node_to_module_path,
                parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix,
-               graph_node_display_names, ancestor_map, collapse_modules_after_depth, height, width, export_format, show_module_attr_names):
+               graph_node_display_names, ancestor_map, collapse_modules_after_depth, height, width, export_format, show_module_attr_names, export_path=None):
     unique_id = str(uuid.uuid4())
     template_str = resources.read_text('torchvista.templates', 'graph.html')
     d3_source = resources.read_text('torchvista.assets', 'd3.min.js')
@@ -895,7 +911,7 @@ def plot_graph(adj_list, module_info, func_info, node_to_module_path,
         'show_modular_view': 'false',
     })
     if export_format == ExportFormat.HTML:
-        generate_html_file_action(output, unique_id)
+        generate_html_file_action(output, unique_id, export_path=export_path)
     else:
         display(HTML(output))
 
@@ -973,7 +989,7 @@ def validate_export_format(export_format):
     
     return ExportFormat(export_format)
 
-def trace_model(model, inputs, show_non_gradient_nodes=True, collapse_modules_after_depth=1, forced_module_tracing_depth=None, height=800, width=None, export_format=None, show_module_attr_names=False):
+def trace_model(model, inputs, show_non_gradient_nodes=True, collapse_modules_after_depth=1, forced_module_tracing_depth=None, height=800, width=None, export_format=None, show_module_attr_names=False, export_path=None):
     adj_list = {}
     module_info = {}
     func_info = {}
@@ -985,7 +1001,10 @@ def trace_model(model, inputs, show_non_gradient_nodes=True, collapse_modules_af
     node_to_ancestors = defaultdict(list)
     collapse_modules_after_depth = max(collapse_modules_after_depth, 0)
 
-    export_format = validate_export_format(export_format)
+    if export_format is None and export_path is not None:
+        export_format = ExportFormat.HTML
+    else:
+        export_format = validate_export_format(export_format)
 
     exception = None
 
@@ -994,7 +1013,10 @@ def trace_model(model, inputs, show_non_gradient_nodes=True, collapse_modules_af
     except Exception as e:
         exception = e
 
-    plot_graph(adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, build_immediate_ancestor_map(node_to_ancestors, adj_list), collapse_modules_after_depth, height, width, export_format, show_module_attr_names)
+    if export_path is not None and export_format in (ExportFormat.PNG, ExportFormat.SVG):
+        print(f"[error] Custom export paths are only supported for HTML exports. Cannot write PNG or SVG to a custom path: {export_path}")
+
+    plot_graph(adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, build_immediate_ancestor_map(node_to_ancestors, adj_list), collapse_modules_after_depth, height, width, export_format, show_module_attr_names, export_path=export_path)
 
 
     if exception is not None:
