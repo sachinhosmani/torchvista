@@ -961,6 +961,7 @@ def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_dept
         'collapse_modules_after_depth': collapse_modules_after_depth,
         'node_to_module_path': node_to_module_path,
         'show_module_attr_names': 'true' if show_module_attr_names else 'false',
+        'show_modular_view': 'false',
         'generate_image': 'false',
         'generate_svg': 'false',
         'height': '95%',

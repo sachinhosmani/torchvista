@@ -16,6 +16,7 @@ def test_all_models():
             kwargs["collapse_modules_after_depth"] = items["collapse_modules_after_depth"]
         kwargs["show_non_gradient_nodes"] = items["show_non_gradient_nodes"]
         kwargs["forced_module_tracing_depth"] = items["forced_module_tracing_depth"]
+        kwargs["show_module_attr_names"] = items["show_module_attr_names"]
         # error_contents = items["error_contents"]
         print(f"Testing {name}...")
         
