@@ -514,6 +514,7 @@
     const graph_node_name_to_without_suffix = ${graph_node_name_to_without_suffix};
     const graph_node_display_names = ${graph_node_display_names};
     const ancestor_map = ${ancestor_map};
+    const repeat_containers = new Set(${repeat_containers});
     const collapse_modules_after_depth = ${collapse_modules_after_depth};
     const show_module_attr_names = ${show_module_attr_names};
     const node_to_module_path = ${node_to_module_path};
@@ -541,6 +542,10 @@
         } else {
             setTimeout(function() { waitForLibs(callback) }, 400);
         }
+    }
+
+    function isRepeatNode(nodeName) {
+        return repeat_containers.has(nodeName);
     }
 
     let currentTooltip = null;
@@ -606,7 +611,11 @@
     }
 
     function formatContainerDisplay(containerName) {
-        const displayName = graph_node_display_names[containerName] || graph_node_name_to_without_suffix[containerName] || containerName;
+        const isRepeat = repeat_containers.has(containerName);
+        let displayName = graph_node_display_names[containerName] || graph_node_name_to_without_suffix[containerName] || containerName;
+        if (isRepeat) {
+            return displayName;
+        }
         const moduleType = graph_node_name_to_without_suffix[containerName] || containerName;
         if (displayName !== moduleType) {
             // can happen when the attr name is shown and it is different from the class name
@@ -874,10 +883,13 @@
                 if (nodeData.node_type === "Input") return "#FF9AFF";
                 if (nodeData.node_type === "Constant") return "#EBEBEB";
                 if (nodeData.node_type === "Output") return "#74e071";
+                if (repeat_containers.has(nodeName)) return "#0C8346";
                 if (nodeData.node_type === "Module") return "#8BDEDB";
                 if (nodeData.node_type === "Operation") return "#FEBC5A";
             }
-            if (collapsedContainers.has(nodeName)) return "#8BDEDB";
+            if (collapsedContainers.has(nodeName)) {
+                return "#8BDEDB";
+            }
             return "#FEBC5A";
         }
 
@@ -981,6 +993,7 @@
         // Process containers recursively
         function processContainer(containerName, level = 0) {
             const indent = ' '.repeat(level * 2);
+            const isRepeat = isRepeatNode(containerName);
             
             // Check if this container is collapsed (appears as a regular node)
             if (collapsedContainers.has(containerName)) {
@@ -997,7 +1010,15 @@
         const displayName = formatContainerDisplay(containerName);
         dotSource += `${indent}  label="${displayName}";\n`;
             dotSource += `${indent}  fontsize=10;\n`;
-            dotSource += `${indent}  style=rounded;\n`;
+            dotSource += `${indent}  style="${isRepeat ? 'rounded,dashed' : 'rounded'}";\n`;
+            if (isRepeat) {
+                dotSource += `${indent}  color="#0C8346";\n`;
+                dotSource += `${indent}  fontcolor="#0C8346";\n`;
+            } else {
+                // Prevent Graphviz from inheriting repeat container colors into children
+                dotSource += `${indent}  color="black";\n`;
+                dotSource += `${indent}  fontcolor="#333";\n`;
+            }
             dotSource += `${indent}  labelloc=t;\n`;
             dotSource += `${indent}  labeljust=l;\n`;
 
@@ -1072,7 +1093,6 @@
                 let repTarget = edge.target;
                 let lca = null;
 
-                debugger;
                 if (show_modular_view) {
                     lca = findLCA(node, edge.target);
                     repSource = findRepresentativeNode(lca, node);
@@ -1207,8 +1227,15 @@
         
         for (const container of containerNodes) {
             const depth = getContainerDepth(container);
-            if (depth >= collapse_modules_after_depth) {
+            if (depth >= collapse_modules_after_depth && !isRepeatNode(container)) {
                 collapsedContainers.add(container);
+            }
+        }
+
+        // Ensure repeat containers stay expanded
+        for (const container of containerNodes) {
+            if (isRepeatNode(container)) {
+                collapsedContainers.delete(container);
             }
         }
     }
@@ -1369,6 +1396,7 @@
             const group = d3.select(this);
 
             const hasFailedNodes = containersWithFailedNodes.has(clusterName);
+            const isRepeat = isRepeatNode(clusterName);
             if (hasFailedNodes) {
                 group.classed("error_${unique_id}", true);
             }
@@ -1383,8 +1411,9 @@
             .attr("width", x2 - x1)
             .attr("height", y2 - y1)
             .attr("fill-opacity", 0.0)
-            .attr("stroke", "black")
-            .attr("stroke-width", 1)
+            .attr("stroke", isRepeat ? "#0C8346" : "black")
+            .attr("stroke-dasharray", isRepeat ? "3 2" : null)
+            .attr("stroke-width", isRepeat ? 1.2 : 1)
             .attr("rx", 5)
             .attr("ry", 5);
                 
@@ -1398,33 +1427,35 @@
             .attr("dominant-baseline", "hanging")
             .attr("dy", "-6")
             .attr("font-size", 7)
-            .attr("fill", "#333")
+            .attr("fill", isRepeat ? "#0C8346" : "#333")
             .attr("stroke", "#f3f3eb")
             .attr("stroke-width", "8px")
             .attr("paint-order", "stroke")
             .attr("stroke-linejoin", "round");
                         
-            // Add collapse/expand button
-            const collapseButton = group.append("circle")
-            .attr("class", "collapse-button_${unique_id}")
-            .attr("cx", x1 + 10)
-            .attr("cy", y1 + 10)
-            .attr("r", 5.5);
+            if (!isRepeatNode(clusterName)) {
+                // Add collapse/expand button
+                const collapseButton = group.append("circle")
+                .attr("class", "collapse-button_${unique_id}")
+                .attr("cx", x1 + 10)
+                .attr("cy", y1 + 10)
+                .attr("r", 5.5);
 
-            group.append("text")
-            .attr("class", "collapse-icon_${unique_id}")
-            .attr("x", x1 + 10)
-            .attr("y", y1 + 10)
-            .attr("text-anchor", "middle")
-            .attr("dominant-baseline", "middle")
-            .attr("font-size", "10px")
-            .text("-");
+                group.append("text")
+                .attr("class", "collapse-icon_${unique_id}")
+                .attr("x", x1 + 10)
+                .attr("y", y1 + 10)
+                .attr("text-anchor", "middle")
+                .attr("dominant-baseline", "middle")
+                .attr("font-size", "10px")
+                .text("-");
 
-            // Add custom tooltip events
-            collapseButton.on("mouseenter", function() {
-                showTooltip(this, "Collapse module");
-            })
-            .on("mouseleave", removeTooltip);
+                // Add custom tooltip events
+                collapseButton.on("mouseenter", function() {
+                    showTooltip(this, "Collapse module");
+                })
+                .on("mouseleave", removeTooltip);
+            }
         });
 
         // Add click event handler for collapse buttons
@@ -1432,6 +1463,7 @@
         .on("click", function(event, [clusterName, clusterData]) {
             event.stopPropagation(); // Prevent event from bubbling to SVG
             removeTooltip();
+            if (isRepeatNode(clusterName)) return;
             // Collapse the container
             collapsedContainers.add(clusterName);
             
@@ -1739,7 +1771,7 @@
         // Add expand buttons to all module nodes (including non-expandable ones)
         inner.selectAll(".node_${unique_id}")
         .filter(function([nodeName]) {
-            return (adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || collapsedContainers.has(nodeName);
+            return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || collapsedContainers.has(nodeName)) && !isRepeatNode(nodeName);
         })
         .each(function([nodeName, nodeData]) {
             const nodeGroup = d3.select(this);

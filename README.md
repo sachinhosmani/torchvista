@@ -75,13 +75,15 @@ trace_model(model, inputs)
 trace_model(
     model,
     inputs,
-    collapse_modules_after_depth=1,
     show_non_gradient_nodes=True,
+    collapse_modules_after_depth=1,
     forced_module_tracing_depth=None,
     height=800,
     width=None,
     export_format=None,
+    show_module_attr_names=False,
     export_path=None,
+    show_compressed_view=False,
 )
 ```
 
@@ -89,10 +91,12 @@ trace_model(
 | --- | --- | --- | --- | --- |
 | `model` | `torch.nn.Module` | — | Tracing | Model instance to visualize. |
 | `inputs` | `Any` | — | Tracing | Input(s) forwarded into the model; pass a single input or a tuple. |
-| `collapse_modules_after_depth` | `int` | `1` | Visual | Depth to initially expand nested modules; `0` collapses everything (nodes can still be expanded interactively). |
 | `show_non_gradient_nodes` | `bool` | `True` | Visual | Display nodes for constants and other values outside the gradient graph. |
+| `collapse_modules_after_depth` | `int` | `1` | Visual | Depth to initially expand nested modules; `0` collapses everything (nodes can still be expanded interactively). |
 | `forced_module_tracing_depth` | `int` | `None` | Tracing | Maximum depth of module internals to trace; `None` traces only user-defined modules. |
 | `height` | `int` | `800` | Visual | Canvas height in pixels. |
 | `width` | `int \| str` | `None` | Visual | Canvas width; accepts pixels or percentages; defaults to full available width when omitted. |
 | `export_format` | `str` | `None` | Export | Optional export format: `png`, `svg`, or `html` if exporting graph as a file. Otherwise, by default the graph is shown within the notebook.|
+| `show_module_attr_names` | `bool` | `False` | Visual | Display attribute names for modules when available instead of just class names. |
 | `export_path` | `str` | `None` | Export | Custom path if exporting as a file. **Only HTML format** is currently supported with custom export paths. If only file name is specified, it will be created inside the present working directory. |
+| `show_compressed_view` | `bool` | `False` | Visual | Compress the graph by showing repeating nodes of the same type with identical input and output dims in single "repeat" blocks. This feature currently only recognises repeating nodes with `Sequential` modules. |

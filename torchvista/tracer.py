@@ -96,7 +96,7 @@ with warnings.catch_warnings():
     MODULES = get_all_nn_modules() - CONTAINER_MODULES
 
 
-def process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, node_to_ancestors, show_non_gradient_nodes, forced_module_tracing_depth, show_module_attr_names=False):
+def process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, node_to_ancestors, repeat_containers, show_non_gradient_nodes, forced_module_tracing_depth, show_module_attr_names=False, show_compressed_view=False):
     last_successful_op = None
     current_op = None
     current_executing_module = None
@@ -682,7 +682,535 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
         for node_data in adj_list.values():
             node_data['edges'] = [edge for edge in node_data['edges'] if edge['target'] in adj_list]
 
+    def transform_to_nested_graph(adj_list, node_to_ancestors):
+        """
+        Transforms a flat adjacency list into a nested graph structure based on node ancestry,
+        while preserving all original node and edge information.
+        
+        Args:
+            adj_list: Dict with structure {node_name: {'edges': [...], 'failed': bool, 'node_type': str}}
+            node_to_ancestors: Dict with structure {node_name: [ancestor1, ancestor2, ...]}
+                            where ancestors are ordered from immediate parent to root
+        
+        Returns:
+            Nested dict where each node can contain 'subgraphs' (child modules)
+        """
+        
+        # Utility function to get the element in the list before the target, if one is present
+        def get_element_before(lst, target):
+            try:
+                index = lst.index(target)
+                return lst[index - 1] if index - 1 >= 0 else None
+            except ValueError:
+                return None
+
+        # Finds the lowest common ancestor between 2 paths, assuming that the paths
+        # are ordered from bottom to top (immediate parent first)
+        def find_lca(path1, path2):
+            lca = None
+            for a, b in zip(path1[::-1], path2[::-1]):
+                if a == b:
+                    lca = a
+                else:
+                    break
+            return lca
+
+        # Given two nodes, determines the correct pair of "representative" nodes
+        # and returns them for linking in the nested graph
+        def get_representative_nodes(node1, node2):
+            ancestry1, ancestry2 = node_to_ancestors.get(node1, []), node_to_ancestors.get(node2, [])
+            
+            # Special cases when the LCA cannot be found
+            if not ancestry1 and not ancestry2:
+                return node1, node2
+            elif not ancestry1:
+                return node1, ancestry2[-1]
+            elif not ancestry2:
+                return ancestry1[-1], node2
+            else:
+                # When LCA is likely to be present
+                lca = find_lca(ancestry1, ancestry2)
+                if not lca:
+                    # This can happen if the 2 nodes have completely disjoint hierarchy paths
+                    return ancestry1[-1], ancestry2[-1]
+        
+                # The node just below the LCA in each node serves as the "representative" node
+                representative_node1 = get_element_before(ancestry1, lca)
+                representative_node2 = get_element_before(ancestry2, lca)
                 
+                # If the two nodes are in the same subtree at the same level, they
+                # will act as their own representative nodes
+                representative_node1 = node1 if representative_node1 is None else representative_node1
+                representative_node2 = node2 if representative_node2 is None else representative_node2
+                
+                return representative_node1, representative_node2
+
+        # Track per-node input/output dims so we can attach them to containers too
+        node_input_dims = defaultdict(list)
+        node_output_dims = defaultdict(list)
+
+        # Step 1: Create the basic structure for all nodes (including ancestors)
+        # Collect all unique nodes (actual nodes + all ancestors)
+        all_nodes = set(adj_list.keys())
+        for ancestors in node_to_ancestors.values():
+            all_nodes.update(ancestors)
+        
+        # Initialize nested structure for each node
+        nodes = {}
+        for node in all_nodes:
+            if node in adj_list:
+                # Copy all original data from adj_list
+                nodes[node] = {
+                    'edges': [],
+                    'subgraphs': {},
+                    'failed': adj_list[node].get('failed', False),
+                    'node_type': adj_list[node].get('node_type', NodeType.MODULE.value),
+                }
+            else:
+                # For ancestor nodes not in adj_list (container modules)
+                nodes[node] = {
+                    'edges': [],
+                    'subgraphs': {},
+                    'failed': False,
+                    'node_type': NodeType.MODULE.value,
+                }
+        
+        # Step 2: Process edges and redirect them to representative nodes
+        for source_node, node_data in adj_list.items():
+            for edge in node_data['edges']:
+                target_node = edge['target']
+                
+                # Get representative nodes for this edge
+                rep_source, rep_target = get_representative_nodes(source_node, target_node)
+
+                dims = edge.get('dims', '')
+                node_output_dims[source_node].append(dims)
+                node_input_dims[target_node].append(dims)
+                for anc in node_to_ancestors.get(source_node, []):
+                    node_output_dims[anc].append(dims)
+                for anc in node_to_ancestors.get(target_node, []):
+                    node_input_dims[anc].append(dims)
+                
+                # Create new edge dict with all original information
+                new_edge = {
+                    'target': rep_target,
+                    'dims': dims,
+                    'edge_data_id': edge.get('edge_data_id'),
+                }
+                
+                # Preserve optional edge attributes
+                if 'is_implied_edge' in edge:
+                    new_edge['is_implied_edge'] = edge['is_implied_edge']
+                
+                # Add edge to representative source node
+                nodes[rep_source]['edges'].append(new_edge)
+
+        # Attach aggregated dim info to every node (including containers)
+        for node_name, node_data in nodes.items():
+            if node_name in node_input_dims:
+                node_data['input_dims'] = sorted(node_input_dims[node_name])
+            else:
+                node_data['input_dims'] = []
+            if node_name in node_output_dims:
+                node_data['output_dims'] = sorted(node_output_dims[node_name])
+            else:
+                node_data['output_dims'] = []
+        
+        # Step 3: Build the nested hierarchy
+        # Keep track of the nodes that stay at root level
+        root = dict(nodes)
+        
+        # Nest each node under its immediate parent
+        for node, ancestors in node_to_ancestors.items():
+            if ancestors:
+                # Nest this node and all its ancestors appropriately
+                for child, parent in zip([node] + list(ancestors[:-1]), ancestors):
+                    if child in nodes and parent in nodes:
+                        # Move child into parent's subgraphs
+                        nodes[parent]['subgraphs'][child] = nodes[child]
+                        # Remove from root level
+                        root.pop(child, None)
+        
+        return root
+    
+    def transform_to_unnested_graph(nested_graph, node_to_ancestors):
+        """
+        Reverses ``transform_to_nested_graph`` by flattening a nested graph back into an
+        adjacency list whose nodes are the deepest leaves. Edges between containers are
+        redirected to the ingress/egress leaves of those containers.
+        
+        Args:
+            nested_graph: Nested dict structure produced by ``transform_to_nested_graph``.
+            node_to_ancestors: Existing ancestor map for leaf nodes (used for context).
+        
+        Returns:
+            A tuple of (unnested_adj_list, rebuilt_ancestors) where rebuilt_ancestors
+            includes synthesized containers (e.g. repeat_*).
+        """
+        # Collect references to every node in the nested graph for quick lookup and rebuild
+        # the ancestor map (immediate parent first) including any synthesized containers.
+        all_nodes = {}
+        rebuilt_ancestors = defaultdict(list)
+
+        def collect_nodes(subgraph, ancestors):
+            for node_name, node_data in subgraph.items():
+                all_nodes[node_name] = node_data
+                rebuilt_ancestors[node_name] = list(reversed(ancestors))
+                collect_nodes(node_data.get('subgraphs', {}), ancestors + [node_name])
+
+        collect_nodes(nested_graph, [])
+
+        # Initialize the flat adjacency list for every leaf node
+        unnested_adj_list = {}
+        for node_name, node_data in all_nodes.items():
+            if not node_data.get('subgraphs'):
+                unnested_adj_list[node_name] = {
+                    'edges': [],
+                    'failed': node_data.get('failed', False),
+                    'node_type': node_data.get('node_type', NodeType.MODULE.value),
+                }
+
+        # Memoized ingress/egress lookups for each node
+        ingress_cache = {}
+        egress_cache = {}
+
+        def _internal_edge_counts(subgraph):
+            incoming = defaultdict(int)
+            outgoing = defaultdict(int)
+            for child_name, child_data in subgraph.items():
+                for edge in child_data.get('edges', []):
+                    target = edge['target']
+                    if target in subgraph:
+                        outgoing[child_name] += 1
+                        incoming[target] += 1
+            for child in subgraph:
+                incoming.setdefault(child, 0)
+                outgoing.setdefault(child, 0)
+            return incoming, outgoing
+
+        def get_ingress_leaves(node_name):
+            if node_name in ingress_cache:
+                return ingress_cache[node_name]
+
+            node_data = all_nodes.get(node_name, {})
+            subgraph = node_data.get('subgraphs', {})
+
+            if not subgraph:
+                ingress_cache[node_name] = [node_name]
+                return ingress_cache[node_name]
+
+            incoming, _ = _internal_edge_counts(subgraph)
+            ingress_candidates = [n for n, count in incoming.items() if count == 0]
+            if not ingress_candidates:
+                ingress_candidates = list(subgraph.keys())
+
+            leaves = []
+            for child in ingress_candidates:
+                leaves.extend(get_ingress_leaves(child))
+
+            ingress_cache[node_name] = leaves
+            return leaves
+
+        def get_egress_leaves(node_name):
+            if node_name in egress_cache:
+                return egress_cache[node_name]
+
+            node_data = all_nodes.get(node_name, {})
+            subgraph = node_data.get('subgraphs', {})
+
+            if not subgraph:
+                egress_cache[node_name] = [node_name]
+                return egress_cache[node_name]
+
+            _, outgoing = _internal_edge_counts(subgraph)
+            egress_candidates = [n for n, count in outgoing.items() if count == 0]
+            if not egress_candidates:
+                egress_candidates = list(subgraph.keys())
+
+            leaves = []
+            for child in egress_candidates:
+                leaves.extend(get_egress_leaves(child))
+
+            egress_cache[node_name] = leaves
+            return leaves
+
+        # Redirect every edge to operate on the deepest nodes
+        for source_name, source_data in all_nodes.items():
+            source_leaves = get_egress_leaves(source_name)
+            if not source_leaves:
+                continue
+
+            for edge in source_data.get('edges', []):
+                target_name = edge['target']
+                target_leaves = get_ingress_leaves(target_name) if target_name in all_nodes else []
+                if not target_leaves:
+                    continue
+
+                for src_leaf in source_leaves:
+                    for tgt_leaf in target_leaves:
+                        new_edge = {
+                            'target': tgt_leaf,
+                            'dims': edge.get('dims', ''),
+                        }
+                        if 'edge_data_id' in edge:
+                            new_edge['edge_data_id'] = edge['edge_data_id']
+                        if 'is_implied_edge' in edge:
+                            new_edge['is_implied_edge'] = edge['is_implied_edge']
+
+                        # Only populate edges for true leaves
+                        if src_leaf in unnested_adj_list:
+                            unnested_adj_list[src_leaf]['edges'].append(new_edge)
+
+        return unnested_adj_list, rebuilt_ancestors
+
+
+    def compress_nested_graph(nested_graph, adj_list, node_to_module_path, graph_node_name_to_without_suffix):
+        """
+        Compresses a nested graph by finding repeating patterns in Sequential/ModuleList containers
+        and replacing them with repeat_<count>_<counter> containers.
+        
+        Args:
+            nested_graph: Nested dict structure from transform_to_nested_graph
+            module_info: Dict containing module information
+            func_info: Dict containing function information
+            node_to_module_path: Dict mapping node names to module paths
+            graph_node_name_to_without_suffix: Dict mapping node names to display names
+        
+        Returns:
+            Compressed nested graph in the exact same format as input
+        """
+        
+        repeat_counter = 0  # Global counter for unique repeat container names
+        repeat_containers = set()
+
+        incoming_edges = defaultdict(list)
+        for source_node, node_data in adj_list.items():  # Wait, adj_list isn't passed in!
+            for edge in node_data['edges']:
+                target = edge['target']
+                incoming_edges[target].append({
+                    'source': source_node,
+                    'dims': edge['dims']
+                })
+            
+        def get_chain_from_subgraph(subgraph):
+            """
+            Extracts the linear chain of nodes from a subgraph (for Sequential/ModuleList).
+            Returns list of node names in order.
+            The subgraph IS already an adjacency list!
+            """
+            nodes = list(subgraph.keys())
+            if not nodes:
+                return []
+            
+            # Find source node (node with no incoming edges)
+            incoming_count = {node: 0 for node in nodes}
+            for node in nodes:
+                for edge in subgraph[node]['edges']:
+                    target = edge['target']
+                    if target in incoming_count:
+                        incoming_count[target] += 1
+            
+            source_nodes = [node for node, count in incoming_count.items() if count == 0]
+            if not source_nodes:
+                # Fallback: just use first node
+                return [nodes[0]]
+            
+            # Trace the chain from source
+            chain = []
+            current = source_nodes[0]
+            visited = set()
+            
+            while current and current not in visited:
+                chain.append(current)
+                visited.add(current)
+                
+                # Find next node in chain by looking at edges
+                edges = subgraph[current]['edges']
+                next_node = None
+                for edge in edges:
+                    target = edge['target']
+                    if target not in visited:
+                        next_node = target
+                        break
+                current = next_node
+            
+            return chain
+        
+        def nodes_are_equivalent(node1, node2, parent_subgraph, incoming_edges):
+            """
+            Checks if two nodes are equivalent (same type and same input/output dims).
+            """
+            def get_input_dims(node):
+                node_info = parent_subgraph.get(node, {})
+                dims = node_info.get('input_dims', [])
+                if not dims:
+                    dims = [e.get('dims', '') for e in incoming_edges.get(node, [])]
+                return sorted(dims)
+
+            def get_output_dims(node):
+                node_info = parent_subgraph.get(node, {})
+                dims = node_info.get('output_dims', [])
+                if not dims:
+                    dims = [e.get('dims', '') for e in node_info.get('edges', [])]
+                return sorted(dims)
+
+            node1_input_dims = get_input_dims(node1)
+            node2_input_dims = get_input_dims(node2)
+            
+            node1_output_dims = get_output_dims(node1)
+            node2_output_dims = get_output_dims(node2)
+            
+            return node1_input_dims == node2_input_dims and node1_output_dims == node2_output_dims
+        
+        def compress_chain(chain, parent_subgraph, adj_list):
+            """
+            Compresses a chain by finding repeating consecutive nodes.
+            Returns new subgraph structure with compressed nodes.
+            Each node in the result is also recursively compressed.
+            """
+            nonlocal repeat_counter
+            
+            if len(chain) <= 1:
+                # Still need to recursively process the single node
+                if len(chain) == 1:
+                    node = chain[0]
+                    return {node: process_node(node, parent_subgraph[node])}
+                return {}
+            
+            new_subgraph = {}
+            i = 0
+            
+            while i < len(chain):
+                current_node = chain[i]
+                repeat_count = 1
+                
+                # Count how many times this node repeats consecutively
+                j = i + 1
+                while j < len(chain) and nodes_are_equivalent(current_node, chain[j], parent_subgraph, incoming_edges):
+                    repeat_count += 1
+                    j += 1
+                
+                if repeat_count > 1:
+                    # Create a repeat container
+                    repeat_name = f"repeat_{repeat_count}_{repeat_counter}"
+                    repeat_counter += 1
+                    repeat_containers.add(repeat_name)
+                    
+                    # Get the first node's data and RECURSIVELY PROCESS IT
+                    first_node = chain[i]
+                    first_node_data = parent_subgraph[first_node]
+                    processed_first_node = process_node(first_node, first_node_data)
+                    processed_first_node['edges'] = []  # Edges will be handled by the repeat container
+                    
+                    # Create the repeat container
+                    new_subgraph[repeat_name] = {
+                        'edges': [],
+                        'subgraphs': {
+                            first_node: processed_first_node
+                        },
+                        'failed': False,
+                        'node_type': NodeType.MODULE.value,
+                    }
+                    
+                    # Update metadata for repeat container
+                    graph_node_name_to_without_suffix[repeat_name] = f"REPEAT X {repeat_count}"
+                    graph_node_display_names[repeat_name] = f"REPEAT {repeat_count}x"
+                    node_to_module_path[repeat_name] = ""
+                    
+                    # Add edge from repeat container to next node (if exists)
+                    if j < len(chain):
+                        next_node = chain[j]
+                        # Get dims from the last repeated node's edge to next
+                        last_repeated_node = chain[j - 1]
+                        last_node_edges = parent_subgraph[last_repeated_node]['edges']
+                        
+                        # Find edge that goes to next_node
+                        dims = '( )'
+                        edge_data_id = None
+                        is_implied = False
+                        for edge in last_node_edges:
+                            dims = edge['dims']
+                            edge_data_id = edge.get('edge_data_id')
+                            is_implied = edge.get('is_implied_edge', False)
+                            break
+                        
+                        new_edge = {
+                            'target': next_node,
+                            'dims': dims,
+                        }
+                        if edge_data_id is not None:
+                            new_edge['edge_data_id'] = edge_data_id
+                        if is_implied:
+                            new_edge['is_implied_edge'] = is_implied
+                        
+                        new_subgraph[repeat_name]['edges'].append(new_edge)
+                    
+                    # Redirect the previous node's edge to point to repeat container instead of first_node
+                    if i > 0:
+                        prev_node = chain[i - 1]
+                        # prev_node might itself be inside a repeat container we just created
+                        # Find which key in new_subgraph contains prev_node
+                        prev_key = None
+                        for key in new_subgraph.keys():
+                            if key == prev_node:
+                                prev_key = key
+                                break
+                            elif key.startswith('repeat_') and prev_node in new_subgraph[key]['subgraphs']:
+                                prev_key = key
+                                break
+                        
+                        if prev_key:
+                            # Update its edge that points to first_node to point to repeat_name instead
+                            for edge in new_subgraph[prev_key]['edges']:
+                                if edge['target'] == first_node:
+                                    edge['target'] = repeat_name
+                    
+                    i = j
+                else:
+                    # Not repeating, RECURSIVELY PROCESS the node and copy it
+                    node_data = parent_subgraph[current_node]
+                    new_subgraph[current_node] = process_node(current_node, node_data)
+                    i += 1
+            
+
+            return new_subgraph
+        
+        def process_node(node_name, node_data):
+            """
+            Recursively processes a node and its subgraphs.
+            Returns the processed node data.
+            """
+            # Check if this is a Sequential or ModuleList
+            node_display_name = graph_node_name_to_without_suffix.get(node_name, node_name)
+            is_sequential_or_modulelist = node_display_name in ['Sequential']
+            
+            new_node_data = {
+                'edges': node_data['edges'].copy(),
+                'subgraphs': {},
+                'failed': node_data.get('failed', False),
+                'node_type': node_data.get('node_type', NodeType.MODULE.value),
+            }
+            
+            if is_sequential_or_modulelist and node_data['subgraphs']:
+                # Extract chain and compress it
+                # compress_chain will recursively process each node in the chain
+                chain = get_chain_from_subgraph(node_data['subgraphs'])
+                new_node_data['subgraphs'] = compress_chain(chain, node_data['subgraphs'], adj_list)
+            else:
+                # Not Sequential/ModuleList, just recursively process subgraphs
+                for sub_node_name, sub_node_data in node_data['subgraphs'].items():
+                    new_node_data['subgraphs'][sub_node_name] = process_node(sub_node_name, sub_node_data)
+            
+            return new_node_data
+        
+        # Process the root level
+        compressed_graph = {}
+        for node_name, node_data in nested_graph.items():
+            compressed_graph[node_name] = process_node(node_name, node_data)
+        
+        return compressed_graph, repeat_containers
+
+
     try:
         wrap_functions()
         traverse_model(model)
@@ -811,6 +1339,24 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
             cleanup_tensor_attributes(tensor)
 
     cleanup_graph(adj_list, nodes_to_delete)
+
+    if show_compressed_view:
+        nested_graph = transform_to_nested_graph(adj_list, node_to_ancestors)
+        compressed_graph, repeat_nodes = compress_nested_graph(nested_graph, adj_list, node_to_module_path, graph_node_name_to_without_suffix)
+        repeat_containers.clear()
+        repeat_containers.update(repeat_nodes)
+        unnested_graph, rebuilt_ancestors = transform_to_unnested_graph(compressed_graph, node_to_ancestors)
+
+        # Replace the working adjacency list with the unnested graph for rendering
+        adj_list.clear()
+        adj_list.update(unnested_graph)
+
+        # Refresh ancestor mapping to include synthesized containers while preserving the reference
+        node_to_ancestors.clear()
+        node_to_ancestors.update(rebuilt_ancestors)
+    else:
+        repeat_containers.clear()
+
     if exception is not None:
         raise exception
 
@@ -877,7 +1423,7 @@ def generate_html_file_action(html_str, unique_id, export_path=None):
 
 def plot_graph(adj_list, module_info, func_info, node_to_module_path,
                parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix,
-               graph_node_display_names, ancestor_map, collapse_modules_after_depth, height, width, export_format, show_module_attr_names, export_path=None):
+               graph_node_display_names, ancestor_map, collapse_modules_after_depth, height, width, export_format, show_module_attr_names, repeat_containers, show_modular_view=False, export_path=None):
     unique_id = str(uuid.uuid4())
     template_str = resources.read_text('torchvista.templates', 'graph.html')
     d3_source = resources.read_text('torchvista.assets', 'd3.min.js')
@@ -896,6 +1442,7 @@ def plot_graph(adj_list, module_info, func_info, node_to_module_path,
         'graph_node_name_to_without_suffix': json.dumps(graph_node_name_to_without_suffix),
         'graph_node_display_names': json.dumps(graph_node_display_names),
         'ancestor_map': json.dumps(ancestor_map),
+        'repeat_containers': json.dumps(list(repeat_containers)),
         'unique_id': unique_id,
         'd3_source': d3_source,
         'viz_source': viz_source,
@@ -908,7 +1455,7 @@ def plot_graph(adj_list, module_info, func_info, node_to_module_path,
         'width': f'{width}px' if width is not None else '100%',
         'generate_image': 'true' if export_format is ExportFormat.PNG else 'false',
         'generate_svg': 'true' if export_format is ExportFormat.SVG else 'false',
-        'show_modular_view': 'false',
+        'show_modular_view': 'true' if show_modular_view else 'false',
     })
     if export_format == ExportFormat.HTML:
         generate_html_file_action(output, unique_id, export_path=export_path)
@@ -927,11 +1474,12 @@ def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_dept
     graph_node_display_names = {}
     node_to_module_path = {}
     node_to_ancestors = defaultdict(list)
+    repeat_containers = set()
 
     exception = None
 
     try:
-        process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, node_to_ancestors, show_non_gradient_nodes=show_non_gradient_nodes, forced_module_tracing_depth=forced_module_tracing_depth, show_module_attr_names=show_module_attr_names)
+        process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, node_to_ancestors, repeat_containers, show_non_gradient_nodes=show_non_gradient_nodes, forced_module_tracing_depth=forced_module_tracing_depth, show_module_attr_names=show_module_attr_names)
     except Exception as e:
         exception = e
 
@@ -953,6 +1501,7 @@ def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_dept
         'graph_node_name_to_without_suffix': json.dumps(graph_node_name_to_without_suffix),
         'graph_node_display_names': json.dumps(graph_node_display_names),
         'ancestor_map': json.dumps(build_immediate_ancestor_map(node_to_ancestors, adj_list)),
+        'repeat_containers': json.dumps(list(repeat_containers)),
         'unique_id': unique_id,
         'd3_source': d3_source,
         'viz_source': viz_source,
@@ -990,7 +1539,7 @@ def validate_export_format(export_format):
     
     return ExportFormat(export_format)
 
-def trace_model(model, inputs, show_non_gradient_nodes=True, collapse_modules_after_depth=1, forced_module_tracing_depth=None, height=800, width=None, export_format=None, show_module_attr_names=False, export_path=None):
+def trace_model(model, inputs, show_non_gradient_nodes=True, collapse_modules_after_depth=1, forced_module_tracing_depth=None, height=800, width=None, export_format=None, show_module_attr_names=False, export_path=None, show_compressed_view=False):
     adj_list = {}
     module_info = {}
     func_info = {}
@@ -1000,6 +1549,7 @@ def trace_model(model, inputs, show_non_gradient_nodes=True, collapse_modules_af
     graph_node_display_names = {}
     node_to_module_path = {}
     node_to_ancestors = defaultdict(list)
+    repeat_containers = set()
     collapse_modules_after_depth = max(collapse_modules_after_depth, 0)
 
     if export_format is None and export_path is not None:
@@ -1010,14 +1560,14 @@ def trace_model(model, inputs, show_non_gradient_nodes=True, collapse_modules_af
     exception = None
 
     try:
-        process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, node_to_ancestors, show_non_gradient_nodes=show_non_gradient_nodes, forced_module_tracing_depth=forced_module_tracing_depth, show_module_attr_names=show_module_attr_names)
+        process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, node_to_ancestors, repeat_containers, show_non_gradient_nodes=show_non_gradient_nodes, forced_module_tracing_depth=forced_module_tracing_depth, show_module_attr_names=show_module_attr_names, show_compressed_view=show_compressed_view)
     except Exception as e:
         exception = e
 
     if export_path is not None and export_format in (ExportFormat.PNG, ExportFormat.SVG):
         print(f"[error] Custom export paths are only supported for HTML exports. Cannot write PNG or SVG to a custom path: {export_path}")
 
-    plot_graph(adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, build_immediate_ancestor_map(node_to_ancestors, adj_list), collapse_modules_after_depth, height, width, export_format, show_module_attr_names, export_path=export_path)
+    plot_graph(adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, build_immediate_ancestor_map(node_to_ancestors, adj_list), collapse_modules_after_depth, height, width, export_format, show_module_attr_names, repeat_containers, show_modular_view=show_compressed_view, export_path=export_path)
 
 
     if exception is not None:
