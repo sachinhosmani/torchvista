@@ -135,7 +135,10 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
         if module:
             op_type_counters[op_type] += 1
             base_name = f"{op_type}_{op_type_counters[op_type]}"
-            module_to_node_name[module] = base_name
+            # Track all node names for each module (for modules called multiple times)
+            if module not in module_to_node_name:
+                module_to_node_name[module] = []
+            module_to_node_name[module].append(base_name)
             module_info[base_name] = get_module_info(module)
             return base_name, NodeType.MODULE.value
         else:
@@ -745,10 +748,6 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 
                 return representative_node1, representative_node2
 
-        # Track per-node input/output dims so we can attach them to containers too
-        node_input_dims = defaultdict(list)
-        node_output_dims = defaultdict(list)
-
         # Step 1: Create the basic structure for all nodes (including ancestors)
         # Collect all unique nodes (actual nodes + all ancestors)
         all_nodes = set(adj_list.keys())
@@ -776,46 +775,43 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 }
         
         # Step 2: Process edges and redirect them to representative nodes
+        # Track seen edges to avoid duplicates when the same tensor flows to multiple
+        # consumers inside a nested module (e.g., residual connections where x goes to
+        # both a layer and an add node). Key: (rep_source, rep_target, edge_data_id)
+        seen_edges = set()
+
         for source_node, node_data in adj_list.items():
             for edge in node_data['edges']:
                 target_node = edge['target']
-                
+
                 # Get representative nodes for this edge
                 rep_source, rep_target = get_representative_nodes(source_node, target_node)
 
+                # Skip duplicate edges from the same tensor between the same representative nodes
+                edge_data_id = edge.get('edge_data_id')
+                if edge_data_id is not None:
+                    edge_key = (rep_source, rep_target, edge_data_id)
+                    if edge_key in seen_edges:
+                        continue
+                    seen_edges.add(edge_key)
+
                 dims = edge.get('dims', '')
-                node_output_dims[source_node].append(dims)
-                node_input_dims[target_node].append(dims)
-                for anc in node_to_ancestors.get(source_node, []):
-                    node_output_dims[anc].append(dims)
-                for anc in node_to_ancestors.get(target_node, []):
-                    node_input_dims[anc].append(dims)
-                
+
                 # Create new edge dict with all original information
                 new_edge = {
                     'target': rep_target,
                     'dims': dims,
-                    'edge_data_id': edge.get('edge_data_id'),
                 }
-                
-                # Preserve optional edge attributes
+
+                # Preserve optional edge attributes (only if they exist and are not None)
+                if edge_data_id is not None:
+                    new_edge['edge_data_id'] = edge_data_id
                 if 'is_implied_edge' in edge:
                     new_edge['is_implied_edge'] = edge['is_implied_edge']
-                
+
                 # Add edge to representative source node
                 nodes[rep_source]['edges'].append(new_edge)
 
-        # Attach aggregated dim info to every node (including containers)
-        for node_name, node_data in nodes.items():
-            if node_name in node_input_dims:
-                node_data['input_dims'] = sorted(node_input_dims[node_name])
-            else:
-                node_data['input_dims'] = []
-            if node_name in node_output_dims:
-                node_data['output_dims'] = sorted(node_output_dims[node_name])
-            else:
-                node_data['output_dims'] = []
-        
         # Step 3: Build the nested hierarchy
         # Keep track of the nodes that stay at root level
         root = dict(nodes)
@@ -962,7 +958,137 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                             unnested_adj_list[src_leaf]['edges'].append(new_edge)
 
         return unnested_adj_list, rebuilt_ancestors
+    
+    def inject_modulelist_containers(nested_graph, module_hierarchy, module_to_node_name, graph_node_name_to_without_suffix, graph_node_display_names, node_to_module_path):
+        """
+        Validates and injects ModuleList containers into the nested graph where children form valid chains.
+        Processes the nested graph recursively and injects ModuleLists at the appropriate levels.
+        """
+        modulelist_counter = 0
 
+        def get_modulelist_parent_path(modulelist_instance):
+            """Compute the path to a ModuleList's parent in the nested graph."""
+            path = []
+            current = module_hierarchy.get(modulelist_instance)
+
+            while current is not None:
+                if current in module_to_node_name:
+                    # Use the last node name if module was called multiple times
+                    node_names = module_to_node_name[current]
+                    path.insert(0, node_names[-1] if isinstance(node_names, list) else node_names)
+                current = module_hierarchy.get(current)
+
+            return path
+
+        def validate_and_inject_at_level(graph_dict, current_path, modulelists_at_path):
+            """
+            Recursively process graph levels and inject ModuleLists where valid.
+            Returns: modified graph_dict
+            """
+            nonlocal modulelist_counter
+
+            # Check if any ModuleList should exist at this level
+            for ml_instance, ml_path in modulelists_at_path.items():
+                if ml_path != current_path:
+                    continue
+
+                # Find children of this ModuleList
+                children_modules = [m for m, p in module_hierarchy.items() if p == ml_instance]
+                # Get all node names for each child module (flatten list of lists)
+                children_names = []
+                for m in children_modules:
+                    if m in module_to_node_name:
+                        node_names = module_to_node_name[m]
+                        if isinstance(node_names, list):
+                            children_names.extend(node_names)
+                        else:
+                            children_names.append(node_names)
+
+                if not children_names:
+                    continue
+
+                # Check all children exist at this level
+                all_present = all(child in graph_dict for child in children_names)
+                if not all_present:
+                    continue
+
+                ordered_children = sorted(children_names)
+
+                # Validate chain: each child should connect to the next
+                is_valid_chain = True
+                for i in range(len(ordered_children) - 1):
+                    current_node = ordered_children[i]
+                    next_node = ordered_children[i + 1]
+
+                    edges = graph_dict[current_node].get('edges', [])
+                    targets = [e['target'] for e in edges]
+
+                    if (len(targets) > 1) or (next_node not in targets):
+                        is_valid_chain = False
+                        break
+
+                if not is_valid_chain:
+                    continue
+
+                # Valid chain! Create ModuleList container
+                ml_name = f"ModuleList_{modulelist_counter}"
+                modulelist_counter += 1
+
+                # Add metadata
+                graph_node_name_to_without_suffix[ml_name] = "ModuleList"
+                graph_node_display_names[ml_name] = "ModuleList"
+                node_to_module_path[ml_name] = "torch.nn.modules.container"
+
+                # Create container with children as subgraphs
+                ml_container = {
+                    'edges': [],
+                    'subgraphs': {},
+                    'failed': False,
+                    'node_type': NodeType.MODULE.value,
+                }
+
+                # Move children into container
+                for child_name in ordered_children:
+                    ml_container['subgraphs'][child_name] = graph_dict[child_name]
+
+                # Find edges from last child to nodes outside the ModuleList
+                last_child = ordered_children[-1]
+                for edge in graph_dict[last_child].get('edges', []):
+                    if edge['target'] not in ordered_children:
+                        # Create clean edge copy (exclude None values to avoid JS null errors)
+                        new_edge = {
+                            'target': edge['target'],
+                            'dims': edge.get('dims', ''),
+                        }
+                        if edge.get('edge_data_id') is not None:
+                            new_edge['edge_data_id'] = edge['edge_data_id']
+                        if 'is_implied_edge' in edge:
+                            new_edge['is_implied_edge'] = edge['is_implied_edge']
+                        ml_container['edges'].append(new_edge)
+
+                # Remove children from current level
+                for child_name in ordered_children:
+                    del graph_dict[child_name]
+
+                # Add container to current level
+                graph_dict[ml_name] = ml_container
+
+            # Recursively process subgraphs
+            for node_name in list(graph_dict.keys()):
+                node_data = graph_dict[node_name]
+                if 'subgraphs' in node_data and node_data['subgraphs']:
+                    new_path = current_path + [node_name]
+                    validate_and_inject_at_level(node_data['subgraphs'], new_path, modulelists_at_path)
+
+        # Collect all ModuleLists with their parent paths
+        modulelists_with_paths = {}
+        for module_instance in module_hierarchy.keys():
+            if isinstance(module_instance, nn.ModuleList):
+                parent_path = get_modulelist_parent_path(module_instance)
+                modulelists_with_paths[module_instance] = parent_path
+
+        # Process the nested graph
+        validate_and_inject_at_level(nested_graph, [], modulelists_with_paths)
 
     def compress_nested_graph(nested_graph, adj_list, node_to_module_path, graph_node_name_to_without_suffix):
         """
@@ -982,16 +1108,8 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
         
         repeat_counter = 0  # Global counter for unique repeat container names
         repeat_containers = set()
+        signature_cache = {}  # Memoization cache for structural signatures
 
-        incoming_edges = defaultdict(list)
-        for source_node, node_data in adj_list.items():  # Wait, adj_list isn't passed in!
-            for edge in node_data['edges']:
-                target = edge['target']
-                incoming_edges[target].append({
-                    'source': source_node,
-                    'dims': edge['dims']
-                })
-            
         def get_chain_from_subgraph(subgraph):
             """
             Extracts the linear chain of nodes from a subgraph (for Sequential/ModuleList).
@@ -1023,44 +1141,117 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
             while current and current not in visited:
                 chain.append(current)
                 visited.add(current)
-                
+
                 # Find next node in chain by looking at edges
                 edges = subgraph[current]['edges']
                 next_node = None
                 for edge in edges:
                     target = edge['target']
-                    if target not in visited:
+                    # Only follow edge if target is in this subgraph
+                    if target in subgraph and target not in visited:
                         next_node = target
                         break
                 current = next_node
             
             return chain
         
-        def nodes_are_equivalent(node1, node2, parent_subgraph, incoming_edges):
+        def serialize_subgraph(subgraph):
             """
-            Checks if two nodes are equivalent (same type and same input/output dims).
+            Convert a subgraph dict into a canonical hashable tuple that captures
+            the full topology: node types, module paths, edges with dims, and
+            nested subgraphs recursively.
+
+            Sorts node names by extracting trailing number (e.g., Linear_5 -> 5)
+            so structurally identical subgraphs serialize to the same tuple.
             """
-            def get_input_dims(node):
-                node_info = parent_subgraph.get(node, {})
-                dims = node_info.get('input_dims', [])
-                if not dims:
-                    dims = [e.get('dims', '') for e in incoming_edges.get(node, [])]
-                return sorted(dims)
+            if not subgraph:
+                return ()
 
-            def get_output_dims(node):
-                node_info = parent_subgraph.get(node, {})
-                dims = node_info.get('output_dims', [])
-                if not dims:
-                    dims = [e.get('dims', '') for e in node_info.get('edges', [])]
-                return sorted(dims)
+            import re
+            def extract_number(name):
+                match = re.search(r'_(\d+)$', name)
+                return int(match.group(1)) if match else 0
 
-            node1_input_dims = get_input_dims(node1)
-            node2_input_dims = get_input_dims(node2)
-            
-            node1_output_dims = get_output_dims(node1)
-            node2_output_dims = get_output_dims(node2)
-            
-            return node1_input_dims == node2_input_dims and node1_output_dims == node2_output_dims
+            # Sort by trailing number for canonical ordering
+            sorted_names = sorted(subgraph.keys(), key=extract_number)
+            name_to_index = {name: i for i, name in enumerate(sorted_names)}
+
+            serialized_nodes = []
+            for name in sorted_names:
+                node_data = subgraph[name]
+                node_type = graph_node_name_to_without_suffix.get(name, name)
+                module_path = node_to_module_path.get(name, '')
+
+                # Serialize edges as (target_index, dims) - use -1 for external targets
+                edges = tuple(sorted(
+                    (name_to_index.get(e['target'], -1), e.get('dims', ''))
+                    for e in node_data.get('edges', [])
+                ))
+
+                # Recursively serialize nested subgraphs
+                child_serial = serialize_subgraph(node_data.get('subgraphs', {}))
+
+                serialized_nodes.append((node_type, module_path, edges, child_serial))
+
+            return tuple(serialized_nodes)
+
+        def get_structural_signature(node_name, node_data, parent_subgraph):
+            """
+            Creates a structural signature for a node that captures its type,
+            module path, incoming/outgoing dims, and full subgraph topology.
+            Two nodes with identical signatures are structurally equivalent.
+            """
+            if node_name in signature_cache:
+                return signature_cache[node_name]
+
+            node_type = graph_node_name_to_without_suffix.get(node_name, node_name)
+            module_path = node_to_module_path.get(node_name, '')
+
+            # Get outgoing edge dims (edges to siblings within parent_subgraph)
+            outgoing_dims = []
+            for edge in node_data.get('edges', []):
+                if edge['target'] in parent_subgraph:
+                    outgoing_dims.append(edge.get('dims', ''))
+            outgoing_dims = tuple(sorted(outgoing_dims))
+
+            # Get incoming edge dims (edges from siblings within parent_subgraph)
+            incoming_dims = []
+            for sibling_name, sibling_data in parent_subgraph.items():
+                for edge in sibling_data.get('edges', []):
+                    if edge['target'] == node_name:
+                        incoming_dims.append(edge.get('dims', ''))
+            incoming_dims = tuple(sorted(incoming_dims))
+
+            # Serialize the full subgraph topology
+            subgraph_serial = serialize_subgraph(node_data.get('subgraphs', {}))
+
+            signature = (node_type, module_path, incoming_dims, outgoing_dims, subgraph_serial)
+            signature_cache[node_name] = signature
+            return signature
+
+        def nodes_are_equivalent(node1, node2, parent_subgraph):
+            """
+            Checks if two nodes are structurally equivalent by comparing their signatures.
+            """
+            # Quick check: same type and module path first
+            type1 = graph_node_name_to_without_suffix.get(node1, node1)
+            type2 = graph_node_name_to_without_suffix.get(node2, node2)
+            if type1 != type2:
+                return False
+
+            path1 = node_to_module_path.get(node1, '')
+            path2 = node_to_module_path.get(node2, '')
+            if path1 != path2:
+                return False
+
+            # Full structural comparison
+            node1_data = parent_subgraph.get(node1, {})
+            node2_data = parent_subgraph.get(node2, {})
+
+            sig1 = get_structural_signature(node1, node1_data, parent_subgraph)
+            sig2 = get_structural_signature(node2, node2_data, parent_subgraph)
+
+            return sig1 == sig2
         
         def compress_chain(chain, parent_subgraph, adj_list):
             """
@@ -1086,7 +1277,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 
                 # Count how many times this node repeats consecutively
                 j = i + 1
-                while j < len(chain) and nodes_are_equivalent(current_node, chain[j], parent_subgraph, incoming_edges):
+                while j < len(chain) and nodes_are_equivalent(current_node, chain[j], parent_subgraph):
                     repeat_count += 1
                     j += 1
                 
@@ -1182,7 +1373,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
             """
             # Check if this is a Sequential or ModuleList
             node_display_name = graph_node_name_to_without_suffix.get(node_name, node_name)
-            is_sequential_or_modulelist = node_display_name in ['Sequential']
+            is_sequential_or_modulelist = node_display_name in ['Sequential', 'ModuleList']
             
             new_node_data = {
                 'edges': node_data['edges'].copy(),
@@ -1342,10 +1533,24 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
 
     if show_compressed_view:
         nested_graph = transform_to_nested_graph(adj_list, node_to_ancestors)
+
+        # Compute paths for all ModuleLists and inject them if they form valid chains
+        inject_modulelist_containers(
+            nested_graph, module_hierarchy, module_to_node_name,
+            graph_node_name_to_without_suffix, graph_node_display_names, node_to_module_path
+        )
+
         compressed_graph, repeat_nodes = compress_nested_graph(nested_graph, adj_list, node_to_module_path, graph_node_name_to_without_suffix)
         repeat_containers.clear()
         repeat_containers.update(repeat_nodes)
         unnested_graph, rebuilt_ancestors = transform_to_unnested_graph(compressed_graph, node_to_ancestors)
+
+        # Remove ModuleList from all ancestor chains (we don't want to display them)
+        for node_name, ancestors in rebuilt_ancestors.items():
+            rebuilt_ancestors[node_name] = [
+                ancestor for ancestor in ancestors
+                if graph_node_name_to_without_suffix.get(ancestor) != "ModuleList"
+            ]
 
         # Replace the working adjacency list with the unnested graph for rendering
         adj_list.clear()
