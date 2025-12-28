@@ -1212,15 +1212,17 @@
             if (containerDepths.has(container)) {
                 return containerDepths.get(container);
             }
-            
+
             let depth = 0;
             for (const [child, parent] of Object.entries(ancestor_map)) {
                 if (child === container && parent) {
-                    depth = getContainerDepth(parent) + 1;
+                    // Skip repeat containers when counting depth
+                    const parentDepth = getContainerDepth(parent);
+                    depth = isRepeatNode(parent) ? parentDepth : parentDepth + 1;
                     break;
                 }
             }
-            
+
             containerDepths.set(container, depth);
             return depth;
         }
