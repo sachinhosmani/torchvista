@@ -964,7 +964,13 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
         Validates and injects ModuleList containers into the nested graph where children form valid chains.
         Processes the nested graph recursively and injects ModuleLists at the appropriate levels.
         """
+        import re
         modulelist_counter = 0
+
+        def extract_trailing_number(name):
+            """Extract trailing number from node name for numeric sorting."""
+            match = re.search(r'_(\d+)$', name)
+            return int(match.group(1)) if match else 0
 
         def get_modulelist_parent_path(modulelist_instance):
             """Compute the path to a ModuleList's parent in the nested graph."""
@@ -1012,7 +1018,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 if not all_present:
                     continue
 
-                ordered_children = sorted(children_names)
+                ordered_children = sorted(children_names, key=extract_trailing_number)
 
                 # Validate chain: each child should connect to the next
                 is_valid_chain = True
@@ -1119,7 +1125,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
             nodes = list(subgraph.keys())
             if not nodes:
                 return []
-            
+
             # Find source node (node with no incoming edges)
             incoming_count = {node: 0 for node in nodes}
             for node in nodes:
@@ -1127,17 +1133,17 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                     target = edge['target']
                     if target in incoming_count:
                         incoming_count[target] += 1
-            
+
             source_nodes = [node for node, count in incoming_count.items() if count == 0]
             if not source_nodes:
                 # Fallback: just use first node
                 return [nodes[0]]
-            
+
             # Trace the chain from source
             chain = []
             current = source_nodes[0]
             visited = set()
-            
+
             while current and current not in visited:
                 chain.append(current)
                 visited.add(current)
@@ -1152,7 +1158,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                         next_node = target
                         break
                 current = next_node
-            
+
             return chain
         
         def serialize_subgraph(subgraph):
@@ -1260,7 +1266,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
             Each node in the result is also recursively compressed.
             """
             nonlocal repeat_counter
-            
+
             if len(chain) <= 1:
                 # Still need to recursively process the single node
                 if len(chain) == 1:
@@ -1274,7 +1280,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
             while i < len(chain):
                 current_node = chain[i]
                 repeat_count = 1
-                
+
                 # Count how many times this node repeats consecutively
                 j = i + 1
                 while j < len(chain) and nodes_are_equivalent(current_node, chain[j], parent_subgraph):
