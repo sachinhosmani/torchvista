@@ -105,7 +105,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
     last_np_array_input_id = 0
     last_numeric_input_id = 0
 
-    op_type_counters = defaultdict(int)
+    global_node_counter = 0
     module_to_node_name = {}
     original_ops = {}
     module_reuse_count = {}
@@ -131,20 +131,18 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
         return "( )" if result == "()"  else result
 
     def get_unique_op_name(op_type, module=None):
-        nonlocal op_type_counters, module_to_node_name, module_info, module_reuse_count
+        nonlocal global_node_counter, module_to_node_name, module_info, module_reuse_count
+        global_node_counter += 1
+        node_name = f"{op_type}_{global_node_counter}"
         if module:
-            op_type_counters[op_type] += 1
-            base_name = f"{op_type}_{op_type_counters[op_type]}"
             # Track all node names for each module (for modules called multiple times)
             if module not in module_to_node_name:
                 module_to_node_name[module] = []
-            module_to_node_name[module].append(base_name)
-            module_info[base_name] = get_module_info(module)
-            return base_name, NodeType.MODULE.value
+            module_to_node_name[module].append(node_name)
+            module_info[node_name] = get_module_info(module)
+            return node_name, NodeType.MODULE.value
         else:
-            op_type_counters[op_type] += 1
-            op_name = f"{op_type}_{op_type_counters[op_type]}"
-            return op_name, NodeType.OPERATION.value
+            return node_name, NodeType.OPERATION.value
 
     def get_module_display_name(module):
         base_name = type(module).__name__
@@ -986,6 +984,8 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
 
             return path
 
+        processed_modulelists = set()
+
         def validate_and_inject_at_level(graph_dict, current_path, modulelists_at_path):
             """
             Recursively process graph levels and inject ModuleLists where valid.
@@ -997,6 +997,9 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
             for ml_instance, ml_path in modulelists_at_path.items():
                 if ml_path != current_path:
                     continue
+                if id(ml_instance) in processed_modulelists:
+                    continue
+                processed_modulelists.add(id(ml_instance))
 
                 # Find children of this ModuleList
                 children_modules = [m for m, p in module_hierarchy.items() if p == ml_instance]
@@ -1083,7 +1086,11 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
             for node_name in list(graph_dict.keys()):
                 node_data = graph_dict[node_name]
                 if 'subgraphs' in node_data and node_data['subgraphs']:
-                    new_path = current_path + [node_name]
+                    # Skip injected ModuleLists when building path (they weren't in the original hierarchy)
+                    if graph_node_name_to_without_suffix.get(node_name) == 'ModuleList':
+                        new_path = current_path
+                    else:
+                        new_path = current_path + [node_name]
                     validate_and_inject_at_level(node_data['subgraphs'], new_path, modulelists_at_path)
 
         # Collect all ModuleLists with their parent paths
@@ -1380,14 +1387,14 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
             # Check if this is a Sequential or ModuleList
             node_display_name = graph_node_name_to_without_suffix.get(node_name, node_name)
             is_sequential_or_modulelist = node_display_name in ['Sequential', 'ModuleList']
-            
+
             new_node_data = {
                 'edges': node_data['edges'].copy(),
                 'subgraphs': {},
                 'failed': node_data.get('failed', False),
                 'node_type': node_data.get('node_type', NodeType.MODULE.value),
             }
-            
+
             if is_sequential_or_modulelist and node_data['subgraphs']:
                 # Extract chain and compress it
                 # compress_chain will recursively process each node in the chain
@@ -1397,7 +1404,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 # Not Sequential/ModuleList, just recursively process subgraphs
                 for sub_node_name, sub_node_data in node_data['subgraphs'].items():
                     new_node_data['subgraphs'][sub_node_name] = process_node(sub_node_name, sub_node_data)
-            
+
             return new_node_data
         
         # Process the root level
@@ -1674,7 +1681,7 @@ def plot_graph(adj_list, module_info, func_info, node_to_module_path,
         display(HTML(output))
 
 
-def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_depth=1, show_non_gradient_nodes=True, forced_module_tracing_depth=None, show_module_attr_names=False):
+def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_depth=1, show_non_gradient_nodes=True, forced_module_tracing_depth=None, show_module_attr_names=False, show_compressed_view=False):
     collapse_modules_after_depth = max(collapse_modules_after_depth, 0)
     adj_list = {}
     module_info = {}
@@ -1690,7 +1697,7 @@ def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_dept
     exception = None
 
     try:
-        process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, node_to_ancestors, repeat_containers, show_non_gradient_nodes=show_non_gradient_nodes, forced_module_tracing_depth=forced_module_tracing_depth, show_module_attr_names=show_module_attr_names)
+        process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, node_to_ancestors, repeat_containers, show_non_gradient_nodes=show_non_gradient_nodes, forced_module_tracing_depth=forced_module_tracing_depth, show_module_attr_names=show_module_attr_names, show_compressed_view=show_compressed_view)
     except Exception as e:
         exception = e
 
@@ -1721,7 +1728,7 @@ def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_dept
         'collapse_modules_after_depth': collapse_modules_after_depth,
         'node_to_module_path': node_to_module_path,
         'show_module_attr_names': 'true' if show_module_attr_names else 'false',
-        'show_modular_view': 'false',
+        'show_modular_view': 'true' if show_compressed_view else 'false',
         'generate_image': 'false',
         'generate_svg': 'false',
         'height': '95%',
