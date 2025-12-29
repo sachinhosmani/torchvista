@@ -16,4 +16,5 @@ for filename in os.listdir(os.path.dirname(__file__)):
             "show_non_gradient_nodes": getattr(module, "show_non_gradient_nodes", True),
             "forced_module_tracing_depth": getattr(module, "forced_module_tracing_depth", None),
             "show_module_attr_names": getattr(module, "show_module_attr_names", False),
+            "show_compressed_view": getattr(module, "show_compressed_view", False),
         }
