@@ -488,6 +488,10 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                         # This happens to modules like ModuleList.
                         traverse_model(module, depth=depth, parent=module)
 
+    # Tensor properties that need special wrapping (they return tensors but aren't callable)
+    TENSOR_PROPERTIES = {'T', 'mT', 'H'}
+    original_properties = {}
+
     def wrap_functions():
         def make_wrapped(orig_func, func_name, namespace):
             def wrapped(*args, **kwargs):
@@ -517,6 +521,41 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 else:
                     return orig_func(*args, **kwargs)
             return wrapped
+
+        def make_property_wrapper(prop_name):
+            """Create a property wrapper for tensor properties like .T, .mT, .H"""
+            def prop_getter(tensor_self):
+                nonlocal current_executing_module, current_executing_function
+                orig_prop = original_properties.get(prop_name)
+                if orig_prop is None:
+                    raise AttributeError(f"Original property {prop_name} not found")
+                output = orig_prop.__get__(tensor_self)
+
+                if current_executing_module is None and current_executing_function is None:
+                    current_executing_function = prop_name
+                    namespace = '<tensor_property>'
+                    node_to_module_path[prop_name] = namespace
+                    node_name, node_type = get_unique_op_name(prop_name)
+                    graph_node_name_to_without_suffix[node_name] = prop_name
+                    graph_node_display_names[node_name] = prop_name
+                    node_to_module_path[node_name] = namespace
+                    pre_trace_op(node_name, node_type, tensor_self)
+                    current_executing_function = None
+                    output = trace_op(node_name, output)
+
+                return output
+            return property(prop_getter)
+
+        # Wrap tensor properties (.T, .mT, .H)
+        for prop_name in TENSOR_PROPERTIES:
+            try:
+                orig_prop = getattr(torch.Tensor, prop_name)
+                # Check for getset_descriptor or property
+                if hasattr(orig_prop, '__get__'):
+                    original_properties[prop_name] = orig_prop
+                    setattr(torch.Tensor, prop_name, make_property_wrapper(prop_name))
+            except AttributeError:
+                pass
 
         for func in FUNCTIONS:
             namespace = func['namespace']
@@ -576,6 +615,10 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 pass
 
     def restore_functions():
+        for prop_name, orig_prop in original_properties.items():
+            setattr(torch.Tensor, prop_name, orig_prop)
+        original_properties.clear()
+
         for (namespace, func_name), orig_func in original_ops.items():
             if namespace == 'torch':
                 module = torch
