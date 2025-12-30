@@ -832,18 +832,32 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
         for container in ancestor_nodes:
             descendants = get_descendants(container)
             # Incoming: edges from non-descendants to descendants
+            # Deduplicate by edge_data_id so same tensor fanning out to multiple internal nodes counts once
+            seen_incoming = set()
             for target_node in descendants:
                 for source_node, node_data in adj_list.items():
                     if source_node in descendants:
                         continue
                     for edge in node_data.get('edges', []):
                         if edge['target'] == target_node:
+                            edge_data_id = edge.get('edge_data_id')
+                            if edge_data_id is not None:
+                                if edge_data_id in seen_incoming:
+                                    continue
+                                seen_incoming.add(edge_data_id)
                             original_incoming_dims[container].append(edge.get('dims', ''))
             # Outgoing: edges from descendants to non-descendants
+            # Deduplicate by edge_data_id so same tensor going to multiple external targets counts once
+            seen_outgoing = set()
             for source_node in descendants:
                 for edge in adj_list.get(source_node, {}).get('edges', []):
                     target_node = edge['target']
                     if target_node not in descendants:
+                        edge_data_id = edge.get('edge_data_id')
+                        if edge_data_id is not None:
+                            if edge_data_id in seen_outgoing:
+                                continue
+                            seen_outgoing.add(edge_data_id)
                         original_outgoing_dims[container].append(edge.get('dims', ''))
 
         # Initialize nested structure for each node
