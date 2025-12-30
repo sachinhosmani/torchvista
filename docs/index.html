@@ -449,6 +449,52 @@
                 </div>
             </div>
         </div>
+
+        <!-- Compression Tests (Experimental) -->
+        <div class="demo-section" data-theme="teal">
+            <div class="section-header">
+                <h2 class="section-title">Compressed View (Experimental)</h2>
+                <div class="section-description">
+                    Detects and compresses repeated blocks in the graph in Sequential or ModuleList containers.
+                    When consecutive modules have matching tensor dimensions and identical internal structure, they are visually compressed with a repetition count indicator.
+                </div>
+            </div>
+            <div class="demos-grid">
+                <div class="demo-item">
+                    <a href="CompressionTest1.html">4 identical Linear layers (Sequential)</a>
+                </div>
+                <div class="demo-item">
+                    <a href="CompressionTest2.html">4 identical Linear layers (ModuleList)</a>
+                </div>
+                <div class="demo-item">
+                    <a href="CompressionTest3.html">Repetition of Sequential within ModuleList</a>
+                </div>
+                <div class="demo-item">
+                    <a href="CompressionTest4.html">Same block reference reused 4 times</a>
+                </div>
+                <div class="demo-item">
+                    <a href="CompressionTest5.html">Repetition of Sequential within ModuleList (10x repetition)</a>
+                </div>
+                <div class="demo-item">
+                    <a href="CompressionTest6.html">6 TransformerBlocks (collapsed view)</a>
+                </div>
+                <div class="demo-item">
+                    <a href="CompressionTest7.html">Encoder-decoder with nested attention blocks</a>
+                </div>
+                <div class="demo-item">
+                    <a href="CompressionTest8.html">4 Linear with different dims (Sequential) - no compression</a>
+                </div>
+                <div class="demo-item">
+                    <a href="CompressionTest9.html">4 Linear with different dims (ModuleList) - no compression</a>
+                </div>
+                <div class="demo-item">
+                    <a href="CompressionTest10.html">Parallel branches with 2 repeating layers each</a>
+                </div>
+                <div class="demo-item">
+                    <a href="CompressionTest11.html">Parallel: imperfect vs perfect MLP repetition</a>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
