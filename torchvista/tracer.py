@@ -117,6 +117,8 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
     constant_node_names = []
     output_node_set = set()
     module_to_attr_name = {}
+    # Track seen edges to deduplicate when the same tensor is passed multiple times between the same pair of nodes
+    seen_edges = set()
 
 
     def format_dims(dims):
@@ -233,11 +235,19 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
         
         for inp in input_tensors:
             if hasattr(inp, '_tensor_source_name'):
+                source_name = inp._tensor_source_name
+                edge_data_id = id(inp)
+                # Deduplicate: skip if we've already added an edge for this (source, target, tensor)
+                edge_key = (source_name, op_name, edge_data_id)
+                if edge_key in seen_edges:
+                    continue
+                seen_edges.add(edge_key)
+
                 dims = format_dims(tuple(inp.shape))
-                entry = {'target': op_name, 'dims': dims, 'edge_data_id': id(inp)}
+                entry = {'target': op_name, 'dims': dims, 'edge_data_id': edge_data_id}
                 if hasattr(inp, '_is_implied_edge') and inp._is_implied_edge:
                     entry['is_implied_edge'] = True
-                adj_list[inp._tensor_source_name]['edges'].append(entry)
+                adj_list[source_name]['edges'].append(entry)
             elif isinstance(inp, torch.Tensor) and show_non_gradient_nodes:
                 dims = format_dims(tuple(inp.shape))
                 adj_list[f'tensor_{last_tensor_input_id}'] = {
