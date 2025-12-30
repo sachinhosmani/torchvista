@@ -794,7 +794,48 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
         all_nodes = set(adj_list.keys())
         for ancestors in node_to_ancestors.values():
             all_nodes.update(ancestors)
-        
+
+        # Pre-compute original incoming/outgoing dims for each node from the flat adj_list
+        # This must be done BEFORE edge redirection so we capture the true edge dimensions
+        original_incoming_dims = defaultdict(list)
+        original_outgoing_dims = defaultdict(list)
+        for source_node, node_data in adj_list.items():
+            for edge in node_data.get('edges', []):
+                target_node = edge['target']
+                dims = edge.get('dims', '')
+                original_outgoing_dims[source_node].append(dims)
+                original_incoming_dims[target_node].append(dims)
+
+        # For container nodes (ancestors), compute their original dims by looking at
+        # edges that cross their boundary. A container's incoming dims are the dims of
+        # edges entering any of its descendant nodes from outside the container.
+        # Similarly for outgoing dims.
+        def get_descendants(container_node):
+            """Get all leaf nodes that have this container in their ancestry."""
+            descendants = set()
+            for node, ancestors in node_to_ancestors.items():
+                if container_node in ancestors:
+                    descendants.add(node)
+            return descendants
+
+        ancestor_nodes = all_nodes - set(adj_list.keys())
+        for container in ancestor_nodes:
+            descendants = get_descendants(container)
+            # Incoming: edges from non-descendants to descendants
+            for target_node in descendants:
+                for source_node, node_data in adj_list.items():
+                    if source_node in descendants:
+                        continue
+                    for edge in node_data.get('edges', []):
+                        if edge['target'] == target_node:
+                            original_incoming_dims[container].append(edge.get('dims', ''))
+            # Outgoing: edges from descendants to non-descendants
+            for source_node in descendants:
+                for edge in adj_list.get(source_node, {}).get('edges', []):
+                    target_node = edge['target']
+                    if target_node not in descendants:
+                        original_outgoing_dims[container].append(edge.get('dims', ''))
+
         # Initialize nested structure for each node
         nodes = {}
         for node in all_nodes:
@@ -805,6 +846,8 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                     'subgraphs': {},
                     'failed': adj_list[node].get('failed', False),
                     'node_type': adj_list[node].get('node_type', NodeType.MODULE.value),
+                    'original_incoming_dims': tuple(sorted(original_incoming_dims.get(node, []))),
+                    'original_outgoing_dims': tuple(sorted(original_outgoing_dims.get(node, []))),
                 }
             else:
                 # For ancestor nodes not in adj_list (container modules)
@@ -813,6 +856,8 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                     'subgraphs': {},
                     'failed': False,
                     'node_type': NodeType.MODULE.value,
+                    'original_incoming_dims': tuple(sorted(original_incoming_dims.get(node, []))),
+                    'original_outgoing_dims': tuple(sorted(original_outgoing_dims.get(node, []))),
                 }
         
         # Step 2: Process edges and redirect them to representative nodes
@@ -1256,6 +1301,10 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
             Creates a structural signature for a node that captures its type,
             module path, incoming/outgoing dims, and full subgraph topology.
             Two nodes with identical signatures are structurally equivalent.
+
+            Uses the original_incoming_dims and original_outgoing_dims stored on each node
+            (computed before edge redirection in transform_to_nested_graph) to ensure
+            boundary nodes in a container are compared correctly with interior nodes.
             """
             if node_name in signature_cache:
                 return signature_cache[node_name]
@@ -1263,20 +1312,9 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
             node_type = graph_node_name_to_without_suffix.get(node_name, node_name)
             module_path = node_to_module_path.get(node_name, '')
 
-            # Get outgoing edge dims (edges to siblings within parent_subgraph)
-            outgoing_dims = []
-            for edge in node_data.get('edges', []):
-                if edge['target'] in parent_subgraph:
-                    outgoing_dims.append(edge.get('dims', ''))
-            outgoing_dims = tuple(sorted(outgoing_dims))
-
-            # Get incoming edge dims (edges from siblings within parent_subgraph)
-            incoming_dims = []
-            for sibling_name, sibling_data in parent_subgraph.items():
-                for edge in sibling_data.get('edges', []):
-                    if edge['target'] == node_name:
-                        incoming_dims.append(edge.get('dims', ''))
-            incoming_dims = tuple(sorted(incoming_dims))
+            # Use the original dims stored on the node (computed before nesting redirected edges)
+            incoming_dims = node_data.get('original_incoming_dims', ())
+            outgoing_dims = node_data.get('original_outgoing_dims', ())
 
             # Serialize the full subgraph topology
             subgraph_serial = serialize_subgraph(node_data.get('subgraphs', {}))
