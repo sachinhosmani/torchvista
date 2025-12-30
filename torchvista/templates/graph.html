@@ -1721,6 +1721,9 @@
         })
         .text(function([nodeName]) {
             if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) {
+                if (!show_module_attr_names) {
+                    return "Module";
+                }
                 const moduleType = graph_node_name_to_without_suffix[nodeName] || "Module";
                 return formatModuleTypeLabel(moduleType);
             }
