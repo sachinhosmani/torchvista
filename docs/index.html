@@ -66,6 +66,25 @@
             font-weight: 600;
             color: #495057;
             margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .anchor-link {
+            color: #adb5bd;
+            text-decoration: none;
+            font-size: 18px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .section-header:hover .anchor-link {
+            opacity: 1;
+        }
+
+        .anchor-link:hover {
+            color: #667eea;
         }
 
         .section-description {
@@ -239,9 +258,9 @@
         <h1 class="main-heading">Demos</h1>
         
         <!-- Basic Examples -->
-        <div class="demo-section" data-theme="green">
+        <div class="demo-section" data-theme="green" id="basic-examples">
             <div class="section-header">
-                <h2 class="section-title">Basic Examples</h2>
+                <h2 class="section-title">Basic Examples <a href="#basic-examples" class="anchor-link">#</a></h2>
                 <p class="section-description">Basic examples demonstrating core TorchVista functionality</p>
             </div>
             <div class="demos-grid">
@@ -273,9 +292,9 @@
         </div>
 
         <!-- Module Collapse Control -->
-        <div class="demo-section" data-theme="blue">
+        <div class="demo-section" data-theme="blue" id="visual-control">
             <div class="section-header">
-                <h2 class="section-title">Visual control</h2>
+                <h2 class="section-title">Visual control <a href="#visual-control" class="anchor-link">#</a></h2>
                 <div class="section-description">
                     <ul>
                         <li>
@@ -313,9 +332,9 @@
         </div>
 
         <!-- Forced module tracing up to a depth -->
-        <div class="demo-section" data-theme="teal">
+        <div class="demo-section" data-theme="teal" id="forced-tracing-depth">
             <div class="section-header">
-                <h2 class="section-title">Forced module tracing up to a depth</h2>
+                <h2 class="section-title">Forced module tracing up to a depth <a href="#forced-tracing-depth" class="anchor-link">#</a></h2>
                 <div class="section-description">By default Pytorch standard or inbuilt modules' internals aren't traced. Use this flag to force trace all modules (including standard Pytorch modules) up to a desired depth</div>
             </div>
             <div class="demos-grid">
@@ -338,9 +357,9 @@
         </div>
 
         <!-- Error Cases -->
-        <div class="demo-section" data-theme="red">
+        <div class="demo-section" data-theme="red" id="error-handling">
             <div class="section-header">
-                <h2 class="section-title">Error Handling</h2>
+                <h2 class="section-title">Error Handling <a href="#error-handling" class="anchor-link">#</a></h2>
                 <div class="section-description">Demonstrations of how TorchVista handles models that encounter runtime errors</div>
             </div>
             <div class="demos-grid">
@@ -354,9 +373,9 @@
         </div>
 
         <!-- Complex Input/Output and edge cases -->
-        <div class="demo-section" data-theme="purple">
+        <div class="demo-section" data-theme="purple" id="complex-io">
             <div class="section-header">
-                <h2 class="section-title">Complex Input & Output</h2>
+                <h2 class="section-title">Complex Input & Output <a href="#complex-io" class="anchor-link">#</a></h2>
                 <div class="section-description">Models with atypical input/output objects and unusual structures</div>
                 <div class="section-description">
                     <ul>
@@ -382,9 +401,9 @@
         </div>
 
         <!-- Large Models -->
-        <div class="demo-section" data-theme="orange">
+        <div class="demo-section" data-theme="orange" id="real-world">
             <div class="section-header">
-                <h2 class="section-title">Real world Examples</h2>
+                <h2 class="section-title">Real world Examples <a href="#real-world" class="anchor-link">#</a></h2>
                 <div class="section-description">Real-world models</div>
             </div>
             <div class="demos-grid">
@@ -401,9 +420,9 @@
         </div>
 
         <!-- Computer vision models -->
-        <div class="demo-section" data-theme="purple">
+        <div class="demo-section" data-theme="purple" id="cv-models">
             <div class="section-header">
-                <h2 class="section-title">Computer vision models</h2>
+                <h2 class="section-title">Computer vision models <a href="#cv-models" class="anchor-link">#</a></h2>
                 <div class="section-description">Real-world CV models</div>
             </div>
             <div class="demos-grid">
@@ -435,9 +454,9 @@
         </div>
 
         <!-- Unusual situations -->
-        <div class="demo-section" data-theme="orange">
+        <div class="demo-section" data-theme="orange" id="unusual-situations">
             <div class="section-header">
-                <h2 class="section-title">Unusual situations</h2>
+                <h2 class="section-title">Unusual situations <a href="#unusual-situations" class="anchor-link">#</a></h2>
                 <div class="section-description">Some unusual situations</div>
             </div>
             <div class="demos-grid">
@@ -451,9 +470,9 @@
         </div>
 
         <!-- Compression Tests (Experimental) -->
-        <div class="demo-section" data-theme="teal">
+        <div class="demo-section" data-theme="teal" id="compressed-view">
             <div class="section-header">
-                <h2 class="section-title">Compressed View (Experimental)</h2>
+                <h2 class="section-title">Compressed View (Experimental) <a href="#compressed-view" class="anchor-link">#</a></h2>
                 <div class="section-description">
                     Detects and compresses repeated blocks in the graph in Sequential or ModuleList containers.
                     When consecutive modules have matching tensor dimensions and identical internal structure, they are visually compressed with a repetition count indicator.
