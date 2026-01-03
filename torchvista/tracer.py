@@ -101,9 +101,6 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
     current_op = None
     current_executing_module = None
     current_executing_function = None
-    last_tensor_input_id = 0
-    last_np_array_input_id = 0
-    last_numeric_input_id = 0
 
     global_node_counter = 0
     module_to_node_name = {}
@@ -219,8 +216,8 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
             "keyword_args": formatted_kwargs
         }
 
-    def pre_trace_op(op_name, node_type, *args, **kwargs):        
-        nonlocal current_op, last_successful_op, last_tensor_input_id, last_np_array_input_id, last_numeric_input_id
+    def pre_trace_op(op_name, node_type, *args, **kwargs):
+        nonlocal current_op, last_successful_op, global_node_counter
 
         input_tensors = extract_tensors_from_obj(args) + extract_tensors_from_obj(kwargs)
         # This can happen in some discovered operations which don't take any inputs. For these, we don't
@@ -250,7 +247,9 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 adj_list[source_name]['edges'].append(entry)
             elif isinstance(inp, torch.Tensor) and show_non_gradient_nodes:
                 dims = format_dims(tuple(inp.shape))
-                adj_list[f'tensor_{last_tensor_input_id}'] = {
+                global_node_counter += 1
+                tensor_node_name = f'tensor_{global_node_counter}'
+                adj_list[tensor_node_name] = {
                     'edges': [],
                     'failed': False,
                     'node_type': 'Constant',
@@ -258,34 +257,37 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 entry = {'target': op_name, 'dims': dims, 'edge_data_id': id(inp)}
                 if hasattr(inp, '_is_implied_edge') and inp._is_implied_edge:
                     entry['is_implied_edge'] = True
-                adj_list[f'tensor_{last_tensor_input_id}']['edges'].append(entry)
-                node_to_ancestors[f'tensor_{last_tensor_input_id}'] = module_stack[::-1]
-                constant_node_names.append(f'tensor_{last_tensor_input_id}')
-                graph_node_display_names[f'tensor_{last_tensor_input_id}'] = f'tensor_{last_tensor_input_id}'
-                last_tensor_input_id += 1
+                adj_list[tensor_node_name]['edges'].append(entry)
+                node_to_ancestors[tensor_node_name] = module_stack[::-1]
+                constant_node_names.append(tensor_node_name)
+                graph_node_display_names[tensor_node_name] = tensor_node_name
+                graph_node_name_to_without_suffix[tensor_node_name] = 'tensor'
 
         if show_non_gradient_nodes:
             for inp in args:
                 if isinstance(inp, np.ndarray):
                     dims = format_dims(tuple(inp.shape))
-                    adj_list[f'np_array_{last_np_array_input_id}'] = {
+                    global_node_counter += 1
+                    np_array_node_name = f'np_array_{global_node_counter}'
+                    adj_list[np_array_node_name] = {
                         'edges': [],
                         'failed': False,
                         'node_type': NodeType.CONSTANT.value,
                     }
-                    adj_list[f'np_array_{last_np_array_input_id}']['edges'].append({'target': op_name, 'dims': dims, 'edge_data_id': id(inp),})
-                    constant_node_names.append(f'np_array_{last_np_array_input_id}')
-                    node_to_ancestors[f'np_array_{last_np_array_input_id}'] = module_stack[::-1]
-                    graph_node_display_names[f'np_array_{last_np_array_input_id}'] = f'np_array_{last_np_array_input_id}'
-                    last_np_array_input_id += 1
+                    adj_list[np_array_node_name]['edges'].append({'target': op_name, 'dims': dims, 'edge_data_id': id(inp),})
+                    constant_node_names.append(np_array_node_name)
+                    node_to_ancestors[np_array_node_name] = module_stack[::-1]
+                    graph_node_display_names[np_array_node_name] = np_array_node_name
+                    graph_node_name_to_without_suffix[np_array_node_name] = 'np_array'
 
             num_scalars = len([inp for inp in args if isinstance(inp, numbers.Number)])
             if num_scalars > 0:
+                global_node_counter += 1
                 if num_scalars == 1:
-                    scalar_node_name = f'scalar_{last_numeric_input_id}'
+                    scalar_node_name = f'scalar_{global_node_counter}'
                     scalar_display_name = 'scalar'
                 else:
-                    scalar_node_name = f'scalars_{last_numeric_input_id}_x_{num_scalars}'
+                    scalar_node_name = f'scalars_{global_node_counter}_x_{num_scalars}'
                     scalar_display_name = f'{num_scalars} scalars'
 
                 dims = "( )" if num_scalars == 1 else f"( ) x {num_scalars}"
@@ -299,7 +301,6 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 node_to_ancestors[scalar_node_name] = module_stack[::-1]
                 graph_node_name_to_without_suffix[scalar_node_name] = scalar_display_name
                 graph_node_display_names[scalar_node_name] = scalar_display_name
-                last_numeric_input_id += 1
 
         record_op_parameters(op_name, *args, **kwargs)
 
@@ -1294,10 +1295,15 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
 
             import re
             def extract_number(name):
+                # Handle scalars_{id}_x_{count} pattern - extract the id, not the count
+                scalars_match = re.match(r'scalars_(\d+)_x_\d+$', name)
+                if scalars_match:
+                    return int(scalars_match.group(1))
+                # Default: extract trailing number
                 match = re.search(r'_(\d+)$', name)
                 return int(match.group(1)) if match else 0
 
-            # Sort by trailing number for canonical ordering
+            # Sort by global ID for canonical ordering
             sorted_names = sorted(subgraph.keys(), key=extract_number)
             name_to_index = {name: i for i, name in enumerate(sorted_names)}
 
