@@ -1652,6 +1652,10 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
         restore_modules()
         for tensor in input_tensors:
             cleanup_tensor_attributes(tensor)
+        # Clean up model buffers that may have been tagged during tracing
+        # (e.g., BatchNorm's num_batches_tracked gets tagged by in-place add_)
+        for buffer in model.buffers():
+            cleanup_tensor_attributes(buffer)
 
     cleanup_graph(adj_list, nodes_to_delete)
 
