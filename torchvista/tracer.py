@@ -260,7 +260,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 adj_list[tensor_node_name]['edges'].append(entry)
                 node_to_ancestors[tensor_node_name] = module_stack[::-1]
                 constant_node_names.append(tensor_node_name)
-                graph_node_display_names[tensor_node_name] = tensor_node_name
+                graph_node_display_names[tensor_node_name] = 'tensor'
                 graph_node_name_to_without_suffix[tensor_node_name] = 'tensor'
 
         if show_non_gradient_nodes:
