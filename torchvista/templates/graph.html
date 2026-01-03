@@ -451,6 +451,7 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             opacity: .6;
         }
+
     </style>
     
     <script>
@@ -515,6 +516,7 @@
     const graph_node_display_names = ${graph_node_display_names};
     const ancestor_map = ${ancestor_map};
     const repeat_containers = new Set(${repeat_containers});
+    const REPEAT_CONTAINER_COLOR = "#FA8334";
     const collapse_modules_after_depth = ${collapse_modules_after_depth};
     const show_module_attr_names = ${show_module_attr_names};
     const node_to_module_path = ${node_to_module_path};
@@ -883,7 +885,7 @@
                 if (nodeData.node_type === "Input") return "#FF9AFF";
                 if (nodeData.node_type === "Constant") return "#EBEBEB";
                 if (nodeData.node_type === "Output") return "#74e071";
-                if (repeat_containers.has(nodeName)) return "#0C8346";
+                if (repeat_containers.has(nodeName)) return REPEAT_CONTAINER_COLOR;
                 if (nodeData.node_type === "Module") return "#8BDEDB";
                 if (nodeData.node_type === "Operation") return "#FEBC5A";
             }
@@ -1012,8 +1014,8 @@
             dotSource += `${indent}  fontsize=10;\n`;
             dotSource += `${indent}  style="${isRepeat ? 'rounded,dashed' : 'rounded'}";\n`;
             if (isRepeat) {
-                dotSource += `${indent}  color="#0C8346";\n`;
-                dotSource += `${indent}  fontcolor="#0C8346";\n`;
+                dotSource += `${indent}  color="${REPEAT_CONTAINER_COLOR}";\n`;
+                dotSource += `${indent}  fontcolor="#333";\n`;
             } else {
                 // Prevent Graphviz from inheriting repeat container colors into children
                 dotSource += `${indent}  color="black";\n`;
@@ -1402,22 +1404,29 @@
             if (hasFailedNodes) {
                 group.classed("error_${unique_id}", true);
             }
+            if (isRepeat) {
+                group.classed("repeat-container_${unique_id}", true);
+            }
 
             // Parse bounding box coordinates
             const [x1, y1, x2, y2] = clusterData.bb.split(",").map(Number);
             
             // Create boundary box
-            group.append("rect")
+            const rect = group.append("rect")
             .attr("x", x1)
             .attr("y", y1)
             .attr("width", x2 - x1)
             .attr("height", y2 - y1)
             .attr("fill-opacity", 0.0)
-            .attr("stroke", isRepeat ? "#0C8346" : "black")
+            .attr("stroke", isRepeat ? REPEAT_CONTAINER_COLOR : "black")
             .attr("stroke-dasharray", isRepeat ? "3 2" : null)
             .attr("stroke-width", isRepeat ? 1.2 : 1)
             .attr("rx", 5)
             .attr("ry", 5);
+
+            if (isRepeat) {
+                rect.style("filter", `drop-shadow(0 0 2px ${REPEAT_CONTAINER_COLOR})`);
+            }
                 
             // Create label for the cluster
             const textGroup = group.append("g")
@@ -1429,7 +1438,7 @@
             .attr("dominant-baseline", "hanging")
             .attr("dy", "-6")
             .attr("font-size", 7)
-            .attr("fill", isRepeat ? "#0C8346" : "#333")
+            .attr("fill", "#333")
             .attr("stroke", "#f3f3eb")
             .attr("stroke-width", "8px")
             .attr("paint-order", "stroke")
