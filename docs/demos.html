@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TorchVista Demos</title>
+    <style>
+        /* MkDocs-inspired Material theme */
+        :root {
+            --md-primary-fg-color: #4051b5;
+            --md-primary-fg-color--dark: #303fa1;
+            --md-accent-fg-color: #526cfe;
+            --md-default-bg-color: #ffffff;
+            --md-default-fg-color: rgba(0, 0, 0, 0.87);
+            --md-default-fg-color--light: rgba(0, 0, 0, 0.54);
+            --md-code-bg-color: #f5f5f5;
+            --md-code-fg-color: #37474f;
+            --md-footer-bg-color: #1e1e1e;
+            --md-footer-fg-color: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--md-default-bg-color);
+            color: var(--md-default-fg-color);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .md-header {
+            background-color: var(--md-primary-fg-color);
+            color: white;
+            box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .md-header__inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .md-header__title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            flex: 1;
+        }
+
+        .md-header__title a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .md-header__nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .md-header__nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+        }
+
+        .md-header__nav a:hover {
+            opacity: 1;
+        }
+
+        .md-header__nav iframe {
+            vertical-align: middle;
+        }
+
+        /* Main content */
+        .md-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .md-content {
+            padding: 0 1rem;
+        }
+
+        /* Page title */
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--md-default-fg-color);
+        }
+
+        /* Demo sections */
+        .demo-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 0.05rem solid rgba(0, 0, 0, 0.07);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--md-default-fg-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .anchor-link {
+            color: var(--md-default-fg-color--light);
+            text-decoration: none;
+            font-size: 1.25rem;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .section-header:hover .anchor-link {
+            opacity: 1;
+        }
+
+        .anchor-link:hover {
+            color: var(--md-accent-fg-color);
+        }
+
+        .section-description {
+            color: var(--md-default-fg-color--light);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .section-description ul {
+            margin: 0.75rem 0 0 0;
+            padding-left: 1.5rem;
+            list-style-type: disc;
+        }
+
+        .section-description li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .section-description b,
+        .section-description strong {
+            color: var(--md-default-fg-color);
+            font-weight: 600;
+        }
+
+        /* Demos grid */
+        .demos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .demo-item {
+            background: var(--md-code-bg-color);
+            border-radius: 0.2rem;
+            padding: 1rem 1.25rem;
+            transition: all 0.2s ease;
+            border-left: 0.2rem solid transparent;
+            position: relative;
+        }
+
+        .demo-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background: white;
+            border-left-color: var(--md-accent-fg-color);
+        }
+
+        .demo-item a {
+            color: var(--md-default-fg-color);
+            text-decoration: none;
+            font-weight: 400;
+            display: block;
+            font-size: 0.95rem;
+        }
+
+        .demo-item:hover a {
+            color: var(--md-accent-fg-color);
+        }
+
+        /* Category color variations */
+        .demo-section[data-category="basic"] .demo-item:hover {
+            border-left-color: #28a745;
+        }
+
+        .demo-section[data-category="basic"] .demo-item:hover a {
+            color: #28a745;
+        }
+
+        .demo-section[data-category="visual"] .demo-item:hover {
+            border-left-color: #17a2b8;
+        }
+
+        .demo-section[data-category="visual"] .demo-item:hover a {
+            color: #17a2b8;
+        }
+
+        .demo-section[data-category="tracing"] .demo-item:hover {
+            border-left-color: #20c997;
+        }
+
+        .demo-section[data-category="tracing"] .demo-item:hover a {
+            color: #20c997;
+        }
+
+        .demo-section[data-category="error"] .demo-item:hover {
+            border-left-color: #dc3545;
+        }
+
+        .demo-section[data-category="error"] .demo-item:hover a {
+            color: #dc3545;
+        }
+
+        .demo-section[data-category="complex"] .demo-item:hover {
+            border-left-color: #6f42c1;
+        }
+
+        .demo-section[data-category="complex"] .demo-item:hover a {
+            color: #6f42c1;
+        }
+
+        .demo-section[data-category="real-world"] .demo-item:hover {
+            border-left-color: #fd7e14;
+        }
+
+        .demo-section[data-category="real-world"] .demo-item:hover a {
+            color: #fd7e14;
+        }
+
+        .demo-section[data-category="cv"] .demo-item:hover {
+            border-left-color: #e83e8c;
+        }
+
+        .demo-section[data-category="cv"] .demo-item:hover a {
+            color: #e83e8c;
+        }
+
+        .demo-section[data-category="unusual"] .demo-item:hover {
+            border-left-color: #ffc107;
+        }
+
+        .demo-section[data-category="unusual"] .demo-item:hover a {
+            color: #ffc107;
+        }
+
+        .demo-section[data-category="compression"] .demo-item:hover {
+            border-left-color: #20c997;
+        }
+
+        .demo-section[data-category="compression"] .demo-item:hover a {
+            color: #20c997;
+        }
+
+        /* Footer */
+        .md-footer {
+            background-color: var(--md-footer-bg-color);
+            color: var(--md-footer-fg-color);
+            padding: 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .md-footer__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .md-footer a {
+            color: var(--md-accent-fg-color);
+            text-decoration: none;
+        }
+
+        .md-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .demos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .md-header__inner {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .md-header__nav {
+                gap: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="md-header">
+        <div class="md-header__inner">
+            <div class="md-header__title">
+                <a href="index.html">TorchVista</a>
+            </div>
+            <nav class="md-header__nav">
+                <a href="index.html">Home</a>
+                <a href="https://github.com/sachinhosmani/torchvista" target="_blank">GitHub</a>
+                <a href="https://colab.research.google.com/drive/1wrWKhpvGiqHhE0Lb1HnFGeOcS4uBqGXw?usp=sharing" target="_blank">Colab Tutorial</a>
+                <iframe src="https://ghbtns.com/github-btn.html?user=sachinhosmani&repo=torchvista&type=star&count=true&size=large"
+                        frameborder="0" scrolling="0" width="170" height="30" title="GitHub Star Button"></iframe>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="md-container">
+        <div class="md-content">
+            <h1 class="page-title">Demos</h1>
+
+            <!-- Basic Examples -->
+            <div class="demo-section" data-category="basic" id="basic-examples">
+                <div class="section-header">
+                    <h2 class="section-title">Basic Examples <a href="#basic-examples" class="anchor-link">#</a></h2>
+                    <p class="section-description">Basic examples demonstrating core TorchVista functionality</p>
+                </div>
+                <div class="demos-grid">
+                    <div class="demo-item">
+                        <a href="demos/LinearModel.html">Simple linear model</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/ArtificiallyMadeComplexModel.html">Artificially made complex model</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/CNNWithBranching.html">CNN with Branching</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/MLPSkipConnections.html">MLP with Skip Connections</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/SimpleResnet.html">Simple Resnet</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/SelfAttentionClassifier.html">Self Attention Classifier</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/TransformerPositional.html">Positional Transformer</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/DeepCNN.html">Deep CNN</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module Collapse Control -->
+            <div class="demo-section" data-category="visual" id="visual-control">
+                <div class="section-header">
+                    <h2 class="section-title">Visual Control <a href="#visual-control" class="anchor-link">#</a></h2>
+                    <div class="section-description">
+                        <ul>
+                            <li>
+                                Initial visual expansion depth of modules to keep the initial graph small and ready for selective expansion
+                            </li>
+                            <li>
+                                Show/hide non-gradient (constant) nodes
+                            </li>
+                            <li>
+                                Show module attribute names in node labels
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="demos-grid">
+                    <div class="demo-item">
+                        <a href="demos/MobileVitCollapsed.html">MobileVit (All modules fully collapsed)</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/MobileVitCollapseDepth1.html">MobileVit (Collapse modules at depth = 1)</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/MobileVitCollapseDepth2.html">MobileVit (Collapse modules at depth = 2)</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/MobileVitHideNonGradientNodes.html">MobileVit (Collapse depth = 2) + hide non-gradient (constant) nodes</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/MobileVitCollapseDepth3.html">MobileVit (Collapse modules at depth = 3)</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/TinyModelWithNestedSubmodules.html">Show attribute names for modules</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forced module tracing up to a depth -->
+            <div class="demo-section" data-category="tracing" id="forced-tracing-depth">
+                <div class="section-header">
+                    <h2 class="section-title">Forced Module Tracing up to a Depth <a href="#forced-tracing-depth" class="anchor-link">#</a></h2>
+                    <div class="section-description">By default PyTorch standard or inbuilt modules' internals aren't traced. Use this flag to force trace all modules (including standard PyTorch modules) up to a desired depth</div>
+                </div>
+                <div class="demos-grid">
+                    <div class="demo-item">
+                        <a href="demos/TransformerPositionalForceTraceDepth.html">Force trace to see the contents of the TransformerEncoder module</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/TransformerPositionalForceTraceDepth2.html">Force trace deeper (depth = 2)</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/TransformerPositionalForceTraceDepth2WithCollapseDepth.html">Force trace deeper (depth = 2) with increased visual collapse depth</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/TransformerPositionalForceTraceDepth3WithCollapseDepth.html">Force trace deeper (depth = 3) with increased visual collapse depth</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/DeepCNNForceTraceDepth4.html">Force trace (depth = 4) on a deep CNN model</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error Cases -->
+            <div class="demo-section" data-category="error" id="error-handling">
+                <div class="section-header">
+                    <h2 class="section-title">Error Handling <a href="#error-handling" class="anchor-link">#</a></h2>
+                    <div class="section-description">Demonstrations of how TorchVista handles models that encounter runtime errors</div>
+                </div>
+                <div class="demos-grid">
+                    <div class="demo-item">
+                        <a href="demos/UNetBottleneckAttention.html">Tensor size mismatch error</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/MultiPathWithError.html">Index out of bounds error</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Complex Input/Output and edge cases -->
+            <div class="demo-section" data-category="complex" id="complex-io">
+                <div class="section-header">
+                    <h2 class="section-title">Complex Input & Output <a href="#complex-io" class="anchor-link">#</a></h2>
+                    <div class="section-description">Models with atypical input/output objects and unusual structures
+                        <ul>
+                            <li>Complex input and output</li>
+                            <li>Use dict key path if tensors are passed/returned in dicts</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="demos-grid">
+                    <div class="demo-item">
+                        <a href="demos/ComplexInputOutput.html">Complex input and output</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/RepeatedOutputTensors.html">Same output tensor repeated and returned</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/UnusedNodes.html">Model nodes that don't connect to the output</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/NestedDictInputOutput.html">Tensors passed/returned in dicts</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Large Models -->
+            <div class="demo-section" data-category="real-world" id="real-world">
+                <div class="section-header">
+                    <h2 class="section-title">Real World Examples <a href="#real-world" class="anchor-link">#</a></h2>
+                    <div class="section-description">Real-world models</div>
+                </div>
+                <div class="demos-grid">
+                    <div class="demo-item">
+                        <a href="demos/XLNetBaseCased.html">XLNetBaseCased (Large model)</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/MiniUnetPP.html">Unet PP</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/FasterrcnnMobilenetV3Large320Fpn.html">FasterRCNN Mobilenet V3 Large 320 FPN</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Computer vision models -->
+            <div class="demo-section" data-category="cv" id="cv-models">
+                <div class="section-header">
+                    <h2 class="section-title">Computer Vision Models <a href="#cv-models" class="anchor-link">#</a></h2>
+                    <div class="section-description">Real-world CV models</div>
+                </div>
+                <div class="demos-grid">
+                    <div class="demo-item">
+                        <a href="demos/LeNet5.html">LeNet5</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/AlexNet.html">AlexNet</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/ConvextTiny.html">ConvextTiny</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/ResnetSmall.html">Resnet small</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/SqueezeNet.html">SqueezeNet</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/VisionTransformer.html">Vision Transformer</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/EfficientNetB0.html">EfficientNetB0</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/MobilenetV3Small.html">MobilenetV3Small</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unusual situations -->
+            <div class="demo-section" data-category="unusual" id="unusual-situations">
+                <div class="section-header">
+                    <h2 class="section-title">Unusual Situations <a href="#unusual-situations" class="anchor-link">#</a></h2>
+                    <div class="section-description">Some unusual situations</div>
+                </div>
+                <div class="demos-grid">
+                    <div class="demo-item">
+                        <a href="demos/NewTensorInjector.html">Model returns new tensor</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/TensorTransposeProperties.html">.T, .mT, .H style transpose</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compression Tests (Experimental) -->
+            <div class="demo-section" data-category="compression" id="compressed-view">
+                <div class="section-header">
+                    <h2 class="section-title">Compressed View (Experimental) <a href="#compressed-view" class="anchor-link">#</a></h2>
+                    <div class="section-description">
+                        Detects and compresses repeated blocks in the graph in Sequential or ModuleList containers.
+                        When consecutive modules have matching tensor dimensions and identical internal structure, they are visually compressed with a repetition count indicator.
+                    </div>
+                </div>
+                <div class="demos-grid">
+                    <div class="demo-item">
+                        <a href="demos/CompressionTest1.html">4 identical Linear layers (Sequential)</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/CompressionTest2.html">4 identical Linear layers (ModuleList)</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/CompressionTest3.html">Repetition of Sequential within ModuleList</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/CompressionTest4.html">Same block reference reused 4 times</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/CompressionTest5.html">Repetition of Sequential within ModuleList (10x repetition)</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/CompressionTest6.html">6 TransformerBlocks (collapsed view)</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/CompressionTest7.html">Encoder-decoder with nested attention blocks</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/CompressionTest8.html">4 Linear with different dims (Sequential) - no compression</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/CompressionTest9.html">4 Linear with different dims (ModuleList) - no compression</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/CompressionTest10.html">Parallel branches with 2 repeating layers each</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/CompressionTest11.html">Parallel: imperfect vs perfect MLP repetition</a>
+                    </div>
+                    <div class="demo-item">
+                        <a href="demos/CompressionTest12.html">Module involving scalars and tensors</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="md-footer">
+        <div class="md-footer__inner">
+            <p><a href="https://github.com/sachinhosmani/torchvista" target="_blank">GitHub</a></p>
+        </div>
+    </footer>
+</body>
+</html>

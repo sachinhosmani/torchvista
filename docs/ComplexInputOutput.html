@@ -2,6 +2,9 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
         <style>
             html, body {
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -74,7 +77,19 @@
             }
 
             .code-box code {
-                font-family: monospace;
+                font-family: "Roboto Mono", "Courier New", monospace;
+                font-size: 0.85rem;
+                line-height: 1.5;
+                background: #2b2b2b;
+                border-radius: 0.2rem;
+                padding: 1rem;
+                display: block;
+                color: #f8f8f2;
+            }
+
+            /* Override highlight.js background */
+            .code-box code.hljs {
+                background: #2b2b2b;
             }
 
             .graph-view {
@@ -136,10 +151,6 @@
     </head>
     <body>
     
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
-
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 document.querySelectorAll('pre code').forEach((block) => {
@@ -220,120 +231,120 @@ trace_model(model, example_input)
     
             <div class="graph-view" id="graphContainer" style="height: 100%">
                 <div class="graph-box-header">Visualized Interactive Graph</div>
-                <div id="graph-container_dc68cbcf-1fcd-4f2c-871f-6e484afe1177">
-    <div id="graph_dc68cbcf-1fcd-4f2c-871f-6e484afe1177"></div>
-    <div class="logo_dc68cbcf-1fcd-4f2c-871f-6e484afe1177">
+                <div id="graph-container_59e41fb2-3919-4d6b-b5cb-aee1566a910f">
+    <div id="graph_59e41fb2-3919-4d6b-b5cb-aee1566a910f"></div>
+    <div class="logo_59e41fb2-3919-4d6b-b5cb-aee1566a910f">
         <a href="https://github.com/sachinhosmani/torchvista" target="_blank" rel="noopener noreferrer">
         torchvista
         </a>
     </div>
-    <div id="popup_dc68cbcf-1fcd-4f2c-871f-6e484afe1177" class="popup_dc68cbcf-1fcd-4f2c-871f-6e484afe1177" style="display: none;">
-        <div class="popup-header_dc68cbcf-1fcd-4f2c-871f-6e484afe1177">
-            <h3 id="popup-title_dc68cbcf-1fcd-4f2c-871f-6e484afe1177"></h3>
-            <span class="popup-close_dc68cbcf-1fcd-4f2c-871f-6e484afe1177">✕</span>
+    <div id="popup_59e41fb2-3919-4d6b-b5cb-aee1566a910f" class="popup_59e41fb2-3919-4d6b-b5cb-aee1566a910f" style="display: none;">
+        <div class="popup-header_59e41fb2-3919-4d6b-b5cb-aee1566a910f">
+            <h3 id="popup-title_59e41fb2-3919-4d6b-b5cb-aee1566a910f"></h3>
+            <span class="popup-close_59e41fb2-3919-4d6b-b5cb-aee1566a910f">✕</span>
         </div>
-        <div id="popup-content_dc68cbcf-1fcd-4f2c-871f-6e484afe1177" class="popup-content_dc68cbcf-1fcd-4f2c-871f-6e484afe1177">
-            <div id="common-info_dc68cbcf-1fcd-4f2c-871f-6e484afe1177">
+        <div id="popup-content_59e41fb2-3919-4d6b-b5cb-aee1566a910f" class="popup-content_59e41fb2-3919-4d6b-b5cb-aee1566a910f">
+            <div id="common-info_59e41fb2-3919-4d6b-b5cb-aee1566a910f">
             </div>
-            <div id="module-template_dc68cbcf-1fcd-4f2c-871f-6e484afe1177" style="display:none;">
-                <details open id="module-parameters-details_dc68cbcf-1fcd-4f2c-871f-6e484afe1177">
+            <div id="module-template_59e41fb2-3919-4d6b-b5cb-aee1566a910f" style="display:none;">
+                <details open id="module-parameters-details_59e41fb2-3919-4d6b-b5cb-aee1566a910f">
                     <summary style="color: black"><strong>forward() Parameters</strong></summary>
-                    <div id="module-parameters_dc68cbcf-1fcd-4f2c-871f-6e484afe1177" class="json-viewer_dc68cbcf-1fcd-4f2c-871f-6e484afe1177"></div>
+                    <div id="module-parameters_59e41fb2-3919-4d6b-b5cb-aee1566a910f" class="json-viewer_59e41fb2-3919-4d6b-b5cb-aee1566a910f"></div>
                 </details>
-                <details open id="module-attributes-details_dc68cbcf-1fcd-4f2c-871f-6e484afe1177">
+                <details open id="module-attributes-details_59e41fb2-3919-4d6b-b5cb-aee1566a910f">
                     <summary style="color: black"><strong>Attributes</strong></summary>
-                    <div id="module-attributes_dc68cbcf-1fcd-4f2c-871f-6e484afe1177" class="json-viewer_dc68cbcf-1fcd-4f2c-871f-6e484afe1177"></div>
+                    <div id="module-attributes_59e41fb2-3919-4d6b-b5cb-aee1566a910f" class="json-viewer_59e41fb2-3919-4d6b-b5cb-aee1566a910f"></div>
                 </details>
             </div>
-            <div id="tensor-op-template_dc68cbcf-1fcd-4f2c-871f-6e484afe1177" style="display:none;">
+            <div id="tensor-op-template_59e41fb2-3919-4d6b-b5cb-aee1566a910f" style="display:none;">
                 <summary><strong>Parameters</strong></summary>
-                <div id="tensor-op-parameters_dc68cbcf-1fcd-4f2c-871f-6e484afe1177" class="json-viewer_dc68cbcf-1fcd-4f2c-871f-6e484afe1177"></div>
+                <div id="tensor-op-parameters_59e41fb2-3919-4d6b-b5cb-aee1566a910f" class="json-viewer_59e41fb2-3919-4d6b-b5cb-aee1566a910f"></div>
             </div>
-            <p id="no-info_dc68cbcf-1fcd-4f2c-871f-6e484afe1177" style="display:none;">No further information available for this node.</p>
+            <p id="no-info_59e41fb2-3919-4d6b-b5cb-aee1566a910f" style="display:none;">No further information available for this node.</p>
         </div>
     </div>
 
     <style>
-        .node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 rect {
+        .node_59e41fb2-3919-4d6b-b5cb-aee1566a910f rect {
             stroke: #333;
             fill: #fff;
         }
-        text.node-label_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        text.node-label_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.type-indicator_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        text.type-indicator_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.collapse-icon_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        text.collapse-icon_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 14px;
             cursor: default;
             user-select: none;
         }
-        .edge_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        .edge_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             stroke: #797979;
             fill: none;
         }
-        .node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 rect.input_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 { fill: #FF9AFF; }
-        .node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 rect.constant_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 { fill: rgb(235 235 235); }
+        .node_59e41fb2-3919-4d6b-b5cb-aee1566a910f rect.input_59e41fb2-3919-4d6b-b5cb-aee1566a910f { fill: #FF9AFF; }
+        .node_59e41fb2-3919-4d6b-b5cb-aee1566a910f rect.constant_59e41fb2-3919-4d6b-b5cb-aee1566a910f { fill: rgb(235 235 235); }
 
-        .node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 rect.output_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 { fill: #74e071; }
-        .node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 rect.failed_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 { fill: rgb(224 15 15); }
-        .node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 rect.module_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 { fill: #8BDEDB; }
-        .node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 rect.operation_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 { fill: #FEBC5A; }
+        .node_59e41fb2-3919-4d6b-b5cb-aee1566a910f rect.output_59e41fb2-3919-4d6b-b5cb-aee1566a910f { fill: #74e071; }
+        .node_59e41fb2-3919-4d6b-b5cb-aee1566a910f rect.failed_59e41fb2-3919-4d6b-b5cb-aee1566a910f { fill: rgb(224 15 15); }
+        .node_59e41fb2-3919-4d6b-b5cb-aee1566a910f rect.module_59e41fb2-3919-4d6b-b5cb-aee1566a910f { fill: #8BDEDB; }
+        .node_59e41fb2-3919-4d6b-b5cb-aee1566a910f rect.operation_59e41fb2-3919-4d6b-b5cb-aee1566a910f { fill: #FEBC5A; }
 
-        .node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 ellipse.input_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 { fill: #FF9AFF; }
-        .node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 ellipse.constant_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 { fill: rgb(235 235 235); }
-        .node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 ellipse.output_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 { fill: #74e071; }
-        .node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 ellipse.failed_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 { fill: rgb(224 15 15); }
+        .node_59e41fb2-3919-4d6b-b5cb-aee1566a910f ellipse.input_59e41fb2-3919-4d6b-b5cb-aee1566a910f { fill: #FF9AFF; }
+        .node_59e41fb2-3919-4d6b-b5cb-aee1566a910f ellipse.constant_59e41fb2-3919-4d6b-b5cb-aee1566a910f { fill: rgb(235 235 235); }
+        .node_59e41fb2-3919-4d6b-b5cb-aee1566a910f ellipse.output_59e41fb2-3919-4d6b-b5cb-aee1566a910f { fill: #74e071; }
+        .node_59e41fb2-3919-4d6b-b5cb-aee1566a910f ellipse.failed_59e41fb2-3919-4d6b-b5cb-aee1566a910f { fill: rgb(224 15 15); }
 
-        .node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 ellipse {
+        .node_59e41fb2-3919-4d6b-b5cb-aee1566a910f ellipse {
             stroke: #333;
             stroke-width: 1px;
         }
-        .edgeLabelGroup_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        .edgeLabelGroup_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             pointer-events: none;
         }
-        #arrowhead_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 path {
+        #arrowhead_59e41fb2-3919-4d6b-b5cb-aee1566a910f path {
             fill: #333333;;
         }
-        .node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 rect,
-        .node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 ellipse {
+        .node_59e41fb2-3919-4d6b-b5cb-aee1566a910f rect,
+        .node_59e41fb2-3919-4d6b-b5cb-aee1566a910f ellipse {
             transition: fill 0.3s ease;
         }
 
-        .node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 .type-indicator_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        .node_59e41fb2-3919-4d6b-b5cb-aee1566a910f .type-indicator_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             font-size: 5px;
             fill: rgba(0, 0, 0, 1.0);  /* Dark grey, semi-transparent */
             pointer-events: none;
         }
 
-        .node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177.error_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 rect {
+        .node_59e41fb2-3919-4d6b-b5cb-aee1566a910f.error_59e41fb2-3919-4d6b-b5cb-aee1566a910f rect {
             stroke: black;
             stroke-width: 1px;
         }
 
-        .boundary-box_dc68cbcf-1fcd-4f2c-871f-6e484afe1177.error_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 > rect:first-of-type {
+        .boundary-box_59e41fb2-3919-4d6b-b5cb-aee1566a910f.error_59e41fb2-3919-4d6b-b5cb-aee1566a910f > rect:first-of-type {
             fill: red;
             fill-opacity: 0.2;
         }
 
-        #graph-container_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        #graph-container_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             position: relative;
             height: 95%;
             width: ${width};
             overflow: hidden;
         }
 
-        #graph_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        #graph_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             height: 100%;
         }
         
-        .popup_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        .popup_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             position: absolute;
             background: white;
@@ -348,7 +359,7 @@ trace_model(model, example_input)
             flex-direction: column;
         }
 
-        .popup-header_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        .popup-header_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             position: sticky;
             top: 0;
             background: white;
@@ -360,12 +371,12 @@ trace_model(model, example_input)
             z-index: 1;
         }
 
-        .popup_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 h3 {
+        .popup_59e41fb2-3919-4d6b-b5cb-aee1566a910f h3 {
             margin: 0;
             font-size: 16px;
         }
 
-        .popup-content_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        .popup-content_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             padding: 10px;
             padding-bottom: 10px;
             overflow-y: auto;
@@ -373,87 +384,87 @@ trace_model(model, example_input)
             flex-grow: 1;
         }
 
-        .popup_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 pre {
+        .popup_59e41fb2-3919-4d6b-b5cb-aee1566a910f pre {
             white-space: pre;
             overflow-x: auto;
         }
 
-        .popup-close_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        .popup-close_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             cursor: pointer;
             font-size: 24px;
             font-weight: bold;
             line-height: 1;
         }
 
-        #popup-title_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        #popup-title_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             font-size: 16px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             color: black;
         }
 
-        #graph-container_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        #graph-container_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             position: relative;
         }
 
-        #graph-container_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 pre {
+        #graph-container_59e41fb2-3919-4d6b-b5cb-aee1566a910f pre {
             margin-bottom: 0;
         }
 
-        .boundary-box_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 rect {
+        .boundary-box_59e41fb2-3919-4d6b-b5cb-aee1566a910f rect {
             pointer-events: none;
         }
-        .boundary-box_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 text {
+        .boundary-box_59e41fb2-3919-4d6b-b5cb-aee1566a910f text {
             pointer-events: none;
             user-select: none;
         }
 
-        .boundary-box_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 rect {
+        .boundary-box_59e41fb2-3919-4d6b-b5cb-aee1566a910f rect {
             pointer-events: none;
         }
-        .boundary-box_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 text {
+        .boundary-box_59e41fb2-3919-4d6b-b5cb-aee1566a910f text {
             pointer-events: none;
             user-select: none;
             font-weight: bold;
         }
-        .edge-label_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 text {
+        .edge-label_59e41fb2-3919-4d6b-b5cb-aee1566a910f text {
             pointer-events: none;
             user-select: none;
             font-size: 4px;
             font-family: "'Roboto', sans-serif";
         }
                     
-        .collapse-button_dc68cbcf-1fcd-4f2c-871f-6e484afe1177, .info-button_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        .collapse-button_59e41fb2-3919-4d6b-b5cb-aee1566a910f, .info-button_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             fill: #fff;
             stroke: #333;
             stroke-width: 1px;
             cursor: pointer;
         }
 
-        .collapse-button_dc68cbcf-1fcd-4f2c-871f-6e484afe1177:hover, .info-button_dc68cbcf-1fcd-4f2c-871f-6e484afe1177:hover {
+        .collapse-button_59e41fb2-3919-4d6b-b5cb-aee1566a910f:hover, .info-button_59e41fb2-3919-4d6b-b5cb-aee1566a910f:hover {
             fill: #eee;
             cursor: pointer;
         }
 
-        .collapse-icon_dc68cbcf-1fcd-4f2c-871f-6e484afe1177, .info-icon_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        .collapse-icon_59e41fb2-3919-4d6b-b5cb-aee1566a910f, .info-icon_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             fill: rgb(51, 51, 51);
         }
 
-        .collapse-button-disabled_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        .collapse-button-disabled_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             fill: #eee5;
             stroke: #3333334f;
             stroke-width: 1px;
             cursor: not-allowed;
         }
 
-        .collapse-button-disabled_dc68cbcf-1fcd-4f2c-871f-6e484afe1177:hover {
+        .collapse-button-disabled_59e41fb2-3919-4d6b-b5cb-aee1566a910f:hover {
             fill: #eee6;
             cursor: not-allowed;
         }
 
-        .collapse-icon-disabled_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        .collapse-icon-disabled_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -462,11 +473,11 @@ trace_model(model, example_input)
         }
 
         /* Edge hover styles */
-        .edge-group_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 path {
+        .edge-group_59e41fb2-3919-4d6b-b5cb-aee1566a910f path {
             pointer-events: stroke;
         }
 
-        .edge-label_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        .edge-label_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             pointer-events: all;
         }
 
@@ -506,50 +517,50 @@ trace_model(model, example_input)
             }
         }
 
-        .highlight-cluster_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 > rect:first-of-type {
+        .highlight-cluster_59e41fb2-3919-4d6b-b5cb-aee1566a910f > rect:first-of-type {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        .highlight-node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 rect {
+        .highlight-node_59e41fb2-3919-4d6b-b5cb-aee1566a910f rect {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        text.node-label_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        text.node-label_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 0.8rem;  /* Base size using rem units for accessibility */
             cursor: default;
             user-select: none;
         }
 
-        .node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177.constant_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 .node-label_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        .node_59e41fb2-3919-4d6b-b5cb-aee1566a910f.constant_59e41fb2-3919-4d6b-b5cb-aee1566a910f .node-label_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             font-size: 0.7rem;
         }
 
-        .popup-content_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 summary {
+        .popup-content_59e41fb2-3919-4d6b-b5cb-aee1566a910f summary {
             cursor: pointer;
             margin: 5px;
             user-select: none;
         }
 
-        .node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177.input_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 rect,
-        .node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177.output_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 rect,
-        .node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177.constant_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 rect {
+        .node_59e41fb2-3919-4d6b-b5cb-aee1566a910f.input_59e41fb2-3919-4d6b-b5cb-aee1566a910f rect,
+        .node_59e41fb2-3919-4d6b-b5cb-aee1566a910f.output_59e41fb2-3919-4d6b-b5cb-aee1566a910f rect,
+        .node_59e41fb2-3919-4d6b-b5cb-aee1566a910f.constant_59e41fb2-3919-4d6b-b5cb-aee1566a910f rect {
             stroke-width: 1px;
             rx: 8px;
             ry: 8px;
             stroke-dasharray: none;
         }
 
-        #png-error-container_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        #png-error-container_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             text-align: center;
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 14px;
         }
 
-        #png-error-message_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        #png-error-message_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             padding: 8px 16px;
             background-color: #dc3545;
             color: white;
@@ -560,13 +571,13 @@ trace_model(model, example_input)
             text-align: left;
         }
 
-        #png-link-container_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        #png-link-container_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 18px;
         }
 
-        #png-download-button_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        #png-download-button_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -576,11 +587,11 @@ trace_model(model, example_input)
             margin-right: 8px;
         }
 
-        #png-download-button_dc68cbcf-1fcd-4f2c-871f-6e484afe1177:hover {
+        #png-download-button_59e41fb2-3919-4d6b-b5cb-aee1566a910f:hover {
             background-color: #0056b3;
         }
 
-        #png-save-button_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        #png-save-button_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -589,18 +600,18 @@ trace_model(model, example_input)
             border-radius: 4px;
         }
 
-        #png-save-button_dc68cbcf-1fcd-4f2c-871f-6e484afe1177:hover {
+        #png-save-button_59e41fb2-3919-4d6b-b5cb-aee1566a910f:hover {
             background-color: #0056b3;
         }
 
-        #svg-link-container_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        #svg-link-container_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 18px;
         }
 
 
-        #svg-download-button_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        #svg-download-button_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -610,11 +621,11 @@ trace_model(model, example_input)
             margin-right: 8px;
         }
 
-        #svg-download-button_dc68cbcf-1fcd-4f2c-871f-6e484afe1177:hover {
+        #svg-download-button_59e41fb2-3919-4d6b-b5cb-aee1566a910f:hover {
             background-color: #0056b3;
         }
 
-        #svg-save-button_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        #svg-save-button_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -623,11 +634,11 @@ trace_model(model, example_input)
             border-radius: 4px;
         }
 
-        #svg-save-button_dc68cbcf-1fcd-4f2c-871f-6e484afe1177:hover {
+        #svg-save-button_59e41fb2-3919-4d6b-b5cb-aee1566a910f:hover {
             background-color: #0056b3;
         }
 
-        .custom-tooltip_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        .custom-tooltip_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             position: absolute;
             background: white;
             border: 1px solid #ccc;
@@ -643,7 +654,7 @@ trace_model(model, example_input)
             display: none;
         }
 
-        .custom-tooltip_smaller_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        .custom-tooltip_smaller_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             position: absolute;
             background: white;
             border: 1px solid #ccc;
@@ -659,16 +670,16 @@ trace_model(model, example_input)
             display: none;
         }
 
-        .edge_dc68cbcf-1fcd-4f2c-871f-6e484afe1177.implied-edge_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        .edge_59e41fb2-3919-4d6b-b5cb-aee1566a910f.implied-edge_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             stroke-dasharray: 5,5;
         }
 
-        .logo_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 {
+        .logo_59e41fb2-3919-4d6b-b5cb-aee1566a910f {
             position: absolute;
             bottom: 8px; left: 8px;
             padding: 4px 6px;
         }
-        .logo_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 a {
+        .logo_59e41fb2-3919-4d6b-b5cb-aee1566a910f a {
             color: #a1a1a1;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             opacity: .6;
@@ -829,7 +840,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
 (function() {
-    const adj_list = {"input_tensor_1": {"edges": [{"target": "__mul___1", "dims": "(2, 5)", "edge_data_id": 5767438960}, {"target": "__getitem___2", "dims": "(2, 5)", "edge_data_id": 5767438960}, {"target": "relu_5", "dims": "(2, 5)", "edge_data_id": 5767438960}], "failed": false, "node_type": "Input"}, "input_inner.tensor_2": {"edges": [{"target": "__mul___1", "dims": "(2, 5)", "edge_data_id": 5767439120}, {"target": "__sub___6", "dims": "(2, 5)", "edge_data_id": 5767439120}], "failed": false, "node_type": "Input"}, "__mul___1": {"edges": [{"target": "__truediv___4", "dims": "(2, 5)", "edge_data_id": 6078353632}], "failed": false, "node_type": "Operation"}, "__getitem___2": {"edges": [{"target": "__truediv___4", "dims": "(5)", "edge_data_id": 6078353952}], "failed": false, "node_type": "Operation"}, "scalar_3": {"edges": [{"target": "__getitem___2", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "__truediv___4": {"edges": [{"target": "output_0", "dims": "(2, 5)", "edge_data_id": 6078354432}], "failed": false, "node_type": "Operation"}, "relu_5": {"edges": [{"target": "__sub___6", "dims": "(2, 5)", "edge_data_id": 6078353952}], "failed": false, "node_type": "Operation"}, "__sub___6": {"edges": [{"target": "Linear_7", "dims": "(2, 5)", "edge_data_id": 6078353632}], "failed": false, "node_type": "Operation"}, "Linear_7": {"edges": [{"target": "output_1", "dims": "(2, 12)", "edge_data_id": 6078353952}], "failed": false, "node_type": "Module"}, "output_0": {"edges": [], "failed": false, "node_type": "Output"}, "output_1": {"edges": [], "failed": false, "node_type": "Output"}};
+    const adj_list = {"input_tensor_1": {"edges": [{"target": "__mul___1", "dims": "(2, 5)", "edge_data_id": 6173254256}, {"target": "__getitem___2", "dims": "(2, 5)", "edge_data_id": 6173254256}, {"target": "relu_5", "dims": "(2, 5)", "edge_data_id": 6173254256}], "failed": false, "node_type": "Input"}, "input_inner.tensor_2": {"edges": [{"target": "__mul___1", "dims": "(2, 5)", "edge_data_id": 6173254496}, {"target": "__sub___6", "dims": "(2, 5)", "edge_data_id": 6173254496}], "failed": false, "node_type": "Input"}, "__mul___1": {"edges": [{"target": "__truediv___4", "dims": "(2, 5)", "edge_data_id": 6015305024}], "failed": false, "node_type": "Operation"}, "__getitem___2": {"edges": [{"target": "__truediv___4", "dims": "(5)", "edge_data_id": 6438238784}], "failed": false, "node_type": "Operation"}, "scalar_3": {"edges": [{"target": "__getitem___2", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "__truediv___4": {"edges": [{"target": "output_0", "dims": "(2, 5)", "edge_data_id": 6438239824}], "failed": false, "node_type": "Operation"}, "relu_5": {"edges": [{"target": "__sub___6", "dims": "(2, 5)", "edge_data_id": 6015305024}], "failed": false, "node_type": "Operation"}, "__sub___6": {"edges": [{"target": "Linear_7", "dims": "(2, 5)", "edge_data_id": 6438238784}], "failed": false, "node_type": "Operation"}, "Linear_7": {"edges": [{"target": "output_1", "dims": "(2, 12)", "edge_data_id": 6015305024}], "failed": false, "node_type": "Module"}, "output_0": {"edges": [], "failed": false, "node_type": "Output"}, "output_1": {"edges": [], "failed": false, "node_type": "Output"}};
     const module_info = {"Linear_7": {"type": "Linear", "parameters": {"weight": {"shape": [12, 5], "requires_grad": true}, "bias": {"shape": [12], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 5, "out_features": 12, "training": true}, "extra_repr": "in_features=5, out_features=12, bias=True"}};
     const func_info = {"__mul___1": {"positional_args": [{"_type": "tensor", "shape": [2, 5], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [2, 5], "dtype": "torch.float32"}], "keyword_args": {}}, "__getitem___2": {"positional_args": [{"_type": "tensor", "shape": [2, 5], "dtype": "torch.float32"}, 0], "keyword_args": {}}, "__truediv___4": {"positional_args": [{"_type": "tensor", "shape": [2, 5], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [5], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_5": {"positional_args": [{"_type": "tensor", "shape": [2, 5], "dtype": "torch.float32"}], "keyword_args": {}}, "__sub___6": {"positional_args": [{"_type": "tensor", "shape": [2, 5], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [2, 5], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_7": {"positional_args": [{"_type": "tensor", "shape": [2, 5], "dtype": "torch.float32"}], "keyword_args": {}}};
     const parent_module_to_nodes = {};
@@ -878,10 +889,10 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         removeTooltip();
         
         const tooltip = document.createElement('div');
-        tooltip.className = !smaller ? `custom-tooltip_dc68cbcf-1fcd-4f2c-871f-6e484afe1177` : `custom-tooltip_smaller_dc68cbcf-1fcd-4f2c-871f-6e484afe1177`;
+        tooltip.className = !smaller ? `custom-tooltip_59e41fb2-3919-4d6b-b5cb-aee1566a910f` : `custom-tooltip_smaller_59e41fb2-3919-4d6b-b5cb-aee1566a910f`;
         tooltip.textContent = text;
         
-        const container = document.getElementById(`graph-container_dc68cbcf-1fcd-4f2c-871f-6e484afe1177`);
+        const container = document.getElementById(`graph-container_59e41fb2-3919-4d6b-b5cb-aee1566a910f`);
         container.appendChild(tooltip);
         currentTooltip = tooltip;
         
@@ -893,7 +904,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const buttonRect = buttonElement.getBoundingClientRect();
         
         // Get the container's position in screen coordinates
-        const containerRect = document.getElementById(`graph-container_dc68cbcf-1fcd-4f2c-871f-6e484afe1177`).getBoundingClientRect();
+        const containerRect = document.getElementById(`graph-container_59e41fb2-3919-4d6b-b5cb-aee1566a910f`).getBoundingClientRect();
         
         // Calculate position relative to container
         const buttonX = buttonRect.left + (buttonRect.width / 2) - containerRect.left;
@@ -1510,7 +1521,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function reloadGraph() {
-        d3.select("#graph_dc68cbcf-1fcd-4f2c-871f-6e484afe1177").html("");
+        d3.select("#graph_59e41fb2-3919-4d6b-b5cb-aee1566a910f").html("");
 
         if (generateImage) {
             renderGraphvizImage();
@@ -1577,16 +1588,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function renderGraphvizImage() {
-        d3.select("#png-link-container_dc68cbcf-1fcd-4f2c-871f-6e484afe1177").remove();
+        d3.select("#png-link-container_59e41fb2-3919-4d6b-b5cb-aee1566a910f").remove();
         
         function showErrorMessage(error) {
-            const parent = d3.select("#graph-container_dc68cbcf-1fcd-4f2c-871f-6e484afe1177").node().parentNode;
+            const parent = d3.select("#graph-container_59e41fb2-3919-4d6b-b5cb-aee1566a910f").node().parentNode;
             const errorContainer = d3.select(parent)
-                .insert("div", "#graph-container_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
-                .attr("id", "png-error-container_dc68cbcf-1fcd-4f2c-871f-6e484afe1177");
+                .insert("div", "#graph-container_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
+                .attr("id", "png-error-container_59e41fb2-3919-4d6b-b5cb-aee1566a910f");
             
             errorContainer.append("div")
-                .attr("id", "png-error-message_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+                .attr("id", "png-error-message_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
                 .html(`<strong>Error:</strong><br>${error.stack || error.message || error}<br><br><strong>Note:</strong> Exporting very large models as PNG is currently not supported. Please use generate_image=False, or raise an issue on https://github.com/sachinhosmani/torchvista/issues`);
         }
         
@@ -1624,21 +1635,21 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const pngUrl = URL.createObjectURL(pngBlob);
         
         // Create link container
-        const parent = d3.select("#graph-container_dc68cbcf-1fcd-4f2c-871f-6e484afe1177").node().parentNode;
+        const parent = d3.select("#graph-container_59e41fb2-3919-4d6b-b5cb-aee1566a910f").node().parentNode;
         const linkContainer = d3.select(parent)
-            .insert("div", "#graph-container_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
-            .attr("id", "png-link-container_dc68cbcf-1fcd-4f2c-871f-6e484afe1177");
+            .insert("div", "#graph-container_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
+            .attr("id", "png-link-container_59e41fb2-3919-4d6b-b5cb-aee1566a910f");
         
         linkContainer.append("a")
             .attr("href", pngUrl)
             .attr("target", "_blank")
-            .attr("id", "png-download-button_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+            .attr("id", "png-download-button_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
             .text("View PNG in New Tab");
 
         linkContainer.append("a")
             .attr("href", pngUrl)
-            .attr("download", `torchvista_graph_dc68cbcf-1fcd-4f2c-871f-6e484afe1177.png`)
-            .attr("id", "png-save-button_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+            .attr("download", `torchvista_graph_59e41fb2-3919-4d6b-b5cb-aee1566a910f.png`)
+            .attr("id", "png-save-button_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
             .text("Download PNG");
             
         URL.revokeObjectURL(svgUrl);
@@ -1659,26 +1670,26 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const svgUrl = URL.createObjectURL(svgBlob);
         
         // Create link container
-        const parent = d3.select("#graph-container_dc68cbcf-1fcd-4f2c-871f-6e484afe1177").node().parentNode;
+        const parent = d3.select("#graph-container_59e41fb2-3919-4d6b-b5cb-aee1566a910f").node().parentNode;
         const linkContainer = d3.select(parent)
-            .insert("div", "#graph-container_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
-            .attr("id", "svg-link-container_dc68cbcf-1fcd-4f2c-871f-6e484afe1177");
+            .insert("div", "#graph-container_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
+            .attr("id", "svg-link-container_59e41fb2-3919-4d6b-b5cb-aee1566a910f");
         
         linkContainer.append("a")
             .attr("href", svgUrl)
             .attr("target", "_blank")
-            .attr("id", "svg-download-button_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+            .attr("id", "svg-download-button_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
             .text("View SVG in New Tab");
 
         linkContainer.append("a")
             .attr("href", svgUrl)
-            .attr("download", `torchvista_graph_dc68cbcf-1fcd-4f2c-871f-6e484afe1177.svg`)
-            .attr("id", "svg-save-button_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+            .attr("download", `torchvista_graph_59e41fb2-3919-4d6b-b5cb-aee1566a910f.svg`)
+            .attr("id", "svg-save-button_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
             .text("Download SVG");
     }
 
     function createGraph(graphvizData) {
-        const svg = d3.select("#graph_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+        const svg = d3.select("#graph_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
         .append("svg")
         .attr("width", "100%")
         .attr("height", "100%")
@@ -1698,7 +1709,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
         // Define arrowhead marker
         svg.append("defs").append("marker")
-        .attr("id", "arrowhead_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+        .attr("id", "arrowhead_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
         .attr("viewBox", "0 -5 10 10")
         .attr("refX", 8)
         .attr("refY", 0)
@@ -1710,11 +1721,11 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .attr("fill", "#333");
 
         // Draw clusters (container boxes) first so they're behind nodes
-        const clusters = inner.selectAll(".boundary-box_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+        const clusters = inner.selectAll(".boundary-box_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
         .data(Object.entries(graphvizData.clusters))
         .enter()
         .append("g")
-        .attr("class", "boundary-box_dc68cbcf-1fcd-4f2c-871f-6e484afe1177");
+        .attr("class", "boundary-box_59e41fb2-3919-4d6b-b5cb-aee1566a910f");
 
         const containersWithFailedNodes = identifyContainersWithFailedNodes(adj_list, ancestor_map);
 
@@ -1724,10 +1735,10 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             const hasFailedNodes = containersWithFailedNodes.has(clusterName);
             const isRepeat = isRepeatNode(clusterName);
             if (hasFailedNodes) {
-                group.classed("error_dc68cbcf-1fcd-4f2c-871f-6e484afe1177", true);
+                group.classed("error_59e41fb2-3919-4d6b-b5cb-aee1566a910f", true);
             }
             if (isRepeat) {
-                group.classed("repeat-container_dc68cbcf-1fcd-4f2c-871f-6e484afe1177", true);
+                group.classed("repeat-container_59e41fb2-3919-4d6b-b5cb-aee1566a910f", true);
             }
 
             // Parse bounding box coordinates
@@ -1769,13 +1780,13 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (!isRepeatNode(clusterName)) {
                 // Add collapse/expand button
                 const collapseButton = group.append("circle")
-                .attr("class", "collapse-button_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+                .attr("class", "collapse-button_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
                 .attr("cx", x1 + 10)
                 .attr("cy", y1 + 10)
                 .attr("r", 5.5);
 
                 group.append("text")
-                .attr("class", "collapse-icon_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+                .attr("class", "collapse-icon_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
                 .attr("x", x1 + 10)
                 .attr("y", y1 + 10)
                 .attr("text-anchor", "middle")
@@ -1792,7 +1803,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add click event handler for collapse buttons
-        clusters.selectAll(".collapse-button_dc68cbcf-1fcd-4f2c-871f-6e484afe1177, .collapse-icon_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+        clusters.selectAll(".collapse-button_59e41fb2-3919-4d6b-b5cb-aee1566a910f, .collapse-icon_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
         .on("click", function(event, [clusterName, clusterData]) {
             event.stopPropagation(); // Prevent event from bubbling to SVG
             removeTooltip();
@@ -1807,19 +1818,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
         
         // Create edges using the path points from Graphviz
-        const edges = inner.selectAll(".edge_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+        const edges = inner.selectAll(".edge_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
         .data(graphvizData.edges)
         .enter()
         .append("g")
-        .attr("class", "edge-group_dc68cbcf-1fcd-4f2c-871f-6e484afe1177");
+        .attr("class", "edge-group_59e41fb2-3919-4d6b-b5cb-aee1566a910f");
         
         // Add the actual path
         edges.append("path")
         .attr("class", function(edge) {
             if (edge.is_implied_edge) {
-                return "edge_dc68cbcf-1fcd-4f2c-871f-6e484afe1177 implied-edge_dc68cbcf-1fcd-4f2c-871f-6e484afe1177";
+                return "edge_59e41fb2-3919-4d6b-b5cb-aee1566a910f implied-edge_59e41fb2-3919-4d6b-b5cb-aee1566a910f";
             }
-            return "edge_dc68cbcf-1fcd-4f2c-871f-6e484afe1177";
+            return "edge_59e41fb2-3919-4d6b-b5cb-aee1566a910f";
         }).attr("d", function(edge) {
             if (edge.path && edge.path.length > 0) {
                     // Create a proper SVG path using Bézier curves
@@ -1845,7 +1856,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             }
             return "";
         })
-        .attr("marker-end", "url(#arrowhead_dc68cbcf-1fcd-4f2c-871f-6e484afe1177)");
+        .attr("marker-end", "url(#arrowhead_59e41fb2-3919-4d6b-b5cb-aee1566a910f)");
         
         // Add dimension labels on edges
         edges.each(function(edge) {
@@ -1874,7 +1885,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Create a background for the text
             const labelGroup = edgeGroup.append("g")
-            .attr("class", "edge-label_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+            .attr("class", "edge-label_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
             .attr("transform", `translate(${pointAtStart.x}, ${pointAtStart.y})`);
             
             const text = labelGroup.append("text")
@@ -1909,7 +1920,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         edges.each(function() {
             const edgeGroup = d3.select(this);
             const path = edgeGroup.select("path");
-            const labelGroup = edgeGroup.select(".edge-label_dc68cbcf-1fcd-4f2c-871f-6e484afe1177");
+            const labelGroup = edgeGroup.select(".edge-label_59e41fb2-3919-4d6b-b5cb-aee1566a910f");
             const labelText = labelGroup.select("text");
             const labelBg = labelGroup.select("rect");
             const originalStrokeWidth = path.attr("stroke-width") || 1;
@@ -1974,19 +1985,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
         // Create nodes using positions from Graphviz
-        const nodes = inner.selectAll(".node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+        const nodes = inner.selectAll(".node_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
             .data(Object.entries(graphvizData.nodes))
             .enter()
             .append("g")
             // In the createGraph function, when you're creating nodes, modify the class assignment:
             .attr("class", function([nodeName, nodeData]) {
-                let classes = "node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177";
-                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_dc68cbcf-1fcd-4f2c-871f-6e484afe1177";
-                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_dc68cbcf-1fcd-4f2c-871f-6e484afe1177";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_dc68cbcf-1fcd-4f2c-871f-6e484afe1177";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_dc68cbcf-1fcd-4f2c-871f-6e484afe1177";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_dc68cbcf-1fcd-4f2c-871f-6e484afe1177";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_dc68cbcf-1fcd-4f2c-871f-6e484afe1177";
+                let classes = "node_59e41fb2-3919-4d6b-b5cb-aee1566a910f";
+                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_59e41fb2-3919-4d6b-b5cb-aee1566a910f";
+                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_59e41fb2-3919-4d6b-b5cb-aee1566a910f";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_59e41fb2-3919-4d6b-b5cb-aee1566a910f";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_59e41fb2-3919-4d6b-b5cb-aee1566a910f";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_59e41fb2-3919-4d6b-b5cb-aee1566a910f";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_59e41fb2-3919-4d6b-b5cb-aee1566a910f";
                 return classes;
             })
             .attr("transform", function([nodeName, nodeData]) {
@@ -2013,11 +2024,11 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 .attr("rx", nodeData.width / 2)
                 .attr("ry", nodeData.height / 2)
                 .attr("class", function() { 
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_dc68cbcf-1fcd-4f2c-871f-6e484afe1177";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_dc68cbcf-1fcd-4f2c-871f-6e484afe1177";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_dc68cbcf-1fcd-4f2c-871f-6e484afe1177";
-                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_dc68cbcf-1fcd-4f2c-871f-6e484afe1177";
-                    return "operation_dc68cbcf-1fcd-4f2c-871f-6e484afe1177";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_59e41fb2-3919-4d6b-b5cb-aee1566a910f";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_59e41fb2-3919-4d6b-b5cb-aee1566a910f";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_59e41fb2-3919-4d6b-b5cb-aee1566a910f";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_59e41fb2-3919-4d6b-b5cb-aee1566a910f";
+                    return "operation_59e41fb2-3919-4d6b-b5cb-aee1566a910f";
                 });
             } else {
                 // Create rectangle
@@ -2027,15 +2038,15 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 .attr("x", -nodeData.width / 2)
                 .attr("y", -nodeData.height / 2)
                 .attr("class", function() { 
-                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_dc68cbcf-1fcd-4f2c-871f-6e484afe1177";
-                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_dc68cbcf-1fcd-4f2c-871f-6e484afe1177" : "operation_dc68cbcf-1fcd-4f2c-871f-6e484afe1177";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_59e41fb2-3919-4d6b-b5cb-aee1566a910f";
+                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_59e41fb2-3919-4d6b-b5cb-aee1566a910f" : "operation_59e41fb2-3919-4d6b-b5cb-aee1566a910f";
                 });
             }
         });
         
         // Add labels for nodes
         nodes.append("text")
-        .attr("class", "node-label_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+        .attr("class", "node-label_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
         .text(function([nodeName]) { return graph_node_display_names[nodeName] || graph_node_name_to_without_suffix[nodeName] || nodeName; })
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "central");
@@ -2044,7 +2055,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         nodes.filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")));
         }).append("text")
-        .attr("class", "type-indicator_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+        .attr("class", "type-indicator_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
         .attr("text-anchor", "start")
         .attr("dominant-baseline", "text-bottom")
         .attr("transform", function([nodeName, nodeData]) {
@@ -2062,7 +2073,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add info buttons to nodes (except input, output, constant)
-        inner.selectAll(".node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+        inner.selectAll(".node_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
         .filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")))
         })
@@ -2073,14 +2084,14 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
         // Add info button circle
         const infoButton = nodeGroup.append("circle")
-        .attr("class", "info-button_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+        .attr("class", "info-button_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
         .attr("cx", width/2 - 7)
         .attr("cy", -height/2 + 7)
         .attr("r", 5.5);
 
         // Add info button icon
         nodeGroup.append("text")
-        .attr("class", "info-icon_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+        .attr("class", "info-icon_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
         .attr("x", width/2 - 7)
         .attr("y", -height/2 + 8)
         .attr("text-anchor", "middle")
@@ -2096,16 +2107,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .on("mouseleave", removeTooltip);
 
         // Add click handler to info button
-            nodeGroup.selectAll(".info-button_dc68cbcf-1fcd-4f2c-871f-6e484afe1177, .info-icon_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+            nodeGroup.selectAll(".info-button_59e41fb2-3919-4d6b-b5cb-aee1566a910f, .info-icon_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
             .on("click", function(event) {
                 event.stopPropagation();
-                const infoButton = nodeGroup.select(".info-button_dc68cbcf-1fcd-4f2c-871f-6e484afe1177").node();
+                const infoButton = nodeGroup.select(".info-button_59e41fb2-3919-4d6b-b5cb-aee1566a910f").node();
                 showPopupFromInfoButton.call(nodeGroup.node(), event, [nodeName], infoButton);
             });
         });
 
         // Add expand buttons to all module nodes (including non-expandable ones)
-        inner.selectAll(".node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+        inner.selectAll(".node_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
         .filter(function([nodeName]) {
             return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || collapsedContainers.has(nodeName)) && !isRepeatNode(nodeName);
         })
@@ -2127,7 +2138,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Add expand button circle
             const expandButton = nodeGroup.append("circle")
-            .attr("class", isExpandable ? "collapse-button_dc68cbcf-1fcd-4f2c-871f-6e484afe1177" : "collapse-button-disabled_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+            .attr("class", isExpandable ? "collapse-button_59e41fb2-3919-4d6b-b5cb-aee1566a910f" : "collapse-button-disabled_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
             .attr("cx", -width / 2 + 7)
             .attr("cy", -height / 2 + 7)
             .attr("r", 5.5)
@@ -2136,7 +2147,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Add expand button icon
             nodeGroup.append("text")
-            .attr("class", isExpandable ? "collapse-icon_dc68cbcf-1fcd-4f2c-871f-6e484afe1177" : "collapse-icon-disabled_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+            .attr("class", isExpandable ? "collapse-icon_59e41fb2-3919-4d6b-b5cb-aee1566a910f" : "collapse-icon-disabled_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
             .attr("x", -width / 2 + 7)
             .attr("y", -height / 2 + 7)
             .attr("text-anchor", "middle")
@@ -2156,7 +2167,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Only add click handler for expandable modules
             if (isExpandable) {
-                nodeGroup.selectAll(".collapse-button_dc68cbcf-1fcd-4f2c-871f-6e484afe1177, .collapse-icon_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+                nodeGroup.selectAll(".collapse-button_59e41fb2-3919-4d6b-b5cb-aee1566a910f, .collapse-icon_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
                 .on("click", function(event) {
                     event.stopPropagation();
                     removeTooltip();
@@ -2257,16 +2268,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                     .scale(currentTransform.k));
             }
 
-            clickedNodeElement.classed("highlight-node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177", true);
+            clickedNodeElement.classed("highlight-node_59e41fb2-3919-4d6b-b5cb-aee1566a910f", true);
             
             setTimeout(() => {
-                clickedNodeElement.classed("highlight-node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177", false);
+                clickedNodeElement.classed("highlight-node_59e41fb2-3919-4d6b-b5cb-aee1566a910f", false);
             }, 2000);
 
-            const popup = d3.select("#popup_dc68cbcf-1fcd-4f2c-871f-6e484afe1177");
-            const moduleTemplate = d3.select("#module-template_dc68cbcf-1fcd-4f2c-871f-6e484afe1177");
-            const tensorOpTemplate = d3.select("#tensor-op-template_dc68cbcf-1fcd-4f2c-871f-6e484afe1177");
-            const noInfoMessage = d3.select("#no-info_dc68cbcf-1fcd-4f2c-871f-6e484afe1177");
+            const popup = d3.select("#popup_59e41fb2-3919-4d6b-b5cb-aee1566a910f");
+            const moduleTemplate = d3.select("#module-template_59e41fb2-3919-4d6b-b5cb-aee1566a910f");
+            const tensorOpTemplate = d3.select("#tensor-op-template_59e41fb2-3919-4d6b-b5cb-aee1566a910f");
+            const noInfoMessage = d3.select("#no-info_59e41fb2-3919-4d6b-b5cb-aee1566a910f");
             
             const nodeData = adj_list[nodeName];
             
@@ -2274,7 +2285,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (node_to_module_path[nodeName] && graph_node_name_to_without_suffix[nodeName]) {
                 popupTitle = node_to_module_path[nodeName] + "." + graph_node_name_to_without_suffix[nodeName];
             }
-            d3.select("#popup-title_dc68cbcf-1fcd-4f2c-871f-6e484afe1177").text(popupTitle);
+            d3.select("#popup-title_59e41fb2-3919-4d6b-b5cb-aee1566a910f").text(popupTitle);
 
             moduleTemplate.style("display", "none");
             tensorOpTemplate.style("display", "none");
@@ -2282,31 +2293,31 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             if (module_info[nodeName]) {
                 const info = module_info[nodeName];
-                moduleTemplate.style("display", "block").classed("content-shown_dc68cbcf-1fcd-4f2c-871f-6e484afe1177", true);
+                moduleTemplate.style("display", "block").classed("content-shown_59e41fb2-3919-4d6b-b5cb-aee1566a910f", true);
                 
-                d3.select("#module-extra-repr_dc68cbcf-1fcd-4f2c-871f-6e484afe1177").text(info.extra_repr || 'N/A');
+                d3.select("#module-extra-repr_59e41fb2-3919-4d6b-b5cb-aee1566a910f").text(info.extra_repr || 'N/A');
 
                 const forward_info = func_info[nodeName];
-                const attributesContainer = d3.select("#module-attributes_dc68cbcf-1fcd-4f2c-871f-6e484afe1177").node();
+                const attributesContainer = d3.select("#module-attributes_59e41fb2-3919-4d6b-b5cb-aee1566a910f").node();
                 attributesContainer.innerHTML = '';
                 createJsonViewer(attributesContainer, info.attributes);
 
-                const parametersContainer = d3.select("#module-parameters_dc68cbcf-1fcd-4f2c-871f-6e484afe1177").node();
+                const parametersContainer = d3.select("#module-parameters_59e41fb2-3919-4d6b-b5cb-aee1566a910f").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, forward_info);
             } else if (!(adj_list[nodeName] && adj_list[nodeName].node_type === "Input") && func_info[nodeName]) {
                 const info = func_info[nodeName];
-                tensorOpTemplate.style("display", "block").classed("content-shown_dc68cbcf-1fcd-4f2c-871f-6e484afe1177", true);
-                const parametersContainer = d3.select("#tensor-op-parameters_dc68cbcf-1fcd-4f2c-871f-6e484afe1177").node();
+                tensorOpTemplate.style("display", "block").classed("content-shown_59e41fb2-3919-4d6b-b5cb-aee1566a910f", true);
+                const parametersContainer = d3.select("#tensor-op-parameters_59e41fb2-3919-4d6b-b5cb-aee1566a910f").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, info);
             } else {
-                noInfoMessage.style("display", "block").classed("content-shown_dc68cbcf-1fcd-4f2c-871f-6e484afe1177", true);
+                noInfoMessage.style("display", "block").classed("content-shown_59e41fb2-3919-4d6b-b5cb-aee1566a910f", true);
             }
             
             // Position popup based on info button or node center
             let boundingBox, x, y;
-            const containerRect = d3.select("#graph-container_dc68cbcf-1fcd-4f2c-871f-6e484afe1177").node().getBoundingClientRect();
+            const containerRect = d3.select("#graph-container_59e41fb2-3919-4d6b-b5cb-aee1566a910f").node().getBoundingClientRect();
             
             if (infoButtonElement) {
                 boundingBox = infoButtonElement.getBoundingClientRect();
@@ -2322,19 +2333,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             popup.style("left", `${x}px`)
             .style("top", `${y}px`)
             .style("display", "flex");
-            d3.select("#popup-content_dc68cbcf-1fcd-4f2c-871f-6e484afe1177").node().scrollTop = 0;
+            d3.select("#popup-content_59e41fb2-3919-4d6b-b5cb-aee1566a910f").node().scrollTop = 0;
         }
 
         function closePopup() {
-            d3.select("#popup_dc68cbcf-1fcd-4f2c-871f-6e484afe1177").style("display", "none");
+            d3.select("#popup_59e41fb2-3919-4d6b-b5cb-aee1566a910f").style("display", "none");
         }
         
-        d3.select(".popup-close_dc68cbcf-1fcd-4f2c-871f-6e484afe1177").on("click", closePopup);
+        d3.select(".popup-close_59e41fb2-3919-4d6b-b5cb-aee1566a910f").on("click", closePopup);
         svg.on("click", closePopup);
 
-        const popup = document.getElementById(`popup_dc68cbcf-1fcd-4f2c-871f-6e484afe1177`);
+        const popup = document.getElementById(`popup_59e41fb2-3919-4d6b-b5cb-aee1566a910f`);
         const resizeObserver = new ResizeObserver(() => {
-            const editorContainers = popup.querySelectorAll('.json-viewer_dc68cbcf-1fcd-4f2c-871f-6e484afe1177');
+            const editorContainers = popup.querySelectorAll('.json-viewer_59e41fb2-3919-4d6b-b5cb-aee1566a910f');
             for (let container of editorContainers) {
                 if (container.jsonEditor) {
                     container.jsonEditor.resize();
@@ -2413,30 +2424,30 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 // Apply highlight effect to the target container
                 if (Object.keys(graphvizData.nodes).includes(lastModifiedContainer)) {
                     // Highlight the node (collapsed container)
-                    const targetElement = inner.selectAll(".node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+                    const targetElement = inner.selectAll(".node_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
                         .filter(([nodeName]) => nodeName === lastModifiedContainer);
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177", true);
+                        targetElement.classed("highlight-node_59e41fb2-3919-4d6b-b5cb-aee1566a910f", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-node_dc68cbcf-1fcd-4f2c-871f-6e484afe1177", false);
+                            targetElement.classed("highlight-node_59e41fb2-3919-4d6b-b5cb-aee1566a910f", false);
                         }, 2000); // Match the animation duration
                     }
                 } else if (Object.keys(graphvizData.clusters).includes(lastModifiedContainer)) {
                     // Highlight the cluster (expanded container)
-                    const targetElement = inner.selectAll(".boundary-box_dc68cbcf-1fcd-4f2c-871f-6e484afe1177")
+                    const targetElement = inner.selectAll(".boundary-box_59e41fb2-3919-4d6b-b5cb-aee1566a910f")
                         .filter(function([clusterName]) {
                             return clusterName === lastModifiedContainer;
                         });
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-cluster_dc68cbcf-1fcd-4f2c-871f-6e484afe1177", true);
+                        targetElement.classed("highlight-cluster_59e41fb2-3919-4d6b-b5cb-aee1566a910f", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-cluster_dc68cbcf-1fcd-4f2c-871f-6e484afe1177", false);
+                            targetElement.classed("highlight-cluster_59e41fb2-3919-4d6b-b5cb-aee1566a910f", false);
                         }, 2000); // Match the animation duration
                     }
                 }

@@ -2,6 +2,9 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
         <style>
             html, body {
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -74,7 +77,19 @@
             }
 
             .code-box code {
-                font-family: monospace;
+                font-family: "Roboto Mono", "Courier New", monospace;
+                font-size: 0.85rem;
+                line-height: 1.5;
+                background: #2b2b2b;
+                border-radius: 0.2rem;
+                padding: 1rem;
+                display: block;
+                color: #f8f8f2;
+            }
+
+            /* Override highlight.js background */
+            .code-box code.hljs {
+                background: #2b2b2b;
             }
 
             .graph-view {
@@ -136,10 +151,6 @@
     </head>
     <body>
     
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
-
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 document.querySelectorAll('pre code').forEach((block) => {
@@ -215,120 +226,120 @@ trace_model(model, example_input)
     
             <div class="graph-view" id="graphContainer" style="height: 100%">
                 <div class="graph-box-header">Visualized Interactive Graph</div>
-                <div id="graph-container_75ad51f8-80b1-4142-aff6-d56658588bcc">
-    <div id="graph_75ad51f8-80b1-4142-aff6-d56658588bcc"></div>
-    <div class="logo_75ad51f8-80b1-4142-aff6-d56658588bcc">
+                <div id="graph-container_15b42b67-1e80-43bf-97b1-17d9b8324e5d">
+    <div id="graph_15b42b67-1e80-43bf-97b1-17d9b8324e5d"></div>
+    <div class="logo_15b42b67-1e80-43bf-97b1-17d9b8324e5d">
         <a href="https://github.com/sachinhosmani/torchvista" target="_blank" rel="noopener noreferrer">
         torchvista
         </a>
     </div>
-    <div id="popup_75ad51f8-80b1-4142-aff6-d56658588bcc" class="popup_75ad51f8-80b1-4142-aff6-d56658588bcc" style="display: none;">
-        <div class="popup-header_75ad51f8-80b1-4142-aff6-d56658588bcc">
-            <h3 id="popup-title_75ad51f8-80b1-4142-aff6-d56658588bcc"></h3>
-            <span class="popup-close_75ad51f8-80b1-4142-aff6-d56658588bcc">✕</span>
+    <div id="popup_15b42b67-1e80-43bf-97b1-17d9b8324e5d" class="popup_15b42b67-1e80-43bf-97b1-17d9b8324e5d" style="display: none;">
+        <div class="popup-header_15b42b67-1e80-43bf-97b1-17d9b8324e5d">
+            <h3 id="popup-title_15b42b67-1e80-43bf-97b1-17d9b8324e5d"></h3>
+            <span class="popup-close_15b42b67-1e80-43bf-97b1-17d9b8324e5d">✕</span>
         </div>
-        <div id="popup-content_75ad51f8-80b1-4142-aff6-d56658588bcc" class="popup-content_75ad51f8-80b1-4142-aff6-d56658588bcc">
-            <div id="common-info_75ad51f8-80b1-4142-aff6-d56658588bcc">
+        <div id="popup-content_15b42b67-1e80-43bf-97b1-17d9b8324e5d" class="popup-content_15b42b67-1e80-43bf-97b1-17d9b8324e5d">
+            <div id="common-info_15b42b67-1e80-43bf-97b1-17d9b8324e5d">
             </div>
-            <div id="module-template_75ad51f8-80b1-4142-aff6-d56658588bcc" style="display:none;">
-                <details open id="module-parameters-details_75ad51f8-80b1-4142-aff6-d56658588bcc">
+            <div id="module-template_15b42b67-1e80-43bf-97b1-17d9b8324e5d" style="display:none;">
+                <details open id="module-parameters-details_15b42b67-1e80-43bf-97b1-17d9b8324e5d">
                     <summary style="color: black"><strong>forward() Parameters</strong></summary>
-                    <div id="module-parameters_75ad51f8-80b1-4142-aff6-d56658588bcc" class="json-viewer_75ad51f8-80b1-4142-aff6-d56658588bcc"></div>
+                    <div id="module-parameters_15b42b67-1e80-43bf-97b1-17d9b8324e5d" class="json-viewer_15b42b67-1e80-43bf-97b1-17d9b8324e5d"></div>
                 </details>
-                <details open id="module-attributes-details_75ad51f8-80b1-4142-aff6-d56658588bcc">
+                <details open id="module-attributes-details_15b42b67-1e80-43bf-97b1-17d9b8324e5d">
                     <summary style="color: black"><strong>Attributes</strong></summary>
-                    <div id="module-attributes_75ad51f8-80b1-4142-aff6-d56658588bcc" class="json-viewer_75ad51f8-80b1-4142-aff6-d56658588bcc"></div>
+                    <div id="module-attributes_15b42b67-1e80-43bf-97b1-17d9b8324e5d" class="json-viewer_15b42b67-1e80-43bf-97b1-17d9b8324e5d"></div>
                 </details>
             </div>
-            <div id="tensor-op-template_75ad51f8-80b1-4142-aff6-d56658588bcc" style="display:none;">
+            <div id="tensor-op-template_15b42b67-1e80-43bf-97b1-17d9b8324e5d" style="display:none;">
                 <summary><strong>Parameters</strong></summary>
-                <div id="tensor-op-parameters_75ad51f8-80b1-4142-aff6-d56658588bcc" class="json-viewer_75ad51f8-80b1-4142-aff6-d56658588bcc"></div>
+                <div id="tensor-op-parameters_15b42b67-1e80-43bf-97b1-17d9b8324e5d" class="json-viewer_15b42b67-1e80-43bf-97b1-17d9b8324e5d"></div>
             </div>
-            <p id="no-info_75ad51f8-80b1-4142-aff6-d56658588bcc" style="display:none;">No further information available for this node.</p>
+            <p id="no-info_15b42b67-1e80-43bf-97b1-17d9b8324e5d" style="display:none;">No further information available for this node.</p>
         </div>
     </div>
 
     <style>
-        .node_75ad51f8-80b1-4142-aff6-d56658588bcc rect {
+        .node_15b42b67-1e80-43bf-97b1-17d9b8324e5d rect {
             stroke: #333;
             fill: #fff;
         }
-        text.node-label_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        text.node-label_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.type-indicator_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        text.type-indicator_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.collapse-icon_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        text.collapse-icon_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 14px;
             cursor: default;
             user-select: none;
         }
-        .edge_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        .edge_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             stroke: #797979;
             fill: none;
         }
-        .node_75ad51f8-80b1-4142-aff6-d56658588bcc rect.input_75ad51f8-80b1-4142-aff6-d56658588bcc { fill: #FF9AFF; }
-        .node_75ad51f8-80b1-4142-aff6-d56658588bcc rect.constant_75ad51f8-80b1-4142-aff6-d56658588bcc { fill: rgb(235 235 235); }
+        .node_15b42b67-1e80-43bf-97b1-17d9b8324e5d rect.input_15b42b67-1e80-43bf-97b1-17d9b8324e5d { fill: #FF9AFF; }
+        .node_15b42b67-1e80-43bf-97b1-17d9b8324e5d rect.constant_15b42b67-1e80-43bf-97b1-17d9b8324e5d { fill: rgb(235 235 235); }
 
-        .node_75ad51f8-80b1-4142-aff6-d56658588bcc rect.output_75ad51f8-80b1-4142-aff6-d56658588bcc { fill: #74e071; }
-        .node_75ad51f8-80b1-4142-aff6-d56658588bcc rect.failed_75ad51f8-80b1-4142-aff6-d56658588bcc { fill: rgb(224 15 15); }
-        .node_75ad51f8-80b1-4142-aff6-d56658588bcc rect.module_75ad51f8-80b1-4142-aff6-d56658588bcc { fill: #8BDEDB; }
-        .node_75ad51f8-80b1-4142-aff6-d56658588bcc rect.operation_75ad51f8-80b1-4142-aff6-d56658588bcc { fill: #FEBC5A; }
+        .node_15b42b67-1e80-43bf-97b1-17d9b8324e5d rect.output_15b42b67-1e80-43bf-97b1-17d9b8324e5d { fill: #74e071; }
+        .node_15b42b67-1e80-43bf-97b1-17d9b8324e5d rect.failed_15b42b67-1e80-43bf-97b1-17d9b8324e5d { fill: rgb(224 15 15); }
+        .node_15b42b67-1e80-43bf-97b1-17d9b8324e5d rect.module_15b42b67-1e80-43bf-97b1-17d9b8324e5d { fill: #8BDEDB; }
+        .node_15b42b67-1e80-43bf-97b1-17d9b8324e5d rect.operation_15b42b67-1e80-43bf-97b1-17d9b8324e5d { fill: #FEBC5A; }
 
-        .node_75ad51f8-80b1-4142-aff6-d56658588bcc ellipse.input_75ad51f8-80b1-4142-aff6-d56658588bcc { fill: #FF9AFF; }
-        .node_75ad51f8-80b1-4142-aff6-d56658588bcc ellipse.constant_75ad51f8-80b1-4142-aff6-d56658588bcc { fill: rgb(235 235 235); }
-        .node_75ad51f8-80b1-4142-aff6-d56658588bcc ellipse.output_75ad51f8-80b1-4142-aff6-d56658588bcc { fill: #74e071; }
-        .node_75ad51f8-80b1-4142-aff6-d56658588bcc ellipse.failed_75ad51f8-80b1-4142-aff6-d56658588bcc { fill: rgb(224 15 15); }
+        .node_15b42b67-1e80-43bf-97b1-17d9b8324e5d ellipse.input_15b42b67-1e80-43bf-97b1-17d9b8324e5d { fill: #FF9AFF; }
+        .node_15b42b67-1e80-43bf-97b1-17d9b8324e5d ellipse.constant_15b42b67-1e80-43bf-97b1-17d9b8324e5d { fill: rgb(235 235 235); }
+        .node_15b42b67-1e80-43bf-97b1-17d9b8324e5d ellipse.output_15b42b67-1e80-43bf-97b1-17d9b8324e5d { fill: #74e071; }
+        .node_15b42b67-1e80-43bf-97b1-17d9b8324e5d ellipse.failed_15b42b67-1e80-43bf-97b1-17d9b8324e5d { fill: rgb(224 15 15); }
 
-        .node_75ad51f8-80b1-4142-aff6-d56658588bcc ellipse {
+        .node_15b42b67-1e80-43bf-97b1-17d9b8324e5d ellipse {
             stroke: #333;
             stroke-width: 1px;
         }
-        .edgeLabelGroup_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        .edgeLabelGroup_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             pointer-events: none;
         }
-        #arrowhead_75ad51f8-80b1-4142-aff6-d56658588bcc path {
+        #arrowhead_15b42b67-1e80-43bf-97b1-17d9b8324e5d path {
             fill: #333333;;
         }
-        .node_75ad51f8-80b1-4142-aff6-d56658588bcc rect,
-        .node_75ad51f8-80b1-4142-aff6-d56658588bcc ellipse {
+        .node_15b42b67-1e80-43bf-97b1-17d9b8324e5d rect,
+        .node_15b42b67-1e80-43bf-97b1-17d9b8324e5d ellipse {
             transition: fill 0.3s ease;
         }
 
-        .node_75ad51f8-80b1-4142-aff6-d56658588bcc .type-indicator_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        .node_15b42b67-1e80-43bf-97b1-17d9b8324e5d .type-indicator_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             font-size: 5px;
             fill: rgba(0, 0, 0, 1.0);  /* Dark grey, semi-transparent */
             pointer-events: none;
         }
 
-        .node_75ad51f8-80b1-4142-aff6-d56658588bcc.error_75ad51f8-80b1-4142-aff6-d56658588bcc rect {
+        .node_15b42b67-1e80-43bf-97b1-17d9b8324e5d.error_15b42b67-1e80-43bf-97b1-17d9b8324e5d rect {
             stroke: black;
             stroke-width: 1px;
         }
 
-        .boundary-box_75ad51f8-80b1-4142-aff6-d56658588bcc.error_75ad51f8-80b1-4142-aff6-d56658588bcc > rect:first-of-type {
+        .boundary-box_15b42b67-1e80-43bf-97b1-17d9b8324e5d.error_15b42b67-1e80-43bf-97b1-17d9b8324e5d > rect:first-of-type {
             fill: red;
             fill-opacity: 0.2;
         }
 
-        #graph-container_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        #graph-container_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             position: relative;
             height: 95%;
             width: ${width};
             overflow: hidden;
         }
 
-        #graph_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        #graph_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             height: 100%;
         }
         
-        .popup_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        .popup_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             position: absolute;
             background: white;
@@ -343,7 +354,7 @@ trace_model(model, example_input)
             flex-direction: column;
         }
 
-        .popup-header_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        .popup-header_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             position: sticky;
             top: 0;
             background: white;
@@ -355,12 +366,12 @@ trace_model(model, example_input)
             z-index: 1;
         }
 
-        .popup_75ad51f8-80b1-4142-aff6-d56658588bcc h3 {
+        .popup_15b42b67-1e80-43bf-97b1-17d9b8324e5d h3 {
             margin: 0;
             font-size: 16px;
         }
 
-        .popup-content_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        .popup-content_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             padding: 10px;
             padding-bottom: 10px;
             overflow-y: auto;
@@ -368,87 +379,87 @@ trace_model(model, example_input)
             flex-grow: 1;
         }
 
-        .popup_75ad51f8-80b1-4142-aff6-d56658588bcc pre {
+        .popup_15b42b67-1e80-43bf-97b1-17d9b8324e5d pre {
             white-space: pre;
             overflow-x: auto;
         }
 
-        .popup-close_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        .popup-close_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             cursor: pointer;
             font-size: 24px;
             font-weight: bold;
             line-height: 1;
         }
 
-        #popup-title_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        #popup-title_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             font-size: 16px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             color: black;
         }
 
-        #graph-container_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        #graph-container_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             position: relative;
         }
 
-        #graph-container_75ad51f8-80b1-4142-aff6-d56658588bcc pre {
+        #graph-container_15b42b67-1e80-43bf-97b1-17d9b8324e5d pre {
             margin-bottom: 0;
         }
 
-        .boundary-box_75ad51f8-80b1-4142-aff6-d56658588bcc rect {
+        .boundary-box_15b42b67-1e80-43bf-97b1-17d9b8324e5d rect {
             pointer-events: none;
         }
-        .boundary-box_75ad51f8-80b1-4142-aff6-d56658588bcc text {
+        .boundary-box_15b42b67-1e80-43bf-97b1-17d9b8324e5d text {
             pointer-events: none;
             user-select: none;
         }
 
-        .boundary-box_75ad51f8-80b1-4142-aff6-d56658588bcc rect {
+        .boundary-box_15b42b67-1e80-43bf-97b1-17d9b8324e5d rect {
             pointer-events: none;
         }
-        .boundary-box_75ad51f8-80b1-4142-aff6-d56658588bcc text {
+        .boundary-box_15b42b67-1e80-43bf-97b1-17d9b8324e5d text {
             pointer-events: none;
             user-select: none;
             font-weight: bold;
         }
-        .edge-label_75ad51f8-80b1-4142-aff6-d56658588bcc text {
+        .edge-label_15b42b67-1e80-43bf-97b1-17d9b8324e5d text {
             pointer-events: none;
             user-select: none;
             font-size: 4px;
             font-family: "'Roboto', sans-serif";
         }
                     
-        .collapse-button_75ad51f8-80b1-4142-aff6-d56658588bcc, .info-button_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        .collapse-button_15b42b67-1e80-43bf-97b1-17d9b8324e5d, .info-button_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             fill: #fff;
             stroke: #333;
             stroke-width: 1px;
             cursor: pointer;
         }
 
-        .collapse-button_75ad51f8-80b1-4142-aff6-d56658588bcc:hover, .info-button_75ad51f8-80b1-4142-aff6-d56658588bcc:hover {
+        .collapse-button_15b42b67-1e80-43bf-97b1-17d9b8324e5d:hover, .info-button_15b42b67-1e80-43bf-97b1-17d9b8324e5d:hover {
             fill: #eee;
             cursor: pointer;
         }
 
-        .collapse-icon_75ad51f8-80b1-4142-aff6-d56658588bcc, .info-icon_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        .collapse-icon_15b42b67-1e80-43bf-97b1-17d9b8324e5d, .info-icon_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             fill: rgb(51, 51, 51);
         }
 
-        .collapse-button-disabled_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        .collapse-button-disabled_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             fill: #eee5;
             stroke: #3333334f;
             stroke-width: 1px;
             cursor: not-allowed;
         }
 
-        .collapse-button-disabled_75ad51f8-80b1-4142-aff6-d56658588bcc:hover {
+        .collapse-button-disabled_15b42b67-1e80-43bf-97b1-17d9b8324e5d:hover {
             fill: #eee6;
             cursor: not-allowed;
         }
 
-        .collapse-icon-disabled_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        .collapse-icon-disabled_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -457,11 +468,11 @@ trace_model(model, example_input)
         }
 
         /* Edge hover styles */
-        .edge-group_75ad51f8-80b1-4142-aff6-d56658588bcc path {
+        .edge-group_15b42b67-1e80-43bf-97b1-17d9b8324e5d path {
             pointer-events: stroke;
         }
 
-        .edge-label_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        .edge-label_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             pointer-events: all;
         }
 
@@ -501,50 +512,50 @@ trace_model(model, example_input)
             }
         }
 
-        .highlight-cluster_75ad51f8-80b1-4142-aff6-d56658588bcc > rect:first-of-type {
+        .highlight-cluster_15b42b67-1e80-43bf-97b1-17d9b8324e5d > rect:first-of-type {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        .highlight-node_75ad51f8-80b1-4142-aff6-d56658588bcc rect {
+        .highlight-node_15b42b67-1e80-43bf-97b1-17d9b8324e5d rect {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        text.node-label_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        text.node-label_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 0.8rem;  /* Base size using rem units for accessibility */
             cursor: default;
             user-select: none;
         }
 
-        .node_75ad51f8-80b1-4142-aff6-d56658588bcc.constant_75ad51f8-80b1-4142-aff6-d56658588bcc .node-label_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        .node_15b42b67-1e80-43bf-97b1-17d9b8324e5d.constant_15b42b67-1e80-43bf-97b1-17d9b8324e5d .node-label_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             font-size: 0.7rem;
         }
 
-        .popup-content_75ad51f8-80b1-4142-aff6-d56658588bcc summary {
+        .popup-content_15b42b67-1e80-43bf-97b1-17d9b8324e5d summary {
             cursor: pointer;
             margin: 5px;
             user-select: none;
         }
 
-        .node_75ad51f8-80b1-4142-aff6-d56658588bcc.input_75ad51f8-80b1-4142-aff6-d56658588bcc rect,
-        .node_75ad51f8-80b1-4142-aff6-d56658588bcc.output_75ad51f8-80b1-4142-aff6-d56658588bcc rect,
-        .node_75ad51f8-80b1-4142-aff6-d56658588bcc.constant_75ad51f8-80b1-4142-aff6-d56658588bcc rect {
+        .node_15b42b67-1e80-43bf-97b1-17d9b8324e5d.input_15b42b67-1e80-43bf-97b1-17d9b8324e5d rect,
+        .node_15b42b67-1e80-43bf-97b1-17d9b8324e5d.output_15b42b67-1e80-43bf-97b1-17d9b8324e5d rect,
+        .node_15b42b67-1e80-43bf-97b1-17d9b8324e5d.constant_15b42b67-1e80-43bf-97b1-17d9b8324e5d rect {
             stroke-width: 1px;
             rx: 8px;
             ry: 8px;
             stroke-dasharray: none;
         }
 
-        #png-error-container_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        #png-error-container_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             text-align: center;
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 14px;
         }
 
-        #png-error-message_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        #png-error-message_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             padding: 8px 16px;
             background-color: #dc3545;
             color: white;
@@ -555,13 +566,13 @@ trace_model(model, example_input)
             text-align: left;
         }
 
-        #png-link-container_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        #png-link-container_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 18px;
         }
 
-        #png-download-button_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        #png-download-button_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -571,11 +582,11 @@ trace_model(model, example_input)
             margin-right: 8px;
         }
 
-        #png-download-button_75ad51f8-80b1-4142-aff6-d56658588bcc:hover {
+        #png-download-button_15b42b67-1e80-43bf-97b1-17d9b8324e5d:hover {
             background-color: #0056b3;
         }
 
-        #png-save-button_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        #png-save-button_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -584,18 +595,18 @@ trace_model(model, example_input)
             border-radius: 4px;
         }
 
-        #png-save-button_75ad51f8-80b1-4142-aff6-d56658588bcc:hover {
+        #png-save-button_15b42b67-1e80-43bf-97b1-17d9b8324e5d:hover {
             background-color: #0056b3;
         }
 
-        #svg-link-container_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        #svg-link-container_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 18px;
         }
 
 
-        #svg-download-button_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        #svg-download-button_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -605,11 +616,11 @@ trace_model(model, example_input)
             margin-right: 8px;
         }
 
-        #svg-download-button_75ad51f8-80b1-4142-aff6-d56658588bcc:hover {
+        #svg-download-button_15b42b67-1e80-43bf-97b1-17d9b8324e5d:hover {
             background-color: #0056b3;
         }
 
-        #svg-save-button_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        #svg-save-button_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -618,11 +629,11 @@ trace_model(model, example_input)
             border-radius: 4px;
         }
 
-        #svg-save-button_75ad51f8-80b1-4142-aff6-d56658588bcc:hover {
+        #svg-save-button_15b42b67-1e80-43bf-97b1-17d9b8324e5d:hover {
             background-color: #0056b3;
         }
 
-        .custom-tooltip_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        .custom-tooltip_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             position: absolute;
             background: white;
             border: 1px solid #ccc;
@@ -638,7 +649,7 @@ trace_model(model, example_input)
             display: none;
         }
 
-        .custom-tooltip_smaller_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        .custom-tooltip_smaller_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             position: absolute;
             background: white;
             border: 1px solid #ccc;
@@ -654,16 +665,16 @@ trace_model(model, example_input)
             display: none;
         }
 
-        .edge_75ad51f8-80b1-4142-aff6-d56658588bcc.implied-edge_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        .edge_15b42b67-1e80-43bf-97b1-17d9b8324e5d.implied-edge_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             stroke-dasharray: 5,5;
         }
 
-        .logo_75ad51f8-80b1-4142-aff6-d56658588bcc {
+        .logo_15b42b67-1e80-43bf-97b1-17d9b8324e5d {
             position: absolute;
             bottom: 8px; left: 8px;
             padding: 4px 6px;
         }
-        .logo_75ad51f8-80b1-4142-aff6-d56658588bcc a {
+        .logo_15b42b67-1e80-43bf-97b1-17d9b8324e5d a {
             color: #a1a1a1;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             opacity: .6;
@@ -824,13 +835,13 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
 (function() {
-    const adj_list = {"input_0": {"edges": [{"target": "__add___9", "dims": "(3, 4)", "edge_data_id": 5495040496}], "failed": false, "node_type": "Input"}, "to_7": {"edges": [{"target": "__add___9", "dims": "(3, 4)", "edge_data_id": 5703979312}, {"target": "output_0", "dims": "(3, 4)", "edge_data_id": 5703979312}], "failed": false, "node_type": "Operation"}, "tensor_8": {"edges": [{"target": "to_7", "dims": "(3, 4)", "edge_data_id": 5703979312}], "failed": false, "node_type": "Constant"}, "__add___9": {"edges": [], "failed": false, "node_type": "Operation"}, "output_0": {"edges": [], "failed": false, "node_type": "Output"}};
+    const adj_list = {"input_0": {"edges": [{"target": "__add___9", "dims": "(3, 4)", "edge_data_id": 6066218624}], "failed": false, "node_type": "Input"}, "to_7": {"edges": [{"target": "__add___9", "dims": "(3, 4)", "edge_data_id": 6169557088}, {"target": "output_0", "dims": "(3, 4)", "edge_data_id": 6169557088}], "failed": false, "node_type": "Operation"}, "tensor_8": {"edges": [{"target": "to_7", "dims": "(3, 4)", "edge_data_id": 6169557088}], "failed": false, "node_type": "Constant"}, "__add___9": {"edges": [], "failed": false, "node_type": "Operation"}, "output_0": {"edges": [], "failed": false, "node_type": "Output"}};
     const module_info = {"DynamicLayerSelector_1": {"type": "DynamicLayerSelector", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}};
     const func_info = {"DynamicLayerSelector_1": {"positional_args": [{"_type": "tensor", "shape": [3, 4], "dtype": "torch.float32"}], "keyword_args": {}}, "size_2": {"positional_args": [{"_type": "tensor", "shape": [3, 4], "dtype": "torch.float32"}, 0], "keyword_args": {}}, "size_4": {"positional_args": [{"_type": "tensor", "shape": [3, 4], "dtype": "torch.float32"}, 1], "keyword_args": {}}, "to_7": {"positional_args": [{"_type": "tensor", "shape": [3, 4], "dtype": "torch.float32"}, {"_type": "device", "repr": "cpu"}], "keyword_args": {}}, "__add___9": {"positional_args": [{"_type": "tensor", "shape": [3, 4], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [3, 4], "dtype": "torch.float32"}], "keyword_args": {}}};
     const parent_module_to_nodes = {"DynamicLayerSelector_1": ["size_2", "size_4", "to_7", "__add___9"]};
     const parent_module_to_depth = {"DynamicLayerSelector_1": 1};
     const graph_node_name_to_without_suffix = {"input_0": "input_0", "DynamicLayerSelector_1": "DynamicLayerSelector", "size_2": "size", "scalar_3": "scalar", "size_4": "size", "scalar_5": "scalar", "zeros_6": "zeros", "to_7": "to", "tensor_8": "tensor", "__add___9": "__add__", "output": "output", "output_0": "output_0"};
-    const graph_node_display_names = {"input_0": "input_0", "DynamicLayerSelector_1": "DynamicLayerSelector", "size_2": "size", "scalar_3": "scalar", "size_4": "size", "scalar_5": "scalar", "zeros_6": "zeros", "to_7": "to", "tensor_8": "tensor_8", "__add___9": "__add__", "output": "output", "output_0": "output_0"};
+    const graph_node_display_names = {"input_0": "input_0", "DynamicLayerSelector_1": "DynamicLayerSelector", "size_2": "size", "scalar_3": "scalar", "size_4": "size", "scalar_5": "scalar", "zeros_6": "zeros", "to_7": "to", "tensor_8": "tensor", "__add___9": "__add__", "output": "output", "output_0": "output_0"};
     const ancestor_map = {"tensor_8": "DynamicLayerSelector_1", "to_7": "DynamicLayerSelector_1", "__add___9": "DynamicLayerSelector_1"};
     const repeat_containers = new Set([]);
     const REPEAT_CONTAINER_COLOR = "#FA8334";
@@ -873,10 +884,10 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         removeTooltip();
         
         const tooltip = document.createElement('div');
-        tooltip.className = !smaller ? `custom-tooltip_75ad51f8-80b1-4142-aff6-d56658588bcc` : `custom-tooltip_smaller_75ad51f8-80b1-4142-aff6-d56658588bcc`;
+        tooltip.className = !smaller ? `custom-tooltip_15b42b67-1e80-43bf-97b1-17d9b8324e5d` : `custom-tooltip_smaller_15b42b67-1e80-43bf-97b1-17d9b8324e5d`;
         tooltip.textContent = text;
         
-        const container = document.getElementById(`graph-container_75ad51f8-80b1-4142-aff6-d56658588bcc`);
+        const container = document.getElementById(`graph-container_15b42b67-1e80-43bf-97b1-17d9b8324e5d`);
         container.appendChild(tooltip);
         currentTooltip = tooltip;
         
@@ -888,7 +899,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const buttonRect = buttonElement.getBoundingClientRect();
         
         // Get the container's position in screen coordinates
-        const containerRect = document.getElementById(`graph-container_75ad51f8-80b1-4142-aff6-d56658588bcc`).getBoundingClientRect();
+        const containerRect = document.getElementById(`graph-container_15b42b67-1e80-43bf-97b1-17d9b8324e5d`).getBoundingClientRect();
         
         // Calculate position relative to container
         const buttonX = buttonRect.left + (buttonRect.width / 2) - containerRect.left;
@@ -1505,7 +1516,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function reloadGraph() {
-        d3.select("#graph_75ad51f8-80b1-4142-aff6-d56658588bcc").html("");
+        d3.select("#graph_15b42b67-1e80-43bf-97b1-17d9b8324e5d").html("");
 
         if (generateImage) {
             renderGraphvizImage();
@@ -1572,16 +1583,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function renderGraphvizImage() {
-        d3.select("#png-link-container_75ad51f8-80b1-4142-aff6-d56658588bcc").remove();
+        d3.select("#png-link-container_15b42b67-1e80-43bf-97b1-17d9b8324e5d").remove();
         
         function showErrorMessage(error) {
-            const parent = d3.select("#graph-container_75ad51f8-80b1-4142-aff6-d56658588bcc").node().parentNode;
+            const parent = d3.select("#graph-container_15b42b67-1e80-43bf-97b1-17d9b8324e5d").node().parentNode;
             const errorContainer = d3.select(parent)
-                .insert("div", "#graph-container_75ad51f8-80b1-4142-aff6-d56658588bcc")
-                .attr("id", "png-error-container_75ad51f8-80b1-4142-aff6-d56658588bcc");
+                .insert("div", "#graph-container_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
+                .attr("id", "png-error-container_15b42b67-1e80-43bf-97b1-17d9b8324e5d");
             
             errorContainer.append("div")
-                .attr("id", "png-error-message_75ad51f8-80b1-4142-aff6-d56658588bcc")
+                .attr("id", "png-error-message_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
                 .html(`<strong>Error:</strong><br>${error.stack || error.message || error}<br><br><strong>Note:</strong> Exporting very large models as PNG is currently not supported. Please use generate_image=False, or raise an issue on https://github.com/sachinhosmani/torchvista/issues`);
         }
         
@@ -1619,21 +1630,21 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const pngUrl = URL.createObjectURL(pngBlob);
         
         // Create link container
-        const parent = d3.select("#graph-container_75ad51f8-80b1-4142-aff6-d56658588bcc").node().parentNode;
+        const parent = d3.select("#graph-container_15b42b67-1e80-43bf-97b1-17d9b8324e5d").node().parentNode;
         const linkContainer = d3.select(parent)
-            .insert("div", "#graph-container_75ad51f8-80b1-4142-aff6-d56658588bcc")
-            .attr("id", "png-link-container_75ad51f8-80b1-4142-aff6-d56658588bcc");
+            .insert("div", "#graph-container_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
+            .attr("id", "png-link-container_15b42b67-1e80-43bf-97b1-17d9b8324e5d");
         
         linkContainer.append("a")
             .attr("href", pngUrl)
             .attr("target", "_blank")
-            .attr("id", "png-download-button_75ad51f8-80b1-4142-aff6-d56658588bcc")
+            .attr("id", "png-download-button_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
             .text("View PNG in New Tab");
 
         linkContainer.append("a")
             .attr("href", pngUrl)
-            .attr("download", `torchvista_graph_75ad51f8-80b1-4142-aff6-d56658588bcc.png`)
-            .attr("id", "png-save-button_75ad51f8-80b1-4142-aff6-d56658588bcc")
+            .attr("download", `torchvista_graph_15b42b67-1e80-43bf-97b1-17d9b8324e5d.png`)
+            .attr("id", "png-save-button_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
             .text("Download PNG");
             
         URL.revokeObjectURL(svgUrl);
@@ -1654,26 +1665,26 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const svgUrl = URL.createObjectURL(svgBlob);
         
         // Create link container
-        const parent = d3.select("#graph-container_75ad51f8-80b1-4142-aff6-d56658588bcc").node().parentNode;
+        const parent = d3.select("#graph-container_15b42b67-1e80-43bf-97b1-17d9b8324e5d").node().parentNode;
         const linkContainer = d3.select(parent)
-            .insert("div", "#graph-container_75ad51f8-80b1-4142-aff6-d56658588bcc")
-            .attr("id", "svg-link-container_75ad51f8-80b1-4142-aff6-d56658588bcc");
+            .insert("div", "#graph-container_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
+            .attr("id", "svg-link-container_15b42b67-1e80-43bf-97b1-17d9b8324e5d");
         
         linkContainer.append("a")
             .attr("href", svgUrl)
             .attr("target", "_blank")
-            .attr("id", "svg-download-button_75ad51f8-80b1-4142-aff6-d56658588bcc")
+            .attr("id", "svg-download-button_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
             .text("View SVG in New Tab");
 
         linkContainer.append("a")
             .attr("href", svgUrl)
-            .attr("download", `torchvista_graph_75ad51f8-80b1-4142-aff6-d56658588bcc.svg`)
-            .attr("id", "svg-save-button_75ad51f8-80b1-4142-aff6-d56658588bcc")
+            .attr("download", `torchvista_graph_15b42b67-1e80-43bf-97b1-17d9b8324e5d.svg`)
+            .attr("id", "svg-save-button_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
             .text("Download SVG");
     }
 
     function createGraph(graphvizData) {
-        const svg = d3.select("#graph_75ad51f8-80b1-4142-aff6-d56658588bcc")
+        const svg = d3.select("#graph_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
         .append("svg")
         .attr("width", "100%")
         .attr("height", "100%")
@@ -1693,7 +1704,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
         // Define arrowhead marker
         svg.append("defs").append("marker")
-        .attr("id", "arrowhead_75ad51f8-80b1-4142-aff6-d56658588bcc")
+        .attr("id", "arrowhead_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
         .attr("viewBox", "0 -5 10 10")
         .attr("refX", 8)
         .attr("refY", 0)
@@ -1705,11 +1716,11 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .attr("fill", "#333");
 
         // Draw clusters (container boxes) first so they're behind nodes
-        const clusters = inner.selectAll(".boundary-box_75ad51f8-80b1-4142-aff6-d56658588bcc")
+        const clusters = inner.selectAll(".boundary-box_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
         .data(Object.entries(graphvizData.clusters))
         .enter()
         .append("g")
-        .attr("class", "boundary-box_75ad51f8-80b1-4142-aff6-d56658588bcc");
+        .attr("class", "boundary-box_15b42b67-1e80-43bf-97b1-17d9b8324e5d");
 
         const containersWithFailedNodes = identifyContainersWithFailedNodes(adj_list, ancestor_map);
 
@@ -1719,10 +1730,10 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             const hasFailedNodes = containersWithFailedNodes.has(clusterName);
             const isRepeat = isRepeatNode(clusterName);
             if (hasFailedNodes) {
-                group.classed("error_75ad51f8-80b1-4142-aff6-d56658588bcc", true);
+                group.classed("error_15b42b67-1e80-43bf-97b1-17d9b8324e5d", true);
             }
             if (isRepeat) {
-                group.classed("repeat-container_75ad51f8-80b1-4142-aff6-d56658588bcc", true);
+                group.classed("repeat-container_15b42b67-1e80-43bf-97b1-17d9b8324e5d", true);
             }
 
             // Parse bounding box coordinates
@@ -1764,13 +1775,13 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (!isRepeatNode(clusterName)) {
                 // Add collapse/expand button
                 const collapseButton = group.append("circle")
-                .attr("class", "collapse-button_75ad51f8-80b1-4142-aff6-d56658588bcc")
+                .attr("class", "collapse-button_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
                 .attr("cx", x1 + 10)
                 .attr("cy", y1 + 10)
                 .attr("r", 5.5);
 
                 group.append("text")
-                .attr("class", "collapse-icon_75ad51f8-80b1-4142-aff6-d56658588bcc")
+                .attr("class", "collapse-icon_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
                 .attr("x", x1 + 10)
                 .attr("y", y1 + 10)
                 .attr("text-anchor", "middle")
@@ -1787,7 +1798,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add click event handler for collapse buttons
-        clusters.selectAll(".collapse-button_75ad51f8-80b1-4142-aff6-d56658588bcc, .collapse-icon_75ad51f8-80b1-4142-aff6-d56658588bcc")
+        clusters.selectAll(".collapse-button_15b42b67-1e80-43bf-97b1-17d9b8324e5d, .collapse-icon_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
         .on("click", function(event, [clusterName, clusterData]) {
             event.stopPropagation(); // Prevent event from bubbling to SVG
             removeTooltip();
@@ -1802,19 +1813,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
         
         // Create edges using the path points from Graphviz
-        const edges = inner.selectAll(".edge_75ad51f8-80b1-4142-aff6-d56658588bcc")
+        const edges = inner.selectAll(".edge_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
         .data(graphvizData.edges)
         .enter()
         .append("g")
-        .attr("class", "edge-group_75ad51f8-80b1-4142-aff6-d56658588bcc");
+        .attr("class", "edge-group_15b42b67-1e80-43bf-97b1-17d9b8324e5d");
         
         // Add the actual path
         edges.append("path")
         .attr("class", function(edge) {
             if (edge.is_implied_edge) {
-                return "edge_75ad51f8-80b1-4142-aff6-d56658588bcc implied-edge_75ad51f8-80b1-4142-aff6-d56658588bcc";
+                return "edge_15b42b67-1e80-43bf-97b1-17d9b8324e5d implied-edge_15b42b67-1e80-43bf-97b1-17d9b8324e5d";
             }
-            return "edge_75ad51f8-80b1-4142-aff6-d56658588bcc";
+            return "edge_15b42b67-1e80-43bf-97b1-17d9b8324e5d";
         }).attr("d", function(edge) {
             if (edge.path && edge.path.length > 0) {
                     // Create a proper SVG path using Bézier curves
@@ -1840,7 +1851,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             }
             return "";
         })
-        .attr("marker-end", "url(#arrowhead_75ad51f8-80b1-4142-aff6-d56658588bcc)");
+        .attr("marker-end", "url(#arrowhead_15b42b67-1e80-43bf-97b1-17d9b8324e5d)");
         
         // Add dimension labels on edges
         edges.each(function(edge) {
@@ -1869,7 +1880,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Create a background for the text
             const labelGroup = edgeGroup.append("g")
-            .attr("class", "edge-label_75ad51f8-80b1-4142-aff6-d56658588bcc")
+            .attr("class", "edge-label_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
             .attr("transform", `translate(${pointAtStart.x}, ${pointAtStart.y})`);
             
             const text = labelGroup.append("text")
@@ -1904,7 +1915,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         edges.each(function() {
             const edgeGroup = d3.select(this);
             const path = edgeGroup.select("path");
-            const labelGroup = edgeGroup.select(".edge-label_75ad51f8-80b1-4142-aff6-d56658588bcc");
+            const labelGroup = edgeGroup.select(".edge-label_15b42b67-1e80-43bf-97b1-17d9b8324e5d");
             const labelText = labelGroup.select("text");
             const labelBg = labelGroup.select("rect");
             const originalStrokeWidth = path.attr("stroke-width") || 1;
@@ -1969,19 +1980,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
         // Create nodes using positions from Graphviz
-        const nodes = inner.selectAll(".node_75ad51f8-80b1-4142-aff6-d56658588bcc")
+        const nodes = inner.selectAll(".node_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
             .data(Object.entries(graphvizData.nodes))
             .enter()
             .append("g")
             // In the createGraph function, when you're creating nodes, modify the class assignment:
             .attr("class", function([nodeName, nodeData]) {
-                let classes = "node_75ad51f8-80b1-4142-aff6-d56658588bcc";
-                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_75ad51f8-80b1-4142-aff6-d56658588bcc";
-                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_75ad51f8-80b1-4142-aff6-d56658588bcc";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_75ad51f8-80b1-4142-aff6-d56658588bcc";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_75ad51f8-80b1-4142-aff6-d56658588bcc";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_75ad51f8-80b1-4142-aff6-d56658588bcc";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_75ad51f8-80b1-4142-aff6-d56658588bcc";
+                let classes = "node_15b42b67-1e80-43bf-97b1-17d9b8324e5d";
+                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_15b42b67-1e80-43bf-97b1-17d9b8324e5d";
+                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_15b42b67-1e80-43bf-97b1-17d9b8324e5d";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_15b42b67-1e80-43bf-97b1-17d9b8324e5d";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_15b42b67-1e80-43bf-97b1-17d9b8324e5d";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_15b42b67-1e80-43bf-97b1-17d9b8324e5d";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_15b42b67-1e80-43bf-97b1-17d9b8324e5d";
                 return classes;
             })
             .attr("transform", function([nodeName, nodeData]) {
@@ -2008,11 +2019,11 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 .attr("rx", nodeData.width / 2)
                 .attr("ry", nodeData.height / 2)
                 .attr("class", function() { 
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_75ad51f8-80b1-4142-aff6-d56658588bcc";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_75ad51f8-80b1-4142-aff6-d56658588bcc";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_75ad51f8-80b1-4142-aff6-d56658588bcc";
-                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_75ad51f8-80b1-4142-aff6-d56658588bcc";
-                    return "operation_75ad51f8-80b1-4142-aff6-d56658588bcc";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_15b42b67-1e80-43bf-97b1-17d9b8324e5d";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_15b42b67-1e80-43bf-97b1-17d9b8324e5d";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_15b42b67-1e80-43bf-97b1-17d9b8324e5d";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_15b42b67-1e80-43bf-97b1-17d9b8324e5d";
+                    return "operation_15b42b67-1e80-43bf-97b1-17d9b8324e5d";
                 });
             } else {
                 // Create rectangle
@@ -2022,15 +2033,15 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 .attr("x", -nodeData.width / 2)
                 .attr("y", -nodeData.height / 2)
                 .attr("class", function() { 
-                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_75ad51f8-80b1-4142-aff6-d56658588bcc";
-                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_75ad51f8-80b1-4142-aff6-d56658588bcc" : "operation_75ad51f8-80b1-4142-aff6-d56658588bcc";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_15b42b67-1e80-43bf-97b1-17d9b8324e5d";
+                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_15b42b67-1e80-43bf-97b1-17d9b8324e5d" : "operation_15b42b67-1e80-43bf-97b1-17d9b8324e5d";
                 });
             }
         });
         
         // Add labels for nodes
         nodes.append("text")
-        .attr("class", "node-label_75ad51f8-80b1-4142-aff6-d56658588bcc")
+        .attr("class", "node-label_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
         .text(function([nodeName]) { return graph_node_display_names[nodeName] || graph_node_name_to_without_suffix[nodeName] || nodeName; })
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "central");
@@ -2039,7 +2050,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         nodes.filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")));
         }).append("text")
-        .attr("class", "type-indicator_75ad51f8-80b1-4142-aff6-d56658588bcc")
+        .attr("class", "type-indicator_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
         .attr("text-anchor", "start")
         .attr("dominant-baseline", "text-bottom")
         .attr("transform", function([nodeName, nodeData]) {
@@ -2057,7 +2068,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add info buttons to nodes (except input, output, constant)
-        inner.selectAll(".node_75ad51f8-80b1-4142-aff6-d56658588bcc")
+        inner.selectAll(".node_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
         .filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")))
         })
@@ -2068,14 +2079,14 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
         // Add info button circle
         const infoButton = nodeGroup.append("circle")
-        .attr("class", "info-button_75ad51f8-80b1-4142-aff6-d56658588bcc")
+        .attr("class", "info-button_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
         .attr("cx", width/2 - 7)
         .attr("cy", -height/2 + 7)
         .attr("r", 5.5);
 
         // Add info button icon
         nodeGroup.append("text")
-        .attr("class", "info-icon_75ad51f8-80b1-4142-aff6-d56658588bcc")
+        .attr("class", "info-icon_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
         .attr("x", width/2 - 7)
         .attr("y", -height/2 + 8)
         .attr("text-anchor", "middle")
@@ -2091,16 +2102,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .on("mouseleave", removeTooltip);
 
         // Add click handler to info button
-            nodeGroup.selectAll(".info-button_75ad51f8-80b1-4142-aff6-d56658588bcc, .info-icon_75ad51f8-80b1-4142-aff6-d56658588bcc")
+            nodeGroup.selectAll(".info-button_15b42b67-1e80-43bf-97b1-17d9b8324e5d, .info-icon_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
             .on("click", function(event) {
                 event.stopPropagation();
-                const infoButton = nodeGroup.select(".info-button_75ad51f8-80b1-4142-aff6-d56658588bcc").node();
+                const infoButton = nodeGroup.select(".info-button_15b42b67-1e80-43bf-97b1-17d9b8324e5d").node();
                 showPopupFromInfoButton.call(nodeGroup.node(), event, [nodeName], infoButton);
             });
         });
 
         // Add expand buttons to all module nodes (including non-expandable ones)
-        inner.selectAll(".node_75ad51f8-80b1-4142-aff6-d56658588bcc")
+        inner.selectAll(".node_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
         .filter(function([nodeName]) {
             return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || collapsedContainers.has(nodeName)) && !isRepeatNode(nodeName);
         })
@@ -2122,7 +2133,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Add expand button circle
             const expandButton = nodeGroup.append("circle")
-            .attr("class", isExpandable ? "collapse-button_75ad51f8-80b1-4142-aff6-d56658588bcc" : "collapse-button-disabled_75ad51f8-80b1-4142-aff6-d56658588bcc")
+            .attr("class", isExpandable ? "collapse-button_15b42b67-1e80-43bf-97b1-17d9b8324e5d" : "collapse-button-disabled_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
             .attr("cx", -width / 2 + 7)
             .attr("cy", -height / 2 + 7)
             .attr("r", 5.5)
@@ -2131,7 +2142,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Add expand button icon
             nodeGroup.append("text")
-            .attr("class", isExpandable ? "collapse-icon_75ad51f8-80b1-4142-aff6-d56658588bcc" : "collapse-icon-disabled_75ad51f8-80b1-4142-aff6-d56658588bcc")
+            .attr("class", isExpandable ? "collapse-icon_15b42b67-1e80-43bf-97b1-17d9b8324e5d" : "collapse-icon-disabled_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
             .attr("x", -width / 2 + 7)
             .attr("y", -height / 2 + 7)
             .attr("text-anchor", "middle")
@@ -2151,7 +2162,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Only add click handler for expandable modules
             if (isExpandable) {
-                nodeGroup.selectAll(".collapse-button_75ad51f8-80b1-4142-aff6-d56658588bcc, .collapse-icon_75ad51f8-80b1-4142-aff6-d56658588bcc")
+                nodeGroup.selectAll(".collapse-button_15b42b67-1e80-43bf-97b1-17d9b8324e5d, .collapse-icon_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
                 .on("click", function(event) {
                     event.stopPropagation();
                     removeTooltip();
@@ -2252,16 +2263,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                     .scale(currentTransform.k));
             }
 
-            clickedNodeElement.classed("highlight-node_75ad51f8-80b1-4142-aff6-d56658588bcc", true);
+            clickedNodeElement.classed("highlight-node_15b42b67-1e80-43bf-97b1-17d9b8324e5d", true);
             
             setTimeout(() => {
-                clickedNodeElement.classed("highlight-node_75ad51f8-80b1-4142-aff6-d56658588bcc", false);
+                clickedNodeElement.classed("highlight-node_15b42b67-1e80-43bf-97b1-17d9b8324e5d", false);
             }, 2000);
 
-            const popup = d3.select("#popup_75ad51f8-80b1-4142-aff6-d56658588bcc");
-            const moduleTemplate = d3.select("#module-template_75ad51f8-80b1-4142-aff6-d56658588bcc");
-            const tensorOpTemplate = d3.select("#tensor-op-template_75ad51f8-80b1-4142-aff6-d56658588bcc");
-            const noInfoMessage = d3.select("#no-info_75ad51f8-80b1-4142-aff6-d56658588bcc");
+            const popup = d3.select("#popup_15b42b67-1e80-43bf-97b1-17d9b8324e5d");
+            const moduleTemplate = d3.select("#module-template_15b42b67-1e80-43bf-97b1-17d9b8324e5d");
+            const tensorOpTemplate = d3.select("#tensor-op-template_15b42b67-1e80-43bf-97b1-17d9b8324e5d");
+            const noInfoMessage = d3.select("#no-info_15b42b67-1e80-43bf-97b1-17d9b8324e5d");
             
             const nodeData = adj_list[nodeName];
             
@@ -2269,7 +2280,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (node_to_module_path[nodeName] && graph_node_name_to_without_suffix[nodeName]) {
                 popupTitle = node_to_module_path[nodeName] + "." + graph_node_name_to_without_suffix[nodeName];
             }
-            d3.select("#popup-title_75ad51f8-80b1-4142-aff6-d56658588bcc").text(popupTitle);
+            d3.select("#popup-title_15b42b67-1e80-43bf-97b1-17d9b8324e5d").text(popupTitle);
 
             moduleTemplate.style("display", "none");
             tensorOpTemplate.style("display", "none");
@@ -2277,31 +2288,31 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             if (module_info[nodeName]) {
                 const info = module_info[nodeName];
-                moduleTemplate.style("display", "block").classed("content-shown_75ad51f8-80b1-4142-aff6-d56658588bcc", true);
+                moduleTemplate.style("display", "block").classed("content-shown_15b42b67-1e80-43bf-97b1-17d9b8324e5d", true);
                 
-                d3.select("#module-extra-repr_75ad51f8-80b1-4142-aff6-d56658588bcc").text(info.extra_repr || 'N/A');
+                d3.select("#module-extra-repr_15b42b67-1e80-43bf-97b1-17d9b8324e5d").text(info.extra_repr || 'N/A');
 
                 const forward_info = func_info[nodeName];
-                const attributesContainer = d3.select("#module-attributes_75ad51f8-80b1-4142-aff6-d56658588bcc").node();
+                const attributesContainer = d3.select("#module-attributes_15b42b67-1e80-43bf-97b1-17d9b8324e5d").node();
                 attributesContainer.innerHTML = '';
                 createJsonViewer(attributesContainer, info.attributes);
 
-                const parametersContainer = d3.select("#module-parameters_75ad51f8-80b1-4142-aff6-d56658588bcc").node();
+                const parametersContainer = d3.select("#module-parameters_15b42b67-1e80-43bf-97b1-17d9b8324e5d").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, forward_info);
             } else if (!(adj_list[nodeName] && adj_list[nodeName].node_type === "Input") && func_info[nodeName]) {
                 const info = func_info[nodeName];
-                tensorOpTemplate.style("display", "block").classed("content-shown_75ad51f8-80b1-4142-aff6-d56658588bcc", true);
-                const parametersContainer = d3.select("#tensor-op-parameters_75ad51f8-80b1-4142-aff6-d56658588bcc").node();
+                tensorOpTemplate.style("display", "block").classed("content-shown_15b42b67-1e80-43bf-97b1-17d9b8324e5d", true);
+                const parametersContainer = d3.select("#tensor-op-parameters_15b42b67-1e80-43bf-97b1-17d9b8324e5d").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, info);
             } else {
-                noInfoMessage.style("display", "block").classed("content-shown_75ad51f8-80b1-4142-aff6-d56658588bcc", true);
+                noInfoMessage.style("display", "block").classed("content-shown_15b42b67-1e80-43bf-97b1-17d9b8324e5d", true);
             }
             
             // Position popup based on info button or node center
             let boundingBox, x, y;
-            const containerRect = d3.select("#graph-container_75ad51f8-80b1-4142-aff6-d56658588bcc").node().getBoundingClientRect();
+            const containerRect = d3.select("#graph-container_15b42b67-1e80-43bf-97b1-17d9b8324e5d").node().getBoundingClientRect();
             
             if (infoButtonElement) {
                 boundingBox = infoButtonElement.getBoundingClientRect();
@@ -2317,19 +2328,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             popup.style("left", `${x}px`)
             .style("top", `${y}px`)
             .style("display", "flex");
-            d3.select("#popup-content_75ad51f8-80b1-4142-aff6-d56658588bcc").node().scrollTop = 0;
+            d3.select("#popup-content_15b42b67-1e80-43bf-97b1-17d9b8324e5d").node().scrollTop = 0;
         }
 
         function closePopup() {
-            d3.select("#popup_75ad51f8-80b1-4142-aff6-d56658588bcc").style("display", "none");
+            d3.select("#popup_15b42b67-1e80-43bf-97b1-17d9b8324e5d").style("display", "none");
         }
         
-        d3.select(".popup-close_75ad51f8-80b1-4142-aff6-d56658588bcc").on("click", closePopup);
+        d3.select(".popup-close_15b42b67-1e80-43bf-97b1-17d9b8324e5d").on("click", closePopup);
         svg.on("click", closePopup);
 
-        const popup = document.getElementById(`popup_75ad51f8-80b1-4142-aff6-d56658588bcc`);
+        const popup = document.getElementById(`popup_15b42b67-1e80-43bf-97b1-17d9b8324e5d`);
         const resizeObserver = new ResizeObserver(() => {
-            const editorContainers = popup.querySelectorAll('.json-viewer_75ad51f8-80b1-4142-aff6-d56658588bcc');
+            const editorContainers = popup.querySelectorAll('.json-viewer_15b42b67-1e80-43bf-97b1-17d9b8324e5d');
             for (let container of editorContainers) {
                 if (container.jsonEditor) {
                     container.jsonEditor.resize();
@@ -2408,30 +2419,30 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 // Apply highlight effect to the target container
                 if (Object.keys(graphvizData.nodes).includes(lastModifiedContainer)) {
                     // Highlight the node (collapsed container)
-                    const targetElement = inner.selectAll(".node_75ad51f8-80b1-4142-aff6-d56658588bcc")
+                    const targetElement = inner.selectAll(".node_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
                         .filter(([nodeName]) => nodeName === lastModifiedContainer);
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-node_75ad51f8-80b1-4142-aff6-d56658588bcc", true);
+                        targetElement.classed("highlight-node_15b42b67-1e80-43bf-97b1-17d9b8324e5d", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-node_75ad51f8-80b1-4142-aff6-d56658588bcc", false);
+                            targetElement.classed("highlight-node_15b42b67-1e80-43bf-97b1-17d9b8324e5d", false);
                         }, 2000); // Match the animation duration
                     }
                 } else if (Object.keys(graphvizData.clusters).includes(lastModifiedContainer)) {
                     // Highlight the cluster (expanded container)
-                    const targetElement = inner.selectAll(".boundary-box_75ad51f8-80b1-4142-aff6-d56658588bcc")
+                    const targetElement = inner.selectAll(".boundary-box_15b42b67-1e80-43bf-97b1-17d9b8324e5d")
                         .filter(function([clusterName]) {
                             return clusterName === lastModifiedContainer;
                         });
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-cluster_75ad51f8-80b1-4142-aff6-d56658588bcc", true);
+                        targetElement.classed("highlight-cluster_15b42b67-1e80-43bf-97b1-17d9b8324e5d", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-cluster_75ad51f8-80b1-4142-aff6-d56658588bcc", false);
+                            targetElement.classed("highlight-cluster_15b42b67-1e80-43bf-97b1-17d9b8324e5d", false);
                         }, 2000); // Match the animation duration
                     }
                 }
