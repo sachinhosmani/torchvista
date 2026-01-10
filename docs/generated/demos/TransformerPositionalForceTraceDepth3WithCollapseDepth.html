@@ -2,10 +2,16 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
         <style>
+            :root {
+                --md-primary-fg-color: #4051b5;
+                --md-accent-fg-color: #526cfe;
+            }
+
             html, body {
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
                 height: 100%;
@@ -102,28 +108,53 @@
                 width: 100%;
                 height: 100%;
             }
-            .top-bar {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+            /* Header - matching website style */
+            .md-header {
+                background-color: var(--md-primary-fg-color);
                 color: white;
-                padding: 12px 20px;
+                box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+            }
+
+            .md-header__inner {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                min-height: 25px;
+                padding: 0.6rem 1rem;
+                max-width: 1200px;
+                margin: 0 auto;
             }
 
-            .repo-title {
-                font-size: 24px;
-                font-weight: bold;
-                margin: 0;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            .md-header__title {
+                font-size: 1.25rem;
+                font-weight: 600;
             }
 
-            /* GitHub button iframe styling */
-            .github-star-button {
-                border-radius: 6px;
-                overflow: hidden;
+            .md-header__title a {
+                color: white;
+                text-decoration: none;
+            }
+
+            .md-header__nav {
+                display: flex;
+                gap: 1.5rem;
+                align-items: center;
+            }
+
+            .md-header__nav a {
+                color: white;
+                text-decoration: none;
+                font-weight: 500;
+                opacity: 0.9;
+                transition: opacity 0.2s;
+            }
+
+            .md-header__nav a:hover {
+                opacity: 1;
+            }
+
+            .md-header__nav iframe {
+                vertical-align: middle;
             }
 
             .json-viewer {
@@ -147,10 +178,22 @@
                 background: #45a049;
             }
 
+            @media (max-width: 768px) {
+                .md-header__inner {
+                    flex-direction: column;
+                    gap: 0.5rem;
+                }
+                .md-header__nav {
+                    gap: 1rem;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                }
+            }
+
         </style>
     </head>
     <body>
-    
+
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 document.querySelectorAll('pre code').forEach((block) => {
@@ -172,14 +215,23 @@
             }
 
         </script>
-   
+
         <div class="container">
-            <div class="top-bar">
-                <h1 class="repo-title">TorchVista</h1>
-                <!-- GitHub's official star button -->
-                <iframe src="https://ghbtns.com/github-btn.html?user=sachinhosmani&repo=torchvista&type=star&count=true&size=large" 
-                        frameborder="0" scrolling="0" width="170" height="30" title="GitHub Star Button"></iframe>
-            </div>
+            <header class="md-header">
+                <div class="md-header__inner">
+                    <div class="md-header__title">
+                        <a href="../../index.html">TorchVista</a>
+                    </div>
+                    <nav class="md-header__nav">
+                        <a href="../../index.html">Home</a>
+                        <a href="../../tutorials.html">Tutorials</a>
+                        <a href="../../demos.html">Demos</a>
+                        <a href="https://github.com/sachinhosmani/torchvista" target="_blank">GitHub</a>
+                        <iframe src="https://ghbtns.com/github-btn.html?user=sachinhosmani&repo=torchvista&type=star&count=true&size=large"
+                                frameborder="0" scrolling="0" width="170" height="30" title="GitHub Star Button"></iframe>
+                    </nav>
+                </div>
+            </header>
             <div class="left-column">
                 <div class="code-box" id="codeBox">
                     <div class="code-box-header">
@@ -245,120 +297,120 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
     
             <div class="graph-view" id="graphContainer" style="height: 100%">
                 <div class="graph-box-header">Visualized Interactive Graph</div>
-                <div id="graph-container_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0">
-    <div id="graph_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0"></div>
-    <div class="logo_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0">
+                <div id="graph-container_d6cc6c28-9269-480a-8394-c2be946e28cf">
+    <div id="graph_d6cc6c28-9269-480a-8394-c2be946e28cf"></div>
+    <div class="logo_d6cc6c28-9269-480a-8394-c2be946e28cf">
         <a href="https://github.com/sachinhosmani/torchvista" target="_blank" rel="noopener noreferrer">
         torchvista
         </a>
     </div>
-    <div id="popup_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0" class="popup_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0" style="display: none;">
-        <div class="popup-header_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0">
-            <h3 id="popup-title_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0"></h3>
-            <span class="popup-close_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0">✕</span>
+    <div id="popup_d6cc6c28-9269-480a-8394-c2be946e28cf" class="popup_d6cc6c28-9269-480a-8394-c2be946e28cf" style="display: none;">
+        <div class="popup-header_d6cc6c28-9269-480a-8394-c2be946e28cf">
+            <h3 id="popup-title_d6cc6c28-9269-480a-8394-c2be946e28cf"></h3>
+            <span class="popup-close_d6cc6c28-9269-480a-8394-c2be946e28cf">✕</span>
         </div>
-        <div id="popup-content_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0" class="popup-content_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0">
-            <div id="common-info_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0">
+        <div id="popup-content_d6cc6c28-9269-480a-8394-c2be946e28cf" class="popup-content_d6cc6c28-9269-480a-8394-c2be946e28cf">
+            <div id="common-info_d6cc6c28-9269-480a-8394-c2be946e28cf">
             </div>
-            <div id="module-template_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0" style="display:none;">
-                <details open id="module-parameters-details_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0">
+            <div id="module-template_d6cc6c28-9269-480a-8394-c2be946e28cf" style="display:none;">
+                <details open id="module-parameters-details_d6cc6c28-9269-480a-8394-c2be946e28cf">
                     <summary style="color: black"><strong>forward() Parameters</strong></summary>
-                    <div id="module-parameters_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0" class="json-viewer_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0"></div>
+                    <div id="module-parameters_d6cc6c28-9269-480a-8394-c2be946e28cf" class="json-viewer_d6cc6c28-9269-480a-8394-c2be946e28cf"></div>
                 </details>
-                <details open id="module-attributes-details_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0">
+                <details open id="module-attributes-details_d6cc6c28-9269-480a-8394-c2be946e28cf">
                     <summary style="color: black"><strong>Attributes</strong></summary>
-                    <div id="module-attributes_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0" class="json-viewer_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0"></div>
+                    <div id="module-attributes_d6cc6c28-9269-480a-8394-c2be946e28cf" class="json-viewer_d6cc6c28-9269-480a-8394-c2be946e28cf"></div>
                 </details>
             </div>
-            <div id="tensor-op-template_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0" style="display:none;">
+            <div id="tensor-op-template_d6cc6c28-9269-480a-8394-c2be946e28cf" style="display:none;">
                 <summary><strong>Parameters</strong></summary>
-                <div id="tensor-op-parameters_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0" class="json-viewer_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0"></div>
+                <div id="tensor-op-parameters_d6cc6c28-9269-480a-8394-c2be946e28cf" class="json-viewer_d6cc6c28-9269-480a-8394-c2be946e28cf"></div>
             </div>
-            <p id="no-info_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0" style="display:none;">No further information available for this node.</p>
+            <p id="no-info_d6cc6c28-9269-480a-8394-c2be946e28cf" style="display:none;">No further information available for this node.</p>
         </div>
     </div>
 
     <style>
-        .node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 rect {
+        .node_d6cc6c28-9269-480a-8394-c2be946e28cf rect {
             stroke: #333;
             fill: #fff;
         }
-        text.node-label_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        text.node-label_d6cc6c28-9269-480a-8394-c2be946e28cf {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.type-indicator_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        text.type-indicator_d6cc6c28-9269-480a-8394-c2be946e28cf {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.collapse-icon_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        text.collapse-icon_d6cc6c28-9269-480a-8394-c2be946e28cf {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 14px;
             cursor: default;
             user-select: none;
         }
-        .edge_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        .edge_d6cc6c28-9269-480a-8394-c2be946e28cf {
             stroke: #797979;
             fill: none;
         }
-        .node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 rect.input_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 { fill: #FF9AFF; }
-        .node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 rect.constant_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 { fill: rgb(235 235 235); }
+        .node_d6cc6c28-9269-480a-8394-c2be946e28cf rect.input_d6cc6c28-9269-480a-8394-c2be946e28cf { fill: #FF9AFF; }
+        .node_d6cc6c28-9269-480a-8394-c2be946e28cf rect.constant_d6cc6c28-9269-480a-8394-c2be946e28cf { fill: rgb(235 235 235); }
 
-        .node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 rect.output_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 { fill: #74e071; }
-        .node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 rect.failed_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 { fill: rgb(224 15 15); }
-        .node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 rect.module_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 { fill: #8BDEDB; }
-        .node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 rect.operation_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 { fill: #FEBC5A; }
+        .node_d6cc6c28-9269-480a-8394-c2be946e28cf rect.output_d6cc6c28-9269-480a-8394-c2be946e28cf { fill: #74e071; }
+        .node_d6cc6c28-9269-480a-8394-c2be946e28cf rect.failed_d6cc6c28-9269-480a-8394-c2be946e28cf { fill: rgb(224 15 15); }
+        .node_d6cc6c28-9269-480a-8394-c2be946e28cf rect.module_d6cc6c28-9269-480a-8394-c2be946e28cf { fill: #8BDEDB; }
+        .node_d6cc6c28-9269-480a-8394-c2be946e28cf rect.operation_d6cc6c28-9269-480a-8394-c2be946e28cf { fill: #FEBC5A; }
 
-        .node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 ellipse.input_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 { fill: #FF9AFF; }
-        .node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 ellipse.constant_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 { fill: rgb(235 235 235); }
-        .node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 ellipse.output_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 { fill: #74e071; }
-        .node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 ellipse.failed_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 { fill: rgb(224 15 15); }
+        .node_d6cc6c28-9269-480a-8394-c2be946e28cf ellipse.input_d6cc6c28-9269-480a-8394-c2be946e28cf { fill: #FF9AFF; }
+        .node_d6cc6c28-9269-480a-8394-c2be946e28cf ellipse.constant_d6cc6c28-9269-480a-8394-c2be946e28cf { fill: rgb(235 235 235); }
+        .node_d6cc6c28-9269-480a-8394-c2be946e28cf ellipse.output_d6cc6c28-9269-480a-8394-c2be946e28cf { fill: #74e071; }
+        .node_d6cc6c28-9269-480a-8394-c2be946e28cf ellipse.failed_d6cc6c28-9269-480a-8394-c2be946e28cf { fill: rgb(224 15 15); }
 
-        .node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 ellipse {
+        .node_d6cc6c28-9269-480a-8394-c2be946e28cf ellipse {
             stroke: #333;
             stroke-width: 1px;
         }
-        .edgeLabelGroup_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        .edgeLabelGroup_d6cc6c28-9269-480a-8394-c2be946e28cf {
             pointer-events: none;
         }
-        #arrowhead_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 path {
+        #arrowhead_d6cc6c28-9269-480a-8394-c2be946e28cf path {
             fill: #333333;;
         }
-        .node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 rect,
-        .node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 ellipse {
+        .node_d6cc6c28-9269-480a-8394-c2be946e28cf rect,
+        .node_d6cc6c28-9269-480a-8394-c2be946e28cf ellipse {
             transition: fill 0.3s ease;
         }
 
-        .node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 .type-indicator_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        .node_d6cc6c28-9269-480a-8394-c2be946e28cf .type-indicator_d6cc6c28-9269-480a-8394-c2be946e28cf {
             font-size: 5px;
             fill: rgba(0, 0, 0, 1.0);  /* Dark grey, semi-transparent */
             pointer-events: none;
         }
 
-        .node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0.error_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 rect {
+        .node_d6cc6c28-9269-480a-8394-c2be946e28cf.error_d6cc6c28-9269-480a-8394-c2be946e28cf rect {
             stroke: black;
             stroke-width: 1px;
         }
 
-        .boundary-box_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0.error_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 > rect:first-of-type {
+        .boundary-box_d6cc6c28-9269-480a-8394-c2be946e28cf.error_d6cc6c28-9269-480a-8394-c2be946e28cf > rect:first-of-type {
             fill: red;
             fill-opacity: 0.2;
         }
 
-        #graph-container_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        #graph-container_d6cc6c28-9269-480a-8394-c2be946e28cf {
             position: relative;
             height: 95%;
             width: ${width};
             overflow: hidden;
         }
 
-        #graph_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        #graph_d6cc6c28-9269-480a-8394-c2be946e28cf {
             height: 100%;
         }
         
-        .popup_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        .popup_d6cc6c28-9269-480a-8394-c2be946e28cf {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             position: absolute;
             background: white;
@@ -373,7 +425,7 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
             flex-direction: column;
         }
 
-        .popup-header_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        .popup-header_d6cc6c28-9269-480a-8394-c2be946e28cf {
             position: sticky;
             top: 0;
             background: white;
@@ -385,12 +437,12 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
             z-index: 1;
         }
 
-        .popup_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 h3 {
+        .popup_d6cc6c28-9269-480a-8394-c2be946e28cf h3 {
             margin: 0;
             font-size: 16px;
         }
 
-        .popup-content_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        .popup-content_d6cc6c28-9269-480a-8394-c2be946e28cf {
             padding: 10px;
             padding-bottom: 10px;
             overflow-y: auto;
@@ -398,87 +450,87 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
             flex-grow: 1;
         }
 
-        .popup_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 pre {
+        .popup_d6cc6c28-9269-480a-8394-c2be946e28cf pre {
             white-space: pre;
             overflow-x: auto;
         }
 
-        .popup-close_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        .popup-close_d6cc6c28-9269-480a-8394-c2be946e28cf {
             cursor: pointer;
             font-size: 24px;
             font-weight: bold;
             line-height: 1;
         }
 
-        #popup-title_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        #popup-title_d6cc6c28-9269-480a-8394-c2be946e28cf {
             font-size: 16px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             color: black;
         }
 
-        #graph-container_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        #graph-container_d6cc6c28-9269-480a-8394-c2be946e28cf {
             position: relative;
         }
 
-        #graph-container_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 pre {
+        #graph-container_d6cc6c28-9269-480a-8394-c2be946e28cf pre {
             margin-bottom: 0;
         }
 
-        .boundary-box_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 rect {
+        .boundary-box_d6cc6c28-9269-480a-8394-c2be946e28cf rect {
             pointer-events: none;
         }
-        .boundary-box_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 text {
+        .boundary-box_d6cc6c28-9269-480a-8394-c2be946e28cf text {
             pointer-events: none;
             user-select: none;
         }
 
-        .boundary-box_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 rect {
+        .boundary-box_d6cc6c28-9269-480a-8394-c2be946e28cf rect {
             pointer-events: none;
         }
-        .boundary-box_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 text {
+        .boundary-box_d6cc6c28-9269-480a-8394-c2be946e28cf text {
             pointer-events: none;
             user-select: none;
             font-weight: bold;
         }
-        .edge-label_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 text {
+        .edge-label_d6cc6c28-9269-480a-8394-c2be946e28cf text {
             pointer-events: none;
             user-select: none;
             font-size: 4px;
             font-family: "'Roboto', sans-serif";
         }
                     
-        .collapse-button_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0, .info-button_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        .collapse-button_d6cc6c28-9269-480a-8394-c2be946e28cf, .info-button_d6cc6c28-9269-480a-8394-c2be946e28cf {
             fill: #fff;
             stroke: #333;
             stroke-width: 1px;
             cursor: pointer;
         }
 
-        .collapse-button_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0:hover, .info-button_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0:hover {
+        .collapse-button_d6cc6c28-9269-480a-8394-c2be946e28cf:hover, .info-button_d6cc6c28-9269-480a-8394-c2be946e28cf:hover {
             fill: #eee;
             cursor: pointer;
         }
 
-        .collapse-icon_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0, .info-icon_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        .collapse-icon_d6cc6c28-9269-480a-8394-c2be946e28cf, .info-icon_d6cc6c28-9269-480a-8394-c2be946e28cf {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             fill: rgb(51, 51, 51);
         }
 
-        .collapse-button-disabled_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        .collapse-button-disabled_d6cc6c28-9269-480a-8394-c2be946e28cf {
             fill: #eee5;
             stroke: #3333334f;
             stroke-width: 1px;
             cursor: not-allowed;
         }
 
-        .collapse-button-disabled_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0:hover {
+        .collapse-button-disabled_d6cc6c28-9269-480a-8394-c2be946e28cf:hover {
             fill: #eee6;
             cursor: not-allowed;
         }
 
-        .collapse-icon-disabled_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        .collapse-icon-disabled_d6cc6c28-9269-480a-8394-c2be946e28cf {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -487,11 +539,11 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
         }
 
         /* Edge hover styles */
-        .edge-group_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 path {
+        .edge-group_d6cc6c28-9269-480a-8394-c2be946e28cf path {
             pointer-events: stroke;
         }
 
-        .edge-label_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        .edge-label_d6cc6c28-9269-480a-8394-c2be946e28cf {
             pointer-events: all;
         }
 
@@ -531,50 +583,50 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
             }
         }
 
-        .highlight-cluster_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 > rect:first-of-type {
+        .highlight-cluster_d6cc6c28-9269-480a-8394-c2be946e28cf > rect:first-of-type {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        .highlight-node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 rect {
+        .highlight-node_d6cc6c28-9269-480a-8394-c2be946e28cf rect {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        text.node-label_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        text.node-label_d6cc6c28-9269-480a-8394-c2be946e28cf {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 0.8rem;  /* Base size using rem units for accessibility */
             cursor: default;
             user-select: none;
         }
 
-        .node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0.constant_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 .node-label_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        .node_d6cc6c28-9269-480a-8394-c2be946e28cf.constant_d6cc6c28-9269-480a-8394-c2be946e28cf .node-label_d6cc6c28-9269-480a-8394-c2be946e28cf {
             font-size: 0.7rem;
         }
 
-        .popup-content_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 summary {
+        .popup-content_d6cc6c28-9269-480a-8394-c2be946e28cf summary {
             cursor: pointer;
             margin: 5px;
             user-select: none;
         }
 
-        .node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0.input_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 rect,
-        .node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0.output_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 rect,
-        .node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0.constant_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 rect {
+        .node_d6cc6c28-9269-480a-8394-c2be946e28cf.input_d6cc6c28-9269-480a-8394-c2be946e28cf rect,
+        .node_d6cc6c28-9269-480a-8394-c2be946e28cf.output_d6cc6c28-9269-480a-8394-c2be946e28cf rect,
+        .node_d6cc6c28-9269-480a-8394-c2be946e28cf.constant_d6cc6c28-9269-480a-8394-c2be946e28cf rect {
             stroke-width: 1px;
             rx: 8px;
             ry: 8px;
             stroke-dasharray: none;
         }
 
-        #png-error-container_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        #png-error-container_d6cc6c28-9269-480a-8394-c2be946e28cf {
             text-align: center;
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 14px;
         }
 
-        #png-error-message_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        #png-error-message_d6cc6c28-9269-480a-8394-c2be946e28cf {
             padding: 8px 16px;
             background-color: #dc3545;
             color: white;
@@ -585,13 +637,13 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
             text-align: left;
         }
 
-        #png-link-container_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        #png-link-container_d6cc6c28-9269-480a-8394-c2be946e28cf {
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 18px;
         }
 
-        #png-download-button_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        #png-download-button_d6cc6c28-9269-480a-8394-c2be946e28cf {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -601,11 +653,11 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
             margin-right: 8px;
         }
 
-        #png-download-button_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0:hover {
+        #png-download-button_d6cc6c28-9269-480a-8394-c2be946e28cf:hover {
             background-color: #0056b3;
         }
 
-        #png-save-button_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        #png-save-button_d6cc6c28-9269-480a-8394-c2be946e28cf {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -614,18 +666,18 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
             border-radius: 4px;
         }
 
-        #png-save-button_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0:hover {
+        #png-save-button_d6cc6c28-9269-480a-8394-c2be946e28cf:hover {
             background-color: #0056b3;
         }
 
-        #svg-link-container_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        #svg-link-container_d6cc6c28-9269-480a-8394-c2be946e28cf {
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 18px;
         }
 
 
-        #svg-download-button_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        #svg-download-button_d6cc6c28-9269-480a-8394-c2be946e28cf {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -635,11 +687,11 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
             margin-right: 8px;
         }
 
-        #svg-download-button_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0:hover {
+        #svg-download-button_d6cc6c28-9269-480a-8394-c2be946e28cf:hover {
             background-color: #0056b3;
         }
 
-        #svg-save-button_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        #svg-save-button_d6cc6c28-9269-480a-8394-c2be946e28cf {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -648,11 +700,11 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
             border-radius: 4px;
         }
 
-        #svg-save-button_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0:hover {
+        #svg-save-button_d6cc6c28-9269-480a-8394-c2be946e28cf:hover {
             background-color: #0056b3;
         }
 
-        .custom-tooltip_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        .custom-tooltip_d6cc6c28-9269-480a-8394-c2be946e28cf {
             position: absolute;
             background: white;
             border: 1px solid #ccc;
@@ -668,7 +720,7 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
             display: none;
         }
 
-        .custom-tooltip_smaller_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        .custom-tooltip_smaller_d6cc6c28-9269-480a-8394-c2be946e28cf {
             position: absolute;
             background: white;
             border: 1px solid #ccc;
@@ -684,16 +736,16 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
             display: none;
         }
 
-        .edge_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0.implied-edge_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        .edge_d6cc6c28-9269-480a-8394-c2be946e28cf.implied-edge_d6cc6c28-9269-480a-8394-c2be946e28cf {
             stroke-dasharray: 5,5;
         }
 
-        .logo_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 {
+        .logo_d6cc6c28-9269-480a-8394-c2be946e28cf {
             position: absolute;
             bottom: 8px; left: 8px;
             padding: 4px 6px;
         }
-        .logo_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 a {
+        .logo_d6cc6c28-9269-480a-8394-c2be946e28cf a {
             color: #a1a1a1;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             opacity: .6;
@@ -854,7 +906,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
 (function() {
-    const adj_list = {"input_0": {"edges": [{"target": "linear_2", "dims": "(10, 1, 20)", "edge_data_id": 6167870176}], "failed": false, "node_type": "Input"}, "linear_2": {"edges": [{"target": "__add___9", "dims": "(10, 1, 32)", "edge_data_id": 11542680416}], "failed": false, "node_type": "Operation"}, "tensor_3": {"edges": [{"target": "linear_2", "dims": "(32, 20)", "edge_data_id": 6167870256}], "failed": false, "node_type": "Constant"}, "tensor_4": {"edges": [{"target": "linear_2", "dims": "(32)", "edge_data_id": 6167870016}], "failed": false, "node_type": "Constant"}, "__getitem___7": {"edges": [{"target": "__add___9", "dims": "(10, 1, 32)", "edge_data_id": 11540935840}], "failed": false, "node_type": "Operation"}, "tensor_8": {"edges": [{"target": "__getitem___7", "dims": "(10, 1, 32)", "edge_data_id": 6167869936}], "failed": false, "node_type": "Constant"}, "__add___9": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "(10, 1, 32)", "edge_data_id": 11540937440}, {"target": "__add___25", "dims": "(10, 1, 32)", "edge_data_id": 11540937440}], "failed": false, "node_type": "Operation"}, "multi_head_attention_forward_16": {"edges": [{"target": "dropout_23", "dims": "(10, 1, 32)", "edge_data_id": 11540937280}], "failed": false, "node_type": "Operation"}, "tensor_17": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "(96, 32)", "edge_data_id": 6167525712}], "failed": false, "node_type": "Constant"}, "tensor_18": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "(96)", "edge_data_id": 6167869296}], "failed": false, "node_type": "Constant"}, "tensor_19": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "(32, 32)", "edge_data_id": 6167706816}], "failed": false, "node_type": "Constant"}, "tensor_20": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "(32)", "edge_data_id": 6168043584}], "failed": false, "node_type": "Constant"}, "scalars_21_x_4": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "( ) x 4"}], "failed": false, "node_type": "Constant"}, "dropout_23": {"edges": [{"target": "__add___25", "dims": "(10, 1, 32)", "edge_data_id": 11540937600}], "failed": false, "node_type": "Operation"}, "scalars_24_x_3": {"edges": [{"target": "dropout_23", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "__add___25": {"edges": [{"target": "layer_norm_27", "dims": "(10, 1, 32)", "edge_data_id": 11540937280}], "failed": false, "node_type": "Operation"}, "layer_norm_27": {"edges": [{"target": "linear_32", "dims": "(10, 1, 32)", "edge_data_id": 11540938240}, {"target": "__add___46", "dims": "(10, 1, 32)", "edge_data_id": 11540938240}], "failed": false, "node_type": "Operation"}, "tensor_28": {"edges": [{"target": "layer_norm_27", "dims": "(32)", "edge_data_id": 6168043824}], "failed": false, "node_type": "Constant"}, "tensor_29": {"edges": [{"target": "layer_norm_27", "dims": "(32)", "edge_data_id": 6168043744}], "failed": false, "node_type": "Constant"}, "scalar_30": {"edges": [{"target": "layer_norm_27", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "linear_32": {"edges": [{"target": "relu_35", "dims": "(10, 1, 2048)", "edge_data_id": 11540937280}], "failed": false, "node_type": "Operation"}, "tensor_33": {"edges": [{"target": "linear_32", "dims": "(2048, 32)", "edge_data_id": 6167705616}], "failed": false, "node_type": "Constant"}, "tensor_34": {"edges": [{"target": "linear_32", "dims": "(2048)", "edge_data_id": 6167523552}], "failed": false, "node_type": "Constant"}, "relu_35": {"edges": [{"target": "dropout_37", "dims": "(10, 1, 2048)", "edge_data_id": 11540935520}], "failed": false, "node_type": "Operation"}, "dropout_37": {"edges": [{"target": "linear_40", "dims": "(10, 1, 2048)", "edge_data_id": 11540936960}], "failed": false, "node_type": "Operation"}, "scalars_38_x_3": {"edges": [{"target": "dropout_37", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "linear_40": {"edges": [{"target": "dropout_44", "dims": "(10, 1, 32)", "edge_data_id": 11540935520}], "failed": false, "node_type": "Operation"}, "tensor_41": {"edges": [{"target": "linear_40", "dims": "(32, 2048)", "edge_data_id": 6167705696}], "failed": false, "node_type": "Constant"}, "tensor_42": {"edges": [{"target": "linear_40", "dims": "(32)", "edge_data_id": 6168043664}], "failed": false, "node_type": "Constant"}, "dropout_44": {"edges": [{"target": "__add___46", "dims": "(10, 1, 32)", "edge_data_id": 11540934960}], "failed": false, "node_type": "Operation"}, "scalars_45_x_3": {"edges": [{"target": "dropout_44", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "__add___46": {"edges": [{"target": "layer_norm_48", "dims": "(10, 1, 32)", "edge_data_id": 11540935520}], "failed": false, "node_type": "Operation"}, "layer_norm_48": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "(10, 1, 32)", "edge_data_id": 11540934960}, {"target": "__add___65", "dims": "(10, 1, 32)", "edge_data_id": 11540934960}], "failed": false, "node_type": "Operation"}, "tensor_49": {"edges": [{"target": "layer_norm_48", "dims": "(32)", "edge_data_id": 6168043984}], "failed": false, "node_type": "Constant"}, "tensor_50": {"edges": [{"target": "layer_norm_48", "dims": "(32)", "edge_data_id": 6168043904}], "failed": false, "node_type": "Constant"}, "scalar_51": {"edges": [{"target": "layer_norm_48", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "multi_head_attention_forward_56": {"edges": [{"target": "dropout_63", "dims": "(10, 1, 32)", "edge_data_id": 11541050608}], "failed": false, "node_type": "Operation"}, "tensor_57": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "(96, 32)", "edge_data_id": 6168044144}], "failed": false, "node_type": "Constant"}, "tensor_58": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "(96)", "edge_data_id": 6168044064}], "failed": false, "node_type": "Constant"}, "tensor_59": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "(32, 32)", "edge_data_id": 6168044544}], "failed": false, "node_type": "Constant"}, "tensor_60": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "(32)", "edge_data_id": 6168044464}], "failed": false, "node_type": "Constant"}, "scalars_61_x_4": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "( ) x 4"}], "failed": false, "node_type": "Constant"}, "dropout_63": {"edges": [{"target": "__add___65", "dims": "(10, 1, 32)", "edge_data_id": 11540936640}], "failed": false, "node_type": "Operation"}, "scalars_64_x_3": {"edges": [{"target": "dropout_63", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "__add___65": {"edges": [{"target": "layer_norm_67", "dims": "(10, 1, 32)", "edge_data_id": 11540937120}], "failed": false, "node_type": "Operation"}, "layer_norm_67": {"edges": [{"target": "linear_72", "dims": "(10, 1, 32)", "edge_data_id": 11540936640}, {"target": "__add___86", "dims": "(10, 1, 32)", "edge_data_id": 11540936640}], "failed": false, "node_type": "Operation"}, "tensor_68": {"edges": [{"target": "layer_norm_67", "dims": "(32)", "edge_data_id": 6168044784}], "failed": false, "node_type": "Constant"}, "tensor_69": {"edges": [{"target": "layer_norm_67", "dims": "(32)", "edge_data_id": 6168044384}], "failed": false, "node_type": "Constant"}, "scalar_70": {"edges": [{"target": "layer_norm_67", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "linear_72": {"edges": [{"target": "relu_75", "dims": "(10, 1, 2048)", "edge_data_id": 11540937120}], "failed": false, "node_type": "Operation"}, "tensor_73": {"edges": [{"target": "linear_72", "dims": "(2048, 32)", "edge_data_id": 6168044304}], "failed": false, "node_type": "Constant"}, "tensor_74": {"edges": [{"target": "linear_72", "dims": "(2048)", "edge_data_id": 6168044224}], "failed": false, "node_type": "Constant"}, "relu_75": {"edges": [{"target": "dropout_77", "dims": "(10, 1, 2048)", "edge_data_id": 11540938400}], "failed": false, "node_type": "Operation"}, "dropout_77": {"edges": [{"target": "linear_80", "dims": "(10, 1, 2048)", "edge_data_id": 11540938080}], "failed": false, "node_type": "Operation"}, "scalars_78_x_3": {"edges": [{"target": "dropout_77", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "linear_80": {"edges": [{"target": "dropout_84", "dims": "(10, 1, 32)", "edge_data_id": 11540938400}], "failed": false, "node_type": "Operation"}, "tensor_81": {"edges": [{"target": "linear_80", "dims": "(32, 2048)", "edge_data_id": 6168044704}], "failed": false, "node_type": "Constant"}, "tensor_82": {"edges": [{"target": "linear_80", "dims": "(32)", "edge_data_id": 6168044624}], "failed": false, "node_type": "Constant"}, "dropout_84": {"edges": [{"target": "__add___86", "dims": "(10, 1, 32)", "edge_data_id": 11540938560}], "failed": false, "node_type": "Operation"}, "scalars_85_x_3": {"edges": [{"target": "dropout_84", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "__add___86": {"edges": [{"target": "layer_norm_88", "dims": "(10, 1, 32)", "edge_data_id": 11540938400}], "failed": false, "node_type": "Operation"}, "layer_norm_88": {"edges": [{"target": "__getitem___92", "dims": "(10, 1, 32)", "edge_data_id": 11540938560}], "failed": false, "node_type": "Operation"}, "tensor_89": {"edges": [{"target": "layer_norm_88", "dims": "(32)", "edge_data_id": 6168044944}], "failed": false, "node_type": "Constant"}, "tensor_90": {"edges": [{"target": "layer_norm_88", "dims": "(32)", "edge_data_id": 6168044864}], "failed": false, "node_type": "Constant"}, "scalar_91": {"edges": [{"target": "layer_norm_88", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "__getitem___92": {"edges": [{"target": "linear_95", "dims": "(1, 32)", "edge_data_id": 11540937440}], "failed": false, "node_type": "Operation"}, "scalar_93": {"edges": [{"target": "__getitem___92", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "linear_95": {"edges": [{"target": "output_0", "dims": "(1, 5)", "edge_data_id": 11540935840}], "failed": false, "node_type": "Operation"}, "tensor_96": {"edges": [{"target": "linear_95", "dims": "(5, 32)", "edge_data_id": 6167870416}], "failed": false, "node_type": "Constant"}, "tensor_97": {"edges": [{"target": "linear_95", "dims": "(5)", "edge_data_id": 6167871296}], "failed": false, "node_type": "Constant"}, "output_0": {"edges": [], "failed": false, "node_type": "Output"}};
+    const adj_list = {"input_0": {"edges": [{"target": "linear_2", "dims": "(10, 1, 20)", "edge_data_id": 11169597616}], "failed": false, "node_type": "Input"}, "linear_2": {"edges": [{"target": "__add___9", "dims": "(10, 1, 32)", "edge_data_id": 4374834688}], "failed": false, "node_type": "Operation"}, "tensor_3": {"edges": [{"target": "linear_2", "dims": "(32, 20)", "edge_data_id": 11169597856}], "failed": false, "node_type": "Constant"}, "tensor_4": {"edges": [{"target": "linear_2", "dims": "(32)", "edge_data_id": 11169597936}], "failed": false, "node_type": "Constant"}, "__getitem___7": {"edges": [{"target": "__add___9", "dims": "(10, 1, 32)", "edge_data_id": 4374834528}], "failed": false, "node_type": "Operation"}, "tensor_8": {"edges": [{"target": "__getitem___7", "dims": "(10, 1, 32)", "edge_data_id": 11169598016}], "failed": false, "node_type": "Constant"}, "__add___9": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "(10, 1, 32)", "edge_data_id": 4374834128}, {"target": "__add___25", "dims": "(10, 1, 32)", "edge_data_id": 4374834128}], "failed": false, "node_type": "Operation"}, "multi_head_attention_forward_16": {"edges": [{"target": "dropout_23", "dims": "(10, 1, 32)", "edge_data_id": 11736277936}], "failed": false, "node_type": "Operation"}, "tensor_17": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "(96, 32)", "edge_data_id": 11169599296}], "failed": false, "node_type": "Constant"}, "tensor_18": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "(96)", "edge_data_id": 11169599376}], "failed": false, "node_type": "Constant"}, "tensor_19": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "(32, 32)", "edge_data_id": 11169597056}], "failed": false, "node_type": "Constant"}, "tensor_20": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "(32)", "edge_data_id": 11169429760}], "failed": false, "node_type": "Constant"}, "scalars_21_x_4": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "( ) x 4"}], "failed": false, "node_type": "Constant"}, "dropout_23": {"edges": [{"target": "__add___25", "dims": "(10, 1, 32)", "edge_data_id": 11736277616}], "failed": false, "node_type": "Operation"}, "scalars_24_x_3": {"edges": [{"target": "dropout_23", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "__add___25": {"edges": [{"target": "layer_norm_27", "dims": "(10, 1, 32)", "edge_data_id": 11736277936}], "failed": false, "node_type": "Operation"}, "layer_norm_27": {"edges": [{"target": "linear_32", "dims": "(10, 1, 32)", "edge_data_id": 11736280416}, {"target": "__add___46", "dims": "(10, 1, 32)", "edge_data_id": 11736280416}], "failed": false, "node_type": "Operation"}, "tensor_28": {"edges": [{"target": "layer_norm_27", "dims": "(32)", "edge_data_id": 11169430800}], "failed": false, "node_type": "Constant"}, "tensor_29": {"edges": [{"target": "layer_norm_27", "dims": "(32)", "edge_data_id": 11169779776}], "failed": false, "node_type": "Constant"}, "scalar_30": {"edges": [{"target": "layer_norm_27", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "linear_32": {"edges": [{"target": "relu_35", "dims": "(10, 1, 2048)", "edge_data_id": 11736277936}], "failed": false, "node_type": "Operation"}, "tensor_33": {"edges": [{"target": "linear_32", "dims": "(2048, 32)", "edge_data_id": 11169599216}], "failed": false, "node_type": "Constant"}, "tensor_34": {"edges": [{"target": "linear_32", "dims": "(2048)", "edge_data_id": 11169599136}], "failed": false, "node_type": "Constant"}, "relu_35": {"edges": [{"target": "dropout_37", "dims": "(10, 1, 2048)", "edge_data_id": 11736278656}], "failed": false, "node_type": "Operation"}, "dropout_37": {"edges": [{"target": "linear_40", "dims": "(10, 1, 2048)", "edge_data_id": 11736280496}], "failed": false, "node_type": "Operation"}, "scalars_38_x_3": {"edges": [{"target": "dropout_37", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "linear_40": {"edges": [{"target": "dropout_44", "dims": "(10, 1, 32)", "edge_data_id": 11736278656}], "failed": false, "node_type": "Operation"}, "tensor_41": {"edges": [{"target": "linear_40", "dims": "(32, 2048)", "edge_data_id": 11169430560}], "failed": false, "node_type": "Constant"}, "tensor_42": {"edges": [{"target": "linear_40", "dims": "(32)", "edge_data_id": 11169596976}], "failed": false, "node_type": "Constant"}, "dropout_44": {"edges": [{"target": "__add___46", "dims": "(10, 1, 32)", "edge_data_id": 11736279296}], "failed": false, "node_type": "Operation"}, "scalars_45_x_3": {"edges": [{"target": "dropout_44", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "__add___46": {"edges": [{"target": "layer_norm_48", "dims": "(10, 1, 32)", "edge_data_id": 11736278656}], "failed": false, "node_type": "Operation"}, "layer_norm_48": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "(10, 1, 32)", "edge_data_id": 11736279296}, {"target": "__add___65", "dims": "(10, 1, 32)", "edge_data_id": 11736279296}], "failed": false, "node_type": "Operation"}, "tensor_49": {"edges": [{"target": "layer_norm_48", "dims": "(32)", "edge_data_id": 11169779936}], "failed": false, "node_type": "Constant"}, "tensor_50": {"edges": [{"target": "layer_norm_48", "dims": "(32)", "edge_data_id": 11169779856}], "failed": false, "node_type": "Constant"}, "scalar_51": {"edges": [{"target": "layer_norm_48", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "multi_head_attention_forward_56": {"edges": [{"target": "dropout_63", "dims": "(10, 1, 32)", "edge_data_id": 11736278096}], "failed": false, "node_type": "Operation"}, "tensor_57": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "(96, 32)", "edge_data_id": 11169780096}], "failed": false, "node_type": "Constant"}, "tensor_58": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "(96)", "edge_data_id": 11169780016}], "failed": false, "node_type": "Constant"}, "tensor_59": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "(32, 32)", "edge_data_id": 11169780496}], "failed": false, "node_type": "Constant"}, "tensor_60": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "(32)", "edge_data_id": 11169780416}], "failed": false, "node_type": "Constant"}, "scalars_61_x_4": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "( ) x 4"}], "failed": false, "node_type": "Constant"}, "dropout_63": {"edges": [{"target": "__add___65", "dims": "(10, 1, 32)", "edge_data_id": 11736277696}], "failed": false, "node_type": "Operation"}, "scalars_64_x_3": {"edges": [{"target": "dropout_63", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "__add___65": {"edges": [{"target": "layer_norm_67", "dims": "(10, 1, 32)", "edge_data_id": 11736278096}], "failed": false, "node_type": "Operation"}, "layer_norm_67": {"edges": [{"target": "linear_72", "dims": "(10, 1, 32)", "edge_data_id": 11736277696}, {"target": "__add___86", "dims": "(10, 1, 32)", "edge_data_id": 11736277696}], "failed": false, "node_type": "Operation"}, "tensor_68": {"edges": [{"target": "layer_norm_67", "dims": "(32)", "edge_data_id": 11169780736}], "failed": false, "node_type": "Constant"}, "tensor_69": {"edges": [{"target": "layer_norm_67", "dims": "(32)", "edge_data_id": 11169780336}], "failed": false, "node_type": "Constant"}, "scalar_70": {"edges": [{"target": "layer_norm_67", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "linear_72": {"edges": [{"target": "relu_75", "dims": "(10, 1, 2048)", "edge_data_id": 11736278096}], "failed": false, "node_type": "Operation"}, "tensor_73": {"edges": [{"target": "linear_72", "dims": "(2048, 32)", "edge_data_id": 11169780256}], "failed": false, "node_type": "Constant"}, "tensor_74": {"edges": [{"target": "linear_72", "dims": "(2048)", "edge_data_id": 11169780176}], "failed": false, "node_type": "Constant"}, "relu_75": {"edges": [{"target": "dropout_77", "dims": "(10, 1, 2048)", "edge_data_id": 11736278736}], "failed": false, "node_type": "Operation"}, "dropout_77": {"edges": [{"target": "linear_80", "dims": "(10, 1, 2048)", "edge_data_id": 11736277456}], "failed": false, "node_type": "Operation"}, "scalars_78_x_3": {"edges": [{"target": "dropout_77", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "linear_80": {"edges": [{"target": "dropout_84", "dims": "(10, 1, 32)", "edge_data_id": 11736278736}], "failed": false, "node_type": "Operation"}, "tensor_81": {"edges": [{"target": "linear_80", "dims": "(32, 2048)", "edge_data_id": 11169780656}], "failed": false, "node_type": "Constant"}, "tensor_82": {"edges": [{"target": "linear_80", "dims": "(32)", "edge_data_id": 11169780576}], "failed": false, "node_type": "Constant"}, "dropout_84": {"edges": [{"target": "__add___86", "dims": "(10, 1, 32)", "edge_data_id": 11736280736}], "failed": false, "node_type": "Operation"}, "scalars_85_x_3": {"edges": [{"target": "dropout_84", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "__add___86": {"edges": [{"target": "layer_norm_88", "dims": "(10, 1, 32)", "edge_data_id": 11736278736}], "failed": false, "node_type": "Operation"}, "layer_norm_88": {"edges": [{"target": "__getitem___92", "dims": "(10, 1, 32)", "edge_data_id": 11736280736}], "failed": false, "node_type": "Operation"}, "tensor_89": {"edges": [{"target": "layer_norm_88", "dims": "(32)", "edge_data_id": 11169780896}], "failed": false, "node_type": "Constant"}, "tensor_90": {"edges": [{"target": "layer_norm_88", "dims": "(32)", "edge_data_id": 11169780816}], "failed": false, "node_type": "Constant"}, "scalar_91": {"edges": [{"target": "layer_norm_88", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "__getitem___92": {"edges": [{"target": "linear_95", "dims": "(1, 32)", "edge_data_id": 4374834128}], "failed": false, "node_type": "Operation"}, "scalar_93": {"edges": [{"target": "__getitem___92", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "linear_95": {"edges": [{"target": "output_0", "dims": "(1, 5)", "edge_data_id": 4374834688}], "failed": false, "node_type": "Operation"}, "tensor_96": {"edges": [{"target": "linear_95", "dims": "(5, 32)", "edge_data_id": 11169598416}], "failed": false, "node_type": "Constant"}, "tensor_97": {"edges": [{"target": "linear_95", "dims": "(5)", "edge_data_id": 11169598096}], "failed": false, "node_type": "Constant"}, "output_0": {"edges": [], "failed": false, "node_type": "Output"}};
     const module_info = {"Linear_1": {"type": "Linear", "parameters": {"weight": {"shape": [32, 20], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 20, "out_features": 32, "training": true}, "extra_repr": "in_features=20, out_features=32, bias=True"}, "TransformerEncoder_10": {"type": "TransformerEncoder", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "enable_nested_tensor": true, "mask_check": true, "num_layers": 2, "training": true, "use_nested_tensor": false}, "extra_repr": ""}, "TransformerEncoderLayer_12": {"type": "TransformerEncoderLayer", "parameters": {}, "attributes": {"activation_relu_or_gelu": 1, "call_super_init": false, "dump_patches": false, "norm_first": false, "training": true}, "extra_repr": ""}, "MultiheadAttention_14": {"type": "MultiheadAttention", "parameters": {"in_proj_weight": {"shape": [96, 32], "requires_grad": true}, "in_proj_bias": {"shape": [96], "requires_grad": true}}, "attributes": {"add_zero_attn": false, "batch_first": false, "call_super_init": false, "dropout": 0.1, "dump_patches": false, "embed_dim": 32, "head_dim": 8, "kdim": 32, "num_heads": 4, "training": true, "vdim": 32}, "extra_repr": ""}, "Dropout_22": {"type": "Dropout", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": false, "p": 0.1, "training": true}, "extra_repr": "p=0.1, inplace=False"}, "LayerNorm_26": {"type": "LayerNorm", "parameters": {"weight": {"shape": [32], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "elementwise_affine": true, "eps": 1e-05, "normalized_shape": [32], "training": true}, "extra_repr": "(32,), eps=1e-05, elementwise_affine=True"}, "Linear_31": {"type": "Linear", "parameters": {"weight": {"shape": [2048, 32], "requires_grad": true}, "bias": {"shape": [2048], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 32, "out_features": 2048, "training": true}, "extra_repr": "in_features=32, out_features=2048, bias=True"}, "Dropout_36": {"type": "Dropout", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": false, "p": 0.1, "training": true}, "extra_repr": "p=0.1, inplace=False"}, "Linear_39": {"type": "Linear", "parameters": {"weight": {"shape": [32, 2048], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 2048, "out_features": 32, "training": true}, "extra_repr": "in_features=2048, out_features=32, bias=True"}, "Dropout_43": {"type": "Dropout", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": false, "p": 0.1, "training": true}, "extra_repr": "p=0.1, inplace=False"}, "LayerNorm_47": {"type": "LayerNorm", "parameters": {"weight": {"shape": [32], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "elementwise_affine": true, "eps": 1e-05, "normalized_shape": [32], "training": true}, "extra_repr": "(32,), eps=1e-05, elementwise_affine=True"}, "TransformerEncoderLayer_52": {"type": "TransformerEncoderLayer", "parameters": {}, "attributes": {"activation_relu_or_gelu": 1, "call_super_init": false, "dump_patches": false, "norm_first": false, "training": true}, "extra_repr": ""}, "MultiheadAttention_54": {"type": "MultiheadAttention", "parameters": {"in_proj_weight": {"shape": [96, 32], "requires_grad": true}, "in_proj_bias": {"shape": [96], "requires_grad": true}}, "attributes": {"add_zero_attn": false, "batch_first": false, "call_super_init": false, "dropout": 0.1, "dump_patches": false, "embed_dim": 32, "head_dim": 8, "kdim": 32, "num_heads": 4, "training": true, "vdim": 32}, "extra_repr": ""}, "Dropout_62": {"type": "Dropout", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": false, "p": 0.1, "training": true}, "extra_repr": "p=0.1, inplace=False"}, "LayerNorm_66": {"type": "LayerNorm", "parameters": {"weight": {"shape": [32], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "elementwise_affine": true, "eps": 1e-05, "normalized_shape": [32], "training": true}, "extra_repr": "(32,), eps=1e-05, elementwise_affine=True"}, "Linear_71": {"type": "Linear", "parameters": {"weight": {"shape": [2048, 32], "requires_grad": true}, "bias": {"shape": [2048], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 32, "out_features": 2048, "training": true}, "extra_repr": "in_features=32, out_features=2048, bias=True"}, "Dropout_76": {"type": "Dropout", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": false, "p": 0.1, "training": true}, "extra_repr": "p=0.1, inplace=False"}, "Linear_79": {"type": "Linear", "parameters": {"weight": {"shape": [32, 2048], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 2048, "out_features": 32, "training": true}, "extra_repr": "in_features=2048, out_features=32, bias=True"}, "Dropout_83": {"type": "Dropout", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": false, "p": 0.1, "training": true}, "extra_repr": "p=0.1, inplace=False"}, "LayerNorm_87": {"type": "LayerNorm", "parameters": {"weight": {"shape": [32], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "elementwise_affine": true, "eps": 1e-05, "normalized_shape": [32], "training": true}, "extra_repr": "(32,), eps=1e-05, elementwise_affine=True"}, "Linear_94": {"type": "Linear", "parameters": {"weight": {"shape": [5, 32], "requires_grad": true}, "bias": {"shape": [5], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 32, "out_features": 5, "training": true}, "extra_repr": "in_features=32, out_features=5, bias=True"}};
     const func_info = {"Linear_1": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 20], "dtype": "torch.float32"}], "keyword_args": {}}, "linear_2": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 20], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32, 20], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}], "keyword_args": {}}, "size_5": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 20], "dtype": "torch.float32"}, 0], "keyword_args": {}}, "__getitem___7": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "slice", "repr": "slice(None, 10, None)"}], "keyword_args": {}}, "__add___9": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "TransformerEncoder_10": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "size_11": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "TransformerEncoderLayer_12": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {"src_mask": null, "is_causal": false, "src_key_padding_mask": null}}, "dim_13": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "MultiheadAttention_14": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {"attn_mask": null, "key_padding_mask": null, "need_weights": false, "is_causal": false}}, "dim_15": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "multi_head_attention_forward_16": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, 32, 4, {"_type": "tensor", "shape": [96, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [96], "dtype": "torch.float32"}, null, null, false, 0.1, {"_type": "tensor", "shape": [32, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}], "keyword_args": {"training": true, "key_padding_mask": null, "need_weights": false, "attn_mask": null, "average_attn_weights": true, "is_causal": false}}, "Dropout_22": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "dropout_23": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, 0.1, true, false], "keyword_args": {}}, "__add___25": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "LayerNorm_26": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "layer_norm_27": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, [32], {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, 1e-05], "keyword_args": {}}, "Linear_31": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "linear_32": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [2048, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [2048], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_35": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 2048], "dtype": "torch.float32"}], "keyword_args": {}}, "Dropout_36": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 2048], "dtype": "torch.float32"}], "keyword_args": {}}, "dropout_37": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 2048], "dtype": "torch.float32"}, 0.1, true, false], "keyword_args": {}}, "Linear_39": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 2048], "dtype": "torch.float32"}], "keyword_args": {}}, "linear_40": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 2048], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32, 2048], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}], "keyword_args": {}}, "Dropout_43": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "dropout_44": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, 0.1, true, false], "keyword_args": {}}, "__add___46": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "LayerNorm_47": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "layer_norm_48": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, [32], {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, 1e-05], "keyword_args": {}}, "TransformerEncoderLayer_52": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {"src_mask": null, "is_causal": false, "src_key_padding_mask": null}}, "dim_53": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "MultiheadAttention_54": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {"attn_mask": null, "key_padding_mask": null, "need_weights": false, "is_causal": false}}, "dim_55": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "multi_head_attention_forward_56": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, 32, 4, {"_type": "tensor", "shape": [96, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [96], "dtype": "torch.float32"}, null, null, false, 0.1, {"_type": "tensor", "shape": [32, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}], "keyword_args": {"training": true, "key_padding_mask": null, "need_weights": false, "attn_mask": null, "average_attn_weights": true, "is_causal": false}}, "Dropout_62": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "dropout_63": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, 0.1, true, false], "keyword_args": {}}, "__add___65": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "LayerNorm_66": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "layer_norm_67": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, [32], {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, 1e-05], "keyword_args": {}}, "Linear_71": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "linear_72": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [2048, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [2048], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_75": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 2048], "dtype": "torch.float32"}], "keyword_args": {}}, "Dropout_76": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 2048], "dtype": "torch.float32"}], "keyword_args": {}}, "dropout_77": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 2048], "dtype": "torch.float32"}, 0.1, true, false], "keyword_args": {}}, "Linear_79": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 2048], "dtype": "torch.float32"}], "keyword_args": {}}, "linear_80": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 2048], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32, 2048], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}], "keyword_args": {}}, "Dropout_83": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "dropout_84": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, 0.1, true, false], "keyword_args": {}}, "__add___86": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "LayerNorm_87": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "layer_norm_88": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, [32], {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, 1e-05], "keyword_args": {}}, "__getitem___92": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, 0], "keyword_args": {}}, "Linear_94": {"positional_args": [{"_type": "tensor", "shape": [1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "linear_95": {"positional_args": [{"_type": "tensor", "shape": [1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [5, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [5], "dtype": "torch.float32"}], "keyword_args": {}}};
     const parent_module_to_nodes = {"Linear_1": ["linear_2"], "TransformerEncoder_10": ["size_11", "dim_13", "dim_15", "multi_head_attention_forward_16", "dropout_23", "__add___25", "layer_norm_27", "linear_32", "relu_35", "dropout_37", "linear_40", "dropout_44", "__add___46", "layer_norm_48", "dim_53", "dim_55", "multi_head_attention_forward_56", "dropout_63", "__add___65", "layer_norm_67", "linear_72", "relu_75", "dropout_77", "linear_80", "dropout_84", "__add___86", "layer_norm_88"], "TransformerEncoderLayer_12": ["dim_13", "dim_15", "multi_head_attention_forward_16", "dropout_23", "__add___25", "layer_norm_27", "linear_32", "relu_35", "dropout_37", "linear_40", "dropout_44", "__add___46", "layer_norm_48"], "MultiheadAttention_14": ["dim_15", "multi_head_attention_forward_16"], "Dropout_22": ["dropout_23"], "LayerNorm_26": ["layer_norm_27"], "Linear_31": ["linear_32"], "Dropout_36": ["dropout_37"], "Linear_39": ["linear_40"], "Dropout_43": ["dropout_44"], "LayerNorm_47": ["layer_norm_48"], "TransformerEncoderLayer_52": ["dim_53", "dim_55", "multi_head_attention_forward_56", "dropout_63", "__add___65", "layer_norm_67", "linear_72", "relu_75", "dropout_77", "linear_80", "dropout_84", "__add___86", "layer_norm_88"], "MultiheadAttention_54": ["dim_55", "multi_head_attention_forward_56"], "Dropout_62": ["dropout_63"], "LayerNorm_66": ["layer_norm_67"], "Linear_71": ["linear_72"], "Dropout_76": ["dropout_77"], "Linear_79": ["linear_80"], "Dropout_83": ["dropout_84"], "LayerNorm_87": ["layer_norm_88"], "Linear_94": ["linear_95"]};
@@ -903,10 +955,10 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         removeTooltip();
         
         const tooltip = document.createElement('div');
-        tooltip.className = !smaller ? `custom-tooltip_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0` : `custom-tooltip_smaller_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0`;
+        tooltip.className = !smaller ? `custom-tooltip_d6cc6c28-9269-480a-8394-c2be946e28cf` : `custom-tooltip_smaller_d6cc6c28-9269-480a-8394-c2be946e28cf`;
         tooltip.textContent = text;
         
-        const container = document.getElementById(`graph-container_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0`);
+        const container = document.getElementById(`graph-container_d6cc6c28-9269-480a-8394-c2be946e28cf`);
         container.appendChild(tooltip);
         currentTooltip = tooltip;
         
@@ -918,7 +970,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const buttonRect = buttonElement.getBoundingClientRect();
         
         // Get the container's position in screen coordinates
-        const containerRect = document.getElementById(`graph-container_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0`).getBoundingClientRect();
+        const containerRect = document.getElementById(`graph-container_d6cc6c28-9269-480a-8394-c2be946e28cf`).getBoundingClientRect();
         
         // Calculate position relative to container
         const buttonX = buttonRect.left + (buttonRect.width / 2) - containerRect.left;
@@ -1535,7 +1587,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function reloadGraph() {
-        d3.select("#graph_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0").html("");
+        d3.select("#graph_d6cc6c28-9269-480a-8394-c2be946e28cf").html("");
 
         if (generateImage) {
             renderGraphvizImage();
@@ -1602,16 +1654,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function renderGraphvizImage() {
-        d3.select("#png-link-container_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0").remove();
+        d3.select("#png-link-container_d6cc6c28-9269-480a-8394-c2be946e28cf").remove();
         
         function showErrorMessage(error) {
-            const parent = d3.select("#graph-container_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0").node().parentNode;
+            const parent = d3.select("#graph-container_d6cc6c28-9269-480a-8394-c2be946e28cf").node().parentNode;
             const errorContainer = d3.select(parent)
-                .insert("div", "#graph-container_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
-                .attr("id", "png-error-container_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0");
+                .insert("div", "#graph-container_d6cc6c28-9269-480a-8394-c2be946e28cf")
+                .attr("id", "png-error-container_d6cc6c28-9269-480a-8394-c2be946e28cf");
             
             errorContainer.append("div")
-                .attr("id", "png-error-message_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+                .attr("id", "png-error-message_d6cc6c28-9269-480a-8394-c2be946e28cf")
                 .html(`<strong>Error:</strong><br>${error.stack || error.message || error}<br><br><strong>Note:</strong> Exporting very large models as PNG is currently not supported. Please use generate_image=False, or raise an issue on https://github.com/sachinhosmani/torchvista/issues`);
         }
         
@@ -1649,21 +1701,21 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const pngUrl = URL.createObjectURL(pngBlob);
         
         // Create link container
-        const parent = d3.select("#graph-container_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0").node().parentNode;
+        const parent = d3.select("#graph-container_d6cc6c28-9269-480a-8394-c2be946e28cf").node().parentNode;
         const linkContainer = d3.select(parent)
-            .insert("div", "#graph-container_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
-            .attr("id", "png-link-container_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0");
+            .insert("div", "#graph-container_d6cc6c28-9269-480a-8394-c2be946e28cf")
+            .attr("id", "png-link-container_d6cc6c28-9269-480a-8394-c2be946e28cf");
         
         linkContainer.append("a")
             .attr("href", pngUrl)
             .attr("target", "_blank")
-            .attr("id", "png-download-button_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+            .attr("id", "png-download-button_d6cc6c28-9269-480a-8394-c2be946e28cf")
             .text("View PNG in New Tab");
 
         linkContainer.append("a")
             .attr("href", pngUrl)
-            .attr("download", `torchvista_graph_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0.png`)
-            .attr("id", "png-save-button_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+            .attr("download", `torchvista_graph_d6cc6c28-9269-480a-8394-c2be946e28cf.png`)
+            .attr("id", "png-save-button_d6cc6c28-9269-480a-8394-c2be946e28cf")
             .text("Download PNG");
             
         URL.revokeObjectURL(svgUrl);
@@ -1684,26 +1736,26 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const svgUrl = URL.createObjectURL(svgBlob);
         
         // Create link container
-        const parent = d3.select("#graph-container_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0").node().parentNode;
+        const parent = d3.select("#graph-container_d6cc6c28-9269-480a-8394-c2be946e28cf").node().parentNode;
         const linkContainer = d3.select(parent)
-            .insert("div", "#graph-container_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
-            .attr("id", "svg-link-container_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0");
+            .insert("div", "#graph-container_d6cc6c28-9269-480a-8394-c2be946e28cf")
+            .attr("id", "svg-link-container_d6cc6c28-9269-480a-8394-c2be946e28cf");
         
         linkContainer.append("a")
             .attr("href", svgUrl)
             .attr("target", "_blank")
-            .attr("id", "svg-download-button_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+            .attr("id", "svg-download-button_d6cc6c28-9269-480a-8394-c2be946e28cf")
             .text("View SVG in New Tab");
 
         linkContainer.append("a")
             .attr("href", svgUrl)
-            .attr("download", `torchvista_graph_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0.svg`)
-            .attr("id", "svg-save-button_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+            .attr("download", `torchvista_graph_d6cc6c28-9269-480a-8394-c2be946e28cf.svg`)
+            .attr("id", "svg-save-button_d6cc6c28-9269-480a-8394-c2be946e28cf")
             .text("Download SVG");
     }
 
     function createGraph(graphvizData) {
-        const svg = d3.select("#graph_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+        const svg = d3.select("#graph_d6cc6c28-9269-480a-8394-c2be946e28cf")
         .append("svg")
         .attr("width", "100%")
         .attr("height", "100%")
@@ -1723,7 +1775,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
         // Define arrowhead marker
         svg.append("defs").append("marker")
-        .attr("id", "arrowhead_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+        .attr("id", "arrowhead_d6cc6c28-9269-480a-8394-c2be946e28cf")
         .attr("viewBox", "0 -5 10 10")
         .attr("refX", 8)
         .attr("refY", 0)
@@ -1735,11 +1787,11 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .attr("fill", "#333");
 
         // Draw clusters (container boxes) first so they're behind nodes
-        const clusters = inner.selectAll(".boundary-box_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+        const clusters = inner.selectAll(".boundary-box_d6cc6c28-9269-480a-8394-c2be946e28cf")
         .data(Object.entries(graphvizData.clusters))
         .enter()
         .append("g")
-        .attr("class", "boundary-box_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0");
+        .attr("class", "boundary-box_d6cc6c28-9269-480a-8394-c2be946e28cf");
 
         const containersWithFailedNodes = identifyContainersWithFailedNodes(adj_list, ancestor_map);
 
@@ -1749,10 +1801,10 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             const hasFailedNodes = containersWithFailedNodes.has(clusterName);
             const isRepeat = isRepeatNode(clusterName);
             if (hasFailedNodes) {
-                group.classed("error_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0", true);
+                group.classed("error_d6cc6c28-9269-480a-8394-c2be946e28cf", true);
             }
             if (isRepeat) {
-                group.classed("repeat-container_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0", true);
+                group.classed("repeat-container_d6cc6c28-9269-480a-8394-c2be946e28cf", true);
             }
 
             // Parse bounding box coordinates
@@ -1794,13 +1846,13 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (!isRepeatNode(clusterName)) {
                 // Add collapse/expand button
                 const collapseButton = group.append("circle")
-                .attr("class", "collapse-button_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+                .attr("class", "collapse-button_d6cc6c28-9269-480a-8394-c2be946e28cf")
                 .attr("cx", x1 + 10)
                 .attr("cy", y1 + 10)
                 .attr("r", 5.5);
 
                 group.append("text")
-                .attr("class", "collapse-icon_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+                .attr("class", "collapse-icon_d6cc6c28-9269-480a-8394-c2be946e28cf")
                 .attr("x", x1 + 10)
                 .attr("y", y1 + 10)
                 .attr("text-anchor", "middle")
@@ -1817,7 +1869,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add click event handler for collapse buttons
-        clusters.selectAll(".collapse-button_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0, .collapse-icon_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+        clusters.selectAll(".collapse-button_d6cc6c28-9269-480a-8394-c2be946e28cf, .collapse-icon_d6cc6c28-9269-480a-8394-c2be946e28cf")
         .on("click", function(event, [clusterName, clusterData]) {
             event.stopPropagation(); // Prevent event from bubbling to SVG
             removeTooltip();
@@ -1832,19 +1884,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
         
         // Create edges using the path points from Graphviz
-        const edges = inner.selectAll(".edge_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+        const edges = inner.selectAll(".edge_d6cc6c28-9269-480a-8394-c2be946e28cf")
         .data(graphvizData.edges)
         .enter()
         .append("g")
-        .attr("class", "edge-group_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0");
+        .attr("class", "edge-group_d6cc6c28-9269-480a-8394-c2be946e28cf");
         
         // Add the actual path
         edges.append("path")
         .attr("class", function(edge) {
             if (edge.is_implied_edge) {
-                return "edge_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0 implied-edge_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0";
+                return "edge_d6cc6c28-9269-480a-8394-c2be946e28cf implied-edge_d6cc6c28-9269-480a-8394-c2be946e28cf";
             }
-            return "edge_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0";
+            return "edge_d6cc6c28-9269-480a-8394-c2be946e28cf";
         }).attr("d", function(edge) {
             if (edge.path && edge.path.length > 0) {
                     // Create a proper SVG path using Bézier curves
@@ -1870,7 +1922,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             }
             return "";
         })
-        .attr("marker-end", "url(#arrowhead_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0)");
+        .attr("marker-end", "url(#arrowhead_d6cc6c28-9269-480a-8394-c2be946e28cf)");
         
         // Add dimension labels on edges
         edges.each(function(edge) {
@@ -1899,7 +1951,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Create a background for the text
             const labelGroup = edgeGroup.append("g")
-            .attr("class", "edge-label_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+            .attr("class", "edge-label_d6cc6c28-9269-480a-8394-c2be946e28cf")
             .attr("transform", `translate(${pointAtStart.x}, ${pointAtStart.y})`);
             
             const text = labelGroup.append("text")
@@ -1934,7 +1986,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         edges.each(function() {
             const edgeGroup = d3.select(this);
             const path = edgeGroup.select("path");
-            const labelGroup = edgeGroup.select(".edge-label_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0");
+            const labelGroup = edgeGroup.select(".edge-label_d6cc6c28-9269-480a-8394-c2be946e28cf");
             const labelText = labelGroup.select("text");
             const labelBg = labelGroup.select("rect");
             const originalStrokeWidth = path.attr("stroke-width") || 1;
@@ -1999,19 +2051,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
         // Create nodes using positions from Graphviz
-        const nodes = inner.selectAll(".node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+        const nodes = inner.selectAll(".node_d6cc6c28-9269-480a-8394-c2be946e28cf")
             .data(Object.entries(graphvizData.nodes))
             .enter()
             .append("g")
             // In the createGraph function, when you're creating nodes, modify the class assignment:
             .attr("class", function([nodeName, nodeData]) {
-                let classes = "node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0";
-                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0";
-                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0";
+                let classes = "node_d6cc6c28-9269-480a-8394-c2be946e28cf";
+                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_d6cc6c28-9269-480a-8394-c2be946e28cf";
+                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_d6cc6c28-9269-480a-8394-c2be946e28cf";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_d6cc6c28-9269-480a-8394-c2be946e28cf";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_d6cc6c28-9269-480a-8394-c2be946e28cf";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_d6cc6c28-9269-480a-8394-c2be946e28cf";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_d6cc6c28-9269-480a-8394-c2be946e28cf";
                 return classes;
             })
             .attr("transform", function([nodeName, nodeData]) {
@@ -2038,11 +2090,11 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 .attr("rx", nodeData.width / 2)
                 .attr("ry", nodeData.height / 2)
                 .attr("class", function() { 
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0";
-                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0";
-                    return "operation_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_d6cc6c28-9269-480a-8394-c2be946e28cf";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_d6cc6c28-9269-480a-8394-c2be946e28cf";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_d6cc6c28-9269-480a-8394-c2be946e28cf";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_d6cc6c28-9269-480a-8394-c2be946e28cf";
+                    return "operation_d6cc6c28-9269-480a-8394-c2be946e28cf";
                 });
             } else {
                 // Create rectangle
@@ -2052,15 +2104,15 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 .attr("x", -nodeData.width / 2)
                 .attr("y", -nodeData.height / 2)
                 .attr("class", function() { 
-                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0";
-                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0" : "operation_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_d6cc6c28-9269-480a-8394-c2be946e28cf";
+                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_d6cc6c28-9269-480a-8394-c2be946e28cf" : "operation_d6cc6c28-9269-480a-8394-c2be946e28cf";
                 });
             }
         });
         
         // Add labels for nodes
         nodes.append("text")
-        .attr("class", "node-label_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+        .attr("class", "node-label_d6cc6c28-9269-480a-8394-c2be946e28cf")
         .text(function([nodeName]) { return graph_node_display_names[nodeName] || graph_node_name_to_without_suffix[nodeName] || nodeName; })
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "central");
@@ -2069,7 +2121,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         nodes.filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")));
         }).append("text")
-        .attr("class", "type-indicator_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+        .attr("class", "type-indicator_d6cc6c28-9269-480a-8394-c2be946e28cf")
         .attr("text-anchor", "start")
         .attr("dominant-baseline", "text-bottom")
         .attr("transform", function([nodeName, nodeData]) {
@@ -2087,7 +2139,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add info buttons to nodes (except input, output, constant)
-        inner.selectAll(".node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+        inner.selectAll(".node_d6cc6c28-9269-480a-8394-c2be946e28cf")
         .filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")))
         })
@@ -2098,14 +2150,14 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
         // Add info button circle
         const infoButton = nodeGroup.append("circle")
-        .attr("class", "info-button_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+        .attr("class", "info-button_d6cc6c28-9269-480a-8394-c2be946e28cf")
         .attr("cx", width/2 - 7)
         .attr("cy", -height/2 + 7)
         .attr("r", 5.5);
 
         // Add info button icon
         nodeGroup.append("text")
-        .attr("class", "info-icon_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+        .attr("class", "info-icon_d6cc6c28-9269-480a-8394-c2be946e28cf")
         .attr("x", width/2 - 7)
         .attr("y", -height/2 + 8)
         .attr("text-anchor", "middle")
@@ -2121,16 +2173,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .on("mouseleave", removeTooltip);
 
         // Add click handler to info button
-            nodeGroup.selectAll(".info-button_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0, .info-icon_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+            nodeGroup.selectAll(".info-button_d6cc6c28-9269-480a-8394-c2be946e28cf, .info-icon_d6cc6c28-9269-480a-8394-c2be946e28cf")
             .on("click", function(event) {
                 event.stopPropagation();
-                const infoButton = nodeGroup.select(".info-button_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0").node();
+                const infoButton = nodeGroup.select(".info-button_d6cc6c28-9269-480a-8394-c2be946e28cf").node();
                 showPopupFromInfoButton.call(nodeGroup.node(), event, [nodeName], infoButton);
             });
         });
 
         // Add expand buttons to all module nodes (including non-expandable ones)
-        inner.selectAll(".node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+        inner.selectAll(".node_d6cc6c28-9269-480a-8394-c2be946e28cf")
         .filter(function([nodeName]) {
             return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || collapsedContainers.has(nodeName)) && !isRepeatNode(nodeName);
         })
@@ -2152,7 +2204,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Add expand button circle
             const expandButton = nodeGroup.append("circle")
-            .attr("class", isExpandable ? "collapse-button_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0" : "collapse-button-disabled_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+            .attr("class", isExpandable ? "collapse-button_d6cc6c28-9269-480a-8394-c2be946e28cf" : "collapse-button-disabled_d6cc6c28-9269-480a-8394-c2be946e28cf")
             .attr("cx", -width / 2 + 7)
             .attr("cy", -height / 2 + 7)
             .attr("r", 5.5)
@@ -2161,7 +2213,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Add expand button icon
             nodeGroup.append("text")
-            .attr("class", isExpandable ? "collapse-icon_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0" : "collapse-icon-disabled_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+            .attr("class", isExpandable ? "collapse-icon_d6cc6c28-9269-480a-8394-c2be946e28cf" : "collapse-icon-disabled_d6cc6c28-9269-480a-8394-c2be946e28cf")
             .attr("x", -width / 2 + 7)
             .attr("y", -height / 2 + 7)
             .attr("text-anchor", "middle")
@@ -2181,7 +2233,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Only add click handler for expandable modules
             if (isExpandable) {
-                nodeGroup.selectAll(".collapse-button_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0, .collapse-icon_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+                nodeGroup.selectAll(".collapse-button_d6cc6c28-9269-480a-8394-c2be946e28cf, .collapse-icon_d6cc6c28-9269-480a-8394-c2be946e28cf")
                 .on("click", function(event) {
                     event.stopPropagation();
                     removeTooltip();
@@ -2282,16 +2334,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                     .scale(currentTransform.k));
             }
 
-            clickedNodeElement.classed("highlight-node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0", true);
+            clickedNodeElement.classed("highlight-node_d6cc6c28-9269-480a-8394-c2be946e28cf", true);
             
             setTimeout(() => {
-                clickedNodeElement.classed("highlight-node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0", false);
+                clickedNodeElement.classed("highlight-node_d6cc6c28-9269-480a-8394-c2be946e28cf", false);
             }, 2000);
 
-            const popup = d3.select("#popup_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0");
-            const moduleTemplate = d3.select("#module-template_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0");
-            const tensorOpTemplate = d3.select("#tensor-op-template_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0");
-            const noInfoMessage = d3.select("#no-info_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0");
+            const popup = d3.select("#popup_d6cc6c28-9269-480a-8394-c2be946e28cf");
+            const moduleTemplate = d3.select("#module-template_d6cc6c28-9269-480a-8394-c2be946e28cf");
+            const tensorOpTemplate = d3.select("#tensor-op-template_d6cc6c28-9269-480a-8394-c2be946e28cf");
+            const noInfoMessage = d3.select("#no-info_d6cc6c28-9269-480a-8394-c2be946e28cf");
             
             const nodeData = adj_list[nodeName];
             
@@ -2299,7 +2351,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (node_to_module_path[nodeName] && graph_node_name_to_without_suffix[nodeName]) {
                 popupTitle = node_to_module_path[nodeName] + "." + graph_node_name_to_without_suffix[nodeName];
             }
-            d3.select("#popup-title_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0").text(popupTitle);
+            d3.select("#popup-title_d6cc6c28-9269-480a-8394-c2be946e28cf").text(popupTitle);
 
             moduleTemplate.style("display", "none");
             tensorOpTemplate.style("display", "none");
@@ -2307,31 +2359,31 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             if (module_info[nodeName]) {
                 const info = module_info[nodeName];
-                moduleTemplate.style("display", "block").classed("content-shown_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0", true);
+                moduleTemplate.style("display", "block").classed("content-shown_d6cc6c28-9269-480a-8394-c2be946e28cf", true);
                 
-                d3.select("#module-extra-repr_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0").text(info.extra_repr || 'N/A');
+                d3.select("#module-extra-repr_d6cc6c28-9269-480a-8394-c2be946e28cf").text(info.extra_repr || 'N/A');
 
                 const forward_info = func_info[nodeName];
-                const attributesContainer = d3.select("#module-attributes_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0").node();
+                const attributesContainer = d3.select("#module-attributes_d6cc6c28-9269-480a-8394-c2be946e28cf").node();
                 attributesContainer.innerHTML = '';
                 createJsonViewer(attributesContainer, info.attributes);
 
-                const parametersContainer = d3.select("#module-parameters_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0").node();
+                const parametersContainer = d3.select("#module-parameters_d6cc6c28-9269-480a-8394-c2be946e28cf").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, forward_info);
             } else if (!(adj_list[nodeName] && adj_list[nodeName].node_type === "Input") && func_info[nodeName]) {
                 const info = func_info[nodeName];
-                tensorOpTemplate.style("display", "block").classed("content-shown_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0", true);
-                const parametersContainer = d3.select("#tensor-op-parameters_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0").node();
+                tensorOpTemplate.style("display", "block").classed("content-shown_d6cc6c28-9269-480a-8394-c2be946e28cf", true);
+                const parametersContainer = d3.select("#tensor-op-parameters_d6cc6c28-9269-480a-8394-c2be946e28cf").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, info);
             } else {
-                noInfoMessage.style("display", "block").classed("content-shown_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0", true);
+                noInfoMessage.style("display", "block").classed("content-shown_d6cc6c28-9269-480a-8394-c2be946e28cf", true);
             }
             
             // Position popup based on info button or node center
             let boundingBox, x, y;
-            const containerRect = d3.select("#graph-container_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0").node().getBoundingClientRect();
+            const containerRect = d3.select("#graph-container_d6cc6c28-9269-480a-8394-c2be946e28cf").node().getBoundingClientRect();
             
             if (infoButtonElement) {
                 boundingBox = infoButtonElement.getBoundingClientRect();
@@ -2347,19 +2399,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             popup.style("left", `${x}px`)
             .style("top", `${y}px`)
             .style("display", "flex");
-            d3.select("#popup-content_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0").node().scrollTop = 0;
+            d3.select("#popup-content_d6cc6c28-9269-480a-8394-c2be946e28cf").node().scrollTop = 0;
         }
 
         function closePopup() {
-            d3.select("#popup_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0").style("display", "none");
+            d3.select("#popup_d6cc6c28-9269-480a-8394-c2be946e28cf").style("display", "none");
         }
         
-        d3.select(".popup-close_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0").on("click", closePopup);
+        d3.select(".popup-close_d6cc6c28-9269-480a-8394-c2be946e28cf").on("click", closePopup);
         svg.on("click", closePopup);
 
-        const popup = document.getElementById(`popup_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0`);
+        const popup = document.getElementById(`popup_d6cc6c28-9269-480a-8394-c2be946e28cf`);
         const resizeObserver = new ResizeObserver(() => {
-            const editorContainers = popup.querySelectorAll('.json-viewer_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0');
+            const editorContainers = popup.querySelectorAll('.json-viewer_d6cc6c28-9269-480a-8394-c2be946e28cf');
             for (let container of editorContainers) {
                 if (container.jsonEditor) {
                     container.jsonEditor.resize();
@@ -2438,30 +2490,30 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 // Apply highlight effect to the target container
                 if (Object.keys(graphvizData.nodes).includes(lastModifiedContainer)) {
                     // Highlight the node (collapsed container)
-                    const targetElement = inner.selectAll(".node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+                    const targetElement = inner.selectAll(".node_d6cc6c28-9269-480a-8394-c2be946e28cf")
                         .filter(([nodeName]) => nodeName === lastModifiedContainer);
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0", true);
+                        targetElement.classed("highlight-node_d6cc6c28-9269-480a-8394-c2be946e28cf", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-node_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0", false);
+                            targetElement.classed("highlight-node_d6cc6c28-9269-480a-8394-c2be946e28cf", false);
                         }, 2000); // Match the animation duration
                     }
                 } else if (Object.keys(graphvizData.clusters).includes(lastModifiedContainer)) {
                     // Highlight the cluster (expanded container)
-                    const targetElement = inner.selectAll(".boundary-box_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0")
+                    const targetElement = inner.selectAll(".boundary-box_d6cc6c28-9269-480a-8394-c2be946e28cf")
                         .filter(function([clusterName]) {
                             return clusterName === lastModifiedContainer;
                         });
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-cluster_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0", true);
+                        targetElement.classed("highlight-cluster_d6cc6c28-9269-480a-8394-c2be946e28cf", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-cluster_f8f9fa99-d1a2-4e53-9dbf-65d5c921c9a0", false);
+                            targetElement.classed("highlight-cluster_d6cc6c28-9269-480a-8394-c2be946e28cf", false);
                         }, 2000); // Match the animation duration
                     }
                 }

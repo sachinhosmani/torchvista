@@ -35,11 +35,18 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            height: 100%;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background: var(--md-default-bg-color);
             color: var(--md-default-fg-color);
             line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         /* Header */
@@ -99,6 +106,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem 1rem;
+            flex: 1;
         }
 
         .md-content {
@@ -331,26 +339,8 @@
         /* Footer */
         .md-footer {
             background-color: var(--md-footer-bg-color);
-            color: var(--md-footer-fg-color);
-            padding: 2rem 1rem;
-            margin-top: 4rem;
-        }
-
-        .md-footer__inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
-
-        .md-footer a {
-            color: var(--md-accent-fg-color);
-            text-decoration: none;
-        }
-
-        .md-footer a:hover {
-            text-decoration: underline;
+            padding: 0.5rem 1rem;
+            margin-top: auto;
         }
 
         /* Responsive design */
@@ -504,10 +494,6 @@ trace_model(model, example_input)</code></pre>
     </main>
 
     <!-- Footer -->
-    <footer class="md-footer">
-        <div class="md-footer__inner">
-            <p><a href="https://github.com/sachinhosmani/torchvista" target="_blank">GitHub</a></p>
-        </div>
-    </footer>
+    <footer class="md-footer"></footer>
 </body>
 </html>

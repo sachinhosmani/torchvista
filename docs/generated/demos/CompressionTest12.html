@@ -2,10 +2,16 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
         <style>
+            :root {
+                --md-primary-fg-color: #4051b5;
+                --md-accent-fg-color: #526cfe;
+            }
+
             html, body {
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
                 height: 100%;
@@ -102,28 +108,53 @@
                 width: 100%;
                 height: 100%;
             }
-            .top-bar {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+            /* Header - matching website style */
+            .md-header {
+                background-color: var(--md-primary-fg-color);
                 color: white;
-                padding: 12px 20px;
+                box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+            }
+
+            .md-header__inner {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                min-height: 25px;
+                padding: 0.6rem 1rem;
+                max-width: 1200px;
+                margin: 0 auto;
             }
 
-            .repo-title {
-                font-size: 24px;
-                font-weight: bold;
-                margin: 0;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            .md-header__title {
+                font-size: 1.25rem;
+                font-weight: 600;
             }
 
-            /* GitHub button iframe styling */
-            .github-star-button {
-                border-radius: 6px;
-                overflow: hidden;
+            .md-header__title a {
+                color: white;
+                text-decoration: none;
+            }
+
+            .md-header__nav {
+                display: flex;
+                gap: 1.5rem;
+                align-items: center;
+            }
+
+            .md-header__nav a {
+                color: white;
+                text-decoration: none;
+                font-weight: 500;
+                opacity: 0.9;
+                transition: opacity 0.2s;
+            }
+
+            .md-header__nav a:hover {
+                opacity: 1;
+            }
+
+            .md-header__nav iframe {
+                vertical-align: middle;
             }
 
             .json-viewer {
@@ -147,10 +178,22 @@
                 background: #45a049;
             }
 
+            @media (max-width: 768px) {
+                .md-header__inner {
+                    flex-direction: column;
+                    gap: 0.5rem;
+                }
+                .md-header__nav {
+                    gap: 1rem;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                }
+            }
+
         </style>
     </head>
     <body>
-    
+
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 document.querySelectorAll('pre code').forEach((block) => {
@@ -172,14 +215,23 @@
             }
 
         </script>
-   
+
         <div class="container">
-            <div class="top-bar">
-                <h1 class="repo-title">TorchVista</h1>
-                <!-- GitHub's official star button -->
-                <iframe src="https://ghbtns.com/github-btn.html?user=sachinhosmani&repo=torchvista&type=star&count=true&size=large" 
-                        frameborder="0" scrolling="0" width="170" height="30" title="GitHub Star Button"></iframe>
-            </div>
+            <header class="md-header">
+                <div class="md-header__inner">
+                    <div class="md-header__title">
+                        <a href="../../index.html">TorchVista</a>
+                    </div>
+                    <nav class="md-header__nav">
+                        <a href="../../index.html">Home</a>
+                        <a href="../../tutorials.html">Tutorials</a>
+                        <a href="../../demos.html">Demos</a>
+                        <a href="https://github.com/sachinhosmani/torchvista" target="_blank">GitHub</a>
+                        <iframe src="https://ghbtns.com/github-btn.html?user=sachinhosmani&repo=torchvista&type=star&count=true&size=large"
+                                frameborder="0" scrolling="0" width="170" height="30" title="GitHub Star Button"></iframe>
+                    </nav>
+                </div>
+            </header>
             <div class="left-column">
                 <div class="code-box" id="codeBox">
                     <div class="code-box-header">
@@ -331,120 +383,120 @@ trace_model(
     
             <div class="graph-view" id="graphContainer" style="height: 100%">
                 <div class="graph-box-header">Visualized Interactive Graph</div>
-                <div id="graph-container_22d23273-b5f1-402b-88a0-2de2e99364fc">
-    <div id="graph_22d23273-b5f1-402b-88a0-2de2e99364fc"></div>
-    <div class="logo_22d23273-b5f1-402b-88a0-2de2e99364fc">
+                <div id="graph-container_31c38a33-ccc8-45cd-867c-12a89cd7d636">
+    <div id="graph_31c38a33-ccc8-45cd-867c-12a89cd7d636"></div>
+    <div class="logo_31c38a33-ccc8-45cd-867c-12a89cd7d636">
         <a href="https://github.com/sachinhosmani/torchvista" target="_blank" rel="noopener noreferrer">
         torchvista
         </a>
     </div>
-    <div id="popup_22d23273-b5f1-402b-88a0-2de2e99364fc" class="popup_22d23273-b5f1-402b-88a0-2de2e99364fc" style="display: none;">
-        <div class="popup-header_22d23273-b5f1-402b-88a0-2de2e99364fc">
-            <h3 id="popup-title_22d23273-b5f1-402b-88a0-2de2e99364fc"></h3>
-            <span class="popup-close_22d23273-b5f1-402b-88a0-2de2e99364fc">✕</span>
+    <div id="popup_31c38a33-ccc8-45cd-867c-12a89cd7d636" class="popup_31c38a33-ccc8-45cd-867c-12a89cd7d636" style="display: none;">
+        <div class="popup-header_31c38a33-ccc8-45cd-867c-12a89cd7d636">
+            <h3 id="popup-title_31c38a33-ccc8-45cd-867c-12a89cd7d636"></h3>
+            <span class="popup-close_31c38a33-ccc8-45cd-867c-12a89cd7d636">✕</span>
         </div>
-        <div id="popup-content_22d23273-b5f1-402b-88a0-2de2e99364fc" class="popup-content_22d23273-b5f1-402b-88a0-2de2e99364fc">
-            <div id="common-info_22d23273-b5f1-402b-88a0-2de2e99364fc">
+        <div id="popup-content_31c38a33-ccc8-45cd-867c-12a89cd7d636" class="popup-content_31c38a33-ccc8-45cd-867c-12a89cd7d636">
+            <div id="common-info_31c38a33-ccc8-45cd-867c-12a89cd7d636">
             </div>
-            <div id="module-template_22d23273-b5f1-402b-88a0-2de2e99364fc" style="display:none;">
-                <details open id="module-parameters-details_22d23273-b5f1-402b-88a0-2de2e99364fc">
+            <div id="module-template_31c38a33-ccc8-45cd-867c-12a89cd7d636" style="display:none;">
+                <details open id="module-parameters-details_31c38a33-ccc8-45cd-867c-12a89cd7d636">
                     <summary style="color: black"><strong>forward() Parameters</strong></summary>
-                    <div id="module-parameters_22d23273-b5f1-402b-88a0-2de2e99364fc" class="json-viewer_22d23273-b5f1-402b-88a0-2de2e99364fc"></div>
+                    <div id="module-parameters_31c38a33-ccc8-45cd-867c-12a89cd7d636" class="json-viewer_31c38a33-ccc8-45cd-867c-12a89cd7d636"></div>
                 </details>
-                <details open id="module-attributes-details_22d23273-b5f1-402b-88a0-2de2e99364fc">
+                <details open id="module-attributes-details_31c38a33-ccc8-45cd-867c-12a89cd7d636">
                     <summary style="color: black"><strong>Attributes</strong></summary>
-                    <div id="module-attributes_22d23273-b5f1-402b-88a0-2de2e99364fc" class="json-viewer_22d23273-b5f1-402b-88a0-2de2e99364fc"></div>
+                    <div id="module-attributes_31c38a33-ccc8-45cd-867c-12a89cd7d636" class="json-viewer_31c38a33-ccc8-45cd-867c-12a89cd7d636"></div>
                 </details>
             </div>
-            <div id="tensor-op-template_22d23273-b5f1-402b-88a0-2de2e99364fc" style="display:none;">
+            <div id="tensor-op-template_31c38a33-ccc8-45cd-867c-12a89cd7d636" style="display:none;">
                 <summary><strong>Parameters</strong></summary>
-                <div id="tensor-op-parameters_22d23273-b5f1-402b-88a0-2de2e99364fc" class="json-viewer_22d23273-b5f1-402b-88a0-2de2e99364fc"></div>
+                <div id="tensor-op-parameters_31c38a33-ccc8-45cd-867c-12a89cd7d636" class="json-viewer_31c38a33-ccc8-45cd-867c-12a89cd7d636"></div>
             </div>
-            <p id="no-info_22d23273-b5f1-402b-88a0-2de2e99364fc" style="display:none;">No further information available for this node.</p>
+            <p id="no-info_31c38a33-ccc8-45cd-867c-12a89cd7d636" style="display:none;">No further information available for this node.</p>
         </div>
     </div>
 
     <style>
-        .node_22d23273-b5f1-402b-88a0-2de2e99364fc rect {
+        .node_31c38a33-ccc8-45cd-867c-12a89cd7d636 rect {
             stroke: #333;
             fill: #fff;
         }
-        text.node-label_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        text.node-label_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.type-indicator_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        text.type-indicator_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.collapse-icon_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        text.collapse-icon_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 14px;
             cursor: default;
             user-select: none;
         }
-        .edge_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        .edge_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             stroke: #797979;
             fill: none;
         }
-        .node_22d23273-b5f1-402b-88a0-2de2e99364fc rect.input_22d23273-b5f1-402b-88a0-2de2e99364fc { fill: #FF9AFF; }
-        .node_22d23273-b5f1-402b-88a0-2de2e99364fc rect.constant_22d23273-b5f1-402b-88a0-2de2e99364fc { fill: rgb(235 235 235); }
+        .node_31c38a33-ccc8-45cd-867c-12a89cd7d636 rect.input_31c38a33-ccc8-45cd-867c-12a89cd7d636 { fill: #FF9AFF; }
+        .node_31c38a33-ccc8-45cd-867c-12a89cd7d636 rect.constant_31c38a33-ccc8-45cd-867c-12a89cd7d636 { fill: rgb(235 235 235); }
 
-        .node_22d23273-b5f1-402b-88a0-2de2e99364fc rect.output_22d23273-b5f1-402b-88a0-2de2e99364fc { fill: #74e071; }
-        .node_22d23273-b5f1-402b-88a0-2de2e99364fc rect.failed_22d23273-b5f1-402b-88a0-2de2e99364fc { fill: rgb(224 15 15); }
-        .node_22d23273-b5f1-402b-88a0-2de2e99364fc rect.module_22d23273-b5f1-402b-88a0-2de2e99364fc { fill: #8BDEDB; }
-        .node_22d23273-b5f1-402b-88a0-2de2e99364fc rect.operation_22d23273-b5f1-402b-88a0-2de2e99364fc { fill: #FEBC5A; }
+        .node_31c38a33-ccc8-45cd-867c-12a89cd7d636 rect.output_31c38a33-ccc8-45cd-867c-12a89cd7d636 { fill: #74e071; }
+        .node_31c38a33-ccc8-45cd-867c-12a89cd7d636 rect.failed_31c38a33-ccc8-45cd-867c-12a89cd7d636 { fill: rgb(224 15 15); }
+        .node_31c38a33-ccc8-45cd-867c-12a89cd7d636 rect.module_31c38a33-ccc8-45cd-867c-12a89cd7d636 { fill: #8BDEDB; }
+        .node_31c38a33-ccc8-45cd-867c-12a89cd7d636 rect.operation_31c38a33-ccc8-45cd-867c-12a89cd7d636 { fill: #FEBC5A; }
 
-        .node_22d23273-b5f1-402b-88a0-2de2e99364fc ellipse.input_22d23273-b5f1-402b-88a0-2de2e99364fc { fill: #FF9AFF; }
-        .node_22d23273-b5f1-402b-88a0-2de2e99364fc ellipse.constant_22d23273-b5f1-402b-88a0-2de2e99364fc { fill: rgb(235 235 235); }
-        .node_22d23273-b5f1-402b-88a0-2de2e99364fc ellipse.output_22d23273-b5f1-402b-88a0-2de2e99364fc { fill: #74e071; }
-        .node_22d23273-b5f1-402b-88a0-2de2e99364fc ellipse.failed_22d23273-b5f1-402b-88a0-2de2e99364fc { fill: rgb(224 15 15); }
+        .node_31c38a33-ccc8-45cd-867c-12a89cd7d636 ellipse.input_31c38a33-ccc8-45cd-867c-12a89cd7d636 { fill: #FF9AFF; }
+        .node_31c38a33-ccc8-45cd-867c-12a89cd7d636 ellipse.constant_31c38a33-ccc8-45cd-867c-12a89cd7d636 { fill: rgb(235 235 235); }
+        .node_31c38a33-ccc8-45cd-867c-12a89cd7d636 ellipse.output_31c38a33-ccc8-45cd-867c-12a89cd7d636 { fill: #74e071; }
+        .node_31c38a33-ccc8-45cd-867c-12a89cd7d636 ellipse.failed_31c38a33-ccc8-45cd-867c-12a89cd7d636 { fill: rgb(224 15 15); }
 
-        .node_22d23273-b5f1-402b-88a0-2de2e99364fc ellipse {
+        .node_31c38a33-ccc8-45cd-867c-12a89cd7d636 ellipse {
             stroke: #333;
             stroke-width: 1px;
         }
-        .edgeLabelGroup_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        .edgeLabelGroup_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             pointer-events: none;
         }
-        #arrowhead_22d23273-b5f1-402b-88a0-2de2e99364fc path {
+        #arrowhead_31c38a33-ccc8-45cd-867c-12a89cd7d636 path {
             fill: #333333;;
         }
-        .node_22d23273-b5f1-402b-88a0-2de2e99364fc rect,
-        .node_22d23273-b5f1-402b-88a0-2de2e99364fc ellipse {
+        .node_31c38a33-ccc8-45cd-867c-12a89cd7d636 rect,
+        .node_31c38a33-ccc8-45cd-867c-12a89cd7d636 ellipse {
             transition: fill 0.3s ease;
         }
 
-        .node_22d23273-b5f1-402b-88a0-2de2e99364fc .type-indicator_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        .node_31c38a33-ccc8-45cd-867c-12a89cd7d636 .type-indicator_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             font-size: 5px;
             fill: rgba(0, 0, 0, 1.0);  /* Dark grey, semi-transparent */
             pointer-events: none;
         }
 
-        .node_22d23273-b5f1-402b-88a0-2de2e99364fc.error_22d23273-b5f1-402b-88a0-2de2e99364fc rect {
+        .node_31c38a33-ccc8-45cd-867c-12a89cd7d636.error_31c38a33-ccc8-45cd-867c-12a89cd7d636 rect {
             stroke: black;
             stroke-width: 1px;
         }
 
-        .boundary-box_22d23273-b5f1-402b-88a0-2de2e99364fc.error_22d23273-b5f1-402b-88a0-2de2e99364fc > rect:first-of-type {
+        .boundary-box_31c38a33-ccc8-45cd-867c-12a89cd7d636.error_31c38a33-ccc8-45cd-867c-12a89cd7d636 > rect:first-of-type {
             fill: red;
             fill-opacity: 0.2;
         }
 
-        #graph-container_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        #graph-container_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             position: relative;
             height: 95%;
             width: ${width};
             overflow: hidden;
         }
 
-        #graph_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        #graph_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             height: 100%;
         }
         
-        .popup_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        .popup_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             position: absolute;
             background: white;
@@ -459,7 +511,7 @@ trace_model(
             flex-direction: column;
         }
 
-        .popup-header_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        .popup-header_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             position: sticky;
             top: 0;
             background: white;
@@ -471,12 +523,12 @@ trace_model(
             z-index: 1;
         }
 
-        .popup_22d23273-b5f1-402b-88a0-2de2e99364fc h3 {
+        .popup_31c38a33-ccc8-45cd-867c-12a89cd7d636 h3 {
             margin: 0;
             font-size: 16px;
         }
 
-        .popup-content_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        .popup-content_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             padding: 10px;
             padding-bottom: 10px;
             overflow-y: auto;
@@ -484,87 +536,87 @@ trace_model(
             flex-grow: 1;
         }
 
-        .popup_22d23273-b5f1-402b-88a0-2de2e99364fc pre {
+        .popup_31c38a33-ccc8-45cd-867c-12a89cd7d636 pre {
             white-space: pre;
             overflow-x: auto;
         }
 
-        .popup-close_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        .popup-close_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             cursor: pointer;
             font-size: 24px;
             font-weight: bold;
             line-height: 1;
         }
 
-        #popup-title_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        #popup-title_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             font-size: 16px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             color: black;
         }
 
-        #graph-container_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        #graph-container_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             position: relative;
         }
 
-        #graph-container_22d23273-b5f1-402b-88a0-2de2e99364fc pre {
+        #graph-container_31c38a33-ccc8-45cd-867c-12a89cd7d636 pre {
             margin-bottom: 0;
         }
 
-        .boundary-box_22d23273-b5f1-402b-88a0-2de2e99364fc rect {
+        .boundary-box_31c38a33-ccc8-45cd-867c-12a89cd7d636 rect {
             pointer-events: none;
         }
-        .boundary-box_22d23273-b5f1-402b-88a0-2de2e99364fc text {
+        .boundary-box_31c38a33-ccc8-45cd-867c-12a89cd7d636 text {
             pointer-events: none;
             user-select: none;
         }
 
-        .boundary-box_22d23273-b5f1-402b-88a0-2de2e99364fc rect {
+        .boundary-box_31c38a33-ccc8-45cd-867c-12a89cd7d636 rect {
             pointer-events: none;
         }
-        .boundary-box_22d23273-b5f1-402b-88a0-2de2e99364fc text {
+        .boundary-box_31c38a33-ccc8-45cd-867c-12a89cd7d636 text {
             pointer-events: none;
             user-select: none;
             font-weight: bold;
         }
-        .edge-label_22d23273-b5f1-402b-88a0-2de2e99364fc text {
+        .edge-label_31c38a33-ccc8-45cd-867c-12a89cd7d636 text {
             pointer-events: none;
             user-select: none;
             font-size: 4px;
             font-family: "'Roboto', sans-serif";
         }
                     
-        .collapse-button_22d23273-b5f1-402b-88a0-2de2e99364fc, .info-button_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        .collapse-button_31c38a33-ccc8-45cd-867c-12a89cd7d636, .info-button_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             fill: #fff;
             stroke: #333;
             stroke-width: 1px;
             cursor: pointer;
         }
 
-        .collapse-button_22d23273-b5f1-402b-88a0-2de2e99364fc:hover, .info-button_22d23273-b5f1-402b-88a0-2de2e99364fc:hover {
+        .collapse-button_31c38a33-ccc8-45cd-867c-12a89cd7d636:hover, .info-button_31c38a33-ccc8-45cd-867c-12a89cd7d636:hover {
             fill: #eee;
             cursor: pointer;
         }
 
-        .collapse-icon_22d23273-b5f1-402b-88a0-2de2e99364fc, .info-icon_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        .collapse-icon_31c38a33-ccc8-45cd-867c-12a89cd7d636, .info-icon_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             fill: rgb(51, 51, 51);
         }
 
-        .collapse-button-disabled_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        .collapse-button-disabled_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             fill: #eee5;
             stroke: #3333334f;
             stroke-width: 1px;
             cursor: not-allowed;
         }
 
-        .collapse-button-disabled_22d23273-b5f1-402b-88a0-2de2e99364fc:hover {
+        .collapse-button-disabled_31c38a33-ccc8-45cd-867c-12a89cd7d636:hover {
             fill: #eee6;
             cursor: not-allowed;
         }
 
-        .collapse-icon-disabled_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        .collapse-icon-disabled_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -573,11 +625,11 @@ trace_model(
         }
 
         /* Edge hover styles */
-        .edge-group_22d23273-b5f1-402b-88a0-2de2e99364fc path {
+        .edge-group_31c38a33-ccc8-45cd-867c-12a89cd7d636 path {
             pointer-events: stroke;
         }
 
-        .edge-label_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        .edge-label_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             pointer-events: all;
         }
 
@@ -617,50 +669,50 @@ trace_model(
             }
         }
 
-        .highlight-cluster_22d23273-b5f1-402b-88a0-2de2e99364fc > rect:first-of-type {
+        .highlight-cluster_31c38a33-ccc8-45cd-867c-12a89cd7d636 > rect:first-of-type {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        .highlight-node_22d23273-b5f1-402b-88a0-2de2e99364fc rect {
+        .highlight-node_31c38a33-ccc8-45cd-867c-12a89cd7d636 rect {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        text.node-label_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        text.node-label_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 0.8rem;  /* Base size using rem units for accessibility */
             cursor: default;
             user-select: none;
         }
 
-        .node_22d23273-b5f1-402b-88a0-2de2e99364fc.constant_22d23273-b5f1-402b-88a0-2de2e99364fc .node-label_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        .node_31c38a33-ccc8-45cd-867c-12a89cd7d636.constant_31c38a33-ccc8-45cd-867c-12a89cd7d636 .node-label_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             font-size: 0.7rem;
         }
 
-        .popup-content_22d23273-b5f1-402b-88a0-2de2e99364fc summary {
+        .popup-content_31c38a33-ccc8-45cd-867c-12a89cd7d636 summary {
             cursor: pointer;
             margin: 5px;
             user-select: none;
         }
 
-        .node_22d23273-b5f1-402b-88a0-2de2e99364fc.input_22d23273-b5f1-402b-88a0-2de2e99364fc rect,
-        .node_22d23273-b5f1-402b-88a0-2de2e99364fc.output_22d23273-b5f1-402b-88a0-2de2e99364fc rect,
-        .node_22d23273-b5f1-402b-88a0-2de2e99364fc.constant_22d23273-b5f1-402b-88a0-2de2e99364fc rect {
+        .node_31c38a33-ccc8-45cd-867c-12a89cd7d636.input_31c38a33-ccc8-45cd-867c-12a89cd7d636 rect,
+        .node_31c38a33-ccc8-45cd-867c-12a89cd7d636.output_31c38a33-ccc8-45cd-867c-12a89cd7d636 rect,
+        .node_31c38a33-ccc8-45cd-867c-12a89cd7d636.constant_31c38a33-ccc8-45cd-867c-12a89cd7d636 rect {
             stroke-width: 1px;
             rx: 8px;
             ry: 8px;
             stroke-dasharray: none;
         }
 
-        #png-error-container_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        #png-error-container_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             text-align: center;
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 14px;
         }
 
-        #png-error-message_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        #png-error-message_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             padding: 8px 16px;
             background-color: #dc3545;
             color: white;
@@ -671,13 +723,13 @@ trace_model(
             text-align: left;
         }
 
-        #png-link-container_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        #png-link-container_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 18px;
         }
 
-        #png-download-button_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        #png-download-button_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -687,11 +739,11 @@ trace_model(
             margin-right: 8px;
         }
 
-        #png-download-button_22d23273-b5f1-402b-88a0-2de2e99364fc:hover {
+        #png-download-button_31c38a33-ccc8-45cd-867c-12a89cd7d636:hover {
             background-color: #0056b3;
         }
 
-        #png-save-button_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        #png-save-button_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -700,18 +752,18 @@ trace_model(
             border-radius: 4px;
         }
 
-        #png-save-button_22d23273-b5f1-402b-88a0-2de2e99364fc:hover {
+        #png-save-button_31c38a33-ccc8-45cd-867c-12a89cd7d636:hover {
             background-color: #0056b3;
         }
 
-        #svg-link-container_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        #svg-link-container_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 18px;
         }
 
 
-        #svg-download-button_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        #svg-download-button_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -721,11 +773,11 @@ trace_model(
             margin-right: 8px;
         }
 
-        #svg-download-button_22d23273-b5f1-402b-88a0-2de2e99364fc:hover {
+        #svg-download-button_31c38a33-ccc8-45cd-867c-12a89cd7d636:hover {
             background-color: #0056b3;
         }
 
-        #svg-save-button_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        #svg-save-button_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -734,11 +786,11 @@ trace_model(
             border-radius: 4px;
         }
 
-        #svg-save-button_22d23273-b5f1-402b-88a0-2de2e99364fc:hover {
+        #svg-save-button_31c38a33-ccc8-45cd-867c-12a89cd7d636:hover {
             background-color: #0056b3;
         }
 
-        .custom-tooltip_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        .custom-tooltip_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             position: absolute;
             background: white;
             border: 1px solid #ccc;
@@ -754,7 +806,7 @@ trace_model(
             display: none;
         }
 
-        .custom-tooltip_smaller_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        .custom-tooltip_smaller_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             position: absolute;
             background: white;
             border: 1px solid #ccc;
@@ -770,16 +822,16 @@ trace_model(
             display: none;
         }
 
-        .edge_22d23273-b5f1-402b-88a0-2de2e99364fc.implied-edge_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        .edge_31c38a33-ccc8-45cd-867c-12a89cd7d636.implied-edge_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             stroke-dasharray: 5,5;
         }
 
-        .logo_22d23273-b5f1-402b-88a0-2de2e99364fc {
+        .logo_31c38a33-ccc8-45cd-867c-12a89cd7d636 {
             position: absolute;
             bottom: 8px; left: 8px;
             padding: 4px 6px;
         }
-        .logo_22d23273-b5f1-402b-88a0-2de2e99364fc a {
+        .logo_31c38a33-ccc8-45cd-867c-12a89cd7d636 a {
             color: #a1a1a1;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             opacity: .6;
@@ -940,7 +992,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
 (function() {
-    const adj_list = {"output_0": {"edges": [], "failed": false, "node_type": "Output"}, "input_0": {"edges": [{"target": "scalars_8_x_2", "dims": "(2, 32, 64)", "edge_data_id": 4351973552}, {"target": "tensor_10", "dims": "(2, 32, 64)", "edge_data_id": 4351973552}, {"target": "tensor_11", "dims": "(2, 32, 64)", "edge_data_id": 4351973552}, {"target": "tensor_12", "dims": "(2, 32, 64)", "edge_data_id": 4351973552}, {"target": "tensor_13", "dims": "(2, 32, 64)", "edge_data_id": 4351973552}, {"target": "scalars_14_x_4", "dims": "(2, 32, 64)", "edge_data_id": 4351973552}, {"target": "scalars_16_x_2", "dims": "(2, 32, 64)", "edge_data_id": 4351973552}], "failed": false, "node_type": "Input"}, "scalars_8_x_2": {"edges": [{"target": "transpose_7", "dims": "( ) x 2"}], "failed": false, "node_type": "Constant"}, "transpose_7": {"edges": [{"target": "multi_head_attention_forward_9", "dims": "(32, 2, 64)", "edge_data_id": 11542682976}], "failed": false, "node_type": "Operation"}, "tensor_10": {"edges": [{"target": "multi_head_attention_forward_9", "dims": "(192, 64)", "edge_data_id": 5754150976}], "failed": false, "node_type": "Constant"}, "tensor_11": {"edges": [{"target": "multi_head_attention_forward_9", "dims": "(192)", "edge_data_id": 5754151136}], "failed": false, "node_type": "Constant"}, "tensor_12": {"edges": [{"target": "multi_head_attention_forward_9", "dims": "(64, 64)", "edge_data_id": 5754151056}], "failed": false, "node_type": "Constant"}, "tensor_13": {"edges": [{"target": "multi_head_attention_forward_9", "dims": "(64)", "edge_data_id": 5754151216}], "failed": false, "node_type": "Constant"}, "scalars_14_x_4": {"edges": [{"target": "multi_head_attention_forward_9", "dims": "( ) x 4"}], "failed": false, "node_type": "Constant"}, "multi_head_attention_forward_9": {"edges": [{"target": "transpose_15", "dims": "(32, 2, 64)", "edge_data_id": 11542600576}], "failed": false, "node_type": "Operation"}, "scalars_16_x_2": {"edges": [{"target": "transpose_15", "dims": "( ) x 2"}], "failed": false, "node_type": "Constant"}, "transpose_15": {"edges": [{"target": "__add___17", "dims": "(2, 32, 64)", "edge_data_id": 11542600496}], "failed": false, "node_type": "Operation"}, "__add___17": {"edges": [{"target": "tensor_20", "dims": "(2, 32, 64)", "edge_data_id": 11542682976}, {"target": "tensor_21", "dims": "(2, 32, 64)", "edge_data_id": 11542682976}, {"target": "scalar_22", "dims": "(2, 32, 64)", "edge_data_id": 11542682976}], "failed": false, "node_type": "Operation"}, "tensor_20": {"edges": [{"target": "layer_norm_19", "dims": "(64)", "edge_data_id": 4351973632}], "failed": false, "node_type": "Constant"}, "tensor_21": {"edges": [{"target": "layer_norm_19", "dims": "(64)", "edge_data_id": 4351973712}], "failed": false, "node_type": "Constant"}, "scalar_22": {"edges": [{"target": "layer_norm_19", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "layer_norm_19": {"edges": [{"target": "FeedForward_24", "dims": "(2, 32, 64)", "edge_data_id": 11542600576}], "failed": false, "node_type": "Operation"}, "FeedForward_24": {"edges": [{"target": "FeedForward_26", "dims": "(2, 32, 64)", "edge_data_id": 11542597696}], "failed": false, "node_type": "Module"}, "FeedForward_26": {"edges": [{"target": "output_0", "dims": "(2, 32, 64)", "edge_data_id": 11542600896}], "failed": false, "node_type": "Module"}};
+    const adj_list = {"output_0": {"edges": [], "failed": false, "node_type": "Output"}, "input_0": {"edges": [{"target": "scalars_8_x_2", "dims": "(2, 32, 64)", "edge_data_id": 5714819648}, {"target": "tensor_10", "dims": "(2, 32, 64)", "edge_data_id": 5714819648}, {"target": "tensor_11", "dims": "(2, 32, 64)", "edge_data_id": 5714819648}, {"target": "tensor_12", "dims": "(2, 32, 64)", "edge_data_id": 5714819648}, {"target": "tensor_13", "dims": "(2, 32, 64)", "edge_data_id": 5714819648}, {"target": "scalars_14_x_4", "dims": "(2, 32, 64)", "edge_data_id": 5714819648}, {"target": "scalars_16_x_2", "dims": "(2, 32, 64)", "edge_data_id": 5714819648}], "failed": false, "node_type": "Input"}, "scalars_8_x_2": {"edges": [{"target": "transpose_7", "dims": "( ) x 2"}], "failed": false, "node_type": "Constant"}, "transpose_7": {"edges": [{"target": "multi_head_attention_forward_9", "dims": "(32, 2, 64)", "edge_data_id": 5714820608}], "failed": false, "node_type": "Operation"}, "tensor_10": {"edges": [{"target": "multi_head_attention_forward_9", "dims": "(192, 64)", "edge_data_id": 5714888000}], "failed": false, "node_type": "Constant"}, "tensor_11": {"edges": [{"target": "multi_head_attention_forward_9", "dims": "(192)", "edge_data_id": 5736513184}], "failed": false, "node_type": "Constant"}, "tensor_12": {"edges": [{"target": "multi_head_attention_forward_9", "dims": "(64, 64)", "edge_data_id": 5695726752}], "failed": false, "node_type": "Constant"}, "tensor_13": {"edges": [{"target": "multi_head_attention_forward_9", "dims": "(64)", "edge_data_id": 5736513264}], "failed": false, "node_type": "Constant"}, "scalars_14_x_4": {"edges": [{"target": "multi_head_attention_forward_9", "dims": "( ) x 4"}], "failed": false, "node_type": "Constant"}, "multi_head_attention_forward_9": {"edges": [{"target": "transpose_15", "dims": "(32, 2, 64)", "edge_data_id": 11736277296}], "failed": false, "node_type": "Operation"}, "scalars_16_x_2": {"edges": [{"target": "transpose_15", "dims": "( ) x 2"}], "failed": false, "node_type": "Constant"}, "transpose_15": {"edges": [{"target": "__add___17", "dims": "(2, 32, 64)", "edge_data_id": 11736279376}], "failed": false, "node_type": "Operation"}, "__add___17": {"edges": [{"target": "tensor_20", "dims": "(2, 32, 64)", "edge_data_id": 5714820608}, {"target": "tensor_21", "dims": "(2, 32, 64)", "edge_data_id": 5714820608}, {"target": "scalar_22", "dims": "(2, 32, 64)", "edge_data_id": 5714820608}], "failed": false, "node_type": "Operation"}, "tensor_20": {"edges": [{"target": "layer_norm_19", "dims": "(64)", "edge_data_id": 4467550064}], "failed": false, "node_type": "Constant"}, "tensor_21": {"edges": [{"target": "layer_norm_19", "dims": "(64)", "edge_data_id": 4467551984}], "failed": false, "node_type": "Constant"}, "scalar_22": {"edges": [{"target": "layer_norm_19", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "layer_norm_19": {"edges": [{"target": "FeedForward_24", "dims": "(2, 32, 64)", "edge_data_id": 11736277296}], "failed": false, "node_type": "Operation"}, "FeedForward_24": {"edges": [{"target": "FeedForward_26", "dims": "(2, 32, 64)", "edge_data_id": 11736280736}], "failed": false, "node_type": "Module"}, "FeedForward_26": {"edges": [{"target": "output_0", "dims": "(2, 32, 64)", "edge_data_id": 11736278656}], "failed": false, "node_type": "Module"}};
     const module_info = {"Sequential_1": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Stage_2": {"type": "Stage", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Sequential_3": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "AttentionBlock_4": {"type": "AttentionBlock", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "MultiheadAttention_5": {"type": "MultiheadAttention", "parameters": {"in_proj_weight": {"shape": [192, 64], "requires_grad": true}, "in_proj_bias": {"shape": [192], "requires_grad": true}}, "attributes": {"add_zero_attn": false, "batch_first": true, "call_super_init": false, "dropout": 0.0, "dump_patches": false, "embed_dim": 64, "head_dim": 16, "kdim": 64, "num_heads": 4, "training": true, "vdim": 64}, "extra_repr": ""}, "LayerNorm_18": {"type": "LayerNorm", "parameters": {"weight": {"shape": [64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "elementwise_affine": true, "eps": 1e-05, "normalized_shape": [64], "training": true}, "extra_repr": "(64,), eps=1e-05, elementwise_affine=True"}, "Sequential_23": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "FeedForward_24": {"type": "FeedForward", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "FeedForward_25": {"type": "FeedForward", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "FeedForward_26": {"type": "FeedForward", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Stage_27": {"type": "Stage", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Sequential_28": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "AttentionBlock_29": {"type": "AttentionBlock", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "MultiheadAttention_30": {"type": "MultiheadAttention", "parameters": {"in_proj_weight": {"shape": [192, 64], "requires_grad": true}, "in_proj_bias": {"shape": [192], "requires_grad": true}}, "attributes": {"add_zero_attn": false, "batch_first": true, "call_super_init": false, "dropout": 0.0, "dump_patches": false, "embed_dim": 64, "head_dim": 16, "kdim": 64, "num_heads": 4, "training": true, "vdim": 64}, "extra_repr": ""}, "LayerNorm_43": {"type": "LayerNorm", "parameters": {"weight": {"shape": [64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "elementwise_affine": true, "eps": 1e-05, "normalized_shape": [64], "training": true}, "extra_repr": "(64,), eps=1e-05, elementwise_affine=True"}, "Sequential_48": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "FeedForward_49": {"type": "FeedForward", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "FeedForward_50": {"type": "FeedForward", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "FeedForward_51": {"type": "FeedForward", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}};
     const func_info = {"Sequential_1": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Stage_2": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Sequential_3": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "AttentionBlock_4": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "MultiheadAttention_5": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "dim_6": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "transpose_7": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}, 1, 0], "keyword_args": {}}, "multi_head_attention_forward_9": {"positional_args": [{"_type": "tensor", "shape": [32, 2, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32, 2, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32, 2, 64], "dtype": "torch.float32"}, 64, 4, {"_type": "tensor", "shape": [192, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [192], "dtype": "torch.float32"}, null, null, false, 0.0, {"_type": "tensor", "shape": [64, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}], "keyword_args": {"training": true, "key_padding_mask": null, "need_weights": true, "attn_mask": null, "average_attn_weights": true, "is_causal": false}}, "transpose_15": {"positional_args": [{"_type": "tensor", "shape": [32, 2, 64], "dtype": "torch.float32"}, 1, 0], "keyword_args": {}}, "__add___17": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "LayerNorm_18": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "layer_norm_19": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}, [64], {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}, 1e-05], "keyword_args": {}}, "Sequential_23": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "FeedForward_24": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "FeedForward_25": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "FeedForward_26": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Stage_27": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Sequential_28": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "AttentionBlock_29": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "MultiheadAttention_30": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "dim_31": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "transpose_32": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}, 1, 0], "keyword_args": {}}, "multi_head_attention_forward_34": {"positional_args": [{"_type": "tensor", "shape": [32, 2, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32, 2, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32, 2, 64], "dtype": "torch.float32"}, 64, 4, {"_type": "tensor", "shape": [192, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [192], "dtype": "torch.float32"}, null, null, false, 0.0, {"_type": "tensor", "shape": [64, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}], "keyword_args": {"training": true, "key_padding_mask": null, "need_weights": true, "attn_mask": null, "average_attn_weights": true, "is_causal": false}}, "transpose_40": {"positional_args": [{"_type": "tensor", "shape": [32, 2, 64], "dtype": "torch.float32"}, 1, 0], "keyword_args": {}}, "__add___42": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "LayerNorm_43": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "layer_norm_44": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}, [64], {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}, 1e-05], "keyword_args": {}}, "Sequential_48": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "FeedForward_49": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "FeedForward_50": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "FeedForward_51": {"positional_args": [{"_type": "tensor", "shape": [2, 32, 64], "dtype": "torch.float32"}], "keyword_args": {}}};
     const parent_module_to_nodes = {"MultiheadAttention_5": ["dim_6", "transpose_7", "multi_head_attention_forward_9", "transpose_15"], "AttentionBlock_4": ["dim_6", "transpose_7", "multi_head_attention_forward_9", "transpose_15", "__add___17", "layer_norm_19", "FeedForward_24", "FeedForward_25", "FeedForward_26"], "Sequential_3": ["dim_6", "transpose_7", "multi_head_attention_forward_9", "transpose_15", "__add___17", "layer_norm_19", "FeedForward_24", "FeedForward_25", "FeedForward_26"], "Stage_2": ["dim_6", "transpose_7", "multi_head_attention_forward_9", "transpose_15", "__add___17", "layer_norm_19", "FeedForward_24", "FeedForward_25", "FeedForward_26"], "Sequential_1": ["dim_6", "transpose_7", "multi_head_attention_forward_9", "transpose_15", "__add___17", "layer_norm_19", "FeedForward_24", "FeedForward_25", "FeedForward_26", "dim_31", "transpose_32", "multi_head_attention_forward_34", "transpose_40", "__add___42", "layer_norm_44", "FeedForward_49", "FeedForward_50", "FeedForward_51"], "LayerNorm_18": ["layer_norm_19"], "Sequential_23": ["FeedForward_24", "FeedForward_25", "FeedForward_26"], "MultiheadAttention_30": ["dim_31", "transpose_32", "multi_head_attention_forward_34", "transpose_40"], "AttentionBlock_29": ["dim_31", "transpose_32", "multi_head_attention_forward_34", "transpose_40", "__add___42", "layer_norm_44", "FeedForward_49", "FeedForward_50", "FeedForward_51"], "Sequential_28": ["dim_31", "transpose_32", "multi_head_attention_forward_34", "transpose_40", "__add___42", "layer_norm_44", "FeedForward_49", "FeedForward_50", "FeedForward_51"], "Stage_27": ["dim_31", "transpose_32", "multi_head_attention_forward_34", "transpose_40", "__add___42", "layer_norm_44", "FeedForward_49", "FeedForward_50", "FeedForward_51"], "LayerNorm_43": ["layer_norm_44"], "Sequential_48": ["FeedForward_49", "FeedForward_50", "FeedForward_51"]};
@@ -989,10 +1041,10 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         removeTooltip();
         
         const tooltip = document.createElement('div');
-        tooltip.className = !smaller ? `custom-tooltip_22d23273-b5f1-402b-88a0-2de2e99364fc` : `custom-tooltip_smaller_22d23273-b5f1-402b-88a0-2de2e99364fc`;
+        tooltip.className = !smaller ? `custom-tooltip_31c38a33-ccc8-45cd-867c-12a89cd7d636` : `custom-tooltip_smaller_31c38a33-ccc8-45cd-867c-12a89cd7d636`;
         tooltip.textContent = text;
         
-        const container = document.getElementById(`graph-container_22d23273-b5f1-402b-88a0-2de2e99364fc`);
+        const container = document.getElementById(`graph-container_31c38a33-ccc8-45cd-867c-12a89cd7d636`);
         container.appendChild(tooltip);
         currentTooltip = tooltip;
         
@@ -1004,7 +1056,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const buttonRect = buttonElement.getBoundingClientRect();
         
         // Get the container's position in screen coordinates
-        const containerRect = document.getElementById(`graph-container_22d23273-b5f1-402b-88a0-2de2e99364fc`).getBoundingClientRect();
+        const containerRect = document.getElementById(`graph-container_31c38a33-ccc8-45cd-867c-12a89cd7d636`).getBoundingClientRect();
         
         // Calculate position relative to container
         const buttonX = buttonRect.left + (buttonRect.width / 2) - containerRect.left;
@@ -1621,7 +1673,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function reloadGraph() {
-        d3.select("#graph_22d23273-b5f1-402b-88a0-2de2e99364fc").html("");
+        d3.select("#graph_31c38a33-ccc8-45cd-867c-12a89cd7d636").html("");
 
         if (generateImage) {
             renderGraphvizImage();
@@ -1688,16 +1740,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function renderGraphvizImage() {
-        d3.select("#png-link-container_22d23273-b5f1-402b-88a0-2de2e99364fc").remove();
+        d3.select("#png-link-container_31c38a33-ccc8-45cd-867c-12a89cd7d636").remove();
         
         function showErrorMessage(error) {
-            const parent = d3.select("#graph-container_22d23273-b5f1-402b-88a0-2de2e99364fc").node().parentNode;
+            const parent = d3.select("#graph-container_31c38a33-ccc8-45cd-867c-12a89cd7d636").node().parentNode;
             const errorContainer = d3.select(parent)
-                .insert("div", "#graph-container_22d23273-b5f1-402b-88a0-2de2e99364fc")
-                .attr("id", "png-error-container_22d23273-b5f1-402b-88a0-2de2e99364fc");
+                .insert("div", "#graph-container_31c38a33-ccc8-45cd-867c-12a89cd7d636")
+                .attr("id", "png-error-container_31c38a33-ccc8-45cd-867c-12a89cd7d636");
             
             errorContainer.append("div")
-                .attr("id", "png-error-message_22d23273-b5f1-402b-88a0-2de2e99364fc")
+                .attr("id", "png-error-message_31c38a33-ccc8-45cd-867c-12a89cd7d636")
                 .html(`<strong>Error:</strong><br>${error.stack || error.message || error}<br><br><strong>Note:</strong> Exporting very large models as PNG is currently not supported. Please use generate_image=False, or raise an issue on https://github.com/sachinhosmani/torchvista/issues`);
         }
         
@@ -1735,21 +1787,21 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const pngUrl = URL.createObjectURL(pngBlob);
         
         // Create link container
-        const parent = d3.select("#graph-container_22d23273-b5f1-402b-88a0-2de2e99364fc").node().parentNode;
+        const parent = d3.select("#graph-container_31c38a33-ccc8-45cd-867c-12a89cd7d636").node().parentNode;
         const linkContainer = d3.select(parent)
-            .insert("div", "#graph-container_22d23273-b5f1-402b-88a0-2de2e99364fc")
-            .attr("id", "png-link-container_22d23273-b5f1-402b-88a0-2de2e99364fc");
+            .insert("div", "#graph-container_31c38a33-ccc8-45cd-867c-12a89cd7d636")
+            .attr("id", "png-link-container_31c38a33-ccc8-45cd-867c-12a89cd7d636");
         
         linkContainer.append("a")
             .attr("href", pngUrl)
             .attr("target", "_blank")
-            .attr("id", "png-download-button_22d23273-b5f1-402b-88a0-2de2e99364fc")
+            .attr("id", "png-download-button_31c38a33-ccc8-45cd-867c-12a89cd7d636")
             .text("View PNG in New Tab");
 
         linkContainer.append("a")
             .attr("href", pngUrl)
-            .attr("download", `torchvista_graph_22d23273-b5f1-402b-88a0-2de2e99364fc.png`)
-            .attr("id", "png-save-button_22d23273-b5f1-402b-88a0-2de2e99364fc")
+            .attr("download", `torchvista_graph_31c38a33-ccc8-45cd-867c-12a89cd7d636.png`)
+            .attr("id", "png-save-button_31c38a33-ccc8-45cd-867c-12a89cd7d636")
             .text("Download PNG");
             
         URL.revokeObjectURL(svgUrl);
@@ -1770,26 +1822,26 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const svgUrl = URL.createObjectURL(svgBlob);
         
         // Create link container
-        const parent = d3.select("#graph-container_22d23273-b5f1-402b-88a0-2de2e99364fc").node().parentNode;
+        const parent = d3.select("#graph-container_31c38a33-ccc8-45cd-867c-12a89cd7d636").node().parentNode;
         const linkContainer = d3.select(parent)
-            .insert("div", "#graph-container_22d23273-b5f1-402b-88a0-2de2e99364fc")
-            .attr("id", "svg-link-container_22d23273-b5f1-402b-88a0-2de2e99364fc");
+            .insert("div", "#graph-container_31c38a33-ccc8-45cd-867c-12a89cd7d636")
+            .attr("id", "svg-link-container_31c38a33-ccc8-45cd-867c-12a89cd7d636");
         
         linkContainer.append("a")
             .attr("href", svgUrl)
             .attr("target", "_blank")
-            .attr("id", "svg-download-button_22d23273-b5f1-402b-88a0-2de2e99364fc")
+            .attr("id", "svg-download-button_31c38a33-ccc8-45cd-867c-12a89cd7d636")
             .text("View SVG in New Tab");
 
         linkContainer.append("a")
             .attr("href", svgUrl)
-            .attr("download", `torchvista_graph_22d23273-b5f1-402b-88a0-2de2e99364fc.svg`)
-            .attr("id", "svg-save-button_22d23273-b5f1-402b-88a0-2de2e99364fc")
+            .attr("download", `torchvista_graph_31c38a33-ccc8-45cd-867c-12a89cd7d636.svg`)
+            .attr("id", "svg-save-button_31c38a33-ccc8-45cd-867c-12a89cd7d636")
             .text("Download SVG");
     }
 
     function createGraph(graphvizData) {
-        const svg = d3.select("#graph_22d23273-b5f1-402b-88a0-2de2e99364fc")
+        const svg = d3.select("#graph_31c38a33-ccc8-45cd-867c-12a89cd7d636")
         .append("svg")
         .attr("width", "100%")
         .attr("height", "100%")
@@ -1809,7 +1861,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
         // Define arrowhead marker
         svg.append("defs").append("marker")
-        .attr("id", "arrowhead_22d23273-b5f1-402b-88a0-2de2e99364fc")
+        .attr("id", "arrowhead_31c38a33-ccc8-45cd-867c-12a89cd7d636")
         .attr("viewBox", "0 -5 10 10")
         .attr("refX", 8)
         .attr("refY", 0)
@@ -1821,11 +1873,11 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .attr("fill", "#333");
 
         // Draw clusters (container boxes) first so they're behind nodes
-        const clusters = inner.selectAll(".boundary-box_22d23273-b5f1-402b-88a0-2de2e99364fc")
+        const clusters = inner.selectAll(".boundary-box_31c38a33-ccc8-45cd-867c-12a89cd7d636")
         .data(Object.entries(graphvizData.clusters))
         .enter()
         .append("g")
-        .attr("class", "boundary-box_22d23273-b5f1-402b-88a0-2de2e99364fc");
+        .attr("class", "boundary-box_31c38a33-ccc8-45cd-867c-12a89cd7d636");
 
         const containersWithFailedNodes = identifyContainersWithFailedNodes(adj_list, ancestor_map);
 
@@ -1835,10 +1887,10 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             const hasFailedNodes = containersWithFailedNodes.has(clusterName);
             const isRepeat = isRepeatNode(clusterName);
             if (hasFailedNodes) {
-                group.classed("error_22d23273-b5f1-402b-88a0-2de2e99364fc", true);
+                group.classed("error_31c38a33-ccc8-45cd-867c-12a89cd7d636", true);
             }
             if (isRepeat) {
-                group.classed("repeat-container_22d23273-b5f1-402b-88a0-2de2e99364fc", true);
+                group.classed("repeat-container_31c38a33-ccc8-45cd-867c-12a89cd7d636", true);
             }
 
             // Parse bounding box coordinates
@@ -1880,13 +1932,13 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (!isRepeatNode(clusterName)) {
                 // Add collapse/expand button
                 const collapseButton = group.append("circle")
-                .attr("class", "collapse-button_22d23273-b5f1-402b-88a0-2de2e99364fc")
+                .attr("class", "collapse-button_31c38a33-ccc8-45cd-867c-12a89cd7d636")
                 .attr("cx", x1 + 10)
                 .attr("cy", y1 + 10)
                 .attr("r", 5.5);
 
                 group.append("text")
-                .attr("class", "collapse-icon_22d23273-b5f1-402b-88a0-2de2e99364fc")
+                .attr("class", "collapse-icon_31c38a33-ccc8-45cd-867c-12a89cd7d636")
                 .attr("x", x1 + 10)
                 .attr("y", y1 + 10)
                 .attr("text-anchor", "middle")
@@ -1903,7 +1955,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add click event handler for collapse buttons
-        clusters.selectAll(".collapse-button_22d23273-b5f1-402b-88a0-2de2e99364fc, .collapse-icon_22d23273-b5f1-402b-88a0-2de2e99364fc")
+        clusters.selectAll(".collapse-button_31c38a33-ccc8-45cd-867c-12a89cd7d636, .collapse-icon_31c38a33-ccc8-45cd-867c-12a89cd7d636")
         .on("click", function(event, [clusterName, clusterData]) {
             event.stopPropagation(); // Prevent event from bubbling to SVG
             removeTooltip();
@@ -1918,19 +1970,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
         
         // Create edges using the path points from Graphviz
-        const edges = inner.selectAll(".edge_22d23273-b5f1-402b-88a0-2de2e99364fc")
+        const edges = inner.selectAll(".edge_31c38a33-ccc8-45cd-867c-12a89cd7d636")
         .data(graphvizData.edges)
         .enter()
         .append("g")
-        .attr("class", "edge-group_22d23273-b5f1-402b-88a0-2de2e99364fc");
+        .attr("class", "edge-group_31c38a33-ccc8-45cd-867c-12a89cd7d636");
         
         // Add the actual path
         edges.append("path")
         .attr("class", function(edge) {
             if (edge.is_implied_edge) {
-                return "edge_22d23273-b5f1-402b-88a0-2de2e99364fc implied-edge_22d23273-b5f1-402b-88a0-2de2e99364fc";
+                return "edge_31c38a33-ccc8-45cd-867c-12a89cd7d636 implied-edge_31c38a33-ccc8-45cd-867c-12a89cd7d636";
             }
-            return "edge_22d23273-b5f1-402b-88a0-2de2e99364fc";
+            return "edge_31c38a33-ccc8-45cd-867c-12a89cd7d636";
         }).attr("d", function(edge) {
             if (edge.path && edge.path.length > 0) {
                     // Create a proper SVG path using Bézier curves
@@ -1956,7 +2008,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             }
             return "";
         })
-        .attr("marker-end", "url(#arrowhead_22d23273-b5f1-402b-88a0-2de2e99364fc)");
+        .attr("marker-end", "url(#arrowhead_31c38a33-ccc8-45cd-867c-12a89cd7d636)");
         
         // Add dimension labels on edges
         edges.each(function(edge) {
@@ -1985,7 +2037,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Create a background for the text
             const labelGroup = edgeGroup.append("g")
-            .attr("class", "edge-label_22d23273-b5f1-402b-88a0-2de2e99364fc")
+            .attr("class", "edge-label_31c38a33-ccc8-45cd-867c-12a89cd7d636")
             .attr("transform", `translate(${pointAtStart.x}, ${pointAtStart.y})`);
             
             const text = labelGroup.append("text")
@@ -2020,7 +2072,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         edges.each(function() {
             const edgeGroup = d3.select(this);
             const path = edgeGroup.select("path");
-            const labelGroup = edgeGroup.select(".edge-label_22d23273-b5f1-402b-88a0-2de2e99364fc");
+            const labelGroup = edgeGroup.select(".edge-label_31c38a33-ccc8-45cd-867c-12a89cd7d636");
             const labelText = labelGroup.select("text");
             const labelBg = labelGroup.select("rect");
             const originalStrokeWidth = path.attr("stroke-width") || 1;
@@ -2085,19 +2137,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
         // Create nodes using positions from Graphviz
-        const nodes = inner.selectAll(".node_22d23273-b5f1-402b-88a0-2de2e99364fc")
+        const nodes = inner.selectAll(".node_31c38a33-ccc8-45cd-867c-12a89cd7d636")
             .data(Object.entries(graphvizData.nodes))
             .enter()
             .append("g")
             // In the createGraph function, when you're creating nodes, modify the class assignment:
             .attr("class", function([nodeName, nodeData]) {
-                let classes = "node_22d23273-b5f1-402b-88a0-2de2e99364fc";
-                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_22d23273-b5f1-402b-88a0-2de2e99364fc";
-                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_22d23273-b5f1-402b-88a0-2de2e99364fc";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_22d23273-b5f1-402b-88a0-2de2e99364fc";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_22d23273-b5f1-402b-88a0-2de2e99364fc";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_22d23273-b5f1-402b-88a0-2de2e99364fc";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_22d23273-b5f1-402b-88a0-2de2e99364fc";
+                let classes = "node_31c38a33-ccc8-45cd-867c-12a89cd7d636";
+                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_31c38a33-ccc8-45cd-867c-12a89cd7d636";
+                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_31c38a33-ccc8-45cd-867c-12a89cd7d636";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_31c38a33-ccc8-45cd-867c-12a89cd7d636";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_31c38a33-ccc8-45cd-867c-12a89cd7d636";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_31c38a33-ccc8-45cd-867c-12a89cd7d636";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_31c38a33-ccc8-45cd-867c-12a89cd7d636";
                 return classes;
             })
             .attr("transform", function([nodeName, nodeData]) {
@@ -2124,11 +2176,11 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 .attr("rx", nodeData.width / 2)
                 .attr("ry", nodeData.height / 2)
                 .attr("class", function() { 
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_22d23273-b5f1-402b-88a0-2de2e99364fc";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_22d23273-b5f1-402b-88a0-2de2e99364fc";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_22d23273-b5f1-402b-88a0-2de2e99364fc";
-                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_22d23273-b5f1-402b-88a0-2de2e99364fc";
-                    return "operation_22d23273-b5f1-402b-88a0-2de2e99364fc";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_31c38a33-ccc8-45cd-867c-12a89cd7d636";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_31c38a33-ccc8-45cd-867c-12a89cd7d636";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_31c38a33-ccc8-45cd-867c-12a89cd7d636";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_31c38a33-ccc8-45cd-867c-12a89cd7d636";
+                    return "operation_31c38a33-ccc8-45cd-867c-12a89cd7d636";
                 });
             } else {
                 // Create rectangle
@@ -2138,15 +2190,15 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 .attr("x", -nodeData.width / 2)
                 .attr("y", -nodeData.height / 2)
                 .attr("class", function() { 
-                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_22d23273-b5f1-402b-88a0-2de2e99364fc";
-                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_22d23273-b5f1-402b-88a0-2de2e99364fc" : "operation_22d23273-b5f1-402b-88a0-2de2e99364fc";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_31c38a33-ccc8-45cd-867c-12a89cd7d636";
+                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_31c38a33-ccc8-45cd-867c-12a89cd7d636" : "operation_31c38a33-ccc8-45cd-867c-12a89cd7d636";
                 });
             }
         });
         
         // Add labels for nodes
         nodes.append("text")
-        .attr("class", "node-label_22d23273-b5f1-402b-88a0-2de2e99364fc")
+        .attr("class", "node-label_31c38a33-ccc8-45cd-867c-12a89cd7d636")
         .text(function([nodeName]) { return graph_node_display_names[nodeName] || graph_node_name_to_without_suffix[nodeName] || nodeName; })
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "central");
@@ -2155,7 +2207,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         nodes.filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")));
         }).append("text")
-        .attr("class", "type-indicator_22d23273-b5f1-402b-88a0-2de2e99364fc")
+        .attr("class", "type-indicator_31c38a33-ccc8-45cd-867c-12a89cd7d636")
         .attr("text-anchor", "start")
         .attr("dominant-baseline", "text-bottom")
         .attr("transform", function([nodeName, nodeData]) {
@@ -2173,7 +2225,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add info buttons to nodes (except input, output, constant)
-        inner.selectAll(".node_22d23273-b5f1-402b-88a0-2de2e99364fc")
+        inner.selectAll(".node_31c38a33-ccc8-45cd-867c-12a89cd7d636")
         .filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")))
         })
@@ -2184,14 +2236,14 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
         // Add info button circle
         const infoButton = nodeGroup.append("circle")
-        .attr("class", "info-button_22d23273-b5f1-402b-88a0-2de2e99364fc")
+        .attr("class", "info-button_31c38a33-ccc8-45cd-867c-12a89cd7d636")
         .attr("cx", width/2 - 7)
         .attr("cy", -height/2 + 7)
         .attr("r", 5.5);
 
         // Add info button icon
         nodeGroup.append("text")
-        .attr("class", "info-icon_22d23273-b5f1-402b-88a0-2de2e99364fc")
+        .attr("class", "info-icon_31c38a33-ccc8-45cd-867c-12a89cd7d636")
         .attr("x", width/2 - 7)
         .attr("y", -height/2 + 8)
         .attr("text-anchor", "middle")
@@ -2207,16 +2259,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .on("mouseleave", removeTooltip);
 
         // Add click handler to info button
-            nodeGroup.selectAll(".info-button_22d23273-b5f1-402b-88a0-2de2e99364fc, .info-icon_22d23273-b5f1-402b-88a0-2de2e99364fc")
+            nodeGroup.selectAll(".info-button_31c38a33-ccc8-45cd-867c-12a89cd7d636, .info-icon_31c38a33-ccc8-45cd-867c-12a89cd7d636")
             .on("click", function(event) {
                 event.stopPropagation();
-                const infoButton = nodeGroup.select(".info-button_22d23273-b5f1-402b-88a0-2de2e99364fc").node();
+                const infoButton = nodeGroup.select(".info-button_31c38a33-ccc8-45cd-867c-12a89cd7d636").node();
                 showPopupFromInfoButton.call(nodeGroup.node(), event, [nodeName], infoButton);
             });
         });
 
         // Add expand buttons to all module nodes (including non-expandable ones)
-        inner.selectAll(".node_22d23273-b5f1-402b-88a0-2de2e99364fc")
+        inner.selectAll(".node_31c38a33-ccc8-45cd-867c-12a89cd7d636")
         .filter(function([nodeName]) {
             return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || collapsedContainers.has(nodeName)) && !isRepeatNode(nodeName);
         })
@@ -2238,7 +2290,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Add expand button circle
             const expandButton = nodeGroup.append("circle")
-            .attr("class", isExpandable ? "collapse-button_22d23273-b5f1-402b-88a0-2de2e99364fc" : "collapse-button-disabled_22d23273-b5f1-402b-88a0-2de2e99364fc")
+            .attr("class", isExpandable ? "collapse-button_31c38a33-ccc8-45cd-867c-12a89cd7d636" : "collapse-button-disabled_31c38a33-ccc8-45cd-867c-12a89cd7d636")
             .attr("cx", -width / 2 + 7)
             .attr("cy", -height / 2 + 7)
             .attr("r", 5.5)
@@ -2247,7 +2299,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Add expand button icon
             nodeGroup.append("text")
-            .attr("class", isExpandable ? "collapse-icon_22d23273-b5f1-402b-88a0-2de2e99364fc" : "collapse-icon-disabled_22d23273-b5f1-402b-88a0-2de2e99364fc")
+            .attr("class", isExpandable ? "collapse-icon_31c38a33-ccc8-45cd-867c-12a89cd7d636" : "collapse-icon-disabled_31c38a33-ccc8-45cd-867c-12a89cd7d636")
             .attr("x", -width / 2 + 7)
             .attr("y", -height / 2 + 7)
             .attr("text-anchor", "middle")
@@ -2267,7 +2319,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Only add click handler for expandable modules
             if (isExpandable) {
-                nodeGroup.selectAll(".collapse-button_22d23273-b5f1-402b-88a0-2de2e99364fc, .collapse-icon_22d23273-b5f1-402b-88a0-2de2e99364fc")
+                nodeGroup.selectAll(".collapse-button_31c38a33-ccc8-45cd-867c-12a89cd7d636, .collapse-icon_31c38a33-ccc8-45cd-867c-12a89cd7d636")
                 .on("click", function(event) {
                     event.stopPropagation();
                     removeTooltip();
@@ -2368,16 +2420,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                     .scale(currentTransform.k));
             }
 
-            clickedNodeElement.classed("highlight-node_22d23273-b5f1-402b-88a0-2de2e99364fc", true);
+            clickedNodeElement.classed("highlight-node_31c38a33-ccc8-45cd-867c-12a89cd7d636", true);
             
             setTimeout(() => {
-                clickedNodeElement.classed("highlight-node_22d23273-b5f1-402b-88a0-2de2e99364fc", false);
+                clickedNodeElement.classed("highlight-node_31c38a33-ccc8-45cd-867c-12a89cd7d636", false);
             }, 2000);
 
-            const popup = d3.select("#popup_22d23273-b5f1-402b-88a0-2de2e99364fc");
-            const moduleTemplate = d3.select("#module-template_22d23273-b5f1-402b-88a0-2de2e99364fc");
-            const tensorOpTemplate = d3.select("#tensor-op-template_22d23273-b5f1-402b-88a0-2de2e99364fc");
-            const noInfoMessage = d3.select("#no-info_22d23273-b5f1-402b-88a0-2de2e99364fc");
+            const popup = d3.select("#popup_31c38a33-ccc8-45cd-867c-12a89cd7d636");
+            const moduleTemplate = d3.select("#module-template_31c38a33-ccc8-45cd-867c-12a89cd7d636");
+            const tensorOpTemplate = d3.select("#tensor-op-template_31c38a33-ccc8-45cd-867c-12a89cd7d636");
+            const noInfoMessage = d3.select("#no-info_31c38a33-ccc8-45cd-867c-12a89cd7d636");
             
             const nodeData = adj_list[nodeName];
             
@@ -2385,7 +2437,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (node_to_module_path[nodeName] && graph_node_name_to_without_suffix[nodeName]) {
                 popupTitle = node_to_module_path[nodeName] + "." + graph_node_name_to_without_suffix[nodeName];
             }
-            d3.select("#popup-title_22d23273-b5f1-402b-88a0-2de2e99364fc").text(popupTitle);
+            d3.select("#popup-title_31c38a33-ccc8-45cd-867c-12a89cd7d636").text(popupTitle);
 
             moduleTemplate.style("display", "none");
             tensorOpTemplate.style("display", "none");
@@ -2393,31 +2445,31 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             if (module_info[nodeName]) {
                 const info = module_info[nodeName];
-                moduleTemplate.style("display", "block").classed("content-shown_22d23273-b5f1-402b-88a0-2de2e99364fc", true);
+                moduleTemplate.style("display", "block").classed("content-shown_31c38a33-ccc8-45cd-867c-12a89cd7d636", true);
                 
-                d3.select("#module-extra-repr_22d23273-b5f1-402b-88a0-2de2e99364fc").text(info.extra_repr || 'N/A');
+                d3.select("#module-extra-repr_31c38a33-ccc8-45cd-867c-12a89cd7d636").text(info.extra_repr || 'N/A');
 
                 const forward_info = func_info[nodeName];
-                const attributesContainer = d3.select("#module-attributes_22d23273-b5f1-402b-88a0-2de2e99364fc").node();
+                const attributesContainer = d3.select("#module-attributes_31c38a33-ccc8-45cd-867c-12a89cd7d636").node();
                 attributesContainer.innerHTML = '';
                 createJsonViewer(attributesContainer, info.attributes);
 
-                const parametersContainer = d3.select("#module-parameters_22d23273-b5f1-402b-88a0-2de2e99364fc").node();
+                const parametersContainer = d3.select("#module-parameters_31c38a33-ccc8-45cd-867c-12a89cd7d636").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, forward_info);
             } else if (!(adj_list[nodeName] && adj_list[nodeName].node_type === "Input") && func_info[nodeName]) {
                 const info = func_info[nodeName];
-                tensorOpTemplate.style("display", "block").classed("content-shown_22d23273-b5f1-402b-88a0-2de2e99364fc", true);
-                const parametersContainer = d3.select("#tensor-op-parameters_22d23273-b5f1-402b-88a0-2de2e99364fc").node();
+                tensorOpTemplate.style("display", "block").classed("content-shown_31c38a33-ccc8-45cd-867c-12a89cd7d636", true);
+                const parametersContainer = d3.select("#tensor-op-parameters_31c38a33-ccc8-45cd-867c-12a89cd7d636").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, info);
             } else {
-                noInfoMessage.style("display", "block").classed("content-shown_22d23273-b5f1-402b-88a0-2de2e99364fc", true);
+                noInfoMessage.style("display", "block").classed("content-shown_31c38a33-ccc8-45cd-867c-12a89cd7d636", true);
             }
             
             // Position popup based on info button or node center
             let boundingBox, x, y;
-            const containerRect = d3.select("#graph-container_22d23273-b5f1-402b-88a0-2de2e99364fc").node().getBoundingClientRect();
+            const containerRect = d3.select("#graph-container_31c38a33-ccc8-45cd-867c-12a89cd7d636").node().getBoundingClientRect();
             
             if (infoButtonElement) {
                 boundingBox = infoButtonElement.getBoundingClientRect();
@@ -2433,19 +2485,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             popup.style("left", `${x}px`)
             .style("top", `${y}px`)
             .style("display", "flex");
-            d3.select("#popup-content_22d23273-b5f1-402b-88a0-2de2e99364fc").node().scrollTop = 0;
+            d3.select("#popup-content_31c38a33-ccc8-45cd-867c-12a89cd7d636").node().scrollTop = 0;
         }
 
         function closePopup() {
-            d3.select("#popup_22d23273-b5f1-402b-88a0-2de2e99364fc").style("display", "none");
+            d3.select("#popup_31c38a33-ccc8-45cd-867c-12a89cd7d636").style("display", "none");
         }
         
-        d3.select(".popup-close_22d23273-b5f1-402b-88a0-2de2e99364fc").on("click", closePopup);
+        d3.select(".popup-close_31c38a33-ccc8-45cd-867c-12a89cd7d636").on("click", closePopup);
         svg.on("click", closePopup);
 
-        const popup = document.getElementById(`popup_22d23273-b5f1-402b-88a0-2de2e99364fc`);
+        const popup = document.getElementById(`popup_31c38a33-ccc8-45cd-867c-12a89cd7d636`);
         const resizeObserver = new ResizeObserver(() => {
-            const editorContainers = popup.querySelectorAll('.json-viewer_22d23273-b5f1-402b-88a0-2de2e99364fc');
+            const editorContainers = popup.querySelectorAll('.json-viewer_31c38a33-ccc8-45cd-867c-12a89cd7d636');
             for (let container of editorContainers) {
                 if (container.jsonEditor) {
                     container.jsonEditor.resize();
@@ -2524,30 +2576,30 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 // Apply highlight effect to the target container
                 if (Object.keys(graphvizData.nodes).includes(lastModifiedContainer)) {
                     // Highlight the node (collapsed container)
-                    const targetElement = inner.selectAll(".node_22d23273-b5f1-402b-88a0-2de2e99364fc")
+                    const targetElement = inner.selectAll(".node_31c38a33-ccc8-45cd-867c-12a89cd7d636")
                         .filter(([nodeName]) => nodeName === lastModifiedContainer);
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-node_22d23273-b5f1-402b-88a0-2de2e99364fc", true);
+                        targetElement.classed("highlight-node_31c38a33-ccc8-45cd-867c-12a89cd7d636", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-node_22d23273-b5f1-402b-88a0-2de2e99364fc", false);
+                            targetElement.classed("highlight-node_31c38a33-ccc8-45cd-867c-12a89cd7d636", false);
                         }, 2000); // Match the animation duration
                     }
                 } else if (Object.keys(graphvizData.clusters).includes(lastModifiedContainer)) {
                     // Highlight the cluster (expanded container)
-                    const targetElement = inner.selectAll(".boundary-box_22d23273-b5f1-402b-88a0-2de2e99364fc")
+                    const targetElement = inner.selectAll(".boundary-box_31c38a33-ccc8-45cd-867c-12a89cd7d636")
                         .filter(function([clusterName]) {
                             return clusterName === lastModifiedContainer;
                         });
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-cluster_22d23273-b5f1-402b-88a0-2de2e99364fc", true);
+                        targetElement.classed("highlight-cluster_31c38a33-ccc8-45cd-867c-12a89cd7d636", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-cluster_22d23273-b5f1-402b-88a0-2de2e99364fc", false);
+                            targetElement.classed("highlight-cluster_31c38a33-ccc8-45cd-867c-12a89cd7d636", false);
                         }, 2000); // Match the animation duration
                     }
                 }

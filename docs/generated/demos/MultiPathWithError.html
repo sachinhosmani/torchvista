@@ -2,10 +2,16 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
         <style>
+            :root {
+                --md-primary-fg-color: #4051b5;
+                --md-accent-fg-color: #526cfe;
+            }
+
             html, body {
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
                 height: 100%;
@@ -102,28 +108,53 @@
                 width: 100%;
                 height: 100%;
             }
-            .top-bar {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+            /* Header - matching website style */
+            .md-header {
+                background-color: var(--md-primary-fg-color);
                 color: white;
-                padding: 12px 20px;
+                box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+            }
+
+            .md-header__inner {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                min-height: 25px;
+                padding: 0.6rem 1rem;
+                max-width: 1200px;
+                margin: 0 auto;
             }
 
-            .repo-title {
-                font-size: 24px;
-                font-weight: bold;
-                margin: 0;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            .md-header__title {
+                font-size: 1.25rem;
+                font-weight: 600;
             }
 
-            /* GitHub button iframe styling */
-            .github-star-button {
-                border-radius: 6px;
-                overflow: hidden;
+            .md-header__title a {
+                color: white;
+                text-decoration: none;
+            }
+
+            .md-header__nav {
+                display: flex;
+                gap: 1.5rem;
+                align-items: center;
+            }
+
+            .md-header__nav a {
+                color: white;
+                text-decoration: none;
+                font-weight: 500;
+                opacity: 0.9;
+                transition: opacity 0.2s;
+            }
+
+            .md-header__nav a:hover {
+                opacity: 1;
+            }
+
+            .md-header__nav iframe {
+                vertical-align: middle;
             }
 
             .json-viewer {
@@ -147,10 +178,22 @@
                 background: #45a049;
             }
 
+            @media (max-width: 768px) {
+                .md-header__inner {
+                    flex-direction: column;
+                    gap: 0.5rem;
+                }
+                .md-header__nav {
+                    gap: 1rem;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                }
+            }
+
         </style>
     </head>
     <body>
-    
+
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 document.querySelectorAll('pre code').forEach((block) => {
@@ -172,14 +215,23 @@
             }
 
         </script>
-   
+
         <div class="container">
-            <div class="top-bar">
-                <h1 class="repo-title">TorchVista</h1>
-                <!-- GitHub's official star button -->
-                <iframe src="https://ghbtns.com/github-btn.html?user=sachinhosmani&repo=torchvista&type=star&count=true&size=large" 
-                        frameborder="0" scrolling="0" width="170" height="30" title="GitHub Star Button"></iframe>
-            </div>
+            <header class="md-header">
+                <div class="md-header__inner">
+                    <div class="md-header__title">
+                        <a href="../../index.html">TorchVista</a>
+                    </div>
+                    <nav class="md-header__nav">
+                        <a href="../../index.html">Home</a>
+                        <a href="../../tutorials.html">Tutorials</a>
+                        <a href="../../demos.html">Demos</a>
+                        <a href="https://github.com/sachinhosmani/torchvista" target="_blank">GitHub</a>
+                        <iframe src="https://ghbtns.com/github-btn.html?user=sachinhosmani&repo=torchvista&type=star&count=true&size=large"
+                                frameborder="0" scrolling="0" width="170" height="30" title="GitHub Star Button"></iframe>
+                    </nav>
+                </div>
+            </header>
             <div class="left-column">
                 <div class="code-box" id="codeBox">
                     <div class="code-box-header">
@@ -284,120 +336,120 @@ trace_model(model, example_input)
     
             <div class="graph-view" id="graphContainer" style="height: 100%">
                 <div class="graph-box-header">Visualized Interactive Graph</div>
-                <div id="graph-container_84f4fc02-30b6-490f-92d8-348a6f37f243">
-    <div id="graph_84f4fc02-30b6-490f-92d8-348a6f37f243"></div>
-    <div class="logo_84f4fc02-30b6-490f-92d8-348a6f37f243">
+                <div id="graph-container_e632c386-1196-4e11-812c-d8c464583930">
+    <div id="graph_e632c386-1196-4e11-812c-d8c464583930"></div>
+    <div class="logo_e632c386-1196-4e11-812c-d8c464583930">
         <a href="https://github.com/sachinhosmani/torchvista" target="_blank" rel="noopener noreferrer">
         torchvista
         </a>
     </div>
-    <div id="popup_84f4fc02-30b6-490f-92d8-348a6f37f243" class="popup_84f4fc02-30b6-490f-92d8-348a6f37f243" style="display: none;">
-        <div class="popup-header_84f4fc02-30b6-490f-92d8-348a6f37f243">
-            <h3 id="popup-title_84f4fc02-30b6-490f-92d8-348a6f37f243"></h3>
-            <span class="popup-close_84f4fc02-30b6-490f-92d8-348a6f37f243">✕</span>
+    <div id="popup_e632c386-1196-4e11-812c-d8c464583930" class="popup_e632c386-1196-4e11-812c-d8c464583930" style="display: none;">
+        <div class="popup-header_e632c386-1196-4e11-812c-d8c464583930">
+            <h3 id="popup-title_e632c386-1196-4e11-812c-d8c464583930"></h3>
+            <span class="popup-close_e632c386-1196-4e11-812c-d8c464583930">✕</span>
         </div>
-        <div id="popup-content_84f4fc02-30b6-490f-92d8-348a6f37f243" class="popup-content_84f4fc02-30b6-490f-92d8-348a6f37f243">
-            <div id="common-info_84f4fc02-30b6-490f-92d8-348a6f37f243">
+        <div id="popup-content_e632c386-1196-4e11-812c-d8c464583930" class="popup-content_e632c386-1196-4e11-812c-d8c464583930">
+            <div id="common-info_e632c386-1196-4e11-812c-d8c464583930">
             </div>
-            <div id="module-template_84f4fc02-30b6-490f-92d8-348a6f37f243" style="display:none;">
-                <details open id="module-parameters-details_84f4fc02-30b6-490f-92d8-348a6f37f243">
+            <div id="module-template_e632c386-1196-4e11-812c-d8c464583930" style="display:none;">
+                <details open id="module-parameters-details_e632c386-1196-4e11-812c-d8c464583930">
                     <summary style="color: black"><strong>forward() Parameters</strong></summary>
-                    <div id="module-parameters_84f4fc02-30b6-490f-92d8-348a6f37f243" class="json-viewer_84f4fc02-30b6-490f-92d8-348a6f37f243"></div>
+                    <div id="module-parameters_e632c386-1196-4e11-812c-d8c464583930" class="json-viewer_e632c386-1196-4e11-812c-d8c464583930"></div>
                 </details>
-                <details open id="module-attributes-details_84f4fc02-30b6-490f-92d8-348a6f37f243">
+                <details open id="module-attributes-details_e632c386-1196-4e11-812c-d8c464583930">
                     <summary style="color: black"><strong>Attributes</strong></summary>
-                    <div id="module-attributes_84f4fc02-30b6-490f-92d8-348a6f37f243" class="json-viewer_84f4fc02-30b6-490f-92d8-348a6f37f243"></div>
+                    <div id="module-attributes_e632c386-1196-4e11-812c-d8c464583930" class="json-viewer_e632c386-1196-4e11-812c-d8c464583930"></div>
                 </details>
             </div>
-            <div id="tensor-op-template_84f4fc02-30b6-490f-92d8-348a6f37f243" style="display:none;">
+            <div id="tensor-op-template_e632c386-1196-4e11-812c-d8c464583930" style="display:none;">
                 <summary><strong>Parameters</strong></summary>
-                <div id="tensor-op-parameters_84f4fc02-30b6-490f-92d8-348a6f37f243" class="json-viewer_84f4fc02-30b6-490f-92d8-348a6f37f243"></div>
+                <div id="tensor-op-parameters_e632c386-1196-4e11-812c-d8c464583930" class="json-viewer_e632c386-1196-4e11-812c-d8c464583930"></div>
             </div>
-            <p id="no-info_84f4fc02-30b6-490f-92d8-348a6f37f243" style="display:none;">No further information available for this node.</p>
+            <p id="no-info_e632c386-1196-4e11-812c-d8c464583930" style="display:none;">No further information available for this node.</p>
         </div>
     </div>
 
     <style>
-        .node_84f4fc02-30b6-490f-92d8-348a6f37f243 rect {
+        .node_e632c386-1196-4e11-812c-d8c464583930 rect {
             stroke: #333;
             fill: #fff;
         }
-        text.node-label_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        text.node-label_e632c386-1196-4e11-812c-d8c464583930 {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.type-indicator_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        text.type-indicator_e632c386-1196-4e11-812c-d8c464583930 {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.collapse-icon_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        text.collapse-icon_e632c386-1196-4e11-812c-d8c464583930 {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 14px;
             cursor: default;
             user-select: none;
         }
-        .edge_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        .edge_e632c386-1196-4e11-812c-d8c464583930 {
             stroke: #797979;
             fill: none;
         }
-        .node_84f4fc02-30b6-490f-92d8-348a6f37f243 rect.input_84f4fc02-30b6-490f-92d8-348a6f37f243 { fill: #FF9AFF; }
-        .node_84f4fc02-30b6-490f-92d8-348a6f37f243 rect.constant_84f4fc02-30b6-490f-92d8-348a6f37f243 { fill: rgb(235 235 235); }
+        .node_e632c386-1196-4e11-812c-d8c464583930 rect.input_e632c386-1196-4e11-812c-d8c464583930 { fill: #FF9AFF; }
+        .node_e632c386-1196-4e11-812c-d8c464583930 rect.constant_e632c386-1196-4e11-812c-d8c464583930 { fill: rgb(235 235 235); }
 
-        .node_84f4fc02-30b6-490f-92d8-348a6f37f243 rect.output_84f4fc02-30b6-490f-92d8-348a6f37f243 { fill: #74e071; }
-        .node_84f4fc02-30b6-490f-92d8-348a6f37f243 rect.failed_84f4fc02-30b6-490f-92d8-348a6f37f243 { fill: rgb(224 15 15); }
-        .node_84f4fc02-30b6-490f-92d8-348a6f37f243 rect.module_84f4fc02-30b6-490f-92d8-348a6f37f243 { fill: #8BDEDB; }
-        .node_84f4fc02-30b6-490f-92d8-348a6f37f243 rect.operation_84f4fc02-30b6-490f-92d8-348a6f37f243 { fill: #FEBC5A; }
+        .node_e632c386-1196-4e11-812c-d8c464583930 rect.output_e632c386-1196-4e11-812c-d8c464583930 { fill: #74e071; }
+        .node_e632c386-1196-4e11-812c-d8c464583930 rect.failed_e632c386-1196-4e11-812c-d8c464583930 { fill: rgb(224 15 15); }
+        .node_e632c386-1196-4e11-812c-d8c464583930 rect.module_e632c386-1196-4e11-812c-d8c464583930 { fill: #8BDEDB; }
+        .node_e632c386-1196-4e11-812c-d8c464583930 rect.operation_e632c386-1196-4e11-812c-d8c464583930 { fill: #FEBC5A; }
 
-        .node_84f4fc02-30b6-490f-92d8-348a6f37f243 ellipse.input_84f4fc02-30b6-490f-92d8-348a6f37f243 { fill: #FF9AFF; }
-        .node_84f4fc02-30b6-490f-92d8-348a6f37f243 ellipse.constant_84f4fc02-30b6-490f-92d8-348a6f37f243 { fill: rgb(235 235 235); }
-        .node_84f4fc02-30b6-490f-92d8-348a6f37f243 ellipse.output_84f4fc02-30b6-490f-92d8-348a6f37f243 { fill: #74e071; }
-        .node_84f4fc02-30b6-490f-92d8-348a6f37f243 ellipse.failed_84f4fc02-30b6-490f-92d8-348a6f37f243 { fill: rgb(224 15 15); }
+        .node_e632c386-1196-4e11-812c-d8c464583930 ellipse.input_e632c386-1196-4e11-812c-d8c464583930 { fill: #FF9AFF; }
+        .node_e632c386-1196-4e11-812c-d8c464583930 ellipse.constant_e632c386-1196-4e11-812c-d8c464583930 { fill: rgb(235 235 235); }
+        .node_e632c386-1196-4e11-812c-d8c464583930 ellipse.output_e632c386-1196-4e11-812c-d8c464583930 { fill: #74e071; }
+        .node_e632c386-1196-4e11-812c-d8c464583930 ellipse.failed_e632c386-1196-4e11-812c-d8c464583930 { fill: rgb(224 15 15); }
 
-        .node_84f4fc02-30b6-490f-92d8-348a6f37f243 ellipse {
+        .node_e632c386-1196-4e11-812c-d8c464583930 ellipse {
             stroke: #333;
             stroke-width: 1px;
         }
-        .edgeLabelGroup_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        .edgeLabelGroup_e632c386-1196-4e11-812c-d8c464583930 {
             pointer-events: none;
         }
-        #arrowhead_84f4fc02-30b6-490f-92d8-348a6f37f243 path {
+        #arrowhead_e632c386-1196-4e11-812c-d8c464583930 path {
             fill: #333333;;
         }
-        .node_84f4fc02-30b6-490f-92d8-348a6f37f243 rect,
-        .node_84f4fc02-30b6-490f-92d8-348a6f37f243 ellipse {
+        .node_e632c386-1196-4e11-812c-d8c464583930 rect,
+        .node_e632c386-1196-4e11-812c-d8c464583930 ellipse {
             transition: fill 0.3s ease;
         }
 
-        .node_84f4fc02-30b6-490f-92d8-348a6f37f243 .type-indicator_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        .node_e632c386-1196-4e11-812c-d8c464583930 .type-indicator_e632c386-1196-4e11-812c-d8c464583930 {
             font-size: 5px;
             fill: rgba(0, 0, 0, 1.0);  /* Dark grey, semi-transparent */
             pointer-events: none;
         }
 
-        .node_84f4fc02-30b6-490f-92d8-348a6f37f243.error_84f4fc02-30b6-490f-92d8-348a6f37f243 rect {
+        .node_e632c386-1196-4e11-812c-d8c464583930.error_e632c386-1196-4e11-812c-d8c464583930 rect {
             stroke: black;
             stroke-width: 1px;
         }
 
-        .boundary-box_84f4fc02-30b6-490f-92d8-348a6f37f243.error_84f4fc02-30b6-490f-92d8-348a6f37f243 > rect:first-of-type {
+        .boundary-box_e632c386-1196-4e11-812c-d8c464583930.error_e632c386-1196-4e11-812c-d8c464583930 > rect:first-of-type {
             fill: red;
             fill-opacity: 0.2;
         }
 
-        #graph-container_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        #graph-container_e632c386-1196-4e11-812c-d8c464583930 {
             position: relative;
             height: 95%;
             width: ${width};
             overflow: hidden;
         }
 
-        #graph_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        #graph_e632c386-1196-4e11-812c-d8c464583930 {
             height: 100%;
         }
         
-        .popup_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        .popup_e632c386-1196-4e11-812c-d8c464583930 {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             position: absolute;
             background: white;
@@ -412,7 +464,7 @@ trace_model(model, example_input)
             flex-direction: column;
         }
 
-        .popup-header_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        .popup-header_e632c386-1196-4e11-812c-d8c464583930 {
             position: sticky;
             top: 0;
             background: white;
@@ -424,12 +476,12 @@ trace_model(model, example_input)
             z-index: 1;
         }
 
-        .popup_84f4fc02-30b6-490f-92d8-348a6f37f243 h3 {
+        .popup_e632c386-1196-4e11-812c-d8c464583930 h3 {
             margin: 0;
             font-size: 16px;
         }
 
-        .popup-content_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        .popup-content_e632c386-1196-4e11-812c-d8c464583930 {
             padding: 10px;
             padding-bottom: 10px;
             overflow-y: auto;
@@ -437,87 +489,87 @@ trace_model(model, example_input)
             flex-grow: 1;
         }
 
-        .popup_84f4fc02-30b6-490f-92d8-348a6f37f243 pre {
+        .popup_e632c386-1196-4e11-812c-d8c464583930 pre {
             white-space: pre;
             overflow-x: auto;
         }
 
-        .popup-close_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        .popup-close_e632c386-1196-4e11-812c-d8c464583930 {
             cursor: pointer;
             font-size: 24px;
             font-weight: bold;
             line-height: 1;
         }
 
-        #popup-title_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        #popup-title_e632c386-1196-4e11-812c-d8c464583930 {
             font-size: 16px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             color: black;
         }
 
-        #graph-container_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        #graph-container_e632c386-1196-4e11-812c-d8c464583930 {
             position: relative;
         }
 
-        #graph-container_84f4fc02-30b6-490f-92d8-348a6f37f243 pre {
+        #graph-container_e632c386-1196-4e11-812c-d8c464583930 pre {
             margin-bottom: 0;
         }
 
-        .boundary-box_84f4fc02-30b6-490f-92d8-348a6f37f243 rect {
+        .boundary-box_e632c386-1196-4e11-812c-d8c464583930 rect {
             pointer-events: none;
         }
-        .boundary-box_84f4fc02-30b6-490f-92d8-348a6f37f243 text {
+        .boundary-box_e632c386-1196-4e11-812c-d8c464583930 text {
             pointer-events: none;
             user-select: none;
         }
 
-        .boundary-box_84f4fc02-30b6-490f-92d8-348a6f37f243 rect {
+        .boundary-box_e632c386-1196-4e11-812c-d8c464583930 rect {
             pointer-events: none;
         }
-        .boundary-box_84f4fc02-30b6-490f-92d8-348a6f37f243 text {
+        .boundary-box_e632c386-1196-4e11-812c-d8c464583930 text {
             pointer-events: none;
             user-select: none;
             font-weight: bold;
         }
-        .edge-label_84f4fc02-30b6-490f-92d8-348a6f37f243 text {
+        .edge-label_e632c386-1196-4e11-812c-d8c464583930 text {
             pointer-events: none;
             user-select: none;
             font-size: 4px;
             font-family: "'Roboto', sans-serif";
         }
                     
-        .collapse-button_84f4fc02-30b6-490f-92d8-348a6f37f243, .info-button_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        .collapse-button_e632c386-1196-4e11-812c-d8c464583930, .info-button_e632c386-1196-4e11-812c-d8c464583930 {
             fill: #fff;
             stroke: #333;
             stroke-width: 1px;
             cursor: pointer;
         }
 
-        .collapse-button_84f4fc02-30b6-490f-92d8-348a6f37f243:hover, .info-button_84f4fc02-30b6-490f-92d8-348a6f37f243:hover {
+        .collapse-button_e632c386-1196-4e11-812c-d8c464583930:hover, .info-button_e632c386-1196-4e11-812c-d8c464583930:hover {
             fill: #eee;
             cursor: pointer;
         }
 
-        .collapse-icon_84f4fc02-30b6-490f-92d8-348a6f37f243, .info-icon_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        .collapse-icon_e632c386-1196-4e11-812c-d8c464583930, .info-icon_e632c386-1196-4e11-812c-d8c464583930 {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             fill: rgb(51, 51, 51);
         }
 
-        .collapse-button-disabled_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        .collapse-button-disabled_e632c386-1196-4e11-812c-d8c464583930 {
             fill: #eee5;
             stroke: #3333334f;
             stroke-width: 1px;
             cursor: not-allowed;
         }
 
-        .collapse-button-disabled_84f4fc02-30b6-490f-92d8-348a6f37f243:hover {
+        .collapse-button-disabled_e632c386-1196-4e11-812c-d8c464583930:hover {
             fill: #eee6;
             cursor: not-allowed;
         }
 
-        .collapse-icon-disabled_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        .collapse-icon-disabled_e632c386-1196-4e11-812c-d8c464583930 {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -526,11 +578,11 @@ trace_model(model, example_input)
         }
 
         /* Edge hover styles */
-        .edge-group_84f4fc02-30b6-490f-92d8-348a6f37f243 path {
+        .edge-group_e632c386-1196-4e11-812c-d8c464583930 path {
             pointer-events: stroke;
         }
 
-        .edge-label_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        .edge-label_e632c386-1196-4e11-812c-d8c464583930 {
             pointer-events: all;
         }
 
@@ -570,50 +622,50 @@ trace_model(model, example_input)
             }
         }
 
-        .highlight-cluster_84f4fc02-30b6-490f-92d8-348a6f37f243 > rect:first-of-type {
+        .highlight-cluster_e632c386-1196-4e11-812c-d8c464583930 > rect:first-of-type {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        .highlight-node_84f4fc02-30b6-490f-92d8-348a6f37f243 rect {
+        .highlight-node_e632c386-1196-4e11-812c-d8c464583930 rect {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        text.node-label_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        text.node-label_e632c386-1196-4e11-812c-d8c464583930 {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 0.8rem;  /* Base size using rem units for accessibility */
             cursor: default;
             user-select: none;
         }
 
-        .node_84f4fc02-30b6-490f-92d8-348a6f37f243.constant_84f4fc02-30b6-490f-92d8-348a6f37f243 .node-label_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        .node_e632c386-1196-4e11-812c-d8c464583930.constant_e632c386-1196-4e11-812c-d8c464583930 .node-label_e632c386-1196-4e11-812c-d8c464583930 {
             font-size: 0.7rem;
         }
 
-        .popup-content_84f4fc02-30b6-490f-92d8-348a6f37f243 summary {
+        .popup-content_e632c386-1196-4e11-812c-d8c464583930 summary {
             cursor: pointer;
             margin: 5px;
             user-select: none;
         }
 
-        .node_84f4fc02-30b6-490f-92d8-348a6f37f243.input_84f4fc02-30b6-490f-92d8-348a6f37f243 rect,
-        .node_84f4fc02-30b6-490f-92d8-348a6f37f243.output_84f4fc02-30b6-490f-92d8-348a6f37f243 rect,
-        .node_84f4fc02-30b6-490f-92d8-348a6f37f243.constant_84f4fc02-30b6-490f-92d8-348a6f37f243 rect {
+        .node_e632c386-1196-4e11-812c-d8c464583930.input_e632c386-1196-4e11-812c-d8c464583930 rect,
+        .node_e632c386-1196-4e11-812c-d8c464583930.output_e632c386-1196-4e11-812c-d8c464583930 rect,
+        .node_e632c386-1196-4e11-812c-d8c464583930.constant_e632c386-1196-4e11-812c-d8c464583930 rect {
             stroke-width: 1px;
             rx: 8px;
             ry: 8px;
             stroke-dasharray: none;
         }
 
-        #png-error-container_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        #png-error-container_e632c386-1196-4e11-812c-d8c464583930 {
             text-align: center;
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 14px;
         }
 
-        #png-error-message_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        #png-error-message_e632c386-1196-4e11-812c-d8c464583930 {
             padding: 8px 16px;
             background-color: #dc3545;
             color: white;
@@ -624,13 +676,13 @@ trace_model(model, example_input)
             text-align: left;
         }
 
-        #png-link-container_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        #png-link-container_e632c386-1196-4e11-812c-d8c464583930 {
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 18px;
         }
 
-        #png-download-button_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        #png-download-button_e632c386-1196-4e11-812c-d8c464583930 {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -640,11 +692,11 @@ trace_model(model, example_input)
             margin-right: 8px;
         }
 
-        #png-download-button_84f4fc02-30b6-490f-92d8-348a6f37f243:hover {
+        #png-download-button_e632c386-1196-4e11-812c-d8c464583930:hover {
             background-color: #0056b3;
         }
 
-        #png-save-button_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        #png-save-button_e632c386-1196-4e11-812c-d8c464583930 {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -653,18 +705,18 @@ trace_model(model, example_input)
             border-radius: 4px;
         }
 
-        #png-save-button_84f4fc02-30b6-490f-92d8-348a6f37f243:hover {
+        #png-save-button_e632c386-1196-4e11-812c-d8c464583930:hover {
             background-color: #0056b3;
         }
 
-        #svg-link-container_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        #svg-link-container_e632c386-1196-4e11-812c-d8c464583930 {
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 18px;
         }
 
 
-        #svg-download-button_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        #svg-download-button_e632c386-1196-4e11-812c-d8c464583930 {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -674,11 +726,11 @@ trace_model(model, example_input)
             margin-right: 8px;
         }
 
-        #svg-download-button_84f4fc02-30b6-490f-92d8-348a6f37f243:hover {
+        #svg-download-button_e632c386-1196-4e11-812c-d8c464583930:hover {
             background-color: #0056b3;
         }
 
-        #svg-save-button_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        #svg-save-button_e632c386-1196-4e11-812c-d8c464583930 {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -687,11 +739,11 @@ trace_model(model, example_input)
             border-radius: 4px;
         }
 
-        #svg-save-button_84f4fc02-30b6-490f-92d8-348a6f37f243:hover {
+        #svg-save-button_e632c386-1196-4e11-812c-d8c464583930:hover {
             background-color: #0056b3;
         }
 
-        .custom-tooltip_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        .custom-tooltip_e632c386-1196-4e11-812c-d8c464583930 {
             position: absolute;
             background: white;
             border: 1px solid #ccc;
@@ -707,7 +759,7 @@ trace_model(model, example_input)
             display: none;
         }
 
-        .custom-tooltip_smaller_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        .custom-tooltip_smaller_e632c386-1196-4e11-812c-d8c464583930 {
             position: absolute;
             background: white;
             border: 1px solid #ccc;
@@ -723,16 +775,16 @@ trace_model(model, example_input)
             display: none;
         }
 
-        .edge_84f4fc02-30b6-490f-92d8-348a6f37f243.implied-edge_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        .edge_e632c386-1196-4e11-812c-d8c464583930.implied-edge_e632c386-1196-4e11-812c-d8c464583930 {
             stroke-dasharray: 5,5;
         }
 
-        .logo_84f4fc02-30b6-490f-92d8-348a6f37f243 {
+        .logo_e632c386-1196-4e11-812c-d8c464583930 {
             position: absolute;
             bottom: 8px; left: 8px;
             padding: 4px 6px;
         }
-        .logo_84f4fc02-30b6-490f-92d8-348a6f37f243 a {
+        .logo_e632c386-1196-4e11-812c-d8c464583930 a {
             color: #a1a1a1;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             opacity: .6;
@@ -893,7 +945,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
 (function() {
-    const adj_list = {"input_0": {"edges": [{"target": "Linear_1", "dims": "(3, 10)", "edge_data_id": 6165829408}, {"target": "__iadd___2", "dims": "(3, 10)", "edge_data_id": 6165829408}], "failed": false, "node_type": "Input"}, "input_1": {"edges": [{"target": "__iadd___2", "dims": "(3, 10)", "edge_data_id": 6165830208}], "failed": false, "node_type": "Input"}, "input_2": {"edges": [{"target": "relu_3", "dims": "(3, 10)", "edge_data_id": 6165830368}], "failed": false, "node_type": "Input"}, "Linear_1": {"edges": [{"target": "__getitem___13", "dims": "(3, 5)", "edge_data_id": 11542426144}, {"target": "__getitem___17", "dims": "(3, 5)", "edge_data_id": 11542426144}], "failed": false, "node_type": "Module"}, "__iadd___2": {"edges": [{"target": "__imul___4", "dims": "(3, 10)", "edge_data_id": 6165829408}], "failed": false, "node_type": "Operation"}, "relu_3": {"edges": [{"target": "__imul___4", "dims": "(3, 10)", "edge_data_id": 11696868864}], "failed": false, "node_type": "Operation"}, "__imul___4": {"edges": [], "failed": false, "node_type": "Operation"}, "__radd___8": {"edges": [{"target": "__add___11", "dims": "(1)", "edge_data_id": 11540975840}], "failed": false, "node_type": "Operation"}, "tensor_9": {"edges": [{"target": "__radd___8", "dims": "(1)", "edge_data_id": 6165829168}], "failed": false, "node_type": "Constant"}, "scalar_10": {"edges": [{"target": "__radd___8", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "__add___11": {"edges": [{"target": "__add___14", "dims": "(1)", "edge_data_id": 11540976000}], "failed": false, "node_type": "Operation"}, "tensor_12": {"edges": [{"target": "__add___11", "dims": "(1)", "edge_data_id": 6165829968}], "failed": false, "node_type": "Constant"}, "__getitem___13": {"edges": [{"target": "__add___14", "dims": "(3, 5)", "edge_data_id": 11541273632}], "failed": false, "node_type": "Operation"}, "__add___14": {"edges": [{"target": "__add___15", "dims": "(3, 5)", "edge_data_id": 6105355184}], "failed": false, "node_type": "Operation"}, "__add___15": {"edges": [], "failed": false, "node_type": "Operation"}, "tensor_16": {"edges": [{"target": "__add___15", "dims": "(3, 5)", "edge_data_id": 11696868864}], "failed": false, "node_type": "Constant"}, "__getitem___17": {"edges": [], "failed": true, "node_type": "Operation"}, "scalar_18": {"edges": [{"target": "__getitem___17", "dims": "( )"}], "failed": false, "node_type": "Constant"}};
+    const adj_list = {"input_0": {"edges": [{"target": "Linear_1", "dims": "(3, 10)", "edge_data_id": 11130722320}, {"target": "__iadd___2", "dims": "(3, 10)", "edge_data_id": 11130722320}], "failed": false, "node_type": "Input"}, "input_1": {"edges": [{"target": "__iadd___2", "dims": "(3, 10)", "edge_data_id": 11130721760}], "failed": false, "node_type": "Input"}, "input_2": {"edges": [{"target": "relu_3", "dims": "(3, 10)", "edge_data_id": 11130722560}], "failed": false, "node_type": "Input"}, "Linear_1": {"edges": [{"target": "__getitem___13", "dims": "(3, 5)", "edge_data_id": 11734760480}, {"target": "__getitem___17", "dims": "(3, 5)", "edge_data_id": 11734760480}], "failed": false, "node_type": "Module"}, "__iadd___2": {"edges": [{"target": "__imul___4", "dims": "(3, 10)", "edge_data_id": 11130722320}], "failed": false, "node_type": "Operation"}, "relu_3": {"edges": [{"target": "__imul___4", "dims": "(3, 10)", "edge_data_id": 11734728112}], "failed": false, "node_type": "Operation"}, "__imul___4": {"edges": [], "failed": false, "node_type": "Operation"}, "__radd___8": {"edges": [{"target": "__add___11", "dims": "(1)", "edge_data_id": 11736179232}], "failed": false, "node_type": "Operation"}, "tensor_9": {"edges": [{"target": "__radd___8", "dims": "(1)", "edge_data_id": 11130722000}], "failed": false, "node_type": "Constant"}, "scalar_10": {"edges": [{"target": "__radd___8", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "__add___11": {"edges": [{"target": "__add___14", "dims": "(1)", "edge_data_id": 11736179392}], "failed": false, "node_type": "Operation"}, "tensor_12": {"edges": [{"target": "__add___11", "dims": "(1)", "edge_data_id": 11130721840}], "failed": false, "node_type": "Constant"}, "__getitem___13": {"edges": [{"target": "__add___14", "dims": "(3, 5)", "edge_data_id": 11734995808}], "failed": false, "node_type": "Operation"}, "__add___14": {"edges": [{"target": "__add___15", "dims": "(3, 5)", "edge_data_id": 11736277376}], "failed": false, "node_type": "Operation"}, "__add___15": {"edges": [], "failed": false, "node_type": "Operation"}, "tensor_16": {"edges": [{"target": "__add___15", "dims": "(3, 5)", "edge_data_id": 11734728112}], "failed": false, "node_type": "Constant"}, "__getitem___17": {"edges": [], "failed": true, "node_type": "Operation"}, "scalar_18": {"edges": [{"target": "__getitem___17", "dims": "( )"}], "failed": false, "node_type": "Constant"}};
     const module_info = {"Linear_1": {"type": "Linear", "parameters": {"weight": {"shape": [5, 10], "requires_grad": true}, "bias": {"shape": [5], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 10, "out_features": 5, "training": true}, "extra_repr": "in_features=10, out_features=5, bias=True"}};
     const func_info = {"Linear_1": {"positional_args": [{"_type": "tensor", "shape": [3, 10], "dtype": "torch.float32"}], "keyword_args": {}}, "__iadd___2": {"positional_args": [{"_type": "tensor", "shape": [3, 10], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [3, 10], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_3": {"positional_args": [{"_type": "tensor", "shape": [3, 10], "dtype": "torch.float32"}], "keyword_args": {}}, "__imul___4": {"positional_args": [{"_type": "tensor", "shape": [3, 10], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [3, 10], "dtype": "torch.float32"}], "keyword_args": {}}, "size_5": {"positional_args": [{"_type": "tensor", "shape": [3, 10], "dtype": "torch.float32"}, 0], "keyword_args": {}}, "__radd___8": {"positional_args": [{"_type": "tensor", "shape": [1], "dtype": "torch.float32"}, 5], "keyword_args": {}}, "__add___11": {"positional_args": [{"_type": "tensor", "shape": [1], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [1], "dtype": "torch.float32"}], "keyword_args": {}}, "__getitem___13": {"positional_args": [{"_type": "tensor", "shape": [3, 5], "dtype": "torch.float32"}, [{"_type": "slice", "repr": "slice(None, None, None)"}, {"_type": "slice", "repr": "slice(None, None, None)"}]], "keyword_args": {}}, "__add___14": {"positional_args": [{"_type": "tensor", "shape": [1], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [3, 5], "dtype": "torch.float32"}], "keyword_args": {}}, "__add___15": {"positional_args": [{"_type": "tensor", "shape": [3, 5], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [3, 5], "dtype": "torch.float32"}], "keyword_args": {}}, "__getitem___17": {"positional_args": [{"_type": "tensor", "shape": [3, 5], "dtype": "torch.float32"}, -5], "keyword_args": {}}};
     const parent_module_to_nodes = {};
@@ -942,10 +994,10 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         removeTooltip();
         
         const tooltip = document.createElement('div');
-        tooltip.className = !smaller ? `custom-tooltip_84f4fc02-30b6-490f-92d8-348a6f37f243` : `custom-tooltip_smaller_84f4fc02-30b6-490f-92d8-348a6f37f243`;
+        tooltip.className = !smaller ? `custom-tooltip_e632c386-1196-4e11-812c-d8c464583930` : `custom-tooltip_smaller_e632c386-1196-4e11-812c-d8c464583930`;
         tooltip.textContent = text;
         
-        const container = document.getElementById(`graph-container_84f4fc02-30b6-490f-92d8-348a6f37f243`);
+        const container = document.getElementById(`graph-container_e632c386-1196-4e11-812c-d8c464583930`);
         container.appendChild(tooltip);
         currentTooltip = tooltip;
         
@@ -957,7 +1009,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const buttonRect = buttonElement.getBoundingClientRect();
         
         // Get the container's position in screen coordinates
-        const containerRect = document.getElementById(`graph-container_84f4fc02-30b6-490f-92d8-348a6f37f243`).getBoundingClientRect();
+        const containerRect = document.getElementById(`graph-container_e632c386-1196-4e11-812c-d8c464583930`).getBoundingClientRect();
         
         // Calculate position relative to container
         const buttonX = buttonRect.left + (buttonRect.width / 2) - containerRect.left;
@@ -1574,7 +1626,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function reloadGraph() {
-        d3.select("#graph_84f4fc02-30b6-490f-92d8-348a6f37f243").html("");
+        d3.select("#graph_e632c386-1196-4e11-812c-d8c464583930").html("");
 
         if (generateImage) {
             renderGraphvizImage();
@@ -1641,16 +1693,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function renderGraphvizImage() {
-        d3.select("#png-link-container_84f4fc02-30b6-490f-92d8-348a6f37f243").remove();
+        d3.select("#png-link-container_e632c386-1196-4e11-812c-d8c464583930").remove();
         
         function showErrorMessage(error) {
-            const parent = d3.select("#graph-container_84f4fc02-30b6-490f-92d8-348a6f37f243").node().parentNode;
+            const parent = d3.select("#graph-container_e632c386-1196-4e11-812c-d8c464583930").node().parentNode;
             const errorContainer = d3.select(parent)
-                .insert("div", "#graph-container_84f4fc02-30b6-490f-92d8-348a6f37f243")
-                .attr("id", "png-error-container_84f4fc02-30b6-490f-92d8-348a6f37f243");
+                .insert("div", "#graph-container_e632c386-1196-4e11-812c-d8c464583930")
+                .attr("id", "png-error-container_e632c386-1196-4e11-812c-d8c464583930");
             
             errorContainer.append("div")
-                .attr("id", "png-error-message_84f4fc02-30b6-490f-92d8-348a6f37f243")
+                .attr("id", "png-error-message_e632c386-1196-4e11-812c-d8c464583930")
                 .html(`<strong>Error:</strong><br>${error.stack || error.message || error}<br><br><strong>Note:</strong> Exporting very large models as PNG is currently not supported. Please use generate_image=False, or raise an issue on https://github.com/sachinhosmani/torchvista/issues`);
         }
         
@@ -1688,21 +1740,21 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const pngUrl = URL.createObjectURL(pngBlob);
         
         // Create link container
-        const parent = d3.select("#graph-container_84f4fc02-30b6-490f-92d8-348a6f37f243").node().parentNode;
+        const parent = d3.select("#graph-container_e632c386-1196-4e11-812c-d8c464583930").node().parentNode;
         const linkContainer = d3.select(parent)
-            .insert("div", "#graph-container_84f4fc02-30b6-490f-92d8-348a6f37f243")
-            .attr("id", "png-link-container_84f4fc02-30b6-490f-92d8-348a6f37f243");
+            .insert("div", "#graph-container_e632c386-1196-4e11-812c-d8c464583930")
+            .attr("id", "png-link-container_e632c386-1196-4e11-812c-d8c464583930");
         
         linkContainer.append("a")
             .attr("href", pngUrl)
             .attr("target", "_blank")
-            .attr("id", "png-download-button_84f4fc02-30b6-490f-92d8-348a6f37f243")
+            .attr("id", "png-download-button_e632c386-1196-4e11-812c-d8c464583930")
             .text("View PNG in New Tab");
 
         linkContainer.append("a")
             .attr("href", pngUrl)
-            .attr("download", `torchvista_graph_84f4fc02-30b6-490f-92d8-348a6f37f243.png`)
-            .attr("id", "png-save-button_84f4fc02-30b6-490f-92d8-348a6f37f243")
+            .attr("download", `torchvista_graph_e632c386-1196-4e11-812c-d8c464583930.png`)
+            .attr("id", "png-save-button_e632c386-1196-4e11-812c-d8c464583930")
             .text("Download PNG");
             
         URL.revokeObjectURL(svgUrl);
@@ -1723,26 +1775,26 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const svgUrl = URL.createObjectURL(svgBlob);
         
         // Create link container
-        const parent = d3.select("#graph-container_84f4fc02-30b6-490f-92d8-348a6f37f243").node().parentNode;
+        const parent = d3.select("#graph-container_e632c386-1196-4e11-812c-d8c464583930").node().parentNode;
         const linkContainer = d3.select(parent)
-            .insert("div", "#graph-container_84f4fc02-30b6-490f-92d8-348a6f37f243")
-            .attr("id", "svg-link-container_84f4fc02-30b6-490f-92d8-348a6f37f243");
+            .insert("div", "#graph-container_e632c386-1196-4e11-812c-d8c464583930")
+            .attr("id", "svg-link-container_e632c386-1196-4e11-812c-d8c464583930");
         
         linkContainer.append("a")
             .attr("href", svgUrl)
             .attr("target", "_blank")
-            .attr("id", "svg-download-button_84f4fc02-30b6-490f-92d8-348a6f37f243")
+            .attr("id", "svg-download-button_e632c386-1196-4e11-812c-d8c464583930")
             .text("View SVG in New Tab");
 
         linkContainer.append("a")
             .attr("href", svgUrl)
-            .attr("download", `torchvista_graph_84f4fc02-30b6-490f-92d8-348a6f37f243.svg`)
-            .attr("id", "svg-save-button_84f4fc02-30b6-490f-92d8-348a6f37f243")
+            .attr("download", `torchvista_graph_e632c386-1196-4e11-812c-d8c464583930.svg`)
+            .attr("id", "svg-save-button_e632c386-1196-4e11-812c-d8c464583930")
             .text("Download SVG");
     }
 
     function createGraph(graphvizData) {
-        const svg = d3.select("#graph_84f4fc02-30b6-490f-92d8-348a6f37f243")
+        const svg = d3.select("#graph_e632c386-1196-4e11-812c-d8c464583930")
         .append("svg")
         .attr("width", "100%")
         .attr("height", "100%")
@@ -1762,7 +1814,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
         // Define arrowhead marker
         svg.append("defs").append("marker")
-        .attr("id", "arrowhead_84f4fc02-30b6-490f-92d8-348a6f37f243")
+        .attr("id", "arrowhead_e632c386-1196-4e11-812c-d8c464583930")
         .attr("viewBox", "0 -5 10 10")
         .attr("refX", 8)
         .attr("refY", 0)
@@ -1774,11 +1826,11 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .attr("fill", "#333");
 
         // Draw clusters (container boxes) first so they're behind nodes
-        const clusters = inner.selectAll(".boundary-box_84f4fc02-30b6-490f-92d8-348a6f37f243")
+        const clusters = inner.selectAll(".boundary-box_e632c386-1196-4e11-812c-d8c464583930")
         .data(Object.entries(graphvizData.clusters))
         .enter()
         .append("g")
-        .attr("class", "boundary-box_84f4fc02-30b6-490f-92d8-348a6f37f243");
+        .attr("class", "boundary-box_e632c386-1196-4e11-812c-d8c464583930");
 
         const containersWithFailedNodes = identifyContainersWithFailedNodes(adj_list, ancestor_map);
 
@@ -1788,10 +1840,10 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             const hasFailedNodes = containersWithFailedNodes.has(clusterName);
             const isRepeat = isRepeatNode(clusterName);
             if (hasFailedNodes) {
-                group.classed("error_84f4fc02-30b6-490f-92d8-348a6f37f243", true);
+                group.classed("error_e632c386-1196-4e11-812c-d8c464583930", true);
             }
             if (isRepeat) {
-                group.classed("repeat-container_84f4fc02-30b6-490f-92d8-348a6f37f243", true);
+                group.classed("repeat-container_e632c386-1196-4e11-812c-d8c464583930", true);
             }
 
             // Parse bounding box coordinates
@@ -1833,13 +1885,13 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (!isRepeatNode(clusterName)) {
                 // Add collapse/expand button
                 const collapseButton = group.append("circle")
-                .attr("class", "collapse-button_84f4fc02-30b6-490f-92d8-348a6f37f243")
+                .attr("class", "collapse-button_e632c386-1196-4e11-812c-d8c464583930")
                 .attr("cx", x1 + 10)
                 .attr("cy", y1 + 10)
                 .attr("r", 5.5);
 
                 group.append("text")
-                .attr("class", "collapse-icon_84f4fc02-30b6-490f-92d8-348a6f37f243")
+                .attr("class", "collapse-icon_e632c386-1196-4e11-812c-d8c464583930")
                 .attr("x", x1 + 10)
                 .attr("y", y1 + 10)
                 .attr("text-anchor", "middle")
@@ -1856,7 +1908,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add click event handler for collapse buttons
-        clusters.selectAll(".collapse-button_84f4fc02-30b6-490f-92d8-348a6f37f243, .collapse-icon_84f4fc02-30b6-490f-92d8-348a6f37f243")
+        clusters.selectAll(".collapse-button_e632c386-1196-4e11-812c-d8c464583930, .collapse-icon_e632c386-1196-4e11-812c-d8c464583930")
         .on("click", function(event, [clusterName, clusterData]) {
             event.stopPropagation(); // Prevent event from bubbling to SVG
             removeTooltip();
@@ -1871,19 +1923,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
         
         // Create edges using the path points from Graphviz
-        const edges = inner.selectAll(".edge_84f4fc02-30b6-490f-92d8-348a6f37f243")
+        const edges = inner.selectAll(".edge_e632c386-1196-4e11-812c-d8c464583930")
         .data(graphvizData.edges)
         .enter()
         .append("g")
-        .attr("class", "edge-group_84f4fc02-30b6-490f-92d8-348a6f37f243");
+        .attr("class", "edge-group_e632c386-1196-4e11-812c-d8c464583930");
         
         // Add the actual path
         edges.append("path")
         .attr("class", function(edge) {
             if (edge.is_implied_edge) {
-                return "edge_84f4fc02-30b6-490f-92d8-348a6f37f243 implied-edge_84f4fc02-30b6-490f-92d8-348a6f37f243";
+                return "edge_e632c386-1196-4e11-812c-d8c464583930 implied-edge_e632c386-1196-4e11-812c-d8c464583930";
             }
-            return "edge_84f4fc02-30b6-490f-92d8-348a6f37f243";
+            return "edge_e632c386-1196-4e11-812c-d8c464583930";
         }).attr("d", function(edge) {
             if (edge.path && edge.path.length > 0) {
                     // Create a proper SVG path using Bézier curves
@@ -1909,7 +1961,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             }
             return "";
         })
-        .attr("marker-end", "url(#arrowhead_84f4fc02-30b6-490f-92d8-348a6f37f243)");
+        .attr("marker-end", "url(#arrowhead_e632c386-1196-4e11-812c-d8c464583930)");
         
         // Add dimension labels on edges
         edges.each(function(edge) {
@@ -1938,7 +1990,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Create a background for the text
             const labelGroup = edgeGroup.append("g")
-            .attr("class", "edge-label_84f4fc02-30b6-490f-92d8-348a6f37f243")
+            .attr("class", "edge-label_e632c386-1196-4e11-812c-d8c464583930")
             .attr("transform", `translate(${pointAtStart.x}, ${pointAtStart.y})`);
             
             const text = labelGroup.append("text")
@@ -1973,7 +2025,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         edges.each(function() {
             const edgeGroup = d3.select(this);
             const path = edgeGroup.select("path");
-            const labelGroup = edgeGroup.select(".edge-label_84f4fc02-30b6-490f-92d8-348a6f37f243");
+            const labelGroup = edgeGroup.select(".edge-label_e632c386-1196-4e11-812c-d8c464583930");
             const labelText = labelGroup.select("text");
             const labelBg = labelGroup.select("rect");
             const originalStrokeWidth = path.attr("stroke-width") || 1;
@@ -2038,19 +2090,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
         // Create nodes using positions from Graphviz
-        const nodes = inner.selectAll(".node_84f4fc02-30b6-490f-92d8-348a6f37f243")
+        const nodes = inner.selectAll(".node_e632c386-1196-4e11-812c-d8c464583930")
             .data(Object.entries(graphvizData.nodes))
             .enter()
             .append("g")
             // In the createGraph function, when you're creating nodes, modify the class assignment:
             .attr("class", function([nodeName, nodeData]) {
-                let classes = "node_84f4fc02-30b6-490f-92d8-348a6f37f243";
-                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_84f4fc02-30b6-490f-92d8-348a6f37f243";
-                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_84f4fc02-30b6-490f-92d8-348a6f37f243";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_84f4fc02-30b6-490f-92d8-348a6f37f243";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_84f4fc02-30b6-490f-92d8-348a6f37f243";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_84f4fc02-30b6-490f-92d8-348a6f37f243";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_84f4fc02-30b6-490f-92d8-348a6f37f243";
+                let classes = "node_e632c386-1196-4e11-812c-d8c464583930";
+                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_e632c386-1196-4e11-812c-d8c464583930";
+                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_e632c386-1196-4e11-812c-d8c464583930";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_e632c386-1196-4e11-812c-d8c464583930";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_e632c386-1196-4e11-812c-d8c464583930";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_e632c386-1196-4e11-812c-d8c464583930";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_e632c386-1196-4e11-812c-d8c464583930";
                 return classes;
             })
             .attr("transform", function([nodeName, nodeData]) {
@@ -2077,11 +2129,11 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 .attr("rx", nodeData.width / 2)
                 .attr("ry", nodeData.height / 2)
                 .attr("class", function() { 
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_84f4fc02-30b6-490f-92d8-348a6f37f243";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_84f4fc02-30b6-490f-92d8-348a6f37f243";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_84f4fc02-30b6-490f-92d8-348a6f37f243";
-                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_84f4fc02-30b6-490f-92d8-348a6f37f243";
-                    return "operation_84f4fc02-30b6-490f-92d8-348a6f37f243";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_e632c386-1196-4e11-812c-d8c464583930";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_e632c386-1196-4e11-812c-d8c464583930";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_e632c386-1196-4e11-812c-d8c464583930";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_e632c386-1196-4e11-812c-d8c464583930";
+                    return "operation_e632c386-1196-4e11-812c-d8c464583930";
                 });
             } else {
                 // Create rectangle
@@ -2091,15 +2143,15 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 .attr("x", -nodeData.width / 2)
                 .attr("y", -nodeData.height / 2)
                 .attr("class", function() { 
-                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_84f4fc02-30b6-490f-92d8-348a6f37f243";
-                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_84f4fc02-30b6-490f-92d8-348a6f37f243" : "operation_84f4fc02-30b6-490f-92d8-348a6f37f243";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_e632c386-1196-4e11-812c-d8c464583930";
+                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_e632c386-1196-4e11-812c-d8c464583930" : "operation_e632c386-1196-4e11-812c-d8c464583930";
                 });
             }
         });
         
         // Add labels for nodes
         nodes.append("text")
-        .attr("class", "node-label_84f4fc02-30b6-490f-92d8-348a6f37f243")
+        .attr("class", "node-label_e632c386-1196-4e11-812c-d8c464583930")
         .text(function([nodeName]) { return graph_node_display_names[nodeName] || graph_node_name_to_without_suffix[nodeName] || nodeName; })
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "central");
@@ -2108,7 +2160,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         nodes.filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")));
         }).append("text")
-        .attr("class", "type-indicator_84f4fc02-30b6-490f-92d8-348a6f37f243")
+        .attr("class", "type-indicator_e632c386-1196-4e11-812c-d8c464583930")
         .attr("text-anchor", "start")
         .attr("dominant-baseline", "text-bottom")
         .attr("transform", function([nodeName, nodeData]) {
@@ -2126,7 +2178,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add info buttons to nodes (except input, output, constant)
-        inner.selectAll(".node_84f4fc02-30b6-490f-92d8-348a6f37f243")
+        inner.selectAll(".node_e632c386-1196-4e11-812c-d8c464583930")
         .filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")))
         })
@@ -2137,14 +2189,14 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
         // Add info button circle
         const infoButton = nodeGroup.append("circle")
-        .attr("class", "info-button_84f4fc02-30b6-490f-92d8-348a6f37f243")
+        .attr("class", "info-button_e632c386-1196-4e11-812c-d8c464583930")
         .attr("cx", width/2 - 7)
         .attr("cy", -height/2 + 7)
         .attr("r", 5.5);
 
         // Add info button icon
         nodeGroup.append("text")
-        .attr("class", "info-icon_84f4fc02-30b6-490f-92d8-348a6f37f243")
+        .attr("class", "info-icon_e632c386-1196-4e11-812c-d8c464583930")
         .attr("x", width/2 - 7)
         .attr("y", -height/2 + 8)
         .attr("text-anchor", "middle")
@@ -2160,16 +2212,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .on("mouseleave", removeTooltip);
 
         // Add click handler to info button
-            nodeGroup.selectAll(".info-button_84f4fc02-30b6-490f-92d8-348a6f37f243, .info-icon_84f4fc02-30b6-490f-92d8-348a6f37f243")
+            nodeGroup.selectAll(".info-button_e632c386-1196-4e11-812c-d8c464583930, .info-icon_e632c386-1196-4e11-812c-d8c464583930")
             .on("click", function(event) {
                 event.stopPropagation();
-                const infoButton = nodeGroup.select(".info-button_84f4fc02-30b6-490f-92d8-348a6f37f243").node();
+                const infoButton = nodeGroup.select(".info-button_e632c386-1196-4e11-812c-d8c464583930").node();
                 showPopupFromInfoButton.call(nodeGroup.node(), event, [nodeName], infoButton);
             });
         });
 
         // Add expand buttons to all module nodes (including non-expandable ones)
-        inner.selectAll(".node_84f4fc02-30b6-490f-92d8-348a6f37f243")
+        inner.selectAll(".node_e632c386-1196-4e11-812c-d8c464583930")
         .filter(function([nodeName]) {
             return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || collapsedContainers.has(nodeName)) && !isRepeatNode(nodeName);
         })
@@ -2191,7 +2243,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Add expand button circle
             const expandButton = nodeGroup.append("circle")
-            .attr("class", isExpandable ? "collapse-button_84f4fc02-30b6-490f-92d8-348a6f37f243" : "collapse-button-disabled_84f4fc02-30b6-490f-92d8-348a6f37f243")
+            .attr("class", isExpandable ? "collapse-button_e632c386-1196-4e11-812c-d8c464583930" : "collapse-button-disabled_e632c386-1196-4e11-812c-d8c464583930")
             .attr("cx", -width / 2 + 7)
             .attr("cy", -height / 2 + 7)
             .attr("r", 5.5)
@@ -2200,7 +2252,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Add expand button icon
             nodeGroup.append("text")
-            .attr("class", isExpandable ? "collapse-icon_84f4fc02-30b6-490f-92d8-348a6f37f243" : "collapse-icon-disabled_84f4fc02-30b6-490f-92d8-348a6f37f243")
+            .attr("class", isExpandable ? "collapse-icon_e632c386-1196-4e11-812c-d8c464583930" : "collapse-icon-disabled_e632c386-1196-4e11-812c-d8c464583930")
             .attr("x", -width / 2 + 7)
             .attr("y", -height / 2 + 7)
             .attr("text-anchor", "middle")
@@ -2220,7 +2272,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Only add click handler for expandable modules
             if (isExpandable) {
-                nodeGroup.selectAll(".collapse-button_84f4fc02-30b6-490f-92d8-348a6f37f243, .collapse-icon_84f4fc02-30b6-490f-92d8-348a6f37f243")
+                nodeGroup.selectAll(".collapse-button_e632c386-1196-4e11-812c-d8c464583930, .collapse-icon_e632c386-1196-4e11-812c-d8c464583930")
                 .on("click", function(event) {
                     event.stopPropagation();
                     removeTooltip();
@@ -2321,16 +2373,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                     .scale(currentTransform.k));
             }
 
-            clickedNodeElement.classed("highlight-node_84f4fc02-30b6-490f-92d8-348a6f37f243", true);
+            clickedNodeElement.classed("highlight-node_e632c386-1196-4e11-812c-d8c464583930", true);
             
             setTimeout(() => {
-                clickedNodeElement.classed("highlight-node_84f4fc02-30b6-490f-92d8-348a6f37f243", false);
+                clickedNodeElement.classed("highlight-node_e632c386-1196-4e11-812c-d8c464583930", false);
             }, 2000);
 
-            const popup = d3.select("#popup_84f4fc02-30b6-490f-92d8-348a6f37f243");
-            const moduleTemplate = d3.select("#module-template_84f4fc02-30b6-490f-92d8-348a6f37f243");
-            const tensorOpTemplate = d3.select("#tensor-op-template_84f4fc02-30b6-490f-92d8-348a6f37f243");
-            const noInfoMessage = d3.select("#no-info_84f4fc02-30b6-490f-92d8-348a6f37f243");
+            const popup = d3.select("#popup_e632c386-1196-4e11-812c-d8c464583930");
+            const moduleTemplate = d3.select("#module-template_e632c386-1196-4e11-812c-d8c464583930");
+            const tensorOpTemplate = d3.select("#tensor-op-template_e632c386-1196-4e11-812c-d8c464583930");
+            const noInfoMessage = d3.select("#no-info_e632c386-1196-4e11-812c-d8c464583930");
             
             const nodeData = adj_list[nodeName];
             
@@ -2338,7 +2390,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (node_to_module_path[nodeName] && graph_node_name_to_without_suffix[nodeName]) {
                 popupTitle = node_to_module_path[nodeName] + "." + graph_node_name_to_without_suffix[nodeName];
             }
-            d3.select("#popup-title_84f4fc02-30b6-490f-92d8-348a6f37f243").text(popupTitle);
+            d3.select("#popup-title_e632c386-1196-4e11-812c-d8c464583930").text(popupTitle);
 
             moduleTemplate.style("display", "none");
             tensorOpTemplate.style("display", "none");
@@ -2346,31 +2398,31 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             if (module_info[nodeName]) {
                 const info = module_info[nodeName];
-                moduleTemplate.style("display", "block").classed("content-shown_84f4fc02-30b6-490f-92d8-348a6f37f243", true);
+                moduleTemplate.style("display", "block").classed("content-shown_e632c386-1196-4e11-812c-d8c464583930", true);
                 
-                d3.select("#module-extra-repr_84f4fc02-30b6-490f-92d8-348a6f37f243").text(info.extra_repr || 'N/A');
+                d3.select("#module-extra-repr_e632c386-1196-4e11-812c-d8c464583930").text(info.extra_repr || 'N/A');
 
                 const forward_info = func_info[nodeName];
-                const attributesContainer = d3.select("#module-attributes_84f4fc02-30b6-490f-92d8-348a6f37f243").node();
+                const attributesContainer = d3.select("#module-attributes_e632c386-1196-4e11-812c-d8c464583930").node();
                 attributesContainer.innerHTML = '';
                 createJsonViewer(attributesContainer, info.attributes);
 
-                const parametersContainer = d3.select("#module-parameters_84f4fc02-30b6-490f-92d8-348a6f37f243").node();
+                const parametersContainer = d3.select("#module-parameters_e632c386-1196-4e11-812c-d8c464583930").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, forward_info);
             } else if (!(adj_list[nodeName] && adj_list[nodeName].node_type === "Input") && func_info[nodeName]) {
                 const info = func_info[nodeName];
-                tensorOpTemplate.style("display", "block").classed("content-shown_84f4fc02-30b6-490f-92d8-348a6f37f243", true);
-                const parametersContainer = d3.select("#tensor-op-parameters_84f4fc02-30b6-490f-92d8-348a6f37f243").node();
+                tensorOpTemplate.style("display", "block").classed("content-shown_e632c386-1196-4e11-812c-d8c464583930", true);
+                const parametersContainer = d3.select("#tensor-op-parameters_e632c386-1196-4e11-812c-d8c464583930").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, info);
             } else {
-                noInfoMessage.style("display", "block").classed("content-shown_84f4fc02-30b6-490f-92d8-348a6f37f243", true);
+                noInfoMessage.style("display", "block").classed("content-shown_e632c386-1196-4e11-812c-d8c464583930", true);
             }
             
             // Position popup based on info button or node center
             let boundingBox, x, y;
-            const containerRect = d3.select("#graph-container_84f4fc02-30b6-490f-92d8-348a6f37f243").node().getBoundingClientRect();
+            const containerRect = d3.select("#graph-container_e632c386-1196-4e11-812c-d8c464583930").node().getBoundingClientRect();
             
             if (infoButtonElement) {
                 boundingBox = infoButtonElement.getBoundingClientRect();
@@ -2386,19 +2438,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             popup.style("left", `${x}px`)
             .style("top", `${y}px`)
             .style("display", "flex");
-            d3.select("#popup-content_84f4fc02-30b6-490f-92d8-348a6f37f243").node().scrollTop = 0;
+            d3.select("#popup-content_e632c386-1196-4e11-812c-d8c464583930").node().scrollTop = 0;
         }
 
         function closePopup() {
-            d3.select("#popup_84f4fc02-30b6-490f-92d8-348a6f37f243").style("display", "none");
+            d3.select("#popup_e632c386-1196-4e11-812c-d8c464583930").style("display", "none");
         }
         
-        d3.select(".popup-close_84f4fc02-30b6-490f-92d8-348a6f37f243").on("click", closePopup);
+        d3.select(".popup-close_e632c386-1196-4e11-812c-d8c464583930").on("click", closePopup);
         svg.on("click", closePopup);
 
-        const popup = document.getElementById(`popup_84f4fc02-30b6-490f-92d8-348a6f37f243`);
+        const popup = document.getElementById(`popup_e632c386-1196-4e11-812c-d8c464583930`);
         const resizeObserver = new ResizeObserver(() => {
-            const editorContainers = popup.querySelectorAll('.json-viewer_84f4fc02-30b6-490f-92d8-348a6f37f243');
+            const editorContainers = popup.querySelectorAll('.json-viewer_e632c386-1196-4e11-812c-d8c464583930');
             for (let container of editorContainers) {
                 if (container.jsonEditor) {
                     container.jsonEditor.resize();
@@ -2477,30 +2529,30 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 // Apply highlight effect to the target container
                 if (Object.keys(graphvizData.nodes).includes(lastModifiedContainer)) {
                     // Highlight the node (collapsed container)
-                    const targetElement = inner.selectAll(".node_84f4fc02-30b6-490f-92d8-348a6f37f243")
+                    const targetElement = inner.selectAll(".node_e632c386-1196-4e11-812c-d8c464583930")
                         .filter(([nodeName]) => nodeName === lastModifiedContainer);
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-node_84f4fc02-30b6-490f-92d8-348a6f37f243", true);
+                        targetElement.classed("highlight-node_e632c386-1196-4e11-812c-d8c464583930", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-node_84f4fc02-30b6-490f-92d8-348a6f37f243", false);
+                            targetElement.classed("highlight-node_e632c386-1196-4e11-812c-d8c464583930", false);
                         }, 2000); // Match the animation duration
                     }
                 } else if (Object.keys(graphvizData.clusters).includes(lastModifiedContainer)) {
                     // Highlight the cluster (expanded container)
-                    const targetElement = inner.selectAll(".boundary-box_84f4fc02-30b6-490f-92d8-348a6f37f243")
+                    const targetElement = inner.selectAll(".boundary-box_e632c386-1196-4e11-812c-d8c464583930")
                         .filter(function([clusterName]) {
                             return clusterName === lastModifiedContainer;
                         });
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-cluster_84f4fc02-30b6-490f-92d8-348a6f37f243", true);
+                        targetElement.classed("highlight-cluster_e632c386-1196-4e11-812c-d8c464583930", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-cluster_84f4fc02-30b6-490f-92d8-348a6f37f243", false);
+                            targetElement.classed("highlight-cluster_e632c386-1196-4e11-812c-d8c464583930", false);
                         }, 2000); // Match the animation duration
                     }
                 }
