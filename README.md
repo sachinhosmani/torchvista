@@ -30,10 +30,11 @@ An interactive tool to visualize the forward pass of a PyTorch model directly in
 --------
 
 
-## Demos
+## Tutorials and examples
 
+- Step-by-step tutorial 👉 [here](https://sachinhosmani.github.io/torchvista/tutorials.html)
 - Quick Google Colab tutorial 👉 [here](https://colab.research.google.com/drive/1wrWKhpvGiqHhE0Lb1HnFGeOcS4uBqGXw?usp=sharing) (must be logged in to Colab)
-- Check out demos 👉 [here](https://sachinhosmani.github.io/torchvista/)
+- Check out demos 👉 [here](https://sachinhosmani.github.io/torchvista/demos.html)
 
 ## ⚙️ Usage
 
