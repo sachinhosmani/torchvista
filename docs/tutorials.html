@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TorchVista Tutorials</title>
+    <style>
+        /* MkDocs-inspired Material theme */
+        :root {
+            --md-primary-fg-color: #4051b5;
+            --md-primary-fg-color--dark: #303fa1;
+            --md-accent-fg-color: #526cfe;
+            --md-default-bg-color: #ffffff;
+            --md-default-fg-color: rgba(0, 0, 0, 0.87);
+            --md-default-fg-color--light: rgba(0, 0, 0, 0.54);
+            --md-code-bg-color: #f5f5f5;
+            --md-code-fg-color: #37474f;
+            --md-footer-bg-color: #1e1e1e;
+            --md-footer-fg-color: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--md-default-bg-color);
+            color: var(--md-default-fg-color);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .md-header {
+            background-color: var(--md-primary-fg-color);
+            color: white;
+            box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .md-header__inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .md-header__title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            flex: 1;
+        }
+
+        .md-header__title a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .md-header__nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .md-header__nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+        }
+
+        .md-header__nav a:hover {
+            opacity: 1;
+        }
+
+        .md-header__nav iframe {
+            vertical-align: middle;
+        }
+
+        /* Main content */
+        .md-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .md-content {
+            padding: 0 1rem;
+        }
+
+        /* Page title */
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: var(--md-default-fg-color);
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: var(--md-default-fg-color--light);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        /* Tutorial list */
+        .tutorial-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tutorial-item {
+            display: flex;
+            align-items: center;
+            background: var(--md-code-bg-color);
+            border-radius: 0.3rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.2s ease;
+            border-left: 0.25rem solid var(--md-accent-fg-color);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .tutorial-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+
+        .tutorial-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--md-accent-fg-color);
+            margin-right: 1.5rem;
+            min-width: 2rem;
+        }
+
+        .tutorial-content {
+            flex: 1;
+        }
+
+        .tutorial-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--md-default-fg-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .tutorial-description {
+            font-size: 0.95rem;
+            color: var(--md-default-fg-color--light);
+        }
+
+        .tutorial-arrow {
+            font-size: 1.5rem;
+            color: var(--md-default-fg-color--light);
+            margin-left: 1rem;
+        }
+
+        .tutorial-item:hover .tutorial-arrow {
+            color: var(--md-accent-fg-color);
+        }
+
+        /* Footer */
+        .md-footer {
+            background-color: var(--md-footer-bg-color);
+            color: var(--md-footer-fg-color);
+            padding: 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .md-footer__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .md-footer a {
+            color: var(--md-accent-fg-color);
+            text-decoration: none;
+        }
+
+        .md-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .md-header__inner {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .md-header__nav {
+                gap: 1rem;
+            }
+
+            .tutorial-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .tutorial-number {
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+            }
+
+            .tutorial-arrow {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="md-header">
+        <div class="md-header__inner">
+            <div class="md-header__title">
+                <a href="index.html">TorchVista</a>
+            </div>
+            <nav class="md-header__nav">
+                <a href="index.html">Home</a>
+                <a href="tutorials.html">Tutorials</a>
+                <a href="demos.html">Demos</a>
+                <a href="https://github.com/sachinhosmani/torchvista" target="_blank">GitHub</a>
+                <iframe src="https://ghbtns.com/github-btn.html?user=sachinhosmani&repo=torchvista&type=star&count=true&size=large"
+                        frameborder="0" scrolling="0" width="170" height="30" title="GitHub Star Button"></iframe>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="md-container">
+        <div class="md-content">
+            <h1 class="page-title">Tutorials</h1>
+            <p class="page-subtitle">Step-by-step guide to help you get the most out of TorchVista</p>
+
+            <div class="tutorial-list">
+                <a href="generated/tutorials/basic_usage.html" class="tutorial-item">
+                    <span class="tutorial-number">1</span>
+                    <div class="tutorial-content">
+                        <div class="tutorial-title">Basic Usage</div>
+                        <div class="tutorial-description">Learn how to visualize your first PyTorch model with trace_model</div>
+                    </div>
+                    <span class="tutorial-arrow">&rarr;</span>
+                </a>
+
+                <a href="generated/tutorials/exploring_modules.html" class="tutorial-item">
+                    <span class="tutorial-number">2</span>
+                    <div class="tutorial-content">
+                        <div class="tutorial-title">Exploring Modules</div>
+                        <div class="tutorial-description">Expand and collapse module hierarchies to explore complex architectures</div>
+                    </div>
+                    <span class="tutorial-arrow">&rarr;</span>
+                </a>
+
+                <a href="generated/tutorials/forced_tracing_depth.html" class="tutorial-item">
+                    <span class="tutorial-number">3</span>
+                    <div class="tutorial-content">
+                        <div class="tutorial-title">Forced module tracing depth</div>
+                        <div class="tutorial-description">Trace any module up to the desired nesting depth</div>
+                    </div>
+                    <span class="tutorial-arrow">&rarr;</span>
+                </a>
+
+                <a href="generated/tutorials/collapse_modules_after_depth.html" class="tutorial-item">
+                    <span class="tutorial-number">4</span>
+                    <div class="tutorial-content">
+                        <div class="tutorial-title">Collapse modules after depth</div>
+                        <div class="tutorial-description">Control which modules are initially expanded in the visualization</div>
+                    </div>
+                    <span class="tutorial-arrow">&rarr;</span>
+                </a>
+
+                <a href="generated/tutorials/show_non_gradient_nodes.html" class="tutorial-item">
+                    <span class="tutorial-number">5</span>
+                    <div class="tutorial-content">
+                        <div class="tutorial-title">Hiding non-gradient nodes</div>
+                        <div class="tutorial-description">Simplify the visualization by hiding constant tensors and scalars</div>
+                    </div>
+                    <span class="tutorial-arrow">&rarr;</span>
+                </a>
+
+                <a href="generated/tutorials/dict_input_naming.html" class="tutorial-item">
+                    <span class="tutorial-number">6</span>
+                    <div class="tutorial-content">
+                        <div class="tutorial-title">Naming tensors with nested dicts</div>
+                        <div class="tutorial-description">Use nested dictionary inputs and outputs to name tensor nodes</div>
+                    </div>
+                    <span class="tutorial-arrow">&rarr;</span>
+                </a>
+
+                <a href="generated/tutorials/compressed_view.html" class="tutorial-item">
+                    <span class="tutorial-number">7</span>
+                    <div class="tutorial-content">
+                        <div class="tutorial-title">Compressed view for repeated structures</div>
+                        <div class="tutorial-description">Collapse repeated layers into a single representation</div>
+                    </div>
+                    <span class="tutorial-arrow">&rarr;</span>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="md-footer">
+        <div class="md-footer__inner">
+            <p><a href="https://github.com/sachinhosmani/torchvista" target="_blank">GitHub</a></p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naming Tensors with Nested Dicts - TorchVista Tutorials</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
+    <style>
+        /* MkDocs-inspired Material theme */
+        :root {
+            --md-primary-fg-color: #4051b5;
+            --md-primary-fg-color--dark: #303fa1;
+            --md-accent-fg-color: #526cfe;
+            --md-default-bg-color: #ffffff;
+            --md-default-fg-color: rgba(0, 0, 0, 0.87);
+            --md-default-fg-color--light: rgba(0, 0, 0, 0.54);
+            --md-code-bg-color: #f5f5f5;
+            --md-code-fg-color: #37474f;
+            --md-footer-bg-color: #1e1e1e;
+            --md-footer-fg-color: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--md-default-bg-color);
+            color: var(--md-default-fg-color);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .md-header {
+            background-color: var(--md-primary-fg-color);
+            color: white;
+            box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .md-header__inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .md-header__title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            flex: 1;
+        }
+
+        .md-header__title a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .md-header__nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .md-header__nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+        }
+
+        .md-header__nav a:hover {
+            opacity: 1;
+        }
+
+        .md-header__nav iframe {
+            vertical-align: middle;
+        }
+
+        /* Main content */
+        .md-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .md-content {
+            padding: 0 1rem;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .breadcrumb a {
+            color: var(--md-accent-fg-color);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: var(--md-default-fg-color--light);
+        }
+
+        /* Tutorial header */
+        .tutorial-header {
+            margin-bottom: 2rem;
+        }
+
+        .tutorial-number {
+            font-size: 0.9rem;
+            color: var(--md-accent-fg-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .tutorial-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: var(--md-default-fg-color);
+        }
+
+        .tutorial-intro {
+            font-size: 1.1rem;
+            color: var(--md-default-fg-color--light);
+            line-height: 1.7;
+        }
+
+        .tutorial-intro p {
+            margin-bottom: 1rem;
+        }
+
+        .tutorial-intro p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Section styling */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin: 2.5rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 0.05rem solid rgba(0, 0, 0, 0.07);
+        }
+
+        .section-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-text p {
+            margin-bottom: 1rem;
+        }
+
+        .section-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Inline code styling */
+        code {
+            background: var(--md-code-bg-color);
+            color: var(--md-code-fg-color);
+            padding: 0.1rem 0.4rem;
+            border-radius: 0.2rem;
+            font-family: "Roboto Mono", "Courier New", monospace;
+            font-size: 0.9em;
+        }
+
+        /* Code block styling */
+        .code-container {
+            background: #2b2b2b;
+            border-radius: 0.2rem;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .code-container pre {
+            margin: 0;
+            font-family: "Roboto Mono", "Courier New", monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #f8f8f2;
+        }
+
+        .code-container code {
+            font-family: inherit;
+        }
+
+        .code-container code.hljs {
+            background: transparent;
+            padding: 0;
+        }
+
+        /* Demo section */
+        .demo-section {
+            background: var(--md-code-bg-color);
+            border: 0.05rem solid rgba(0, 0, 0, 0.07);
+            border-radius: 0.2rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .demo-section h3 {
+            margin-top: 0;
+            color: var(--md-primary-fg-color);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Conclusion text */
+        .conclusion {
+            background: linear-gradient(135deg, rgba(82, 108, 254, 0.1), rgba(64, 81, 181, 0.1));
+            border-radius: 0.3rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-left: 0.25rem solid var(--md-accent-fg-color);
+        }
+
+        .conclusion p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .conclusion p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Navigation buttons */
+        .tutorial-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 0.05rem solid rgba(0, 0, 0, 0.07);
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            background: var(--md-code-bg-color);
+            border-radius: 0.3rem;
+            text-decoration: none;
+            color: var(--md-default-fg-color);
+            transition: all 0.2s ease;
+            max-width: 45%;
+        }
+
+        .nav-button:hover {
+            background: var(--md-accent-fg-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-button.prev {
+            padding-left: 1rem;
+        }
+
+        .nav-button.next {
+            padding-right: 1rem;
+            margin-left: auto;
+        }
+
+        .nav-button .arrow {
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+
+        .nav-button.prev .arrow {
+            margin-right: 1rem;
+        }
+
+        .nav-button.next .arrow {
+            margin-left: 1rem;
+        }
+
+        .nav-button .label {
+            font-size: 0.8rem;
+            color: var(--md-default-fg-color--light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-button:hover .label {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .nav-button .title {
+            font-weight: 600;
+        }
+
+        .nav-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-button.next .nav-content {
+            text-align: right;
+        }
+
+        /* Footer */
+        .md-footer {
+            background-color: var(--md-footer-bg-color);
+            color: var(--md-footer-fg-color);
+            padding: 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .md-footer__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .md-footer a {
+            color: var(--md-accent-fg-color);
+            text-decoration: none;
+        }
+
+        .md-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .tutorial-title {
+                font-size: 2rem;
+            }
+
+            .md-header__inner {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .md-header__nav {
+                gap: 1rem;
+            }
+
+            .tutorial-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-button {
+                max-width: 100%;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .nav-button.next {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="md-header">
+        <div class="md-header__inner">
+            <div class="md-header__title">
+                <a href="../../index.html">TorchVista</a>
+            </div>
+            <nav class="md-header__nav">
+                <a href="../../index.html">Home</a>
+                <a href="../../tutorials.html">Tutorials</a>
+                <a href="../../demos.html">Demos</a>
+                <a href="https://github.com/sachinhosmani/torchvista" target="_blank">GitHub</a>
+                <iframe src="https://ghbtns.com/github-btn.html?user=sachinhosmani&repo=torchvista&type=star&count=true&size=large"
+                        frameborder="0" scrolling="0" width="170" height="30" title="GitHub Star Button"></iframe>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="md-container">
+        <div class="md-content">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="../../tutorials.html">Tutorials</a> <span>&rsaquo; Naming Tensors with Nested Dicts</span>
+            </div>
+
+            <!-- Tutorial header -->
+            <div class="tutorial-header">
+                <div class="tutorial-number">Tutorial 6</div>
+                <h1 class="tutorial-title">Naming Tensors with Nested Dicts</h1>
+                <div class="tutorial-intro"><p>In the previous tutorials, you may have noticed that raw tensor and scalar nodes are generically named "Tensor" or "Scalar". You can give these nodes meaningful names by passing your inputs as a dictionary instead of raw tensors. The dictionary keys become the node names in the visualization.</p>
+<p>This also works with nested dictionaries and for outputs! Let's see how.</p></div>
+            </div>
+
+            <!-- Code section -->
+            <h2 class="section-title">Code</h2>
+            <div class="section-text"></div>
+
+            <div class="code-container">
+<pre><code class="language-python">import torch
+import torch.nn as nn
+from torchvista import trace_model
+
+class SimpleProcessor(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.image_encoder = nn.Linear(64, 32)
+        self.text_encoder = nn.Linear(32, 32)
+        self.fusion = nn.Linear(64, 16)
+
+    def forward(self, inputs):
+        # Keys become node names: 'visual.image', 'text.embedding'
+        img = inputs['visual']['image']
+        txt = inputs['text']['embedding']
+
+        img_features = self.image_encoder(img)
+        txt_features = self.text_encoder(txt)
+
+        combined = torch.cat([img_features, txt_features], dim=-1)
+        output = self.fusion(combined)
+
+        # Output dict keys also become node names
+        return {
+            'results': {
+                'prediction': output,
+                'features': [img_features, txt_features]  # list indices: [0], [1]
+            }
+        }
+
+model = SimpleProcessor()
+
+# Nested dict input - keys become node names in the visualization
+example_input = {
+    'visual': {
+        'image': torch.randn(1, 64)      # -> node gets named 'visual.image'
+    },
+    'text': {
+        'embedding': torch.randn(1, 32)  # -> node gets named 'text.embedding'
+    }
+}
+
+trace_model(model, example_input)</code></pre>
+            </div>
+
+            <!-- Demo section -->
+            <div class="demo-section">
+                <h3>Interactive Visualization</h3>
+                <iframe src="../tutorial_visualizations/dict_input_naming.html" style="width: 100%; height: 820px; border: none; background: white;"></iframe>
+            </div>
+
+            <!-- Conclusion -->
+            <div class="conclusion">
+                <p>You've learned how to use dictionary inputs and outputs to give meaningful names to tensor nodes in the visualization.</p>
+<p>The key takeaways: - Dictionary keys become node names in the visualization - Nesting is supported: <code>visual.image</code> shows the path through the dict - This works for both inputs AND outputs - List indices are shown as <code>[0]</code>, <code>[1]</code>, etc.</p>
+<p>In the next tutorial, we'll learn how to compress repeated structures into a single visual representation.</p>
+            </div>
+
+            <!-- Navigation -->
+            <div class="tutorial-nav">
+                <a href="show_non_gradient_nodes.html" class="nav-button prev">
+                    <span class="arrow">&larr;</span>
+                    <div class="nav-content">
+                        <span class="label">Previous</span>
+                        <span class="title">Hiding Non-Gradient Nodes</span>
+                    </div>
+                </a>
+
+                <a href="compressed_view.html" class="nav-button next">
+                    <div class="nav-content">
+                        <span class="label">Next</span>
+                        <span class="title">Compressed View for Repeated Structures</span>
+                    </div>
+                    <span class="arrow">&rarr;</span>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="md-footer">
+        <div class="md-footer__inner">
+            <p><a href="https://github.com/sachinhosmani/torchvista" target="_blank">GitHub</a></p>
+        </div>
+    </footer>
+</body>
+</html>

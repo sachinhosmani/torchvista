@@ -1,22 +1,37 @@
-import importlib
-import os
+"""
+Model loader for tests.
+
+Models are now stored in docs/models/ subdirectories.
+This module provides backwards-compatible loading for tests.
+"""
+import importlib.util
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+DOCS_MODELS_DIR = PROJECT_ROOT / "docs" / "models"
+
 
 def load_models_from_dir(subdir):
-    """Load all models from a subdirectory."""
+    """Load all models from a docs/models/ subdirectory."""
     models = {}
-    dir_path = os.path.join(os.path.dirname(__file__), subdir)
+    dir_path = DOCS_MODELS_DIR / subdir
 
-    if not os.path.isdir(dir_path):
+    if not dir_path.is_dir():
         return models
 
-    for filename in os.listdir(dir_path):
-        if filename.endswith(".py") and filename != "__init__.py":
-            modname = filename[:-3]
-            module = importlib.import_module(f".{subdir}.{modname}", package=__name__)
+    for filename in sorted(dir_path.iterdir()):
+        if filename.suffix == ".py" and filename.name != "__init__.py":
+            modname = filename.stem
+
+            # Load module from file path
+            spec = importlib.util.spec_from_file_location(modname, filename)
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+
             models[modname] = {
                 "model": getattr(module, "model"),
                 "example_input": getattr(module, "example_input"),
-                "code_contents": getattr(module, "code_contents"),
+                "code_contents": getattr(module, "code_contents", ""),
                 "error_contents": getattr(module, "error_contents", ""),
                 "collapse_modules_after_depth": getattr(module, "collapse_modules_after_depth", -1),
                 "show_non_gradient_nodes": getattr(module, "show_non_gradient_nodes", True),
@@ -25,6 +40,7 @@ def load_models_from_dir(subdir):
                 "show_compressed_view": getattr(module, "show_compressed_view", False),
             }
     return models
+
 
 # Load models from each subdirectory
 demos_models = load_models_from_dir("demos")

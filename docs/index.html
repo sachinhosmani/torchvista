@@ -319,6 +319,102 @@
             color: var(--md-accent-fg-color);
         }
 
+        /* Tutorial CTA button */
+        .tutorial-cta {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .tutorial-button,
+        .md-typeset .tutorial-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--md-primary-fg-color), var(--md-accent-fg-color));
+            color: white !important;
+            text-decoration: none;
+            border-radius: 0.3rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(64, 81, 181, 0.3);
+        }
+
+        .tutorial-button:hover,
+        .md-typeset .tutorial-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(64, 81, 181, 0.4);
+            color: white !important;
+            text-decoration: none;
+        }
+
+        .tutorial-button .arrow {
+            font-size: 1.3rem;
+        }
+
+        /* API parameter list styling */
+        .api-params {
+            margin: 1.5rem 0;
+        }
+
+        .api-param {
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 3px solid var(--md-accent-fg-color);
+        }
+
+        .api-param-header {
+            margin-bottom: 0.4rem;
+        }
+
+        .api-param-name {
+            font-family: "Roboto Mono", "Courier New", monospace;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #d73a49;
+        }
+
+        .api-param-meta {
+            font-size: 0.9rem;
+            color: var(--md-default-fg-color--light);
+            margin-left: 0.5rem;
+        }
+
+        .api-param-type {
+            font-family: "Roboto Mono", "Courier New", monospace;
+            color: #6f42c1;
+        }
+
+        .api-param-default {
+            color: #22863a;
+        }
+
+        .api-param-category {
+            background: var(--md-code-bg-color);
+            padding: 0.1rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            margin-left: 0.5rem;
+        }
+
+        .api-param-desc {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--md-default-fg-color);
+        }
+
+        .api-param-desc code {
+            background: var(--md-code-bg-color);
+            padding: 0.1rem 0.35rem;
+            border-radius: 0.2rem;
+            font-family: "Roboto Mono", "Courier New", monospace;
+            font-size: 0.85em;
+            color: #e83e8c;
+        }
+
         /* Responsive design */
         @media (max-width: 768px) {
             .hero h1 {
@@ -352,7 +448,9 @@
                 <a href="index.html">TorchVista</a>
             </div>
             <nav class="md-header__nav">
+                <a href="tutorials.html">Tutorials</a>
                 <a href="demos.html">Demos</a>
+                <a href="#api">API</a>
                 <a href="https://github.com/sachinhosmani/torchvista" target="_blank">GitHub</a>
                 <iframe src="https://ghbtns.com/github-btn.html?user=sachinhosmani&repo=torchvista&type=star&count=true&size=large"
                         frameborder="0" scrolling="0" width="170" height="30" title="GitHub Star Button"></iframe>
@@ -451,7 +549,133 @@ trace_model(model, example_input)
                 <!-- HTML demo section -->
                 <div class="demo-section">
                     <h3>Interactive Visualization</h3>
-                    <iframe src="website/AttentionClassifier.html" style="width: 100%; height: 825px; border: none; background: white;"></iframe>
+                    <iframe src="generated/website/AttentionClassifier.html" style="width: 100%; height: 825px; border: none; background: white;"></iframe>
+                </div>
+
+                <!-- Tutorial CTA -->
+                <div class="tutorial-cta">
+                    <a href="tutorials.html" class="tutorial-button">
+                        Start the Tutorial <span class="arrow">&rarr;</span>
+                    </a>
+                </div>
+
+                <h2 id="api">API: <code>trace_model</code></h2>
+                <div class="code-container">
+<pre><code class="language-python">trace_model(
+    model,
+    inputs,
+    show_non_gradient_nodes=True,
+    collapse_modules_after_depth=1,
+    forced_module_tracing_depth=None,
+    height=800,
+    width=None,
+    export_format=None,
+    show_module_attr_names=False,
+    export_path=None,
+    show_compressed_view=False,
+)</code></pre>
+                </div>
+
+                <h3>Parameters</h3>
+                <div class="api-params">
+                    <div class="api-param">
+                        <div class="api-param-header">
+                            <span class="api-param-name">model</span>
+                            <span class="api-param-meta">(<span class="api-param-type">torch.nn.Module</span>)</span>
+                            <span class="api-param-category">Purpose: Tracing</span>
+                        </div>
+                        <div class="api-param-desc">Model instance to visualize.</div>
+                    </div>
+
+                    <div class="api-param">
+                        <div class="api-param-header">
+                            <span class="api-param-name">inputs</span>
+                            <span class="api-param-meta">(<span class="api-param-type">Any</span>)</span>
+                            <span class="api-param-category">Purpose: Tracing</span>
+                        </div>
+                        <div class="api-param-desc">Input(s) forwarded into the model; pass a single input or a tuple.</div>
+                    </div>
+
+                    <div class="api-param">
+                        <div class="api-param-header">
+                            <span class="api-param-name">show_non_gradient_nodes</span>
+                            <span class="api-param-meta">(<span class="api-param-type">bool</span>, default: <span class="api-param-default">True</span>)</span>
+                            <span class="api-param-category">Purpose: Visual</span>
+                        </div>
+                        <div class="api-param-desc">Display nodes for constants and other values outside the gradient graph.</div>
+                    </div>
+
+                    <div class="api-param">
+                        <div class="api-param-header">
+                            <span class="api-param-name">collapse_modules_after_depth</span>
+                            <span class="api-param-meta">(<span class="api-param-type">int</span>, default: <span class="api-param-default">1</span>)</span>
+                            <span class="api-param-category">Purpose: Visual</span>
+                        </div>
+                        <div class="api-param-desc">Depth to initially expand nested modules; <code>0</code> collapses everything (nodes can still be expanded interactively).</div>
+                    </div>
+
+                    <div class="api-param">
+                        <div class="api-param-header">
+                            <span class="api-param-name">forced_module_tracing_depth</span>
+                            <span class="api-param-meta">(<span class="api-param-type">int</span>, default: <span class="api-param-default">None</span>)</span>
+                            <span class="api-param-category">Purpose: Tracing</span>
+                        </div>
+                        <div class="api-param-desc">Maximum depth of module internals to trace; <code>None</code> traces only user-defined modules.</div>
+                    </div>
+
+                    <div class="api-param">
+                        <div class="api-param-header">
+                            <span class="api-param-name">height</span>
+                            <span class="api-param-meta">(<span class="api-param-type">int</span>, default: <span class="api-param-default">800</span>)</span>
+                            <span class="api-param-category">Purpose: Visual</span>
+                        </div>
+                        <div class="api-param-desc">Canvas height in pixels.</div>
+                    </div>
+
+                    <div class="api-param">
+                        <div class="api-param-header">
+                            <span class="api-param-name">width</span>
+                            <span class="api-param-meta">(<span class="api-param-type">int | str</span>, default: <span class="api-param-default">None</span>)</span>
+                            <span class="api-param-category">Purpose: Visual</span>
+                        </div>
+                        <div class="api-param-desc">Canvas width; accepts pixels or percentages; defaults to full available width when omitted.</div>
+                    </div>
+
+                    <div class="api-param">
+                        <div class="api-param-header">
+                            <span class="api-param-name">export_format</span>
+                            <span class="api-param-meta">(<span class="api-param-type">str</span>, default: <span class="api-param-default">None</span>)</span>
+                            <span class="api-param-category">Purpose: Export</span>
+                        </div>
+                        <div class="api-param-desc">Optional export format: <code>png</code>, <code>svg</code>, or <code>html</code> if exporting graph as a file. Otherwise, by default the graph is shown within the notebook.</div>
+                    </div>
+
+                    <div class="api-param">
+                        <div class="api-param-header">
+                            <span class="api-param-name">show_module_attr_names</span>
+                            <span class="api-param-meta">(<span class="api-param-type">bool</span>, default: <span class="api-param-default">False</span>)</span>
+                            <span class="api-param-category">Purpose: Visual</span>
+                        </div>
+                        <div class="api-param-desc">Display attribute names for modules when available instead of just class names.</div>
+                    </div>
+
+                    <div class="api-param">
+                        <div class="api-param-header">
+                            <span class="api-param-name">export_path</span>
+                            <span class="api-param-meta">(<span class="api-param-type">str</span>, default: <span class="api-param-default">None</span>)</span>
+                            <span class="api-param-category">Purpose: Export</span>
+                        </div>
+                        <div class="api-param-desc">Custom path if exporting as a file. <strong>Only HTML format</strong> is currently supported with custom export paths. If only file name is specified, it will be created inside the present working directory.</div>
+                    </div>
+
+                    <div class="api-param">
+                        <div class="api-param-header">
+                            <span class="api-param-name">show_compressed_view</span> <em>(Experimental)</em>
+                            <span class="api-param-meta">(<span class="api-param-type">bool</span>, default: <span class="api-param-default">False</span>)</span>
+                            <span class="api-param-category">Purpose: Visual</span>
+                        </div>
+                        <div class="api-param-desc">Compress the graph by showing repeating nodes of the same type with identical input and output dims in single "repeat" blocks. This feature currently only recognises repeating nodes within <code>Sequential</code> and <code>ModuleList</code>. WARNING: this feature might be expensive on large models.</div>
+                    </div>
                 </div>
 
                 <h2>Resources</h2>
