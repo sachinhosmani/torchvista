@@ -179,8 +179,7 @@ def load_models_from_dir(subdir):
             if show_compressed:
                 trace_kwargs['show_compressed_view'] = True
 
-            # Generate display code
-            code_contents = generate_display_code(code, trace_kwargs if trace_kwargs else None)
+            code_contents = getattr(module, 'code_contents', None)
 
             models[modname] = {
                 "model": getattr(module, "model"),

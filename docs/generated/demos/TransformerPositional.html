@@ -254,28 +254,6 @@ class PositionalTransformer(nn.Module):
     def forward(self, x):
         x = self.embed(x) + self.pos_embed[:x.size(0)]
         x = self.encoder(x)
-        return self.fc(x[0])  # classification using first token
-
-model = PositionalTransformer()
-example_input = torch.randn(10, 1, 20)  # (seq_len, batch_size, input_dim)
-
-code_contents = """\
-import torch
-import torch.nn as nn
-from torchvista import trace_model
-
-class PositionalTransformer(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.embed = nn.Linear(20, 32)
-        self.pos_embed = nn.Parameter(torch.randn(10, 1, 32))
-        self.encoder_layer = nn.TransformerEncoderLayer(d_model=32, nhead=4)
-        self.encoder = nn.TransformerEncoder(self.encoder_layer, num_layers=2)
-        self.fc = nn.Linear(32, 5)
-
-    def forward(self, x):
-        x = self.embed(x) + self.pos_embed[:x.size(0)]
-        x = self.encoder(x)
         return self.fc(x[0])
 
 model = PositionalTransformer()
@@ -283,7 +261,6 @@ example_input = torch.randn(10, 1, 20)
 
 trace_model(model, example_input)
 
-"""
 </code></pre>
                 </div>
 
@@ -296,120 +273,120 @@ trace_model(model, example_input)
     
             <div class="graph-view" id="graphContainer" style="height: 100%">
                 <div class="graph-box-header">Visualized Interactive Graph</div>
-                <div id="graph-container_2b57441c-4669-4062-99e1-cb3854b0c695">
-    <div id="graph_2b57441c-4669-4062-99e1-cb3854b0c695"></div>
-    <div class="logo_2b57441c-4669-4062-99e1-cb3854b0c695">
+                <div id="graph-container_51fdcb45-237a-4068-9fd7-986f99ecef3a">
+    <div id="graph_51fdcb45-237a-4068-9fd7-986f99ecef3a"></div>
+    <div class="logo_51fdcb45-237a-4068-9fd7-986f99ecef3a">
         <a href="https://github.com/sachinhosmani/torchvista" target="_blank" rel="noopener noreferrer">
         torchvista
         </a>
     </div>
-    <div id="popup_2b57441c-4669-4062-99e1-cb3854b0c695" class="popup_2b57441c-4669-4062-99e1-cb3854b0c695" style="display: none;">
-        <div class="popup-header_2b57441c-4669-4062-99e1-cb3854b0c695">
-            <h3 id="popup-title_2b57441c-4669-4062-99e1-cb3854b0c695"></h3>
-            <span class="popup-close_2b57441c-4669-4062-99e1-cb3854b0c695">✕</span>
+    <div id="popup_51fdcb45-237a-4068-9fd7-986f99ecef3a" class="popup_51fdcb45-237a-4068-9fd7-986f99ecef3a" style="display: none;">
+        <div class="popup-header_51fdcb45-237a-4068-9fd7-986f99ecef3a">
+            <h3 id="popup-title_51fdcb45-237a-4068-9fd7-986f99ecef3a"></h3>
+            <span class="popup-close_51fdcb45-237a-4068-9fd7-986f99ecef3a">✕</span>
         </div>
-        <div id="popup-content_2b57441c-4669-4062-99e1-cb3854b0c695" class="popup-content_2b57441c-4669-4062-99e1-cb3854b0c695">
-            <div id="common-info_2b57441c-4669-4062-99e1-cb3854b0c695">
+        <div id="popup-content_51fdcb45-237a-4068-9fd7-986f99ecef3a" class="popup-content_51fdcb45-237a-4068-9fd7-986f99ecef3a">
+            <div id="common-info_51fdcb45-237a-4068-9fd7-986f99ecef3a">
             </div>
-            <div id="module-template_2b57441c-4669-4062-99e1-cb3854b0c695" style="display:none;">
-                <details open id="module-parameters-details_2b57441c-4669-4062-99e1-cb3854b0c695">
+            <div id="module-template_51fdcb45-237a-4068-9fd7-986f99ecef3a" style="display:none;">
+                <details open id="module-parameters-details_51fdcb45-237a-4068-9fd7-986f99ecef3a">
                     <summary style="color: black"><strong>forward() Parameters</strong></summary>
-                    <div id="module-parameters_2b57441c-4669-4062-99e1-cb3854b0c695" class="json-viewer_2b57441c-4669-4062-99e1-cb3854b0c695"></div>
+                    <div id="module-parameters_51fdcb45-237a-4068-9fd7-986f99ecef3a" class="json-viewer_51fdcb45-237a-4068-9fd7-986f99ecef3a"></div>
                 </details>
-                <details open id="module-attributes-details_2b57441c-4669-4062-99e1-cb3854b0c695">
+                <details open id="module-attributes-details_51fdcb45-237a-4068-9fd7-986f99ecef3a">
                     <summary style="color: black"><strong>Attributes</strong></summary>
-                    <div id="module-attributes_2b57441c-4669-4062-99e1-cb3854b0c695" class="json-viewer_2b57441c-4669-4062-99e1-cb3854b0c695"></div>
+                    <div id="module-attributes_51fdcb45-237a-4068-9fd7-986f99ecef3a" class="json-viewer_51fdcb45-237a-4068-9fd7-986f99ecef3a"></div>
                 </details>
             </div>
-            <div id="tensor-op-template_2b57441c-4669-4062-99e1-cb3854b0c695" style="display:none;">
+            <div id="tensor-op-template_51fdcb45-237a-4068-9fd7-986f99ecef3a" style="display:none;">
                 <summary><strong>Parameters</strong></summary>
-                <div id="tensor-op-parameters_2b57441c-4669-4062-99e1-cb3854b0c695" class="json-viewer_2b57441c-4669-4062-99e1-cb3854b0c695"></div>
+                <div id="tensor-op-parameters_51fdcb45-237a-4068-9fd7-986f99ecef3a" class="json-viewer_51fdcb45-237a-4068-9fd7-986f99ecef3a"></div>
             </div>
-            <p id="no-info_2b57441c-4669-4062-99e1-cb3854b0c695" style="display:none;">No further information available for this node.</p>
+            <p id="no-info_51fdcb45-237a-4068-9fd7-986f99ecef3a" style="display:none;">No further information available for this node.</p>
         </div>
     </div>
 
     <style>
-        .node_2b57441c-4669-4062-99e1-cb3854b0c695 rect {
+        .node_51fdcb45-237a-4068-9fd7-986f99ecef3a rect {
             stroke: #333;
             fill: #fff;
         }
-        text.node-label_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        text.node-label_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.type-indicator_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        text.type-indicator_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.collapse-icon_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        text.collapse-icon_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 14px;
             cursor: default;
             user-select: none;
         }
-        .edge_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        .edge_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             stroke: #797979;
             fill: none;
         }
-        .node_2b57441c-4669-4062-99e1-cb3854b0c695 rect.input_2b57441c-4669-4062-99e1-cb3854b0c695 { fill: #FF9AFF; }
-        .node_2b57441c-4669-4062-99e1-cb3854b0c695 rect.constant_2b57441c-4669-4062-99e1-cb3854b0c695 { fill: rgb(235 235 235); }
+        .node_51fdcb45-237a-4068-9fd7-986f99ecef3a rect.input_51fdcb45-237a-4068-9fd7-986f99ecef3a { fill: #FF9AFF; }
+        .node_51fdcb45-237a-4068-9fd7-986f99ecef3a rect.constant_51fdcb45-237a-4068-9fd7-986f99ecef3a { fill: rgb(235 235 235); }
 
-        .node_2b57441c-4669-4062-99e1-cb3854b0c695 rect.output_2b57441c-4669-4062-99e1-cb3854b0c695 { fill: #74e071; }
-        .node_2b57441c-4669-4062-99e1-cb3854b0c695 rect.failed_2b57441c-4669-4062-99e1-cb3854b0c695 { fill: rgb(224 15 15); }
-        .node_2b57441c-4669-4062-99e1-cb3854b0c695 rect.module_2b57441c-4669-4062-99e1-cb3854b0c695 { fill: #8BDEDB; }
-        .node_2b57441c-4669-4062-99e1-cb3854b0c695 rect.operation_2b57441c-4669-4062-99e1-cb3854b0c695 { fill: #FEBC5A; }
+        .node_51fdcb45-237a-4068-9fd7-986f99ecef3a rect.output_51fdcb45-237a-4068-9fd7-986f99ecef3a { fill: #74e071; }
+        .node_51fdcb45-237a-4068-9fd7-986f99ecef3a rect.failed_51fdcb45-237a-4068-9fd7-986f99ecef3a { fill: rgb(224 15 15); }
+        .node_51fdcb45-237a-4068-9fd7-986f99ecef3a rect.module_51fdcb45-237a-4068-9fd7-986f99ecef3a { fill: #8BDEDB; }
+        .node_51fdcb45-237a-4068-9fd7-986f99ecef3a rect.operation_51fdcb45-237a-4068-9fd7-986f99ecef3a { fill: #FEBC5A; }
 
-        .node_2b57441c-4669-4062-99e1-cb3854b0c695 ellipse.input_2b57441c-4669-4062-99e1-cb3854b0c695 { fill: #FF9AFF; }
-        .node_2b57441c-4669-4062-99e1-cb3854b0c695 ellipse.constant_2b57441c-4669-4062-99e1-cb3854b0c695 { fill: rgb(235 235 235); }
-        .node_2b57441c-4669-4062-99e1-cb3854b0c695 ellipse.output_2b57441c-4669-4062-99e1-cb3854b0c695 { fill: #74e071; }
-        .node_2b57441c-4669-4062-99e1-cb3854b0c695 ellipse.failed_2b57441c-4669-4062-99e1-cb3854b0c695 { fill: rgb(224 15 15); }
+        .node_51fdcb45-237a-4068-9fd7-986f99ecef3a ellipse.input_51fdcb45-237a-4068-9fd7-986f99ecef3a { fill: #FF9AFF; }
+        .node_51fdcb45-237a-4068-9fd7-986f99ecef3a ellipse.constant_51fdcb45-237a-4068-9fd7-986f99ecef3a { fill: rgb(235 235 235); }
+        .node_51fdcb45-237a-4068-9fd7-986f99ecef3a ellipse.output_51fdcb45-237a-4068-9fd7-986f99ecef3a { fill: #74e071; }
+        .node_51fdcb45-237a-4068-9fd7-986f99ecef3a ellipse.failed_51fdcb45-237a-4068-9fd7-986f99ecef3a { fill: rgb(224 15 15); }
 
-        .node_2b57441c-4669-4062-99e1-cb3854b0c695 ellipse {
+        .node_51fdcb45-237a-4068-9fd7-986f99ecef3a ellipse {
             stroke: #333;
             stroke-width: 1px;
         }
-        .edgeLabelGroup_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        .edgeLabelGroup_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             pointer-events: none;
         }
-        #arrowhead_2b57441c-4669-4062-99e1-cb3854b0c695 path {
+        #arrowhead_51fdcb45-237a-4068-9fd7-986f99ecef3a path {
             fill: #333333;;
         }
-        .node_2b57441c-4669-4062-99e1-cb3854b0c695 rect,
-        .node_2b57441c-4669-4062-99e1-cb3854b0c695 ellipse {
+        .node_51fdcb45-237a-4068-9fd7-986f99ecef3a rect,
+        .node_51fdcb45-237a-4068-9fd7-986f99ecef3a ellipse {
             transition: fill 0.3s ease;
         }
 
-        .node_2b57441c-4669-4062-99e1-cb3854b0c695 .type-indicator_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        .node_51fdcb45-237a-4068-9fd7-986f99ecef3a .type-indicator_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             font-size: 5px;
             fill: rgba(0, 0, 0, 1.0);  /* Dark grey, semi-transparent */
             pointer-events: none;
         }
 
-        .node_2b57441c-4669-4062-99e1-cb3854b0c695.error_2b57441c-4669-4062-99e1-cb3854b0c695 rect {
+        .node_51fdcb45-237a-4068-9fd7-986f99ecef3a.error_51fdcb45-237a-4068-9fd7-986f99ecef3a rect {
             stroke: black;
             stroke-width: 1px;
         }
 
-        .boundary-box_2b57441c-4669-4062-99e1-cb3854b0c695.error_2b57441c-4669-4062-99e1-cb3854b0c695 > rect:first-of-type {
+        .boundary-box_51fdcb45-237a-4068-9fd7-986f99ecef3a.error_51fdcb45-237a-4068-9fd7-986f99ecef3a > rect:first-of-type {
             fill: red;
             fill-opacity: 0.2;
         }
 
-        #graph-container_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        #graph-container_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             position: relative;
             height: 95%;
             width: ${width};
             overflow: hidden;
         }
 
-        #graph_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        #graph_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             height: 100%;
         }
         
-        .popup_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        .popup_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             position: absolute;
             background: white;
@@ -424,7 +401,7 @@ trace_model(model, example_input)
             flex-direction: column;
         }
 
-        .popup-header_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        .popup-header_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             position: sticky;
             top: 0;
             background: white;
@@ -436,12 +413,12 @@ trace_model(model, example_input)
             z-index: 1;
         }
 
-        .popup_2b57441c-4669-4062-99e1-cb3854b0c695 h3 {
+        .popup_51fdcb45-237a-4068-9fd7-986f99ecef3a h3 {
             margin: 0;
             font-size: 16px;
         }
 
-        .popup-content_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        .popup-content_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             padding: 10px;
             padding-bottom: 10px;
             overflow-y: auto;
@@ -449,87 +426,87 @@ trace_model(model, example_input)
             flex-grow: 1;
         }
 
-        .popup_2b57441c-4669-4062-99e1-cb3854b0c695 pre {
+        .popup_51fdcb45-237a-4068-9fd7-986f99ecef3a pre {
             white-space: pre;
             overflow-x: auto;
         }
 
-        .popup-close_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        .popup-close_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             cursor: pointer;
             font-size: 24px;
             font-weight: bold;
             line-height: 1;
         }
 
-        #popup-title_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        #popup-title_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             font-size: 16px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             color: black;
         }
 
-        #graph-container_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        #graph-container_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             position: relative;
         }
 
-        #graph-container_2b57441c-4669-4062-99e1-cb3854b0c695 pre {
+        #graph-container_51fdcb45-237a-4068-9fd7-986f99ecef3a pre {
             margin-bottom: 0;
         }
 
-        .boundary-box_2b57441c-4669-4062-99e1-cb3854b0c695 rect {
+        .boundary-box_51fdcb45-237a-4068-9fd7-986f99ecef3a rect {
             pointer-events: none;
         }
-        .boundary-box_2b57441c-4669-4062-99e1-cb3854b0c695 text {
+        .boundary-box_51fdcb45-237a-4068-9fd7-986f99ecef3a text {
             pointer-events: none;
             user-select: none;
         }
 
-        .boundary-box_2b57441c-4669-4062-99e1-cb3854b0c695 rect {
+        .boundary-box_51fdcb45-237a-4068-9fd7-986f99ecef3a rect {
             pointer-events: none;
         }
-        .boundary-box_2b57441c-4669-4062-99e1-cb3854b0c695 text {
+        .boundary-box_51fdcb45-237a-4068-9fd7-986f99ecef3a text {
             pointer-events: none;
             user-select: none;
             font-weight: bold;
         }
-        .edge-label_2b57441c-4669-4062-99e1-cb3854b0c695 text {
+        .edge-label_51fdcb45-237a-4068-9fd7-986f99ecef3a text {
             pointer-events: none;
             user-select: none;
             font-size: 4px;
             font-family: "'Roboto', sans-serif";
         }
                     
-        .collapse-button_2b57441c-4669-4062-99e1-cb3854b0c695, .info-button_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        .collapse-button_51fdcb45-237a-4068-9fd7-986f99ecef3a, .info-button_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             fill: #fff;
             stroke: #333;
             stroke-width: 1px;
             cursor: pointer;
         }
 
-        .collapse-button_2b57441c-4669-4062-99e1-cb3854b0c695:hover, .info-button_2b57441c-4669-4062-99e1-cb3854b0c695:hover {
+        .collapse-button_51fdcb45-237a-4068-9fd7-986f99ecef3a:hover, .info-button_51fdcb45-237a-4068-9fd7-986f99ecef3a:hover {
             fill: #eee;
             cursor: pointer;
         }
 
-        .collapse-icon_2b57441c-4669-4062-99e1-cb3854b0c695, .info-icon_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        .collapse-icon_51fdcb45-237a-4068-9fd7-986f99ecef3a, .info-icon_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             fill: rgb(51, 51, 51);
         }
 
-        .collapse-button-disabled_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        .collapse-button-disabled_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             fill: #eee5;
             stroke: #3333334f;
             stroke-width: 1px;
             cursor: not-allowed;
         }
 
-        .collapse-button-disabled_2b57441c-4669-4062-99e1-cb3854b0c695:hover {
+        .collapse-button-disabled_51fdcb45-237a-4068-9fd7-986f99ecef3a:hover {
             fill: #eee6;
             cursor: not-allowed;
         }
 
-        .collapse-icon-disabled_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        .collapse-icon-disabled_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -538,11 +515,11 @@ trace_model(model, example_input)
         }
 
         /* Edge hover styles */
-        .edge-group_2b57441c-4669-4062-99e1-cb3854b0c695 path {
+        .edge-group_51fdcb45-237a-4068-9fd7-986f99ecef3a path {
             pointer-events: stroke;
         }
 
-        .edge-label_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        .edge-label_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             pointer-events: all;
         }
 
@@ -582,50 +559,50 @@ trace_model(model, example_input)
             }
         }
 
-        .highlight-cluster_2b57441c-4669-4062-99e1-cb3854b0c695 > rect:first-of-type {
+        .highlight-cluster_51fdcb45-237a-4068-9fd7-986f99ecef3a > rect:first-of-type {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        .highlight-node_2b57441c-4669-4062-99e1-cb3854b0c695 rect {
+        .highlight-node_51fdcb45-237a-4068-9fd7-986f99ecef3a rect {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        text.node-label_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        text.node-label_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 0.8rem;  /* Base size using rem units for accessibility */
             cursor: default;
             user-select: none;
         }
 
-        .node_2b57441c-4669-4062-99e1-cb3854b0c695.constant_2b57441c-4669-4062-99e1-cb3854b0c695 .node-label_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        .node_51fdcb45-237a-4068-9fd7-986f99ecef3a.constant_51fdcb45-237a-4068-9fd7-986f99ecef3a .node-label_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             font-size: 0.7rem;
         }
 
-        .popup-content_2b57441c-4669-4062-99e1-cb3854b0c695 summary {
+        .popup-content_51fdcb45-237a-4068-9fd7-986f99ecef3a summary {
             cursor: pointer;
             margin: 5px;
             user-select: none;
         }
 
-        .node_2b57441c-4669-4062-99e1-cb3854b0c695.input_2b57441c-4669-4062-99e1-cb3854b0c695 rect,
-        .node_2b57441c-4669-4062-99e1-cb3854b0c695.output_2b57441c-4669-4062-99e1-cb3854b0c695 rect,
-        .node_2b57441c-4669-4062-99e1-cb3854b0c695.constant_2b57441c-4669-4062-99e1-cb3854b0c695 rect {
+        .node_51fdcb45-237a-4068-9fd7-986f99ecef3a.input_51fdcb45-237a-4068-9fd7-986f99ecef3a rect,
+        .node_51fdcb45-237a-4068-9fd7-986f99ecef3a.output_51fdcb45-237a-4068-9fd7-986f99ecef3a rect,
+        .node_51fdcb45-237a-4068-9fd7-986f99ecef3a.constant_51fdcb45-237a-4068-9fd7-986f99ecef3a rect {
             stroke-width: 1px;
             rx: 8px;
             ry: 8px;
             stroke-dasharray: none;
         }
 
-        #png-error-container_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        #png-error-container_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             text-align: center;
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 14px;
         }
 
-        #png-error-message_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        #png-error-message_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             padding: 8px 16px;
             background-color: #dc3545;
             color: white;
@@ -636,13 +613,13 @@ trace_model(model, example_input)
             text-align: left;
         }
 
-        #png-link-container_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        #png-link-container_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 18px;
         }
 
-        #png-download-button_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        #png-download-button_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -652,11 +629,11 @@ trace_model(model, example_input)
             margin-right: 8px;
         }
 
-        #png-download-button_2b57441c-4669-4062-99e1-cb3854b0c695:hover {
+        #png-download-button_51fdcb45-237a-4068-9fd7-986f99ecef3a:hover {
             background-color: #0056b3;
         }
 
-        #png-save-button_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        #png-save-button_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -665,18 +642,18 @@ trace_model(model, example_input)
             border-radius: 4px;
         }
 
-        #png-save-button_2b57441c-4669-4062-99e1-cb3854b0c695:hover {
+        #png-save-button_51fdcb45-237a-4068-9fd7-986f99ecef3a:hover {
             background-color: #0056b3;
         }
 
-        #svg-link-container_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        #svg-link-container_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 18px;
         }
 
 
-        #svg-download-button_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        #svg-download-button_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -686,11 +663,11 @@ trace_model(model, example_input)
             margin-right: 8px;
         }
 
-        #svg-download-button_2b57441c-4669-4062-99e1-cb3854b0c695:hover {
+        #svg-download-button_51fdcb45-237a-4068-9fd7-986f99ecef3a:hover {
             background-color: #0056b3;
         }
 
-        #svg-save-button_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        #svg-save-button_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -699,11 +676,11 @@ trace_model(model, example_input)
             border-radius: 4px;
         }
 
-        #svg-save-button_2b57441c-4669-4062-99e1-cb3854b0c695:hover {
+        #svg-save-button_51fdcb45-237a-4068-9fd7-986f99ecef3a:hover {
             background-color: #0056b3;
         }
 
-        .custom-tooltip_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        .custom-tooltip_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             position: absolute;
             background: white;
             border: 1px solid #ccc;
@@ -719,7 +696,7 @@ trace_model(model, example_input)
             display: none;
         }
 
-        .custom-tooltip_smaller_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        .custom-tooltip_smaller_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             position: absolute;
             background: white;
             border: 1px solid #ccc;
@@ -735,16 +712,16 @@ trace_model(model, example_input)
             display: none;
         }
 
-        .edge_2b57441c-4669-4062-99e1-cb3854b0c695.implied-edge_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        .edge_51fdcb45-237a-4068-9fd7-986f99ecef3a.implied-edge_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             stroke-dasharray: 5,5;
         }
 
-        .logo_2b57441c-4669-4062-99e1-cb3854b0c695 {
+        .logo_51fdcb45-237a-4068-9fd7-986f99ecef3a {
             position: absolute;
             bottom: 8px; left: 8px;
             padding: 4px 6px;
         }
-        .logo_2b57441c-4669-4062-99e1-cb3854b0c695 a {
+        .logo_51fdcb45-237a-4068-9fd7-986f99ecef3a a {
             color: #a1a1a1;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             opacity: .6;
@@ -905,7 +882,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
 (function() {
-    const adj_list = {"input_0": {"edges": [{"target": "Linear_1", "dims": "(10, 1, 20)", "edge_data_id": 11057819136}], "failed": false, "node_type": "Input"}, "Linear_1": {"edges": [{"target": "__add___6", "dims": "(10, 1, 32)", "edge_data_id": 11661083408}], "failed": false, "node_type": "Module"}, "__getitem___4": {"edges": [{"target": "__add___6", "dims": "(10, 1, 32)", "edge_data_id": 11661076016}], "failed": false, "node_type": "Operation"}, "tensor_5": {"edges": [{"target": "__getitem___4", "dims": "(10, 1, 32)", "edge_data_id": 11058411216}], "failed": false, "node_type": "Constant"}, "__add___6": {"edges": [{"target": "TransformerEncoder_7", "dims": "(10, 1, 32)", "edge_data_id": 11661508672}], "failed": false, "node_type": "Operation"}, "TransformerEncoder_7": {"edges": [{"target": "__getitem___8", "dims": "(10, 1, 32)", "edge_data_id": 11661509552}], "failed": false, "node_type": "Module"}, "__getitem___8": {"edges": [{"target": "Linear_10", "dims": "(1, 32)", "edge_data_id": 11661083408}], "failed": false, "node_type": "Operation"}, "scalar_9": {"edges": [{"target": "__getitem___8", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "Linear_10": {"edges": [{"target": "output_0", "dims": "(1, 5)", "edge_data_id": 11661508672}], "failed": false, "node_type": "Module"}, "output_0": {"edges": [], "failed": false, "node_type": "Output"}};
+    const adj_list = {"input_0": {"edges": [{"target": "Linear_1", "dims": "(10, 1, 20)", "edge_data_id": 5466616112}], "failed": false, "node_type": "Input"}, "Linear_1": {"edges": [{"target": "__add___6", "dims": "(10, 1, 32)", "edge_data_id": 11404068800}], "failed": false, "node_type": "Module"}, "__getitem___4": {"edges": [{"target": "__add___6", "dims": "(10, 1, 32)", "edge_data_id": 11403840144}], "failed": false, "node_type": "Operation"}, "tensor_5": {"edges": [{"target": "__getitem___4", "dims": "(10, 1, 32)", "edge_data_id": 6434982704}], "failed": false, "node_type": "Constant"}, "__add___6": {"edges": [{"target": "TransformerEncoder_7", "dims": "(10, 1, 32)", "edge_data_id": 11403840464}], "failed": false, "node_type": "Operation"}, "TransformerEncoder_7": {"edges": [{"target": "__getitem___8", "dims": "(10, 1, 32)", "edge_data_id": 11403839984}], "failed": false, "node_type": "Module"}, "__getitem___8": {"edges": [{"target": "Linear_10", "dims": "(1, 32)", "edge_data_id": 11403904480}], "failed": false, "node_type": "Operation"}, "scalar_9": {"edges": [{"target": "__getitem___8", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "Linear_10": {"edges": [{"target": "output_0", "dims": "(1, 5)", "edge_data_id": 11403840464}], "failed": false, "node_type": "Module"}, "output_0": {"edges": [], "failed": false, "node_type": "Output"}};
     const module_info = {"Linear_1": {"type": "Linear", "parameters": {"weight": {"shape": [32, 20], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 20, "out_features": 32, "training": true}, "extra_repr": "in_features=20, out_features=32, bias=True"}, "TransformerEncoder_7": {"type": "TransformerEncoder", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "enable_nested_tensor": true, "mask_check": true, "num_layers": 2, "training": true, "use_nested_tensor": false}, "extra_repr": ""}, "Linear_10": {"type": "Linear", "parameters": {"weight": {"shape": [5, 32], "requires_grad": true}, "bias": {"shape": [5], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 32, "out_features": 5, "training": true}, "extra_repr": "in_features=32, out_features=5, bias=True"}};
     const func_info = {"Linear_1": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 20], "dtype": "torch.float32"}], "keyword_args": {}}, "size_2": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 20], "dtype": "torch.float32"}, 0], "keyword_args": {}}, "__getitem___4": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "slice", "repr": "slice(None, 10, None)"}], "keyword_args": {}}, "__add___6": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "TransformerEncoder_7": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "__getitem___8": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, 0], "keyword_args": {}}, "Linear_10": {"positional_args": [{"_type": "tensor", "shape": [1, 32], "dtype": "torch.float32"}], "keyword_args": {}}};
     const parent_module_to_nodes = {};
@@ -954,10 +931,10 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         removeTooltip();
         
         const tooltip = document.createElement('div');
-        tooltip.className = !smaller ? `custom-tooltip_2b57441c-4669-4062-99e1-cb3854b0c695` : `custom-tooltip_smaller_2b57441c-4669-4062-99e1-cb3854b0c695`;
+        tooltip.className = !smaller ? `custom-tooltip_51fdcb45-237a-4068-9fd7-986f99ecef3a` : `custom-tooltip_smaller_51fdcb45-237a-4068-9fd7-986f99ecef3a`;
         tooltip.textContent = text;
         
-        const container = document.getElementById(`graph-container_2b57441c-4669-4062-99e1-cb3854b0c695`);
+        const container = document.getElementById(`graph-container_51fdcb45-237a-4068-9fd7-986f99ecef3a`);
         container.appendChild(tooltip);
         currentTooltip = tooltip;
         
@@ -969,7 +946,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const buttonRect = buttonElement.getBoundingClientRect();
         
         // Get the container's position in screen coordinates
-        const containerRect = document.getElementById(`graph-container_2b57441c-4669-4062-99e1-cb3854b0c695`).getBoundingClientRect();
+        const containerRect = document.getElementById(`graph-container_51fdcb45-237a-4068-9fd7-986f99ecef3a`).getBoundingClientRect();
         
         // Calculate position relative to container
         const buttonX = buttonRect.left + (buttonRect.width / 2) - containerRect.left;
@@ -1586,7 +1563,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function reloadGraph() {
-        d3.select("#graph_2b57441c-4669-4062-99e1-cb3854b0c695").html("");
+        d3.select("#graph_51fdcb45-237a-4068-9fd7-986f99ecef3a").html("");
 
         if (generateImage) {
             renderGraphvizImage();
@@ -1653,16 +1630,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function renderGraphvizImage() {
-        d3.select("#png-link-container_2b57441c-4669-4062-99e1-cb3854b0c695").remove();
+        d3.select("#png-link-container_51fdcb45-237a-4068-9fd7-986f99ecef3a").remove();
         
         function showErrorMessage(error) {
-            const parent = d3.select("#graph-container_2b57441c-4669-4062-99e1-cb3854b0c695").node().parentNode;
+            const parent = d3.select("#graph-container_51fdcb45-237a-4068-9fd7-986f99ecef3a").node().parentNode;
             const errorContainer = d3.select(parent)
-                .insert("div", "#graph-container_2b57441c-4669-4062-99e1-cb3854b0c695")
-                .attr("id", "png-error-container_2b57441c-4669-4062-99e1-cb3854b0c695");
+                .insert("div", "#graph-container_51fdcb45-237a-4068-9fd7-986f99ecef3a")
+                .attr("id", "png-error-container_51fdcb45-237a-4068-9fd7-986f99ecef3a");
             
             errorContainer.append("div")
-                .attr("id", "png-error-message_2b57441c-4669-4062-99e1-cb3854b0c695")
+                .attr("id", "png-error-message_51fdcb45-237a-4068-9fd7-986f99ecef3a")
                 .html(`<strong>Error:</strong><br>${error.stack || error.message || error}<br><br><strong>Note:</strong> Exporting very large models as PNG is currently not supported. Please use generate_image=False, or raise an issue on https://github.com/sachinhosmani/torchvista/issues`);
         }
         
@@ -1700,21 +1677,21 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const pngUrl = URL.createObjectURL(pngBlob);
         
         // Create link container
-        const parent = d3.select("#graph-container_2b57441c-4669-4062-99e1-cb3854b0c695").node().parentNode;
+        const parent = d3.select("#graph-container_51fdcb45-237a-4068-9fd7-986f99ecef3a").node().parentNode;
         const linkContainer = d3.select(parent)
-            .insert("div", "#graph-container_2b57441c-4669-4062-99e1-cb3854b0c695")
-            .attr("id", "png-link-container_2b57441c-4669-4062-99e1-cb3854b0c695");
+            .insert("div", "#graph-container_51fdcb45-237a-4068-9fd7-986f99ecef3a")
+            .attr("id", "png-link-container_51fdcb45-237a-4068-9fd7-986f99ecef3a");
         
         linkContainer.append("a")
             .attr("href", pngUrl)
             .attr("target", "_blank")
-            .attr("id", "png-download-button_2b57441c-4669-4062-99e1-cb3854b0c695")
+            .attr("id", "png-download-button_51fdcb45-237a-4068-9fd7-986f99ecef3a")
             .text("View PNG in New Tab");
 
         linkContainer.append("a")
             .attr("href", pngUrl)
-            .attr("download", `torchvista_graph_2b57441c-4669-4062-99e1-cb3854b0c695.png`)
-            .attr("id", "png-save-button_2b57441c-4669-4062-99e1-cb3854b0c695")
+            .attr("download", `torchvista_graph_51fdcb45-237a-4068-9fd7-986f99ecef3a.png`)
+            .attr("id", "png-save-button_51fdcb45-237a-4068-9fd7-986f99ecef3a")
             .text("Download PNG");
             
         URL.revokeObjectURL(svgUrl);
@@ -1735,26 +1712,26 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const svgUrl = URL.createObjectURL(svgBlob);
         
         // Create link container
-        const parent = d3.select("#graph-container_2b57441c-4669-4062-99e1-cb3854b0c695").node().parentNode;
+        const parent = d3.select("#graph-container_51fdcb45-237a-4068-9fd7-986f99ecef3a").node().parentNode;
         const linkContainer = d3.select(parent)
-            .insert("div", "#graph-container_2b57441c-4669-4062-99e1-cb3854b0c695")
-            .attr("id", "svg-link-container_2b57441c-4669-4062-99e1-cb3854b0c695");
+            .insert("div", "#graph-container_51fdcb45-237a-4068-9fd7-986f99ecef3a")
+            .attr("id", "svg-link-container_51fdcb45-237a-4068-9fd7-986f99ecef3a");
         
         linkContainer.append("a")
             .attr("href", svgUrl)
             .attr("target", "_blank")
-            .attr("id", "svg-download-button_2b57441c-4669-4062-99e1-cb3854b0c695")
+            .attr("id", "svg-download-button_51fdcb45-237a-4068-9fd7-986f99ecef3a")
             .text("View SVG in New Tab");
 
         linkContainer.append("a")
             .attr("href", svgUrl)
-            .attr("download", `torchvista_graph_2b57441c-4669-4062-99e1-cb3854b0c695.svg`)
-            .attr("id", "svg-save-button_2b57441c-4669-4062-99e1-cb3854b0c695")
+            .attr("download", `torchvista_graph_51fdcb45-237a-4068-9fd7-986f99ecef3a.svg`)
+            .attr("id", "svg-save-button_51fdcb45-237a-4068-9fd7-986f99ecef3a")
             .text("Download SVG");
     }
 
     function createGraph(graphvizData) {
-        const svg = d3.select("#graph_2b57441c-4669-4062-99e1-cb3854b0c695")
+        const svg = d3.select("#graph_51fdcb45-237a-4068-9fd7-986f99ecef3a")
         .append("svg")
         .attr("width", "100%")
         .attr("height", "100%")
@@ -1774,7 +1751,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
         // Define arrowhead marker
         svg.append("defs").append("marker")
-        .attr("id", "arrowhead_2b57441c-4669-4062-99e1-cb3854b0c695")
+        .attr("id", "arrowhead_51fdcb45-237a-4068-9fd7-986f99ecef3a")
         .attr("viewBox", "0 -5 10 10")
         .attr("refX", 8)
         .attr("refY", 0)
@@ -1786,11 +1763,11 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .attr("fill", "#333");
 
         // Draw clusters (container boxes) first so they're behind nodes
-        const clusters = inner.selectAll(".boundary-box_2b57441c-4669-4062-99e1-cb3854b0c695")
+        const clusters = inner.selectAll(".boundary-box_51fdcb45-237a-4068-9fd7-986f99ecef3a")
         .data(Object.entries(graphvizData.clusters))
         .enter()
         .append("g")
-        .attr("class", "boundary-box_2b57441c-4669-4062-99e1-cb3854b0c695");
+        .attr("class", "boundary-box_51fdcb45-237a-4068-9fd7-986f99ecef3a");
 
         const containersWithFailedNodes = identifyContainersWithFailedNodes(adj_list, ancestor_map);
 
@@ -1800,10 +1777,10 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             const hasFailedNodes = containersWithFailedNodes.has(clusterName);
             const isRepeat = isRepeatNode(clusterName);
             if (hasFailedNodes) {
-                group.classed("error_2b57441c-4669-4062-99e1-cb3854b0c695", true);
+                group.classed("error_51fdcb45-237a-4068-9fd7-986f99ecef3a", true);
             }
             if (isRepeat) {
-                group.classed("repeat-container_2b57441c-4669-4062-99e1-cb3854b0c695", true);
+                group.classed("repeat-container_51fdcb45-237a-4068-9fd7-986f99ecef3a", true);
             }
 
             // Parse bounding box coordinates
@@ -1845,13 +1822,13 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (!isRepeatNode(clusterName)) {
                 // Add collapse/expand button
                 const collapseButton = group.append("circle")
-                .attr("class", "collapse-button_2b57441c-4669-4062-99e1-cb3854b0c695")
+                .attr("class", "collapse-button_51fdcb45-237a-4068-9fd7-986f99ecef3a")
                 .attr("cx", x1 + 10)
                 .attr("cy", y1 + 10)
                 .attr("r", 5.5);
 
                 group.append("text")
-                .attr("class", "collapse-icon_2b57441c-4669-4062-99e1-cb3854b0c695")
+                .attr("class", "collapse-icon_51fdcb45-237a-4068-9fd7-986f99ecef3a")
                 .attr("x", x1 + 10)
                 .attr("y", y1 + 10)
                 .attr("text-anchor", "middle")
@@ -1868,7 +1845,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add click event handler for collapse buttons
-        clusters.selectAll(".collapse-button_2b57441c-4669-4062-99e1-cb3854b0c695, .collapse-icon_2b57441c-4669-4062-99e1-cb3854b0c695")
+        clusters.selectAll(".collapse-button_51fdcb45-237a-4068-9fd7-986f99ecef3a, .collapse-icon_51fdcb45-237a-4068-9fd7-986f99ecef3a")
         .on("click", function(event, [clusterName, clusterData]) {
             event.stopPropagation(); // Prevent event from bubbling to SVG
             removeTooltip();
@@ -1883,19 +1860,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
         
         // Create edges using the path points from Graphviz
-        const edges = inner.selectAll(".edge_2b57441c-4669-4062-99e1-cb3854b0c695")
+        const edges = inner.selectAll(".edge_51fdcb45-237a-4068-9fd7-986f99ecef3a")
         .data(graphvizData.edges)
         .enter()
         .append("g")
-        .attr("class", "edge-group_2b57441c-4669-4062-99e1-cb3854b0c695");
+        .attr("class", "edge-group_51fdcb45-237a-4068-9fd7-986f99ecef3a");
         
         // Add the actual path
         edges.append("path")
         .attr("class", function(edge) {
             if (edge.is_implied_edge) {
-                return "edge_2b57441c-4669-4062-99e1-cb3854b0c695 implied-edge_2b57441c-4669-4062-99e1-cb3854b0c695";
+                return "edge_51fdcb45-237a-4068-9fd7-986f99ecef3a implied-edge_51fdcb45-237a-4068-9fd7-986f99ecef3a";
             }
-            return "edge_2b57441c-4669-4062-99e1-cb3854b0c695";
+            return "edge_51fdcb45-237a-4068-9fd7-986f99ecef3a";
         }).attr("d", function(edge) {
             if (edge.path && edge.path.length > 0) {
                     // Create a proper SVG path using Bézier curves
@@ -1921,7 +1898,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             }
             return "";
         })
-        .attr("marker-end", "url(#arrowhead_2b57441c-4669-4062-99e1-cb3854b0c695)");
+        .attr("marker-end", "url(#arrowhead_51fdcb45-237a-4068-9fd7-986f99ecef3a)");
         
         // Add dimension labels on edges
         edges.each(function(edge) {
@@ -1950,7 +1927,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Create a background for the text
             const labelGroup = edgeGroup.append("g")
-            .attr("class", "edge-label_2b57441c-4669-4062-99e1-cb3854b0c695")
+            .attr("class", "edge-label_51fdcb45-237a-4068-9fd7-986f99ecef3a")
             .attr("transform", `translate(${pointAtStart.x}, ${pointAtStart.y})`);
             
             const text = labelGroup.append("text")
@@ -1985,7 +1962,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         edges.each(function() {
             const edgeGroup = d3.select(this);
             const path = edgeGroup.select("path");
-            const labelGroup = edgeGroup.select(".edge-label_2b57441c-4669-4062-99e1-cb3854b0c695");
+            const labelGroup = edgeGroup.select(".edge-label_51fdcb45-237a-4068-9fd7-986f99ecef3a");
             const labelText = labelGroup.select("text");
             const labelBg = labelGroup.select("rect");
             const originalStrokeWidth = path.attr("stroke-width") || 1;
@@ -2050,19 +2027,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
         // Create nodes using positions from Graphviz
-        const nodes = inner.selectAll(".node_2b57441c-4669-4062-99e1-cb3854b0c695")
+        const nodes = inner.selectAll(".node_51fdcb45-237a-4068-9fd7-986f99ecef3a")
             .data(Object.entries(graphvizData.nodes))
             .enter()
             .append("g")
             // In the createGraph function, when you're creating nodes, modify the class assignment:
             .attr("class", function([nodeName, nodeData]) {
-                let classes = "node_2b57441c-4669-4062-99e1-cb3854b0c695";
-                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_2b57441c-4669-4062-99e1-cb3854b0c695";
-                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_2b57441c-4669-4062-99e1-cb3854b0c695";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_2b57441c-4669-4062-99e1-cb3854b0c695";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_2b57441c-4669-4062-99e1-cb3854b0c695";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_2b57441c-4669-4062-99e1-cb3854b0c695";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_2b57441c-4669-4062-99e1-cb3854b0c695";
+                let classes = "node_51fdcb45-237a-4068-9fd7-986f99ecef3a";
+                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_51fdcb45-237a-4068-9fd7-986f99ecef3a";
+                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_51fdcb45-237a-4068-9fd7-986f99ecef3a";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_51fdcb45-237a-4068-9fd7-986f99ecef3a";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_51fdcb45-237a-4068-9fd7-986f99ecef3a";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_51fdcb45-237a-4068-9fd7-986f99ecef3a";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_51fdcb45-237a-4068-9fd7-986f99ecef3a";
                 return classes;
             })
             .attr("transform", function([nodeName, nodeData]) {
@@ -2089,11 +2066,11 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 .attr("rx", nodeData.width / 2)
                 .attr("ry", nodeData.height / 2)
                 .attr("class", function() { 
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_2b57441c-4669-4062-99e1-cb3854b0c695";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_2b57441c-4669-4062-99e1-cb3854b0c695";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_2b57441c-4669-4062-99e1-cb3854b0c695";
-                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_2b57441c-4669-4062-99e1-cb3854b0c695";
-                    return "operation_2b57441c-4669-4062-99e1-cb3854b0c695";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_51fdcb45-237a-4068-9fd7-986f99ecef3a";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_51fdcb45-237a-4068-9fd7-986f99ecef3a";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_51fdcb45-237a-4068-9fd7-986f99ecef3a";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_51fdcb45-237a-4068-9fd7-986f99ecef3a";
+                    return "operation_51fdcb45-237a-4068-9fd7-986f99ecef3a";
                 });
             } else {
                 // Create rectangle
@@ -2103,15 +2080,15 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 .attr("x", -nodeData.width / 2)
                 .attr("y", -nodeData.height / 2)
                 .attr("class", function() { 
-                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_2b57441c-4669-4062-99e1-cb3854b0c695";
-                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_2b57441c-4669-4062-99e1-cb3854b0c695" : "operation_2b57441c-4669-4062-99e1-cb3854b0c695";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_51fdcb45-237a-4068-9fd7-986f99ecef3a";
+                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_51fdcb45-237a-4068-9fd7-986f99ecef3a" : "operation_51fdcb45-237a-4068-9fd7-986f99ecef3a";
                 });
             }
         });
         
         // Add labels for nodes
         nodes.append("text")
-        .attr("class", "node-label_2b57441c-4669-4062-99e1-cb3854b0c695")
+        .attr("class", "node-label_51fdcb45-237a-4068-9fd7-986f99ecef3a")
         .text(function([nodeName]) { return graph_node_display_names[nodeName] || graph_node_name_to_without_suffix[nodeName] || nodeName; })
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "central");
@@ -2120,7 +2097,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         nodes.filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")));
         }).append("text")
-        .attr("class", "type-indicator_2b57441c-4669-4062-99e1-cb3854b0c695")
+        .attr("class", "type-indicator_51fdcb45-237a-4068-9fd7-986f99ecef3a")
         .attr("text-anchor", "start")
         .attr("dominant-baseline", "text-bottom")
         .attr("transform", function([nodeName, nodeData]) {
@@ -2138,7 +2115,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add info buttons to nodes (except input, output, constant)
-        inner.selectAll(".node_2b57441c-4669-4062-99e1-cb3854b0c695")
+        inner.selectAll(".node_51fdcb45-237a-4068-9fd7-986f99ecef3a")
         .filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")))
         })
@@ -2149,14 +2126,14 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
         // Add info button circle
         const infoButton = nodeGroup.append("circle")
-        .attr("class", "info-button_2b57441c-4669-4062-99e1-cb3854b0c695")
+        .attr("class", "info-button_51fdcb45-237a-4068-9fd7-986f99ecef3a")
         .attr("cx", width/2 - 7)
         .attr("cy", -height/2 + 7)
         .attr("r", 5.5);
 
         // Add info button icon
         nodeGroup.append("text")
-        .attr("class", "info-icon_2b57441c-4669-4062-99e1-cb3854b0c695")
+        .attr("class", "info-icon_51fdcb45-237a-4068-9fd7-986f99ecef3a")
         .attr("x", width/2 - 7)
         .attr("y", -height/2 + 8)
         .attr("text-anchor", "middle")
@@ -2172,16 +2149,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .on("mouseleave", removeTooltip);
 
         // Add click handler to info button
-            nodeGroup.selectAll(".info-button_2b57441c-4669-4062-99e1-cb3854b0c695, .info-icon_2b57441c-4669-4062-99e1-cb3854b0c695")
+            nodeGroup.selectAll(".info-button_51fdcb45-237a-4068-9fd7-986f99ecef3a, .info-icon_51fdcb45-237a-4068-9fd7-986f99ecef3a")
             .on("click", function(event) {
                 event.stopPropagation();
-                const infoButton = nodeGroup.select(".info-button_2b57441c-4669-4062-99e1-cb3854b0c695").node();
+                const infoButton = nodeGroup.select(".info-button_51fdcb45-237a-4068-9fd7-986f99ecef3a").node();
                 showPopupFromInfoButton.call(nodeGroup.node(), event, [nodeName], infoButton);
             });
         });
 
         // Add expand buttons to all module nodes (including non-expandable ones)
-        inner.selectAll(".node_2b57441c-4669-4062-99e1-cb3854b0c695")
+        inner.selectAll(".node_51fdcb45-237a-4068-9fd7-986f99ecef3a")
         .filter(function([nodeName]) {
             return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || collapsedContainers.has(nodeName)) && !isRepeatNode(nodeName);
         })
@@ -2203,7 +2180,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Add expand button circle
             const expandButton = nodeGroup.append("circle")
-            .attr("class", isExpandable ? "collapse-button_2b57441c-4669-4062-99e1-cb3854b0c695" : "collapse-button-disabled_2b57441c-4669-4062-99e1-cb3854b0c695")
+            .attr("class", isExpandable ? "collapse-button_51fdcb45-237a-4068-9fd7-986f99ecef3a" : "collapse-button-disabled_51fdcb45-237a-4068-9fd7-986f99ecef3a")
             .attr("cx", -width / 2 + 7)
             .attr("cy", -height / 2 + 7)
             .attr("r", 5.5)
@@ -2212,7 +2189,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Add expand button icon
             nodeGroup.append("text")
-            .attr("class", isExpandable ? "collapse-icon_2b57441c-4669-4062-99e1-cb3854b0c695" : "collapse-icon-disabled_2b57441c-4669-4062-99e1-cb3854b0c695")
+            .attr("class", isExpandable ? "collapse-icon_51fdcb45-237a-4068-9fd7-986f99ecef3a" : "collapse-icon-disabled_51fdcb45-237a-4068-9fd7-986f99ecef3a")
             .attr("x", -width / 2 + 7)
             .attr("y", -height / 2 + 7)
             .attr("text-anchor", "middle")
@@ -2232,7 +2209,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Only add click handler for expandable modules
             if (isExpandable) {
-                nodeGroup.selectAll(".collapse-button_2b57441c-4669-4062-99e1-cb3854b0c695, .collapse-icon_2b57441c-4669-4062-99e1-cb3854b0c695")
+                nodeGroup.selectAll(".collapse-button_51fdcb45-237a-4068-9fd7-986f99ecef3a, .collapse-icon_51fdcb45-237a-4068-9fd7-986f99ecef3a")
                 .on("click", function(event) {
                     event.stopPropagation();
                     removeTooltip();
@@ -2333,16 +2310,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                     .scale(currentTransform.k));
             }
 
-            clickedNodeElement.classed("highlight-node_2b57441c-4669-4062-99e1-cb3854b0c695", true);
+            clickedNodeElement.classed("highlight-node_51fdcb45-237a-4068-9fd7-986f99ecef3a", true);
             
             setTimeout(() => {
-                clickedNodeElement.classed("highlight-node_2b57441c-4669-4062-99e1-cb3854b0c695", false);
+                clickedNodeElement.classed("highlight-node_51fdcb45-237a-4068-9fd7-986f99ecef3a", false);
             }, 2000);
 
-            const popup = d3.select("#popup_2b57441c-4669-4062-99e1-cb3854b0c695");
-            const moduleTemplate = d3.select("#module-template_2b57441c-4669-4062-99e1-cb3854b0c695");
-            const tensorOpTemplate = d3.select("#tensor-op-template_2b57441c-4669-4062-99e1-cb3854b0c695");
-            const noInfoMessage = d3.select("#no-info_2b57441c-4669-4062-99e1-cb3854b0c695");
+            const popup = d3.select("#popup_51fdcb45-237a-4068-9fd7-986f99ecef3a");
+            const moduleTemplate = d3.select("#module-template_51fdcb45-237a-4068-9fd7-986f99ecef3a");
+            const tensorOpTemplate = d3.select("#tensor-op-template_51fdcb45-237a-4068-9fd7-986f99ecef3a");
+            const noInfoMessage = d3.select("#no-info_51fdcb45-237a-4068-9fd7-986f99ecef3a");
             
             const nodeData = adj_list[nodeName];
             
@@ -2350,7 +2327,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (node_to_module_path[nodeName] && graph_node_name_to_without_suffix[nodeName]) {
                 popupTitle = node_to_module_path[nodeName] + "." + graph_node_name_to_without_suffix[nodeName];
             }
-            d3.select("#popup-title_2b57441c-4669-4062-99e1-cb3854b0c695").text(popupTitle);
+            d3.select("#popup-title_51fdcb45-237a-4068-9fd7-986f99ecef3a").text(popupTitle);
 
             moduleTemplate.style("display", "none");
             tensorOpTemplate.style("display", "none");
@@ -2358,31 +2335,31 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             if (module_info[nodeName]) {
                 const info = module_info[nodeName];
-                moduleTemplate.style("display", "block").classed("content-shown_2b57441c-4669-4062-99e1-cb3854b0c695", true);
+                moduleTemplate.style("display", "block").classed("content-shown_51fdcb45-237a-4068-9fd7-986f99ecef3a", true);
                 
-                d3.select("#module-extra-repr_2b57441c-4669-4062-99e1-cb3854b0c695").text(info.extra_repr || 'N/A');
+                d3.select("#module-extra-repr_51fdcb45-237a-4068-9fd7-986f99ecef3a").text(info.extra_repr || 'N/A');
 
                 const forward_info = func_info[nodeName];
-                const attributesContainer = d3.select("#module-attributes_2b57441c-4669-4062-99e1-cb3854b0c695").node();
+                const attributesContainer = d3.select("#module-attributes_51fdcb45-237a-4068-9fd7-986f99ecef3a").node();
                 attributesContainer.innerHTML = '';
                 createJsonViewer(attributesContainer, info.attributes);
 
-                const parametersContainer = d3.select("#module-parameters_2b57441c-4669-4062-99e1-cb3854b0c695").node();
+                const parametersContainer = d3.select("#module-parameters_51fdcb45-237a-4068-9fd7-986f99ecef3a").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, forward_info);
             } else if (!(adj_list[nodeName] && adj_list[nodeName].node_type === "Input") && func_info[nodeName]) {
                 const info = func_info[nodeName];
-                tensorOpTemplate.style("display", "block").classed("content-shown_2b57441c-4669-4062-99e1-cb3854b0c695", true);
-                const parametersContainer = d3.select("#tensor-op-parameters_2b57441c-4669-4062-99e1-cb3854b0c695").node();
+                tensorOpTemplate.style("display", "block").classed("content-shown_51fdcb45-237a-4068-9fd7-986f99ecef3a", true);
+                const parametersContainer = d3.select("#tensor-op-parameters_51fdcb45-237a-4068-9fd7-986f99ecef3a").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, info);
             } else {
-                noInfoMessage.style("display", "block").classed("content-shown_2b57441c-4669-4062-99e1-cb3854b0c695", true);
+                noInfoMessage.style("display", "block").classed("content-shown_51fdcb45-237a-4068-9fd7-986f99ecef3a", true);
             }
             
             // Position popup based on info button or node center
             let boundingBox, x, y;
-            const containerRect = d3.select("#graph-container_2b57441c-4669-4062-99e1-cb3854b0c695").node().getBoundingClientRect();
+            const containerRect = d3.select("#graph-container_51fdcb45-237a-4068-9fd7-986f99ecef3a").node().getBoundingClientRect();
             
             if (infoButtonElement) {
                 boundingBox = infoButtonElement.getBoundingClientRect();
@@ -2398,19 +2375,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             popup.style("left", `${x}px`)
             .style("top", `${y}px`)
             .style("display", "flex");
-            d3.select("#popup-content_2b57441c-4669-4062-99e1-cb3854b0c695").node().scrollTop = 0;
+            d3.select("#popup-content_51fdcb45-237a-4068-9fd7-986f99ecef3a").node().scrollTop = 0;
         }
 
         function closePopup() {
-            d3.select("#popup_2b57441c-4669-4062-99e1-cb3854b0c695").style("display", "none");
+            d3.select("#popup_51fdcb45-237a-4068-9fd7-986f99ecef3a").style("display", "none");
         }
         
-        d3.select(".popup-close_2b57441c-4669-4062-99e1-cb3854b0c695").on("click", closePopup);
+        d3.select(".popup-close_51fdcb45-237a-4068-9fd7-986f99ecef3a").on("click", closePopup);
         svg.on("click", closePopup);
 
-        const popup = document.getElementById(`popup_2b57441c-4669-4062-99e1-cb3854b0c695`);
+        const popup = document.getElementById(`popup_51fdcb45-237a-4068-9fd7-986f99ecef3a`);
         const resizeObserver = new ResizeObserver(() => {
-            const editorContainers = popup.querySelectorAll('.json-viewer_2b57441c-4669-4062-99e1-cb3854b0c695');
+            const editorContainers = popup.querySelectorAll('.json-viewer_51fdcb45-237a-4068-9fd7-986f99ecef3a');
             for (let container of editorContainers) {
                 if (container.jsonEditor) {
                     container.jsonEditor.resize();
@@ -2489,30 +2466,30 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 // Apply highlight effect to the target container
                 if (Object.keys(graphvizData.nodes).includes(lastModifiedContainer)) {
                     // Highlight the node (collapsed container)
-                    const targetElement = inner.selectAll(".node_2b57441c-4669-4062-99e1-cb3854b0c695")
+                    const targetElement = inner.selectAll(".node_51fdcb45-237a-4068-9fd7-986f99ecef3a")
                         .filter(([nodeName]) => nodeName === lastModifiedContainer);
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-node_2b57441c-4669-4062-99e1-cb3854b0c695", true);
+                        targetElement.classed("highlight-node_51fdcb45-237a-4068-9fd7-986f99ecef3a", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-node_2b57441c-4669-4062-99e1-cb3854b0c695", false);
+                            targetElement.classed("highlight-node_51fdcb45-237a-4068-9fd7-986f99ecef3a", false);
                         }, 2000); // Match the animation duration
                     }
                 } else if (Object.keys(graphvizData.clusters).includes(lastModifiedContainer)) {
                     // Highlight the cluster (expanded container)
-                    const targetElement = inner.selectAll(".boundary-box_2b57441c-4669-4062-99e1-cb3854b0c695")
+                    const targetElement = inner.selectAll(".boundary-box_51fdcb45-237a-4068-9fd7-986f99ecef3a")
                         .filter(function([clusterName]) {
                             return clusterName === lastModifiedContainer;
                         });
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-cluster_2b57441c-4669-4062-99e1-cb3854b0c695", true);
+                        targetElement.classed("highlight-cluster_51fdcb45-237a-4068-9fd7-986f99ecef3a", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-cluster_2b57441c-4669-4062-99e1-cb3854b0c695", false);
+                            targetElement.classed("highlight-cluster_51fdcb45-237a-4068-9fd7-986f99ecef3a", false);
                         }, 2000); // Match the animation duration
                     }
                 }

@@ -239,17 +239,6 @@
                         <button class="copy-btn" onclick="copyCode()">Copy</button>
                     </div>
                     <pre><code class="language-python" id="codeContent">import torch
-from torchvision import models
-from torchvista import trace_model
-
-model = models.squeezenet1_0(weights=None)
-example_input = torch.randn(1, 3, 224, 224)
-
-forced_module_tracing_depth = 4
-collapse_modules_after_depth = 2
-
-code_contents = """\
-import torch
 from torchvista import trace_model
 from torchvision import models
 
@@ -257,7 +246,6 @@ model = models.squeezenet1_0(weights=None)
 example_input = torch.randn(1, 3, 224, 224)
 trace_model(model, example_input, forced_module_tracing_depth=4, collapse_modules_after_depth=2)
 
-"""
 </code></pre>
                 </div>
 
@@ -270,120 +258,120 @@ trace_model(model, example_input, forced_module_tracing_depth=4, collapse_module
     
             <div class="graph-view" id="graphContainer" style="height: 100%">
                 <div class="graph-box-header">Visualized Interactive Graph</div>
-                <div id="graph-container_b5e6c594-6264-494e-8858-c99171e433e1">
-    <div id="graph_b5e6c594-6264-494e-8858-c99171e433e1"></div>
-    <div class="logo_b5e6c594-6264-494e-8858-c99171e433e1">
+                <div id="graph-container_6e964725-4343-4ecb-88e3-9d4209714171">
+    <div id="graph_6e964725-4343-4ecb-88e3-9d4209714171"></div>
+    <div class="logo_6e964725-4343-4ecb-88e3-9d4209714171">
         <a href="https://github.com/sachinhosmani/torchvista" target="_blank" rel="noopener noreferrer">
         torchvista
         </a>
     </div>
-    <div id="popup_b5e6c594-6264-494e-8858-c99171e433e1" class="popup_b5e6c594-6264-494e-8858-c99171e433e1" style="display: none;">
-        <div class="popup-header_b5e6c594-6264-494e-8858-c99171e433e1">
-            <h3 id="popup-title_b5e6c594-6264-494e-8858-c99171e433e1"></h3>
-            <span class="popup-close_b5e6c594-6264-494e-8858-c99171e433e1">✕</span>
+    <div id="popup_6e964725-4343-4ecb-88e3-9d4209714171" class="popup_6e964725-4343-4ecb-88e3-9d4209714171" style="display: none;">
+        <div class="popup-header_6e964725-4343-4ecb-88e3-9d4209714171">
+            <h3 id="popup-title_6e964725-4343-4ecb-88e3-9d4209714171"></h3>
+            <span class="popup-close_6e964725-4343-4ecb-88e3-9d4209714171">✕</span>
         </div>
-        <div id="popup-content_b5e6c594-6264-494e-8858-c99171e433e1" class="popup-content_b5e6c594-6264-494e-8858-c99171e433e1">
-            <div id="common-info_b5e6c594-6264-494e-8858-c99171e433e1">
+        <div id="popup-content_6e964725-4343-4ecb-88e3-9d4209714171" class="popup-content_6e964725-4343-4ecb-88e3-9d4209714171">
+            <div id="common-info_6e964725-4343-4ecb-88e3-9d4209714171">
             </div>
-            <div id="module-template_b5e6c594-6264-494e-8858-c99171e433e1" style="display:none;">
-                <details open id="module-parameters-details_b5e6c594-6264-494e-8858-c99171e433e1">
+            <div id="module-template_6e964725-4343-4ecb-88e3-9d4209714171" style="display:none;">
+                <details open id="module-parameters-details_6e964725-4343-4ecb-88e3-9d4209714171">
                     <summary style="color: black"><strong>forward() Parameters</strong></summary>
-                    <div id="module-parameters_b5e6c594-6264-494e-8858-c99171e433e1" class="json-viewer_b5e6c594-6264-494e-8858-c99171e433e1"></div>
+                    <div id="module-parameters_6e964725-4343-4ecb-88e3-9d4209714171" class="json-viewer_6e964725-4343-4ecb-88e3-9d4209714171"></div>
                 </details>
-                <details open id="module-attributes-details_b5e6c594-6264-494e-8858-c99171e433e1">
+                <details open id="module-attributes-details_6e964725-4343-4ecb-88e3-9d4209714171">
                     <summary style="color: black"><strong>Attributes</strong></summary>
-                    <div id="module-attributes_b5e6c594-6264-494e-8858-c99171e433e1" class="json-viewer_b5e6c594-6264-494e-8858-c99171e433e1"></div>
+                    <div id="module-attributes_6e964725-4343-4ecb-88e3-9d4209714171" class="json-viewer_6e964725-4343-4ecb-88e3-9d4209714171"></div>
                 </details>
             </div>
-            <div id="tensor-op-template_b5e6c594-6264-494e-8858-c99171e433e1" style="display:none;">
+            <div id="tensor-op-template_6e964725-4343-4ecb-88e3-9d4209714171" style="display:none;">
                 <summary><strong>Parameters</strong></summary>
-                <div id="tensor-op-parameters_b5e6c594-6264-494e-8858-c99171e433e1" class="json-viewer_b5e6c594-6264-494e-8858-c99171e433e1"></div>
+                <div id="tensor-op-parameters_6e964725-4343-4ecb-88e3-9d4209714171" class="json-viewer_6e964725-4343-4ecb-88e3-9d4209714171"></div>
             </div>
-            <p id="no-info_b5e6c594-6264-494e-8858-c99171e433e1" style="display:none;">No further information available for this node.</p>
+            <p id="no-info_6e964725-4343-4ecb-88e3-9d4209714171" style="display:none;">No further information available for this node.</p>
         </div>
     </div>
 
     <style>
-        .node_b5e6c594-6264-494e-8858-c99171e433e1 rect {
+        .node_6e964725-4343-4ecb-88e3-9d4209714171 rect {
             stroke: #333;
             fill: #fff;
         }
-        text.node-label_b5e6c594-6264-494e-8858-c99171e433e1 {
+        text.node-label_6e964725-4343-4ecb-88e3-9d4209714171 {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.type-indicator_b5e6c594-6264-494e-8858-c99171e433e1 {
+        text.type-indicator_6e964725-4343-4ecb-88e3-9d4209714171 {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.collapse-icon_b5e6c594-6264-494e-8858-c99171e433e1 {
+        text.collapse-icon_6e964725-4343-4ecb-88e3-9d4209714171 {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 14px;
             cursor: default;
             user-select: none;
         }
-        .edge_b5e6c594-6264-494e-8858-c99171e433e1 {
+        .edge_6e964725-4343-4ecb-88e3-9d4209714171 {
             stroke: #797979;
             fill: none;
         }
-        .node_b5e6c594-6264-494e-8858-c99171e433e1 rect.input_b5e6c594-6264-494e-8858-c99171e433e1 { fill: #FF9AFF; }
-        .node_b5e6c594-6264-494e-8858-c99171e433e1 rect.constant_b5e6c594-6264-494e-8858-c99171e433e1 { fill: rgb(235 235 235); }
+        .node_6e964725-4343-4ecb-88e3-9d4209714171 rect.input_6e964725-4343-4ecb-88e3-9d4209714171 { fill: #FF9AFF; }
+        .node_6e964725-4343-4ecb-88e3-9d4209714171 rect.constant_6e964725-4343-4ecb-88e3-9d4209714171 { fill: rgb(235 235 235); }
 
-        .node_b5e6c594-6264-494e-8858-c99171e433e1 rect.output_b5e6c594-6264-494e-8858-c99171e433e1 { fill: #74e071; }
-        .node_b5e6c594-6264-494e-8858-c99171e433e1 rect.failed_b5e6c594-6264-494e-8858-c99171e433e1 { fill: rgb(224 15 15); }
-        .node_b5e6c594-6264-494e-8858-c99171e433e1 rect.module_b5e6c594-6264-494e-8858-c99171e433e1 { fill: #8BDEDB; }
-        .node_b5e6c594-6264-494e-8858-c99171e433e1 rect.operation_b5e6c594-6264-494e-8858-c99171e433e1 { fill: #FEBC5A; }
+        .node_6e964725-4343-4ecb-88e3-9d4209714171 rect.output_6e964725-4343-4ecb-88e3-9d4209714171 { fill: #74e071; }
+        .node_6e964725-4343-4ecb-88e3-9d4209714171 rect.failed_6e964725-4343-4ecb-88e3-9d4209714171 { fill: rgb(224 15 15); }
+        .node_6e964725-4343-4ecb-88e3-9d4209714171 rect.module_6e964725-4343-4ecb-88e3-9d4209714171 { fill: #8BDEDB; }
+        .node_6e964725-4343-4ecb-88e3-9d4209714171 rect.operation_6e964725-4343-4ecb-88e3-9d4209714171 { fill: #FEBC5A; }
 
-        .node_b5e6c594-6264-494e-8858-c99171e433e1 ellipse.input_b5e6c594-6264-494e-8858-c99171e433e1 { fill: #FF9AFF; }
-        .node_b5e6c594-6264-494e-8858-c99171e433e1 ellipse.constant_b5e6c594-6264-494e-8858-c99171e433e1 { fill: rgb(235 235 235); }
-        .node_b5e6c594-6264-494e-8858-c99171e433e1 ellipse.output_b5e6c594-6264-494e-8858-c99171e433e1 { fill: #74e071; }
-        .node_b5e6c594-6264-494e-8858-c99171e433e1 ellipse.failed_b5e6c594-6264-494e-8858-c99171e433e1 { fill: rgb(224 15 15); }
+        .node_6e964725-4343-4ecb-88e3-9d4209714171 ellipse.input_6e964725-4343-4ecb-88e3-9d4209714171 { fill: #FF9AFF; }
+        .node_6e964725-4343-4ecb-88e3-9d4209714171 ellipse.constant_6e964725-4343-4ecb-88e3-9d4209714171 { fill: rgb(235 235 235); }
+        .node_6e964725-4343-4ecb-88e3-9d4209714171 ellipse.output_6e964725-4343-4ecb-88e3-9d4209714171 { fill: #74e071; }
+        .node_6e964725-4343-4ecb-88e3-9d4209714171 ellipse.failed_6e964725-4343-4ecb-88e3-9d4209714171 { fill: rgb(224 15 15); }
 
-        .node_b5e6c594-6264-494e-8858-c99171e433e1 ellipse {
+        .node_6e964725-4343-4ecb-88e3-9d4209714171 ellipse {
             stroke: #333;
             stroke-width: 1px;
         }
-        .edgeLabelGroup_b5e6c594-6264-494e-8858-c99171e433e1 {
+        .edgeLabelGroup_6e964725-4343-4ecb-88e3-9d4209714171 {
             pointer-events: none;
         }
-        #arrowhead_b5e6c594-6264-494e-8858-c99171e433e1 path {
+        #arrowhead_6e964725-4343-4ecb-88e3-9d4209714171 path {
             fill: #333333;;
         }
-        .node_b5e6c594-6264-494e-8858-c99171e433e1 rect,
-        .node_b5e6c594-6264-494e-8858-c99171e433e1 ellipse {
+        .node_6e964725-4343-4ecb-88e3-9d4209714171 rect,
+        .node_6e964725-4343-4ecb-88e3-9d4209714171 ellipse {
             transition: fill 0.3s ease;
         }
 
-        .node_b5e6c594-6264-494e-8858-c99171e433e1 .type-indicator_b5e6c594-6264-494e-8858-c99171e433e1 {
+        .node_6e964725-4343-4ecb-88e3-9d4209714171 .type-indicator_6e964725-4343-4ecb-88e3-9d4209714171 {
             font-size: 5px;
             fill: rgba(0, 0, 0, 1.0);  /* Dark grey, semi-transparent */
             pointer-events: none;
         }
 
-        .node_b5e6c594-6264-494e-8858-c99171e433e1.error_b5e6c594-6264-494e-8858-c99171e433e1 rect {
+        .node_6e964725-4343-4ecb-88e3-9d4209714171.error_6e964725-4343-4ecb-88e3-9d4209714171 rect {
             stroke: black;
             stroke-width: 1px;
         }
 
-        .boundary-box_b5e6c594-6264-494e-8858-c99171e433e1.error_b5e6c594-6264-494e-8858-c99171e433e1 > rect:first-of-type {
+        .boundary-box_6e964725-4343-4ecb-88e3-9d4209714171.error_6e964725-4343-4ecb-88e3-9d4209714171 > rect:first-of-type {
             fill: red;
             fill-opacity: 0.2;
         }
 
-        #graph-container_b5e6c594-6264-494e-8858-c99171e433e1 {
+        #graph-container_6e964725-4343-4ecb-88e3-9d4209714171 {
             position: relative;
             height: 95%;
             width: ${width};
             overflow: hidden;
         }
 
-        #graph_b5e6c594-6264-494e-8858-c99171e433e1 {
+        #graph_6e964725-4343-4ecb-88e3-9d4209714171 {
             height: 100%;
         }
         
-        .popup_b5e6c594-6264-494e-8858-c99171e433e1 {
+        .popup_6e964725-4343-4ecb-88e3-9d4209714171 {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             position: absolute;
             background: white;
@@ -398,7 +386,7 @@ trace_model(model, example_input, forced_module_tracing_depth=4, collapse_module
             flex-direction: column;
         }
 
-        .popup-header_b5e6c594-6264-494e-8858-c99171e433e1 {
+        .popup-header_6e964725-4343-4ecb-88e3-9d4209714171 {
             position: sticky;
             top: 0;
             background: white;
@@ -410,12 +398,12 @@ trace_model(model, example_input, forced_module_tracing_depth=4, collapse_module
             z-index: 1;
         }
 
-        .popup_b5e6c594-6264-494e-8858-c99171e433e1 h3 {
+        .popup_6e964725-4343-4ecb-88e3-9d4209714171 h3 {
             margin: 0;
             font-size: 16px;
         }
 
-        .popup-content_b5e6c594-6264-494e-8858-c99171e433e1 {
+        .popup-content_6e964725-4343-4ecb-88e3-9d4209714171 {
             padding: 10px;
             padding-bottom: 10px;
             overflow-y: auto;
@@ -423,87 +411,87 @@ trace_model(model, example_input, forced_module_tracing_depth=4, collapse_module
             flex-grow: 1;
         }
 
-        .popup_b5e6c594-6264-494e-8858-c99171e433e1 pre {
+        .popup_6e964725-4343-4ecb-88e3-9d4209714171 pre {
             white-space: pre;
             overflow-x: auto;
         }
 
-        .popup-close_b5e6c594-6264-494e-8858-c99171e433e1 {
+        .popup-close_6e964725-4343-4ecb-88e3-9d4209714171 {
             cursor: pointer;
             font-size: 24px;
             font-weight: bold;
             line-height: 1;
         }
 
-        #popup-title_b5e6c594-6264-494e-8858-c99171e433e1 {
+        #popup-title_6e964725-4343-4ecb-88e3-9d4209714171 {
             font-size: 16px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             color: black;
         }
 
-        #graph-container_b5e6c594-6264-494e-8858-c99171e433e1 {
+        #graph-container_6e964725-4343-4ecb-88e3-9d4209714171 {
             position: relative;
         }
 
-        #graph-container_b5e6c594-6264-494e-8858-c99171e433e1 pre {
+        #graph-container_6e964725-4343-4ecb-88e3-9d4209714171 pre {
             margin-bottom: 0;
         }
 
-        .boundary-box_b5e6c594-6264-494e-8858-c99171e433e1 rect {
+        .boundary-box_6e964725-4343-4ecb-88e3-9d4209714171 rect {
             pointer-events: none;
         }
-        .boundary-box_b5e6c594-6264-494e-8858-c99171e433e1 text {
+        .boundary-box_6e964725-4343-4ecb-88e3-9d4209714171 text {
             pointer-events: none;
             user-select: none;
         }
 
-        .boundary-box_b5e6c594-6264-494e-8858-c99171e433e1 rect {
+        .boundary-box_6e964725-4343-4ecb-88e3-9d4209714171 rect {
             pointer-events: none;
         }
-        .boundary-box_b5e6c594-6264-494e-8858-c99171e433e1 text {
+        .boundary-box_6e964725-4343-4ecb-88e3-9d4209714171 text {
             pointer-events: none;
             user-select: none;
             font-weight: bold;
         }
-        .edge-label_b5e6c594-6264-494e-8858-c99171e433e1 text {
+        .edge-label_6e964725-4343-4ecb-88e3-9d4209714171 text {
             pointer-events: none;
             user-select: none;
             font-size: 4px;
             font-family: "'Roboto', sans-serif";
         }
                     
-        .collapse-button_b5e6c594-6264-494e-8858-c99171e433e1, .info-button_b5e6c594-6264-494e-8858-c99171e433e1 {
+        .collapse-button_6e964725-4343-4ecb-88e3-9d4209714171, .info-button_6e964725-4343-4ecb-88e3-9d4209714171 {
             fill: #fff;
             stroke: #333;
             stroke-width: 1px;
             cursor: pointer;
         }
 
-        .collapse-button_b5e6c594-6264-494e-8858-c99171e433e1:hover, .info-button_b5e6c594-6264-494e-8858-c99171e433e1:hover {
+        .collapse-button_6e964725-4343-4ecb-88e3-9d4209714171:hover, .info-button_6e964725-4343-4ecb-88e3-9d4209714171:hover {
             fill: #eee;
             cursor: pointer;
         }
 
-        .collapse-icon_b5e6c594-6264-494e-8858-c99171e433e1, .info-icon_b5e6c594-6264-494e-8858-c99171e433e1 {
+        .collapse-icon_6e964725-4343-4ecb-88e3-9d4209714171, .info-icon_6e964725-4343-4ecb-88e3-9d4209714171 {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             fill: rgb(51, 51, 51);
         }
 
-        .collapse-button-disabled_b5e6c594-6264-494e-8858-c99171e433e1 {
+        .collapse-button-disabled_6e964725-4343-4ecb-88e3-9d4209714171 {
             fill: #eee5;
             stroke: #3333334f;
             stroke-width: 1px;
             cursor: not-allowed;
         }
 
-        .collapse-button-disabled_b5e6c594-6264-494e-8858-c99171e433e1:hover {
+        .collapse-button-disabled_6e964725-4343-4ecb-88e3-9d4209714171:hover {
             fill: #eee6;
             cursor: not-allowed;
         }
 
-        .collapse-icon-disabled_b5e6c594-6264-494e-8858-c99171e433e1 {
+        .collapse-icon-disabled_6e964725-4343-4ecb-88e3-9d4209714171 {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -512,11 +500,11 @@ trace_model(model, example_input, forced_module_tracing_depth=4, collapse_module
         }
 
         /* Edge hover styles */
-        .edge-group_b5e6c594-6264-494e-8858-c99171e433e1 path {
+        .edge-group_6e964725-4343-4ecb-88e3-9d4209714171 path {
             pointer-events: stroke;
         }
 
-        .edge-label_b5e6c594-6264-494e-8858-c99171e433e1 {
+        .edge-label_6e964725-4343-4ecb-88e3-9d4209714171 {
             pointer-events: all;
         }
 
@@ -556,50 +544,50 @@ trace_model(model, example_input, forced_module_tracing_depth=4, collapse_module
             }
         }
 
-        .highlight-cluster_b5e6c594-6264-494e-8858-c99171e433e1 > rect:first-of-type {
+        .highlight-cluster_6e964725-4343-4ecb-88e3-9d4209714171 > rect:first-of-type {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        .highlight-node_b5e6c594-6264-494e-8858-c99171e433e1 rect {
+        .highlight-node_6e964725-4343-4ecb-88e3-9d4209714171 rect {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        text.node-label_b5e6c594-6264-494e-8858-c99171e433e1 {
+        text.node-label_6e964725-4343-4ecb-88e3-9d4209714171 {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 0.8rem;  /* Base size using rem units for accessibility */
             cursor: default;
             user-select: none;
         }
 
-        .node_b5e6c594-6264-494e-8858-c99171e433e1.constant_b5e6c594-6264-494e-8858-c99171e433e1 .node-label_b5e6c594-6264-494e-8858-c99171e433e1 {
+        .node_6e964725-4343-4ecb-88e3-9d4209714171.constant_6e964725-4343-4ecb-88e3-9d4209714171 .node-label_6e964725-4343-4ecb-88e3-9d4209714171 {
             font-size: 0.7rem;
         }
 
-        .popup-content_b5e6c594-6264-494e-8858-c99171e433e1 summary {
+        .popup-content_6e964725-4343-4ecb-88e3-9d4209714171 summary {
             cursor: pointer;
             margin: 5px;
             user-select: none;
         }
 
-        .node_b5e6c594-6264-494e-8858-c99171e433e1.input_b5e6c594-6264-494e-8858-c99171e433e1 rect,
-        .node_b5e6c594-6264-494e-8858-c99171e433e1.output_b5e6c594-6264-494e-8858-c99171e433e1 rect,
-        .node_b5e6c594-6264-494e-8858-c99171e433e1.constant_b5e6c594-6264-494e-8858-c99171e433e1 rect {
+        .node_6e964725-4343-4ecb-88e3-9d4209714171.input_6e964725-4343-4ecb-88e3-9d4209714171 rect,
+        .node_6e964725-4343-4ecb-88e3-9d4209714171.output_6e964725-4343-4ecb-88e3-9d4209714171 rect,
+        .node_6e964725-4343-4ecb-88e3-9d4209714171.constant_6e964725-4343-4ecb-88e3-9d4209714171 rect {
             stroke-width: 1px;
             rx: 8px;
             ry: 8px;
             stroke-dasharray: none;
         }
 
-        #png-error-container_b5e6c594-6264-494e-8858-c99171e433e1 {
+        #png-error-container_6e964725-4343-4ecb-88e3-9d4209714171 {
             text-align: center;
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 14px;
         }
 
-        #png-error-message_b5e6c594-6264-494e-8858-c99171e433e1 {
+        #png-error-message_6e964725-4343-4ecb-88e3-9d4209714171 {
             padding: 8px 16px;
             background-color: #dc3545;
             color: white;
@@ -610,13 +598,13 @@ trace_model(model, example_input, forced_module_tracing_depth=4, collapse_module
             text-align: left;
         }
 
-        #png-link-container_b5e6c594-6264-494e-8858-c99171e433e1 {
+        #png-link-container_6e964725-4343-4ecb-88e3-9d4209714171 {
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 18px;
         }
 
-        #png-download-button_b5e6c594-6264-494e-8858-c99171e433e1 {
+        #png-download-button_6e964725-4343-4ecb-88e3-9d4209714171 {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -626,11 +614,11 @@ trace_model(model, example_input, forced_module_tracing_depth=4, collapse_module
             margin-right: 8px;
         }
 
-        #png-download-button_b5e6c594-6264-494e-8858-c99171e433e1:hover {
+        #png-download-button_6e964725-4343-4ecb-88e3-9d4209714171:hover {
             background-color: #0056b3;
         }
 
-        #png-save-button_b5e6c594-6264-494e-8858-c99171e433e1 {
+        #png-save-button_6e964725-4343-4ecb-88e3-9d4209714171 {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -639,18 +627,18 @@ trace_model(model, example_input, forced_module_tracing_depth=4, collapse_module
             border-radius: 4px;
         }
 
-        #png-save-button_b5e6c594-6264-494e-8858-c99171e433e1:hover {
+        #png-save-button_6e964725-4343-4ecb-88e3-9d4209714171:hover {
             background-color: #0056b3;
         }
 
-        #svg-link-container_b5e6c594-6264-494e-8858-c99171e433e1 {
+        #svg-link-container_6e964725-4343-4ecb-88e3-9d4209714171 {
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 18px;
         }
 
 
-        #svg-download-button_b5e6c594-6264-494e-8858-c99171e433e1 {
+        #svg-download-button_6e964725-4343-4ecb-88e3-9d4209714171 {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -660,11 +648,11 @@ trace_model(model, example_input, forced_module_tracing_depth=4, collapse_module
             margin-right: 8px;
         }
 
-        #svg-download-button_b5e6c594-6264-494e-8858-c99171e433e1:hover {
+        #svg-download-button_6e964725-4343-4ecb-88e3-9d4209714171:hover {
             background-color: #0056b3;
         }
 
-        #svg-save-button_b5e6c594-6264-494e-8858-c99171e433e1 {
+        #svg-save-button_6e964725-4343-4ecb-88e3-9d4209714171 {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -673,11 +661,11 @@ trace_model(model, example_input, forced_module_tracing_depth=4, collapse_module
             border-radius: 4px;
         }
 
-        #svg-save-button_b5e6c594-6264-494e-8858-c99171e433e1:hover {
+        #svg-save-button_6e964725-4343-4ecb-88e3-9d4209714171:hover {
             background-color: #0056b3;
         }
 
-        .custom-tooltip_b5e6c594-6264-494e-8858-c99171e433e1 {
+        .custom-tooltip_6e964725-4343-4ecb-88e3-9d4209714171 {
             position: absolute;
             background: white;
             border: 1px solid #ccc;
@@ -693,7 +681,7 @@ trace_model(model, example_input, forced_module_tracing_depth=4, collapse_module
             display: none;
         }
 
-        .custom-tooltip_smaller_b5e6c594-6264-494e-8858-c99171e433e1 {
+        .custom-tooltip_smaller_6e964725-4343-4ecb-88e3-9d4209714171 {
             position: absolute;
             background: white;
             border: 1px solid #ccc;
@@ -709,16 +697,16 @@ trace_model(model, example_input, forced_module_tracing_depth=4, collapse_module
             display: none;
         }
 
-        .edge_b5e6c594-6264-494e-8858-c99171e433e1.implied-edge_b5e6c594-6264-494e-8858-c99171e433e1 {
+        .edge_6e964725-4343-4ecb-88e3-9d4209714171.implied-edge_6e964725-4343-4ecb-88e3-9d4209714171 {
             stroke-dasharray: 5,5;
         }
 
-        .logo_b5e6c594-6264-494e-8858-c99171e433e1 {
+        .logo_6e964725-4343-4ecb-88e3-9d4209714171 {
             position: absolute;
             bottom: 8px; left: 8px;
             padding: 4px 6px;
         }
-        .logo_b5e6c594-6264-494e-8858-c99171e433e1 a {
+        .logo_6e964725-4343-4ecb-88e3-9d4209714171 a {
             color: #a1a1a1;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             opacity: .6;
@@ -879,7 +867,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
 (function() {
-    const adj_list = {"input_0": {"edges": [{"target": "conv2d_3", "dims": "(1, 3, 224, 224)", "edge_data_id": 11057817056}], "failed": false, "node_type": "Input"}, "conv2d_3": {"edges": [{"target": "relu_8", "dims": "(1, 96, 109, 109)", "edge_data_id": 11661076176}], "failed": false, "node_type": "Operation"}, "tensor_4": {"edges": [{"target": "conv2d_3", "dims": "(96, 3, 7, 7)", "edge_data_id": 11058192192}], "failed": false, "node_type": "Constant"}, "tensor_5": {"edges": [{"target": "conv2d_3", "dims": "(96)", "edge_data_id": 11058192112}], "failed": false, "node_type": "Constant"}, "scalar_6": {"edges": [{"target": "conv2d_3", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_8": {"edges": [{"target": "max_pool2d_10", "dims": "(1, 96, 109, 109)", "edge_data_id": 11661076176}], "failed": false, "node_type": "Operation"}, "max_pool2d_10": {"edges": [{"target": "conv2d_14", "dims": "(1, 96, 54, 54)", "edge_data_id": 11661075856}], "failed": false, "node_type": "Operation"}, "scalars_11_x_4": {"edges": [{"target": "max_pool2d_10", "dims": "( ) x 4"}], "failed": false, "node_type": "Constant"}, "conv2d_14": {"edges": [{"target": "relu_19", "dims": "(1, 16, 54, 54)", "edge_data_id": 11661076176}], "failed": false, "node_type": "Operation"}, "tensor_15": {"edges": [{"target": "conv2d_14", "dims": "(16, 96, 1, 1)", "edge_data_id": 11058189392}], "failed": false, "node_type": "Constant"}, "tensor_16": {"edges": [{"target": "conv2d_14", "dims": "(16)", "edge_data_id": 11057568640}], "failed": false, "node_type": "Constant"}, "scalar_17": {"edges": [{"target": "conv2d_14", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_19": {"edges": [{"target": "conv2d_21", "dims": "(1, 16, 54, 54)", "edge_data_id": 11661076176}, {"target": "conv2d_28", "dims": "(1, 16, 54, 54)", "edge_data_id": 11661076176}], "failed": false, "node_type": "Operation"}, "conv2d_21": {"edges": [{"target": "relu_26", "dims": "(1, 64, 54, 54)", "edge_data_id": 11661076336}], "failed": false, "node_type": "Operation"}, "tensor_22": {"edges": [{"target": "conv2d_21", "dims": "(64, 16, 1, 1)", "edge_data_id": 11058057280}], "failed": false, "node_type": "Constant"}, "tensor_23": {"edges": [{"target": "conv2d_21", "dims": "(64)", "edge_data_id": 11058057360}], "failed": false, "node_type": "Constant"}, "scalar_24": {"edges": [{"target": "conv2d_21", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_26": {"edges": [{"target": "cat_34", "dims": "(1, 64, 54, 54)", "edge_data_id": 11661076336}], "failed": false, "node_type": "Operation"}, "conv2d_28": {"edges": [{"target": "relu_33", "dims": "(1, 64, 54, 54)", "edge_data_id": 11661077936}], "failed": false, "node_type": "Operation"}, "tensor_29": {"edges": [{"target": "conv2d_28", "dims": "(64, 16, 3, 3)", "edge_data_id": 11058057520}], "failed": false, "node_type": "Constant"}, "tensor_30": {"edges": [{"target": "conv2d_28", "dims": "(64)", "edge_data_id": 11058057600}], "failed": false, "node_type": "Constant"}, "scalar_31": {"edges": [{"target": "conv2d_28", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_33": {"edges": [{"target": "cat_34", "dims": "(1, 64, 54, 54)", "edge_data_id": 11661077936}], "failed": false, "node_type": "Operation"}, "cat_34": {"edges": [{"target": "conv2d_38", "dims": "(1, 128, 54, 54)", "edge_data_id": 11661075696}], "failed": false, "node_type": "Operation"}, "scalar_35": {"edges": [{"target": "cat_34", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "conv2d_38": {"edges": [{"target": "relu_43", "dims": "(1, 16, 54, 54)", "edge_data_id": 11661076176}], "failed": false, "node_type": "Operation"}, "tensor_39": {"edges": [{"target": "conv2d_38", "dims": "(16, 128, 1, 1)", "edge_data_id": 11058057760}], "failed": false, "node_type": "Constant"}, "tensor_40": {"edges": [{"target": "conv2d_38", "dims": "(16)", "edge_data_id": 11058057840}], "failed": false, "node_type": "Constant"}, "scalar_41": {"edges": [{"target": "conv2d_38", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_43": {"edges": [{"target": "conv2d_45", "dims": "(1, 16, 54, 54)", "edge_data_id": 11661076176}, {"target": "conv2d_52", "dims": "(1, 16, 54, 54)", "edge_data_id": 11661076176}], "failed": false, "node_type": "Operation"}, "conv2d_45": {"edges": [{"target": "relu_50", "dims": "(1, 64, 54, 54)", "edge_data_id": 11661076816}], "failed": false, "node_type": "Operation"}, "tensor_46": {"edges": [{"target": "conv2d_45", "dims": "(64, 16, 1, 1)", "edge_data_id": 11058058000}], "failed": false, "node_type": "Constant"}, "tensor_47": {"edges": [{"target": "conv2d_45", "dims": "(64)", "edge_data_id": 11058058080}], "failed": false, "node_type": "Constant"}, "scalar_48": {"edges": [{"target": "conv2d_45", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_50": {"edges": [{"target": "cat_58", "dims": "(1, 64, 54, 54)", "edge_data_id": 11661076816}], "failed": false, "node_type": "Operation"}, "conv2d_52": {"edges": [{"target": "relu_57", "dims": "(1, 64, 54, 54)", "edge_data_id": 11661077296}], "failed": false, "node_type": "Operation"}, "tensor_53": {"edges": [{"target": "conv2d_52", "dims": "(64, 16, 3, 3)", "edge_data_id": 11058058240}], "failed": false, "node_type": "Constant"}, "tensor_54": {"edges": [{"target": "conv2d_52", "dims": "(64)", "edge_data_id": 11058058320}], "failed": false, "node_type": "Constant"}, "scalar_55": {"edges": [{"target": "conv2d_52", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_57": {"edges": [{"target": "cat_58", "dims": "(1, 64, 54, 54)", "edge_data_id": 11661077296}], "failed": false, "node_type": "Operation"}, "cat_58": {"edges": [{"target": "conv2d_62", "dims": "(1, 128, 54, 54)", "edge_data_id": 11661332048}], "failed": false, "node_type": "Operation"}, "scalar_59": {"edges": [{"target": "cat_58", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "conv2d_62": {"edges": [{"target": "relu_67", "dims": "(1, 32, 54, 54)", "edge_data_id": 11661076176}], "failed": false, "node_type": "Operation"}, "tensor_63": {"edges": [{"target": "conv2d_62", "dims": "(32, 128, 1, 1)", "edge_data_id": 11058058480}], "failed": false, "node_type": "Constant"}, "tensor_64": {"edges": [{"target": "conv2d_62", "dims": "(32)", "edge_data_id": 11058058560}], "failed": false, "node_type": "Constant"}, "scalar_65": {"edges": [{"target": "conv2d_62", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_67": {"edges": [{"target": "conv2d_69", "dims": "(1, 32, 54, 54)", "edge_data_id": 11661076176}, {"target": "conv2d_76", "dims": "(1, 32, 54, 54)", "edge_data_id": 11661076176}], "failed": false, "node_type": "Operation"}, "conv2d_69": {"edges": [{"target": "relu_74", "dims": "(1, 128, 54, 54)", "edge_data_id": 11661076816}], "failed": false, "node_type": "Operation"}, "tensor_70": {"edges": [{"target": "conv2d_69", "dims": "(128, 32, 1, 1)", "edge_data_id": 11058058720}], "failed": false, "node_type": "Constant"}, "tensor_71": {"edges": [{"target": "conv2d_69", "dims": "(128)", "edge_data_id": 11058058800}], "failed": false, "node_type": "Constant"}, "scalar_72": {"edges": [{"target": "conv2d_69", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_74": {"edges": [{"target": "cat_82", "dims": "(1, 128, 54, 54)", "edge_data_id": 11661076816}], "failed": false, "node_type": "Operation"}, "conv2d_76": {"edges": [{"target": "relu_81", "dims": "(1, 128, 54, 54)", "edge_data_id": 11661329168}], "failed": false, "node_type": "Operation"}, "tensor_77": {"edges": [{"target": "conv2d_76", "dims": "(128, 32, 3, 3)", "edge_data_id": 11058058960}], "failed": false, "node_type": "Constant"}, "tensor_78": {"edges": [{"target": "conv2d_76", "dims": "(128)", "edge_data_id": 11058059040}], "failed": false, "node_type": "Constant"}, "scalar_79": {"edges": [{"target": "conv2d_76", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_81": {"edges": [{"target": "cat_82", "dims": "(1, 128, 54, 54)", "edge_data_id": 11661329168}], "failed": false, "node_type": "Operation"}, "cat_82": {"edges": [{"target": "max_pool2d_85", "dims": "(1, 256, 54, 54)", "edge_data_id": 11661331888}], "failed": false, "node_type": "Operation"}, "scalar_83": {"edges": [{"target": "cat_82", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "max_pool2d_85": {"edges": [{"target": "conv2d_89", "dims": "(1, 256, 27, 27)", "edge_data_id": 11661076176}], "failed": false, "node_type": "Operation"}, "scalars_86_x_4": {"edges": [{"target": "max_pool2d_85", "dims": "( ) x 4"}], "failed": false, "node_type": "Constant"}, "conv2d_89": {"edges": [{"target": "relu_94", "dims": "(1, 32, 27, 27)", "edge_data_id": 11661332048}], "failed": false, "node_type": "Operation"}, "tensor_90": {"edges": [{"target": "conv2d_89", "dims": "(32, 256, 1, 1)", "edge_data_id": 11058059200}], "failed": false, "node_type": "Constant"}, "tensor_91": {"edges": [{"target": "conv2d_89", "dims": "(32)", "edge_data_id": 11058059280}], "failed": false, "node_type": "Constant"}, "scalar_92": {"edges": [{"target": "conv2d_89", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_94": {"edges": [{"target": "conv2d_96", "dims": "(1, 32, 27, 27)", "edge_data_id": 11661332048}, {"target": "conv2d_103", "dims": "(1, 32, 27, 27)", "edge_data_id": 11661332048}], "failed": false, "node_type": "Operation"}, "conv2d_96": {"edges": [{"target": "relu_101", "dims": "(1, 128, 27, 27)", "edge_data_id": 11661329168}], "failed": false, "node_type": "Operation"}, "tensor_97": {"edges": [{"target": "conv2d_96", "dims": "(128, 32, 1, 1)", "edge_data_id": 11058059440}], "failed": false, "node_type": "Constant"}, "tensor_98": {"edges": [{"target": "conv2d_96", "dims": "(128)", "edge_data_id": 11058059520}], "failed": false, "node_type": "Constant"}, "scalar_99": {"edges": [{"target": "conv2d_96", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_101": {"edges": [{"target": "cat_109", "dims": "(1, 128, 27, 27)", "edge_data_id": 11661329168}], "failed": false, "node_type": "Operation"}, "conv2d_103": {"edges": [{"target": "relu_108", "dims": "(1, 128, 27, 27)", "edge_data_id": 11661328528}], "failed": false, "node_type": "Operation"}, "tensor_104": {"edges": [{"target": "conv2d_103", "dims": "(128, 32, 3, 3)", "edge_data_id": 11058059680}], "failed": false, "node_type": "Constant"}, "tensor_105": {"edges": [{"target": "conv2d_103", "dims": "(128)", "edge_data_id": 11058059760}], "failed": false, "node_type": "Constant"}, "scalar_106": {"edges": [{"target": "conv2d_103", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_108": {"edges": [{"target": "cat_109", "dims": "(1, 128, 27, 27)", "edge_data_id": 11661328528}], "failed": false, "node_type": "Operation"}, "cat_109": {"edges": [{"target": "conv2d_113", "dims": "(1, 256, 27, 27)", "edge_data_id": 11661332208}], "failed": false, "node_type": "Operation"}, "scalar_110": {"edges": [{"target": "cat_109", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "conv2d_113": {"edges": [{"target": "relu_118", "dims": "(1, 48, 27, 27)", "edge_data_id": 11661332048}], "failed": false, "node_type": "Operation"}, "tensor_114": {"edges": [{"target": "conv2d_113", "dims": "(48, 256, 1, 1)", "edge_data_id": 11058059920}], "failed": false, "node_type": "Constant"}, "tensor_115": {"edges": [{"target": "conv2d_113", "dims": "(48)", "edge_data_id": 11058060000}], "failed": false, "node_type": "Constant"}, "scalar_116": {"edges": [{"target": "conv2d_113", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_118": {"edges": [{"target": "conv2d_120", "dims": "(1, 48, 27, 27)", "edge_data_id": 11661332048}, {"target": "conv2d_127", "dims": "(1, 48, 27, 27)", "edge_data_id": 11661332048}], "failed": false, "node_type": "Operation"}, "conv2d_120": {"edges": [{"target": "relu_125", "dims": "(1, 192, 27, 27)", "edge_data_id": 11661329168}], "failed": false, "node_type": "Operation"}, "tensor_121": {"edges": [{"target": "conv2d_120", "dims": "(192, 48, 1, 1)", "edge_data_id": 11058060160}], "failed": false, "node_type": "Constant"}, "tensor_122": {"edges": [{"target": "conv2d_120", "dims": "(192)", "edge_data_id": 11058060240}], "failed": false, "node_type": "Constant"}, "scalar_123": {"edges": [{"target": "conv2d_120", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_125": {"edges": [{"target": "cat_133", "dims": "(1, 192, 27, 27)", "edge_data_id": 11661329168}], "failed": false, "node_type": "Operation"}, "conv2d_127": {"edges": [{"target": "relu_132", "dims": "(1, 192, 27, 27)", "edge_data_id": 11661328448}], "failed": false, "node_type": "Operation"}, "tensor_128": {"edges": [{"target": "conv2d_127", "dims": "(192, 48, 3, 3)", "edge_data_id": 11058060400}], "failed": false, "node_type": "Constant"}, "tensor_129": {"edges": [{"target": "conv2d_127", "dims": "(192)", "edge_data_id": 11058060480}], "failed": false, "node_type": "Constant"}, "scalar_130": {"edges": [{"target": "conv2d_127", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_132": {"edges": [{"target": "cat_133", "dims": "(1, 192, 27, 27)", "edge_data_id": 11661328448}], "failed": false, "node_type": "Operation"}, "cat_133": {"edges": [{"target": "conv2d_137", "dims": "(1, 384, 27, 27)", "edge_data_id": 11661330448}], "failed": false, "node_type": "Operation"}, "scalar_134": {"edges": [{"target": "cat_133", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "conv2d_137": {"edges": [{"target": "relu_142", "dims": "(1, 48, 27, 27)", "edge_data_id": 11661332048}], "failed": false, "node_type": "Operation"}, "tensor_138": {"edges": [{"target": "conv2d_137", "dims": "(48, 384, 1, 1)", "edge_data_id": 11058060640}], "failed": false, "node_type": "Constant"}, "tensor_139": {"edges": [{"target": "conv2d_137", "dims": "(48)", "edge_data_id": 11058060720}], "failed": false, "node_type": "Constant"}, "scalar_140": {"edges": [{"target": "conv2d_137", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_142": {"edges": [{"target": "conv2d_144", "dims": "(1, 48, 27, 27)", "edge_data_id": 11661332048}, {"target": "conv2d_151", "dims": "(1, 48, 27, 27)", "edge_data_id": 11661332048}], "failed": false, "node_type": "Operation"}, "conv2d_144": {"edges": [{"target": "relu_149", "dims": "(1, 192, 27, 27)", "edge_data_id": 11661329168}], "failed": false, "node_type": "Operation"}, "tensor_145": {"edges": [{"target": "conv2d_144", "dims": "(192, 48, 1, 1)", "edge_data_id": 11058060880}], "failed": false, "node_type": "Constant"}, "tensor_146": {"edges": [{"target": "conv2d_144", "dims": "(192)", "edge_data_id": 11058060960}], "failed": false, "node_type": "Constant"}, "scalar_147": {"edges": [{"target": "conv2d_144", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_149": {"edges": [{"target": "cat_157", "dims": "(1, 192, 27, 27)", "edge_data_id": 11661329168}], "failed": false, "node_type": "Operation"}, "conv2d_151": {"edges": [{"target": "relu_156", "dims": "(1, 192, 27, 27)", "edge_data_id": 11136429888}], "failed": false, "node_type": "Operation"}, "tensor_152": {"edges": [{"target": "conv2d_151", "dims": "(192, 48, 3, 3)", "edge_data_id": 11058061120}], "failed": false, "node_type": "Constant"}, "tensor_153": {"edges": [{"target": "conv2d_151", "dims": "(192)", "edge_data_id": 11058061200}], "failed": false, "node_type": "Constant"}, "scalar_154": {"edges": [{"target": "conv2d_151", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_156": {"edges": [{"target": "cat_157", "dims": "(1, 192, 27, 27)", "edge_data_id": 11136429888}], "failed": false, "node_type": "Operation"}, "cat_157": {"edges": [{"target": "conv2d_161", "dims": "(1, 384, 27, 27)", "edge_data_id": 11661084208}], "failed": false, "node_type": "Operation"}, "scalar_158": {"edges": [{"target": "cat_157", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "conv2d_161": {"edges": [{"target": "relu_166", "dims": "(1, 64, 27, 27)", "edge_data_id": 11136429888}], "failed": false, "node_type": "Operation"}, "tensor_162": {"edges": [{"target": "conv2d_161", "dims": "(64, 384, 1, 1)", "edge_data_id": 11057815696}], "failed": false, "node_type": "Constant"}, "tensor_163": {"edges": [{"target": "conv2d_161", "dims": "(64)", "edge_data_id": 11057815776}], "failed": false, "node_type": "Constant"}, "scalar_164": {"edges": [{"target": "conv2d_161", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_166": {"edges": [{"target": "conv2d_168", "dims": "(1, 64, 27, 27)", "edge_data_id": 11136429888}, {"target": "conv2d_175", "dims": "(1, 64, 27, 27)", "edge_data_id": 11136429888}], "failed": false, "node_type": "Operation"}, "conv2d_168": {"edges": [{"target": "relu_173", "dims": "(1, 256, 27, 27)", "edge_data_id": 11661085728}], "failed": false, "node_type": "Operation"}, "tensor_169": {"edges": [{"target": "conv2d_168", "dims": "(256, 64, 1, 1)", "edge_data_id": 11057815936}], "failed": false, "node_type": "Constant"}, "tensor_170": {"edges": [{"target": "conv2d_168", "dims": "(256)", "edge_data_id": 11057816016}], "failed": false, "node_type": "Constant"}, "scalar_171": {"edges": [{"target": "conv2d_168", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_173": {"edges": [{"target": "cat_181", "dims": "(1, 256, 27, 27)", "edge_data_id": 11661085728}], "failed": false, "node_type": "Operation"}, "conv2d_175": {"edges": [{"target": "relu_180", "dims": "(1, 256, 27, 27)", "edge_data_id": 11661083888}], "failed": false, "node_type": "Operation"}, "tensor_176": {"edges": [{"target": "conv2d_175", "dims": "(256, 64, 3, 3)", "edge_data_id": 11057816176}], "failed": false, "node_type": "Constant"}, "tensor_177": {"edges": [{"target": "conv2d_175", "dims": "(256)", "edge_data_id": 11057816256}], "failed": false, "node_type": "Constant"}, "scalar_178": {"edges": [{"target": "conv2d_175", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_180": {"edges": [{"target": "cat_181", "dims": "(1, 256, 27, 27)", "edge_data_id": 11661083888}], "failed": false, "node_type": "Operation"}, "cat_181": {"edges": [{"target": "max_pool2d_184", "dims": "(1, 512, 27, 27)", "edge_data_id": 11661083088}], "failed": false, "node_type": "Operation"}, "scalar_182": {"edges": [{"target": "cat_181", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "max_pool2d_184": {"edges": [{"target": "conv2d_188", "dims": "(1, 512, 13, 13)", "edge_data_id": 11136429888}], "failed": false, "node_type": "Operation"}, "scalars_185_x_4": {"edges": [{"target": "max_pool2d_184", "dims": "( ) x 4"}], "failed": false, "node_type": "Constant"}, "conv2d_188": {"edges": [{"target": "relu_193", "dims": "(1, 64, 13, 13)", "edge_data_id": 11661085728}], "failed": false, "node_type": "Operation"}, "tensor_189": {"edges": [{"target": "conv2d_188", "dims": "(64, 512, 1, 1)", "edge_data_id": 11057816416}], "failed": false, "node_type": "Constant"}, "tensor_190": {"edges": [{"target": "conv2d_188", "dims": "(64)", "edge_data_id": 11057816496}], "failed": false, "node_type": "Constant"}, "scalar_191": {"edges": [{"target": "conv2d_188", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_193": {"edges": [{"target": "conv2d_195", "dims": "(1, 64, 13, 13)", "edge_data_id": 11661085728}, {"target": "conv2d_202", "dims": "(1, 64, 13, 13)", "edge_data_id": 11661085728}], "failed": false, "node_type": "Operation"}, "conv2d_195": {"edges": [{"target": "relu_200", "dims": "(1, 256, 13, 13)", "edge_data_id": 11661083888}], "failed": false, "node_type": "Operation"}, "tensor_196": {"edges": [{"target": "conv2d_195", "dims": "(256, 64, 1, 1)", "edge_data_id": 11057816656}], "failed": false, "node_type": "Constant"}, "tensor_197": {"edges": [{"target": "conv2d_195", "dims": "(256)", "edge_data_id": 11057816736}], "failed": false, "node_type": "Constant"}, "scalar_198": {"edges": [{"target": "conv2d_195", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_200": {"edges": [{"target": "cat_208", "dims": "(1, 256, 13, 13)", "edge_data_id": 11661083888}], "failed": false, "node_type": "Operation"}, "conv2d_202": {"edges": [{"target": "relu_207", "dims": "(1, 256, 13, 13)", "edge_data_id": 11661084368}], "failed": false, "node_type": "Operation"}, "tensor_203": {"edges": [{"target": "conv2d_202", "dims": "(256, 64, 3, 3)", "edge_data_id": 11057816896}], "failed": false, "node_type": "Constant"}, "tensor_204": {"edges": [{"target": "conv2d_202", "dims": "(256)", "edge_data_id": 11057816976}], "failed": false, "node_type": "Constant"}, "scalar_205": {"edges": [{"target": "conv2d_202", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_207": {"edges": [{"target": "cat_208", "dims": "(1, 256, 13, 13)", "edge_data_id": 11661084368}], "failed": false, "node_type": "Operation"}, "cat_208": {"edges": [{"target": "dropout_212", "dims": "(1, 512, 13, 13)", "edge_data_id": 11661083408}], "failed": false, "node_type": "Operation"}, "scalar_209": {"edges": [{"target": "cat_208", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "dropout_212": {"edges": [{"target": "conv2d_215", "dims": "(1, 512, 13, 13)", "edge_data_id": 11661084928}], "failed": false, "node_type": "Operation"}, "scalars_213_x_3": {"edges": [{"target": "dropout_212", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "conv2d_215": {"edges": [{"target": "relu_220", "dims": "(1, 1000, 13, 13)", "edge_data_id": 11661084048}], "failed": false, "node_type": "Operation"}, "tensor_216": {"edges": [{"target": "conv2d_215", "dims": "(1000, 512, 1, 1)", "edge_data_id": 11057817136}], "failed": false, "node_type": "Constant"}, "tensor_217": {"edges": [{"target": "conv2d_215", "dims": "(1000)", "edge_data_id": 11057817216}], "failed": false, "node_type": "Constant"}, "scalar_218": {"edges": [{"target": "conv2d_215", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_220": {"edges": [{"target": "adaptive_avg_pool2d_222", "dims": "(1, 1000, 13, 13)", "edge_data_id": 11661084048}], "failed": false, "node_type": "Operation"}, "adaptive_avg_pool2d_222": {"edges": [{"target": "flatten_223", "dims": "(1, 1000, 1, 1)", "edge_data_id": 11661084768}], "failed": false, "node_type": "Operation"}, "flatten_223": {"edges": [{"target": "output_0", "dims": "(1, 1000)", "edge_data_id": 11661076016}], "failed": false, "node_type": "Operation"}, "scalar_224": {"edges": [{"target": "flatten_223", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "output_0": {"edges": [], "failed": false, "node_type": "Output"}};
+    const adj_list = {"input_0": {"edges": [{"target": "conv2d_3", "dims": "(1, 3, 224, 224)", "edge_data_id": 6434843520}], "failed": false, "node_type": "Input"}, "conv2d_3": {"edges": [{"target": "relu_8", "dims": "(1, 96, 109, 109)", "edge_data_id": 11404068320}], "failed": false, "node_type": "Operation"}, "tensor_4": {"edges": [{"target": "conv2d_3", "dims": "(96, 3, 7, 7)", "edge_data_id": 6434380592}], "failed": false, "node_type": "Constant"}, "tensor_5": {"edges": [{"target": "conv2d_3", "dims": "(96)", "edge_data_id": 6434380752}], "failed": false, "node_type": "Constant"}, "scalar_6": {"edges": [{"target": "conv2d_3", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_8": {"edges": [{"target": "max_pool2d_10", "dims": "(1, 96, 109, 109)", "edge_data_id": 11404068320}], "failed": false, "node_type": "Operation"}, "max_pool2d_10": {"edges": [{"target": "conv2d_14", "dims": "(1, 96, 54, 54)", "edge_data_id": 11404068640}], "failed": false, "node_type": "Operation"}, "scalars_11_x_4": {"edges": [{"target": "max_pool2d_10", "dims": "( ) x 4"}], "failed": false, "node_type": "Constant"}, "conv2d_14": {"edges": [{"target": "relu_19", "dims": "(1, 16, 54, 54)", "edge_data_id": 11404068320}], "failed": false, "node_type": "Operation"}, "tensor_15": {"edges": [{"target": "conv2d_14", "dims": "(16, 96, 1, 1)", "edge_data_id": 6434380352}], "failed": false, "node_type": "Constant"}, "tensor_16": {"edges": [{"target": "conv2d_14", "dims": "(16)", "edge_data_id": 6434378672}], "failed": false, "node_type": "Constant"}, "scalar_17": {"edges": [{"target": "conv2d_14", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_19": {"edges": [{"target": "conv2d_21", "dims": "(1, 16, 54, 54)", "edge_data_id": 11404068320}, {"target": "conv2d_28", "dims": "(1, 16, 54, 54)", "edge_data_id": 11404068320}], "failed": false, "node_type": "Operation"}, "conv2d_21": {"edges": [{"target": "relu_26", "dims": "(1, 64, 54, 54)", "edge_data_id": 11404068160}], "failed": false, "node_type": "Operation"}, "tensor_22": {"edges": [{"target": "conv2d_21", "dims": "(64, 16, 1, 1)", "edge_data_id": 6434378992}], "failed": false, "node_type": "Constant"}, "tensor_23": {"edges": [{"target": "conv2d_21", "dims": "(64)", "edge_data_id": 6434379072}], "failed": false, "node_type": "Constant"}, "scalar_24": {"edges": [{"target": "conv2d_21", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_26": {"edges": [{"target": "cat_34", "dims": "(1, 64, 54, 54)", "edge_data_id": 11404068160}], "failed": false, "node_type": "Operation"}, "conv2d_28": {"edges": [{"target": "relu_33", "dims": "(1, 64, 54, 54)", "edge_data_id": 11403966080}], "failed": false, "node_type": "Operation"}, "tensor_29": {"edges": [{"target": "conv2d_28", "dims": "(64, 16, 3, 3)", "edge_data_id": 6434378752}], "failed": false, "node_type": "Constant"}, "tensor_30": {"edges": [{"target": "conv2d_28", "dims": "(64)", "edge_data_id": 6434379232}], "failed": false, "node_type": "Constant"}, "scalar_31": {"edges": [{"target": "conv2d_28", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_33": {"edges": [{"target": "cat_34", "dims": "(1, 64, 54, 54)", "edge_data_id": 11403966080}], "failed": false, "node_type": "Operation"}, "cat_34": {"edges": [{"target": "conv2d_38", "dims": "(1, 128, 54, 54)", "edge_data_id": 11403964960}], "failed": false, "node_type": "Operation"}, "scalar_35": {"edges": [{"target": "cat_34", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "conv2d_38": {"edges": [{"target": "relu_43", "dims": "(1, 16, 54, 54)", "edge_data_id": 11404068320}], "failed": false, "node_type": "Operation"}, "tensor_39": {"edges": [{"target": "conv2d_38", "dims": "(16, 128, 1, 1)", "edge_data_id": 6434379552}], "failed": false, "node_type": "Constant"}, "tensor_40": {"edges": [{"target": "conv2d_38", "dims": "(16)", "edge_data_id": 6434379632}], "failed": false, "node_type": "Constant"}, "scalar_41": {"edges": [{"target": "conv2d_38", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_43": {"edges": [{"target": "conv2d_45", "dims": "(1, 16, 54, 54)", "edge_data_id": 11404068320}, {"target": "conv2d_52", "dims": "(1, 16, 54, 54)", "edge_data_id": 11404068320}], "failed": false, "node_type": "Operation"}, "conv2d_45": {"edges": [{"target": "relu_50", "dims": "(1, 64, 54, 54)", "edge_data_id": 11403964480}], "failed": false, "node_type": "Operation"}, "tensor_46": {"edges": [{"target": "conv2d_45", "dims": "(64, 16, 1, 1)", "edge_data_id": 6434379792}], "failed": false, "node_type": "Constant"}, "tensor_47": {"edges": [{"target": "conv2d_45", "dims": "(64)", "edge_data_id": 6434379392}], "failed": false, "node_type": "Constant"}, "scalar_48": {"edges": [{"target": "conv2d_45", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_50": {"edges": [{"target": "cat_58", "dims": "(1, 64, 54, 54)", "edge_data_id": 11403964480}], "failed": false, "node_type": "Operation"}, "conv2d_52": {"edges": [{"target": "relu_57", "dims": "(1, 64, 54, 54)", "edge_data_id": 11404040128}], "failed": false, "node_type": "Operation"}, "tensor_53": {"edges": [{"target": "conv2d_52", "dims": "(64, 16, 3, 3)", "edge_data_id": 6434379152}], "failed": false, "node_type": "Constant"}, "tensor_54": {"edges": [{"target": "conv2d_52", "dims": "(64)", "edge_data_id": 6434379952}], "failed": false, "node_type": "Constant"}, "scalar_55": {"edges": [{"target": "conv2d_52", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_57": {"edges": [{"target": "cat_58", "dims": "(1, 64, 54, 54)", "edge_data_id": 11404040128}], "failed": false, "node_type": "Operation"}, "cat_58": {"edges": [{"target": "conv2d_62", "dims": "(1, 128, 54, 54)", "edge_data_id": 11404039968}], "failed": false, "node_type": "Operation"}, "scalar_59": {"edges": [{"target": "cat_58", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "conv2d_62": {"edges": [{"target": "relu_67", "dims": "(1, 32, 54, 54)", "edge_data_id": 11404040128}], "failed": false, "node_type": "Operation"}, "tensor_63": {"edges": [{"target": "conv2d_62", "dims": "(32, 128, 1, 1)", "edge_data_id": 6434379872}], "failed": false, "node_type": "Constant"}, "tensor_64": {"edges": [{"target": "conv2d_62", "dims": "(32)", "edge_data_id": 6434380192}], "failed": false, "node_type": "Constant"}, "scalar_65": {"edges": [{"target": "conv2d_62", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_67": {"edges": [{"target": "conv2d_69", "dims": "(1, 32, 54, 54)", "edge_data_id": 11404040128}, {"target": "conv2d_76", "dims": "(1, 32, 54, 54)", "edge_data_id": 11404040128}], "failed": false, "node_type": "Operation"}, "conv2d_69": {"edges": [{"target": "relu_74", "dims": "(1, 128, 54, 54)", "edge_data_id": 11404039808}], "failed": false, "node_type": "Operation"}, "tensor_70": {"edges": [{"target": "conv2d_69", "dims": "(128, 32, 1, 1)", "edge_data_id": 6434380112}], "failed": false, "node_type": "Constant"}, "tensor_71": {"edges": [{"target": "conv2d_69", "dims": "(128)", "edge_data_id": 6434380432}], "failed": false, "node_type": "Constant"}, "scalar_72": {"edges": [{"target": "conv2d_69", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_74": {"edges": [{"target": "cat_82", "dims": "(1, 128, 54, 54)", "edge_data_id": 11404039808}], "failed": false, "node_type": "Operation"}, "conv2d_76": {"edges": [{"target": "relu_81", "dims": "(1, 128, 54, 54)", "edge_data_id": 11404040448}], "failed": false, "node_type": "Operation"}, "tensor_77": {"edges": [{"target": "conv2d_76", "dims": "(128, 32, 3, 3)", "edge_data_id": 6434380912}], "failed": false, "node_type": "Constant"}, "tensor_78": {"edges": [{"target": "conv2d_76", "dims": "(128)", "edge_data_id": 6434380992}], "failed": false, "node_type": "Constant"}, "scalar_79": {"edges": [{"target": "conv2d_76", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_81": {"edges": [{"target": "cat_82", "dims": "(1, 128, 54, 54)", "edge_data_id": 11404040448}], "failed": false, "node_type": "Operation"}, "cat_82": {"edges": [{"target": "max_pool2d_85", "dims": "(1, 256, 54, 54)", "edge_data_id": 11404041248}], "failed": false, "node_type": "Operation"}, "scalar_83": {"edges": [{"target": "cat_82", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "max_pool2d_85": {"edges": [{"target": "conv2d_89", "dims": "(1, 256, 27, 27)", "edge_data_id": 11404039968}], "failed": false, "node_type": "Operation"}, "scalars_86_x_4": {"edges": [{"target": "max_pool2d_85", "dims": "( ) x 4"}], "failed": false, "node_type": "Constant"}, "conv2d_89": {"edges": [{"target": "relu_94", "dims": "(1, 32, 27, 27)", "edge_data_id": 11404039808}], "failed": false, "node_type": "Operation"}, "tensor_90": {"edges": [{"target": "conv2d_89", "dims": "(32, 256, 1, 1)", "edge_data_id": 6434381152}], "failed": false, "node_type": "Constant"}, "tensor_91": {"edges": [{"target": "conv2d_89", "dims": "(32)", "edge_data_id": 6434381232}], "failed": false, "node_type": "Constant"}, "scalar_92": {"edges": [{"target": "conv2d_89", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_94": {"edges": [{"target": "conv2d_96", "dims": "(1, 32, 27, 27)", "edge_data_id": 11404039808}, {"target": "conv2d_103", "dims": "(1, 32, 27, 27)", "edge_data_id": 11404039808}], "failed": false, "node_type": "Operation"}, "conv2d_96": {"edges": [{"target": "relu_101", "dims": "(1, 128, 27, 27)", "edge_data_id": 11404040448}], "failed": false, "node_type": "Operation"}, "tensor_97": {"edges": [{"target": "conv2d_96", "dims": "(128, 32, 1, 1)", "edge_data_id": 6434381392}], "failed": false, "node_type": "Constant"}, "tensor_98": {"edges": [{"target": "conv2d_96", "dims": "(128)", "edge_data_id": 6434381472}], "failed": false, "node_type": "Constant"}, "scalar_99": {"edges": [{"target": "conv2d_96", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_101": {"edges": [{"target": "cat_109", "dims": "(1, 128, 27, 27)", "edge_data_id": 11404040448}], "failed": false, "node_type": "Operation"}, "conv2d_103": {"edges": [{"target": "relu_108", "dims": "(1, 128, 27, 27)", "edge_data_id": 11404042048}], "failed": false, "node_type": "Operation"}, "tensor_104": {"edges": [{"target": "conv2d_103", "dims": "(128, 32, 3, 3)", "edge_data_id": 6434381632}], "failed": false, "node_type": "Constant"}, "tensor_105": {"edges": [{"target": "conv2d_103", "dims": "(128)", "edge_data_id": 6434381712}], "failed": false, "node_type": "Constant"}, "scalar_106": {"edges": [{"target": "conv2d_103", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_108": {"edges": [{"target": "cat_109", "dims": "(1, 128, 27, 27)", "edge_data_id": 11404042048}], "failed": false, "node_type": "Operation"}, "cat_109": {"edges": [{"target": "conv2d_113", "dims": "(1, 256, 27, 27)", "edge_data_id": 11404036352}], "failed": false, "node_type": "Operation"}, "scalar_110": {"edges": [{"target": "cat_109", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "conv2d_113": {"edges": [{"target": "relu_118", "dims": "(1, 48, 27, 27)", "edge_data_id": 11404040448}], "failed": false, "node_type": "Operation"}, "tensor_114": {"edges": [{"target": "conv2d_113", "dims": "(48, 256, 1, 1)", "edge_data_id": 6434840720}], "failed": false, "node_type": "Constant"}, "tensor_115": {"edges": [{"target": "conv2d_113", "dims": "(48)", "edge_data_id": 6434840800}], "failed": false, "node_type": "Constant"}, "scalar_116": {"edges": [{"target": "conv2d_113", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_118": {"edges": [{"target": "conv2d_120", "dims": "(1, 48, 27, 27)", "edge_data_id": 11404040448}, {"target": "conv2d_127", "dims": "(1, 48, 27, 27)", "edge_data_id": 11404040448}], "failed": false, "node_type": "Operation"}, "conv2d_120": {"edges": [{"target": "relu_125", "dims": "(1, 192, 27, 27)", "edge_data_id": 11404042048}], "failed": false, "node_type": "Operation"}, "tensor_121": {"edges": [{"target": "conv2d_120", "dims": "(192, 48, 1, 1)", "edge_data_id": 6434840960}], "failed": false, "node_type": "Constant"}, "tensor_122": {"edges": [{"target": "conv2d_120", "dims": "(192)", "edge_data_id": 6434841040}], "failed": false, "node_type": "Constant"}, "scalar_123": {"edges": [{"target": "conv2d_120", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_125": {"edges": [{"target": "cat_133", "dims": "(1, 192, 27, 27)", "edge_data_id": 11404042048}], "failed": false, "node_type": "Operation"}, "conv2d_127": {"edges": [{"target": "relu_132", "dims": "(1, 192, 27, 27)", "edge_data_id": 11404035232}], "failed": false, "node_type": "Operation"}, "tensor_128": {"edges": [{"target": "conv2d_127", "dims": "(192, 48, 3, 3)", "edge_data_id": 6434841200}], "failed": false, "node_type": "Constant"}, "tensor_129": {"edges": [{"target": "conv2d_127", "dims": "(192)", "edge_data_id": 6434841280}], "failed": false, "node_type": "Constant"}, "scalar_130": {"edges": [{"target": "conv2d_127", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_132": {"edges": [{"target": "cat_133", "dims": "(1, 192, 27, 27)", "edge_data_id": 11404035232}], "failed": false, "node_type": "Operation"}, "cat_133": {"edges": [{"target": "conv2d_137", "dims": "(1, 384, 27, 27)", "edge_data_id": 11404035392}], "failed": false, "node_type": "Operation"}, "scalar_134": {"edges": [{"target": "cat_133", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "conv2d_137": {"edges": [{"target": "relu_142", "dims": "(1, 48, 27, 27)", "edge_data_id": 11404042048}], "failed": false, "node_type": "Operation"}, "tensor_138": {"edges": [{"target": "conv2d_137", "dims": "(48, 384, 1, 1)", "edge_data_id": 6434841440}], "failed": false, "node_type": "Constant"}, "tensor_139": {"edges": [{"target": "conv2d_137", "dims": "(48)", "edge_data_id": 6434841520}], "failed": false, "node_type": "Constant"}, "scalar_140": {"edges": [{"target": "conv2d_137", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_142": {"edges": [{"target": "conv2d_144", "dims": "(1, 48, 27, 27)", "edge_data_id": 11404042048}, {"target": "conv2d_151", "dims": "(1, 48, 27, 27)", "edge_data_id": 11404042048}], "failed": false, "node_type": "Operation"}, "conv2d_144": {"edges": [{"target": "relu_149", "dims": "(1, 192, 27, 27)", "edge_data_id": 11404036352}], "failed": false, "node_type": "Operation"}, "tensor_145": {"edges": [{"target": "conv2d_144", "dims": "(192, 48, 1, 1)", "edge_data_id": 6434841680}], "failed": false, "node_type": "Constant"}, "tensor_146": {"edges": [{"target": "conv2d_144", "dims": "(192)", "edge_data_id": 6434841760}], "failed": false, "node_type": "Constant"}, "scalar_147": {"edges": [{"target": "conv2d_144", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_149": {"edges": [{"target": "cat_157", "dims": "(1, 192, 27, 27)", "edge_data_id": 11404036352}], "failed": false, "node_type": "Operation"}, "conv2d_151": {"edges": [{"target": "relu_156", "dims": "(1, 192, 27, 27)", "edge_data_id": 11404036512}], "failed": false, "node_type": "Operation"}, "tensor_152": {"edges": [{"target": "conv2d_151", "dims": "(192, 48, 3, 3)", "edge_data_id": 6434841920}], "failed": false, "node_type": "Constant"}, "tensor_153": {"edges": [{"target": "conv2d_151", "dims": "(192)", "edge_data_id": 6434842000}], "failed": false, "node_type": "Constant"}, "scalar_154": {"edges": [{"target": "conv2d_151", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_156": {"edges": [{"target": "cat_157", "dims": "(1, 192, 27, 27)", "edge_data_id": 11404036512}], "failed": false, "node_type": "Operation"}, "cat_157": {"edges": [{"target": "conv2d_161", "dims": "(1, 384, 27, 27)", "edge_data_id": 11404035552}], "failed": false, "node_type": "Operation"}, "scalar_158": {"edges": [{"target": "cat_157", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "conv2d_161": {"edges": [{"target": "relu_166", "dims": "(1, 64, 27, 27)", "edge_data_id": 11404036512}], "failed": false, "node_type": "Operation"}, "tensor_162": {"edges": [{"target": "conv2d_161", "dims": "(64, 384, 1, 1)", "edge_data_id": 6434842160}], "failed": false, "node_type": "Constant"}, "tensor_163": {"edges": [{"target": "conv2d_161", "dims": "(64)", "edge_data_id": 6434842240}], "failed": false, "node_type": "Constant"}, "scalar_164": {"edges": [{"target": "conv2d_161", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_166": {"edges": [{"target": "conv2d_168", "dims": "(1, 64, 27, 27)", "edge_data_id": 11404036512}, {"target": "conv2d_175", "dims": "(1, 64, 27, 27)", "edge_data_id": 11404036512}], "failed": false, "node_type": "Operation"}, "conv2d_168": {"edges": [{"target": "relu_173", "dims": "(1, 256, 27, 27)", "edge_data_id": 11404037072}], "failed": false, "node_type": "Operation"}, "tensor_169": {"edges": [{"target": "conv2d_168", "dims": "(256, 64, 1, 1)", "edge_data_id": 6434842400}], "failed": false, "node_type": "Constant"}, "tensor_170": {"edges": [{"target": "conv2d_168", "dims": "(256)", "edge_data_id": 6434842480}], "failed": false, "node_type": "Constant"}, "scalar_171": {"edges": [{"target": "conv2d_168", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_173": {"edges": [{"target": "cat_181", "dims": "(1, 256, 27, 27)", "edge_data_id": 11404037072}], "failed": false, "node_type": "Operation"}, "conv2d_175": {"edges": [{"target": "relu_180", "dims": "(1, 256, 27, 27)", "edge_data_id": 11404036992}], "failed": false, "node_type": "Operation"}, "tensor_176": {"edges": [{"target": "conv2d_175", "dims": "(256, 64, 3, 3)", "edge_data_id": 6434842640}], "failed": false, "node_type": "Constant"}, "tensor_177": {"edges": [{"target": "conv2d_175", "dims": "(256)", "edge_data_id": 6434842720}], "failed": false, "node_type": "Constant"}, "scalar_178": {"edges": [{"target": "conv2d_175", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_180": {"edges": [{"target": "cat_181", "dims": "(1, 256, 27, 27)", "edge_data_id": 11404036992}], "failed": false, "node_type": "Operation"}, "cat_181": {"edges": [{"target": "max_pool2d_184", "dims": "(1, 512, 27, 27)", "edge_data_id": 11404034432}], "failed": false, "node_type": "Operation"}, "scalar_182": {"edges": [{"target": "cat_181", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "max_pool2d_184": {"edges": [{"target": "conv2d_188", "dims": "(1, 512, 13, 13)", "edge_data_id": 11404035552}], "failed": false, "node_type": "Operation"}, "scalars_185_x_4": {"edges": [{"target": "max_pool2d_184", "dims": "( ) x 4"}], "failed": false, "node_type": "Constant"}, "conv2d_188": {"edges": [{"target": "relu_193", "dims": "(1, 64, 13, 13)", "edge_data_id": 11404037072}], "failed": false, "node_type": "Operation"}, "tensor_189": {"edges": [{"target": "conv2d_188", "dims": "(64, 512, 1, 1)", "edge_data_id": 6434842880}], "failed": false, "node_type": "Constant"}, "tensor_190": {"edges": [{"target": "conv2d_188", "dims": "(64)", "edge_data_id": 6434842960}], "failed": false, "node_type": "Constant"}, "scalar_191": {"edges": [{"target": "conv2d_188", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_193": {"edges": [{"target": "conv2d_195", "dims": "(1, 64, 13, 13)", "edge_data_id": 11404037072}, {"target": "conv2d_202", "dims": "(1, 64, 13, 13)", "edge_data_id": 11404037072}], "failed": false, "node_type": "Operation"}, "conv2d_195": {"edges": [{"target": "relu_200", "dims": "(1, 256, 13, 13)", "edge_data_id": 11404036992}], "failed": false, "node_type": "Operation"}, "tensor_196": {"edges": [{"target": "conv2d_195", "dims": "(256, 64, 1, 1)", "edge_data_id": 6434843120}], "failed": false, "node_type": "Constant"}, "tensor_197": {"edges": [{"target": "conv2d_195", "dims": "(256)", "edge_data_id": 6434843200}], "failed": false, "node_type": "Constant"}, "scalar_198": {"edges": [{"target": "conv2d_195", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_200": {"edges": [{"target": "cat_208", "dims": "(1, 256, 13, 13)", "edge_data_id": 11404036992}], "failed": false, "node_type": "Operation"}, "conv2d_202": {"edges": [{"target": "relu_207", "dims": "(1, 256, 13, 13)", "edge_data_id": 11404037552}], "failed": false, "node_type": "Operation"}, "tensor_203": {"edges": [{"target": "conv2d_202", "dims": "(256, 64, 3, 3)", "edge_data_id": 6434843360}], "failed": false, "node_type": "Constant"}, "tensor_204": {"edges": [{"target": "conv2d_202", "dims": "(256)", "edge_data_id": 6434843440}], "failed": false, "node_type": "Constant"}, "scalar_205": {"edges": [{"target": "conv2d_202", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_207": {"edges": [{"target": "cat_208", "dims": "(1, 256, 13, 13)", "edge_data_id": 11404037552}], "failed": false, "node_type": "Operation"}, "cat_208": {"edges": [{"target": "dropout_212", "dims": "(1, 512, 13, 13)", "edge_data_id": 11403839024}], "failed": false, "node_type": "Operation"}, "scalar_209": {"edges": [{"target": "cat_208", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "dropout_212": {"edges": [{"target": "conv2d_215", "dims": "(1, 512, 13, 13)", "edge_data_id": 11403840384}], "failed": false, "node_type": "Operation"}, "scalars_213_x_3": {"edges": [{"target": "dropout_212", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "conv2d_215": {"edges": [{"target": "relu_220", "dims": "(1, 1000, 13, 13)", "edge_data_id": 11403838384}], "failed": false, "node_type": "Operation"}, "tensor_216": {"edges": [{"target": "conv2d_215", "dims": "(1000, 512, 1, 1)", "edge_data_id": 6434843600}], "failed": false, "node_type": "Constant"}, "tensor_217": {"edges": [{"target": "conv2d_215", "dims": "(1000)", "edge_data_id": 6434843680}], "failed": false, "node_type": "Constant"}, "scalar_218": {"edges": [{"target": "conv2d_215", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "relu_220": {"edges": [{"target": "adaptive_avg_pool2d_222", "dims": "(1, 1000, 13, 13)", "edge_data_id": 11403838384}], "failed": false, "node_type": "Operation"}, "adaptive_avg_pool2d_222": {"edges": [{"target": "flatten_223", "dims": "(1, 1000, 1, 1)", "edge_data_id": 11403838064}], "failed": false, "node_type": "Operation"}, "flatten_223": {"edges": [{"target": "output_0", "dims": "(1, 1000)", "edge_data_id": 11404068800}], "failed": false, "node_type": "Operation"}, "scalar_224": {"edges": [{"target": "flatten_223", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "output_0": {"edges": [], "failed": false, "node_type": "Output"}};
     const module_info = {"Sequential_1": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Conv2d_2": {"type": "Conv2d", "parameters": {"weight": {"shape": [96, 3, 7, 7], "requires_grad": true}, "bias": {"shape": [96], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 3, "kernel_size": [7, 7], "out_channels": 96, "output_padding": [0, 0], "padding": [0, 0], "padding_mode": "zeros", "stride": [2, 2], "training": true, "transposed": false}, "extra_repr": "3, 96, kernel_size=(7, 7), stride=(2, 2)"}, "ReLU_7": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "MaxPool2d_9": {"type": "MaxPool2d", "parameters": {}, "attributes": {"call_super_init": false, "ceil_mode": true, "dilation": 1, "dump_patches": false, "kernel_size": 3, "padding": 0, "return_indices": false, "stride": 2, "training": true}, "extra_repr": "kernel_size=3, stride=2, padding=0, dilation=1, ceil_mode=True"}, "Fire_12": {"type": "Fire", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplanes": 96, "training": true}, "extra_repr": ""}, "Conv2d_13": {"type": "Conv2d", "parameters": {"weight": {"shape": [16, 96, 1, 1], "requires_grad": true}, "bias": {"shape": [16], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 96, "kernel_size": [1, 1], "out_channels": 16, "output_padding": [0, 0], "padding": [0, 0], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "96, 16, kernel_size=(1, 1), stride=(1, 1)"}, "ReLU_18": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Conv2d_20": {"type": "Conv2d", "parameters": {"weight": {"shape": [64, 16, 1, 1], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 16, "kernel_size": [1, 1], "out_channels": 64, "output_padding": [0, 0], "padding": [0, 0], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "16, 64, kernel_size=(1, 1), stride=(1, 1)"}, "ReLU_25": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Conv2d_27": {"type": "Conv2d", "parameters": {"weight": {"shape": [64, 16, 3, 3], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 16, "kernel_size": [3, 3], "out_channels": 64, "output_padding": [0, 0], "padding": [1, 1], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "16, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)"}, "ReLU_32": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Fire_36": {"type": "Fire", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplanes": 128, "training": true}, "extra_repr": ""}, "Conv2d_37": {"type": "Conv2d", "parameters": {"weight": {"shape": [16, 128, 1, 1], "requires_grad": true}, "bias": {"shape": [16], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 128, "kernel_size": [1, 1], "out_channels": 16, "output_padding": [0, 0], "padding": [0, 0], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "128, 16, kernel_size=(1, 1), stride=(1, 1)"}, "ReLU_42": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Conv2d_44": {"type": "Conv2d", "parameters": {"weight": {"shape": [64, 16, 1, 1], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 16, "kernel_size": [1, 1], "out_channels": 64, "output_padding": [0, 0], "padding": [0, 0], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "16, 64, kernel_size=(1, 1), stride=(1, 1)"}, "ReLU_49": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Conv2d_51": {"type": "Conv2d", "parameters": {"weight": {"shape": [64, 16, 3, 3], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 16, "kernel_size": [3, 3], "out_channels": 64, "output_padding": [0, 0], "padding": [1, 1], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "16, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)"}, "ReLU_56": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Fire_60": {"type": "Fire", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplanes": 128, "training": true}, "extra_repr": ""}, "Conv2d_61": {"type": "Conv2d", "parameters": {"weight": {"shape": [32, 128, 1, 1], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 128, "kernel_size": [1, 1], "out_channels": 32, "output_padding": [0, 0], "padding": [0, 0], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "128, 32, kernel_size=(1, 1), stride=(1, 1)"}, "ReLU_66": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Conv2d_68": {"type": "Conv2d", "parameters": {"weight": {"shape": [128, 32, 1, 1], "requires_grad": true}, "bias": {"shape": [128], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 32, "kernel_size": [1, 1], "out_channels": 128, "output_padding": [0, 0], "padding": [0, 0], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "32, 128, kernel_size=(1, 1), stride=(1, 1)"}, "ReLU_73": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Conv2d_75": {"type": "Conv2d", "parameters": {"weight": {"shape": [128, 32, 3, 3], "requires_grad": true}, "bias": {"shape": [128], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 32, "kernel_size": [3, 3], "out_channels": 128, "output_padding": [0, 0], "padding": [1, 1], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "32, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)"}, "ReLU_80": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "MaxPool2d_84": {"type": "MaxPool2d", "parameters": {}, "attributes": {"call_super_init": false, "ceil_mode": true, "dilation": 1, "dump_patches": false, "kernel_size": 3, "padding": 0, "return_indices": false, "stride": 2, "training": true}, "extra_repr": "kernel_size=3, stride=2, padding=0, dilation=1, ceil_mode=True"}, "Fire_87": {"type": "Fire", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplanes": 256, "training": true}, "extra_repr": ""}, "Conv2d_88": {"type": "Conv2d", "parameters": {"weight": {"shape": [32, 256, 1, 1], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 256, "kernel_size": [1, 1], "out_channels": 32, "output_padding": [0, 0], "padding": [0, 0], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "256, 32, kernel_size=(1, 1), stride=(1, 1)"}, "ReLU_93": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Conv2d_95": {"type": "Conv2d", "parameters": {"weight": {"shape": [128, 32, 1, 1], "requires_grad": true}, "bias": {"shape": [128], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 32, "kernel_size": [1, 1], "out_channels": 128, "output_padding": [0, 0], "padding": [0, 0], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "32, 128, kernel_size=(1, 1), stride=(1, 1)"}, "ReLU_100": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Conv2d_102": {"type": "Conv2d", "parameters": {"weight": {"shape": [128, 32, 3, 3], "requires_grad": true}, "bias": {"shape": [128], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 32, "kernel_size": [3, 3], "out_channels": 128, "output_padding": [0, 0], "padding": [1, 1], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "32, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)"}, "ReLU_107": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Fire_111": {"type": "Fire", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplanes": 256, "training": true}, "extra_repr": ""}, "Conv2d_112": {"type": "Conv2d", "parameters": {"weight": {"shape": [48, 256, 1, 1], "requires_grad": true}, "bias": {"shape": [48], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 256, "kernel_size": [1, 1], "out_channels": 48, "output_padding": [0, 0], "padding": [0, 0], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "256, 48, kernel_size=(1, 1), stride=(1, 1)"}, "ReLU_117": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Conv2d_119": {"type": "Conv2d", "parameters": {"weight": {"shape": [192, 48, 1, 1], "requires_grad": true}, "bias": {"shape": [192], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 48, "kernel_size": [1, 1], "out_channels": 192, "output_padding": [0, 0], "padding": [0, 0], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "48, 192, kernel_size=(1, 1), stride=(1, 1)"}, "ReLU_124": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Conv2d_126": {"type": "Conv2d", "parameters": {"weight": {"shape": [192, 48, 3, 3], "requires_grad": true}, "bias": {"shape": [192], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 48, "kernel_size": [3, 3], "out_channels": 192, "output_padding": [0, 0], "padding": [1, 1], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "48, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)"}, "ReLU_131": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Fire_135": {"type": "Fire", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplanes": 384, "training": true}, "extra_repr": ""}, "Conv2d_136": {"type": "Conv2d", "parameters": {"weight": {"shape": [48, 384, 1, 1], "requires_grad": true}, "bias": {"shape": [48], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 384, "kernel_size": [1, 1], "out_channels": 48, "output_padding": [0, 0], "padding": [0, 0], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "384, 48, kernel_size=(1, 1), stride=(1, 1)"}, "ReLU_141": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Conv2d_143": {"type": "Conv2d", "parameters": {"weight": {"shape": [192, 48, 1, 1], "requires_grad": true}, "bias": {"shape": [192], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 48, "kernel_size": [1, 1], "out_channels": 192, "output_padding": [0, 0], "padding": [0, 0], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "48, 192, kernel_size=(1, 1), stride=(1, 1)"}, "ReLU_148": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Conv2d_150": {"type": "Conv2d", "parameters": {"weight": {"shape": [192, 48, 3, 3], "requires_grad": true}, "bias": {"shape": [192], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 48, "kernel_size": [3, 3], "out_channels": 192, "output_padding": [0, 0], "padding": [1, 1], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "48, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)"}, "ReLU_155": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Fire_159": {"type": "Fire", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplanes": 384, "training": true}, "extra_repr": ""}, "Conv2d_160": {"type": "Conv2d", "parameters": {"weight": {"shape": [64, 384, 1, 1], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 384, "kernel_size": [1, 1], "out_channels": 64, "output_padding": [0, 0], "padding": [0, 0], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "384, 64, kernel_size=(1, 1), stride=(1, 1)"}, "ReLU_165": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Conv2d_167": {"type": "Conv2d", "parameters": {"weight": {"shape": [256, 64, 1, 1], "requires_grad": true}, "bias": {"shape": [256], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 64, "kernel_size": [1, 1], "out_channels": 256, "output_padding": [0, 0], "padding": [0, 0], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "64, 256, kernel_size=(1, 1), stride=(1, 1)"}, "ReLU_172": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Conv2d_174": {"type": "Conv2d", "parameters": {"weight": {"shape": [256, 64, 3, 3], "requires_grad": true}, "bias": {"shape": [256], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 64, "kernel_size": [3, 3], "out_channels": 256, "output_padding": [0, 0], "padding": [1, 1], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "64, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)"}, "ReLU_179": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "MaxPool2d_183": {"type": "MaxPool2d", "parameters": {}, "attributes": {"call_super_init": false, "ceil_mode": true, "dilation": 1, "dump_patches": false, "kernel_size": 3, "padding": 0, "return_indices": false, "stride": 2, "training": true}, "extra_repr": "kernel_size=3, stride=2, padding=0, dilation=1, ceil_mode=True"}, "Fire_186": {"type": "Fire", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplanes": 512, "training": true}, "extra_repr": ""}, "Conv2d_187": {"type": "Conv2d", "parameters": {"weight": {"shape": [64, 512, 1, 1], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 512, "kernel_size": [1, 1], "out_channels": 64, "output_padding": [0, 0], "padding": [0, 0], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "512, 64, kernel_size=(1, 1), stride=(1, 1)"}, "ReLU_192": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Conv2d_194": {"type": "Conv2d", "parameters": {"weight": {"shape": [256, 64, 1, 1], "requires_grad": true}, "bias": {"shape": [256], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 64, "kernel_size": [1, 1], "out_channels": 256, "output_padding": [0, 0], "padding": [0, 0], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "64, 256, kernel_size=(1, 1), stride=(1, 1)"}, "ReLU_199": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Conv2d_201": {"type": "Conv2d", "parameters": {"weight": {"shape": [256, 64, 3, 3], "requires_grad": true}, "bias": {"shape": [256], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 64, "kernel_size": [3, 3], "out_channels": 256, "output_padding": [0, 0], "padding": [1, 1], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "64, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)"}, "ReLU_206": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "Sequential_210": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Dropout_211": {"type": "Dropout", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": false, "p": 0.5, "training": true}, "extra_repr": "p=0.5, inplace=False"}, "Conv2d_214": {"type": "Conv2d", "parameters": {"weight": {"shape": [1000, 512, 1, 1], "requires_grad": true}, "bias": {"shape": [1000], "requires_grad": true}}, "attributes": {"call_super_init": false, "dilation": [1, 1], "dump_patches": false, "groups": 1, "in_channels": 512, "kernel_size": [1, 1], "out_channels": 1000, "output_padding": [0, 0], "padding": [0, 0], "padding_mode": "zeros", "stride": [1, 1], "training": true, "transposed": false}, "extra_repr": "512, 1000, kernel_size=(1, 1), stride=(1, 1)"}, "ReLU_219": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": true, "training": true}, "extra_repr": "inplace=True"}, "AdaptiveAvgPool2d_221": {"type": "AdaptiveAvgPool2d", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "output_size": [1, 1], "training": true}, "extra_repr": "output_size=(1, 1)"}};
     const func_info = {"Sequential_1": {"positional_args": [{"_type": "tensor", "shape": [1, 3, 224, 224], "dtype": "torch.float32"}], "keyword_args": {}}, "Conv2d_2": {"positional_args": [{"_type": "tensor", "shape": [1, 3, 224, 224], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_3": {"positional_args": [{"_type": "tensor", "shape": [1, 3, 224, 224], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [96, 3, 7, 7], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [96], "dtype": "torch.float32"}, [2, 2], [0, 0], [1, 1], 1], "keyword_args": {}}, "ReLU_7": {"positional_args": [{"_type": "tensor", "shape": [1, 96, 109, 109], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_8": {"positional_args": [{"_type": "tensor", "shape": [1, 96, 109, 109], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "MaxPool2d_9": {"positional_args": [{"_type": "tensor", "shape": [1, 96, 109, 109], "dtype": "torch.float32"}], "keyword_args": {}}, "max_pool2d_10": {"positional_args": [{"_type": "tensor", "shape": [1, 96, 109, 109], "dtype": "torch.float32"}, 3, 2, 0, 1], "keyword_args": {"ceil_mode": true, "return_indices": false}}, "Fire_12": {"positional_args": [{"_type": "tensor", "shape": [1, 96, 54, 54], "dtype": "torch.float32"}], "keyword_args": {}}, "Conv2d_13": {"positional_args": [{"_type": "tensor", "shape": [1, 96, 54, 54], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_14": {"positional_args": [{"_type": "tensor", "shape": [1, 96, 54, 54], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [16, 96, 1, 1], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [16], "dtype": "torch.float32"}, [1, 1], [0, 0], [1, 1], 1], "keyword_args": {}}, "ReLU_18": {"positional_args": [{"_type": "tensor", "shape": [1, 16, 54, 54], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_19": {"positional_args": [{"_type": "tensor", "shape": [1, 16, 54, 54], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "Conv2d_20": {"positional_args": [{"_type": "tensor", "shape": [1, 16, 54, 54], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_21": {"positional_args": [{"_type": "tensor", "shape": [1, 16, 54, 54], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64, 16, 1, 1], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}, [1, 1], [0, 0], [1, 1], 1], "keyword_args": {}}, "ReLU_25": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 54, 54], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_26": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 54, 54], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "Conv2d_27": {"positional_args": [{"_type": "tensor", "shape": [1, 16, 54, 54], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_28": {"positional_args": [{"_type": "tensor", "shape": [1, 16, 54, 54], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64, 16, 3, 3], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}, [1, 1], [1, 1], [1, 1], 1], "keyword_args": {}}, "ReLU_32": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 54, 54], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_33": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 54, 54], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "cat_34": {"positional_args": [[{"_type": "tensor", "shape": [1, 64, 54, 54], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [1, 64, 54, 54], "dtype": "torch.float32"}], 1], "keyword_args": {}}, "Fire_36": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 54, 54], "dtype": "torch.float32"}], "keyword_args": {}}, "Conv2d_37": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 54, 54], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_38": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 54, 54], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [16, 128, 1, 1], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [16], "dtype": "torch.float32"}, [1, 1], [0, 0], [1, 1], 1], "keyword_args": {}}, "ReLU_42": {"positional_args": [{"_type": "tensor", "shape": [1, 16, 54, 54], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_43": {"positional_args": [{"_type": "tensor", "shape": [1, 16, 54, 54], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "Conv2d_44": {"positional_args": [{"_type": "tensor", "shape": [1, 16, 54, 54], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_45": {"positional_args": [{"_type": "tensor", "shape": [1, 16, 54, 54], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64, 16, 1, 1], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}, [1, 1], [0, 0], [1, 1], 1], "keyword_args": {}}, "ReLU_49": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 54, 54], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_50": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 54, 54], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "Conv2d_51": {"positional_args": [{"_type": "tensor", "shape": [1, 16, 54, 54], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_52": {"positional_args": [{"_type": "tensor", "shape": [1, 16, 54, 54], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64, 16, 3, 3], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}, [1, 1], [1, 1], [1, 1], 1], "keyword_args": {}}, "ReLU_56": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 54, 54], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_57": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 54, 54], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "cat_58": {"positional_args": [[{"_type": "tensor", "shape": [1, 64, 54, 54], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [1, 64, 54, 54], "dtype": "torch.float32"}], 1], "keyword_args": {}}, "Fire_60": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 54, 54], "dtype": "torch.float32"}], "keyword_args": {}}, "Conv2d_61": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 54, 54], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_62": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 54, 54], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32, 128, 1, 1], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, [1, 1], [0, 0], [1, 1], 1], "keyword_args": {}}, "ReLU_66": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 54, 54], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_67": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 54, 54], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "Conv2d_68": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 54, 54], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_69": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 54, 54], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [128, 32, 1, 1], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [128], "dtype": "torch.float32"}, [1, 1], [0, 0], [1, 1], 1], "keyword_args": {}}, "ReLU_73": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 54, 54], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_74": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 54, 54], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "Conv2d_75": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 54, 54], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_76": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 54, 54], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [128, 32, 3, 3], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [128], "dtype": "torch.float32"}, [1, 1], [1, 1], [1, 1], 1], "keyword_args": {}}, "ReLU_80": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 54, 54], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_81": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 54, 54], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "cat_82": {"positional_args": [[{"_type": "tensor", "shape": [1, 128, 54, 54], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [1, 128, 54, 54], "dtype": "torch.float32"}], 1], "keyword_args": {}}, "MaxPool2d_84": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 54, 54], "dtype": "torch.float32"}], "keyword_args": {}}, "max_pool2d_85": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 54, 54], "dtype": "torch.float32"}, 3, 2, 0, 1], "keyword_args": {"ceil_mode": true, "return_indices": false}}, "Fire_87": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "Conv2d_88": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_89": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 27, 27], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32, 256, 1, 1], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, [1, 1], [0, 0], [1, 1], 1], "keyword_args": {}}, "ReLU_93": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_94": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 27, 27], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "Conv2d_95": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_96": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 27, 27], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [128, 32, 1, 1], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [128], "dtype": "torch.float32"}, [1, 1], [0, 0], [1, 1], 1], "keyword_args": {}}, "ReLU_100": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_101": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 27, 27], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "Conv2d_102": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_103": {"positional_args": [{"_type": "tensor", "shape": [1, 32, 27, 27], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [128, 32, 3, 3], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [128], "dtype": "torch.float32"}, [1, 1], [1, 1], [1, 1], 1], "keyword_args": {}}, "ReLU_107": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_108": {"positional_args": [{"_type": "tensor", "shape": [1, 128, 27, 27], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "cat_109": {"positional_args": [[{"_type": "tensor", "shape": [1, 128, 27, 27], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [1, 128, 27, 27], "dtype": "torch.float32"}], 1], "keyword_args": {}}, "Fire_111": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "Conv2d_112": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_113": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 27, 27], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [48, 256, 1, 1], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [48], "dtype": "torch.float32"}, [1, 1], [0, 0], [1, 1], 1], "keyword_args": {}}, "ReLU_117": {"positional_args": [{"_type": "tensor", "shape": [1, 48, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_118": {"positional_args": [{"_type": "tensor", "shape": [1, 48, 27, 27], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "Conv2d_119": {"positional_args": [{"_type": "tensor", "shape": [1, 48, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_120": {"positional_args": [{"_type": "tensor", "shape": [1, 48, 27, 27], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [192, 48, 1, 1], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [192], "dtype": "torch.float32"}, [1, 1], [0, 0], [1, 1], 1], "keyword_args": {}}, "ReLU_124": {"positional_args": [{"_type": "tensor", "shape": [1, 192, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_125": {"positional_args": [{"_type": "tensor", "shape": [1, 192, 27, 27], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "Conv2d_126": {"positional_args": [{"_type": "tensor", "shape": [1, 48, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_127": {"positional_args": [{"_type": "tensor", "shape": [1, 48, 27, 27], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [192, 48, 3, 3], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [192], "dtype": "torch.float32"}, [1, 1], [1, 1], [1, 1], 1], "keyword_args": {}}, "ReLU_131": {"positional_args": [{"_type": "tensor", "shape": [1, 192, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_132": {"positional_args": [{"_type": "tensor", "shape": [1, 192, 27, 27], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "cat_133": {"positional_args": [[{"_type": "tensor", "shape": [1, 192, 27, 27], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [1, 192, 27, 27], "dtype": "torch.float32"}], 1], "keyword_args": {}}, "Fire_135": {"positional_args": [{"_type": "tensor", "shape": [1, 384, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "Conv2d_136": {"positional_args": [{"_type": "tensor", "shape": [1, 384, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_137": {"positional_args": [{"_type": "tensor", "shape": [1, 384, 27, 27], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [48, 384, 1, 1], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [48], "dtype": "torch.float32"}, [1, 1], [0, 0], [1, 1], 1], "keyword_args": {}}, "ReLU_141": {"positional_args": [{"_type": "tensor", "shape": [1, 48, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_142": {"positional_args": [{"_type": "tensor", "shape": [1, 48, 27, 27], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "Conv2d_143": {"positional_args": [{"_type": "tensor", "shape": [1, 48, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_144": {"positional_args": [{"_type": "tensor", "shape": [1, 48, 27, 27], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [192, 48, 1, 1], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [192], "dtype": "torch.float32"}, [1, 1], [0, 0], [1, 1], 1], "keyword_args": {}}, "ReLU_148": {"positional_args": [{"_type": "tensor", "shape": [1, 192, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_149": {"positional_args": [{"_type": "tensor", "shape": [1, 192, 27, 27], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "Conv2d_150": {"positional_args": [{"_type": "tensor", "shape": [1, 48, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_151": {"positional_args": [{"_type": "tensor", "shape": [1, 48, 27, 27], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [192, 48, 3, 3], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [192], "dtype": "torch.float32"}, [1, 1], [1, 1], [1, 1], 1], "keyword_args": {}}, "ReLU_155": {"positional_args": [{"_type": "tensor", "shape": [1, 192, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_156": {"positional_args": [{"_type": "tensor", "shape": [1, 192, 27, 27], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "cat_157": {"positional_args": [[{"_type": "tensor", "shape": [1, 192, 27, 27], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [1, 192, 27, 27], "dtype": "torch.float32"}], 1], "keyword_args": {}}, "Fire_159": {"positional_args": [{"_type": "tensor", "shape": [1, 384, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "Conv2d_160": {"positional_args": [{"_type": "tensor", "shape": [1, 384, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_161": {"positional_args": [{"_type": "tensor", "shape": [1, 384, 27, 27], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64, 384, 1, 1], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}, [1, 1], [0, 0], [1, 1], 1], "keyword_args": {}}, "ReLU_165": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_166": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 27, 27], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "Conv2d_167": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_168": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 27, 27], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [256, 64, 1, 1], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [256], "dtype": "torch.float32"}, [1, 1], [0, 0], [1, 1], 1], "keyword_args": {}}, "ReLU_172": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_173": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 27, 27], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "Conv2d_174": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_175": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 27, 27], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [256, 64, 3, 3], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [256], "dtype": "torch.float32"}, [1, 1], [1, 1], [1, 1], 1], "keyword_args": {}}, "ReLU_179": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_180": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 27, 27], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "cat_181": {"positional_args": [[{"_type": "tensor", "shape": [1, 256, 27, 27], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [1, 256, 27, 27], "dtype": "torch.float32"}], 1], "keyword_args": {}}, "MaxPool2d_183": {"positional_args": [{"_type": "tensor", "shape": [1, 512, 27, 27], "dtype": "torch.float32"}], "keyword_args": {}}, "max_pool2d_184": {"positional_args": [{"_type": "tensor", "shape": [1, 512, 27, 27], "dtype": "torch.float32"}, 3, 2, 0, 1], "keyword_args": {"ceil_mode": true, "return_indices": false}}, "Fire_186": {"positional_args": [{"_type": "tensor", "shape": [1, 512, 13, 13], "dtype": "torch.float32"}], "keyword_args": {}}, "Conv2d_187": {"positional_args": [{"_type": "tensor", "shape": [1, 512, 13, 13], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_188": {"positional_args": [{"_type": "tensor", "shape": [1, 512, 13, 13], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64, 512, 1, 1], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}, [1, 1], [0, 0], [1, 1], 1], "keyword_args": {}}, "ReLU_192": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 13, 13], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_193": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 13, 13], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "Conv2d_194": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 13, 13], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_195": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 13, 13], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [256, 64, 1, 1], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [256], "dtype": "torch.float32"}, [1, 1], [0, 0], [1, 1], 1], "keyword_args": {}}, "ReLU_199": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 13, 13], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_200": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 13, 13], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "Conv2d_201": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 13, 13], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_202": {"positional_args": [{"_type": "tensor", "shape": [1, 64, 13, 13], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [256, 64, 3, 3], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [256], "dtype": "torch.float32"}, [1, 1], [1, 1], [1, 1], 1], "keyword_args": {}}, "ReLU_206": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 13, 13], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_207": {"positional_args": [{"_type": "tensor", "shape": [1, 256, 13, 13], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "cat_208": {"positional_args": [[{"_type": "tensor", "shape": [1, 256, 13, 13], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [1, 256, 13, 13], "dtype": "torch.float32"}], 1], "keyword_args": {}}, "Sequential_210": {"positional_args": [{"_type": "tensor", "shape": [1, 512, 13, 13], "dtype": "torch.float32"}], "keyword_args": {}}, "Dropout_211": {"positional_args": [{"_type": "tensor", "shape": [1, 512, 13, 13], "dtype": "torch.float32"}], "keyword_args": {}}, "dropout_212": {"positional_args": [{"_type": "tensor", "shape": [1, 512, 13, 13], "dtype": "torch.float32"}, 0.5, true, false], "keyword_args": {}}, "Conv2d_214": {"positional_args": [{"_type": "tensor", "shape": [1, 512, 13, 13], "dtype": "torch.float32"}], "keyword_args": {}}, "conv2d_215": {"positional_args": [{"_type": "tensor", "shape": [1, 512, 13, 13], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [1000, 512, 1, 1], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [1000], "dtype": "torch.float32"}, [1, 1], [0, 0], [1, 1], 1], "keyword_args": {}}, "ReLU_219": {"positional_args": [{"_type": "tensor", "shape": [1, 1000, 13, 13], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_220": {"positional_args": [{"_type": "tensor", "shape": [1, 1000, 13, 13], "dtype": "torch.float32"}], "keyword_args": {"inplace": true}}, "AdaptiveAvgPool2d_221": {"positional_args": [{"_type": "tensor", "shape": [1, 1000, 13, 13], "dtype": "torch.float32"}], "keyword_args": {}}, "adaptive_avg_pool2d_222": {"positional_args": [{"_type": "tensor", "shape": [1, 1000, 13, 13], "dtype": "torch.float32"}, [1, 1]], "keyword_args": {}}, "flatten_223": {"positional_args": [{"_type": "tensor", "shape": [1, 1000, 1, 1], "dtype": "torch.float32"}, 1], "keyword_args": {}}};
     const parent_module_to_nodes = {"Conv2d_2": ["conv2d_3"], "Sequential_1": ["conv2d_3", "relu_8", "max_pool2d_10", "conv2d_14", "relu_19", "conv2d_21", "relu_26", "conv2d_28", "relu_33", "cat_34", "conv2d_38", "relu_43", "conv2d_45", "relu_50", "conv2d_52", "relu_57", "cat_58", "conv2d_62", "relu_67", "conv2d_69", "relu_74", "conv2d_76", "relu_81", "cat_82", "max_pool2d_85", "conv2d_89", "relu_94", "conv2d_96", "relu_101", "conv2d_103", "relu_108", "cat_109", "conv2d_113", "relu_118", "conv2d_120", "relu_125", "conv2d_127", "relu_132", "cat_133", "conv2d_137", "relu_142", "conv2d_144", "relu_149", "conv2d_151", "relu_156", "cat_157", "conv2d_161", "relu_166", "conv2d_168", "relu_173", "conv2d_175", "relu_180", "cat_181", "max_pool2d_184", "conv2d_188", "relu_193", "conv2d_195", "relu_200", "conv2d_202", "relu_207", "cat_208"], "ReLU_7": ["relu_8"], "MaxPool2d_9": ["max_pool2d_10"], "Conv2d_13": ["conv2d_14"], "Fire_12": ["conv2d_14", "relu_19", "conv2d_21", "relu_26", "conv2d_28", "relu_33", "cat_34"], "ReLU_18": ["relu_19"], "Conv2d_20": ["conv2d_21"], "ReLU_25": ["relu_26"], "Conv2d_27": ["conv2d_28"], "ReLU_32": ["relu_33"], "Conv2d_37": ["conv2d_38"], "Fire_36": ["conv2d_38", "relu_43", "conv2d_45", "relu_50", "conv2d_52", "relu_57", "cat_58"], "ReLU_42": ["relu_43"], "Conv2d_44": ["conv2d_45"], "ReLU_49": ["relu_50"], "Conv2d_51": ["conv2d_52"], "ReLU_56": ["relu_57"], "Conv2d_61": ["conv2d_62"], "Fire_60": ["conv2d_62", "relu_67", "conv2d_69", "relu_74", "conv2d_76", "relu_81", "cat_82"], "ReLU_66": ["relu_67"], "Conv2d_68": ["conv2d_69"], "ReLU_73": ["relu_74"], "Conv2d_75": ["conv2d_76"], "ReLU_80": ["relu_81"], "MaxPool2d_84": ["max_pool2d_85"], "Conv2d_88": ["conv2d_89"], "Fire_87": ["conv2d_89", "relu_94", "conv2d_96", "relu_101", "conv2d_103", "relu_108", "cat_109"], "ReLU_93": ["relu_94"], "Conv2d_95": ["conv2d_96"], "ReLU_100": ["relu_101"], "Conv2d_102": ["conv2d_103"], "ReLU_107": ["relu_108"], "Conv2d_112": ["conv2d_113"], "Fire_111": ["conv2d_113", "relu_118", "conv2d_120", "relu_125", "conv2d_127", "relu_132", "cat_133"], "ReLU_117": ["relu_118"], "Conv2d_119": ["conv2d_120"], "ReLU_124": ["relu_125"], "Conv2d_126": ["conv2d_127"], "ReLU_131": ["relu_132"], "Conv2d_136": ["conv2d_137"], "Fire_135": ["conv2d_137", "relu_142", "conv2d_144", "relu_149", "conv2d_151", "relu_156", "cat_157"], "ReLU_141": ["relu_142"], "Conv2d_143": ["conv2d_144"], "ReLU_148": ["relu_149"], "Conv2d_150": ["conv2d_151"], "ReLU_155": ["relu_156"], "Conv2d_160": ["conv2d_161"], "Fire_159": ["conv2d_161", "relu_166", "conv2d_168", "relu_173", "conv2d_175", "relu_180", "cat_181"], "ReLU_165": ["relu_166"], "Conv2d_167": ["conv2d_168"], "ReLU_172": ["relu_173"], "Conv2d_174": ["conv2d_175"], "ReLU_179": ["relu_180"], "MaxPool2d_183": ["max_pool2d_184"], "Conv2d_187": ["conv2d_188"], "Fire_186": ["conv2d_188", "relu_193", "conv2d_195", "relu_200", "conv2d_202", "relu_207", "cat_208"], "ReLU_192": ["relu_193"], "Conv2d_194": ["conv2d_195"], "ReLU_199": ["relu_200"], "Conv2d_201": ["conv2d_202"], "ReLU_206": ["relu_207"], "Dropout_211": ["dropout_212"], "Sequential_210": ["dropout_212", "conv2d_215", "relu_220", "adaptive_avg_pool2d_222"], "Conv2d_214": ["conv2d_215"], "ReLU_219": ["relu_220"], "AdaptiveAvgPool2d_221": ["adaptive_avg_pool2d_222"]};
@@ -928,10 +916,10 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         removeTooltip();
         
         const tooltip = document.createElement('div');
-        tooltip.className = !smaller ? `custom-tooltip_b5e6c594-6264-494e-8858-c99171e433e1` : `custom-tooltip_smaller_b5e6c594-6264-494e-8858-c99171e433e1`;
+        tooltip.className = !smaller ? `custom-tooltip_6e964725-4343-4ecb-88e3-9d4209714171` : `custom-tooltip_smaller_6e964725-4343-4ecb-88e3-9d4209714171`;
         tooltip.textContent = text;
         
-        const container = document.getElementById(`graph-container_b5e6c594-6264-494e-8858-c99171e433e1`);
+        const container = document.getElementById(`graph-container_6e964725-4343-4ecb-88e3-9d4209714171`);
         container.appendChild(tooltip);
         currentTooltip = tooltip;
         
@@ -943,7 +931,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const buttonRect = buttonElement.getBoundingClientRect();
         
         // Get the container's position in screen coordinates
-        const containerRect = document.getElementById(`graph-container_b5e6c594-6264-494e-8858-c99171e433e1`).getBoundingClientRect();
+        const containerRect = document.getElementById(`graph-container_6e964725-4343-4ecb-88e3-9d4209714171`).getBoundingClientRect();
         
         // Calculate position relative to container
         const buttonX = buttonRect.left + (buttonRect.width / 2) - containerRect.left;
@@ -1560,7 +1548,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function reloadGraph() {
-        d3.select("#graph_b5e6c594-6264-494e-8858-c99171e433e1").html("");
+        d3.select("#graph_6e964725-4343-4ecb-88e3-9d4209714171").html("");
 
         if (generateImage) {
             renderGraphvizImage();
@@ -1627,16 +1615,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function renderGraphvizImage() {
-        d3.select("#png-link-container_b5e6c594-6264-494e-8858-c99171e433e1").remove();
+        d3.select("#png-link-container_6e964725-4343-4ecb-88e3-9d4209714171").remove();
         
         function showErrorMessage(error) {
-            const parent = d3.select("#graph-container_b5e6c594-6264-494e-8858-c99171e433e1").node().parentNode;
+            const parent = d3.select("#graph-container_6e964725-4343-4ecb-88e3-9d4209714171").node().parentNode;
             const errorContainer = d3.select(parent)
-                .insert("div", "#graph-container_b5e6c594-6264-494e-8858-c99171e433e1")
-                .attr("id", "png-error-container_b5e6c594-6264-494e-8858-c99171e433e1");
+                .insert("div", "#graph-container_6e964725-4343-4ecb-88e3-9d4209714171")
+                .attr("id", "png-error-container_6e964725-4343-4ecb-88e3-9d4209714171");
             
             errorContainer.append("div")
-                .attr("id", "png-error-message_b5e6c594-6264-494e-8858-c99171e433e1")
+                .attr("id", "png-error-message_6e964725-4343-4ecb-88e3-9d4209714171")
                 .html(`<strong>Error:</strong><br>${error.stack || error.message || error}<br><br><strong>Note:</strong> Exporting very large models as PNG is currently not supported. Please use generate_image=False, or raise an issue on https://github.com/sachinhosmani/torchvista/issues`);
         }
         
@@ -1674,21 +1662,21 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const pngUrl = URL.createObjectURL(pngBlob);
         
         // Create link container
-        const parent = d3.select("#graph-container_b5e6c594-6264-494e-8858-c99171e433e1").node().parentNode;
+        const parent = d3.select("#graph-container_6e964725-4343-4ecb-88e3-9d4209714171").node().parentNode;
         const linkContainer = d3.select(parent)
-            .insert("div", "#graph-container_b5e6c594-6264-494e-8858-c99171e433e1")
-            .attr("id", "png-link-container_b5e6c594-6264-494e-8858-c99171e433e1");
+            .insert("div", "#graph-container_6e964725-4343-4ecb-88e3-9d4209714171")
+            .attr("id", "png-link-container_6e964725-4343-4ecb-88e3-9d4209714171");
         
         linkContainer.append("a")
             .attr("href", pngUrl)
             .attr("target", "_blank")
-            .attr("id", "png-download-button_b5e6c594-6264-494e-8858-c99171e433e1")
+            .attr("id", "png-download-button_6e964725-4343-4ecb-88e3-9d4209714171")
             .text("View PNG in New Tab");
 
         linkContainer.append("a")
             .attr("href", pngUrl)
-            .attr("download", `torchvista_graph_b5e6c594-6264-494e-8858-c99171e433e1.png`)
-            .attr("id", "png-save-button_b5e6c594-6264-494e-8858-c99171e433e1")
+            .attr("download", `torchvista_graph_6e964725-4343-4ecb-88e3-9d4209714171.png`)
+            .attr("id", "png-save-button_6e964725-4343-4ecb-88e3-9d4209714171")
             .text("Download PNG");
             
         URL.revokeObjectURL(svgUrl);
@@ -1709,26 +1697,26 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const svgUrl = URL.createObjectURL(svgBlob);
         
         // Create link container
-        const parent = d3.select("#graph-container_b5e6c594-6264-494e-8858-c99171e433e1").node().parentNode;
+        const parent = d3.select("#graph-container_6e964725-4343-4ecb-88e3-9d4209714171").node().parentNode;
         const linkContainer = d3.select(parent)
-            .insert("div", "#graph-container_b5e6c594-6264-494e-8858-c99171e433e1")
-            .attr("id", "svg-link-container_b5e6c594-6264-494e-8858-c99171e433e1");
+            .insert("div", "#graph-container_6e964725-4343-4ecb-88e3-9d4209714171")
+            .attr("id", "svg-link-container_6e964725-4343-4ecb-88e3-9d4209714171");
         
         linkContainer.append("a")
             .attr("href", svgUrl)
             .attr("target", "_blank")
-            .attr("id", "svg-download-button_b5e6c594-6264-494e-8858-c99171e433e1")
+            .attr("id", "svg-download-button_6e964725-4343-4ecb-88e3-9d4209714171")
             .text("View SVG in New Tab");
 
         linkContainer.append("a")
             .attr("href", svgUrl)
-            .attr("download", `torchvista_graph_b5e6c594-6264-494e-8858-c99171e433e1.svg`)
-            .attr("id", "svg-save-button_b5e6c594-6264-494e-8858-c99171e433e1")
+            .attr("download", `torchvista_graph_6e964725-4343-4ecb-88e3-9d4209714171.svg`)
+            .attr("id", "svg-save-button_6e964725-4343-4ecb-88e3-9d4209714171")
             .text("Download SVG");
     }
 
     function createGraph(graphvizData) {
-        const svg = d3.select("#graph_b5e6c594-6264-494e-8858-c99171e433e1")
+        const svg = d3.select("#graph_6e964725-4343-4ecb-88e3-9d4209714171")
         .append("svg")
         .attr("width", "100%")
         .attr("height", "100%")
@@ -1748,7 +1736,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
         // Define arrowhead marker
         svg.append("defs").append("marker")
-        .attr("id", "arrowhead_b5e6c594-6264-494e-8858-c99171e433e1")
+        .attr("id", "arrowhead_6e964725-4343-4ecb-88e3-9d4209714171")
         .attr("viewBox", "0 -5 10 10")
         .attr("refX", 8)
         .attr("refY", 0)
@@ -1760,11 +1748,11 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .attr("fill", "#333");
 
         // Draw clusters (container boxes) first so they're behind nodes
-        const clusters = inner.selectAll(".boundary-box_b5e6c594-6264-494e-8858-c99171e433e1")
+        const clusters = inner.selectAll(".boundary-box_6e964725-4343-4ecb-88e3-9d4209714171")
         .data(Object.entries(graphvizData.clusters))
         .enter()
         .append("g")
-        .attr("class", "boundary-box_b5e6c594-6264-494e-8858-c99171e433e1");
+        .attr("class", "boundary-box_6e964725-4343-4ecb-88e3-9d4209714171");
 
         const containersWithFailedNodes = identifyContainersWithFailedNodes(adj_list, ancestor_map);
 
@@ -1774,10 +1762,10 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             const hasFailedNodes = containersWithFailedNodes.has(clusterName);
             const isRepeat = isRepeatNode(clusterName);
             if (hasFailedNodes) {
-                group.classed("error_b5e6c594-6264-494e-8858-c99171e433e1", true);
+                group.classed("error_6e964725-4343-4ecb-88e3-9d4209714171", true);
             }
             if (isRepeat) {
-                group.classed("repeat-container_b5e6c594-6264-494e-8858-c99171e433e1", true);
+                group.classed("repeat-container_6e964725-4343-4ecb-88e3-9d4209714171", true);
             }
 
             // Parse bounding box coordinates
@@ -1819,13 +1807,13 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (!isRepeatNode(clusterName)) {
                 // Add collapse/expand button
                 const collapseButton = group.append("circle")
-                .attr("class", "collapse-button_b5e6c594-6264-494e-8858-c99171e433e1")
+                .attr("class", "collapse-button_6e964725-4343-4ecb-88e3-9d4209714171")
                 .attr("cx", x1 + 10)
                 .attr("cy", y1 + 10)
                 .attr("r", 5.5);
 
                 group.append("text")
-                .attr("class", "collapse-icon_b5e6c594-6264-494e-8858-c99171e433e1")
+                .attr("class", "collapse-icon_6e964725-4343-4ecb-88e3-9d4209714171")
                 .attr("x", x1 + 10)
                 .attr("y", y1 + 10)
                 .attr("text-anchor", "middle")
@@ -1842,7 +1830,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add click event handler for collapse buttons
-        clusters.selectAll(".collapse-button_b5e6c594-6264-494e-8858-c99171e433e1, .collapse-icon_b5e6c594-6264-494e-8858-c99171e433e1")
+        clusters.selectAll(".collapse-button_6e964725-4343-4ecb-88e3-9d4209714171, .collapse-icon_6e964725-4343-4ecb-88e3-9d4209714171")
         .on("click", function(event, [clusterName, clusterData]) {
             event.stopPropagation(); // Prevent event from bubbling to SVG
             removeTooltip();
@@ -1857,19 +1845,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
         
         // Create edges using the path points from Graphviz
-        const edges = inner.selectAll(".edge_b5e6c594-6264-494e-8858-c99171e433e1")
+        const edges = inner.selectAll(".edge_6e964725-4343-4ecb-88e3-9d4209714171")
         .data(graphvizData.edges)
         .enter()
         .append("g")
-        .attr("class", "edge-group_b5e6c594-6264-494e-8858-c99171e433e1");
+        .attr("class", "edge-group_6e964725-4343-4ecb-88e3-9d4209714171");
         
         // Add the actual path
         edges.append("path")
         .attr("class", function(edge) {
             if (edge.is_implied_edge) {
-                return "edge_b5e6c594-6264-494e-8858-c99171e433e1 implied-edge_b5e6c594-6264-494e-8858-c99171e433e1";
+                return "edge_6e964725-4343-4ecb-88e3-9d4209714171 implied-edge_6e964725-4343-4ecb-88e3-9d4209714171";
             }
-            return "edge_b5e6c594-6264-494e-8858-c99171e433e1";
+            return "edge_6e964725-4343-4ecb-88e3-9d4209714171";
         }).attr("d", function(edge) {
             if (edge.path && edge.path.length > 0) {
                     // Create a proper SVG path using Bézier curves
@@ -1895,7 +1883,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             }
             return "";
         })
-        .attr("marker-end", "url(#arrowhead_b5e6c594-6264-494e-8858-c99171e433e1)");
+        .attr("marker-end", "url(#arrowhead_6e964725-4343-4ecb-88e3-9d4209714171)");
         
         // Add dimension labels on edges
         edges.each(function(edge) {
@@ -1924,7 +1912,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Create a background for the text
             const labelGroup = edgeGroup.append("g")
-            .attr("class", "edge-label_b5e6c594-6264-494e-8858-c99171e433e1")
+            .attr("class", "edge-label_6e964725-4343-4ecb-88e3-9d4209714171")
             .attr("transform", `translate(${pointAtStart.x}, ${pointAtStart.y})`);
             
             const text = labelGroup.append("text")
@@ -1959,7 +1947,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         edges.each(function() {
             const edgeGroup = d3.select(this);
             const path = edgeGroup.select("path");
-            const labelGroup = edgeGroup.select(".edge-label_b5e6c594-6264-494e-8858-c99171e433e1");
+            const labelGroup = edgeGroup.select(".edge-label_6e964725-4343-4ecb-88e3-9d4209714171");
             const labelText = labelGroup.select("text");
             const labelBg = labelGroup.select("rect");
             const originalStrokeWidth = path.attr("stroke-width") || 1;
@@ -2024,19 +2012,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
         // Create nodes using positions from Graphviz
-        const nodes = inner.selectAll(".node_b5e6c594-6264-494e-8858-c99171e433e1")
+        const nodes = inner.selectAll(".node_6e964725-4343-4ecb-88e3-9d4209714171")
             .data(Object.entries(graphvizData.nodes))
             .enter()
             .append("g")
             // In the createGraph function, when you're creating nodes, modify the class assignment:
             .attr("class", function([nodeName, nodeData]) {
-                let classes = "node_b5e6c594-6264-494e-8858-c99171e433e1";
-                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_b5e6c594-6264-494e-8858-c99171e433e1";
-                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_b5e6c594-6264-494e-8858-c99171e433e1";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_b5e6c594-6264-494e-8858-c99171e433e1";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_b5e6c594-6264-494e-8858-c99171e433e1";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_b5e6c594-6264-494e-8858-c99171e433e1";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_b5e6c594-6264-494e-8858-c99171e433e1";
+                let classes = "node_6e964725-4343-4ecb-88e3-9d4209714171";
+                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_6e964725-4343-4ecb-88e3-9d4209714171";
+                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_6e964725-4343-4ecb-88e3-9d4209714171";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_6e964725-4343-4ecb-88e3-9d4209714171";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_6e964725-4343-4ecb-88e3-9d4209714171";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_6e964725-4343-4ecb-88e3-9d4209714171";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_6e964725-4343-4ecb-88e3-9d4209714171";
                 return classes;
             })
             .attr("transform", function([nodeName, nodeData]) {
@@ -2063,11 +2051,11 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 .attr("rx", nodeData.width / 2)
                 .attr("ry", nodeData.height / 2)
                 .attr("class", function() { 
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_b5e6c594-6264-494e-8858-c99171e433e1";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_b5e6c594-6264-494e-8858-c99171e433e1";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_b5e6c594-6264-494e-8858-c99171e433e1";
-                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_b5e6c594-6264-494e-8858-c99171e433e1";
-                    return "operation_b5e6c594-6264-494e-8858-c99171e433e1";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_6e964725-4343-4ecb-88e3-9d4209714171";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_6e964725-4343-4ecb-88e3-9d4209714171";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_6e964725-4343-4ecb-88e3-9d4209714171";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_6e964725-4343-4ecb-88e3-9d4209714171";
+                    return "operation_6e964725-4343-4ecb-88e3-9d4209714171";
                 });
             } else {
                 // Create rectangle
@@ -2077,15 +2065,15 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 .attr("x", -nodeData.width / 2)
                 .attr("y", -nodeData.height / 2)
                 .attr("class", function() { 
-                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_b5e6c594-6264-494e-8858-c99171e433e1";
-                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_b5e6c594-6264-494e-8858-c99171e433e1" : "operation_b5e6c594-6264-494e-8858-c99171e433e1";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_6e964725-4343-4ecb-88e3-9d4209714171";
+                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_6e964725-4343-4ecb-88e3-9d4209714171" : "operation_6e964725-4343-4ecb-88e3-9d4209714171";
                 });
             }
         });
         
         // Add labels for nodes
         nodes.append("text")
-        .attr("class", "node-label_b5e6c594-6264-494e-8858-c99171e433e1")
+        .attr("class", "node-label_6e964725-4343-4ecb-88e3-9d4209714171")
         .text(function([nodeName]) { return graph_node_display_names[nodeName] || graph_node_name_to_without_suffix[nodeName] || nodeName; })
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "central");
@@ -2094,7 +2082,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         nodes.filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")));
         }).append("text")
-        .attr("class", "type-indicator_b5e6c594-6264-494e-8858-c99171e433e1")
+        .attr("class", "type-indicator_6e964725-4343-4ecb-88e3-9d4209714171")
         .attr("text-anchor", "start")
         .attr("dominant-baseline", "text-bottom")
         .attr("transform", function([nodeName, nodeData]) {
@@ -2112,7 +2100,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add info buttons to nodes (except input, output, constant)
-        inner.selectAll(".node_b5e6c594-6264-494e-8858-c99171e433e1")
+        inner.selectAll(".node_6e964725-4343-4ecb-88e3-9d4209714171")
         .filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")))
         })
@@ -2123,14 +2111,14 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
         // Add info button circle
         const infoButton = nodeGroup.append("circle")
-        .attr("class", "info-button_b5e6c594-6264-494e-8858-c99171e433e1")
+        .attr("class", "info-button_6e964725-4343-4ecb-88e3-9d4209714171")
         .attr("cx", width/2 - 7)
         .attr("cy", -height/2 + 7)
         .attr("r", 5.5);
 
         // Add info button icon
         nodeGroup.append("text")
-        .attr("class", "info-icon_b5e6c594-6264-494e-8858-c99171e433e1")
+        .attr("class", "info-icon_6e964725-4343-4ecb-88e3-9d4209714171")
         .attr("x", width/2 - 7)
         .attr("y", -height/2 + 8)
         .attr("text-anchor", "middle")
@@ -2146,16 +2134,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .on("mouseleave", removeTooltip);
 
         // Add click handler to info button
-            nodeGroup.selectAll(".info-button_b5e6c594-6264-494e-8858-c99171e433e1, .info-icon_b5e6c594-6264-494e-8858-c99171e433e1")
+            nodeGroup.selectAll(".info-button_6e964725-4343-4ecb-88e3-9d4209714171, .info-icon_6e964725-4343-4ecb-88e3-9d4209714171")
             .on("click", function(event) {
                 event.stopPropagation();
-                const infoButton = nodeGroup.select(".info-button_b5e6c594-6264-494e-8858-c99171e433e1").node();
+                const infoButton = nodeGroup.select(".info-button_6e964725-4343-4ecb-88e3-9d4209714171").node();
                 showPopupFromInfoButton.call(nodeGroup.node(), event, [nodeName], infoButton);
             });
         });
 
         // Add expand buttons to all module nodes (including non-expandable ones)
-        inner.selectAll(".node_b5e6c594-6264-494e-8858-c99171e433e1")
+        inner.selectAll(".node_6e964725-4343-4ecb-88e3-9d4209714171")
         .filter(function([nodeName]) {
             return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || collapsedContainers.has(nodeName)) && !isRepeatNode(nodeName);
         })
@@ -2177,7 +2165,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Add expand button circle
             const expandButton = nodeGroup.append("circle")
-            .attr("class", isExpandable ? "collapse-button_b5e6c594-6264-494e-8858-c99171e433e1" : "collapse-button-disabled_b5e6c594-6264-494e-8858-c99171e433e1")
+            .attr("class", isExpandable ? "collapse-button_6e964725-4343-4ecb-88e3-9d4209714171" : "collapse-button-disabled_6e964725-4343-4ecb-88e3-9d4209714171")
             .attr("cx", -width / 2 + 7)
             .attr("cy", -height / 2 + 7)
             .attr("r", 5.5)
@@ -2186,7 +2174,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Add expand button icon
             nodeGroup.append("text")
-            .attr("class", isExpandable ? "collapse-icon_b5e6c594-6264-494e-8858-c99171e433e1" : "collapse-icon-disabled_b5e6c594-6264-494e-8858-c99171e433e1")
+            .attr("class", isExpandable ? "collapse-icon_6e964725-4343-4ecb-88e3-9d4209714171" : "collapse-icon-disabled_6e964725-4343-4ecb-88e3-9d4209714171")
             .attr("x", -width / 2 + 7)
             .attr("y", -height / 2 + 7)
             .attr("text-anchor", "middle")
@@ -2206,7 +2194,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Only add click handler for expandable modules
             if (isExpandable) {
-                nodeGroup.selectAll(".collapse-button_b5e6c594-6264-494e-8858-c99171e433e1, .collapse-icon_b5e6c594-6264-494e-8858-c99171e433e1")
+                nodeGroup.selectAll(".collapse-button_6e964725-4343-4ecb-88e3-9d4209714171, .collapse-icon_6e964725-4343-4ecb-88e3-9d4209714171")
                 .on("click", function(event) {
                     event.stopPropagation();
                     removeTooltip();
@@ -2307,16 +2295,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                     .scale(currentTransform.k));
             }
 
-            clickedNodeElement.classed("highlight-node_b5e6c594-6264-494e-8858-c99171e433e1", true);
+            clickedNodeElement.classed("highlight-node_6e964725-4343-4ecb-88e3-9d4209714171", true);
             
             setTimeout(() => {
-                clickedNodeElement.classed("highlight-node_b5e6c594-6264-494e-8858-c99171e433e1", false);
+                clickedNodeElement.classed("highlight-node_6e964725-4343-4ecb-88e3-9d4209714171", false);
             }, 2000);
 
-            const popup = d3.select("#popup_b5e6c594-6264-494e-8858-c99171e433e1");
-            const moduleTemplate = d3.select("#module-template_b5e6c594-6264-494e-8858-c99171e433e1");
-            const tensorOpTemplate = d3.select("#tensor-op-template_b5e6c594-6264-494e-8858-c99171e433e1");
-            const noInfoMessage = d3.select("#no-info_b5e6c594-6264-494e-8858-c99171e433e1");
+            const popup = d3.select("#popup_6e964725-4343-4ecb-88e3-9d4209714171");
+            const moduleTemplate = d3.select("#module-template_6e964725-4343-4ecb-88e3-9d4209714171");
+            const tensorOpTemplate = d3.select("#tensor-op-template_6e964725-4343-4ecb-88e3-9d4209714171");
+            const noInfoMessage = d3.select("#no-info_6e964725-4343-4ecb-88e3-9d4209714171");
             
             const nodeData = adj_list[nodeName];
             
@@ -2324,7 +2312,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (node_to_module_path[nodeName] && graph_node_name_to_without_suffix[nodeName]) {
                 popupTitle = node_to_module_path[nodeName] + "." + graph_node_name_to_without_suffix[nodeName];
             }
-            d3.select("#popup-title_b5e6c594-6264-494e-8858-c99171e433e1").text(popupTitle);
+            d3.select("#popup-title_6e964725-4343-4ecb-88e3-9d4209714171").text(popupTitle);
 
             moduleTemplate.style("display", "none");
             tensorOpTemplate.style("display", "none");
@@ -2332,31 +2320,31 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             if (module_info[nodeName]) {
                 const info = module_info[nodeName];
-                moduleTemplate.style("display", "block").classed("content-shown_b5e6c594-6264-494e-8858-c99171e433e1", true);
+                moduleTemplate.style("display", "block").classed("content-shown_6e964725-4343-4ecb-88e3-9d4209714171", true);
                 
-                d3.select("#module-extra-repr_b5e6c594-6264-494e-8858-c99171e433e1").text(info.extra_repr || 'N/A');
+                d3.select("#module-extra-repr_6e964725-4343-4ecb-88e3-9d4209714171").text(info.extra_repr || 'N/A');
 
                 const forward_info = func_info[nodeName];
-                const attributesContainer = d3.select("#module-attributes_b5e6c594-6264-494e-8858-c99171e433e1").node();
+                const attributesContainer = d3.select("#module-attributes_6e964725-4343-4ecb-88e3-9d4209714171").node();
                 attributesContainer.innerHTML = '';
                 createJsonViewer(attributesContainer, info.attributes);
 
-                const parametersContainer = d3.select("#module-parameters_b5e6c594-6264-494e-8858-c99171e433e1").node();
+                const parametersContainer = d3.select("#module-parameters_6e964725-4343-4ecb-88e3-9d4209714171").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, forward_info);
             } else if (!(adj_list[nodeName] && adj_list[nodeName].node_type === "Input") && func_info[nodeName]) {
                 const info = func_info[nodeName];
-                tensorOpTemplate.style("display", "block").classed("content-shown_b5e6c594-6264-494e-8858-c99171e433e1", true);
-                const parametersContainer = d3.select("#tensor-op-parameters_b5e6c594-6264-494e-8858-c99171e433e1").node();
+                tensorOpTemplate.style("display", "block").classed("content-shown_6e964725-4343-4ecb-88e3-9d4209714171", true);
+                const parametersContainer = d3.select("#tensor-op-parameters_6e964725-4343-4ecb-88e3-9d4209714171").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, info);
             } else {
-                noInfoMessage.style("display", "block").classed("content-shown_b5e6c594-6264-494e-8858-c99171e433e1", true);
+                noInfoMessage.style("display", "block").classed("content-shown_6e964725-4343-4ecb-88e3-9d4209714171", true);
             }
             
             // Position popup based on info button or node center
             let boundingBox, x, y;
-            const containerRect = d3.select("#graph-container_b5e6c594-6264-494e-8858-c99171e433e1").node().getBoundingClientRect();
+            const containerRect = d3.select("#graph-container_6e964725-4343-4ecb-88e3-9d4209714171").node().getBoundingClientRect();
             
             if (infoButtonElement) {
                 boundingBox = infoButtonElement.getBoundingClientRect();
@@ -2372,19 +2360,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             popup.style("left", `${x}px`)
             .style("top", `${y}px`)
             .style("display", "flex");
-            d3.select("#popup-content_b5e6c594-6264-494e-8858-c99171e433e1").node().scrollTop = 0;
+            d3.select("#popup-content_6e964725-4343-4ecb-88e3-9d4209714171").node().scrollTop = 0;
         }
 
         function closePopup() {
-            d3.select("#popup_b5e6c594-6264-494e-8858-c99171e433e1").style("display", "none");
+            d3.select("#popup_6e964725-4343-4ecb-88e3-9d4209714171").style("display", "none");
         }
         
-        d3.select(".popup-close_b5e6c594-6264-494e-8858-c99171e433e1").on("click", closePopup);
+        d3.select(".popup-close_6e964725-4343-4ecb-88e3-9d4209714171").on("click", closePopup);
         svg.on("click", closePopup);
 
-        const popup = document.getElementById(`popup_b5e6c594-6264-494e-8858-c99171e433e1`);
+        const popup = document.getElementById(`popup_6e964725-4343-4ecb-88e3-9d4209714171`);
         const resizeObserver = new ResizeObserver(() => {
-            const editorContainers = popup.querySelectorAll('.json-viewer_b5e6c594-6264-494e-8858-c99171e433e1');
+            const editorContainers = popup.querySelectorAll('.json-viewer_6e964725-4343-4ecb-88e3-9d4209714171');
             for (let container of editorContainers) {
                 if (container.jsonEditor) {
                     container.jsonEditor.resize();
@@ -2463,30 +2451,30 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 // Apply highlight effect to the target container
                 if (Object.keys(graphvizData.nodes).includes(lastModifiedContainer)) {
                     // Highlight the node (collapsed container)
-                    const targetElement = inner.selectAll(".node_b5e6c594-6264-494e-8858-c99171e433e1")
+                    const targetElement = inner.selectAll(".node_6e964725-4343-4ecb-88e3-9d4209714171")
                         .filter(([nodeName]) => nodeName === lastModifiedContainer);
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-node_b5e6c594-6264-494e-8858-c99171e433e1", true);
+                        targetElement.classed("highlight-node_6e964725-4343-4ecb-88e3-9d4209714171", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-node_b5e6c594-6264-494e-8858-c99171e433e1", false);
+                            targetElement.classed("highlight-node_6e964725-4343-4ecb-88e3-9d4209714171", false);
                         }, 2000); // Match the animation duration
                     }
                 } else if (Object.keys(graphvizData.clusters).includes(lastModifiedContainer)) {
                     // Highlight the cluster (expanded container)
-                    const targetElement = inner.selectAll(".boundary-box_b5e6c594-6264-494e-8858-c99171e433e1")
+                    const targetElement = inner.selectAll(".boundary-box_6e964725-4343-4ecb-88e3-9d4209714171")
                         .filter(function([clusterName]) {
                             return clusterName === lastModifiedContainer;
                         });
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-cluster_b5e6c594-6264-494e-8858-c99171e433e1", true);
+                        targetElement.classed("highlight-cluster_6e964725-4343-4ecb-88e3-9d4209714171", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-cluster_b5e6c594-6264-494e-8858-c99171e433e1", false);
+                            targetElement.classed("highlight-cluster_6e964725-4343-4ecb-88e3-9d4209714171", false);
                         }, 2000); // Match the animation duration
                     }
                 }
