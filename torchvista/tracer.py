@@ -105,6 +105,11 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
     global_node_counter = 0
     module_to_node_name = {}
     original_ops = {}
+    # Maps id(original_func) -> wrapped_func for patching module attrs
+    # While patching module attrs, we look for the original_func in this dict to get the wrapped version
+    orig_to_wrapped = {}
+    # Maps (module_id, attr_name) -> original_func
+    patched_module_attrs = {}
     module_reuse_count = {}
     module_hierarchy = {}
     wrapped_modules = set()
@@ -599,7 +604,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
         for func in FUNCTIONS:
             namespace = func['namespace']
             func_name = func['function']
-            
+
             if namespace == 'torch':
                 module = torch
             elif namespace == 'torch.functional':
@@ -622,8 +627,45 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 if callable(orig_func):
                     wrapped_func = make_wrapped(orig_func, func_name, namespace)
                     setattr(module, func_name, wrapped_func)
+                    # Build mapping from original to wrapped for patching module attributes
+                    orig_to_wrapped[id(original_ops[(namespace, func_name)])] = wrapped_func
             except AttributeError:
                 pass
+
+    def patch_module_function_attrs(model):
+        """
+        Scan all modules in the model and replace any attributes that hold
+        references to original torch functions with their wrapped versions.
+        This handles cases like: self.act = nn.functional.gelu
+        """
+        for module in model.modules():
+            for attr_name in dir(module):
+                # Skip private/dunder attributes and known nn.Module attributes
+                if attr_name.startswith('_'):
+                    continue
+                try:
+                    attr_value = getattr(module, attr_name)
+                    # Check if this attribute is a function we've wrapped
+                    if callable(attr_value) and id(attr_value) in orig_to_wrapped:
+                        wrapped = orig_to_wrapped[id(attr_value)]
+                        # Store original for restoration
+                        patched_module_attrs[(id(module), attr_name)] = attr_value
+                        setattr(module, attr_name, wrapped)
+                except (AttributeError, TypeError):
+                    pass
+
+    def restore_module_function_attrs():
+        """Restore any module attributes that were patched."""
+        for (module_id, attr_name), orig_func in patched_module_attrs.items():
+            # Find the module by id
+            for module in model.modules():
+                if id(module) == module_id:
+                    try:
+                        setattr(module, attr_name, orig_func)
+                    except (AttributeError, TypeError):
+                        pass
+                    break
+        patched_module_attrs.clear()
 
     def restore_functions():
         for prop_name, orig_prop in original_properties.items():
@@ -649,6 +691,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 continue
 
             setattr(module, func_name, orig_func)
+        orig_to_wrapped.clear()
 
     def restore_modules():
         for module, original_call in original_module_forwards.items():
@@ -1528,6 +1571,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
 
     try:
         wrap_functions()
+        patch_module_function_attrs(model)
         traverse_model(model)
 
         inputs_wrapped = (inputs)
@@ -1648,6 +1692,7 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
     except Exception as e:
         exception = e
     finally:
+        restore_module_function_attrs()
         restore_functions()
         restore_modules()
         for tensor in input_tensors:
