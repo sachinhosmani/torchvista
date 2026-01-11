@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='torchvista',
-    version='0.2.7',
+    version='0.2.8',
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
