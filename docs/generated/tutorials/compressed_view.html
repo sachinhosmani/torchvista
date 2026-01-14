@@ -2,115 +2,95 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Compressed View for Repeated Structures - TorchVista Tutorials</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/a11y-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            document.querySelectorAll('pre code').forEach((block) => {
-                hljs.highlightBlock(block);
-            });
+            hljs.highlightAll();
         });
     </script>
     <style>
-        /* MkDocs-inspired Material theme */
-        :root {
-            --md-primary-fg-color: #4051b5;
-            --md-primary-fg-color--dark: #303fa1;
-            --md-accent-fg-color: #526cfe;
-            --md-default-bg-color: #ffffff;
-            --md-default-fg-color: rgba(0, 0, 0, 0.87);
-            --md-default-fg-color--light: rgba(0, 0, 0, 0.54);
-            --md-code-bg-color: #f5f5f5;
-            --md-code-fg-color: #37474f;
-            --md-footer-bg-color: #1e1e1e;
-            --md-footer-fg-color: #ffffff;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
+        *, *::before, *::after {
             box-sizing: border-box;
         }
 
-        html, body {
-            height: 100%;
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: var(--md-default-bg-color);
-            color: var(--md-default-fg-color);
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
             line-height: 1.6;
+            color: #333;
+            background: #fff;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
+        main {
+            flex: 1;
+        }
+
+        a {
+            color: #4051b5;
+        }
+
         /* Header */
-        .md-header {
-            background-color: var(--md-primary-fg-color);
-            color: white;
-            box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+        header {
+            background: #4051b5;
+            color: #fff;
+            padding: 1rem;
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
         }
 
-        .md-header__inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.6rem 1rem;
-            max-width: 1200px;
+        .header-content {
+            max-width: 1100px;
             margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
         }
 
-        .md-header__title {
+        .logo {
             font-size: 1.25rem;
             font-weight: 600;
-            flex: 1;
-        }
-
-        .md-header__title a {
-            color: white;
+            color: #fff;
             text-decoration: none;
         }
 
-        .md-header__nav {
+        nav {
             display: flex;
-            gap: 1.5rem;
+            flex-wrap: wrap;
             align-items: center;
+            gap: 0.75rem 1rem;
         }
 
-        .md-header__nav a {
-            color: white;
+        nav a {
+            color: rgba(255,255,255,0.9);
             text-decoration: none;
-            font-weight: 500;
-            opacity: 0.9;
-            transition: opacity 0.2s;
+            font-size: 0.95rem;
         }
 
-        .md-header__nav a:hover {
-            opacity: 1;
+        nav a:hover {
+            color: #fff;
         }
 
-        .md-header__nav iframe {
-            vertical-align: middle;
-        }
-
-        /* Main content */
-        .md-container {
-            max-width: 1200px;
+        /* Main container */
+        .main-content {
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 2rem 1rem;
-            flex: 1;
-        }
-
-        .md-content {
-            padding: 0 1rem;
+            padding: 1.5rem 1rem;
         }
 
         /* Breadcrumb */
@@ -120,7 +100,7 @@
         }
 
         .breadcrumb a {
-            color: var(--md-accent-fg-color);
+            color: #526cfe;
             text-decoration: none;
         }
 
@@ -129,7 +109,7 @@
         }
 
         .breadcrumb span {
-            color: var(--md-default-fg-color--light);
+            color: #666;
         }
 
         /* Tutorial header */
@@ -138,8 +118,8 @@
         }
 
         .tutorial-number {
-            font-size: 0.9rem;
-            color: var(--md-accent-fg-color);
+            font-size: 0.85rem;
+            color: #526cfe;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -147,20 +127,25 @@
         }
 
         .tutorial-title {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 300;
-            margin-bottom: 1rem;
-            color: var(--md-default-fg-color);
+            margin: 0 0 1rem;
+        }
+
+        @media (min-width: 600px) {
+            .tutorial-title {
+                font-size: 2.5rem;
+            }
         }
 
         .tutorial-intro {
-            font-size: 1.1rem;
-            color: var(--md-default-fg-color--light);
+            font-size: 1.05rem;
+            color: #666;
             line-height: 1.7;
         }
 
         .tutorial-intro p {
-            margin-bottom: 1rem;
+            margin: 0 0 1rem;
         }
 
         .tutorial-intro p:last-child {
@@ -171,9 +156,9 @@
         .section-title {
             font-size: 1.5rem;
             font-weight: 400;
-            margin: 2.5rem 0 1rem;
+            margin: 2rem 0 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 0.05rem solid rgba(0, 0, 0, 0.07);
+            border-bottom: 1px solid #eee;
         }
 
         .section-text {
@@ -183,77 +168,102 @@
         }
 
         .section-text p {
-            margin-bottom: 1rem;
+            margin: 0 0 1rem;
         }
 
         .section-text p:last-child {
             margin-bottom: 0;
         }
 
-        /* Inline code styling */
+        /* Inline code */
         code {
-            background: var(--md-code-bg-color);
-            color: var(--md-code-fg-color);
-            padding: 0.1rem 0.4rem;
-            border-radius: 0.2rem;
-            font-family: "Roboto Mono", "Courier New", monospace;
+            background: #f1f3f5;
+            color: #37474f;
+            padding: 0.1rem 0.35rem;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
             font-size: 0.9em;
         }
 
-        /* Code block styling */
-        .code-container {
+        /* Code blocks */
+        .code-block {
             background: #2b2b2b;
-            border-radius: 0.2rem;
+            border-radius: 6px;
             padding: 1rem;
-            margin: 1.5rem 0;
+            margin: 1rem 0;
             overflow-x: auto;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            -webkit-overflow-scrolling: touch;
         }
 
-        .code-container pre {
+        .code-block pre {
             margin: 0;
-            font-family: "Roboto Mono", "Courier New", monospace;
             font-size: 0.85rem;
             line-height: 1.5;
-            color: #f8f8f2;
         }
 
-        .code-container code {
-            font-family: inherit;
+        .code-block code {
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+            background: transparent;
+            padding: 0;
         }
 
-        .code-container code.hljs {
+        .code-block code.hljs {
             background: transparent;
             padding: 0;
         }
 
         /* Demo section */
         .demo-section {
-            background: var(--md-code-bg-color);
-            border: 0.05rem solid rgba(0, 0, 0, 0.07);
-            border-radius: 0.2rem;
-            padding: 1.5rem;
-            margin: 2rem 0;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+            border-bottom: 1px solid #e9ecef;
+            padding: 1rem 0;
+            margin: 1.5rem -1rem;
         }
 
         .demo-section h3 {
-            margin-top: 0;
-            color: var(--md-primary-fg-color);
+            margin: 0 0 1rem;
+            padding: 0 1rem;
+            color: #4051b5;
             font-size: 1.1rem;
-            margin-bottom: 1rem;
         }
 
-        /* Conclusion text */
+        .demo-iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+            background: #fff;
+            display: block;
+        }
+
+        @media (min-width: 600px) {
+            .demo-section {
+                border: 1px solid #e9ecef;
+                border-radius: 6px;
+                padding: 1rem;
+                margin: 1.5rem 0;
+            }
+
+            .demo-section h3 {
+                padding: 0;
+            }
+
+            .demo-iframe {
+                border-radius: 4px;
+            }
+        }
+
+        /* Conclusion */
         .conclusion {
-            background: linear-gradient(135deg, rgba(82, 108, 254, 0.1), rgba(64, 81, 181, 0.1));
-            border-radius: 0.3rem;
-            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(82,108,254,0.1), rgba(64,81,181,0.1));
+            border-radius: 6px;
+            padding: 1.25rem;
             margin: 2rem 0;
-            border-left: 0.25rem solid var(--md-accent-fg-color);
+            border-left: 4px solid #526cfe;
         }
 
         .conclusion p {
-            margin-bottom: 1rem;
+            margin: 0 0 1rem;
             line-height: 1.7;
         }
 
@@ -264,63 +274,68 @@
         /* Navigation buttons */
         .tutorial-nav {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 0.05rem solid rgba(0, 0, 0, 0.07);
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+
+        @media (min-width: 600px) {
+            .tutorial-nav {
+                flex-direction: row;
+                justify-content: space-between;
+            }
         }
 
         .nav-button {
             display: flex;
             align-items: center;
-            padding: 1rem 1.5rem;
-            background: var(--md-code-bg-color);
-            border-radius: 0.3rem;
+            padding: 1rem 1.25rem;
+            background: #f8f9fa;
+            border-radius: 6px;
             text-decoration: none;
-            color: var(--md-default-fg-color);
-            transition: all 0.2s ease;
-            max-width: 45%;
+            color: #333;
+            transition: all 0.2s;
+        }
+
+        @media (min-width: 600px) {
+            .nav-button {
+                max-width: 45%;
+            }
         }
 
         .nav-button:hover {
-            background: var(--md-accent-fg-color);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .nav-button.prev {
-            padding-left: 1rem;
+            background: #526cfe;
+            color: #fff;
         }
 
         .nav-button.next {
-            padding-right: 1rem;
             margin-left: auto;
         }
 
         .nav-button .arrow {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 300;
         }
 
         .nav-button.prev .arrow {
-            margin-right: 1rem;
+            margin-right: 0.75rem;
         }
 
         .nav-button.next .arrow {
-            margin-left: 1rem;
+            margin-left: 0.75rem;
         }
 
         .nav-button .label {
-            font-size: 0.8rem;
-            color: var(--md-default-fg-color--light);
+            font-size: 0.75rem;
+            color: #666;
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
 
         .nav-button:hover .label {
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255,255,255,0.8);
         }
 
         .nav-button .title {
@@ -337,84 +352,44 @@
         }
 
         /* Footer */
-        .md-footer {
-            background-color: var(--md-footer-bg-color);
-            padding: 0.5rem 1rem;
-            margin-top: auto;
-        }
-
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .tutorial-title {
-                font-size: 2rem;
-            }
-
-            .md-header__inner {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .md-header__nav {
-                gap: 1rem;
-            }
-
-            .tutorial-nav {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .nav-button {
-                max-width: 100%;
-                width: 100%;
-                justify-content: center;
-            }
-
-            .nav-button.next {
-                margin-left: 0;
-            }
+        footer {
+            background: #1e1e1e;
+            padding: 1rem;
+            margin-top: 2rem;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="md-header">
-        <div class="md-header__inner">
-            <div class="md-header__title">
-                <a href="../../index.html">TorchVista</a>
-            </div>
-            <nav class="md-header__nav">
+    <header>
+        <div class="header-content">
+            <a href="../../index.html" class="logo">TorchVista</a>
+            <nav>
                 <a href="../../index.html">Home</a>
                 <a href="../../tutorials.html">Tutorials</a>
                 <a href="../../demos.html">Demos</a>
                 <a href="https://github.com/sachinhosmani/torchvista" target="_blank">GitHub</a>
-                <iframe src="https://ghbtns.com/github-btn.html?user=sachinhosmani&repo=torchvista&type=star&count=true&size=large"
-                        frameborder="0" scrolling="0" width="170" height="30" title="GitHub Star Button"></iframe>
             </nav>
         </div>
     </header>
 
-    <!-- Main content -->
-    <main class="md-container">
-        <div class="md-content">
-            <!-- Breadcrumb -->
-            <div class="breadcrumb">
-                <a href="../../tutorials.html">Tutorials</a> <span>&rsaquo; Compressed View for Repeated Structures</span>
-            </div>
+    <main>
+        <div class="main-content">
+        <div class="breadcrumb">
+            <a href="../../tutorials.html">Tutorials</a> <span>&rsaquo; Compressed View for Repeated Structures</span>
+        </div>
 
-            <!-- Tutorial header -->
-            <div class="tutorial-header">
-                <div class="tutorial-number">Tutorial 7</div>
-                <h1 class="tutorial-title">Compressed View for Repeated Structures</h1>
-                <div class="tutorial-intro"><p>When your model has many repeated layers (like a stack of identical blocks), the visualization can become very long and repetitive.</p>
+        <div class="tutorial-header">
+            <div class="tutorial-number">Tutorial 7</div>
+            <h1 class="tutorial-title">Compressed View for Repeated Structures</h1>
+            <div class="tutorial-intro"><p>When your model has many repeated layers (like a stack of identical blocks), the visualization can become very long and repetitive.</p>
 <p>TorchVista can detect these repeated patterns and compress them into a single "repeated" node. But this is possible only when the repeated structures are within <code>nn.ModuleList</code> or <code>nn.Sequential</code> as a chain.</p>
 <p>Set <code>show_compressed_view=True</code> to enable this feature.</p></div>
-            </div>
+        </div>
 
-            <!-- Code section -->
-            <h2 class="section-title">Code</h2>
-            <div class="section-text"></div>
+        <h2 class="section-title">Code</h2>
+        <div class="section-text"></div>
 
-            <div class="code-container">
+        <div class="code-block">
 <pre><code class="language-python">import torch
 import torch.nn as nn
 from torchvista import trace_model
@@ -442,22 +417,19 @@ trace_model(
     show_compressed_view=True  # <-- compresses repeated layers
     ###############################
 )</code></pre>
-            </div>
+        </div>
 
-            <!-- Demo section -->
-            <div class="demo-section">
-                <h3>Interactive Visualization</h3>
-                <iframe src="../tutorial_visualizations/compressed_view.html" style="width: 100%; height: 820px; border: none; background: white;"></iframe>
-            </div>
+        <div class="demo-section">
+            <h3>Interactive Visualization</h3>
+            <iframe class="demo-iframe" src="../tutorial_visualizations/compressed_view.html"></iframe>
+        </div>
 
-            <!-- Conclusion -->
-            <div class="conclusion">
-                <p>You've now completed the TorchVista tutorial series! Check out the demos page for more examples.</p>
-            </div>
+        <div class="conclusion">
+            <p>You've now completed the TorchVista tutorial series! Check out the demos page for more examples.</p>
+        </div>
 
-            <!-- Navigation -->
-            <div class="tutorial-nav">
-                <a href="dict_input_naming.html" class="nav-button prev">
+        <div class="tutorial-nav">
+            <a href="dict_input_naming.html" class="nav-button prev">
                     <span class="arrow">&larr;</span>
                     <div class="nav-content">
                         <span class="label">Previous</span>
@@ -465,18 +437,17 @@ trace_model(
                     </div>
                 </a>
 
-                <a href="../../tutorials.html" class="nav-button next">
+            <a href="../../tutorials.html" class="nav-button next">
                     <div class="nav-content">
                         <span class="label">Back to</span>
                         <span class="title">All Tutorials</span>
                     </div>
                     <span class="arrow">&rarr;</span>
                 </a>
-            </div>
+        </div>
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="md-footer"></footer>
+    <footer></footer>
 </body>
 </html>

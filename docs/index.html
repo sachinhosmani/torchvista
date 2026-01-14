@@ -2,503 +2,413 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>TorchVista - Interactive PyTorch Model Visualization</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/a11y-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            document.querySelectorAll('pre code').forEach((block) => {
-                hljs.highlightBlock(block);
-            });
+            hljs.highlightAll();
         });
     </script>
     <style>
-        /* MkDocs-inspired Material theme */
-        :root {
-            --md-primary-fg-color: #4051b5;
-            --md-primary-fg-color--dark: #303fa1;
-            --md-accent-fg-color: #526cfe;
-            --md-default-bg-color: #ffffff;
-            --md-default-fg-color: rgba(0, 0, 0, 0.87);
-            --md-default-fg-color--light: rgba(0, 0, 0, 0.54);
-            --md-code-bg-color: #f5f5f5;
-            --md-code-fg-color: #37474f;
-            --md-footer-bg-color: #1e1e1e;
-            --md-footer-fg-color: #ffffff;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
+        *, *::before, *::after {
             box-sizing: border-box;
         }
 
-        html, body {
-            height: 100%;
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: var(--md-default-bg-color);
-            color: var(--md-default-fg-color);
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
             line-height: 1.6;
+            color: #333;
+            background: #fff;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
+        main {
+            flex: 1;
+        }
+
+        .main-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem;
+        }
+
+        img, video {
+            max-width: 100%;
+            height: auto;
+        }
+
+        a {
+            color: #4051b5;
+        }
+
         /* Header */
-        .md-header {
-            background-color: var(--md-primary-fg-color);
-            color: white;
-            box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+        header {
+            background: #4051b5;
+            color: #fff;
+            padding: 1rem;
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
         }
 
-        .md-header__inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.6rem 1rem;
-            max-width: 1200px;
+        .header-content {
+            max-width: 1100px;
             margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
         }
 
-        .md-header__title {
+        .logo {
             font-size: 1.25rem;
             font-weight: 600;
-            flex: 1;
-        }
-
-        .md-header__title a {
-            color: white;
+            color: #fff;
             text-decoration: none;
         }
 
-        .md-header__nav {
+        nav {
             display: flex;
-            gap: 1.5rem;
+            flex-wrap: wrap;
             align-items: center;
+            gap: 0.75rem 1rem;
         }
 
-        .md-header__nav a {
-            color: white;
+        nav a {
+            color: rgba(255,255,255,0.9);
             text-decoration: none;
-            font-weight: 500;
-            opacity: 0.9;
-            transition: opacity 0.2s;
+            font-size: 0.95rem;
         }
 
-        .md-header__nav a:hover {
-            opacity: 1;
+        nav a:hover {
+            color: #fff;
         }
 
-        .md-header__nav iframe {
-            vertical-align: middle;
+        iframe {
+            height: 800px;
         }
 
-        /* Main content */
-        .md-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-            flex: 1;
-        }
-
-        .md-content {
-            padding: 0 1rem;
-        }
-
-        /* Hero section */
+        /* Hero */
         .hero {
             text-align: center;
-            padding: 2rem 0 0.5rem;
+            padding: 1rem 0 1.5rem;
         }
 
         .hero h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 300;
-            margin-bottom: 0.5rem;
-            color: var(--md-default-fg-color);
+            margin: 0 0 0.5rem;
         }
 
-        .hero .subtitle {
-            font-size: 1.25rem;
-            color: var(--md-default-fg-color--light);
+        .hero p {
+            font-size: 1.1rem;
+            color: #666;
+            margin: 0;
+        }
+
+        @media (min-width: 600px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Section headings */
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        p {
+            margin: 0 0 1rem;
+        }
+
+        ul {
+            margin: 0 0 1rem;
+            padding-left: 1.5rem;
+        }
+
+        li {
             margin-bottom: 0.5rem;
         }
 
         /* Features grid */
-        .features-grid {
+        .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1rem;
-            margin: 1rem 0;
+            margin: 1rem 0 1.5rem;
+        }
+
+        @media (min-width: 500px) {
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 800px) {
+            .features {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
         .feature {
-            padding: 0.75rem 1rem;
-            background: var(--md-code-bg-color);
-            border-radius: 0.2rem;
-            border-left: 0.2rem solid var(--md-accent-fg-color);
+            background: #f8f9fa;
+            padding: 1rem;
+            border-left: 3px solid #526cfe;
+            border-radius: 4px;
         }
 
         .feature h3 {
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-            color: var(--md-default-fg-color);
+            font-size: 1rem;
+            margin: 0 0 0.25rem;
         }
 
         .feature p {
-            font-size: 0.8rem;
-            color: var(--md-default-fg-color--light);
-            line-height: 1.4;
-        }
-
-        /* Section styling */
-        .md-typeset h2 {
-            font-size: 1.75rem;
-            font-weight: 400;
-            margin: 2.5rem 0 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 0.05rem solid rgba(0, 0, 0, 0.07);
-        }
-
-        .md-typeset h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin: 1.5rem 0 0.8rem;
-        }
-
-        .md-typeset p {
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-
-        .md-typeset ul {
-            margin-bottom: 1rem;
-            padding-left: 2rem;
-        }
-
-        .md-typeset li {
-            margin-bottom: 0.5rem;
-        }
-
-        .md-typeset a {
-            color: var(--md-accent-fg-color);
-            text-decoration: none;
-        }
-
-        .md-typeset a:hover {
-            text-decoration: underline;
-        }
-
-        /* Code block styling */
-        .code-container {
-            background: #2b2b2b;
-            border-radius: 0.2rem;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            overflow-x: auto;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .code-container pre {
+            font-size: 0.9rem;
+            color: #666;
             margin: 0;
-            font-family: "Roboto Mono", "Courier New", monospace;
+            line-height: 1.5;
+        }
+
+        /* Code blocks */
+        .code-block {
+            background: #2b2b2b;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .code-block pre {
+            margin: 0;
             font-size: 0.85rem;
             line-height: 1.5;
-            color: #f8f8f2;
         }
 
-        .code-container code {
-            font-family: inherit;
+        .code-block code {
+            font-family: "SF Mono", Monaco, Consolas, monospace;
         }
 
-        /* Override highlight.js background */
-        .code-container code.hljs {
+        .code-block code.hljs {
             background: transparent;
             padding: 0;
         }
 
-        /* Installation box */
+        /* Install box */
         .install-box {
-            background: linear-gradient(135deg, var(--md-primary-fg-color), var(--md-accent-fg-color));
-            color: white;
-            padding: 2rem;
-            border-radius: 0.2rem;
-            margin: 2rem 0;
+            background: linear-gradient(135deg, #4051b5, #526cfe);
+            color: #fff;
+            padding: 1.5rem;
+            border-radius: 6px;
             text-align: center;
+            margin: 1.5rem 0;
         }
 
         .install-box h3 {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 400;
-            margin-bottom: 1rem;
+            margin: 0 0 0.75rem;
+            color: #fff;
         }
 
         .install-code {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.2rem;
-            font-family: "Roboto Mono", monospace;
-            font-size: 1rem;
+            background: rgba(0,0,0,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-family: monospace;
             display: inline-block;
+            font-size: 1rem;
         }
 
-        /* Demo sections */
+        /* Demo section */
         .demo-section {
-            background: var(--md-code-bg-color);
-            border: 0.05rem solid rgba(0, 0, 0, 0.07);
-            border-radius: 0.2rem;
-            padding: 1.5rem;
-            margin: 2rem 0;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1.5rem 0;
         }
 
         .demo-section h3 {
             margin-top: 0;
-            color: var(--md-primary-fg-color);
-            font-size: 1.1rem;
+            color: #4051b5;
         }
 
-        .demo-placeholder {
-            background: white;
-            border: 0.1rem dashed var(--md-default-fg-color--light);
-            border-radius: 0.2rem;
-            padding: 3rem 2rem;
-            text-align: center;
-            color: var(--md-default-fg-color--light);
-            min-height: 400px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        .demo-iframe {
+            width: 100%;
+            height: 830px;
+            border: none;
+            background: #fff;
+            border-radius: 4px;
         }
 
-        .demo-placeholder svg {
-            width: 48px;
-            height: 48px;
-            margin-bottom: 1rem;
-            opacity: 0.3;
-        }
-
-        /* Footer */
-        .md-footer {
-            background-color: var(--md-footer-bg-color);
-            padding: 0.5rem 1rem;
-            margin-top: auto;
-        }
-
-        /* Scroll offset for anchor links with sticky header */
-        :target {
-            scroll-margin-top: 4rem;
-        }
-
-        /* Admonition (info box) */
-        .admonition {
-            padding: 1rem;
-            margin: 1.5rem 0;
-            border-left: 0.2rem solid var(--md-accent-fg-color);
-            background-color: rgba(82, 108, 254, 0.1);
-            border-radius: 0.2rem;
-        }
-
-        .admonition-title {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--md-accent-fg-color);
-        }
-
-        /* Tutorial CTA button */
-        .tutorial-cta {
+        /* CTA button */
+        .cta {
             text-align: center;
             margin: 2rem 0;
         }
 
-        .tutorial-button,
-        .md-typeset .tutorial-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, var(--md-primary-fg-color), var(--md-accent-fg-color));
-            color: white !important;
+        .cta-button {
+            display: inline-block;
+            padding: 0.875rem 1.75rem;
+            background: linear-gradient(135deg, #4051b5, #526cfe);
+            color: #fff;
             text-decoration: none;
-            border-radius: 0.3rem;
+            border-radius: 6px;
             font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(64, 81, 181, 0.3);
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(64,81,181,0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .tutorial-button:hover,
-        .md-typeset .tutorial-button:hover {
+        .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(64, 81, 181, 0.4);
-            color: white !important;
-            text-decoration: none;
+            box-shadow: 0 6px 20px rgba(64,81,181,0.4);
+            color: #fff;
         }
 
-        .tutorial-button .arrow {
-            font-size: 1.3rem;
-        }
-
-        /* API parameter list styling */
-        .api-params {
-            margin: 1.5rem 0;
+        /* API section */
+        .api-signature {
+            margin: 1rem 0;
         }
 
         .api-param {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
             padding-left: 1rem;
-            border-left: 3px solid var(--md-accent-fg-color);
+            border-left: 3px solid #526cfe;
         }
 
-        .api-param-header {
-            margin-bottom: 0.4rem;
-        }
-
-        .api-param-name {
-            font-family: "Roboto Mono", "Courier New", monospace;
+        .param-name {
+            font-family: monospace;
             font-weight: 700;
-            font-size: 1rem;
             color: #d73a49;
         }
 
-        .api-param-meta {
+        .param-meta {
             font-size: 0.9rem;
-            color: var(--md-default-fg-color--light);
-            margin-left: 0.5rem;
+            color: #666;
         }
 
-        .api-param-type {
-            font-family: "Roboto Mono", "Courier New", monospace;
+        .param-type {
+            font-family: monospace;
             color: #6f42c1;
         }
 
-        .api-param-default {
+        .param-default {
             color: #22863a;
         }
 
-        .api-param-category {
-            background: var(--md-code-bg-color);
+        .param-tag {
+            background: #f1f3f5;
             padding: 0.1rem 0.4rem;
-            border-radius: 0.2rem;
-            font-size: 0.75rem;
+            border-radius: 3px;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 0.03em;
             margin-left: 0.5rem;
         }
 
-        .api-param-desc {
+        .param-desc {
             font-size: 0.95rem;
-            line-height: 1.6;
-            color: var(--md-default-fg-color);
+            margin-top: 0.25rem;
         }
 
-        .api-param-desc code {
-            background: var(--md-code-bg-color);
-            padding: 0.1rem 0.35rem;
-            border-radius: 0.2rem;
-            font-family: "Roboto Mono", "Courier New", monospace;
+        .param-desc code {
+            background: #f1f3f5;
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+            font-family: monospace;
             font-size: 0.85em;
             color: #e83e8c;
         }
 
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
+        /* Footer */
+        footer {
+            background: #1e1e1e;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
 
-            .hero .subtitle {
-                font-size: 1.1rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .md-header__inner {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .md-header__nav {
-                gap: 1rem;
-            }
+        /* Scroll anchor offset */
+        :target {
+            scroll-margin-top: 4rem;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="md-header">
-        <div class="md-header__inner">
-            <div class="md-header__title">
-                <a href="index.html">TorchVista</a>
-            </div>
-            <nav class="md-header__nav">
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">TorchVista</a>
+            <nav>
                 <a href="tutorials.html">Tutorials</a>
                 <a href="demos.html">Demos</a>
                 <a href="#api">API</a>
                 <a href="https://github.com/sachinhosmani/torchvista" target="_blank">GitHub</a>
-                <iframe src="https://ghbtns.com/github-btn.html?user=sachinhosmani&repo=torchvista&type=star&count=true&size=large"
-                        frameborder="0" scrolling="0" width="170" height="30" title="GitHub Star Button"></iframe>
             </nav>
         </div>
     </header>
 
-    <!-- Main content -->
-    <main class="md-container">
-        <div class="md-content">
-            <!-- Hero section -->
-            <div class="hero">
-                <h1>TorchVista</h1>
-                <p class="subtitle">An interactive tool to visualize the forward pass of a PyTorch model directly in the notebook—with a single line of code.</p>
+    <main>
+        <div class="main-content">
+        <div class="hero">
+            <h1>TorchVista</h1>
+            <p>An interactive tool to visualize the forward pass of a PyTorch model directly in the notebook—with a single line of code.</p>
+        </div>
+
+        <h2>Features</h2>
+        <div class="features">
+            <div class="feature">
+                <h3>Interactive Graph</h3>
+                <p>Drag and zoom to explore your model architecture with full interactive control.</p>
             </div>
+            <div class="feature">
+                <h3>Collapsible Nodes</h3>
+                <p>Hierarchical modules can be expanded or collapsed to manage complexity in large models.</p>
+            </div>
+            <div class="feature">
+                <h3>Notebook First</h3>
+                <p>Use from web-based notebooks like Jupyter, Colab, VS Code, etc.</p>
+            </div>
+            <div class="feature">
+                <h3>Error Tolerant</h3>
+                <p>Partial visualization when errors arise (e.g., shape mismatches) for ease of debugging.</p>
+            </div>
+            <div class="feature">
+                <h3>Compressed View</h3>
+                <p>Option to compress repeating nodes with identical structure to simplify large models.</p>
+            </div>
+            <div class="feature">
+                <h3>Export Options</h3>
+                <p>Export visualization as PNG, SVG, or HTML to showcase your models.</p>
+            </div>
+        </div>
 
-            <!-- Main content -->
-            <div class="md-typeset">
-                <!-- Features -->
-                <h2>Features</h2>
-                <div class="features-grid">
-                    <div class="feature">
-                        <h3>Interactive Graph</h3>
-                        <p>Drag and zoom to explore your model architecture with full interactive control.</p>
-                    </div>
-                    <div class="feature">
-                        <h3>Collapsible Nodes</h3>
-                        <p>Hierarchical modules can be expanded or collapsed to manage complexity in large models.</p>
-                    </div>
-                    <div class="feature">
-                        <h3>Notebook first</h3>
-                        <p>Use from web-based notebooks like Jupyter, Colab, VS Code, etc</p>
-                    </div>
-                    <div class="feature">
-                        <h3>Error Tolerant</h3>
-                        <p>Partial visualization when errors arise (e.g., shape mismatches) for ease of debugging.</p>
-                    </div>
-                    <div class="feature">
-                        <h3>Compressed View</h3>
-                        <p>Option to compress repeating nodes with identical structure to simplify large models.</p>
-                    </div>
-                    <div class="feature">
-                        <h3>Export options</h3>
-                        <p>Option to export visualization as png/svg/html to showcase.</p>
-                    </div>
-                </div>
+        <h2>Quick Start</h2>
+        <p>Run from your web-based notebook (Jupyter, Colab, VSCode notebook, etc):</p>
 
-                <h2>Quick start</h2>
-                <p>Run from your web-based notebook (Jupyter, Colab, VSCode notebook, etc):</p>
-
-                <h3>Define model</h3>
-                <!-- Code snippet section -->
-                <div class="code-container">
+        <h3>Define Model</h3>
+        <div class="code-block">
 <pre><code class="language-python">import torch
 import torch.nn as nn
 from torchvista import trace_model
@@ -530,32 +440,26 @@ class AttentionClassifier(nn.Module):
         x = self.attn(x)
         return self.classifier(x.mean(dim=1))
 
-model = AttentionClassifier()
-</code></pre>
-                </div>
+model = AttentionClassifier()</code></pre>
+        </div>
 
-                <h3>Trace model</h3>
-                <div class="code-container">
+        <h3>Trace Model</h3>
+        <div class="code-block">
 <pre><code class="language-python">example_input = torch.randn(1, 10, 32)
-trace_model(model, example_input)
-</code></pre>
-                </div>
+trace_model(model, example_input)</code></pre>
+        </div>
 
-                <!-- HTML demo section -->
-                <div class="demo-section">
-                    <h3>Interactive Visualization</h3>
-                    <iframe src="generated/website/AttentionClassifier.html" style="width: 100%; height: 825px; border: none; background: white;"></iframe>
-                </div>
+        <div class="demo-section">
+            <h3>Interactive Visualization</h3>
+            <iframe class="demo-iframe" src="generated/website/AttentionClassifier.html"></iframe>
+        </div>
 
-                <!-- Tutorial CTA -->
-                <div class="tutorial-cta">
-                    <a href="tutorials.html" class="tutorial-button">
-                        Start the Tutorial <span class="arrow">&rarr;</span>
-                    </a>
-                </div>
+        <div class="cta">
+            <a href="tutorials.html" class="cta-button">Start the Tutorial →</a>
+        </div>
 
-                <h2 id="api">API: <code>trace_model</code></h2>
-                <div class="code-container">
+        <h2 id="api">API: trace_model</h2>
+        <div class="code-block api-signature">
 <pre><code class="language-python">trace_model(
     model,
     inputs,
@@ -569,121 +473,118 @@ trace_model(model, example_input)
     export_path=None,
     show_compressed_view=False,
 )</code></pre>
-                </div>
+        </div>
 
-                <h3>Parameters</h3>
-                <div class="api-params">
-                    <div class="api-param">
-                        <div class="api-param-header">
-                            <span class="api-param-name">model</span>
-                            <span class="api-param-meta">(<span class="api-param-type">torch.nn.Module</span>)</span>
-                            <span class="api-param-category">Purpose: Tracing</span>
-                        </div>
-                        <div class="api-param-desc">Model instance to visualize.</div>
-                    </div>
+        <h3>Parameters</h3>
 
-                    <div class="api-param">
-                        <div class="api-param-header">
-                            <span class="api-param-name">inputs</span>
-                            <span class="api-param-meta">(<span class="api-param-type">Any</span>)</span>
-                            <span class="api-param-category">Purpose: Tracing</span>
-                        </div>
-                        <div class="api-param-desc">Input(s) forwarded into the model; pass a single input or a tuple.</div>
-                    </div>
-
-                    <div class="api-param">
-                        <div class="api-param-header">
-                            <span class="api-param-name">show_non_gradient_nodes</span>
-                            <span class="api-param-meta">(<span class="api-param-type">bool</span>, default: <span class="api-param-default">True</span>)</span>
-                            <span class="api-param-category">Purpose: Visual</span>
-                        </div>
-                        <div class="api-param-desc">Display nodes for constants and other values outside the gradient graph.</div>
-                    </div>
-
-                    <div class="api-param">
-                        <div class="api-param-header">
-                            <span class="api-param-name">collapse_modules_after_depth</span>
-                            <span class="api-param-meta">(<span class="api-param-type">int</span>, default: <span class="api-param-default">1</span>)</span>
-                            <span class="api-param-category">Purpose: Visual</span>
-                        </div>
-                        <div class="api-param-desc">Depth to initially expand nested modules; <code>0</code> collapses everything (nodes can still be expanded interactively).</div>
-                    </div>
-
-                    <div class="api-param">
-                        <div class="api-param-header">
-                            <span class="api-param-name">forced_module_tracing_depth</span>
-                            <span class="api-param-meta">(<span class="api-param-type">int</span>, default: <span class="api-param-default">None</span>)</span>
-                            <span class="api-param-category">Purpose: Tracing</span>
-                        </div>
-                        <div class="api-param-desc">Maximum depth of module internals to trace; <code>None</code> traces only user-defined modules.</div>
-                    </div>
-
-                    <div class="api-param">
-                        <div class="api-param-header">
-                            <span class="api-param-name">height</span>
-                            <span class="api-param-meta">(<span class="api-param-type">int</span>, default: <span class="api-param-default">800</span>)</span>
-                            <span class="api-param-category">Purpose: Visual</span>
-                        </div>
-                        <div class="api-param-desc">Canvas height in pixels.</div>
-                    </div>
-
-                    <div class="api-param">
-                        <div class="api-param-header">
-                            <span class="api-param-name">width</span>
-                            <span class="api-param-meta">(<span class="api-param-type">int | str</span>, default: <span class="api-param-default">None</span>)</span>
-                            <span class="api-param-category">Purpose: Visual</span>
-                        </div>
-                        <div class="api-param-desc">Canvas width; accepts pixels or percentages; defaults to full available width when omitted.</div>
-                    </div>
-
-                    <div class="api-param">
-                        <div class="api-param-header">
-                            <span class="api-param-name">export_format</span>
-                            <span class="api-param-meta">(<span class="api-param-type">str</span>, default: <span class="api-param-default">None</span>)</span>
-                            <span class="api-param-category">Purpose: Export</span>
-                        </div>
-                        <div class="api-param-desc">Optional export format: <code>png</code>, <code>svg</code>, or <code>html</code> if exporting graph as a file. Otherwise, by default the graph is shown within the notebook.</div>
-                    </div>
-
-                    <div class="api-param">
-                        <div class="api-param-header">
-                            <span class="api-param-name">show_module_attr_names</span>
-                            <span class="api-param-meta">(<span class="api-param-type">bool</span>, default: <span class="api-param-default">False</span>)</span>
-                            <span class="api-param-category">Purpose: Visual</span>
-                        </div>
-                        <div class="api-param-desc">Display attribute names for modules when available instead of just class names.</div>
-                    </div>
-
-                    <div class="api-param">
-                        <div class="api-param-header">
-                            <span class="api-param-name">export_path</span>
-                            <span class="api-param-meta">(<span class="api-param-type">str</span>, default: <span class="api-param-default">None</span>)</span>
-                            <span class="api-param-category">Purpose: Export</span>
-                        </div>
-                        <div class="api-param-desc">Custom path if exporting as a file. <strong>Only HTML format</strong> is currently supported with custom export paths. If only file name is specified, it will be created inside the present working directory.</div>
-                    </div>
-
-                    <div class="api-param">
-                        <div class="api-param-header">
-                            <span class="api-param-name">show_compressed_view</span> <em>(Experimental)</em>
-                            <span class="api-param-meta">(<span class="api-param-type">bool</span>, default: <span class="api-param-default">False</span>)</span>
-                            <span class="api-param-category">Purpose: Visual</span>
-                        </div>
-                        <div class="api-param-desc">Compress the graph by showing repeating nodes of the same type with identical input and output dims in single "repeat" blocks. This feature currently only recognises repeating nodes within <code>Sequential</code> and <code>ModuleList</code>. WARNING: this feature might be expensive on large models.</div>
-                    </div>
-                </div>
-
-                <h2>Resources</h2>
-                <ul>
-                    <li><a href="https://colab.research.google.com/drive/1wrWKhpvGiqHhE0Lb1HnFGeOcS4uBqGXw?usp=sharing" target="_blank">Quick Google Colab Tutorial</a> - Get started with an interactive tutorial (must be logged in to Colab)</li>
-                    <li><a href="demos.html">Check out demos</a> - Explore examples ranging from simple linear models to complex transformers</li>
-                    <li><a href="https://github.com/sachinhosmani/torchvista" target="_blank">GitHub Repository</a> - Source code, issues, and contributions</li>
-                </ul>
+        <div class="api-param">
+            <div>
+                <span class="param-name">model</span>
+                <span class="param-meta">(<span class="param-type">torch.nn.Module</span>)</span>
+                <span class="param-tag">Tracing</span>
             </div>
+            <div class="param-desc">Model instance to visualize.</div>
+        </div>
+
+        <div class="api-param">
+            <div>
+                <span class="param-name">inputs</span>
+                <span class="param-meta">(<span class="param-type">Any</span>)</span>
+                <span class="param-tag">Tracing</span>
+            </div>
+            <div class="param-desc">Input(s) forwarded into the model; pass a single input or a tuple.</div>
+        </div>
+
+        <div class="api-param">
+            <div>
+                <span class="param-name">show_non_gradient_nodes</span>
+                <span class="param-meta">(<span class="param-type">bool</span>, default: <span class="param-default">True</span>)</span>
+                <span class="param-tag">Visual</span>
+            </div>
+            <div class="param-desc">Display nodes for constants and other values outside the gradient graph.</div>
+        </div>
+
+        <div class="api-param">
+            <div>
+                <span class="param-name">collapse_modules_after_depth</span>
+                <span class="param-meta">(<span class="param-type">int</span>, default: <span class="param-default">1</span>)</span>
+                <span class="param-tag">Visual</span>
+            </div>
+            <div class="param-desc">Depth to initially expand nested modules; <code>0</code> collapses everything (nodes can still be expanded interactively).</div>
+        </div>
+
+        <div class="api-param">
+            <div>
+                <span class="param-name">forced_module_tracing_depth</span>
+                <span class="param-meta">(<span class="param-type">int</span>, default: <span class="param-default">None</span>)</span>
+                <span class="param-tag">Tracing</span>
+            </div>
+            <div class="param-desc">Maximum depth of module internals to trace; <code>None</code> traces only user-defined modules.</div>
+        </div>
+
+        <div class="api-param">
+            <div>
+                <span class="param-name">height</span>
+                <span class="param-meta">(<span class="param-type">int</span>, default: <span class="param-default">800</span>)</span>
+                <span class="param-tag">Visual</span>
+            </div>
+            <div class="param-desc">Canvas height in pixels.</div>
+        </div>
+
+        <div class="api-param">
+            <div>
+                <span class="param-name">width</span>
+                <span class="param-meta">(<span class="param-type">int | str</span>, default: <span class="param-default">None</span>)</span>
+                <span class="param-tag">Visual</span>
+            </div>
+            <div class="param-desc">Canvas width; accepts pixels or percentages; defaults to full available width when omitted.</div>
+        </div>
+
+        <div class="api-param">
+            <div>
+                <span class="param-name">export_format</span>
+                <span class="param-meta">(<span class="param-type">str</span>, default: <span class="param-default">None</span>)</span>
+                <span class="param-tag">Export</span>
+            </div>
+            <div class="param-desc">Optional export format: <code>png</code>, <code>svg</code>, or <code>html</code> if exporting graph as a file. Otherwise, by default the graph is shown within the notebook.</div>
+        </div>
+
+        <div class="api-param">
+            <div>
+                <span class="param-name">show_module_attr_names</span>
+                <span class="param-meta">(<span class="param-type">bool</span>, default: <span class="param-default">False</span>)</span>
+                <span class="param-tag">Visual</span>
+            </div>
+            <div class="param-desc">Display attribute names for modules when available instead of just class names.</div>
+        </div>
+
+        <div class="api-param">
+            <div>
+                <span class="param-name">export_path</span>
+                <span class="param-meta">(<span class="param-type">str</span>, default: <span class="param-default">None</span>)</span>
+                <span class="param-tag">Export</span>
+            </div>
+            <div class="param-desc">Custom path if exporting as a file. <strong>Only HTML format</strong> is currently supported with custom export paths.</div>
+        </div>
+
+        <div class="api-param">
+            <div>
+                <span class="param-name">show_compressed_view</span> <em>(Experimental)</em>
+                <span class="param-meta">(<span class="param-type">bool</span>, default: <span class="param-default">False</span>)</span>
+                <span class="param-tag">Visual</span>
+            </div>
+            <div class="param-desc">Compress the graph by showing repeating nodes of the same type with identical input and output dims in single "repeat" blocks. This feature currently only recognises repeating nodes within <code>Sequential</code> and <code>ModuleList</code>. Warning: this feature might be expensive on large models.</div>
+        </div>
+
+        <h2>Resources</h2>
+        <ul>
+            <li><a href="https://colab.research.google.com/drive/1wrWKhpvGiqHhE0Lb1HnFGeOcS4uBqGXw?usp=sharing" target="_blank">Quick Google Colab Tutorial</a> – Get started with an interactive tutorial</li>
+            <li><a href="demos.html">Check out demos</a> – Explore examples ranging from simple linear models to complex transformers</li>
+            <li><a href="https://github.com/sachinhosmani/torchvista" target="_blank">GitHub Repository</a> – Source code, issues, and contributions</li>
+        </ul>
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="md-footer"></footer>
+    <footer></footer>
 </body>
 </html>

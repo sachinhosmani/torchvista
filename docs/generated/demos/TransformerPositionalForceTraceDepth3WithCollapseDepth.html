@@ -1,244 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/a11y-dark.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
-        <style>
-            :root {
-                --md-primary-fg-color: #4051b5;
-                --md-accent-fg-color: #526cfe;
-            }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/a11y-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
 
-            html, body {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                height: 100%;
-                margin: 0;
-            }
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+        }
 
-            .container {
-                display: flex;
-                flex-direction: column;
-                height: 100vh;
-            }
+        html, body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+            height: 100%;
+            margin: 0;
+        }
 
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .left-column {
+            display: flex;
+            flex-direction: row;
+            max-height: 40vh;
+        }
+
+        .code-box {
+            flex: 1.5;
+            height: 100%;
+            background-color: #f5f5f5;
+            padding: 16px;
+            overflow: auto;
+            border-right: 1px solid #ccc;
+            word-wrap: break-word;
+            border-bottom: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .error-box {
+            flex: 1;
+            height: 100%;
+            background-color: #f5f5f5;
+            padding: 16px;
+            overflow: auto;
+            color: red;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .code-box-header {
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #cccccc;
+            color: #333;
+            font-size: large;
+        }
+
+        .error-box-header {
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #000000;
+            color: #333;
+            font-size: large;
+        }
+
+        .graph-box-header {
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #000000;
+            color: #333;
+            font-size: large;
+        }
+
+        .code-box pre {
+            margin: 0;
+            padding: 0;
+        }
+
+        .code-box code {
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            background: #2b2b2b;
+            border-radius: 4px;
+            padding: 1rem;
+            display: block;
+            color: #f8f8f2;
+        }
+
+        .code-box code.hljs {
+            background: #2b2b2b;
+        }
+
+        .graph-view {
+            height: 60vh;
+            overflow: hidden;
+            padding: 16px;
+            background-color: #ffffff;
+        }
+
+        #graph {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Header */
+        header {
+            background: #4051b5;
+            color: #fff;
+            padding: 1rem;
+        }
+
+        .header-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.75rem 1rem;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            color: #fff;
+        }
+
+        .json-viewer {
+            height: 60%;
+            width: 100%;
+        }
+
+        .copy-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 4px 10px;
+            font-size: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: background 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: #45a049;
+        }
+
+        @media (max-width: 768px) {
             .left-column {
-                display: flex;
-                flex-direction: row;
-                max-height: 40vh;
+                flex-direction: column;
+                max-height: none;
             }
 
             .code-box {
-                flex: 1.5;
-                height: 100%;
-                background-color: #f5f5f5;
-                padding: 16px;
-                overflow: auto;
-                border-right: 1px solid #ccc;
-                word-wrap: break-word;
-                border-bottom: none;
+                border-right: none;
+                border-bottom: 1px solid #ccc;
+                max-height: 30vh;
             }
 
             .error-box {
-                flex: 1;
-                height: 100%;
-                background-color: #f5f5f5;
-                padding: 16px;
-                overflow: auto;
-                color: red;
-                box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
-            }
-            .code-box-header {
-                font-weight: bold;
-                margin-bottom: 10px;
-                padding-bottom: 5px;
-                border-bottom: 1px solid #cccccc;
-                color: #333;
-                font-size: large;
-            }
-
-            .error-box-header {
-                font-weight: bold;
-                margin-bottom: 10px;
-                padding-bottom: 5px;
-                border-bottom: 1px solid #000000;
-                color: #333;
-                font-size: large;
-            }
-
-            .graph-box-header {
-                font-weight: bold;
-                margin-bottom: 10px;
-                padding-bottom: 5px;
-                border-bottom: 1px solid #000000;
-                color: #333;
-                font-size: large;
-            }
-
-            .code-box pre {
-                margin: 0;
-                padding: 0;
-            }
-
-            .code-box code {
-                font-family: "Roboto Mono", "Courier New", monospace;
-                font-size: 0.85rem;
-                line-height: 1.5;
-                background: #2b2b2b;
-                border-radius: 0.2rem;
-                padding: 1rem;
-                display: block;
-                color: #f8f8f2;
-            }
-
-            /* Override highlight.js background */
-            .code-box code.hljs {
-                background: #2b2b2b;
+                max-height: 20vh;
             }
 
             .graph-view {
-                height: 60vh;
-                overflow: hidden;
-                padding: 16px;
-                background-color: #ffffff;
+                height: 50vh;
             }
-            #graph {
-                width: 100%;
-                height: 100%;
-            }
+        }
+    </style>
+</head>
+<body>
 
-            /* Header - matching website style */
-            .md-header {
-                background-color: var(--md-primary-fg-color);
-                color: white;
-                box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
-            }
-
-            .md-header__inner {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 0.6rem 1rem;
-                max-width: 1200px;
-                margin: 0 auto;
-            }
-
-            .md-header__title {
-                font-size: 1.25rem;
-                font-weight: 600;
-            }
-
-            .md-header__title a {
-                color: white;
-                text-decoration: none;
-            }
-
-            .md-header__nav {
-                display: flex;
-                gap: 1.5rem;
-                align-items: center;
-            }
-
-            .md-header__nav a {
-                color: white;
-                text-decoration: none;
-                font-weight: 500;
-                opacity: 0.9;
-                transition: opacity 0.2s;
-            }
-
-            .md-header__nav a:hover {
-                opacity: 1;
-            }
-
-            .md-header__nav iframe {
-                vertical-align: middle;
-            }
-
-            .json-viewer {
-                height: 60%;
-                width: 100%;
-            }
-
-            .copy-btn {
-                background: #4CAF50;
-                color: white;
-                border: none;
-                padding: 4px 10px;
-                font-size: 12px;
-                border-radius: 4px;
-                cursor: pointer;
-                margin-left: 10px;
-                transition: background 0.3s;
-            }
-
-            .copy-btn:hover {
-                background: #45a049;
-            }
-
-            @media (max-width: 768px) {
-                .md-header__inner {
-                    flex-direction: column;
-                    gap: 0.5rem;
-                }
-                .md-header__nav {
-                    gap: 1rem;
-                    flex-wrap: wrap;
-                    justify-content: center;
-                }
-            }
-
-        </style>
-    </head>
-    <body>
-
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                document.querySelectorAll('pre code').forEach((block) => {
-                    hljs.highlightBlock(block);
-                });
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
             });
+        });
 
-            function copyCode() {
-                const codeElement = document.getElementById("codeContent");
-                const textToCopy = codeElement.innerText;
+        function copyCode() {
+            const codeElement = document.getElementById("codeContent");
+            const textToCopy = codeElement.innerText;
 
-                navigator.clipboard.writeText(textToCopy).then(() => {
-                    const btn = document.querySelector(".copy-btn");
-                    btn.textContent = "Copied!";
-                    setTimeout(() => btn.textContent = "Copy", 2000);
-                }).catch(err => {
-                    console.error("Failed to copy: ", err);
-                });
-            }
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const btn = document.querySelector(".copy-btn");
+                btn.textContent = "Copied!";
+                setTimeout(() => btn.textContent = "Copy", 2000);
+            }).catch(err => {
+                console.error("Failed to copy: ", err);
+            });
+        }
+    </script>
 
-        </script>
-
-        <div class="container">
-            <header class="md-header">
-                <div class="md-header__inner">
-                    <div class="md-header__title">
-                        <a href="../../index.html">TorchVista</a>
-                    </div>
-                    <nav class="md-header__nav">
-                        <a href="../../index.html">Home</a>
-                        <a href="../../tutorials.html">Tutorials</a>
-                        <a href="../../demos.html">Demos</a>
-                        <a href="https://github.com/sachinhosmani/torchvista" target="_blank">GitHub</a>
-                        <iframe src="https://ghbtns.com/github-btn.html?user=sachinhosmani&repo=torchvista&type=star&count=true&size=large"
-                                frameborder="0" scrolling="0" width="170" height="30" title="GitHub Star Button"></iframe>
-                    </nav>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <a href="../../index.html" class="logo">TorchVista</a>
+                <nav>
+                    <a href="../../index.html">Home</a>
+                    <a href="../../tutorials.html">Tutorials</a>
+                    <a href="../../demos.html">Demos</a>
+                    <a href="https://github.com/sachinhosmani/torchvista" target="_blank">GitHub</a>
+                </nav>
+            </div>
+        </header>
+        <div class="left-column">
+            <div class="code-box" id="codeBox">
+                <div class="code-box-header">
+                    Sample code (Not editable)
+                    <button class="copy-btn" onclick="copyCode()">Copy</button>
                 </div>
-            </header>
-            <div class="left-column">
-                <div class="code-box" id="codeBox">
-                    <div class="code-box-header">
-                        Sample code (Not editable)
-                        <button class="copy-btn" onclick="copyCode()">Copy</button>
-                    </div>
-                    <pre><code class="language-python" id="codeContent">import torch
+                <pre><code class="language-python" id="codeContent">import torch
 import torch.nn as nn
 from torchvista import trace_model
 
@@ -261,131 +264,131 @@ example_input = torch.randn(10, 1, 20)
 
 trace_model(model, example_input, forced_module_tracing_depth=3, collapse_modules_after_depth=3)
 </code></pre>
-                </div>
-
-                <div class="error-box" id="errorBox">
-                    <div class="error-box-header">Error Output (if any)</div>
-                
-                </div>
-
             </div>
-    
-            <div class="graph-view" id="graphContainer" style="height: 100%">
-                <div class="graph-box-header">Visualized Interactive Graph</div>
-                <div id="graph-container_1d3bcb12-d135-41a4-a88b-f65be277adeb">
-    <div id="graph_1d3bcb12-d135-41a4-a88b-f65be277adeb"></div>
-    <div class="logo_1d3bcb12-d135-41a4-a88b-f65be277adeb">
+
+            <div class="error-box" id="errorBox">
+                <div class="error-box-header">Error Output (if any)</div>
+            
+            </div>
+
+        </div>
+
+        <div class="graph-view" id="graphContainer" style="height: 100%">
+            <div class="graph-box-header">Visualized Interactive Graph</div>
+            <div id="graph-container_4e952cfa-6e72-43a4-9111-497fc8a095ef">
+    <div id="graph_4e952cfa-6e72-43a4-9111-497fc8a095ef"></div>
+    <div class="logo_4e952cfa-6e72-43a4-9111-497fc8a095ef">
         <a href="https://github.com/sachinhosmani/torchvista" target="_blank" rel="noopener noreferrer">
         torchvista
         </a>
     </div>
-    <div id="popup_1d3bcb12-d135-41a4-a88b-f65be277adeb" class="popup_1d3bcb12-d135-41a4-a88b-f65be277adeb" style="display: none;">
-        <div class="popup-header_1d3bcb12-d135-41a4-a88b-f65be277adeb">
-            <h3 id="popup-title_1d3bcb12-d135-41a4-a88b-f65be277adeb"></h3>
-            <span class="popup-close_1d3bcb12-d135-41a4-a88b-f65be277adeb">✕</span>
+    <div id="popup_4e952cfa-6e72-43a4-9111-497fc8a095ef" class="popup_4e952cfa-6e72-43a4-9111-497fc8a095ef" style="display: none;">
+        <div class="popup-header_4e952cfa-6e72-43a4-9111-497fc8a095ef">
+            <h3 id="popup-title_4e952cfa-6e72-43a4-9111-497fc8a095ef"></h3>
+            <span class="popup-close_4e952cfa-6e72-43a4-9111-497fc8a095ef">✕</span>
         </div>
-        <div id="popup-content_1d3bcb12-d135-41a4-a88b-f65be277adeb" class="popup-content_1d3bcb12-d135-41a4-a88b-f65be277adeb">
-            <div id="common-info_1d3bcb12-d135-41a4-a88b-f65be277adeb">
+        <div id="popup-content_4e952cfa-6e72-43a4-9111-497fc8a095ef" class="popup-content_4e952cfa-6e72-43a4-9111-497fc8a095ef">
+            <div id="common-info_4e952cfa-6e72-43a4-9111-497fc8a095ef">
             </div>
-            <div id="module-template_1d3bcb12-d135-41a4-a88b-f65be277adeb" style="display:none;">
-                <details open id="module-parameters-details_1d3bcb12-d135-41a4-a88b-f65be277adeb">
+            <div id="module-template_4e952cfa-6e72-43a4-9111-497fc8a095ef" style="display:none;">
+                <details open id="module-parameters-details_4e952cfa-6e72-43a4-9111-497fc8a095ef">
                     <summary style="color: black"><strong>forward() Parameters</strong></summary>
-                    <div id="module-parameters_1d3bcb12-d135-41a4-a88b-f65be277adeb" class="json-viewer_1d3bcb12-d135-41a4-a88b-f65be277adeb"></div>
+                    <div id="module-parameters_4e952cfa-6e72-43a4-9111-497fc8a095ef" class="json-viewer_4e952cfa-6e72-43a4-9111-497fc8a095ef"></div>
                 </details>
-                <details open id="module-attributes-details_1d3bcb12-d135-41a4-a88b-f65be277adeb">
+                <details open id="module-attributes-details_4e952cfa-6e72-43a4-9111-497fc8a095ef">
                     <summary style="color: black"><strong>Attributes</strong></summary>
-                    <div id="module-attributes_1d3bcb12-d135-41a4-a88b-f65be277adeb" class="json-viewer_1d3bcb12-d135-41a4-a88b-f65be277adeb"></div>
+                    <div id="module-attributes_4e952cfa-6e72-43a4-9111-497fc8a095ef" class="json-viewer_4e952cfa-6e72-43a4-9111-497fc8a095ef"></div>
                 </details>
             </div>
-            <div id="tensor-op-template_1d3bcb12-d135-41a4-a88b-f65be277adeb" style="display:none;">
+            <div id="tensor-op-template_4e952cfa-6e72-43a4-9111-497fc8a095ef" style="display:none;">
                 <summary><strong>Parameters</strong></summary>
-                <div id="tensor-op-parameters_1d3bcb12-d135-41a4-a88b-f65be277adeb" class="json-viewer_1d3bcb12-d135-41a4-a88b-f65be277adeb"></div>
+                <div id="tensor-op-parameters_4e952cfa-6e72-43a4-9111-497fc8a095ef" class="json-viewer_4e952cfa-6e72-43a4-9111-497fc8a095ef"></div>
             </div>
-            <p id="no-info_1d3bcb12-d135-41a4-a88b-f65be277adeb" style="display:none;">No further information available for this node.</p>
+            <p id="no-info_4e952cfa-6e72-43a4-9111-497fc8a095ef" style="display:none;">No further information available for this node.</p>
         </div>
     </div>
 
     <style>
-        .node_1d3bcb12-d135-41a4-a88b-f65be277adeb rect {
+        .node_4e952cfa-6e72-43a4-9111-497fc8a095ef rect {
             stroke: #333;
             fill: #fff;
         }
-        text.node-label_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        text.node-label_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.type-indicator_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        text.type-indicator_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.collapse-icon_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        text.collapse-icon_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 14px;
             cursor: default;
             user-select: none;
         }
-        .edge_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        .edge_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             stroke: #797979;
             fill: none;
         }
-        .node_1d3bcb12-d135-41a4-a88b-f65be277adeb rect.input_1d3bcb12-d135-41a4-a88b-f65be277adeb { fill: #FF9AFF; }
-        .node_1d3bcb12-d135-41a4-a88b-f65be277adeb rect.constant_1d3bcb12-d135-41a4-a88b-f65be277adeb { fill: rgb(235 235 235); }
+        .node_4e952cfa-6e72-43a4-9111-497fc8a095ef rect.input_4e952cfa-6e72-43a4-9111-497fc8a095ef { fill: #FF9AFF; }
+        .node_4e952cfa-6e72-43a4-9111-497fc8a095ef rect.constant_4e952cfa-6e72-43a4-9111-497fc8a095ef { fill: rgb(235 235 235); }
 
-        .node_1d3bcb12-d135-41a4-a88b-f65be277adeb rect.output_1d3bcb12-d135-41a4-a88b-f65be277adeb { fill: #74e071; }
-        .node_1d3bcb12-d135-41a4-a88b-f65be277adeb rect.failed_1d3bcb12-d135-41a4-a88b-f65be277adeb { fill: rgb(224 15 15); }
-        .node_1d3bcb12-d135-41a4-a88b-f65be277adeb rect.module_1d3bcb12-d135-41a4-a88b-f65be277adeb { fill: #8BDEDB; }
-        .node_1d3bcb12-d135-41a4-a88b-f65be277adeb rect.operation_1d3bcb12-d135-41a4-a88b-f65be277adeb { fill: #FEBC5A; }
+        .node_4e952cfa-6e72-43a4-9111-497fc8a095ef rect.output_4e952cfa-6e72-43a4-9111-497fc8a095ef { fill: #74e071; }
+        .node_4e952cfa-6e72-43a4-9111-497fc8a095ef rect.failed_4e952cfa-6e72-43a4-9111-497fc8a095ef { fill: rgb(224 15 15); }
+        .node_4e952cfa-6e72-43a4-9111-497fc8a095ef rect.module_4e952cfa-6e72-43a4-9111-497fc8a095ef { fill: #8BDEDB; }
+        .node_4e952cfa-6e72-43a4-9111-497fc8a095ef rect.operation_4e952cfa-6e72-43a4-9111-497fc8a095ef { fill: #FEBC5A; }
 
-        .node_1d3bcb12-d135-41a4-a88b-f65be277adeb ellipse.input_1d3bcb12-d135-41a4-a88b-f65be277adeb { fill: #FF9AFF; }
-        .node_1d3bcb12-d135-41a4-a88b-f65be277adeb ellipse.constant_1d3bcb12-d135-41a4-a88b-f65be277adeb { fill: rgb(235 235 235); }
-        .node_1d3bcb12-d135-41a4-a88b-f65be277adeb ellipse.output_1d3bcb12-d135-41a4-a88b-f65be277adeb { fill: #74e071; }
-        .node_1d3bcb12-d135-41a4-a88b-f65be277adeb ellipse.failed_1d3bcb12-d135-41a4-a88b-f65be277adeb { fill: rgb(224 15 15); }
+        .node_4e952cfa-6e72-43a4-9111-497fc8a095ef ellipse.input_4e952cfa-6e72-43a4-9111-497fc8a095ef { fill: #FF9AFF; }
+        .node_4e952cfa-6e72-43a4-9111-497fc8a095ef ellipse.constant_4e952cfa-6e72-43a4-9111-497fc8a095ef { fill: rgb(235 235 235); }
+        .node_4e952cfa-6e72-43a4-9111-497fc8a095ef ellipse.output_4e952cfa-6e72-43a4-9111-497fc8a095ef { fill: #74e071; }
+        .node_4e952cfa-6e72-43a4-9111-497fc8a095ef ellipse.failed_4e952cfa-6e72-43a4-9111-497fc8a095ef { fill: rgb(224 15 15); }
 
-        .node_1d3bcb12-d135-41a4-a88b-f65be277adeb ellipse {
+        .node_4e952cfa-6e72-43a4-9111-497fc8a095ef ellipse {
             stroke: #333;
             stroke-width: 1px;
         }
-        .edgeLabelGroup_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        .edgeLabelGroup_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             pointer-events: none;
         }
-        #arrowhead_1d3bcb12-d135-41a4-a88b-f65be277adeb path {
+        #arrowhead_4e952cfa-6e72-43a4-9111-497fc8a095ef path {
             fill: #333333;;
         }
-        .node_1d3bcb12-d135-41a4-a88b-f65be277adeb rect,
-        .node_1d3bcb12-d135-41a4-a88b-f65be277adeb ellipse {
+        .node_4e952cfa-6e72-43a4-9111-497fc8a095ef rect,
+        .node_4e952cfa-6e72-43a4-9111-497fc8a095ef ellipse {
             transition: fill 0.3s ease;
         }
 
-        .node_1d3bcb12-d135-41a4-a88b-f65be277adeb .type-indicator_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        .node_4e952cfa-6e72-43a4-9111-497fc8a095ef .type-indicator_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             font-size: 5px;
             fill: rgba(0, 0, 0, 1.0);  /* Dark grey, semi-transparent */
             pointer-events: none;
         }
 
-        .node_1d3bcb12-d135-41a4-a88b-f65be277adeb.error_1d3bcb12-d135-41a4-a88b-f65be277adeb rect {
+        .node_4e952cfa-6e72-43a4-9111-497fc8a095ef.error_4e952cfa-6e72-43a4-9111-497fc8a095ef rect {
             stroke: black;
             stroke-width: 1px;
         }
 
-        .boundary-box_1d3bcb12-d135-41a4-a88b-f65be277adeb.error_1d3bcb12-d135-41a4-a88b-f65be277adeb > rect:first-of-type {
+        .boundary-box_4e952cfa-6e72-43a4-9111-497fc8a095ef.error_4e952cfa-6e72-43a4-9111-497fc8a095ef > rect:first-of-type {
             fill: red;
             fill-opacity: 0.2;
         }
 
-        #graph-container_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        #graph-container_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             position: relative;
             height: 95%;
             width: ${width};
             overflow: hidden;
         }
 
-        #graph_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        #graph_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             height: 100%;
         }
         
-        .popup_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        .popup_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             position: absolute;
             background: white;
@@ -400,7 +403,7 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
             flex-direction: column;
         }
 
-        .popup-header_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        .popup-header_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             position: sticky;
             top: 0;
             background: white;
@@ -412,12 +415,12 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
             z-index: 1;
         }
 
-        .popup_1d3bcb12-d135-41a4-a88b-f65be277adeb h3 {
+        .popup_4e952cfa-6e72-43a4-9111-497fc8a095ef h3 {
             margin: 0;
             font-size: 16px;
         }
 
-        .popup-content_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        .popup-content_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             padding: 10px;
             padding-bottom: 10px;
             overflow-y: auto;
@@ -425,87 +428,87 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
             flex-grow: 1;
         }
 
-        .popup_1d3bcb12-d135-41a4-a88b-f65be277adeb pre {
+        .popup_4e952cfa-6e72-43a4-9111-497fc8a095ef pre {
             white-space: pre;
             overflow-x: auto;
         }
 
-        .popup-close_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        .popup-close_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             cursor: pointer;
             font-size: 24px;
             font-weight: bold;
             line-height: 1;
         }
 
-        #popup-title_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        #popup-title_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             font-size: 16px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             color: black;
         }
 
-        #graph-container_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        #graph-container_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             position: relative;
         }
 
-        #graph-container_1d3bcb12-d135-41a4-a88b-f65be277adeb pre {
+        #graph-container_4e952cfa-6e72-43a4-9111-497fc8a095ef pre {
             margin-bottom: 0;
         }
 
-        .boundary-box_1d3bcb12-d135-41a4-a88b-f65be277adeb rect {
+        .boundary-box_4e952cfa-6e72-43a4-9111-497fc8a095ef rect {
             pointer-events: none;
         }
-        .boundary-box_1d3bcb12-d135-41a4-a88b-f65be277adeb text {
+        .boundary-box_4e952cfa-6e72-43a4-9111-497fc8a095ef text {
             pointer-events: none;
             user-select: none;
         }
 
-        .boundary-box_1d3bcb12-d135-41a4-a88b-f65be277adeb rect {
+        .boundary-box_4e952cfa-6e72-43a4-9111-497fc8a095ef rect {
             pointer-events: none;
         }
-        .boundary-box_1d3bcb12-d135-41a4-a88b-f65be277adeb text {
+        .boundary-box_4e952cfa-6e72-43a4-9111-497fc8a095ef text {
             pointer-events: none;
             user-select: none;
             font-weight: bold;
         }
-        .edge-label_1d3bcb12-d135-41a4-a88b-f65be277adeb text {
+        .edge-label_4e952cfa-6e72-43a4-9111-497fc8a095ef text {
             pointer-events: none;
             user-select: none;
             font-size: 4px;
             font-family: "'Roboto', sans-serif";
         }
                     
-        .collapse-button_1d3bcb12-d135-41a4-a88b-f65be277adeb, .info-button_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        .collapse-button_4e952cfa-6e72-43a4-9111-497fc8a095ef, .info-button_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             fill: #fff;
             stroke: #333;
             stroke-width: 1px;
             cursor: pointer;
         }
 
-        .collapse-button_1d3bcb12-d135-41a4-a88b-f65be277adeb:hover, .info-button_1d3bcb12-d135-41a4-a88b-f65be277adeb:hover {
+        .collapse-button_4e952cfa-6e72-43a4-9111-497fc8a095ef:hover, .info-button_4e952cfa-6e72-43a4-9111-497fc8a095ef:hover {
             fill: #eee;
             cursor: pointer;
         }
 
-        .collapse-icon_1d3bcb12-d135-41a4-a88b-f65be277adeb, .info-icon_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        .collapse-icon_4e952cfa-6e72-43a4-9111-497fc8a095ef, .info-icon_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             fill: rgb(51, 51, 51);
         }
 
-        .collapse-button-disabled_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        .collapse-button-disabled_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             fill: #eee5;
             stroke: #3333334f;
             stroke-width: 1px;
             cursor: not-allowed;
         }
 
-        .collapse-button-disabled_1d3bcb12-d135-41a4-a88b-f65be277adeb:hover {
+        .collapse-button-disabled_4e952cfa-6e72-43a4-9111-497fc8a095ef:hover {
             fill: #eee6;
             cursor: not-allowed;
         }
 
-        .collapse-icon-disabled_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        .collapse-icon-disabled_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -514,11 +517,11 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
         }
 
         /* Edge hover styles */
-        .edge-group_1d3bcb12-d135-41a4-a88b-f65be277adeb path {
+        .edge-group_4e952cfa-6e72-43a4-9111-497fc8a095ef path {
             pointer-events: stroke;
         }
 
-        .edge-label_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        .edge-label_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             pointer-events: all;
         }
 
@@ -558,50 +561,50 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
             }
         }
 
-        .highlight-cluster_1d3bcb12-d135-41a4-a88b-f65be277adeb > rect:first-of-type {
+        .highlight-cluster_4e952cfa-6e72-43a4-9111-497fc8a095ef > rect:first-of-type {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        .highlight-node_1d3bcb12-d135-41a4-a88b-f65be277adeb rect {
+        .highlight-node_4e952cfa-6e72-43a4-9111-497fc8a095ef rect {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        text.node-label_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        text.node-label_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 0.8rem;  /* Base size using rem units for accessibility */
             cursor: default;
             user-select: none;
         }
 
-        .node_1d3bcb12-d135-41a4-a88b-f65be277adeb.constant_1d3bcb12-d135-41a4-a88b-f65be277adeb .node-label_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        .node_4e952cfa-6e72-43a4-9111-497fc8a095ef.constant_4e952cfa-6e72-43a4-9111-497fc8a095ef .node-label_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             font-size: 0.7rem;
         }
 
-        .popup-content_1d3bcb12-d135-41a4-a88b-f65be277adeb summary {
+        .popup-content_4e952cfa-6e72-43a4-9111-497fc8a095ef summary {
             cursor: pointer;
             margin: 5px;
             user-select: none;
         }
 
-        .node_1d3bcb12-d135-41a4-a88b-f65be277adeb.input_1d3bcb12-d135-41a4-a88b-f65be277adeb rect,
-        .node_1d3bcb12-d135-41a4-a88b-f65be277adeb.output_1d3bcb12-d135-41a4-a88b-f65be277adeb rect,
-        .node_1d3bcb12-d135-41a4-a88b-f65be277adeb.constant_1d3bcb12-d135-41a4-a88b-f65be277adeb rect {
+        .node_4e952cfa-6e72-43a4-9111-497fc8a095ef.input_4e952cfa-6e72-43a4-9111-497fc8a095ef rect,
+        .node_4e952cfa-6e72-43a4-9111-497fc8a095ef.output_4e952cfa-6e72-43a4-9111-497fc8a095ef rect,
+        .node_4e952cfa-6e72-43a4-9111-497fc8a095ef.constant_4e952cfa-6e72-43a4-9111-497fc8a095ef rect {
             stroke-width: 1px;
             rx: 8px;
             ry: 8px;
             stroke-dasharray: none;
         }
 
-        #png-error-container_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        #png-error-container_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             text-align: center;
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 14px;
         }
 
-        #png-error-message_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        #png-error-message_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             padding: 8px 16px;
             background-color: #dc3545;
             color: white;
@@ -612,13 +615,13 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
             text-align: left;
         }
 
-        #png-link-container_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        #png-link-container_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 18px;
         }
 
-        #png-download-button_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        #png-download-button_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -628,11 +631,11 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
             margin-right: 8px;
         }
 
-        #png-download-button_1d3bcb12-d135-41a4-a88b-f65be277adeb:hover {
+        #png-download-button_4e952cfa-6e72-43a4-9111-497fc8a095ef:hover {
             background-color: #0056b3;
         }
 
-        #png-save-button_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        #png-save-button_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -641,18 +644,18 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
             border-radius: 4px;
         }
 
-        #png-save-button_1d3bcb12-d135-41a4-a88b-f65be277adeb:hover {
+        #png-save-button_4e952cfa-6e72-43a4-9111-497fc8a095ef:hover {
             background-color: #0056b3;
         }
 
-        #svg-link-container_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        #svg-link-container_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 18px;
         }
 
 
-        #svg-download-button_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        #svg-download-button_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -662,11 +665,11 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
             margin-right: 8px;
         }
 
-        #svg-download-button_1d3bcb12-d135-41a4-a88b-f65be277adeb:hover {
+        #svg-download-button_4e952cfa-6e72-43a4-9111-497fc8a095ef:hover {
             background-color: #0056b3;
         }
 
-        #svg-save-button_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        #svg-save-button_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -675,11 +678,11 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
             border-radius: 4px;
         }
 
-        #svg-save-button_1d3bcb12-d135-41a4-a88b-f65be277adeb:hover {
+        #svg-save-button_4e952cfa-6e72-43a4-9111-497fc8a095ef:hover {
             background-color: #0056b3;
         }
 
-        .custom-tooltip_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        .custom-tooltip_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             position: absolute;
             background: white;
             border: 1px solid #ccc;
@@ -695,7 +698,7 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
             display: none;
         }
 
-        .custom-tooltip_smaller_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        .custom-tooltip_smaller_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             position: absolute;
             background: white;
             border: 1px solid #ccc;
@@ -711,16 +714,16 @@ trace_model(model, example_input, forced_module_tracing_depth=3, collapse_module
             display: none;
         }
 
-        .edge_1d3bcb12-d135-41a4-a88b-f65be277adeb.implied-edge_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        .edge_4e952cfa-6e72-43a4-9111-497fc8a095ef.implied-edge_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             stroke-dasharray: 5,5;
         }
 
-        .logo_1d3bcb12-d135-41a4-a88b-f65be277adeb {
+        .logo_4e952cfa-6e72-43a4-9111-497fc8a095ef {
             position: absolute;
             bottom: 8px; left: 8px;
             padding: 4px 6px;
         }
-        .logo_1d3bcb12-d135-41a4-a88b-f65be277adeb a {
+        .logo_4e952cfa-6e72-43a4-9111-497fc8a095ef a {
             color: #a1a1a1;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             opacity: .6;
@@ -881,7 +884,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
 (function() {
-    const adj_list = {"input_0": {"edges": [{"target": "linear_2", "dims": "(10, 1, 20)", "edge_data_id": 6435674848}], "failed": false, "node_type": "Input"}, "linear_2": {"edges": [{"target": "__add___9", "dims": "(10, 1, 32)", "edge_data_id": 5498145744}], "failed": false, "node_type": "Operation"}, "tensor_3": {"edges": [{"target": "linear_2", "dims": "(32, 20)", "edge_data_id": 6435675328}], "failed": false, "node_type": "Constant"}, "tensor_4": {"edges": [{"target": "linear_2", "dims": "(32)", "edge_data_id": 6435675568}], "failed": false, "node_type": "Constant"}, "__getitem___7": {"edges": [{"target": "__add___9", "dims": "(10, 1, 32)", "edge_data_id": 11405196880}], "failed": false, "node_type": "Operation"}, "tensor_8": {"edges": [{"target": "__getitem___7", "dims": "(10, 1, 32)", "edge_data_id": 6435675648}], "failed": false, "node_type": "Constant"}, "__add___9": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "(10, 1, 32)", "edge_data_id": 11404236496}, {"target": "__add___25", "dims": "(10, 1, 32)", "edge_data_id": 11404236496}], "failed": false, "node_type": "Operation"}, "multi_head_attention_forward_16": {"edges": [{"target": "dropout_23", "dims": "(10, 1, 32)", "edge_data_id": 11404234976}], "failed": false, "node_type": "Operation"}, "tensor_17": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "(96, 32)", "edge_data_id": 6435852752}], "failed": false, "node_type": "Constant"}, "tensor_18": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "(96)", "edge_data_id": 6435852672}], "failed": false, "node_type": "Constant"}, "tensor_19": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "(32, 32)", "edge_data_id": 6435853152}], "failed": false, "node_type": "Constant"}, "tensor_20": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "(32)", "edge_data_id": 6435853072}], "failed": false, "node_type": "Constant"}, "scalars_21_x_4": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "( ) x 4"}], "failed": false, "node_type": "Constant"}, "dropout_23": {"edges": [{"target": "__add___25", "dims": "(10, 1, 32)", "edge_data_id": 11404238096}], "failed": false, "node_type": "Operation"}, "scalars_24_x_3": {"edges": [{"target": "dropout_23", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "__add___25": {"edges": [{"target": "layer_norm_27", "dims": "(10, 1, 32)", "edge_data_id": 11404234976}], "failed": false, "node_type": "Operation"}, "layer_norm_27": {"edges": [{"target": "linear_32", "dims": "(10, 1, 32)", "edge_data_id": 11404234896}, {"target": "__add___46", "dims": "(10, 1, 32)", "edge_data_id": 11404234896}], "failed": false, "node_type": "Operation"}, "tensor_28": {"edges": [{"target": "layer_norm_27", "dims": "(32)", "edge_data_id": 6435853312}], "failed": false, "node_type": "Constant"}, "tensor_29": {"edges": [{"target": "layer_norm_27", "dims": "(32)", "edge_data_id": 6435852992}], "failed": false, "node_type": "Constant"}, "scalar_30": {"edges": [{"target": "layer_norm_27", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "linear_32": {"edges": [{"target": "relu_35", "dims": "(10, 1, 2048)", "edge_data_id": 11404234976}], "failed": false, "node_type": "Operation"}, "tensor_33": {"edges": [{"target": "linear_32", "dims": "(2048, 32)", "edge_data_id": 6435852592}], "failed": false, "node_type": "Constant"}, "tensor_34": {"edges": [{"target": "linear_32", "dims": "(2048)", "edge_data_id": 6435852832}], "failed": false, "node_type": "Constant"}, "relu_35": {"edges": [{"target": "dropout_37", "dims": "(10, 1, 2048)", "edge_data_id": 11404236176}], "failed": false, "node_type": "Operation"}, "dropout_37": {"edges": [{"target": "linear_40", "dims": "(10, 1, 2048)", "edge_data_id": 11404235216}], "failed": false, "node_type": "Operation"}, "scalars_38_x_3": {"edges": [{"target": "dropout_37", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "linear_40": {"edges": [{"target": "dropout_44", "dims": "(10, 1, 32)", "edge_data_id": 11404236176}], "failed": false, "node_type": "Operation"}, "tensor_41": {"edges": [{"target": "linear_40", "dims": "(32, 2048)", "edge_data_id": 6435853232}], "failed": false, "node_type": "Constant"}, "tensor_42": {"edges": [{"target": "linear_40", "dims": "(32)", "edge_data_id": 6435852912}], "failed": false, "node_type": "Constant"}, "dropout_44": {"edges": [{"target": "__add___46", "dims": "(10, 1, 32)", "edge_data_id": 11404236336}], "failed": false, "node_type": "Operation"}, "scalars_45_x_3": {"edges": [{"target": "dropout_44", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "__add___46": {"edges": [{"target": "layer_norm_48", "dims": "(10, 1, 32)", "edge_data_id": 11404236176}], "failed": false, "node_type": "Operation"}, "layer_norm_48": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "(10, 1, 32)", "edge_data_id": 11404236336}, {"target": "__add___65", "dims": "(10, 1, 32)", "edge_data_id": 11404236336}], "failed": false, "node_type": "Operation"}, "tensor_49": {"edges": [{"target": "layer_norm_48", "dims": "(32)", "edge_data_id": 6435853392}], "failed": false, "node_type": "Constant"}, "tensor_50": {"edges": [{"target": "layer_norm_48", "dims": "(32)", "edge_data_id": 6435853472}], "failed": false, "node_type": "Constant"}, "scalar_51": {"edges": [{"target": "layer_norm_48", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "multi_head_attention_forward_56": {"edges": [{"target": "dropout_63", "dims": "(10, 1, 32)", "edge_data_id": 11404238416}], "failed": false, "node_type": "Operation"}, "tensor_57": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "(96, 32)", "edge_data_id": 6435853632}], "failed": false, "node_type": "Constant"}, "tensor_58": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "(96)", "edge_data_id": 6435853712}], "failed": false, "node_type": "Constant"}, "tensor_59": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "(32, 32)", "edge_data_id": 6435854112}], "failed": false, "node_type": "Constant"}, "tensor_60": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "(32)", "edge_data_id": 6435854032}], "failed": false, "node_type": "Constant"}, "scalars_61_x_4": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "( ) x 4"}], "failed": false, "node_type": "Constant"}, "dropout_63": {"edges": [{"target": "__add___65", "dims": "(10, 1, 32)", "edge_data_id": 11404235616}], "failed": false, "node_type": "Operation"}, "scalars_64_x_3": {"edges": [{"target": "dropout_63", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "__add___65": {"edges": [{"target": "layer_norm_67", "dims": "(10, 1, 32)", "edge_data_id": 11404238416}], "failed": false, "node_type": "Operation"}, "layer_norm_67": {"edges": [{"target": "linear_72", "dims": "(10, 1, 32)", "edge_data_id": 11404235616}, {"target": "__add___86", "dims": "(10, 1, 32)", "edge_data_id": 11404235616}], "failed": false, "node_type": "Operation"}, "tensor_68": {"edges": [{"target": "layer_norm_67", "dims": "(32)", "edge_data_id": 6435854272}], "failed": false, "node_type": "Constant"}, "tensor_69": {"edges": [{"target": "layer_norm_67", "dims": "(32)", "edge_data_id": 6435853952}], "failed": false, "node_type": "Constant"}, "scalar_70": {"edges": [{"target": "layer_norm_67", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "linear_72": {"edges": [{"target": "relu_75", "dims": "(10, 1, 2048)", "edge_data_id": 11404238416}], "failed": false, "node_type": "Operation"}, "tensor_73": {"edges": [{"target": "linear_72", "dims": "(2048, 32)", "edge_data_id": 6435853552}], "failed": false, "node_type": "Constant"}, "tensor_74": {"edges": [{"target": "linear_72", "dims": "(2048)", "edge_data_id": 6435853792}], "failed": false, "node_type": "Constant"}, "relu_75": {"edges": [{"target": "dropout_77", "dims": "(10, 1, 2048)", "edge_data_id": 11404238336}], "failed": false, "node_type": "Operation"}, "dropout_77": {"edges": [{"target": "linear_80", "dims": "(10, 1, 2048)", "edge_data_id": 11404236896}], "failed": false, "node_type": "Operation"}, "scalars_78_x_3": {"edges": [{"target": "dropout_77", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "linear_80": {"edges": [{"target": "dropout_84", "dims": "(10, 1, 32)", "edge_data_id": 11404238336}], "failed": false, "node_type": "Operation"}, "tensor_81": {"edges": [{"target": "linear_80", "dims": "(32, 2048)", "edge_data_id": 6435854192}], "failed": false, "node_type": "Constant"}, "tensor_82": {"edges": [{"target": "linear_80", "dims": "(32)", "edge_data_id": 6435853872}], "failed": false, "node_type": "Constant"}, "dropout_84": {"edges": [{"target": "__add___86", "dims": "(10, 1, 32)", "edge_data_id": 11404237376}], "failed": false, "node_type": "Operation"}, "scalars_85_x_3": {"edges": [{"target": "dropout_84", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "__add___86": {"edges": [{"target": "layer_norm_88", "dims": "(10, 1, 32)", "edge_data_id": 11404238336}], "failed": false, "node_type": "Operation"}, "layer_norm_88": {"edges": [{"target": "__getitem___92", "dims": "(10, 1, 32)", "edge_data_id": 11404237376}], "failed": false, "node_type": "Operation"}, "tensor_89": {"edges": [{"target": "layer_norm_88", "dims": "(32)", "edge_data_id": 6435854352}], "failed": false, "node_type": "Constant"}, "tensor_90": {"edges": [{"target": "layer_norm_88", "dims": "(32)", "edge_data_id": 6435854432}], "failed": false, "node_type": "Constant"}, "scalar_91": {"edges": [{"target": "layer_norm_88", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "__getitem___92": {"edges": [{"target": "linear_95", "dims": "(1, 32)", "edge_data_id": 5498145744}], "failed": false, "node_type": "Operation"}, "scalar_93": {"edges": [{"target": "__getitem___92", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "linear_95": {"edges": [{"target": "output_0", "dims": "(1, 5)", "edge_data_id": 11404236496}], "failed": false, "node_type": "Operation"}, "tensor_96": {"edges": [{"target": "linear_95", "dims": "(5, 32)", "edge_data_id": 6435672448}], "failed": false, "node_type": "Constant"}, "tensor_97": {"edges": [{"target": "linear_95", "dims": "(5)", "edge_data_id": 6435852512}], "failed": false, "node_type": "Constant"}, "output_0": {"edges": [], "failed": false, "node_type": "Output"}};
+    const adj_list = {"input_0": {"edges": [{"target": "linear_2", "dims": "(10, 1, 20)", "edge_data_id": 10995837664}], "failed": false, "node_type": "Input"}, "linear_2": {"edges": [{"target": "__add___9", "dims": "(10, 1, 32)", "edge_data_id": 5318341392}], "failed": false, "node_type": "Operation"}, "tensor_3": {"edges": [{"target": "linear_2", "dims": "(32, 20)", "edge_data_id": 10995837744}], "failed": false, "node_type": "Constant"}, "tensor_4": {"edges": [{"target": "linear_2", "dims": "(32)", "edge_data_id": 10995837824}], "failed": false, "node_type": "Constant"}, "__getitem___7": {"edges": [{"target": "__add___9", "dims": "(10, 1, 32)", "edge_data_id": 11531773728}], "failed": false, "node_type": "Operation"}, "tensor_8": {"edges": [{"target": "__getitem___7", "dims": "(10, 1, 32)", "edge_data_id": 10995837584}], "failed": false, "node_type": "Constant"}, "__add___9": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "(10, 1, 32)", "edge_data_id": 11531773248}, {"target": "__add___25", "dims": "(10, 1, 32)", "edge_data_id": 11531773248}], "failed": false, "node_type": "Operation"}, "multi_head_attention_forward_16": {"edges": [{"target": "dropout_23", "dims": "(10, 1, 32)", "edge_data_id": 11532470208}], "failed": false, "node_type": "Operation"}, "tensor_17": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "(96, 32)", "edge_data_id": 10995836864}], "failed": false, "node_type": "Constant"}, "tensor_18": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "(96)", "edge_data_id": 10995673184}], "failed": false, "node_type": "Constant"}, "tensor_19": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "(32, 32)", "edge_data_id": 10996011152}], "failed": false, "node_type": "Constant"}, "tensor_20": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "(32)", "edge_data_id": 10996011072}], "failed": false, "node_type": "Constant"}, "scalars_21_x_4": {"edges": [{"target": "multi_head_attention_forward_16", "dims": "( ) x 4"}], "failed": false, "node_type": "Constant"}, "dropout_23": {"edges": [{"target": "__add___25", "dims": "(10, 1, 32)", "edge_data_id": 10996748672}], "failed": false, "node_type": "Operation"}, "scalars_24_x_3": {"edges": [{"target": "dropout_23", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "__add___25": {"edges": [{"target": "layer_norm_27", "dims": "(10, 1, 32)", "edge_data_id": 11531772528}], "failed": false, "node_type": "Operation"}, "layer_norm_27": {"edges": [{"target": "linear_32", "dims": "(10, 1, 32)", "edge_data_id": 11532471568}, {"target": "__add___46", "dims": "(10, 1, 32)", "edge_data_id": 11532471568}], "failed": false, "node_type": "Operation"}, "tensor_28": {"edges": [{"target": "layer_norm_27", "dims": "(32)", "edge_data_id": 10996011392}], "failed": false, "node_type": "Constant"}, "tensor_29": {"edges": [{"target": "layer_norm_27", "dims": "(32)", "edge_data_id": 10996011312}], "failed": false, "node_type": "Constant"}, "scalar_30": {"edges": [{"target": "layer_norm_27", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "linear_32": {"edges": [{"target": "relu_35", "dims": "(10, 1, 2048)", "edge_data_id": 11531772528}], "failed": false, "node_type": "Operation"}, "tensor_33": {"edges": [{"target": "linear_32", "dims": "(2048, 32)", "edge_data_id": 10995673344}], "failed": false, "node_type": "Constant"}, "tensor_34": {"edges": [{"target": "linear_32", "dims": "(2048)", "edge_data_id": 10995671184}], "failed": false, "node_type": "Constant"}, "relu_35": {"edges": [{"target": "dropout_37", "dims": "(10, 1, 2048)", "edge_data_id": 11532470688}], "failed": false, "node_type": "Operation"}, "dropout_37": {"edges": [{"target": "linear_40", "dims": "(10, 1, 2048)", "edge_data_id": 11532469488}], "failed": false, "node_type": "Operation"}, "scalars_38_x_3": {"edges": [{"target": "dropout_37", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "linear_40": {"edges": [{"target": "dropout_44", "dims": "(10, 1, 32)", "edge_data_id": 11532470688}], "failed": false, "node_type": "Operation"}, "tensor_41": {"edges": [{"target": "linear_40", "dims": "(32, 2048)", "edge_data_id": 10995674384}], "failed": false, "node_type": "Constant"}, "tensor_42": {"edges": [{"target": "linear_40", "dims": "(32)", "edge_data_id": 10996011232}], "failed": false, "node_type": "Constant"}, "dropout_44": {"edges": [{"target": "__add___46", "dims": "(10, 1, 32)", "edge_data_id": 11532471808}], "failed": false, "node_type": "Operation"}, "scalars_45_x_3": {"edges": [{"target": "dropout_44", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "__add___46": {"edges": [{"target": "layer_norm_48", "dims": "(10, 1, 32)", "edge_data_id": 11532470688}], "failed": false, "node_type": "Operation"}, "layer_norm_48": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "(10, 1, 32)", "edge_data_id": 11532471808}, {"target": "__add___65", "dims": "(10, 1, 32)", "edge_data_id": 11532471808}], "failed": false, "node_type": "Operation"}, "tensor_49": {"edges": [{"target": "layer_norm_48", "dims": "(32)", "edge_data_id": 10996011552}], "failed": false, "node_type": "Constant"}, "tensor_50": {"edges": [{"target": "layer_norm_48", "dims": "(32)", "edge_data_id": 10996011472}], "failed": false, "node_type": "Constant"}, "scalar_51": {"edges": [{"target": "layer_norm_48", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "multi_head_attention_forward_56": {"edges": [{"target": "dropout_63", "dims": "(10, 1, 32)", "edge_data_id": 10995098704}], "failed": false, "node_type": "Operation"}, "tensor_57": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "(96, 32)", "edge_data_id": 10996011712}], "failed": false, "node_type": "Constant"}, "tensor_58": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "(96)", "edge_data_id": 10996011632}], "failed": false, "node_type": "Constant"}, "tensor_59": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "(32, 32)", "edge_data_id": 10996012112}], "failed": false, "node_type": "Constant"}, "tensor_60": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "(32)", "edge_data_id": 10996012032}], "failed": false, "node_type": "Constant"}, "scalars_61_x_4": {"edges": [{"target": "multi_head_attention_forward_56", "dims": "( ) x 4"}], "failed": false, "node_type": "Constant"}, "dropout_63": {"edges": [{"target": "__add___65", "dims": "(10, 1, 32)", "edge_data_id": 11532469248}], "failed": false, "node_type": "Operation"}, "scalars_64_x_3": {"edges": [{"target": "dropout_63", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "__add___65": {"edges": [{"target": "layer_norm_67", "dims": "(10, 1, 32)", "edge_data_id": 11532471888}], "failed": false, "node_type": "Operation"}, "layer_norm_67": {"edges": [{"target": "linear_72", "dims": "(10, 1, 32)", "edge_data_id": 11532469248}, {"target": "__add___86", "dims": "(10, 1, 32)", "edge_data_id": 11532469248}], "failed": false, "node_type": "Operation"}, "tensor_68": {"edges": [{"target": "layer_norm_67", "dims": "(32)", "edge_data_id": 10996012352}], "failed": false, "node_type": "Constant"}, "tensor_69": {"edges": [{"target": "layer_norm_67", "dims": "(32)", "edge_data_id": 10996011952}], "failed": false, "node_type": "Constant"}, "scalar_70": {"edges": [{"target": "layer_norm_67", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "linear_72": {"edges": [{"target": "relu_75", "dims": "(10, 1, 2048)", "edge_data_id": 11532471888}], "failed": false, "node_type": "Operation"}, "tensor_73": {"edges": [{"target": "linear_72", "dims": "(2048, 32)", "edge_data_id": 10996011872}], "failed": false, "node_type": "Constant"}, "tensor_74": {"edges": [{"target": "linear_72", "dims": "(2048)", "edge_data_id": 10996011792}], "failed": false, "node_type": "Constant"}, "relu_75": {"edges": [{"target": "dropout_77", "dims": "(10, 1, 2048)", "edge_data_id": 11532470448}], "failed": false, "node_type": "Operation"}, "dropout_77": {"edges": [{"target": "linear_80", "dims": "(10, 1, 2048)", "edge_data_id": 11532471088}], "failed": false, "node_type": "Operation"}, "scalars_78_x_3": {"edges": [{"target": "dropout_77", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "linear_80": {"edges": [{"target": "dropout_84", "dims": "(10, 1, 32)", "edge_data_id": 11532470448}], "failed": false, "node_type": "Operation"}, "tensor_81": {"edges": [{"target": "linear_80", "dims": "(32, 2048)", "edge_data_id": 10996012272}], "failed": false, "node_type": "Constant"}, "tensor_82": {"edges": [{"target": "linear_80", "dims": "(32)", "edge_data_id": 10996012192}], "failed": false, "node_type": "Constant"}, "dropout_84": {"edges": [{"target": "__add___86", "dims": "(10, 1, 32)", "edge_data_id": 11532470608}], "failed": false, "node_type": "Operation"}, "scalars_85_x_3": {"edges": [{"target": "dropout_84", "dims": "( ) x 3"}], "failed": false, "node_type": "Constant"}, "__add___86": {"edges": [{"target": "layer_norm_88", "dims": "(10, 1, 32)", "edge_data_id": 11532470448}], "failed": false, "node_type": "Operation"}, "layer_norm_88": {"edges": [{"target": "__getitem___92", "dims": "(10, 1, 32)", "edge_data_id": 11532470608}], "failed": false, "node_type": "Operation"}, "tensor_89": {"edges": [{"target": "layer_norm_88", "dims": "(32)", "edge_data_id": 10996012512}], "failed": false, "node_type": "Constant"}, "tensor_90": {"edges": [{"target": "layer_norm_88", "dims": "(32)", "edge_data_id": 10996012432}], "failed": false, "node_type": "Constant"}, "scalar_91": {"edges": [{"target": "layer_norm_88", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "__getitem___92": {"edges": [{"target": "linear_95", "dims": "(1, 32)", "edge_data_id": 11531773248}], "failed": false, "node_type": "Operation"}, "scalar_93": {"edges": [{"target": "__getitem___92", "dims": "( )"}], "failed": false, "node_type": "Constant"}, "linear_95": {"edges": [{"target": "output_0", "dims": "(1, 5)", "edge_data_id": 11531773728}], "failed": false, "node_type": "Operation"}, "tensor_96": {"edges": [{"target": "linear_95", "dims": "(5, 32)", "edge_data_id": 10995838144}], "failed": false, "node_type": "Constant"}, "tensor_97": {"edges": [{"target": "linear_95", "dims": "(5)", "edge_data_id": 10995838864}], "failed": false, "node_type": "Constant"}, "output_0": {"edges": [], "failed": false, "node_type": "Output"}};
     const module_info = {"Linear_1": {"type": "Linear", "parameters": {"weight": {"shape": [32, 20], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 20, "out_features": 32, "training": true}, "extra_repr": "in_features=20, out_features=32, bias=True"}, "TransformerEncoder_10": {"type": "TransformerEncoder", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "enable_nested_tensor": true, "mask_check": true, "num_layers": 2, "training": true, "use_nested_tensor": false}, "extra_repr": ""}, "TransformerEncoderLayer_12": {"type": "TransformerEncoderLayer", "parameters": {}, "attributes": {"activation_relu_or_gelu": 1, "call_super_init": false, "dump_patches": false, "norm_first": false, "training": true}, "extra_repr": ""}, "MultiheadAttention_14": {"type": "MultiheadAttention", "parameters": {"in_proj_weight": {"shape": [96, 32], "requires_grad": true}, "in_proj_bias": {"shape": [96], "requires_grad": true}}, "attributes": {"add_zero_attn": false, "batch_first": false, "call_super_init": false, "dropout": 0.1, "dump_patches": false, "embed_dim": 32, "head_dim": 8, "kdim": 32, "num_heads": 4, "training": true, "vdim": 32}, "extra_repr": ""}, "Dropout_22": {"type": "Dropout", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": false, "p": 0.1, "training": true}, "extra_repr": "p=0.1, inplace=False"}, "LayerNorm_26": {"type": "LayerNorm", "parameters": {"weight": {"shape": [32], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "elementwise_affine": true, "eps": 1e-05, "normalized_shape": [32], "training": true}, "extra_repr": "(32,), eps=1e-05, elementwise_affine=True"}, "Linear_31": {"type": "Linear", "parameters": {"weight": {"shape": [2048, 32], "requires_grad": true}, "bias": {"shape": [2048], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 32, "out_features": 2048, "training": true}, "extra_repr": "in_features=32, out_features=2048, bias=True"}, "Dropout_36": {"type": "Dropout", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": false, "p": 0.1, "training": true}, "extra_repr": "p=0.1, inplace=False"}, "Linear_39": {"type": "Linear", "parameters": {"weight": {"shape": [32, 2048], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 2048, "out_features": 32, "training": true}, "extra_repr": "in_features=2048, out_features=32, bias=True"}, "Dropout_43": {"type": "Dropout", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": false, "p": 0.1, "training": true}, "extra_repr": "p=0.1, inplace=False"}, "LayerNorm_47": {"type": "LayerNorm", "parameters": {"weight": {"shape": [32], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "elementwise_affine": true, "eps": 1e-05, "normalized_shape": [32], "training": true}, "extra_repr": "(32,), eps=1e-05, elementwise_affine=True"}, "TransformerEncoderLayer_52": {"type": "TransformerEncoderLayer", "parameters": {}, "attributes": {"activation_relu_or_gelu": 1, "call_super_init": false, "dump_patches": false, "norm_first": false, "training": true}, "extra_repr": ""}, "MultiheadAttention_54": {"type": "MultiheadAttention", "parameters": {"in_proj_weight": {"shape": [96, 32], "requires_grad": true}, "in_proj_bias": {"shape": [96], "requires_grad": true}}, "attributes": {"add_zero_attn": false, "batch_first": false, "call_super_init": false, "dropout": 0.1, "dump_patches": false, "embed_dim": 32, "head_dim": 8, "kdim": 32, "num_heads": 4, "training": true, "vdim": 32}, "extra_repr": ""}, "Dropout_62": {"type": "Dropout", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": false, "p": 0.1, "training": true}, "extra_repr": "p=0.1, inplace=False"}, "LayerNorm_66": {"type": "LayerNorm", "parameters": {"weight": {"shape": [32], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "elementwise_affine": true, "eps": 1e-05, "normalized_shape": [32], "training": true}, "extra_repr": "(32,), eps=1e-05, elementwise_affine=True"}, "Linear_71": {"type": "Linear", "parameters": {"weight": {"shape": [2048, 32], "requires_grad": true}, "bias": {"shape": [2048], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 32, "out_features": 2048, "training": true}, "extra_repr": "in_features=32, out_features=2048, bias=True"}, "Dropout_76": {"type": "Dropout", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": false, "p": 0.1, "training": true}, "extra_repr": "p=0.1, inplace=False"}, "Linear_79": {"type": "Linear", "parameters": {"weight": {"shape": [32, 2048], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 2048, "out_features": 32, "training": true}, "extra_repr": "in_features=2048, out_features=32, bias=True"}, "Dropout_83": {"type": "Dropout", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": false, "p": 0.1, "training": true}, "extra_repr": "p=0.1, inplace=False"}, "LayerNorm_87": {"type": "LayerNorm", "parameters": {"weight": {"shape": [32], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "elementwise_affine": true, "eps": 1e-05, "normalized_shape": [32], "training": true}, "extra_repr": "(32,), eps=1e-05, elementwise_affine=True"}, "Linear_94": {"type": "Linear", "parameters": {"weight": {"shape": [5, 32], "requires_grad": true}, "bias": {"shape": [5], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 32, "out_features": 5, "training": true}, "extra_repr": "in_features=32, out_features=5, bias=True"}};
     const func_info = {"Linear_1": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 20], "dtype": "torch.float32"}], "keyword_args": {}}, "linear_2": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 20], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32, 20], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}], "keyword_args": {}}, "size_5": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 20], "dtype": "torch.float32"}, 0], "keyword_args": {}}, "__getitem___7": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "slice", "repr": "slice(None, 10, None)"}], "keyword_args": {}}, "__add___9": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "TransformerEncoder_10": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "size_11": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "TransformerEncoderLayer_12": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {"src_mask": null, "is_causal": false, "src_key_padding_mask": null}}, "dim_13": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "MultiheadAttention_14": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {"attn_mask": null, "key_padding_mask": null, "need_weights": false, "is_causal": false}}, "dim_15": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "multi_head_attention_forward_16": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, 32, 4, {"_type": "tensor", "shape": [96, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [96], "dtype": "torch.float32"}, null, null, false, 0.1, {"_type": "tensor", "shape": [32, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}], "keyword_args": {"training": true, "key_padding_mask": null, "need_weights": false, "attn_mask": null, "average_attn_weights": true, "is_causal": false}}, "Dropout_22": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "dropout_23": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, 0.1, true, false], "keyword_args": {}}, "__add___25": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "LayerNorm_26": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "layer_norm_27": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, [32], {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, 1e-05], "keyword_args": {}}, "Linear_31": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "linear_32": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [2048, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [2048], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_35": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 2048], "dtype": "torch.float32"}], "keyword_args": {}}, "Dropout_36": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 2048], "dtype": "torch.float32"}], "keyword_args": {}}, "dropout_37": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 2048], "dtype": "torch.float32"}, 0.1, true, false], "keyword_args": {}}, "Linear_39": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 2048], "dtype": "torch.float32"}], "keyword_args": {}}, "linear_40": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 2048], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32, 2048], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}], "keyword_args": {}}, "Dropout_43": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "dropout_44": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, 0.1, true, false], "keyword_args": {}}, "__add___46": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "LayerNorm_47": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "layer_norm_48": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, [32], {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, 1e-05], "keyword_args": {}}, "TransformerEncoderLayer_52": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {"src_mask": null, "is_causal": false, "src_key_padding_mask": null}}, "dim_53": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "MultiheadAttention_54": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {"attn_mask": null, "key_padding_mask": null, "need_weights": false, "is_causal": false}}, "dim_55": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "multi_head_attention_forward_56": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, 32, 4, {"_type": "tensor", "shape": [96, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [96], "dtype": "torch.float32"}, null, null, false, 0.1, {"_type": "tensor", "shape": [32, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}], "keyword_args": {"training": true, "key_padding_mask": null, "need_weights": false, "attn_mask": null, "average_attn_weights": true, "is_causal": false}}, "Dropout_62": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "dropout_63": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, 0.1, true, false], "keyword_args": {}}, "__add___65": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "LayerNorm_66": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "layer_norm_67": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, [32], {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, 1e-05], "keyword_args": {}}, "Linear_71": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "linear_72": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [2048, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [2048], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_75": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 2048], "dtype": "torch.float32"}], "keyword_args": {}}, "Dropout_76": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 2048], "dtype": "torch.float32"}], "keyword_args": {}}, "dropout_77": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 2048], "dtype": "torch.float32"}, 0.1, true, false], "keyword_args": {}}, "Linear_79": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 2048], "dtype": "torch.float32"}], "keyword_args": {}}, "linear_80": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 2048], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32, 2048], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}], "keyword_args": {}}, "Dropout_83": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "dropout_84": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, 0.1, true, false], "keyword_args": {}}, "__add___86": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "LayerNorm_87": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "layer_norm_88": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, [32], {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}, 1e-05], "keyword_args": {}}, "__getitem___92": {"positional_args": [{"_type": "tensor", "shape": [10, 1, 32], "dtype": "torch.float32"}, 0], "keyword_args": {}}, "Linear_94": {"positional_args": [{"_type": "tensor", "shape": [1, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "linear_95": {"positional_args": [{"_type": "tensor", "shape": [1, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [5, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [5], "dtype": "torch.float32"}], "keyword_args": {}}};
     const parent_module_to_nodes = {"Linear_1": ["linear_2"], "TransformerEncoder_10": ["size_11", "dim_13", "dim_15", "multi_head_attention_forward_16", "dropout_23", "__add___25", "layer_norm_27", "linear_32", "relu_35", "dropout_37", "linear_40", "dropout_44", "__add___46", "layer_norm_48", "dim_53", "dim_55", "multi_head_attention_forward_56", "dropout_63", "__add___65", "layer_norm_67", "linear_72", "relu_75", "dropout_77", "linear_80", "dropout_84", "__add___86", "layer_norm_88"], "TransformerEncoderLayer_12": ["dim_13", "dim_15", "multi_head_attention_forward_16", "dropout_23", "__add___25", "layer_norm_27", "linear_32", "relu_35", "dropout_37", "linear_40", "dropout_44", "__add___46", "layer_norm_48"], "MultiheadAttention_14": ["dim_15", "multi_head_attention_forward_16"], "Dropout_22": ["dropout_23"], "LayerNorm_26": ["layer_norm_27"], "Linear_31": ["linear_32"], "Dropout_36": ["dropout_37"], "Linear_39": ["linear_40"], "Dropout_43": ["dropout_44"], "LayerNorm_47": ["layer_norm_48"], "TransformerEncoderLayer_52": ["dim_53", "dim_55", "multi_head_attention_forward_56", "dropout_63", "__add___65", "layer_norm_67", "linear_72", "relu_75", "dropout_77", "linear_80", "dropout_84", "__add___86", "layer_norm_88"], "MultiheadAttention_54": ["dim_55", "multi_head_attention_forward_56"], "Dropout_62": ["dropout_63"], "LayerNorm_66": ["layer_norm_67"], "Linear_71": ["linear_72"], "Dropout_76": ["dropout_77"], "Linear_79": ["linear_80"], "Dropout_83": ["dropout_84"], "LayerNorm_87": ["layer_norm_88"], "Linear_94": ["linear_95"]};
@@ -930,10 +933,10 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         removeTooltip();
         
         const tooltip = document.createElement('div');
-        tooltip.className = !smaller ? `custom-tooltip_1d3bcb12-d135-41a4-a88b-f65be277adeb` : `custom-tooltip_smaller_1d3bcb12-d135-41a4-a88b-f65be277adeb`;
+        tooltip.className = !smaller ? `custom-tooltip_4e952cfa-6e72-43a4-9111-497fc8a095ef` : `custom-tooltip_smaller_4e952cfa-6e72-43a4-9111-497fc8a095ef`;
         tooltip.textContent = text;
         
-        const container = document.getElementById(`graph-container_1d3bcb12-d135-41a4-a88b-f65be277adeb`);
+        const container = document.getElementById(`graph-container_4e952cfa-6e72-43a4-9111-497fc8a095ef`);
         container.appendChild(tooltip);
         currentTooltip = tooltip;
         
@@ -945,7 +948,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const buttonRect = buttonElement.getBoundingClientRect();
         
         // Get the container's position in screen coordinates
-        const containerRect = document.getElementById(`graph-container_1d3bcb12-d135-41a4-a88b-f65be277adeb`).getBoundingClientRect();
+        const containerRect = document.getElementById(`graph-container_4e952cfa-6e72-43a4-9111-497fc8a095ef`).getBoundingClientRect();
         
         // Calculate position relative to container
         const buttonX = buttonRect.left + (buttonRect.width / 2) - containerRect.left;
@@ -1562,7 +1565,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function reloadGraph() {
-        d3.select("#graph_1d3bcb12-d135-41a4-a88b-f65be277adeb").html("");
+        d3.select("#graph_4e952cfa-6e72-43a4-9111-497fc8a095ef").html("");
 
         if (generateImage) {
             renderGraphvizImage();
@@ -1629,16 +1632,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function renderGraphvizImage() {
-        d3.select("#png-link-container_1d3bcb12-d135-41a4-a88b-f65be277adeb").remove();
+        d3.select("#png-link-container_4e952cfa-6e72-43a4-9111-497fc8a095ef").remove();
         
         function showErrorMessage(error) {
-            const parent = d3.select("#graph-container_1d3bcb12-d135-41a4-a88b-f65be277adeb").node().parentNode;
+            const parent = d3.select("#graph-container_4e952cfa-6e72-43a4-9111-497fc8a095ef").node().parentNode;
             const errorContainer = d3.select(parent)
-                .insert("div", "#graph-container_1d3bcb12-d135-41a4-a88b-f65be277adeb")
-                .attr("id", "png-error-container_1d3bcb12-d135-41a4-a88b-f65be277adeb");
+                .insert("div", "#graph-container_4e952cfa-6e72-43a4-9111-497fc8a095ef")
+                .attr("id", "png-error-container_4e952cfa-6e72-43a4-9111-497fc8a095ef");
             
             errorContainer.append("div")
-                .attr("id", "png-error-message_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+                .attr("id", "png-error-message_4e952cfa-6e72-43a4-9111-497fc8a095ef")
                 .html(`<strong>Error:</strong><br>${error.stack || error.message || error}<br><br><strong>Note:</strong> Exporting very large models as PNG is currently not supported. Please use generate_image=False, or raise an issue on https://github.com/sachinhosmani/torchvista/issues`);
         }
         
@@ -1676,21 +1679,21 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const pngUrl = URL.createObjectURL(pngBlob);
         
         // Create link container
-        const parent = d3.select("#graph-container_1d3bcb12-d135-41a4-a88b-f65be277adeb").node().parentNode;
+        const parent = d3.select("#graph-container_4e952cfa-6e72-43a4-9111-497fc8a095ef").node().parentNode;
         const linkContainer = d3.select(parent)
-            .insert("div", "#graph-container_1d3bcb12-d135-41a4-a88b-f65be277adeb")
-            .attr("id", "png-link-container_1d3bcb12-d135-41a4-a88b-f65be277adeb");
+            .insert("div", "#graph-container_4e952cfa-6e72-43a4-9111-497fc8a095ef")
+            .attr("id", "png-link-container_4e952cfa-6e72-43a4-9111-497fc8a095ef");
         
         linkContainer.append("a")
             .attr("href", pngUrl)
             .attr("target", "_blank")
-            .attr("id", "png-download-button_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+            .attr("id", "png-download-button_4e952cfa-6e72-43a4-9111-497fc8a095ef")
             .text("View PNG in New Tab");
 
         linkContainer.append("a")
             .attr("href", pngUrl)
-            .attr("download", `torchvista_graph_1d3bcb12-d135-41a4-a88b-f65be277adeb.png`)
-            .attr("id", "png-save-button_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+            .attr("download", `torchvista_graph_4e952cfa-6e72-43a4-9111-497fc8a095ef.png`)
+            .attr("id", "png-save-button_4e952cfa-6e72-43a4-9111-497fc8a095ef")
             .text("Download PNG");
             
         URL.revokeObjectURL(svgUrl);
@@ -1711,26 +1714,26 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const svgUrl = URL.createObjectURL(svgBlob);
         
         // Create link container
-        const parent = d3.select("#graph-container_1d3bcb12-d135-41a4-a88b-f65be277adeb").node().parentNode;
+        const parent = d3.select("#graph-container_4e952cfa-6e72-43a4-9111-497fc8a095ef").node().parentNode;
         const linkContainer = d3.select(parent)
-            .insert("div", "#graph-container_1d3bcb12-d135-41a4-a88b-f65be277adeb")
-            .attr("id", "svg-link-container_1d3bcb12-d135-41a4-a88b-f65be277adeb");
+            .insert("div", "#graph-container_4e952cfa-6e72-43a4-9111-497fc8a095ef")
+            .attr("id", "svg-link-container_4e952cfa-6e72-43a4-9111-497fc8a095ef");
         
         linkContainer.append("a")
             .attr("href", svgUrl)
             .attr("target", "_blank")
-            .attr("id", "svg-download-button_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+            .attr("id", "svg-download-button_4e952cfa-6e72-43a4-9111-497fc8a095ef")
             .text("View SVG in New Tab");
 
         linkContainer.append("a")
             .attr("href", svgUrl)
-            .attr("download", `torchvista_graph_1d3bcb12-d135-41a4-a88b-f65be277adeb.svg`)
-            .attr("id", "svg-save-button_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+            .attr("download", `torchvista_graph_4e952cfa-6e72-43a4-9111-497fc8a095ef.svg`)
+            .attr("id", "svg-save-button_4e952cfa-6e72-43a4-9111-497fc8a095ef")
             .text("Download SVG");
     }
 
     function createGraph(graphvizData) {
-        const svg = d3.select("#graph_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+        const svg = d3.select("#graph_4e952cfa-6e72-43a4-9111-497fc8a095ef")
         .append("svg")
         .attr("width", "100%")
         .attr("height", "100%")
@@ -1750,7 +1753,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
         // Define arrowhead marker
         svg.append("defs").append("marker")
-        .attr("id", "arrowhead_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+        .attr("id", "arrowhead_4e952cfa-6e72-43a4-9111-497fc8a095ef")
         .attr("viewBox", "0 -5 10 10")
         .attr("refX", 8)
         .attr("refY", 0)
@@ -1762,11 +1765,11 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .attr("fill", "#333");
 
         // Draw clusters (container boxes) first so they're behind nodes
-        const clusters = inner.selectAll(".boundary-box_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+        const clusters = inner.selectAll(".boundary-box_4e952cfa-6e72-43a4-9111-497fc8a095ef")
         .data(Object.entries(graphvizData.clusters))
         .enter()
         .append("g")
-        .attr("class", "boundary-box_1d3bcb12-d135-41a4-a88b-f65be277adeb");
+        .attr("class", "boundary-box_4e952cfa-6e72-43a4-9111-497fc8a095ef");
 
         const containersWithFailedNodes = identifyContainersWithFailedNodes(adj_list, ancestor_map);
 
@@ -1776,10 +1779,10 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             const hasFailedNodes = containersWithFailedNodes.has(clusterName);
             const isRepeat = isRepeatNode(clusterName);
             if (hasFailedNodes) {
-                group.classed("error_1d3bcb12-d135-41a4-a88b-f65be277adeb", true);
+                group.classed("error_4e952cfa-6e72-43a4-9111-497fc8a095ef", true);
             }
             if (isRepeat) {
-                group.classed("repeat-container_1d3bcb12-d135-41a4-a88b-f65be277adeb", true);
+                group.classed("repeat-container_4e952cfa-6e72-43a4-9111-497fc8a095ef", true);
             }
 
             // Parse bounding box coordinates
@@ -1821,13 +1824,13 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (!isRepeatNode(clusterName)) {
                 // Add collapse/expand button
                 const collapseButton = group.append("circle")
-                .attr("class", "collapse-button_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+                .attr("class", "collapse-button_4e952cfa-6e72-43a4-9111-497fc8a095ef")
                 .attr("cx", x1 + 10)
                 .attr("cy", y1 + 10)
                 .attr("r", 5.5);
 
                 group.append("text")
-                .attr("class", "collapse-icon_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+                .attr("class", "collapse-icon_4e952cfa-6e72-43a4-9111-497fc8a095ef")
                 .attr("x", x1 + 10)
                 .attr("y", y1 + 10)
                 .attr("text-anchor", "middle")
@@ -1844,7 +1847,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add click event handler for collapse buttons
-        clusters.selectAll(".collapse-button_1d3bcb12-d135-41a4-a88b-f65be277adeb, .collapse-icon_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+        clusters.selectAll(".collapse-button_4e952cfa-6e72-43a4-9111-497fc8a095ef, .collapse-icon_4e952cfa-6e72-43a4-9111-497fc8a095ef")
         .on("click", function(event, [clusterName, clusterData]) {
             event.stopPropagation(); // Prevent event from bubbling to SVG
             removeTooltip();
@@ -1859,19 +1862,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
         
         // Create edges using the path points from Graphviz
-        const edges = inner.selectAll(".edge_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+        const edges = inner.selectAll(".edge_4e952cfa-6e72-43a4-9111-497fc8a095ef")
         .data(graphvizData.edges)
         .enter()
         .append("g")
-        .attr("class", "edge-group_1d3bcb12-d135-41a4-a88b-f65be277adeb");
+        .attr("class", "edge-group_4e952cfa-6e72-43a4-9111-497fc8a095ef");
         
         // Add the actual path
         edges.append("path")
         .attr("class", function(edge) {
             if (edge.is_implied_edge) {
-                return "edge_1d3bcb12-d135-41a4-a88b-f65be277adeb implied-edge_1d3bcb12-d135-41a4-a88b-f65be277adeb";
+                return "edge_4e952cfa-6e72-43a4-9111-497fc8a095ef implied-edge_4e952cfa-6e72-43a4-9111-497fc8a095ef";
             }
-            return "edge_1d3bcb12-d135-41a4-a88b-f65be277adeb";
+            return "edge_4e952cfa-6e72-43a4-9111-497fc8a095ef";
         }).attr("d", function(edge) {
             if (edge.path && edge.path.length > 0) {
                     // Create a proper SVG path using Bézier curves
@@ -1897,7 +1900,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             }
             return "";
         })
-        .attr("marker-end", "url(#arrowhead_1d3bcb12-d135-41a4-a88b-f65be277adeb)");
+        .attr("marker-end", "url(#arrowhead_4e952cfa-6e72-43a4-9111-497fc8a095ef)");
         
         // Add dimension labels on edges
         edges.each(function(edge) {
@@ -1926,7 +1929,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Create a background for the text
             const labelGroup = edgeGroup.append("g")
-            .attr("class", "edge-label_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+            .attr("class", "edge-label_4e952cfa-6e72-43a4-9111-497fc8a095ef")
             .attr("transform", `translate(${pointAtStart.x}, ${pointAtStart.y})`);
             
             const text = labelGroup.append("text")
@@ -1961,7 +1964,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         edges.each(function() {
             const edgeGroup = d3.select(this);
             const path = edgeGroup.select("path");
-            const labelGroup = edgeGroup.select(".edge-label_1d3bcb12-d135-41a4-a88b-f65be277adeb");
+            const labelGroup = edgeGroup.select(".edge-label_4e952cfa-6e72-43a4-9111-497fc8a095ef");
             const labelText = labelGroup.select("text");
             const labelBg = labelGroup.select("rect");
             const originalStrokeWidth = path.attr("stroke-width") || 1;
@@ -2026,19 +2029,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
         // Create nodes using positions from Graphviz
-        const nodes = inner.selectAll(".node_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+        const nodes = inner.selectAll(".node_4e952cfa-6e72-43a4-9111-497fc8a095ef")
             .data(Object.entries(graphvizData.nodes))
             .enter()
             .append("g")
             // In the createGraph function, when you're creating nodes, modify the class assignment:
             .attr("class", function([nodeName, nodeData]) {
-                let classes = "node_1d3bcb12-d135-41a4-a88b-f65be277adeb";
-                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_1d3bcb12-d135-41a4-a88b-f65be277adeb";
-                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_1d3bcb12-d135-41a4-a88b-f65be277adeb";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_1d3bcb12-d135-41a4-a88b-f65be277adeb";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_1d3bcb12-d135-41a4-a88b-f65be277adeb";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_1d3bcb12-d135-41a4-a88b-f65be277adeb";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_1d3bcb12-d135-41a4-a88b-f65be277adeb";
+                let classes = "node_4e952cfa-6e72-43a4-9111-497fc8a095ef";
+                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_4e952cfa-6e72-43a4-9111-497fc8a095ef";
+                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_4e952cfa-6e72-43a4-9111-497fc8a095ef";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_4e952cfa-6e72-43a4-9111-497fc8a095ef";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_4e952cfa-6e72-43a4-9111-497fc8a095ef";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_4e952cfa-6e72-43a4-9111-497fc8a095ef";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_4e952cfa-6e72-43a4-9111-497fc8a095ef";
                 return classes;
             })
             .attr("transform", function([nodeName, nodeData]) {
@@ -2065,11 +2068,11 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 .attr("rx", nodeData.width / 2)
                 .attr("ry", nodeData.height / 2)
                 .attr("class", function() { 
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_1d3bcb12-d135-41a4-a88b-f65be277adeb";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_1d3bcb12-d135-41a4-a88b-f65be277adeb";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_1d3bcb12-d135-41a4-a88b-f65be277adeb";
-                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_1d3bcb12-d135-41a4-a88b-f65be277adeb";
-                    return "operation_1d3bcb12-d135-41a4-a88b-f65be277adeb";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_4e952cfa-6e72-43a4-9111-497fc8a095ef";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_4e952cfa-6e72-43a4-9111-497fc8a095ef";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_4e952cfa-6e72-43a4-9111-497fc8a095ef";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_4e952cfa-6e72-43a4-9111-497fc8a095ef";
+                    return "operation_4e952cfa-6e72-43a4-9111-497fc8a095ef";
                 });
             } else {
                 // Create rectangle
@@ -2079,15 +2082,15 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 .attr("x", -nodeData.width / 2)
                 .attr("y", -nodeData.height / 2)
                 .attr("class", function() { 
-                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_1d3bcb12-d135-41a4-a88b-f65be277adeb";
-                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_1d3bcb12-d135-41a4-a88b-f65be277adeb" : "operation_1d3bcb12-d135-41a4-a88b-f65be277adeb";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_4e952cfa-6e72-43a4-9111-497fc8a095ef";
+                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_4e952cfa-6e72-43a4-9111-497fc8a095ef" : "operation_4e952cfa-6e72-43a4-9111-497fc8a095ef";
                 });
             }
         });
         
         // Add labels for nodes
         nodes.append("text")
-        .attr("class", "node-label_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+        .attr("class", "node-label_4e952cfa-6e72-43a4-9111-497fc8a095ef")
         .text(function([nodeName]) { return graph_node_display_names[nodeName] || graph_node_name_to_without_suffix[nodeName] || nodeName; })
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "central");
@@ -2096,7 +2099,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         nodes.filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")));
         }).append("text")
-        .attr("class", "type-indicator_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+        .attr("class", "type-indicator_4e952cfa-6e72-43a4-9111-497fc8a095ef")
         .attr("text-anchor", "start")
         .attr("dominant-baseline", "text-bottom")
         .attr("transform", function([nodeName, nodeData]) {
@@ -2114,7 +2117,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add info buttons to nodes (except input, output, constant)
-        inner.selectAll(".node_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+        inner.selectAll(".node_4e952cfa-6e72-43a4-9111-497fc8a095ef")
         .filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")))
         })
@@ -2125,14 +2128,14 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
         // Add info button circle
         const infoButton = nodeGroup.append("circle")
-        .attr("class", "info-button_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+        .attr("class", "info-button_4e952cfa-6e72-43a4-9111-497fc8a095ef")
         .attr("cx", width/2 - 7)
         .attr("cy", -height/2 + 7)
         .attr("r", 5.5);
 
         // Add info button icon
         nodeGroup.append("text")
-        .attr("class", "info-icon_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+        .attr("class", "info-icon_4e952cfa-6e72-43a4-9111-497fc8a095ef")
         .attr("x", width/2 - 7)
         .attr("y", -height/2 + 8)
         .attr("text-anchor", "middle")
@@ -2148,16 +2151,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .on("mouseleave", removeTooltip);
 
         // Add click handler to info button
-            nodeGroup.selectAll(".info-button_1d3bcb12-d135-41a4-a88b-f65be277adeb, .info-icon_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+            nodeGroup.selectAll(".info-button_4e952cfa-6e72-43a4-9111-497fc8a095ef, .info-icon_4e952cfa-6e72-43a4-9111-497fc8a095ef")
             .on("click", function(event) {
                 event.stopPropagation();
-                const infoButton = nodeGroup.select(".info-button_1d3bcb12-d135-41a4-a88b-f65be277adeb").node();
+                const infoButton = nodeGroup.select(".info-button_4e952cfa-6e72-43a4-9111-497fc8a095ef").node();
                 showPopupFromInfoButton.call(nodeGroup.node(), event, [nodeName], infoButton);
             });
         });
 
         // Add expand buttons to all module nodes (including non-expandable ones)
-        inner.selectAll(".node_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+        inner.selectAll(".node_4e952cfa-6e72-43a4-9111-497fc8a095ef")
         .filter(function([nodeName]) {
             return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || collapsedContainers.has(nodeName)) && !isRepeatNode(nodeName);
         })
@@ -2179,7 +2182,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Add expand button circle
             const expandButton = nodeGroup.append("circle")
-            .attr("class", isExpandable ? "collapse-button_1d3bcb12-d135-41a4-a88b-f65be277adeb" : "collapse-button-disabled_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+            .attr("class", isExpandable ? "collapse-button_4e952cfa-6e72-43a4-9111-497fc8a095ef" : "collapse-button-disabled_4e952cfa-6e72-43a4-9111-497fc8a095ef")
             .attr("cx", -width / 2 + 7)
             .attr("cy", -height / 2 + 7)
             .attr("r", 5.5)
@@ -2188,7 +2191,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Add expand button icon
             nodeGroup.append("text")
-            .attr("class", isExpandable ? "collapse-icon_1d3bcb12-d135-41a4-a88b-f65be277adeb" : "collapse-icon-disabled_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+            .attr("class", isExpandable ? "collapse-icon_4e952cfa-6e72-43a4-9111-497fc8a095ef" : "collapse-icon-disabled_4e952cfa-6e72-43a4-9111-497fc8a095ef")
             .attr("x", -width / 2 + 7)
             .attr("y", -height / 2 + 7)
             .attr("text-anchor", "middle")
@@ -2208,7 +2211,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Only add click handler for expandable modules
             if (isExpandable) {
-                nodeGroup.selectAll(".collapse-button_1d3bcb12-d135-41a4-a88b-f65be277adeb, .collapse-icon_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+                nodeGroup.selectAll(".collapse-button_4e952cfa-6e72-43a4-9111-497fc8a095ef, .collapse-icon_4e952cfa-6e72-43a4-9111-497fc8a095ef")
                 .on("click", function(event) {
                     event.stopPropagation();
                     removeTooltip();
@@ -2309,16 +2312,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                     .scale(currentTransform.k));
             }
 
-            clickedNodeElement.classed("highlight-node_1d3bcb12-d135-41a4-a88b-f65be277adeb", true);
+            clickedNodeElement.classed("highlight-node_4e952cfa-6e72-43a4-9111-497fc8a095ef", true);
             
             setTimeout(() => {
-                clickedNodeElement.classed("highlight-node_1d3bcb12-d135-41a4-a88b-f65be277adeb", false);
+                clickedNodeElement.classed("highlight-node_4e952cfa-6e72-43a4-9111-497fc8a095ef", false);
             }, 2000);
 
-            const popup = d3.select("#popup_1d3bcb12-d135-41a4-a88b-f65be277adeb");
-            const moduleTemplate = d3.select("#module-template_1d3bcb12-d135-41a4-a88b-f65be277adeb");
-            const tensorOpTemplate = d3.select("#tensor-op-template_1d3bcb12-d135-41a4-a88b-f65be277adeb");
-            const noInfoMessage = d3.select("#no-info_1d3bcb12-d135-41a4-a88b-f65be277adeb");
+            const popup = d3.select("#popup_4e952cfa-6e72-43a4-9111-497fc8a095ef");
+            const moduleTemplate = d3.select("#module-template_4e952cfa-6e72-43a4-9111-497fc8a095ef");
+            const tensorOpTemplate = d3.select("#tensor-op-template_4e952cfa-6e72-43a4-9111-497fc8a095ef");
+            const noInfoMessage = d3.select("#no-info_4e952cfa-6e72-43a4-9111-497fc8a095ef");
             
             const nodeData = adj_list[nodeName];
             
@@ -2326,7 +2329,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (node_to_module_path[nodeName] && graph_node_name_to_without_suffix[nodeName]) {
                 popupTitle = node_to_module_path[nodeName] + "." + graph_node_name_to_without_suffix[nodeName];
             }
-            d3.select("#popup-title_1d3bcb12-d135-41a4-a88b-f65be277adeb").text(popupTitle);
+            d3.select("#popup-title_4e952cfa-6e72-43a4-9111-497fc8a095ef").text(popupTitle);
 
             moduleTemplate.style("display", "none");
             tensorOpTemplate.style("display", "none");
@@ -2334,31 +2337,31 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             if (module_info[nodeName]) {
                 const info = module_info[nodeName];
-                moduleTemplate.style("display", "block").classed("content-shown_1d3bcb12-d135-41a4-a88b-f65be277adeb", true);
+                moduleTemplate.style("display", "block").classed("content-shown_4e952cfa-6e72-43a4-9111-497fc8a095ef", true);
                 
-                d3.select("#module-extra-repr_1d3bcb12-d135-41a4-a88b-f65be277adeb").text(info.extra_repr || 'N/A');
+                d3.select("#module-extra-repr_4e952cfa-6e72-43a4-9111-497fc8a095ef").text(info.extra_repr || 'N/A');
 
                 const forward_info = func_info[nodeName];
-                const attributesContainer = d3.select("#module-attributes_1d3bcb12-d135-41a4-a88b-f65be277adeb").node();
+                const attributesContainer = d3.select("#module-attributes_4e952cfa-6e72-43a4-9111-497fc8a095ef").node();
                 attributesContainer.innerHTML = '';
                 createJsonViewer(attributesContainer, info.attributes);
 
-                const parametersContainer = d3.select("#module-parameters_1d3bcb12-d135-41a4-a88b-f65be277adeb").node();
+                const parametersContainer = d3.select("#module-parameters_4e952cfa-6e72-43a4-9111-497fc8a095ef").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, forward_info);
             } else if (!(adj_list[nodeName] && adj_list[nodeName].node_type === "Input") && func_info[nodeName]) {
                 const info = func_info[nodeName];
-                tensorOpTemplate.style("display", "block").classed("content-shown_1d3bcb12-d135-41a4-a88b-f65be277adeb", true);
-                const parametersContainer = d3.select("#tensor-op-parameters_1d3bcb12-d135-41a4-a88b-f65be277adeb").node();
+                tensorOpTemplate.style("display", "block").classed("content-shown_4e952cfa-6e72-43a4-9111-497fc8a095ef", true);
+                const parametersContainer = d3.select("#tensor-op-parameters_4e952cfa-6e72-43a4-9111-497fc8a095ef").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, info);
             } else {
-                noInfoMessage.style("display", "block").classed("content-shown_1d3bcb12-d135-41a4-a88b-f65be277adeb", true);
+                noInfoMessage.style("display", "block").classed("content-shown_4e952cfa-6e72-43a4-9111-497fc8a095ef", true);
             }
             
             // Position popup based on info button or node center
             let boundingBox, x, y;
-            const containerRect = d3.select("#graph-container_1d3bcb12-d135-41a4-a88b-f65be277adeb").node().getBoundingClientRect();
+            const containerRect = d3.select("#graph-container_4e952cfa-6e72-43a4-9111-497fc8a095ef").node().getBoundingClientRect();
             
             if (infoButtonElement) {
                 boundingBox = infoButtonElement.getBoundingClientRect();
@@ -2374,19 +2377,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             popup.style("left", `${x}px`)
             .style("top", `${y}px`)
             .style("display", "flex");
-            d3.select("#popup-content_1d3bcb12-d135-41a4-a88b-f65be277adeb").node().scrollTop = 0;
+            d3.select("#popup-content_4e952cfa-6e72-43a4-9111-497fc8a095ef").node().scrollTop = 0;
         }
 
         function closePopup() {
-            d3.select("#popup_1d3bcb12-d135-41a4-a88b-f65be277adeb").style("display", "none");
+            d3.select("#popup_4e952cfa-6e72-43a4-9111-497fc8a095ef").style("display", "none");
         }
         
-        d3.select(".popup-close_1d3bcb12-d135-41a4-a88b-f65be277adeb").on("click", closePopup);
+        d3.select(".popup-close_4e952cfa-6e72-43a4-9111-497fc8a095ef").on("click", closePopup);
         svg.on("click", closePopup);
 
-        const popup = document.getElementById(`popup_1d3bcb12-d135-41a4-a88b-f65be277adeb`);
+        const popup = document.getElementById(`popup_4e952cfa-6e72-43a4-9111-497fc8a095ef`);
         const resizeObserver = new ResizeObserver(() => {
-            const editorContainers = popup.querySelectorAll('.json-viewer_1d3bcb12-d135-41a4-a88b-f65be277adeb');
+            const editorContainers = popup.querySelectorAll('.json-viewer_4e952cfa-6e72-43a4-9111-497fc8a095ef');
             for (let container of editorContainers) {
                 if (container.jsonEditor) {
                     container.jsonEditor.resize();
@@ -2465,30 +2468,30 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 // Apply highlight effect to the target container
                 if (Object.keys(graphvizData.nodes).includes(lastModifiedContainer)) {
                     // Highlight the node (collapsed container)
-                    const targetElement = inner.selectAll(".node_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+                    const targetElement = inner.selectAll(".node_4e952cfa-6e72-43a4-9111-497fc8a095ef")
                         .filter(([nodeName]) => nodeName === lastModifiedContainer);
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-node_1d3bcb12-d135-41a4-a88b-f65be277adeb", true);
+                        targetElement.classed("highlight-node_4e952cfa-6e72-43a4-9111-497fc8a095ef", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-node_1d3bcb12-d135-41a4-a88b-f65be277adeb", false);
+                            targetElement.classed("highlight-node_4e952cfa-6e72-43a4-9111-497fc8a095ef", false);
                         }, 2000); // Match the animation duration
                     }
                 } else if (Object.keys(graphvizData.clusters).includes(lastModifiedContainer)) {
                     // Highlight the cluster (expanded container)
-                    const targetElement = inner.selectAll(".boundary-box_1d3bcb12-d135-41a4-a88b-f65be277adeb")
+                    const targetElement = inner.selectAll(".boundary-box_4e952cfa-6e72-43a4-9111-497fc8a095ef")
                         .filter(function([clusterName]) {
                             return clusterName === lastModifiedContainer;
                         });
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-cluster_1d3bcb12-d135-41a4-a88b-f65be277adeb", true);
+                        targetElement.classed("highlight-cluster_4e952cfa-6e72-43a4-9111-497fc8a095ef", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-cluster_1d3bcb12-d135-41a4-a88b-f65be277adeb", false);
+                            targetElement.classed("highlight-cluster_4e952cfa-6e72-43a4-9111-497fc8a095ef", false);
                         }, 2000); // Match the animation duration
                     }
                 }
@@ -2557,7 +2560,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     </script>
 </div>
 
-            </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>

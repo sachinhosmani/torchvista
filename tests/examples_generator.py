@@ -304,7 +304,7 @@ def load_tutorial_models():
 
 
 def generate_tutorial_visualizations(tutorials):
-    """Generate clean visualization HTML files for tutorials (iframe content)."""
+    """Generate visualization HTML files for tutorials (iframe content)."""
     output_dir = GENERATED_DIR / "tutorial_visualizations"
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -322,13 +322,11 @@ def generate_tutorial_visualizations(tutorials):
         output_path = output_dir / f"{name}.html"
         print(f"Generating tutorial_visualizations/{name}...")
 
-        trace_model(
+        tracer.trace_model(
             model,
             example_input,
             export_format='html',
             export_path=str(output_path),
-            height=800,
-            width='100%',
             **kwargs
         )
         print(f"Saved output to {output_path}")

@@ -1,257 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/a11y-dark.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
-        <style>
-            :root {
-                --md-primary-fg-color: #4051b5;
-                --md-accent-fg-color: #526cfe;
-            }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/a11y-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
 
-            html, body {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                height: 100%;
-                margin: 0;
-            }
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+        }
 
-            .container {
-                display: flex;
-                flex-direction: column;
-                height: 100vh;
-            }
+        html, body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+            height: 100%;
+            margin: 0;
+        }
 
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .left-column {
+            display: flex;
+            flex-direction: row;
+            max-height: 40vh;
+        }
+
+        .code-box {
+            flex: 1.5;
+            height: 100%;
+            background-color: #f5f5f5;
+            padding: 16px;
+            overflow: auto;
+            border-right: 1px solid #ccc;
+            word-wrap: break-word;
+            border-bottom: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .error-box {
+            flex: 1;
+            height: 100%;
+            background-color: #f5f5f5;
+            padding: 16px;
+            overflow: auto;
+            color: red;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .code-box-header {
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #cccccc;
+            color: #333;
+            font-size: large;
+        }
+
+        .error-box-header {
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #000000;
+            color: #333;
+            font-size: large;
+        }
+
+        .graph-box-header {
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #000000;
+            color: #333;
+            font-size: large;
+        }
+
+        .code-box pre {
+            margin: 0;
+            padding: 0;
+        }
+
+        .code-box code {
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            background: #2b2b2b;
+            border-radius: 4px;
+            padding: 1rem;
+            display: block;
+            color: #f8f8f2;
+        }
+
+        .code-box code.hljs {
+            background: #2b2b2b;
+        }
+
+        .graph-view {
+            height: 60vh;
+            overflow: hidden;
+            padding: 16px;
+            background-color: #ffffff;
+        }
+
+        #graph {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Header */
+        header {
+            background: #4051b5;
+            color: #fff;
+            padding: 1rem;
+        }
+
+        .header-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.75rem 1rem;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            color: #fff;
+        }
+
+        .json-viewer {
+            height: 60%;
+            width: 100%;
+        }
+
+        .copy-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 4px 10px;
+            font-size: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: background 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: #45a049;
+        }
+
+        @media (max-width: 768px) {
             .left-column {
-                display: flex;
-                flex-direction: row;
-                max-height: 40vh;
+                flex-direction: column;
+                max-height: none;
             }
 
             .code-box {
-                flex: 1.5;
-                height: 100%;
-                background-color: #f5f5f5;
-                padding: 16px;
-                overflow: auto;
-                border-right: 1px solid #ccc;
-                word-wrap: break-word;
-                border-bottom: none;
+                border-right: none;
+                border-bottom: 1px solid #ccc;
+                max-height: 30vh;
             }
 
             .error-box {
-                flex: 1;
-                height: 100%;
-                background-color: #f5f5f5;
-                padding: 16px;
-                overflow: auto;
-                color: red;
-                box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
-            }
-            .code-box-header {
-                font-weight: bold;
-                margin-bottom: 10px;
-                padding-bottom: 5px;
-                border-bottom: 1px solid #cccccc;
-                color: #333;
-                font-size: large;
-            }
-
-            .error-box-header {
-                font-weight: bold;
-                margin-bottom: 10px;
-                padding-bottom: 5px;
-                border-bottom: 1px solid #000000;
-                color: #333;
-                font-size: large;
-            }
-
-            .graph-box-header {
-                font-weight: bold;
-                margin-bottom: 10px;
-                padding-bottom: 5px;
-                border-bottom: 1px solid #000000;
-                color: #333;
-                font-size: large;
-            }
-
-            .code-box pre {
-                margin: 0;
-                padding: 0;
-            }
-
-            .code-box code {
-                font-family: "Roboto Mono", "Courier New", monospace;
-                font-size: 0.85rem;
-                line-height: 1.5;
-                background: #2b2b2b;
-                border-radius: 0.2rem;
-                padding: 1rem;
-                display: block;
-                color: #f8f8f2;
-            }
-
-            /* Override highlight.js background */
-            .code-box code.hljs {
-                background: #2b2b2b;
+                max-height: 20vh;
             }
 
             .graph-view {
-                height: 60vh;
-                overflow: hidden;
-                padding: 16px;
-                background-color: #ffffff;
+                height: 50vh;
             }
-            #graph {
-                width: 100%;
-                height: 100%;
-            }
+        }
+    </style>
+</head>
+<body>
 
-            /* Header - matching website style */
-            .md-header {
-                background-color: var(--md-primary-fg-color);
-                color: white;
-                box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
-            }
-
-            .md-header__inner {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 0.6rem 1rem;
-                max-width: 1200px;
-                margin: 0 auto;
-            }
-
-            .md-header__title {
-                font-size: 1.25rem;
-                font-weight: 600;
-            }
-
-            .md-header__title a {
-                color: white;
-                text-decoration: none;
-            }
-
-            .md-header__nav {
-                display: flex;
-                gap: 1.5rem;
-                align-items: center;
-            }
-
-            .md-header__nav a {
-                color: white;
-                text-decoration: none;
-                font-weight: 500;
-                opacity: 0.9;
-                transition: opacity 0.2s;
-            }
-
-            .md-header__nav a:hover {
-                opacity: 1;
-            }
-
-            .md-header__nav iframe {
-                vertical-align: middle;
-            }
-
-            .json-viewer {
-                height: 60%;
-                width: 100%;
-            }
-
-            .copy-btn {
-                background: #4CAF50;
-                color: white;
-                border: none;
-                padding: 4px 10px;
-                font-size: 12px;
-                border-radius: 4px;
-                cursor: pointer;
-                margin-left: 10px;
-                transition: background 0.3s;
-            }
-
-            .copy-btn:hover {
-                background: #45a049;
-            }
-
-            @media (max-width: 768px) {
-                .md-header__inner {
-                    flex-direction: column;
-                    gap: 0.5rem;
-                }
-                .md-header__nav {
-                    gap: 1rem;
-                    flex-wrap: wrap;
-                    justify-content: center;
-                }
-            }
-
-        </style>
-    </head>
-    <body>
-
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                document.querySelectorAll('pre code').forEach((block) => {
-                    hljs.highlightBlock(block);
-                });
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
             });
+        });
 
-            function copyCode() {
-                const codeElement = document.getElementById("codeContent");
-                const textToCopy = codeElement.innerText;
+        function copyCode() {
+            const codeElement = document.getElementById("codeContent");
+            const textToCopy = codeElement.innerText;
 
-                navigator.clipboard.writeText(textToCopy).then(() => {
-                    const btn = document.querySelector(".copy-btn");
-                    btn.textContent = "Copied!";
-                    setTimeout(() => btn.textContent = "Copy", 2000);
-                }).catch(err => {
-                    console.error("Failed to copy: ", err);
-                });
-            }
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const btn = document.querySelector(".copy-btn");
+                btn.textContent = "Copied!";
+                setTimeout(() => btn.textContent = "Copy", 2000);
+            }).catch(err => {
+                console.error("Failed to copy: ", err);
+            });
+        }
+    </script>
 
-        </script>
-
-        <div class="container">
-            <header class="md-header">
-                <div class="md-header__inner">
-                    <div class="md-header__title">
-                        <a href="../../index.html">TorchVista</a>
-                    </div>
-                    <nav class="md-header__nav">
-                        <a href="../../index.html">Home</a>
-                        <a href="../../tutorials.html">Tutorials</a>
-                        <a href="../../demos.html">Demos</a>
-                        <a href="https://github.com/sachinhosmani/torchvista" target="_blank">GitHub</a>
-                        <iframe src="https://ghbtns.com/github-btn.html?user=sachinhosmani&repo=torchvista&type=star&count=true&size=large"
-                                frameborder="0" scrolling="0" width="170" height="30" title="GitHub Star Button"></iframe>
-                    </nav>
-                </div>
-            </header>
-            <div class="left-column">
-                <div class="code-box" id="codeBox">
-                    <div class="code-box-header">
-                        Sample code (Not editable)
-                        <button class="copy-btn" onclick="copyCode()">Copy</button>
-                    </div>
-                    <pre><code class="language-python" id="codeContent">${code_contents}</code></pre>
-                </div>
-
-                <div class="error-box" id="errorBox">
-                    <div class="error-box-header">Error Output (if any)</div>
-                ${error_contents}
-                </div>
-
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <a href="../../index.html" class="logo">TorchVista</a>
+                <nav>
+                    <a href="../../index.html">Home</a>
+                    <a href="../../tutorials.html">Tutorials</a>
+                    <a href="../../demos.html">Demos</a>
+                    <a href="https://github.com/sachinhosmani/torchvista" target="_blank">GitHub</a>
+                </nav>
             </div>
-    
-            <div class="graph-view" id="graphContainer" style="height: 100%">
-                <div class="graph-box-header">Visualized Interactive Graph</div>
-                ${graph_html}
+        </header>
+        <div class="left-column">
+            <div class="code-box" id="codeBox">
+                <div class="code-box-header">
+                    Sample code (Not editable)
+                    <button class="copy-btn" onclick="copyCode()">Copy</button>
+                </div>
+                <pre><code class="language-python" id="codeContent">${code_contents}</code></pre>
             </div>
+
+            <div class="error-box" id="errorBox">
+                <div class="error-box-header">Error Output (if any)</div>
+            ${error_contents}
+            </div>
+
         </div>
-    </body>
+
+        <div class="graph-view" id="graphContainer" style="height: 100%">
+            <div class="graph-box-header">Visualized Interactive Graph</div>
+            ${graph_html}
+        </div>
+    </div>
+</body>
 </html>
