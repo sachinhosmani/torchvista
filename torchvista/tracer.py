@@ -24,6 +24,7 @@ class NodeType(Enum):
     INPUT = "Input"
     OUTPUT = "Output"
     CONSTANT = "Constant"
+    PARAMETER = "Parameter"
 
 class ExportFormat(Enum):
     SVG = "svg"
@@ -250,6 +251,25 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 if hasattr(inp, '_is_implied_edge') and inp._is_implied_edge:
                     entry['is_implied_edge'] = True
                 adj_list[source_name]['edges'].append(entry)
+            elif isinstance(inp, nn.Parameter):
+                # nn.Parameter instances are trainable and should be shown distinctly
+                dims = format_dims(tuple(inp.shape))
+                global_node_counter += 1
+                param_node_name = f'param_{global_node_counter}'
+                adj_list[param_node_name] = {
+                    'edges': [],
+                    'failed': False,
+                    'node_type': NodeType.PARAMETER.value,
+                }
+                entry = {'target': op_name, 'dims': dims, 'edge_data_id': id(inp)}
+                if hasattr(inp, '_is_implied_edge') and inp._is_implied_edge:
+                    entry['is_implied_edge'] = True
+                adj_list[param_node_name]['edges'].append(entry)
+                node_to_ancestors[param_node_name] = module_stack[::-1]
+                constant_node_names.append(param_node_name)
+                graph_node_display_names[param_node_name] = 'nn.Parameter'
+                graph_node_name_to_without_suffix[param_node_name] = 'nn.Parameter'
+                inp._tensor_source_name = param_node_name
             elif isinstance(inp, torch.Tensor) and show_non_gradient_nodes:
                 dims = format_dims(tuple(inp.shape))
                 global_node_counter += 1

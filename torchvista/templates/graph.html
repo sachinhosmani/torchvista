@@ -67,6 +67,7 @@
         .node_${unique_id} ellipse.input_${unique_id} { fill: #FF9AFF; }
         .node_${unique_id} ellipse.constant_${unique_id} { fill: rgb(235 235 235); }
         .node_${unique_id} ellipse.output_${unique_id} { fill: #74e071; }
+        .node_${unique_id} ellipse.parameter_${unique_id} { fill: #FE5F55; }
         .node_${unique_id} ellipse.failed_${unique_id} { fill: rgb(224 15 15); }
 
         .node_${unique_id} ellipse {
@@ -885,6 +886,7 @@
                 if (nodeData.node_type === "Input") return "#FF9AFF";
                 if (nodeData.node_type === "Constant") return "#EBEBEB";
                 if (nodeData.node_type === "Output") return "#74e071";
+                if (nodeData.node_type === "Parameter") return "#FE5F55";
                 if (repeat_containers.has(nodeName)) return REPEAT_CONTAINER_COLOR;
                 if (nodeData.node_type === "Module") return "#8BDEDB";
                 if (nodeData.node_type === "Operation") return "#FEBC5A";
@@ -1038,7 +1040,7 @@
             for (const child of children) {
                 if (!containerNodes.has(child) && adj_list_collapsed_nodes[child]) {
                     const nodeData = adj_list_collapsed_nodes[child];
-                    if (nodeData.node_type === "Constant") {
+                    if (nodeData.node_type === "Constant" || nodeData.node_type === "Parameter") {
                         const errorColor = getErrorColor(child);
                         const fillColor = errorColor || getNodeColor(child);
                         const childDisplayName = graph_node_display_names[child] || graph_node_name_to_without_suffix[child] || child;
@@ -1067,7 +1069,7 @@
         // Add standalone nodes (not in any container)
         for (const [node, data] of Object.entries(adj_list_collapsed_nodes)) {
             if (!ancestor_map[node]) {
-                if (data.node_type === "Constant") {
+                if (data.node_type === "Constant" || data.node_type === "Parameter") {
                     const errorColor = getErrorColor(node);
                     const fillColor = errorColor || getNodeColor(node);
                     const nodeDisplayName = graph_node_display_names[node] || graph_node_name_to_without_suffix[node] || node;
@@ -1678,9 +1680,10 @@
             
             // Check if this should be an ellipse
             const isEllipseNode = (adj_list[nodeName] && (
-                adj_list[nodeName].node_type === "Input" || 
-                adj_list[nodeName].node_type === "Output" || 
-                adj_list[nodeName].node_type === "Constant"
+                adj_list[nodeName].node_type === "Input" ||
+                adj_list[nodeName].node_type === "Output" ||
+                adj_list[nodeName].node_type === "Constant" ||
+                adj_list[nodeName].node_type === "Parameter"
             ));
             
             if (isEllipseNode) {
@@ -1690,10 +1693,11 @@
                 .attr("cy", 0)
                 .attr("rx", nodeData.width / 2)
                 .attr("ry", nodeData.height / 2)
-                .attr("class", function() { 
+                .attr("class", function() {
                     if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_${unique_id}";
                     if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_${unique_id}";
                     if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_${unique_id}";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Parameter") return "parameter_${unique_id}";
                     if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_${unique_id}";
                     return "operation_${unique_id}";
                 });
@@ -1720,7 +1724,7 @@
         
         // Add type indicators
         nodes.filter(function([nodeName]) {
-            return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")));
+            return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Parameter")));
         }).append("text")
         .attr("class", "type-indicator_${unique_id}")
         .attr("text-anchor", "start")
@@ -1739,10 +1743,10 @@
             return "Tensor Op";
         });
 
-        // Add info buttons to nodes (except input, output, constant)
+        // Add info buttons to nodes (except input, output, constant, parameter)
         inner.selectAll(".node_${unique_id}")
         .filter(function([nodeName]) {
-            return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")))
+            return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Parameter")))
         })
         .each(function([nodeName, nodeData]) {
             const nodeGroup = d3.select(this);
