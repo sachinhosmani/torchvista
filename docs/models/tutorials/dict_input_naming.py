@@ -1,4 +1,4 @@
-title = "Naming Tensors with Nested Dicts"
+title = "Naming Input/Output Tensors with Nested Dicts"
 
 intro = """
 In the previous tutorials, you may have noticed that raw tensor and scalar nodes are generically named "Tensor" or "Scalar".

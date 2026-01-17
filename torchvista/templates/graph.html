@@ -70,7 +70,7 @@
         .node_${unique_id} ellipse.input_${unique_id} { fill: #FF9AFF; }
         .node_${unique_id} ellipse.constant_${unique_id} { fill: rgb(235 235 235); }
         .node_${unique_id} ellipse.output_${unique_id} { fill: #74e071; }
-        .node_${unique_id} ellipse.parameter_${unique_id} { fill: #FE5F55; }
+        .node_${unique_id} ellipse.parameter_${unique_id} { fill: #B9CCF3; }
         .node_${unique_id} ellipse.failed_${unique_id} { fill: rgb(224 15 15); }
 
         .node_${unique_id} ellipse {
@@ -890,7 +890,7 @@
                 if (nodeData.node_type === "Input") return "#FF9AFF";
                 if (nodeData.node_type === "Constant") return "#EBEBEB";
                 if (nodeData.node_type === "Output") return "#74e071";
-                if (nodeData.node_type === "Parameter") return "#FE5F55";
+                if (nodeData.node_type === "Parameter") return "#B9CCF3";
                 if (repeat_containers.has(nodeName)) return REPEAT_CONTAINER_COLOR;
                 if (nodeData.node_type === "Module") return "#8BDEDB";
                 if (nodeData.node_type === "Operation") return "#FEBC5A";
