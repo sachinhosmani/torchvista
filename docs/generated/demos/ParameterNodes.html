@@ -245,43 +245,32 @@
 import torch.nn as nn
 from torchvista import trace_model
 
-class InnerSubBlock(nn.Module):
-    def __init__(self, dim):
+class SubModule(nn.Module):
+    def __init__(self):
         super().__init__()
-        self.inner_linear_with_long_name = nn.Linear(dim, dim)
-        self.inner_activation_function_layer = nn.ReLU()
+        self.linear = nn.Linear(64, 64)
+        self.scale = nn.Parameter(torch.ones(64))
 
     def forward(self, x):
-        return self.inner_activation_function_layer(
-            self.inner_linear_with_long_name(x)
-        )
+        return self.linear(x) * self.scale
 
-class MidLevelBlock(nn.Module):
-    def __init__(self, dim):
+class ModelWithParameters(nn.Module):
+    def __init__(self):
         super().__init__()
-        self.midlevel_linear_transformation_step = nn.Linear(dim, dim)
-        self.deeply_nested_inner_block = InnerSubBlock(dim)
+        self.bias = nn.Parameter(torch.zeros(64))
+        self.sub = SubModule()
 
     def forward(self, x):
-        x = self.midlevel_linear_transformation_step(x)
-        return self.deeply_nested_inner_block(x)
+        x = x + self.bias
+        x = x + torch.ones(64)
+        x = torch.relu(x)
+        x = self.sub(x)
+        return x
 
-class TinyModelWithNestedSubmodules(nn.Module):
-    def __init__(self, dim=32):
-        super().__init__()
-        self.initial_projection_layer_with_lengthy_name = nn.Linear(dim, dim)
-        self.midlevel_feature_processing_unit = MidLevelBlock(dim)
-        self.final_output_mapping_layer = nn.Linear(dim, dim)
+model = ModelWithParameters()
+example_input = torch.randn(1, 64)
 
-    def forward(self, x):
-        x = self.initial_projection_layer_with_lengthy_name(x)
-        x = self.midlevel_feature_processing_unit(x)
-        return self.final_output_mapping_layer(x)
-
-# Example
-model = TinyModelWithNestedSubmodules()
-
-trace_model(model, torch.randn(2, 32), show_module_attr_names=True, collapse_modules_after_depth=0, forced_module_tracing_depth=5)
+trace_model(model, example_input)
 
 </code></pre>
             </div>
@@ -295,121 +284,121 @@ trace_model(model, torch.randn(2, 32), show_module_attr_names=True, collapse_mod
 
         <div class="graph-view" id="graphContainer" style="height: 100%">
             <div class="graph-box-header">Visualized Interactive Graph</div>
-            <div id="graph-container_59fd3bcf-8464-45e9-a355-b4f0835120f4">
-    <div id="graph_59fd3bcf-8464-45e9-a355-b4f0835120f4"></div>
-    <div class="logo_59fd3bcf-8464-45e9-a355-b4f0835120f4">
+            <div id="graph-container_a626c947-24fd-40b0-a3b5-a7047d5ffb7f">
+    <div id="graph_a626c947-24fd-40b0-a3b5-a7047d5ffb7f"></div>
+    <div class="logo_a626c947-24fd-40b0-a3b5-a7047d5ffb7f">
         <a href="https://github.com/sachinhosmani/torchvista" target="_blank" rel="noopener noreferrer">
         torchvista
         </a>
     </div>
-    <div id="popup_59fd3bcf-8464-45e9-a355-b4f0835120f4" class="popup_59fd3bcf-8464-45e9-a355-b4f0835120f4" style="display: none;">
-        <div class="popup-header_59fd3bcf-8464-45e9-a355-b4f0835120f4">
-            <h3 id="popup-title_59fd3bcf-8464-45e9-a355-b4f0835120f4"></h3>
-            <span class="popup-close_59fd3bcf-8464-45e9-a355-b4f0835120f4">✕</span>
+    <div id="popup_a626c947-24fd-40b0-a3b5-a7047d5ffb7f" class="popup_a626c947-24fd-40b0-a3b5-a7047d5ffb7f" style="display: none;">
+        <div class="popup-header_a626c947-24fd-40b0-a3b5-a7047d5ffb7f">
+            <h3 id="popup-title_a626c947-24fd-40b0-a3b5-a7047d5ffb7f"></h3>
+            <span class="popup-close_a626c947-24fd-40b0-a3b5-a7047d5ffb7f">✕</span>
         </div>
-        <div id="popup-content_59fd3bcf-8464-45e9-a355-b4f0835120f4" class="popup-content_59fd3bcf-8464-45e9-a355-b4f0835120f4">
-            <div id="common-info_59fd3bcf-8464-45e9-a355-b4f0835120f4">
+        <div id="popup-content_a626c947-24fd-40b0-a3b5-a7047d5ffb7f" class="popup-content_a626c947-24fd-40b0-a3b5-a7047d5ffb7f">
+            <div id="common-info_a626c947-24fd-40b0-a3b5-a7047d5ffb7f">
             </div>
-            <div id="module-template_59fd3bcf-8464-45e9-a355-b4f0835120f4" style="display:none;">
-                <details open id="module-parameters-details_59fd3bcf-8464-45e9-a355-b4f0835120f4">
+            <div id="module-template_a626c947-24fd-40b0-a3b5-a7047d5ffb7f" style="display:none;">
+                <details open id="module-parameters-details_a626c947-24fd-40b0-a3b5-a7047d5ffb7f">
                     <summary style="color: black"><strong>forward() Parameters</strong></summary>
-                    <div id="module-parameters_59fd3bcf-8464-45e9-a355-b4f0835120f4" class="json-viewer_59fd3bcf-8464-45e9-a355-b4f0835120f4"></div>
+                    <div id="module-parameters_a626c947-24fd-40b0-a3b5-a7047d5ffb7f" class="json-viewer_a626c947-24fd-40b0-a3b5-a7047d5ffb7f"></div>
                 </details>
-                <details open id="module-attributes-details_59fd3bcf-8464-45e9-a355-b4f0835120f4">
+                <details open id="module-attributes-details_a626c947-24fd-40b0-a3b5-a7047d5ffb7f">
                     <summary style="color: black"><strong>Attributes</strong></summary>
-                    <div id="module-attributes_59fd3bcf-8464-45e9-a355-b4f0835120f4" class="json-viewer_59fd3bcf-8464-45e9-a355-b4f0835120f4"></div>
+                    <div id="module-attributes_a626c947-24fd-40b0-a3b5-a7047d5ffb7f" class="json-viewer_a626c947-24fd-40b0-a3b5-a7047d5ffb7f"></div>
                 </details>
             </div>
-            <div id="tensor-op-template_59fd3bcf-8464-45e9-a355-b4f0835120f4" style="display:none;">
+            <div id="tensor-op-template_a626c947-24fd-40b0-a3b5-a7047d5ffb7f" style="display:none;">
                 <summary><strong>Parameters</strong></summary>
-                <div id="tensor-op-parameters_59fd3bcf-8464-45e9-a355-b4f0835120f4" class="json-viewer_59fd3bcf-8464-45e9-a355-b4f0835120f4"></div>
+                <div id="tensor-op-parameters_a626c947-24fd-40b0-a3b5-a7047d5ffb7f" class="json-viewer_a626c947-24fd-40b0-a3b5-a7047d5ffb7f"></div>
             </div>
-            <p id="no-info_59fd3bcf-8464-45e9-a355-b4f0835120f4" style="display:none;">No further information available for this node.</p>
+            <p id="no-info_a626c947-24fd-40b0-a3b5-a7047d5ffb7f" style="display:none;">No further information available for this node.</p>
         </div>
     </div>
 
     <style>
-        .node_59fd3bcf-8464-45e9-a355-b4f0835120f4 rect {
+        .node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f rect {
             stroke: #333;
             fill: #fff;
         }
-        text.node-label_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        text.node-label_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.type-indicator_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        text.type-indicator_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.collapse-icon_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        text.collapse-icon_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 14px;
             cursor: default;
             user-select: none;
         }
-        .edge_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        .edge_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             stroke: #797979;
             fill: none;
         }
-        .node_59fd3bcf-8464-45e9-a355-b4f0835120f4 rect.input_59fd3bcf-8464-45e9-a355-b4f0835120f4 { fill: #FF9AFF; }
-        .node_59fd3bcf-8464-45e9-a355-b4f0835120f4 rect.constant_59fd3bcf-8464-45e9-a355-b4f0835120f4 { fill: rgb(235 235 235); }
+        .node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f rect.input_a626c947-24fd-40b0-a3b5-a7047d5ffb7f { fill: #FF9AFF; }
+        .node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f rect.constant_a626c947-24fd-40b0-a3b5-a7047d5ffb7f { fill: rgb(235 235 235); }
 
-        .node_59fd3bcf-8464-45e9-a355-b4f0835120f4 rect.output_59fd3bcf-8464-45e9-a355-b4f0835120f4 { fill: #74e071; }
-        .node_59fd3bcf-8464-45e9-a355-b4f0835120f4 rect.failed_59fd3bcf-8464-45e9-a355-b4f0835120f4 { fill: rgb(224 15 15); }
-        .node_59fd3bcf-8464-45e9-a355-b4f0835120f4 rect.module_59fd3bcf-8464-45e9-a355-b4f0835120f4 { fill: #8BDEDB; }
-        .node_59fd3bcf-8464-45e9-a355-b4f0835120f4 rect.operation_59fd3bcf-8464-45e9-a355-b4f0835120f4 { fill: #FEBC5A; }
+        .node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f rect.output_a626c947-24fd-40b0-a3b5-a7047d5ffb7f { fill: #74e071; }
+        .node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f rect.failed_a626c947-24fd-40b0-a3b5-a7047d5ffb7f { fill: rgb(224 15 15); }
+        .node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f rect.module_a626c947-24fd-40b0-a3b5-a7047d5ffb7f { fill: #8BDEDB; }
+        .node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f rect.operation_a626c947-24fd-40b0-a3b5-a7047d5ffb7f { fill: #FEBC5A; }
 
-        .node_59fd3bcf-8464-45e9-a355-b4f0835120f4 ellipse.input_59fd3bcf-8464-45e9-a355-b4f0835120f4 { fill: #FF9AFF; }
-        .node_59fd3bcf-8464-45e9-a355-b4f0835120f4 ellipse.constant_59fd3bcf-8464-45e9-a355-b4f0835120f4 { fill: rgb(235 235 235); }
-        .node_59fd3bcf-8464-45e9-a355-b4f0835120f4 ellipse.output_59fd3bcf-8464-45e9-a355-b4f0835120f4 { fill: #74e071; }
-        .node_59fd3bcf-8464-45e9-a355-b4f0835120f4 ellipse.parameter_59fd3bcf-8464-45e9-a355-b4f0835120f4 { fill: #FE5F55; }
-        .node_59fd3bcf-8464-45e9-a355-b4f0835120f4 ellipse.failed_59fd3bcf-8464-45e9-a355-b4f0835120f4 { fill: rgb(224 15 15); }
+        .node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f ellipse.input_a626c947-24fd-40b0-a3b5-a7047d5ffb7f { fill: #FF9AFF; }
+        .node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f ellipse.constant_a626c947-24fd-40b0-a3b5-a7047d5ffb7f { fill: rgb(235 235 235); }
+        .node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f ellipse.output_a626c947-24fd-40b0-a3b5-a7047d5ffb7f { fill: #74e071; }
+        .node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f ellipse.parameter_a626c947-24fd-40b0-a3b5-a7047d5ffb7f { fill: #FE5F55; }
+        .node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f ellipse.failed_a626c947-24fd-40b0-a3b5-a7047d5ffb7f { fill: rgb(224 15 15); }
 
-        .node_59fd3bcf-8464-45e9-a355-b4f0835120f4 ellipse {
+        .node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f ellipse {
             stroke: #333;
             stroke-width: 1px;
         }
-        .edgeLabelGroup_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        .edgeLabelGroup_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             pointer-events: none;
         }
-        #arrowhead_59fd3bcf-8464-45e9-a355-b4f0835120f4 path {
+        #arrowhead_a626c947-24fd-40b0-a3b5-a7047d5ffb7f path {
             fill: #333333;;
         }
-        .node_59fd3bcf-8464-45e9-a355-b4f0835120f4 rect,
-        .node_59fd3bcf-8464-45e9-a355-b4f0835120f4 ellipse {
+        .node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f rect,
+        .node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f ellipse {
             transition: fill 0.3s ease;
         }
 
-        .node_59fd3bcf-8464-45e9-a355-b4f0835120f4 .type-indicator_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        .node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f .type-indicator_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             font-size: 5px;
             fill: rgba(0, 0, 0, 1.0);  /* Dark grey, semi-transparent */
             pointer-events: none;
         }
 
-        .node_59fd3bcf-8464-45e9-a355-b4f0835120f4.error_59fd3bcf-8464-45e9-a355-b4f0835120f4 rect {
+        .node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f.error_a626c947-24fd-40b0-a3b5-a7047d5ffb7f rect {
             stroke: black;
             stroke-width: 1px;
         }
 
-        .boundary-box_59fd3bcf-8464-45e9-a355-b4f0835120f4.error_59fd3bcf-8464-45e9-a355-b4f0835120f4 > rect:first-of-type {
+        .boundary-box_a626c947-24fd-40b0-a3b5-a7047d5ffb7f.error_a626c947-24fd-40b0-a3b5-a7047d5ffb7f > rect:first-of-type {
             fill: red;
             fill-opacity: 0.2;
         }
 
-        #graph-container_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        #graph-container_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             position: relative;
             height: 95%;
             width: ${width};
             overflow: hidden;
         }
 
-        #graph_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        #graph_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             height: 100%;
         }
         
-        .popup_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        .popup_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             position: absolute;
             background: white;
@@ -424,7 +413,7 @@ trace_model(model, torch.randn(2, 32), show_module_attr_names=True, collapse_mod
             flex-direction: column;
         }
 
-        .popup-header_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        .popup-header_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             position: sticky;
             top: 0;
             background: white;
@@ -436,12 +425,12 @@ trace_model(model, torch.randn(2, 32), show_module_attr_names=True, collapse_mod
             z-index: 1;
         }
 
-        .popup_59fd3bcf-8464-45e9-a355-b4f0835120f4 h3 {
+        .popup_a626c947-24fd-40b0-a3b5-a7047d5ffb7f h3 {
             margin: 0;
             font-size: 16px;
         }
 
-        .popup-content_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        .popup-content_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             padding: 10px;
             padding-bottom: 10px;
             overflow-y: auto;
@@ -449,87 +438,87 @@ trace_model(model, torch.randn(2, 32), show_module_attr_names=True, collapse_mod
             flex-grow: 1;
         }
 
-        .popup_59fd3bcf-8464-45e9-a355-b4f0835120f4 pre {
+        .popup_a626c947-24fd-40b0-a3b5-a7047d5ffb7f pre {
             white-space: pre;
             overflow-x: auto;
         }
 
-        .popup-close_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        .popup-close_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             cursor: pointer;
             font-size: 24px;
             font-weight: bold;
             line-height: 1;
         }
 
-        #popup-title_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        #popup-title_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             font-size: 16px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             color: black;
         }
 
-        #graph-container_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        #graph-container_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             position: relative;
         }
 
-        #graph-container_59fd3bcf-8464-45e9-a355-b4f0835120f4 pre {
+        #graph-container_a626c947-24fd-40b0-a3b5-a7047d5ffb7f pre {
             margin-bottom: 0;
         }
 
-        .boundary-box_59fd3bcf-8464-45e9-a355-b4f0835120f4 rect {
+        .boundary-box_a626c947-24fd-40b0-a3b5-a7047d5ffb7f rect {
             pointer-events: none;
         }
-        .boundary-box_59fd3bcf-8464-45e9-a355-b4f0835120f4 text {
+        .boundary-box_a626c947-24fd-40b0-a3b5-a7047d5ffb7f text {
             pointer-events: none;
             user-select: none;
         }
 
-        .boundary-box_59fd3bcf-8464-45e9-a355-b4f0835120f4 rect {
+        .boundary-box_a626c947-24fd-40b0-a3b5-a7047d5ffb7f rect {
             pointer-events: none;
         }
-        .boundary-box_59fd3bcf-8464-45e9-a355-b4f0835120f4 text {
+        .boundary-box_a626c947-24fd-40b0-a3b5-a7047d5ffb7f text {
             pointer-events: none;
             user-select: none;
             font-weight: bold;
         }
-        .edge-label_59fd3bcf-8464-45e9-a355-b4f0835120f4 text {
+        .edge-label_a626c947-24fd-40b0-a3b5-a7047d5ffb7f text {
             pointer-events: none;
             user-select: none;
             font-size: 4px;
             font-family: "'Roboto', sans-serif";
         }
                     
-        .collapse-button_59fd3bcf-8464-45e9-a355-b4f0835120f4, .info-button_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        .collapse-button_a626c947-24fd-40b0-a3b5-a7047d5ffb7f, .info-button_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             fill: #fff;
             stroke: #333;
             stroke-width: 1px;
             cursor: pointer;
         }
 
-        .collapse-button_59fd3bcf-8464-45e9-a355-b4f0835120f4:hover, .info-button_59fd3bcf-8464-45e9-a355-b4f0835120f4:hover {
+        .collapse-button_a626c947-24fd-40b0-a3b5-a7047d5ffb7f:hover, .info-button_a626c947-24fd-40b0-a3b5-a7047d5ffb7f:hover {
             fill: #eee;
             cursor: pointer;
         }
 
-        .collapse-icon_59fd3bcf-8464-45e9-a355-b4f0835120f4, .info-icon_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        .collapse-icon_a626c947-24fd-40b0-a3b5-a7047d5ffb7f, .info-icon_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             fill: rgb(51, 51, 51);
         }
 
-        .collapse-button-disabled_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        .collapse-button-disabled_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             fill: #eee5;
             stroke: #3333334f;
             stroke-width: 1px;
             cursor: not-allowed;
         }
 
-        .collapse-button-disabled_59fd3bcf-8464-45e9-a355-b4f0835120f4:hover {
+        .collapse-button-disabled_a626c947-24fd-40b0-a3b5-a7047d5ffb7f:hover {
             fill: #eee6;
             cursor: not-allowed;
         }
 
-        .collapse-icon-disabled_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        .collapse-icon-disabled_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -538,11 +527,11 @@ trace_model(model, torch.randn(2, 32), show_module_attr_names=True, collapse_mod
         }
 
         /* Edge hover styles */
-        .edge-group_59fd3bcf-8464-45e9-a355-b4f0835120f4 path {
+        .edge-group_a626c947-24fd-40b0-a3b5-a7047d5ffb7f path {
             pointer-events: stroke;
         }
 
-        .edge-label_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        .edge-label_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             pointer-events: all;
         }
 
@@ -582,50 +571,50 @@ trace_model(model, torch.randn(2, 32), show_module_attr_names=True, collapse_mod
             }
         }
 
-        .highlight-cluster_59fd3bcf-8464-45e9-a355-b4f0835120f4 > rect:first-of-type {
+        .highlight-cluster_a626c947-24fd-40b0-a3b5-a7047d5ffb7f > rect:first-of-type {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        .highlight-node_59fd3bcf-8464-45e9-a355-b4f0835120f4 rect {
+        .highlight-node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f rect {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        text.node-label_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        text.node-label_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 0.8rem;  /* Base size using rem units for accessibility */
             cursor: default;
             user-select: none;
         }
 
-        .node_59fd3bcf-8464-45e9-a355-b4f0835120f4.constant_59fd3bcf-8464-45e9-a355-b4f0835120f4 .node-label_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        .node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f.constant_a626c947-24fd-40b0-a3b5-a7047d5ffb7f .node-label_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             font-size: 0.7rem;
         }
 
-        .popup-content_59fd3bcf-8464-45e9-a355-b4f0835120f4 summary {
+        .popup-content_a626c947-24fd-40b0-a3b5-a7047d5ffb7f summary {
             cursor: pointer;
             margin: 5px;
             user-select: none;
         }
 
-        .node_59fd3bcf-8464-45e9-a355-b4f0835120f4.input_59fd3bcf-8464-45e9-a355-b4f0835120f4 rect,
-        .node_59fd3bcf-8464-45e9-a355-b4f0835120f4.output_59fd3bcf-8464-45e9-a355-b4f0835120f4 rect,
-        .node_59fd3bcf-8464-45e9-a355-b4f0835120f4.constant_59fd3bcf-8464-45e9-a355-b4f0835120f4 rect {
+        .node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f.input_a626c947-24fd-40b0-a3b5-a7047d5ffb7f rect,
+        .node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f.output_a626c947-24fd-40b0-a3b5-a7047d5ffb7f rect,
+        .node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f.constant_a626c947-24fd-40b0-a3b5-a7047d5ffb7f rect {
             stroke-width: 1px;
             rx: 8px;
             ry: 8px;
             stroke-dasharray: none;
         }
 
-        #png-error-container_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        #png-error-container_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             text-align: center;
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 14px;
         }
 
-        #png-error-message_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        #png-error-message_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             padding: 8px 16px;
             background-color: #dc3545;
             color: white;
@@ -636,13 +625,13 @@ trace_model(model, torch.randn(2, 32), show_module_attr_names=True, collapse_mod
             text-align: left;
         }
 
-        #png-link-container_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        #png-link-container_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 18px;
         }
 
-        #png-download-button_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        #png-download-button_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -652,11 +641,11 @@ trace_model(model, torch.randn(2, 32), show_module_attr_names=True, collapse_mod
             margin-right: 8px;
         }
 
-        #png-download-button_59fd3bcf-8464-45e9-a355-b4f0835120f4:hover {
+        #png-download-button_a626c947-24fd-40b0-a3b5-a7047d5ffb7f:hover {
             background-color: #0056b3;
         }
 
-        #png-save-button_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        #png-save-button_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -665,18 +654,18 @@ trace_model(model, torch.randn(2, 32), show_module_attr_names=True, collapse_mod
             border-radius: 4px;
         }
 
-        #png-save-button_59fd3bcf-8464-45e9-a355-b4f0835120f4:hover {
+        #png-save-button_a626c947-24fd-40b0-a3b5-a7047d5ffb7f:hover {
             background-color: #0056b3;
         }
 
-        #svg-link-container_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        #svg-link-container_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 18px;
         }
 
 
-        #svg-download-button_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        #svg-download-button_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -686,11 +675,11 @@ trace_model(model, torch.randn(2, 32), show_module_attr_names=True, collapse_mod
             margin-right: 8px;
         }
 
-        #svg-download-button_59fd3bcf-8464-45e9-a355-b4f0835120f4:hover {
+        #svg-download-button_a626c947-24fd-40b0-a3b5-a7047d5ffb7f:hover {
             background-color: #0056b3;
         }
 
-        #svg-save-button_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        #svg-save-button_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -699,11 +688,11 @@ trace_model(model, torch.randn(2, 32), show_module_attr_names=True, collapse_mod
             border-radius: 4px;
         }
 
-        #svg-save-button_59fd3bcf-8464-45e9-a355-b4f0835120f4:hover {
+        #svg-save-button_a626c947-24fd-40b0-a3b5-a7047d5ffb7f:hover {
             background-color: #0056b3;
         }
 
-        .custom-tooltip_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        .custom-tooltip_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             position: absolute;
             background: white;
             border: 1px solid #ccc;
@@ -719,7 +708,7 @@ trace_model(model, torch.randn(2, 32), show_module_attr_names=True, collapse_mod
             display: none;
         }
 
-        .custom-tooltip_smaller_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        .custom-tooltip_smaller_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             position: absolute;
             background: white;
             border: 1px solid #ccc;
@@ -735,16 +724,16 @@ trace_model(model, torch.randn(2, 32), show_module_attr_names=True, collapse_mod
             display: none;
         }
 
-        .edge_59fd3bcf-8464-45e9-a355-b4f0835120f4.implied-edge_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        .edge_a626c947-24fd-40b0-a3b5-a7047d5ffb7f.implied-edge_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             stroke-dasharray: 5,5;
         }
 
-        .logo_59fd3bcf-8464-45e9-a355-b4f0835120f4 {
+        .logo_a626c947-24fd-40b0-a3b5-a7047d5ffb7f {
             position: absolute;
             bottom: 8px; left: 8px;
             padding: 4px 6px;
         }
-        .logo_59fd3bcf-8464-45e9-a355-b4f0835120f4 a {
+        .logo_a626c947-24fd-40b0-a3b5-a7047d5ffb7f a {
             color: #a1a1a1;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             opacity: .6;
@@ -905,19 +894,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
 (function() {
-    const adj_list = {"input_0": {"edges": [{"target": "linear_2", "dims": "(2, 32)", "edge_data_id": 11096314160}], "failed": false, "node_type": "Input"}, "linear_2": {"edges": [{"target": "linear_7", "dims": "(2, 32)", "edge_data_id": 11700471104}], "failed": false, "node_type": "Operation"}, "param_3": {"edges": [{"target": "linear_2", "dims": "(32, 32)", "edge_data_id": 11096314240}], "failed": false, "node_type": "Parameter"}, "param_4": {"edges": [{"target": "linear_2", "dims": "(32)", "edge_data_id": 11096314320}], "failed": false, "node_type": "Parameter"}, "linear_7": {"edges": [{"target": "linear_12", "dims": "(2, 32)", "edge_data_id": 11703186992}], "failed": false, "node_type": "Operation"}, "param_8": {"edges": [{"target": "linear_7", "dims": "(32, 32)", "edge_data_id": 11096314400}], "failed": false, "node_type": "Parameter"}, "param_9": {"edges": [{"target": "linear_7", "dims": "(32)", "edge_data_id": 11096314480}], "failed": false, "node_type": "Parameter"}, "linear_12": {"edges": [{"target": "relu_16", "dims": "(2, 32)", "edge_data_id": 11700743280}], "failed": false, "node_type": "Operation"}, "param_13": {"edges": [{"target": "linear_12", "dims": "(32, 32)", "edge_data_id": 11096314560}], "failed": false, "node_type": "Parameter"}, "param_14": {"edges": [{"target": "linear_12", "dims": "(32)", "edge_data_id": 11096314640}], "failed": false, "node_type": "Parameter"}, "relu_16": {"edges": [{"target": "linear_18", "dims": "(2, 32)", "edge_data_id": 11700742320}], "failed": false, "node_type": "Operation"}, "linear_18": {"edges": [{"target": "output_0", "dims": "(2, 32)", "edge_data_id": 11700471104}], "failed": false, "node_type": "Operation"}, "param_19": {"edges": [{"target": "linear_18", "dims": "(32, 32)", "edge_data_id": 11096314720}], "failed": false, "node_type": "Parameter"}, "param_20": {"edges": [{"target": "linear_18", "dims": "(32)", "edge_data_id": 11096314800}], "failed": false, "node_type": "Parameter"}, "output_0": {"edges": [], "failed": false, "node_type": "Output"}};
-    const module_info = {"Linear_1": {"type": "Linear", "parameters": {"weight": {"shape": [32, 32], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 32, "out_features": 32, "training": true}, "extra_repr": "in_features=32, out_features=32, bias=True"}, "MidLevelBlock_5": {"type": "MidLevelBlock", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Linear_6": {"type": "Linear", "parameters": {"weight": {"shape": [32, 32], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 32, "out_features": 32, "training": true}, "extra_repr": "in_features=32, out_features=32, bias=True"}, "InnerSubBlock_10": {"type": "InnerSubBlock", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Linear_11": {"type": "Linear", "parameters": {"weight": {"shape": [32, 32], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 32, "out_features": 32, "training": true}, "extra_repr": "in_features=32, out_features=32, bias=True"}, "ReLU_15": {"type": "ReLU", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "inplace": false, "training": true}, "extra_repr": ""}, "Linear_17": {"type": "Linear", "parameters": {"weight": {"shape": [32, 32], "requires_grad": true}, "bias": {"shape": [32], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 32, "out_features": 32, "training": true}, "extra_repr": "in_features=32, out_features=32, bias=True"}};
-    const func_info = {"Linear_1": {"positional_args": [{"_type": "tensor", "shape": [2, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "linear_2": {"positional_args": [{"_type": "tensor", "shape": [2, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}], "keyword_args": {}}, "MidLevelBlock_5": {"positional_args": [{"_type": "tensor", "shape": [2, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_6": {"positional_args": [{"_type": "tensor", "shape": [2, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "linear_7": {"positional_args": [{"_type": "tensor", "shape": [2, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}], "keyword_args": {}}, "InnerSubBlock_10": {"positional_args": [{"_type": "tensor", "shape": [2, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_11": {"positional_args": [{"_type": "tensor", "shape": [2, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "linear_12": {"positional_args": [{"_type": "tensor", "shape": [2, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}], "keyword_args": {}}, "ReLU_15": {"positional_args": [{"_type": "tensor", "shape": [2, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_16": {"positional_args": [{"_type": "tensor", "shape": [2, 32], "dtype": "torch.float32"}], "keyword_args": {"inplace": false}}, "Linear_17": {"positional_args": [{"_type": "tensor", "shape": [2, 32], "dtype": "torch.float32"}], "keyword_args": {}}, "linear_18": {"positional_args": [{"_type": "tensor", "shape": [2, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32, 32], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [32], "dtype": "torch.float32"}], "keyword_args": {}}};
-    const parent_module_to_nodes = {"Linear_1": ["linear_2"], "Linear_6": ["linear_7"], "MidLevelBlock_5": ["linear_7", "linear_12", "relu_16"], "Linear_11": ["linear_12"], "InnerSubBlock_10": ["linear_12", "relu_16"], "ReLU_15": ["relu_16"], "Linear_17": ["linear_18"]};
-    const parent_module_to_depth = {"Linear_1": 1, "Linear_6": 1, "MidLevelBlock_5": 3, "Linear_11": 1, "InnerSubBlock_10": 2, "ReLU_15": 1, "Linear_17": 1};
-    const graph_node_name_to_without_suffix = {"input_0": "input_0", "Linear_1": "Linear", "linear_2": "linear", "param_3": "nn.Parameter", "param_4": "nn.Parameter", "MidLevelBlock_5": "MidLevelBlock", "Linear_6": "Linear", "linear_7": "linear", "param_8": "nn.Parameter", "param_9": "nn.Parameter", "InnerSubBlock_10": "InnerSubBlock", "Linear_11": "Linear", "linear_12": "linear", "param_13": "nn.Parameter", "param_14": "nn.Parameter", "ReLU_15": "ReLU", "relu_16": "relu", "Linear_17": "Linear", "linear_18": "linear", "param_19": "nn.Parameter", "param_20": "nn.Parameter", "output": "output", "output_0": "output_0"};
-    const graph_node_display_names = {"input_0": "input_0", "Linear_1": "initial_projection_layer_with_lengthy_name", "linear_2": "linear", "param_3": "nn.Parameter", "param_4": "nn.Parameter", "MidLevelBlock_5": "midlevel_feature_processing_unit", "Linear_6": "midlevel_linear_transformation_step", "linear_7": "linear", "param_8": "nn.Parameter", "param_9": "nn.Parameter", "InnerSubBlock_10": "deeply_nested_inner_block", "Linear_11": "inner_linear_with_long_name", "linear_12": "linear", "param_13": "nn.Parameter", "param_14": "nn.Parameter", "ReLU_15": "inner_activation_function_layer", "relu_16": "relu", "Linear_17": "final_output_mapping_layer", "linear_18": "linear", "param_19": "nn.Parameter", "param_20": "nn.Parameter", "output": "output", "output_0": "output_0"};
-    const ancestor_map = {"param_3": "Linear_1", "param_4": "Linear_1", "linear_2": "Linear_1", "param_8": "Linear_6", "Linear_6": "MidLevelBlock_5", "param_9": "Linear_6", "linear_7": "Linear_6", "param_13": "Linear_11", "Linear_11": "InnerSubBlock_10", "InnerSubBlock_10": "MidLevelBlock_5", "param_14": "Linear_11", "linear_12": "Linear_11", "relu_16": "ReLU_15", "ReLU_15": "InnerSubBlock_10", "param_19": "Linear_17", "param_20": "Linear_17", "linear_18": "Linear_17"};
+    const adj_list = {"input_0": {"edges": [{"target": "__add___1", "dims": "(1, 64)", "edge_data_id": 11096704880}], "failed": false, "node_type": "Input"}, "__add___1": {"edges": [{"target": "__add___4", "dims": "(1, 64)", "edge_data_id": 5317867136}], "failed": false, "node_type": "Operation"}, "param_2": {"edges": [{"target": "__add___1", "dims": "(64)", "edge_data_id": 11096705440}], "failed": false, "node_type": "Parameter"}, "__add___4": {"edges": [{"target": "relu_6", "dims": "(1, 64)", "edge_data_id": 11703188192}], "failed": false, "node_type": "Operation"}, "tensor_5": {"edges": [{"target": "__add___4", "dims": "(64)", "edge_data_id": 11703186672}], "failed": false, "node_type": "Constant"}, "relu_6": {"edges": [{"target": "Linear_8", "dims": "(1, 64)", "edge_data_id": 5317867136}], "failed": false, "node_type": "Operation"}, "Linear_8": {"edges": [{"target": "__mul___9", "dims": "(1, 64)", "edge_data_id": 11703186672}], "failed": false, "node_type": "Module"}, "__mul___9": {"edges": [{"target": "output_0", "dims": "(1, 64)", "edge_data_id": 11703187872}], "failed": false, "node_type": "Operation"}, "param_10": {"edges": [{"target": "__mul___9", "dims": "(64)", "edge_data_id": 11096706160}], "failed": false, "node_type": "Parameter"}, "output_0": {"edges": [], "failed": false, "node_type": "Output"}};
+    const module_info = {"SubModule_7": {"type": "SubModule", "parameters": {"scale": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Linear_8": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": true}, "extra_repr": "in_features=64, out_features=64, bias=True"}};
+    const func_info = {"__add___1": {"positional_args": [{"_type": "tensor", "shape": [1, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}], "keyword_args": {}}, "__add___4": {"positional_args": [{"_type": "tensor", "shape": [1, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}], "keyword_args": {}}, "relu_6": {"positional_args": [{"_type": "tensor", "shape": [1, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "SubModule_7": {"positional_args": [{"_type": "tensor", "shape": [1, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_8": {"positional_args": [{"_type": "tensor", "shape": [1, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "__mul___9": {"positional_args": [{"_type": "tensor", "shape": [1, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}], "keyword_args": {}}};
+    const parent_module_to_nodes = {"SubModule_7": ["Linear_8", "__mul___9"]};
+    const parent_module_to_depth = {"SubModule_7": 1};
+    const graph_node_name_to_without_suffix = {"input_0": "input_0", "__add___1": "__add__", "param_2": "nn.Parameter", "ones_3": "ones", "__add___4": "__add__", "tensor_5": "tensor", "relu_6": "relu", "SubModule_7": "SubModule", "Linear_8": "Linear", "__mul___9": "__mul__", "param_10": "nn.Parameter", "output": "output", "output_0": "output_0"};
+    const graph_node_display_names = {"input_0": "input_0", "__add___1": "__add__", "param_2": "nn.Parameter", "ones_3": "ones", "__add___4": "__add__", "tensor_5": "tensor", "relu_6": "relu", "SubModule_7": "SubModule", "Linear_8": "Linear", "__mul___9": "__mul__", "param_10": "nn.Parameter", "output": "output", "output_0": "output_0"};
+    const ancestor_map = {"Linear_8": "SubModule_7", "param_10": "SubModule_7", "__mul___9": "SubModule_7"};
     const repeat_containers = new Set([]);
     const REPEAT_CONTAINER_COLOR = "#FA8334";
-    const collapse_modules_after_depth = 0;
-    const show_module_attr_names = true;
-    const node_to_module_path = {'Linear_1': 'torch.nn.modules.linear', 'linear': 'torch.nn.functional', 'linear_2': 'torch.nn.functional', 'MidLevelBlock_5': 'TinyModelWithNestedSubmodules', 'Linear_6': 'torch.nn.modules.linear', 'linear_7': 'torch.nn.functional', 'InnerSubBlock_10': 'TinyModelWithNestedSubmodules', 'Linear_11': 'torch.nn.modules.linear', 'linear_12': 'torch.nn.functional', 'ReLU_15': 'torch.nn.modules.activation', 'relu': 'torch.nn.functional', 'relu_16': 'torch.nn.functional', 'Linear_17': 'torch.nn.modules.linear', 'linear_18': 'torch.nn.functional'};
+    const collapse_modules_after_depth = 1;
+    const show_module_attr_names = false;
+    const node_to_module_path = {'__add__': 'torch.Tensor', '__add___1': 'torch.Tensor', 'ones': 'torch', 'ones_3': 'torch', '__add___4': 'torch.Tensor', 'relu': 'torch', 'relu_6': 'torch', 'SubModule_7': 'ParameterNodes', 'Linear_8': 'torch.nn.modules.linear', '__mul__': 'torch.Tensor', '__mul___9': 'torch.Tensor'};
     const generateImage = false;
     const generateSvg = false;
     const show_modular_view = false;
@@ -954,10 +943,10 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         removeTooltip();
         
         const tooltip = document.createElement('div');
-        tooltip.className = !smaller ? `custom-tooltip_59fd3bcf-8464-45e9-a355-b4f0835120f4` : `custom-tooltip_smaller_59fd3bcf-8464-45e9-a355-b4f0835120f4`;
+        tooltip.className = !smaller ? `custom-tooltip_a626c947-24fd-40b0-a3b5-a7047d5ffb7f` : `custom-tooltip_smaller_a626c947-24fd-40b0-a3b5-a7047d5ffb7f`;
         tooltip.textContent = text;
         
-        const container = document.getElementById(`graph-container_59fd3bcf-8464-45e9-a355-b4f0835120f4`);
+        const container = document.getElementById(`graph-container_a626c947-24fd-40b0-a3b5-a7047d5ffb7f`);
         container.appendChild(tooltip);
         currentTooltip = tooltip;
         
@@ -969,7 +958,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const buttonRect = buttonElement.getBoundingClientRect();
         
         // Get the container's position in screen coordinates
-        const containerRect = document.getElementById(`graph-container_59fd3bcf-8464-45e9-a355-b4f0835120f4`).getBoundingClientRect();
+        const containerRect = document.getElementById(`graph-container_a626c947-24fd-40b0-a3b5-a7047d5ffb7f`).getBoundingClientRect();
         
         // Calculate position relative to container
         const buttonX = buttonRect.left + (buttonRect.width / 2) - containerRect.left;
@@ -1587,7 +1576,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function reloadGraph() {
-        d3.select("#graph_59fd3bcf-8464-45e9-a355-b4f0835120f4").html("");
+        d3.select("#graph_a626c947-24fd-40b0-a3b5-a7047d5ffb7f").html("");
 
         if (generateImage) {
             renderGraphvizImage();
@@ -1654,16 +1643,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function renderGraphvizImage() {
-        d3.select("#png-link-container_59fd3bcf-8464-45e9-a355-b4f0835120f4").remove();
+        d3.select("#png-link-container_a626c947-24fd-40b0-a3b5-a7047d5ffb7f").remove();
         
         function showErrorMessage(error) {
-            const parent = d3.select("#graph-container_59fd3bcf-8464-45e9-a355-b4f0835120f4").node().parentNode;
+            const parent = d3.select("#graph-container_a626c947-24fd-40b0-a3b5-a7047d5ffb7f").node().parentNode;
             const errorContainer = d3.select(parent)
-                .insert("div", "#graph-container_59fd3bcf-8464-45e9-a355-b4f0835120f4")
-                .attr("id", "png-error-container_59fd3bcf-8464-45e9-a355-b4f0835120f4");
+                .insert("div", "#graph-container_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
+                .attr("id", "png-error-container_a626c947-24fd-40b0-a3b5-a7047d5ffb7f");
             
             errorContainer.append("div")
-                .attr("id", "png-error-message_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+                .attr("id", "png-error-message_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
                 .html(`<strong>Error:</strong><br>${error.stack || error.message || error}<br><br><strong>Note:</strong> Exporting very large models as PNG is currently not supported. Please use generate_image=False, or raise an issue on https://github.com/sachinhosmani/torchvista/issues`);
         }
         
@@ -1701,21 +1690,21 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const pngUrl = URL.createObjectURL(pngBlob);
         
         // Create link container
-        const parent = d3.select("#graph-container_59fd3bcf-8464-45e9-a355-b4f0835120f4").node().parentNode;
+        const parent = d3.select("#graph-container_a626c947-24fd-40b0-a3b5-a7047d5ffb7f").node().parentNode;
         const linkContainer = d3.select(parent)
-            .insert("div", "#graph-container_59fd3bcf-8464-45e9-a355-b4f0835120f4")
-            .attr("id", "png-link-container_59fd3bcf-8464-45e9-a355-b4f0835120f4");
+            .insert("div", "#graph-container_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
+            .attr("id", "png-link-container_a626c947-24fd-40b0-a3b5-a7047d5ffb7f");
         
         linkContainer.append("a")
             .attr("href", pngUrl)
             .attr("target", "_blank")
-            .attr("id", "png-download-button_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+            .attr("id", "png-download-button_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
             .text("View PNG in New Tab");
 
         linkContainer.append("a")
             .attr("href", pngUrl)
-            .attr("download", `torchvista_graph_59fd3bcf-8464-45e9-a355-b4f0835120f4.png`)
-            .attr("id", "png-save-button_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+            .attr("download", `torchvista_graph_a626c947-24fd-40b0-a3b5-a7047d5ffb7f.png`)
+            .attr("id", "png-save-button_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
             .text("Download PNG");
             
         URL.revokeObjectURL(svgUrl);
@@ -1736,26 +1725,26 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const svgUrl = URL.createObjectURL(svgBlob);
         
         // Create link container
-        const parent = d3.select("#graph-container_59fd3bcf-8464-45e9-a355-b4f0835120f4").node().parentNode;
+        const parent = d3.select("#graph-container_a626c947-24fd-40b0-a3b5-a7047d5ffb7f").node().parentNode;
         const linkContainer = d3.select(parent)
-            .insert("div", "#graph-container_59fd3bcf-8464-45e9-a355-b4f0835120f4")
-            .attr("id", "svg-link-container_59fd3bcf-8464-45e9-a355-b4f0835120f4");
+            .insert("div", "#graph-container_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
+            .attr("id", "svg-link-container_a626c947-24fd-40b0-a3b5-a7047d5ffb7f");
         
         linkContainer.append("a")
             .attr("href", svgUrl)
             .attr("target", "_blank")
-            .attr("id", "svg-download-button_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+            .attr("id", "svg-download-button_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
             .text("View SVG in New Tab");
 
         linkContainer.append("a")
             .attr("href", svgUrl)
-            .attr("download", `torchvista_graph_59fd3bcf-8464-45e9-a355-b4f0835120f4.svg`)
-            .attr("id", "svg-save-button_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+            .attr("download", `torchvista_graph_a626c947-24fd-40b0-a3b5-a7047d5ffb7f.svg`)
+            .attr("id", "svg-save-button_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
             .text("Download SVG");
     }
 
     function createGraph(graphvizData) {
-        const svg = d3.select("#graph_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+        const svg = d3.select("#graph_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
         .append("svg")
         .attr("width", "100%")
         .attr("height", "100%")
@@ -1775,7 +1764,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
         // Define arrowhead marker
         svg.append("defs").append("marker")
-        .attr("id", "arrowhead_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+        .attr("id", "arrowhead_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
         .attr("viewBox", "0 -5 10 10")
         .attr("refX", 8)
         .attr("refY", 0)
@@ -1787,11 +1776,11 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .attr("fill", "#333");
 
         // Draw clusters (container boxes) first so they're behind nodes
-        const clusters = inner.selectAll(".boundary-box_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+        const clusters = inner.selectAll(".boundary-box_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
         .data(Object.entries(graphvizData.clusters))
         .enter()
         .append("g")
-        .attr("class", "boundary-box_59fd3bcf-8464-45e9-a355-b4f0835120f4");
+        .attr("class", "boundary-box_a626c947-24fd-40b0-a3b5-a7047d5ffb7f");
 
         const containersWithFailedNodes = identifyContainersWithFailedNodes(adj_list, ancestor_map);
 
@@ -1801,10 +1790,10 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             const hasFailedNodes = containersWithFailedNodes.has(clusterName);
             const isRepeat = isRepeatNode(clusterName);
             if (hasFailedNodes) {
-                group.classed("error_59fd3bcf-8464-45e9-a355-b4f0835120f4", true);
+                group.classed("error_a626c947-24fd-40b0-a3b5-a7047d5ffb7f", true);
             }
             if (isRepeat) {
-                group.classed("repeat-container_59fd3bcf-8464-45e9-a355-b4f0835120f4", true);
+                group.classed("repeat-container_a626c947-24fd-40b0-a3b5-a7047d5ffb7f", true);
             }
 
             // Parse bounding box coordinates
@@ -1846,13 +1835,13 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (!isRepeatNode(clusterName)) {
                 // Add collapse/expand button
                 const collapseButton = group.append("circle")
-                .attr("class", "collapse-button_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+                .attr("class", "collapse-button_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
                 .attr("cx", x1 + 10)
                 .attr("cy", y1 + 10)
                 .attr("r", 5.5);
 
                 group.append("text")
-                .attr("class", "collapse-icon_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+                .attr("class", "collapse-icon_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
                 .attr("x", x1 + 10)
                 .attr("y", y1 + 10)
                 .attr("text-anchor", "middle")
@@ -1869,7 +1858,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add click event handler for collapse buttons
-        clusters.selectAll(".collapse-button_59fd3bcf-8464-45e9-a355-b4f0835120f4, .collapse-icon_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+        clusters.selectAll(".collapse-button_a626c947-24fd-40b0-a3b5-a7047d5ffb7f, .collapse-icon_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
         .on("click", function(event, [clusterName, clusterData]) {
             event.stopPropagation(); // Prevent event from bubbling to SVG
             removeTooltip();
@@ -1884,19 +1873,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
         
         // Create edges using the path points from Graphviz
-        const edges = inner.selectAll(".edge_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+        const edges = inner.selectAll(".edge_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
         .data(graphvizData.edges)
         .enter()
         .append("g")
-        .attr("class", "edge-group_59fd3bcf-8464-45e9-a355-b4f0835120f4");
+        .attr("class", "edge-group_a626c947-24fd-40b0-a3b5-a7047d5ffb7f");
         
         // Add the actual path
         edges.append("path")
         .attr("class", function(edge) {
             if (edge.is_implied_edge) {
-                return "edge_59fd3bcf-8464-45e9-a355-b4f0835120f4 implied-edge_59fd3bcf-8464-45e9-a355-b4f0835120f4";
+                return "edge_a626c947-24fd-40b0-a3b5-a7047d5ffb7f implied-edge_a626c947-24fd-40b0-a3b5-a7047d5ffb7f";
             }
-            return "edge_59fd3bcf-8464-45e9-a355-b4f0835120f4";
+            return "edge_a626c947-24fd-40b0-a3b5-a7047d5ffb7f";
         }).attr("d", function(edge) {
             if (edge.path && edge.path.length > 0) {
                     // Create a proper SVG path using Bézier curves
@@ -1922,7 +1911,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             }
             return "";
         })
-        .attr("marker-end", "url(#arrowhead_59fd3bcf-8464-45e9-a355-b4f0835120f4)");
+        .attr("marker-end", "url(#arrowhead_a626c947-24fd-40b0-a3b5-a7047d5ffb7f)");
         
         // Add dimension labels on edges
         edges.each(function(edge) {
@@ -1951,7 +1940,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Create a background for the text
             const labelGroup = edgeGroup.append("g")
-            .attr("class", "edge-label_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+            .attr("class", "edge-label_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
             .attr("transform", `translate(${pointAtStart.x}, ${pointAtStart.y})`);
             
             const text = labelGroup.append("text")
@@ -1986,7 +1975,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         edges.each(function() {
             const edgeGroup = d3.select(this);
             const path = edgeGroup.select("path");
-            const labelGroup = edgeGroup.select(".edge-label_59fd3bcf-8464-45e9-a355-b4f0835120f4");
+            const labelGroup = edgeGroup.select(".edge-label_a626c947-24fd-40b0-a3b5-a7047d5ffb7f");
             const labelText = labelGroup.select("text");
             const labelBg = labelGroup.select("rect");
             const originalStrokeWidth = path.attr("stroke-width") || 1;
@@ -2051,19 +2040,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
         // Create nodes using positions from Graphviz
-        const nodes = inner.selectAll(".node_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+        const nodes = inner.selectAll(".node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
             .data(Object.entries(graphvizData.nodes))
             .enter()
             .append("g")
             // In the createGraph function, when you're creating nodes, modify the class assignment:
             .attr("class", function([nodeName, nodeData]) {
-                let classes = "node_59fd3bcf-8464-45e9-a355-b4f0835120f4";
-                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_59fd3bcf-8464-45e9-a355-b4f0835120f4";
-                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_59fd3bcf-8464-45e9-a355-b4f0835120f4";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_59fd3bcf-8464-45e9-a355-b4f0835120f4";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_59fd3bcf-8464-45e9-a355-b4f0835120f4";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_59fd3bcf-8464-45e9-a355-b4f0835120f4";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_59fd3bcf-8464-45e9-a355-b4f0835120f4";
+                let classes = "node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f";
+                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_a626c947-24fd-40b0-a3b5-a7047d5ffb7f";
+                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_a626c947-24fd-40b0-a3b5-a7047d5ffb7f";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_a626c947-24fd-40b0-a3b5-a7047d5ffb7f";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_a626c947-24fd-40b0-a3b5-a7047d5ffb7f";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_a626c947-24fd-40b0-a3b5-a7047d5ffb7f";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_a626c947-24fd-40b0-a3b5-a7047d5ffb7f";
                 return classes;
             })
             .attr("transform", function([nodeName, nodeData]) {
@@ -2091,12 +2080,12 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 .attr("rx", nodeData.width / 2)
                 .attr("ry", nodeData.height / 2)
                 .attr("class", function() {
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_59fd3bcf-8464-45e9-a355-b4f0835120f4";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_59fd3bcf-8464-45e9-a355-b4f0835120f4";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_59fd3bcf-8464-45e9-a355-b4f0835120f4";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Parameter") return "parameter_59fd3bcf-8464-45e9-a355-b4f0835120f4";
-                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_59fd3bcf-8464-45e9-a355-b4f0835120f4";
-                    return "operation_59fd3bcf-8464-45e9-a355-b4f0835120f4";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_a626c947-24fd-40b0-a3b5-a7047d5ffb7f";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_a626c947-24fd-40b0-a3b5-a7047d5ffb7f";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_a626c947-24fd-40b0-a3b5-a7047d5ffb7f";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Parameter") return "parameter_a626c947-24fd-40b0-a3b5-a7047d5ffb7f";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_a626c947-24fd-40b0-a3b5-a7047d5ffb7f";
+                    return "operation_a626c947-24fd-40b0-a3b5-a7047d5ffb7f";
                 });
             } else {
                 // Create rectangle
@@ -2106,15 +2095,15 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 .attr("x", -nodeData.width / 2)
                 .attr("y", -nodeData.height / 2)
                 .attr("class", function() { 
-                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_59fd3bcf-8464-45e9-a355-b4f0835120f4";
-                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_59fd3bcf-8464-45e9-a355-b4f0835120f4" : "operation_59fd3bcf-8464-45e9-a355-b4f0835120f4";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_a626c947-24fd-40b0-a3b5-a7047d5ffb7f";
+                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_a626c947-24fd-40b0-a3b5-a7047d5ffb7f" : "operation_a626c947-24fd-40b0-a3b5-a7047d5ffb7f";
                 });
             }
         });
         
         // Add labels for nodes
         nodes.append("text")
-        .attr("class", "node-label_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+        .attr("class", "node-label_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
         .text(function([nodeName]) { return graph_node_display_names[nodeName] || graph_node_name_to_without_suffix[nodeName] || nodeName; })
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "central");
@@ -2123,7 +2112,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         nodes.filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Parameter")));
         }).append("text")
-        .attr("class", "type-indicator_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+        .attr("class", "type-indicator_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
         .attr("text-anchor", "start")
         .attr("dominant-baseline", "text-bottom")
         .attr("transform", function([nodeName, nodeData]) {
@@ -2141,7 +2130,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add info buttons to nodes (except input, output, constant, parameter)
-        inner.selectAll(".node_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+        inner.selectAll(".node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
         .filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Parameter")))
         })
@@ -2152,14 +2141,14 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
         // Add info button circle
         const infoButton = nodeGroup.append("circle")
-        .attr("class", "info-button_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+        .attr("class", "info-button_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
         .attr("cx", width/2 - 7)
         .attr("cy", -height/2 + 7)
         .attr("r", 5.5);
 
         // Add info button icon
         nodeGroup.append("text")
-        .attr("class", "info-icon_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+        .attr("class", "info-icon_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
         .attr("x", width/2 - 7)
         .attr("y", -height/2 + 8)
         .attr("text-anchor", "middle")
@@ -2175,16 +2164,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .on("mouseleave", removeTooltip);
 
         // Add click handler to info button
-            nodeGroup.selectAll(".info-button_59fd3bcf-8464-45e9-a355-b4f0835120f4, .info-icon_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+            nodeGroup.selectAll(".info-button_a626c947-24fd-40b0-a3b5-a7047d5ffb7f, .info-icon_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
             .on("click", function(event) {
                 event.stopPropagation();
-                const infoButton = nodeGroup.select(".info-button_59fd3bcf-8464-45e9-a355-b4f0835120f4").node();
+                const infoButton = nodeGroup.select(".info-button_a626c947-24fd-40b0-a3b5-a7047d5ffb7f").node();
                 showPopupFromInfoButton.call(nodeGroup.node(), event, [nodeName], infoButton);
             });
         });
 
         // Add expand buttons to all module nodes (including non-expandable ones)
-        inner.selectAll(".node_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+        inner.selectAll(".node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
         .filter(function([nodeName]) {
             return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || collapsedContainers.has(nodeName)) && !isRepeatNode(nodeName);
         })
@@ -2206,7 +2195,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Add expand button circle
             const expandButton = nodeGroup.append("circle")
-            .attr("class", isExpandable ? "collapse-button_59fd3bcf-8464-45e9-a355-b4f0835120f4" : "collapse-button-disabled_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+            .attr("class", isExpandable ? "collapse-button_a626c947-24fd-40b0-a3b5-a7047d5ffb7f" : "collapse-button-disabled_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
             .attr("cx", -width / 2 + 7)
             .attr("cy", -height / 2 + 7)
             .attr("r", 5.5)
@@ -2215,7 +2204,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Add expand button icon
             nodeGroup.append("text")
-            .attr("class", isExpandable ? "collapse-icon_59fd3bcf-8464-45e9-a355-b4f0835120f4" : "collapse-icon-disabled_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+            .attr("class", isExpandable ? "collapse-icon_a626c947-24fd-40b0-a3b5-a7047d5ffb7f" : "collapse-icon-disabled_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
             .attr("x", -width / 2 + 7)
             .attr("y", -height / 2 + 7)
             .attr("text-anchor", "middle")
@@ -2235,7 +2224,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Only add click handler for expandable modules
             if (isExpandable) {
-                nodeGroup.selectAll(".collapse-button_59fd3bcf-8464-45e9-a355-b4f0835120f4, .collapse-icon_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+                nodeGroup.selectAll(".collapse-button_a626c947-24fd-40b0-a3b5-a7047d5ffb7f, .collapse-icon_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
                 .on("click", function(event) {
                     event.stopPropagation();
                     removeTooltip();
@@ -2336,16 +2325,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                     .scale(currentTransform.k));
             }
 
-            clickedNodeElement.classed("highlight-node_59fd3bcf-8464-45e9-a355-b4f0835120f4", true);
+            clickedNodeElement.classed("highlight-node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f", true);
             
             setTimeout(() => {
-                clickedNodeElement.classed("highlight-node_59fd3bcf-8464-45e9-a355-b4f0835120f4", false);
+                clickedNodeElement.classed("highlight-node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f", false);
             }, 2000);
 
-            const popup = d3.select("#popup_59fd3bcf-8464-45e9-a355-b4f0835120f4");
-            const moduleTemplate = d3.select("#module-template_59fd3bcf-8464-45e9-a355-b4f0835120f4");
-            const tensorOpTemplate = d3.select("#tensor-op-template_59fd3bcf-8464-45e9-a355-b4f0835120f4");
-            const noInfoMessage = d3.select("#no-info_59fd3bcf-8464-45e9-a355-b4f0835120f4");
+            const popup = d3.select("#popup_a626c947-24fd-40b0-a3b5-a7047d5ffb7f");
+            const moduleTemplate = d3.select("#module-template_a626c947-24fd-40b0-a3b5-a7047d5ffb7f");
+            const tensorOpTemplate = d3.select("#tensor-op-template_a626c947-24fd-40b0-a3b5-a7047d5ffb7f");
+            const noInfoMessage = d3.select("#no-info_a626c947-24fd-40b0-a3b5-a7047d5ffb7f");
             
             const nodeData = adj_list[nodeName];
             
@@ -2353,7 +2342,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (node_to_module_path[nodeName] && graph_node_name_to_without_suffix[nodeName]) {
                 popupTitle = node_to_module_path[nodeName] + "." + graph_node_name_to_without_suffix[nodeName];
             }
-            d3.select("#popup-title_59fd3bcf-8464-45e9-a355-b4f0835120f4").text(popupTitle);
+            d3.select("#popup-title_a626c947-24fd-40b0-a3b5-a7047d5ffb7f").text(popupTitle);
 
             moduleTemplate.style("display", "none");
             tensorOpTemplate.style("display", "none");
@@ -2361,31 +2350,31 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             if (module_info[nodeName]) {
                 const info = module_info[nodeName];
-                moduleTemplate.style("display", "block").classed("content-shown_59fd3bcf-8464-45e9-a355-b4f0835120f4", true);
+                moduleTemplate.style("display", "block").classed("content-shown_a626c947-24fd-40b0-a3b5-a7047d5ffb7f", true);
                 
-                d3.select("#module-extra-repr_59fd3bcf-8464-45e9-a355-b4f0835120f4").text(info.extra_repr || 'N/A');
+                d3.select("#module-extra-repr_a626c947-24fd-40b0-a3b5-a7047d5ffb7f").text(info.extra_repr || 'N/A');
 
                 const forward_info = func_info[nodeName];
-                const attributesContainer = d3.select("#module-attributes_59fd3bcf-8464-45e9-a355-b4f0835120f4").node();
+                const attributesContainer = d3.select("#module-attributes_a626c947-24fd-40b0-a3b5-a7047d5ffb7f").node();
                 attributesContainer.innerHTML = '';
                 createJsonViewer(attributesContainer, info.attributes);
 
-                const parametersContainer = d3.select("#module-parameters_59fd3bcf-8464-45e9-a355-b4f0835120f4").node();
+                const parametersContainer = d3.select("#module-parameters_a626c947-24fd-40b0-a3b5-a7047d5ffb7f").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, forward_info);
             } else if (!(adj_list[nodeName] && adj_list[nodeName].node_type === "Input") && func_info[nodeName]) {
                 const info = func_info[nodeName];
-                tensorOpTemplate.style("display", "block").classed("content-shown_59fd3bcf-8464-45e9-a355-b4f0835120f4", true);
-                const parametersContainer = d3.select("#tensor-op-parameters_59fd3bcf-8464-45e9-a355-b4f0835120f4").node();
+                tensorOpTemplate.style("display", "block").classed("content-shown_a626c947-24fd-40b0-a3b5-a7047d5ffb7f", true);
+                const parametersContainer = d3.select("#tensor-op-parameters_a626c947-24fd-40b0-a3b5-a7047d5ffb7f").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, info);
             } else {
-                noInfoMessage.style("display", "block").classed("content-shown_59fd3bcf-8464-45e9-a355-b4f0835120f4", true);
+                noInfoMessage.style("display", "block").classed("content-shown_a626c947-24fd-40b0-a3b5-a7047d5ffb7f", true);
             }
             
             // Position popup based on info button or node center
             let boundingBox, x, y;
-            const containerRect = d3.select("#graph-container_59fd3bcf-8464-45e9-a355-b4f0835120f4").node().getBoundingClientRect();
+            const containerRect = d3.select("#graph-container_a626c947-24fd-40b0-a3b5-a7047d5ffb7f").node().getBoundingClientRect();
             
             if (infoButtonElement) {
                 boundingBox = infoButtonElement.getBoundingClientRect();
@@ -2401,19 +2390,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             popup.style("left", `${x}px`)
             .style("top", `${y}px`)
             .style("display", "flex");
-            d3.select("#popup-content_59fd3bcf-8464-45e9-a355-b4f0835120f4").node().scrollTop = 0;
+            d3.select("#popup-content_a626c947-24fd-40b0-a3b5-a7047d5ffb7f").node().scrollTop = 0;
         }
 
         function closePopup() {
-            d3.select("#popup_59fd3bcf-8464-45e9-a355-b4f0835120f4").style("display", "none");
+            d3.select("#popup_a626c947-24fd-40b0-a3b5-a7047d5ffb7f").style("display", "none");
         }
         
-        d3.select(".popup-close_59fd3bcf-8464-45e9-a355-b4f0835120f4").on("click", closePopup);
+        d3.select(".popup-close_a626c947-24fd-40b0-a3b5-a7047d5ffb7f").on("click", closePopup);
         svg.on("click", closePopup);
 
-        const popup = document.getElementById(`popup_59fd3bcf-8464-45e9-a355-b4f0835120f4`);
+        const popup = document.getElementById(`popup_a626c947-24fd-40b0-a3b5-a7047d5ffb7f`);
         const resizeObserver = new ResizeObserver(() => {
-            const editorContainers = popup.querySelectorAll('.json-viewer_59fd3bcf-8464-45e9-a355-b4f0835120f4');
+            const editorContainers = popup.querySelectorAll('.json-viewer_a626c947-24fd-40b0-a3b5-a7047d5ffb7f');
             for (let container of editorContainers) {
                 if (container.jsonEditor) {
                     container.jsonEditor.resize();
@@ -2492,30 +2481,30 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 // Apply highlight effect to the target container
                 if (Object.keys(graphvizData.nodes).includes(lastModifiedContainer)) {
                     // Highlight the node (collapsed container)
-                    const targetElement = inner.selectAll(".node_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+                    const targetElement = inner.selectAll(".node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
                         .filter(([nodeName]) => nodeName === lastModifiedContainer);
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-node_59fd3bcf-8464-45e9-a355-b4f0835120f4", true);
+                        targetElement.classed("highlight-node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-node_59fd3bcf-8464-45e9-a355-b4f0835120f4", false);
+                            targetElement.classed("highlight-node_a626c947-24fd-40b0-a3b5-a7047d5ffb7f", false);
                         }, 2000); // Match the animation duration
                     }
                 } else if (Object.keys(graphvizData.clusters).includes(lastModifiedContainer)) {
                     // Highlight the cluster (expanded container)
-                    const targetElement = inner.selectAll(".boundary-box_59fd3bcf-8464-45e9-a355-b4f0835120f4")
+                    const targetElement = inner.selectAll(".boundary-box_a626c947-24fd-40b0-a3b5-a7047d5ffb7f")
                         .filter(function([clusterName]) {
                             return clusterName === lastModifiedContainer;
                         });
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-cluster_59fd3bcf-8464-45e9-a355-b4f0835120f4", true);
+                        targetElement.classed("highlight-cluster_a626c947-24fd-40b0-a3b5-a7047d5ffb7f", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-cluster_59fd3bcf-8464-45e9-a355-b4f0835120f4", false);
+                            targetElement.classed("highlight-cluster_a626c947-24fd-40b0-a3b5-a7047d5ffb7f", false);
                         }, 2000); // Match the animation duration
                     }
                 }
