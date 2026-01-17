@@ -12,6 +12,9 @@
         </div>
         <div id="popup-content_${unique_id}" class="popup-content_${unique_id}">
             <div id="common-info_${unique_id}">
+                <p id="attr-name-row_${unique_id}" style="display:none;">
+                    <strong>Attribute name:</strong> <code id="attr-name-value_${unique_id}" style="background:#f0f0f0; padding:2px 5px; border-radius:3px; font-family:monospace;"></code>
+                </p>
             </div>
             <div id="module-template_${unique_id}" style="display:none;">
                 <details open id="module-parameters-details_${unique_id}">
@@ -515,6 +518,7 @@
     const parent_module_to_depth = ${parent_module_to_depth_json};
     const graph_node_name_to_without_suffix = ${graph_node_name_to_without_suffix};
     const graph_node_display_names = ${graph_node_display_names};
+    const node_to_attr_name = ${node_to_attr_name};
     const ancestor_map = ${ancestor_map};
     const repeat_containers = new Set(${repeat_containers});
     const REPEAT_CONTAINER_COLOR = "#FA8334";
@@ -1957,6 +1961,17 @@
                 popupTitle = node_to_module_path[nodeName] + "." + graph_node_name_to_without_suffix[nodeName];
             }
             d3.select("#popup-title_${unique_id}").text(popupTitle);
+
+            // Show attribute name if available
+            const attrName = node_to_attr_name[nodeName];
+            const attrNameRow = d3.select("#attr-name-row_${unique_id}");
+
+            if (attrName) {
+                d3.select("#attr-name-value_${unique_id}").text(attrName);
+                attrNameRow.style("display", "block");
+            } else {
+                attrNameRow.style("display", "none");
+            }
 
             moduleTemplate.style("display", "none");
             tensorOpTemplate.style("display", "none");

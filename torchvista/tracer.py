@@ -97,7 +97,7 @@ with warnings.catch_warnings():
     MODULES = get_all_nn_modules() - CONTAINER_MODULES
 
 
-def process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, node_to_ancestors, repeat_containers, show_non_gradient_nodes, forced_module_tracing_depth, show_module_attr_names=False, show_compressed_view=False):
+def process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, node_to_ancestors, repeat_containers, node_to_attr_name, show_non_gradient_nodes, forced_module_tracing_depth, show_module_attr_names=False, show_compressed_view=False):
     last_successful_op = None
     current_op = None
     current_executing_module = None
@@ -470,6 +470,8 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 graph_node_name_to_without_suffix[module_name] = type(module).__name__
                 graph_node_display_names[module_name] = get_module_display_name(module)
                 node_to_module_path[module_name] = type(module).__module__
+                if module in module_to_attr_name:
+                    node_to_attr_name[module_name] = module_to_attr_name[module]
                 pre_trace_op(module_name, node_type, *args, **kwargs)
                 module_stack.append(module_name)
                 output = orig_forward(*args, **kwargs)
@@ -482,6 +484,8 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 graph_node_name_to_without_suffix[module_name] = type(module).__name__
                 graph_node_display_names[module_name] = get_module_display_name(module)
                 node_to_module_path[module_name] = type(module).__module__
+                if module in module_to_attr_name:
+                    node_to_attr_name[module_name] = module_to_attr_name[module]
                 module_stack.append(module_name)
                 record_op_parameters(module_name, *args, **kwargs)
                 output = orig_forward(*args, **kwargs)
@@ -1821,7 +1825,7 @@ def generate_html_file_action(html_str, unique_id, export_path=None):
 
 def plot_graph(adj_list, module_info, func_info, node_to_module_path,
                parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix,
-               graph_node_display_names, ancestor_map, collapse_modules_after_depth, height, width, export_format, show_module_attr_names, repeat_containers, show_modular_view=False, export_path=None):
+               graph_node_display_names, node_to_attr_name, ancestor_map, collapse_modules_after_depth, height, width, export_format, show_module_attr_names, repeat_containers, show_modular_view=False, export_path=None):
     unique_id = str(uuid.uuid4())
     template_str = resources.read_text('torchvista.templates', 'graph.html')
     d3_source = resources.read_text('torchvista.assets', 'd3.min.js')
@@ -1839,6 +1843,7 @@ def plot_graph(adj_list, module_info, func_info, node_to_module_path,
         'parent_module_to_depth_json': json.dumps(parent_module_to_depth),
         'graph_node_name_to_without_suffix': json.dumps(graph_node_name_to_without_suffix),
         'graph_node_display_names': json.dumps(graph_node_display_names),
+        'node_to_attr_name': json.dumps(node_to_attr_name),
         'ancestor_map': json.dumps(ancestor_map),
         'repeat_containers': json.dumps(list(repeat_containers)),
         'unique_id': unique_id,
@@ -1873,11 +1878,12 @@ def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_dept
     node_to_module_path = {}
     node_to_ancestors = defaultdict(list)
     repeat_containers = set()
+    node_to_attr_name = {}
 
     exception = None
 
     try:
-        process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, node_to_ancestors, repeat_containers, show_non_gradient_nodes=show_non_gradient_nodes, forced_module_tracing_depth=forced_module_tracing_depth, show_module_attr_names=show_module_attr_names, show_compressed_view=show_compressed_view)
+        process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, node_to_ancestors, repeat_containers, node_to_attr_name, show_non_gradient_nodes=show_non_gradient_nodes, forced_module_tracing_depth=forced_module_tracing_depth, show_module_attr_names=show_module_attr_names, show_compressed_view=show_compressed_view)
     except Exception as e:
         exception = e
 
@@ -1898,6 +1904,7 @@ def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_dept
         'parent_module_to_depth_json': json.dumps(parent_module_to_depth),
         'graph_node_name_to_without_suffix': json.dumps(graph_node_name_to_without_suffix),
         'graph_node_display_names': json.dumps(graph_node_display_names),
+        'node_to_attr_name': json.dumps(node_to_attr_name),
         'ancestor_map': json.dumps(build_immediate_ancestor_map(node_to_ancestors, adj_list)),
         'repeat_containers': json.dumps(list(repeat_containers)),
         'unique_id': unique_id,
@@ -1948,6 +1955,7 @@ def trace_model(model, inputs, show_non_gradient_nodes=True, collapse_modules_af
     node_to_module_path = {}
     node_to_ancestors = defaultdict(list)
     repeat_containers = set()
+    node_to_attr_name = {}
     collapse_modules_after_depth = max(collapse_modules_after_depth, 0)
 
     if export_format is None and export_path is not None:
@@ -1958,14 +1966,14 @@ def trace_model(model, inputs, show_non_gradient_nodes=True, collapse_modules_af
     exception = None
 
     try:
-        process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, node_to_ancestors, repeat_containers, show_non_gradient_nodes=show_non_gradient_nodes, forced_module_tracing_depth=forced_module_tracing_depth, show_module_attr_names=show_module_attr_names, show_compressed_view=show_compressed_view)
+        process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, node_to_ancestors, repeat_containers, node_to_attr_name, show_non_gradient_nodes=show_non_gradient_nodes, forced_module_tracing_depth=forced_module_tracing_depth, show_module_attr_names=show_module_attr_names, show_compressed_view=show_compressed_view)
     except Exception as e:
         exception = e
 
     if export_path is not None and export_format in (ExportFormat.PNG, ExportFormat.SVG):
         print(f"[error] Custom export paths are only supported for HTML exports. Cannot write PNG or SVG to a custom path: {export_path}")
 
-    plot_graph(adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, build_immediate_ancestor_map(node_to_ancestors, adj_list), collapse_modules_after_depth, height, width, export_format, show_module_attr_names, repeat_containers, show_modular_view=show_compressed_view, export_path=export_path)
+    plot_graph(adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, node_to_attr_name, build_immediate_ancestor_map(node_to_ancestors, adj_list), collapse_modules_after_depth, height, width, export_format, show_module_attr_names, repeat_containers, show_modular_view=show_compressed_view, export_path=export_path)
 
 
     if exception is not None:
