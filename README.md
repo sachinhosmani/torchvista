@@ -43,7 +43,7 @@ Install via pip
 pip install torchvista
 ```
 
-Alternatively, install via `conda` (See [`torchvist feedstock`](https://github.com/conda-forge/torchvista-feedstock?tab=readme-ov-file#installing-torchvista) for more information)
+Alternatively, install via `conda` (See [`torchvista-feedstock`](https://github.com/conda-forge/torchvista-feedstock?tab=readme-ov-file#installing-torchvista) for more information)
 
 ```
 conda install -c conda-forge torchvista
