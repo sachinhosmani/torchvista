@@ -2,4 +2,7 @@
 *.egg-info/
 dist/
 __pycache__/
+*.pyc
 .vscode/
+.conda/
+.ipynb_checkpoints/
