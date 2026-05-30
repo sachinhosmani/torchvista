@@ -1954,6 +1954,16 @@ def validate_export_format(export_format):
     return ExportFormat(export_format)
 
 def trace_model(model, inputs, show_non_gradient_nodes=True, collapse_modules_after_depth=1, forced_module_tracing_depth=None, height=800, width=None, export_format=None, show_module_attr_names=False, export_path=None, show_compressed_view=False):
+    if isinstance(model, torch.nn.Module) and model.training:
+        warnings.warn(
+            "trace_model: the model is in training mode. Tracing runs a real forward pass, "
+            "which can mutate stateful layers (e.g. BatchNorm running stats) and trigger "
+            "stochastic behavior (e.g. Dropout). Call model.eval() before tracing to avoid "
+            "these side effects.",
+            UserWarning,
+            stacklevel=2,
+        )
+
     adj_list = {}
     module_info = {}
     func_info = {}
