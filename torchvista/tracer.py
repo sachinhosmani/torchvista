@@ -7,7 +7,8 @@ from pathlib import Path
 from string import Template
 import uuid
 from collections import defaultdict
-from .overrides import CONTAINER_MODULES, FUNCTIONS
+from .overrides import CONTAINER_MODULES, FUNCTIONS, NAMESPACE_TO_MODULE
+import torch.overrides
 import warnings
 
 import json
@@ -106,6 +107,10 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
     global_node_counter = 0
     module_to_node_name = {}
     original_ops = {}
+    # Maps inherited func object -> (namespace, func_name). Populated for class
+    # special-method slots that cannot be safely monkey-patched (see issue #38). These
+    # are intercepted via TorchFunctionMode instead.
+    inherited_dunders_to_trace = {}
     # Maps id(original_func) -> wrapped_func for patching module attrs
     # While patching module attrs, we look for the original_func in this dict to get the wrapped version
     orig_to_wrapped = {}
@@ -600,27 +605,24 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
         for func in FUNCTIONS:
             namespace = func['namespace']
             func_name = func['function']
-            
-            if namespace == 'torch':
-                module = torch
-            elif namespace == 'torch.functional':
-                module = torch.functional
-            elif namespace == 'torch.Tensor':
-                module = torch.Tensor
-            elif namespace == 'torch.nn.functional':
-                module = torch.nn.functional
-            elif namespace == 'torch.nn.init':
-                module = torch.nn.init
-            elif namespace == 'torch.linalg':
-                module = torch.linalg
-            elif namespace == 'torch.ops.torchvision':
-                module = torch.ops.torchvision
-            else:
+
+            module = NAMESPACE_TO_MODULE.get(namespace)
+            if module is None:
                 continue
 
             try:
                 orig_func = getattr(module, func_name)
                 if callable(orig_func):
+                    # Empirically-verified (see scripts/find_function_mode_overrides.py) set
+                    # of entries whose setattr+restore cycle leaves torch in a corrupted state
+                    # (issue #38).
+                    # Cause: monkey-patching an inherited C-slot special method demotes the
+                    # type's C slot to a Python dispatcher and does not fully revert.
+                    # For these we skip monkey-patching and intercept via TorchFunctionMode
+                    # instead.
+                    if (namespace, func_name) == ('torch.Tensor', '__getitem__'):
+                        inherited_dunders_to_trace[orig_func] = (namespace, func_name)
+                        continue
                     original_ops[(namespace, func_name)] = orig_func
             except AttributeError:
                 pass
@@ -629,32 +631,52 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
             namespace = func['namespace']
             func_name = func['function']
 
-            if namespace == 'torch':
-                module = torch
-            elif namespace == 'torch.functional':
-                module = torch.functional
-            elif namespace == 'torch.Tensor':
-                module = torch.Tensor
-            elif namespace == 'torch.nn.functional':
-                module = torch.nn.functional
-            elif namespace == 'torch.nn.init':
-                module = torch.nn.init
-            elif namespace == 'torch.linalg':
-                module = torch.linalg
-            elif namespace == 'torch.ops.torchvision':
-                module = torch.ops.torchvision
-            else:
+            module = NAMESPACE_TO_MODULE.get(namespace)
+            if module is None:
                 continue
 
+            # Skip any function wrapped using TorchFunctionMode
+            if (namespace, func_name) not in original_ops:
+                continue
             try:
-                orig_func = getattr(module, func_name)
-                if callable(orig_func):
-                    wrapped_func = make_wrapped(orig_func, func_name, namespace)
-                    setattr(module, func_name, wrapped_func)
-                    # Build mapping from original to wrapped for patching module attributes
-                    orig_to_wrapped[id(original_ops[(namespace, func_name)])] = wrapped_func
+                orig_func = original_ops[(namespace, func_name)]
+                wrapped_func = make_wrapped(orig_func, func_name, namespace)
+                setattr(module, func_name, wrapped_func)
+                # Build mapping from original to wrapped for patching module attributes
+                orig_to_wrapped[id(orig_func)] = wrapped_func
             except AttributeError:
                 pass
+
+    def make_trace_mode():
+        """
+        Build a TorchFunctionMode that traces ops we deliberately did not monkey-patch
+        (currently: __getitem__ on torch.Tensor — see issue #38). Inside the
+        mode's __torch_function__, we run the same bookkeeping as make_wrapped.
+        The recursion guard (current_executing_function) prevents double-tracing.
+        """
+
+        class TraceMode(torch.overrides.TorchFunctionMode):
+            def __torch_function__(self, func, types, args=(), kwargs=None):
+                nonlocal current_executing_module, current_executing_function
+                kwargs = kwargs or {}
+                target = inherited_dunders_to_trace.get(func)
+                if target is None or current_executing_module is not None or current_executing_function is not None:
+                    return func(*args, **kwargs)
+
+                namespace, func_name = target
+                current_executing_function = func_name
+                node_to_module_path[func_name] = namespace
+                node_name, node_type = get_unique_op_name(func_name)
+                graph_node_name_to_without_suffix[node_name] = func_name
+                graph_node_display_names[node_name] = func_name
+                node_to_module_path[node_name] = namespace
+                pre_trace_op(node_name, node_type, *args, **kwargs)
+                output = func(*args, **kwargs)
+                current_executing_function = None
+                output = trace_op(node_name, output)
+                return output
+
+        return TraceMode()
 
     def patch_module_function_attrs(model):
         """
@@ -697,23 +719,9 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
         original_properties.clear()
 
         for (namespace, func_name), orig_func in original_ops.items():
-            if namespace == 'torch':
-                module = torch
-            elif namespace == 'torch.functional':
-                module = torch.functional
-            elif namespace == 'torch.Tensor':
-                module = torch.Tensor
-            elif namespace == 'torch.nn.functional':
-                module = torch.nn.functional
-            elif namespace == 'torch.nn.init':
-                module = torch.nn.init
-            elif namespace == 'torch.linalg':
-                module = torch.linalg
-            elif namespace == 'torch.ops.torchvision':
-                module = torch.ops.torchvision
-            else:
+            module = NAMESPACE_TO_MODULE.get(namespace)
+            if module is None:
                 continue
-
             setattr(module, func_name, orig_func)
         orig_to_wrapped.clear()
 
@@ -1629,7 +1637,8 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
                 node_to_ancestors[input_name] = []
 
         exception = None
-        with torch.no_grad():
+        trace_mode = make_trace_mode()
+        with torch.no_grad(), trace_mode:
             output = model(*inputs) if isinstance(inputs, tuple) else model(inputs)
             # Check if output is a dict to use keys as names
             if isinstance(output, dict):

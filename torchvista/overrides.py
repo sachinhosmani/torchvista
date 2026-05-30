@@ -1,6 +1,18 @@
 import torch
 import torch.nn as nn
 
+# Maps the string namespaces used in FUNCTIONS entries to the actual module or
+# class on which the override is applied.
+NAMESPACE_TO_MODULE = {
+    'torch': torch,
+    'torch.functional': torch.functional,
+    'torch.Tensor': torch.Tensor,
+    'torch.nn.functional': torch.nn.functional,
+    'torch.nn.init': torch.nn.init,
+    'torch.linalg': torch.linalg,
+    'torch.ops.torchvision': torch.ops.torchvision,
+}
+
 # TODO: Find this list more systematically
 # Right now they have been taken from
 # - torch.Tensor
