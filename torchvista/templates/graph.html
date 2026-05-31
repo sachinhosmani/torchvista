@@ -1602,8 +1602,12 @@
             const originalPosition = Array.from(originalParent.childNodes).indexOf(edgeGroup.node());
             
             function highlightEdge() {
-                // Move to end of parent's children list to appear on top
-                originalParent.appendChild(edgeGroup.node());
+                // Move to end of parent's children list to appear on top — but only if not already there.
+                // Re-appending during the mouseenter handler triggers another mouseenter on the same path,
+                // creating a re-entry loop that prevents mouseleave from ever firing.
+                if (edgeGroup.node() !== originalParent.lastChild) {
+                    originalParent.appendChild(edgeGroup.node());
+                }
                 
                 // Make edge thicker
                 path.attr("stroke-width", parseFloat(originalStrokeWidth) * 1.4);
