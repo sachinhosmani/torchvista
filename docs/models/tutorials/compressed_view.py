@@ -30,6 +30,7 @@ class DeepModel(nn.Module):
         return x
 
 model = DeepModel()
+model.eval()
 example_input = torch.randn(2, 64)
 
 # Compress repeated structures into a single representation
@@ -58,6 +59,7 @@ class DeepModel(nn.Module):
         return x
 
 model = DeepModel()
+model.eval()
 example_input = torch.randn(2, 64)
 
 show_compressed_view = True

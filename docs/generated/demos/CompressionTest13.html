@@ -269,6 +269,7 @@ class CompressionTest13(nn.Module):
         return self.layers(x)
 
 model = CompressionTest13()
+model.eval()
 example_input = torch.randn(2, 64)
 
 trace_model(model, example_input, show_compressed_view=True)
@@ -285,124 +286,124 @@ trace_model(model, example_input, show_compressed_view=True)
 
         <div class="graph-view" id="graphContainer" style="height: 100%">
             <div class="graph-box-header">Visualized Interactive Graph</div>
-            <div id="graph-container_1cee23c5-0ddc-4957-b53d-824c57c16e64">
-    <div id="graph_1cee23c5-0ddc-4957-b53d-824c57c16e64"></div>
-    <div class="logo_1cee23c5-0ddc-4957-b53d-824c57c16e64">
+            <div id="graph-container_06c653e7-4404-4361-8100-e2076981dfdc">
+    <div id="graph_06c653e7-4404-4361-8100-e2076981dfdc"></div>
+    <div class="logo_06c653e7-4404-4361-8100-e2076981dfdc">
         <a href="https://github.com/sachinhosmani/torchvista" target="_blank" rel="noopener noreferrer">
         torchvista
         </a>
     </div>
-    <div id="popup_1cee23c5-0ddc-4957-b53d-824c57c16e64" class="popup_1cee23c5-0ddc-4957-b53d-824c57c16e64" style="display: none;">
-        <div class="popup-header_1cee23c5-0ddc-4957-b53d-824c57c16e64">
-            <h3 id="popup-title_1cee23c5-0ddc-4957-b53d-824c57c16e64"></h3>
-            <span class="popup-close_1cee23c5-0ddc-4957-b53d-824c57c16e64">✕</span>
+    <div id="popup_06c653e7-4404-4361-8100-e2076981dfdc" class="popup_06c653e7-4404-4361-8100-e2076981dfdc" style="display: none;">
+        <div class="popup-header_06c653e7-4404-4361-8100-e2076981dfdc">
+            <h3 id="popup-title_06c653e7-4404-4361-8100-e2076981dfdc"></h3>
+            <span class="popup-close_06c653e7-4404-4361-8100-e2076981dfdc">✕</span>
         </div>
-        <div id="popup-content_1cee23c5-0ddc-4957-b53d-824c57c16e64" class="popup-content_1cee23c5-0ddc-4957-b53d-824c57c16e64">
-            <div id="common-info_1cee23c5-0ddc-4957-b53d-824c57c16e64">
-                <p id="attr-name-row_1cee23c5-0ddc-4957-b53d-824c57c16e64" style="display:none;">
-                    <strong>Attribute name:</strong> <code id="attr-name-value_1cee23c5-0ddc-4957-b53d-824c57c16e64" style="background:#f0f0f0; padding:2px 5px; border-radius:3px; font-family:monospace;"></code>
+        <div id="popup-content_06c653e7-4404-4361-8100-e2076981dfdc" class="popup-content_06c653e7-4404-4361-8100-e2076981dfdc">
+            <div id="common-info_06c653e7-4404-4361-8100-e2076981dfdc">
+                <p id="attr-name-row_06c653e7-4404-4361-8100-e2076981dfdc" style="display:none;">
+                    <strong>Attribute name:</strong> <code id="attr-name-value_06c653e7-4404-4361-8100-e2076981dfdc" style="background:#f0f0f0; padding:2px 5px; border-radius:3px; font-family:monospace;"></code>
                 </p>
             </div>
-            <div id="module-template_1cee23c5-0ddc-4957-b53d-824c57c16e64" style="display:none;">
-                <details open id="module-parameters-details_1cee23c5-0ddc-4957-b53d-824c57c16e64">
+            <div id="module-template_06c653e7-4404-4361-8100-e2076981dfdc" style="display:none;">
+                <details open id="module-parameters-details_06c653e7-4404-4361-8100-e2076981dfdc">
                     <summary style="color: black"><strong>forward() Parameters</strong></summary>
-                    <div id="module-parameters_1cee23c5-0ddc-4957-b53d-824c57c16e64" class="json-viewer_1cee23c5-0ddc-4957-b53d-824c57c16e64"></div>
+                    <div id="module-parameters_06c653e7-4404-4361-8100-e2076981dfdc" class="json-viewer_06c653e7-4404-4361-8100-e2076981dfdc"></div>
                 </details>
-                <details open id="module-attributes-details_1cee23c5-0ddc-4957-b53d-824c57c16e64">
+                <details open id="module-attributes-details_06c653e7-4404-4361-8100-e2076981dfdc">
                     <summary style="color: black"><strong>Attributes</strong></summary>
-                    <div id="module-attributes_1cee23c5-0ddc-4957-b53d-824c57c16e64" class="json-viewer_1cee23c5-0ddc-4957-b53d-824c57c16e64"></div>
+                    <div id="module-attributes_06c653e7-4404-4361-8100-e2076981dfdc" class="json-viewer_06c653e7-4404-4361-8100-e2076981dfdc"></div>
                 </details>
             </div>
-            <div id="tensor-op-template_1cee23c5-0ddc-4957-b53d-824c57c16e64" style="display:none;">
+            <div id="tensor-op-template_06c653e7-4404-4361-8100-e2076981dfdc" style="display:none;">
                 <summary><strong>Parameters</strong></summary>
-                <div id="tensor-op-parameters_1cee23c5-0ddc-4957-b53d-824c57c16e64" class="json-viewer_1cee23c5-0ddc-4957-b53d-824c57c16e64"></div>
+                <div id="tensor-op-parameters_06c653e7-4404-4361-8100-e2076981dfdc" class="json-viewer_06c653e7-4404-4361-8100-e2076981dfdc"></div>
             </div>
-            <p id="no-info_1cee23c5-0ddc-4957-b53d-824c57c16e64" style="display:none;">No further information available for this node.</p>
+            <p id="no-info_06c653e7-4404-4361-8100-e2076981dfdc" style="display:none;">No further information available for this node.</p>
         </div>
     </div>
 
     <style>
-        .node_1cee23c5-0ddc-4957-b53d-824c57c16e64 rect {
+        .node_06c653e7-4404-4361-8100-e2076981dfdc rect {
             stroke: #333;
             fill: #fff;
         }
-        text.node-label_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        text.node-label_06c653e7-4404-4361-8100-e2076981dfdc {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.type-indicator_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        text.type-indicator_06c653e7-4404-4361-8100-e2076981dfdc {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.collapse-icon_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        text.collapse-icon_06c653e7-4404-4361-8100-e2076981dfdc {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 14px;
             cursor: default;
             user-select: none;
         }
-        .edge_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        .edge_06c653e7-4404-4361-8100-e2076981dfdc {
             stroke: #797979;
             fill: none;
         }
-        .node_1cee23c5-0ddc-4957-b53d-824c57c16e64 rect.input_1cee23c5-0ddc-4957-b53d-824c57c16e64 { fill: #FF9AFF; }
-        .node_1cee23c5-0ddc-4957-b53d-824c57c16e64 rect.constant_1cee23c5-0ddc-4957-b53d-824c57c16e64 { fill: rgb(235 235 235); }
+        .node_06c653e7-4404-4361-8100-e2076981dfdc rect.input_06c653e7-4404-4361-8100-e2076981dfdc { fill: #FF9AFF; }
+        .node_06c653e7-4404-4361-8100-e2076981dfdc rect.constant_06c653e7-4404-4361-8100-e2076981dfdc { fill: rgb(235 235 235); }
 
-        .node_1cee23c5-0ddc-4957-b53d-824c57c16e64 rect.output_1cee23c5-0ddc-4957-b53d-824c57c16e64 { fill: #74e071; }
-        .node_1cee23c5-0ddc-4957-b53d-824c57c16e64 rect.failed_1cee23c5-0ddc-4957-b53d-824c57c16e64 { fill: rgb(224 15 15); }
-        .node_1cee23c5-0ddc-4957-b53d-824c57c16e64 rect.module_1cee23c5-0ddc-4957-b53d-824c57c16e64 { fill: #8BDEDB; }
-        .node_1cee23c5-0ddc-4957-b53d-824c57c16e64 rect.operation_1cee23c5-0ddc-4957-b53d-824c57c16e64 { fill: #FEBC5A; }
+        .node_06c653e7-4404-4361-8100-e2076981dfdc rect.output_06c653e7-4404-4361-8100-e2076981dfdc { fill: #74e071; }
+        .node_06c653e7-4404-4361-8100-e2076981dfdc rect.failed_06c653e7-4404-4361-8100-e2076981dfdc { fill: rgb(224 15 15); }
+        .node_06c653e7-4404-4361-8100-e2076981dfdc rect.module_06c653e7-4404-4361-8100-e2076981dfdc { fill: #8BDEDB; }
+        .node_06c653e7-4404-4361-8100-e2076981dfdc rect.operation_06c653e7-4404-4361-8100-e2076981dfdc { fill: #FEBC5A; }
 
-        .node_1cee23c5-0ddc-4957-b53d-824c57c16e64 ellipse.input_1cee23c5-0ddc-4957-b53d-824c57c16e64 { fill: #FF9AFF; }
-        .node_1cee23c5-0ddc-4957-b53d-824c57c16e64 ellipse.constant_1cee23c5-0ddc-4957-b53d-824c57c16e64 { fill: rgb(235 235 235); }
-        .node_1cee23c5-0ddc-4957-b53d-824c57c16e64 ellipse.output_1cee23c5-0ddc-4957-b53d-824c57c16e64 { fill: #74e071; }
-        .node_1cee23c5-0ddc-4957-b53d-824c57c16e64 ellipse.parameter_1cee23c5-0ddc-4957-b53d-824c57c16e64 { fill: #B9CCF3; }
-        .node_1cee23c5-0ddc-4957-b53d-824c57c16e64 ellipse.failed_1cee23c5-0ddc-4957-b53d-824c57c16e64 { fill: rgb(224 15 15); }
+        .node_06c653e7-4404-4361-8100-e2076981dfdc ellipse.input_06c653e7-4404-4361-8100-e2076981dfdc { fill: #FF9AFF; }
+        .node_06c653e7-4404-4361-8100-e2076981dfdc ellipse.constant_06c653e7-4404-4361-8100-e2076981dfdc { fill: rgb(235 235 235); }
+        .node_06c653e7-4404-4361-8100-e2076981dfdc ellipse.output_06c653e7-4404-4361-8100-e2076981dfdc { fill: #74e071; }
+        .node_06c653e7-4404-4361-8100-e2076981dfdc ellipse.parameter_06c653e7-4404-4361-8100-e2076981dfdc { fill: #B9CCF3; }
+        .node_06c653e7-4404-4361-8100-e2076981dfdc ellipse.failed_06c653e7-4404-4361-8100-e2076981dfdc { fill: rgb(224 15 15); }
 
-        .node_1cee23c5-0ddc-4957-b53d-824c57c16e64 ellipse {
+        .node_06c653e7-4404-4361-8100-e2076981dfdc ellipse {
             stroke: #333;
             stroke-width: 1px;
         }
-        .edgeLabelGroup_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        .edgeLabelGroup_06c653e7-4404-4361-8100-e2076981dfdc {
             pointer-events: none;
         }
-        #arrowhead_1cee23c5-0ddc-4957-b53d-824c57c16e64 path {
+        #arrowhead_06c653e7-4404-4361-8100-e2076981dfdc path {
             fill: #333333;;
         }
-        .node_1cee23c5-0ddc-4957-b53d-824c57c16e64 rect,
-        .node_1cee23c5-0ddc-4957-b53d-824c57c16e64 ellipse {
+        .node_06c653e7-4404-4361-8100-e2076981dfdc rect,
+        .node_06c653e7-4404-4361-8100-e2076981dfdc ellipse {
             transition: fill 0.3s ease;
         }
 
-        .node_1cee23c5-0ddc-4957-b53d-824c57c16e64 .type-indicator_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        .node_06c653e7-4404-4361-8100-e2076981dfdc .type-indicator_06c653e7-4404-4361-8100-e2076981dfdc {
             font-size: 5px;
             fill: rgba(0, 0, 0, 1.0);  /* Dark grey, semi-transparent */
             pointer-events: none;
         }
 
-        .node_1cee23c5-0ddc-4957-b53d-824c57c16e64.error_1cee23c5-0ddc-4957-b53d-824c57c16e64 rect {
+        .node_06c653e7-4404-4361-8100-e2076981dfdc.error_06c653e7-4404-4361-8100-e2076981dfdc rect {
             stroke: black;
             stroke-width: 1px;
         }
 
-        .boundary-box_1cee23c5-0ddc-4957-b53d-824c57c16e64.error_1cee23c5-0ddc-4957-b53d-824c57c16e64 > rect:first-of-type {
+        .boundary-box_06c653e7-4404-4361-8100-e2076981dfdc.error_06c653e7-4404-4361-8100-e2076981dfdc > rect:first-of-type {
             fill: red;
             fill-opacity: 0.2;
         }
 
-        #graph-container_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        #graph-container_06c653e7-4404-4361-8100-e2076981dfdc {
             position: relative;
             height: 95%;
             width: ${width};
             overflow: hidden;
         }
 
-        #graph_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        #graph_06c653e7-4404-4361-8100-e2076981dfdc {
             height: 100%;
         }
         
-        .popup_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        .popup_06c653e7-4404-4361-8100-e2076981dfdc {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             position: absolute;
             background: white;
@@ -417,7 +418,7 @@ trace_model(model, example_input, show_compressed_view=True)
             flex-direction: column;
         }
 
-        .popup-header_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        .popup-header_06c653e7-4404-4361-8100-e2076981dfdc {
             position: sticky;
             top: 0;
             background: white;
@@ -429,12 +430,12 @@ trace_model(model, example_input, show_compressed_view=True)
             z-index: 1;
         }
 
-        .popup_1cee23c5-0ddc-4957-b53d-824c57c16e64 h3 {
+        .popup_06c653e7-4404-4361-8100-e2076981dfdc h3 {
             margin: 0;
             font-size: 16px;
         }
 
-        .popup-content_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        .popup-content_06c653e7-4404-4361-8100-e2076981dfdc {
             padding: 10px;
             padding-bottom: 10px;
             overflow-y: auto;
@@ -442,87 +443,87 @@ trace_model(model, example_input, show_compressed_view=True)
             flex-grow: 1;
         }
 
-        .popup_1cee23c5-0ddc-4957-b53d-824c57c16e64 pre {
+        .popup_06c653e7-4404-4361-8100-e2076981dfdc pre {
             white-space: pre;
             overflow-x: auto;
         }
 
-        .popup-close_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        .popup-close_06c653e7-4404-4361-8100-e2076981dfdc {
             cursor: pointer;
             font-size: 24px;
             font-weight: bold;
             line-height: 1;
         }
 
-        #popup-title_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        #popup-title_06c653e7-4404-4361-8100-e2076981dfdc {
             font-size: 16px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             color: black;
         }
 
-        #graph-container_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        #graph-container_06c653e7-4404-4361-8100-e2076981dfdc {
             position: relative;
         }
 
-        #graph-container_1cee23c5-0ddc-4957-b53d-824c57c16e64 pre {
+        #graph-container_06c653e7-4404-4361-8100-e2076981dfdc pre {
             margin-bottom: 0;
         }
 
-        .boundary-box_1cee23c5-0ddc-4957-b53d-824c57c16e64 rect {
+        .boundary-box_06c653e7-4404-4361-8100-e2076981dfdc rect {
             pointer-events: none;
         }
-        .boundary-box_1cee23c5-0ddc-4957-b53d-824c57c16e64 text {
+        .boundary-box_06c653e7-4404-4361-8100-e2076981dfdc text {
             pointer-events: none;
             user-select: none;
         }
 
-        .boundary-box_1cee23c5-0ddc-4957-b53d-824c57c16e64 rect {
+        .boundary-box_06c653e7-4404-4361-8100-e2076981dfdc rect {
             pointer-events: none;
         }
-        .boundary-box_1cee23c5-0ddc-4957-b53d-824c57c16e64 text {
+        .boundary-box_06c653e7-4404-4361-8100-e2076981dfdc text {
             pointer-events: none;
             user-select: none;
             font-weight: bold;
         }
-        .edge-label_1cee23c5-0ddc-4957-b53d-824c57c16e64 text {
+        .edge-label_06c653e7-4404-4361-8100-e2076981dfdc text {
             pointer-events: none;
             user-select: none;
             font-size: 4px;
             font-family: "'Roboto', sans-serif";
         }
                     
-        .collapse-button_1cee23c5-0ddc-4957-b53d-824c57c16e64, .info-button_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        .collapse-button_06c653e7-4404-4361-8100-e2076981dfdc, .info-button_06c653e7-4404-4361-8100-e2076981dfdc {
             fill: #fff;
             stroke: #333;
             stroke-width: 1px;
             cursor: pointer;
         }
 
-        .collapse-button_1cee23c5-0ddc-4957-b53d-824c57c16e64:hover, .info-button_1cee23c5-0ddc-4957-b53d-824c57c16e64:hover {
+        .collapse-button_06c653e7-4404-4361-8100-e2076981dfdc:hover, .info-button_06c653e7-4404-4361-8100-e2076981dfdc:hover {
             fill: #eee;
             cursor: pointer;
         }
 
-        .collapse-icon_1cee23c5-0ddc-4957-b53d-824c57c16e64, .info-icon_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        .collapse-icon_06c653e7-4404-4361-8100-e2076981dfdc, .info-icon_06c653e7-4404-4361-8100-e2076981dfdc {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             fill: rgb(51, 51, 51);
         }
 
-        .collapse-button-disabled_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        .collapse-button-disabled_06c653e7-4404-4361-8100-e2076981dfdc {
             fill: #eee5;
             stroke: #3333334f;
             stroke-width: 1px;
             cursor: not-allowed;
         }
 
-        .collapse-button-disabled_1cee23c5-0ddc-4957-b53d-824c57c16e64:hover {
+        .collapse-button-disabled_06c653e7-4404-4361-8100-e2076981dfdc:hover {
             fill: #eee6;
             cursor: not-allowed;
         }
 
-        .collapse-icon-disabled_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        .collapse-icon-disabled_06c653e7-4404-4361-8100-e2076981dfdc {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -531,11 +532,11 @@ trace_model(model, example_input, show_compressed_view=True)
         }
 
         /* Edge hover styles */
-        .edge-group_1cee23c5-0ddc-4957-b53d-824c57c16e64 path {
+        .edge-group_06c653e7-4404-4361-8100-e2076981dfdc path {
             pointer-events: stroke;
         }
 
-        .edge-label_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        .edge-label_06c653e7-4404-4361-8100-e2076981dfdc {
             pointer-events: all;
         }
 
@@ -575,50 +576,50 @@ trace_model(model, example_input, show_compressed_view=True)
             }
         }
 
-        .highlight-cluster_1cee23c5-0ddc-4957-b53d-824c57c16e64 > rect:first-of-type {
+        .highlight-cluster_06c653e7-4404-4361-8100-e2076981dfdc > rect:first-of-type {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        .highlight-node_1cee23c5-0ddc-4957-b53d-824c57c16e64 rect {
+        .highlight-node_06c653e7-4404-4361-8100-e2076981dfdc rect {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        text.node-label_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        text.node-label_06c653e7-4404-4361-8100-e2076981dfdc {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 0.8rem;  /* Base size using rem units for accessibility */
             cursor: default;
             user-select: none;
         }
 
-        .node_1cee23c5-0ddc-4957-b53d-824c57c16e64.constant_1cee23c5-0ddc-4957-b53d-824c57c16e64 .node-label_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        .node_06c653e7-4404-4361-8100-e2076981dfdc.constant_06c653e7-4404-4361-8100-e2076981dfdc .node-label_06c653e7-4404-4361-8100-e2076981dfdc {
             font-size: 0.7rem;
         }
 
-        .popup-content_1cee23c5-0ddc-4957-b53d-824c57c16e64 summary {
+        .popup-content_06c653e7-4404-4361-8100-e2076981dfdc summary {
             cursor: pointer;
             margin: 5px;
             user-select: none;
         }
 
-        .node_1cee23c5-0ddc-4957-b53d-824c57c16e64.input_1cee23c5-0ddc-4957-b53d-824c57c16e64 rect,
-        .node_1cee23c5-0ddc-4957-b53d-824c57c16e64.output_1cee23c5-0ddc-4957-b53d-824c57c16e64 rect,
-        .node_1cee23c5-0ddc-4957-b53d-824c57c16e64.constant_1cee23c5-0ddc-4957-b53d-824c57c16e64 rect {
+        .node_06c653e7-4404-4361-8100-e2076981dfdc.input_06c653e7-4404-4361-8100-e2076981dfdc rect,
+        .node_06c653e7-4404-4361-8100-e2076981dfdc.output_06c653e7-4404-4361-8100-e2076981dfdc rect,
+        .node_06c653e7-4404-4361-8100-e2076981dfdc.constant_06c653e7-4404-4361-8100-e2076981dfdc rect {
             stroke-width: 1px;
             rx: 8px;
             ry: 8px;
             stroke-dasharray: none;
         }
 
-        #png-error-container_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        #png-error-container_06c653e7-4404-4361-8100-e2076981dfdc {
             text-align: center;
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 14px;
         }
 
-        #png-error-message_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        #png-error-message_06c653e7-4404-4361-8100-e2076981dfdc {
             padding: 8px 16px;
             background-color: #dc3545;
             color: white;
@@ -629,13 +630,13 @@ trace_model(model, example_input, show_compressed_view=True)
             text-align: left;
         }
 
-        #png-link-container_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        #png-link-container_06c653e7-4404-4361-8100-e2076981dfdc {
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 18px;
         }
 
-        #png-download-button_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        #png-download-button_06c653e7-4404-4361-8100-e2076981dfdc {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -645,11 +646,11 @@ trace_model(model, example_input, show_compressed_view=True)
             margin-right: 8px;
         }
 
-        #png-download-button_1cee23c5-0ddc-4957-b53d-824c57c16e64:hover {
+        #png-download-button_06c653e7-4404-4361-8100-e2076981dfdc:hover {
             background-color: #0056b3;
         }
 
-        #png-save-button_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        #png-save-button_06c653e7-4404-4361-8100-e2076981dfdc {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -658,18 +659,18 @@ trace_model(model, example_input, show_compressed_view=True)
             border-radius: 4px;
         }
 
-        #png-save-button_1cee23c5-0ddc-4957-b53d-824c57c16e64:hover {
+        #png-save-button_06c653e7-4404-4361-8100-e2076981dfdc:hover {
             background-color: #0056b3;
         }
 
-        #svg-link-container_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        #svg-link-container_06c653e7-4404-4361-8100-e2076981dfdc {
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 18px;
         }
 
 
-        #svg-download-button_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        #svg-download-button_06c653e7-4404-4361-8100-e2076981dfdc {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -679,11 +680,11 @@ trace_model(model, example_input, show_compressed_view=True)
             margin-right: 8px;
         }
 
-        #svg-download-button_1cee23c5-0ddc-4957-b53d-824c57c16e64:hover {
+        #svg-download-button_06c653e7-4404-4361-8100-e2076981dfdc:hover {
             background-color: #0056b3;
         }
 
-        #svg-save-button_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        #svg-save-button_06c653e7-4404-4361-8100-e2076981dfdc {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -692,11 +693,11 @@ trace_model(model, example_input, show_compressed_view=True)
             border-radius: 4px;
         }
 
-        #svg-save-button_1cee23c5-0ddc-4957-b53d-824c57c16e64:hover {
+        #svg-save-button_06c653e7-4404-4361-8100-e2076981dfdc:hover {
             background-color: #0056b3;
         }
 
-        .custom-tooltip_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        .custom-tooltip_06c653e7-4404-4361-8100-e2076981dfdc {
             position: absolute;
             background: white;
             border: 1px solid #ccc;
@@ -712,7 +713,7 @@ trace_model(model, example_input, show_compressed_view=True)
             display: none;
         }
 
-        .custom-tooltip_smaller_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        .custom-tooltip_smaller_06c653e7-4404-4361-8100-e2076981dfdc {
             position: absolute;
             background: white;
             border: 1px solid #ccc;
@@ -728,16 +729,16 @@ trace_model(model, example_input, show_compressed_view=True)
             display: none;
         }
 
-        .edge_1cee23c5-0ddc-4957-b53d-824c57c16e64.implied-edge_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        .edge_06c653e7-4404-4361-8100-e2076981dfdc.implied-edge_06c653e7-4404-4361-8100-e2076981dfdc {
             stroke-dasharray: 5,5;
         }
 
-        .logo_1cee23c5-0ddc-4957-b53d-824c57c16e64 {
+        .logo_06c653e7-4404-4361-8100-e2076981dfdc {
             position: absolute;
             bottom: 8px; left: 8px;
             padding: 4px 6px;
         }
-        .logo_1cee23c5-0ddc-4957-b53d-824c57c16e64 a {
+        .logo_06c653e7-4404-4361-8100-e2076981dfdc a {
             color: #a1a1a1;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             opacity: .6;
@@ -898,8 +899,8 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
 (function() {
-    const adj_list = {"input_0": {"edges": [{"target": "Linear_3", "dims": "(2, 64)", "edge_data_id": 4957003024}, {"target": "param_5", "dims": "(2, 64)", "edge_data_id": 4957003024}], "failed": false, "node_type": "Input"}, "output_0": {"edges": [], "failed": false, "node_type": "Output"}, "Linear_3": {"edges": [{"target": "__mul___4", "dims": "(2, 64)", "edge_data_id": 13588135184}], "failed": false, "node_type": "Module"}, "param_5": {"edges": [{"target": "__mul___4", "dims": "(64)", "edge_data_id": 4938311856}], "failed": false, "node_type": "Parameter"}, "__mul___4": {"edges": [{"target": "output_0", "dims": "(2, 64)", "edge_data_id": 13588135344}], "failed": false, "node_type": "Operation"}};
-    const module_info = {"Sequential_1": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "BlockWithParameter_2": {"type": "BlockWithParameter", "parameters": {"scale": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Linear_3": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": true}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "BlockWithParameter_6": {"type": "BlockWithParameter", "parameters": {"scale": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Linear_7": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": true}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "BlockWithParameter_10": {"type": "BlockWithParameter", "parameters": {"scale": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Linear_11": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": true}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "BlockWithParameter_14": {"type": "BlockWithParameter", "parameters": {"scale": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Linear_15": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": true}, "extra_repr": "in_features=64, out_features=64, bias=True"}};
+    const adj_list = {"output_0": {"edges": [], "failed": false, "node_type": "Output"}, "input_0": {"edges": [{"target": "Linear_3", "dims": "(2, 64)", "edge_data_id": 4704835280}, {"target": "param_5", "dims": "(2, 64)", "edge_data_id": 4704835280}], "failed": false, "node_type": "Input"}, "Linear_3": {"edges": [{"target": "__mul___4", "dims": "(2, 64)", "edge_data_id": 5635043872}], "failed": false, "node_type": "Module"}, "param_5": {"edges": [{"target": "__mul___4", "dims": "(64)", "edge_data_id": 4794829456}], "failed": false, "node_type": "Parameter"}, "__mul___4": {"edges": [{"target": "output_0", "dims": "(2, 64)", "edge_data_id": 5635040576}], "failed": false, "node_type": "Operation"}};
+    const module_info = {"Sequential_1": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": false}, "extra_repr": ""}, "BlockWithParameter_2": {"type": "BlockWithParameter", "parameters": {"scale": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "training": false}, "extra_repr": ""}, "Linear_3": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": false}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "BlockWithParameter_6": {"type": "BlockWithParameter", "parameters": {"scale": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "training": false}, "extra_repr": ""}, "Linear_7": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": false}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "BlockWithParameter_10": {"type": "BlockWithParameter", "parameters": {"scale": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "training": false}, "extra_repr": ""}, "Linear_11": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": false}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "BlockWithParameter_14": {"type": "BlockWithParameter", "parameters": {"scale": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "training": false}, "extra_repr": ""}, "Linear_15": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": false}, "extra_repr": "in_features=64, out_features=64, bias=True"}};
     const func_info = {"Sequential_1": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "BlockWithParameter_2": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_3": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "__mul___4": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}], "keyword_args": {}}, "BlockWithParameter_6": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_7": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "__mul___8": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}], "keyword_args": {}}, "BlockWithParameter_10": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_11": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "__mul___12": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}], "keyword_args": {}}, "BlockWithParameter_14": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_15": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "__mul___16": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}, {"_type": "tensor", "shape": [64], "dtype": "torch.float32"}], "keyword_args": {}}};
     const parent_module_to_nodes = {"BlockWithParameter_2": ["Linear_3", "__mul___4"], "Sequential_1": ["Linear_3", "__mul___4", "Linear_7", "__mul___8", "Linear_11", "__mul___12", "Linear_15", "__mul___16"], "BlockWithParameter_6": ["Linear_7", "__mul___8"], "BlockWithParameter_10": ["Linear_11", "__mul___12"], "BlockWithParameter_14": ["Linear_15", "__mul___16"]};
     const parent_module_to_depth = {"BlockWithParameter_2": 1, "Sequential_1": 2, "BlockWithParameter_6": 1, "BlockWithParameter_10": 1, "BlockWithParameter_14": 1};
@@ -948,10 +949,10 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         removeTooltip();
         
         const tooltip = document.createElement('div');
-        tooltip.className = !smaller ? `custom-tooltip_1cee23c5-0ddc-4957-b53d-824c57c16e64` : `custom-tooltip_smaller_1cee23c5-0ddc-4957-b53d-824c57c16e64`;
+        tooltip.className = !smaller ? `custom-tooltip_06c653e7-4404-4361-8100-e2076981dfdc` : `custom-tooltip_smaller_06c653e7-4404-4361-8100-e2076981dfdc`;
         tooltip.textContent = text;
         
-        const container = document.getElementById(`graph-container_1cee23c5-0ddc-4957-b53d-824c57c16e64`);
+        const container = document.getElementById(`graph-container_06c653e7-4404-4361-8100-e2076981dfdc`);
         container.appendChild(tooltip);
         currentTooltip = tooltip;
         
@@ -963,7 +964,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const buttonRect = buttonElement.getBoundingClientRect();
         
         // Get the container's position in screen coordinates
-        const containerRect = document.getElementById(`graph-container_1cee23c5-0ddc-4957-b53d-824c57c16e64`).getBoundingClientRect();
+        const containerRect = document.getElementById(`graph-container_06c653e7-4404-4361-8100-e2076981dfdc`).getBoundingClientRect();
         
         // Calculate position relative to container
         const buttonX = buttonRect.left + (buttonRect.width / 2) - containerRect.left;
@@ -1581,7 +1582,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function reloadGraph() {
-        d3.select("#graph_1cee23c5-0ddc-4957-b53d-824c57c16e64").html("");
+        d3.select("#graph_06c653e7-4404-4361-8100-e2076981dfdc").html("");
 
         if (generateImage) {
             renderGraphvizImage();
@@ -1648,16 +1649,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function renderGraphvizImage() {
-        d3.select("#png-link-container_1cee23c5-0ddc-4957-b53d-824c57c16e64").remove();
+        d3.select("#png-link-container_06c653e7-4404-4361-8100-e2076981dfdc").remove();
         
         function showErrorMessage(error) {
-            const parent = d3.select("#graph-container_1cee23c5-0ddc-4957-b53d-824c57c16e64").node().parentNode;
+            const parent = d3.select("#graph-container_06c653e7-4404-4361-8100-e2076981dfdc").node().parentNode;
             const errorContainer = d3.select(parent)
-                .insert("div", "#graph-container_1cee23c5-0ddc-4957-b53d-824c57c16e64")
-                .attr("id", "png-error-container_1cee23c5-0ddc-4957-b53d-824c57c16e64");
+                .insert("div", "#graph-container_06c653e7-4404-4361-8100-e2076981dfdc")
+                .attr("id", "png-error-container_06c653e7-4404-4361-8100-e2076981dfdc");
             
             errorContainer.append("div")
-                .attr("id", "png-error-message_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+                .attr("id", "png-error-message_06c653e7-4404-4361-8100-e2076981dfdc")
                 .html(`<strong>Error:</strong><br>${error.stack || error.message || error}<br><br><strong>Note:</strong> Exporting very large models as PNG is currently not supported. Please use generate_image=False, or raise an issue on https://github.com/sachinhosmani/torchvista/issues`);
         }
         
@@ -1695,21 +1696,21 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const pngUrl = URL.createObjectURL(pngBlob);
         
         // Create link container
-        const parent = d3.select("#graph-container_1cee23c5-0ddc-4957-b53d-824c57c16e64").node().parentNode;
+        const parent = d3.select("#graph-container_06c653e7-4404-4361-8100-e2076981dfdc").node().parentNode;
         const linkContainer = d3.select(parent)
-            .insert("div", "#graph-container_1cee23c5-0ddc-4957-b53d-824c57c16e64")
-            .attr("id", "png-link-container_1cee23c5-0ddc-4957-b53d-824c57c16e64");
+            .insert("div", "#graph-container_06c653e7-4404-4361-8100-e2076981dfdc")
+            .attr("id", "png-link-container_06c653e7-4404-4361-8100-e2076981dfdc");
         
         linkContainer.append("a")
             .attr("href", pngUrl)
             .attr("target", "_blank")
-            .attr("id", "png-download-button_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+            .attr("id", "png-download-button_06c653e7-4404-4361-8100-e2076981dfdc")
             .text("View PNG in New Tab");
 
         linkContainer.append("a")
             .attr("href", pngUrl)
-            .attr("download", `torchvista_graph_1cee23c5-0ddc-4957-b53d-824c57c16e64.png`)
-            .attr("id", "png-save-button_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+            .attr("download", `torchvista_graph_06c653e7-4404-4361-8100-e2076981dfdc.png`)
+            .attr("id", "png-save-button_06c653e7-4404-4361-8100-e2076981dfdc")
             .text("Download PNG");
             
         URL.revokeObjectURL(svgUrl);
@@ -1730,26 +1731,26 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const svgUrl = URL.createObjectURL(svgBlob);
         
         // Create link container
-        const parent = d3.select("#graph-container_1cee23c5-0ddc-4957-b53d-824c57c16e64").node().parentNode;
+        const parent = d3.select("#graph-container_06c653e7-4404-4361-8100-e2076981dfdc").node().parentNode;
         const linkContainer = d3.select(parent)
-            .insert("div", "#graph-container_1cee23c5-0ddc-4957-b53d-824c57c16e64")
-            .attr("id", "svg-link-container_1cee23c5-0ddc-4957-b53d-824c57c16e64");
+            .insert("div", "#graph-container_06c653e7-4404-4361-8100-e2076981dfdc")
+            .attr("id", "svg-link-container_06c653e7-4404-4361-8100-e2076981dfdc");
         
         linkContainer.append("a")
             .attr("href", svgUrl)
             .attr("target", "_blank")
-            .attr("id", "svg-download-button_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+            .attr("id", "svg-download-button_06c653e7-4404-4361-8100-e2076981dfdc")
             .text("View SVG in New Tab");
 
         linkContainer.append("a")
             .attr("href", svgUrl)
-            .attr("download", `torchvista_graph_1cee23c5-0ddc-4957-b53d-824c57c16e64.svg`)
-            .attr("id", "svg-save-button_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+            .attr("download", `torchvista_graph_06c653e7-4404-4361-8100-e2076981dfdc.svg`)
+            .attr("id", "svg-save-button_06c653e7-4404-4361-8100-e2076981dfdc")
             .text("Download SVG");
     }
 
     function createGraph(graphvizData) {
-        const svg = d3.select("#graph_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+        const svg = d3.select("#graph_06c653e7-4404-4361-8100-e2076981dfdc")
         .append("svg")
         .attr("width", "100%")
         .attr("height", "100%")
@@ -1769,7 +1770,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
         // Define arrowhead marker
         svg.append("defs").append("marker")
-        .attr("id", "arrowhead_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+        .attr("id", "arrowhead_06c653e7-4404-4361-8100-e2076981dfdc")
         .attr("viewBox", "0 -5 10 10")
         .attr("refX", 8)
         .attr("refY", 0)
@@ -1781,11 +1782,11 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .attr("fill", "#333");
 
         // Draw clusters (container boxes) first so they're behind nodes
-        const clusters = inner.selectAll(".boundary-box_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+        const clusters = inner.selectAll(".boundary-box_06c653e7-4404-4361-8100-e2076981dfdc")
         .data(Object.entries(graphvizData.clusters))
         .enter()
         .append("g")
-        .attr("class", "boundary-box_1cee23c5-0ddc-4957-b53d-824c57c16e64");
+        .attr("class", "boundary-box_06c653e7-4404-4361-8100-e2076981dfdc");
 
         const containersWithFailedNodes = identifyContainersWithFailedNodes(adj_list, ancestor_map);
 
@@ -1795,10 +1796,10 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             const hasFailedNodes = containersWithFailedNodes.has(clusterName);
             const isRepeat = isRepeatNode(clusterName);
             if (hasFailedNodes) {
-                group.classed("error_1cee23c5-0ddc-4957-b53d-824c57c16e64", true);
+                group.classed("error_06c653e7-4404-4361-8100-e2076981dfdc", true);
             }
             if (isRepeat) {
-                group.classed("repeat-container_1cee23c5-0ddc-4957-b53d-824c57c16e64", true);
+                group.classed("repeat-container_06c653e7-4404-4361-8100-e2076981dfdc", true);
             }
 
             // Parse bounding box coordinates
@@ -1840,13 +1841,13 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (!isRepeatNode(clusterName)) {
                 // Add collapse/expand button
                 const collapseButton = group.append("circle")
-                .attr("class", "collapse-button_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+                .attr("class", "collapse-button_06c653e7-4404-4361-8100-e2076981dfdc")
                 .attr("cx", x1 + 10)
                 .attr("cy", y1 + 10)
                 .attr("r", 5.5);
 
                 group.append("text")
-                .attr("class", "collapse-icon_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+                .attr("class", "collapse-icon_06c653e7-4404-4361-8100-e2076981dfdc")
                 .attr("x", x1 + 10)
                 .attr("y", y1 + 10)
                 .attr("text-anchor", "middle")
@@ -1863,7 +1864,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add click event handler for collapse buttons
-        clusters.selectAll(".collapse-button_1cee23c5-0ddc-4957-b53d-824c57c16e64, .collapse-icon_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+        clusters.selectAll(".collapse-button_06c653e7-4404-4361-8100-e2076981dfdc, .collapse-icon_06c653e7-4404-4361-8100-e2076981dfdc")
         .on("click", function(event, [clusterName, clusterData]) {
             event.stopPropagation(); // Prevent event from bubbling to SVG
             removeTooltip();
@@ -1878,19 +1879,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
         
         // Create edges using the path points from Graphviz
-        const edges = inner.selectAll(".edge_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+        const edges = inner.selectAll(".edge_06c653e7-4404-4361-8100-e2076981dfdc")
         .data(graphvizData.edges)
         .enter()
         .append("g")
-        .attr("class", "edge-group_1cee23c5-0ddc-4957-b53d-824c57c16e64");
+        .attr("class", "edge-group_06c653e7-4404-4361-8100-e2076981dfdc");
         
         // Add the actual path
         edges.append("path")
         .attr("class", function(edge) {
             if (edge.is_implied_edge) {
-                return "edge_1cee23c5-0ddc-4957-b53d-824c57c16e64 implied-edge_1cee23c5-0ddc-4957-b53d-824c57c16e64";
+                return "edge_06c653e7-4404-4361-8100-e2076981dfdc implied-edge_06c653e7-4404-4361-8100-e2076981dfdc";
             }
-            return "edge_1cee23c5-0ddc-4957-b53d-824c57c16e64";
+            return "edge_06c653e7-4404-4361-8100-e2076981dfdc";
         }).attr("d", function(edge) {
             if (edge.path && edge.path.length > 0) {
                     // Create a proper SVG path using Bézier curves
@@ -1916,7 +1917,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             }
             return "";
         })
-        .attr("marker-end", "url(#arrowhead_1cee23c5-0ddc-4957-b53d-824c57c16e64)");
+        .attr("marker-end", "url(#arrowhead_06c653e7-4404-4361-8100-e2076981dfdc)");
         
         // Add dimension labels on edges
         edges.each(function(edge) {
@@ -1945,7 +1946,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Create a background for the text
             const labelGroup = edgeGroup.append("g")
-            .attr("class", "edge-label_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+            .attr("class", "edge-label_06c653e7-4404-4361-8100-e2076981dfdc")
             .attr("transform", `translate(${pointAtStart.x}, ${pointAtStart.y})`);
             
             const text = labelGroup.append("text")
@@ -1980,7 +1981,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         edges.each(function() {
             const edgeGroup = d3.select(this);
             const path = edgeGroup.select("path");
-            const labelGroup = edgeGroup.select(".edge-label_1cee23c5-0ddc-4957-b53d-824c57c16e64");
+            const labelGroup = edgeGroup.select(".edge-label_06c653e7-4404-4361-8100-e2076981dfdc");
             const labelText = labelGroup.select("text");
             const labelBg = labelGroup.select("rect");
             const originalStrokeWidth = path.attr("stroke-width") || 1;
@@ -2049,19 +2050,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
         // Create nodes using positions from Graphviz
-        const nodes = inner.selectAll(".node_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+        const nodes = inner.selectAll(".node_06c653e7-4404-4361-8100-e2076981dfdc")
             .data(Object.entries(graphvizData.nodes))
             .enter()
             .append("g")
             // In the createGraph function, when you're creating nodes, modify the class assignment:
             .attr("class", function([nodeName, nodeData]) {
-                let classes = "node_1cee23c5-0ddc-4957-b53d-824c57c16e64";
-                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_1cee23c5-0ddc-4957-b53d-824c57c16e64";
-                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_1cee23c5-0ddc-4957-b53d-824c57c16e64";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_1cee23c5-0ddc-4957-b53d-824c57c16e64";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_1cee23c5-0ddc-4957-b53d-824c57c16e64";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_1cee23c5-0ddc-4957-b53d-824c57c16e64";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_1cee23c5-0ddc-4957-b53d-824c57c16e64";
+                let classes = "node_06c653e7-4404-4361-8100-e2076981dfdc";
+                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_06c653e7-4404-4361-8100-e2076981dfdc";
+                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_06c653e7-4404-4361-8100-e2076981dfdc";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_06c653e7-4404-4361-8100-e2076981dfdc";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_06c653e7-4404-4361-8100-e2076981dfdc";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_06c653e7-4404-4361-8100-e2076981dfdc";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_06c653e7-4404-4361-8100-e2076981dfdc";
                 return classes;
             })
             .attr("transform", function([nodeName, nodeData]) {
@@ -2089,12 +2090,12 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 .attr("rx", nodeData.width / 2)
                 .attr("ry", nodeData.height / 2)
                 .attr("class", function() {
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_1cee23c5-0ddc-4957-b53d-824c57c16e64";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_1cee23c5-0ddc-4957-b53d-824c57c16e64";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_1cee23c5-0ddc-4957-b53d-824c57c16e64";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Parameter") return "parameter_1cee23c5-0ddc-4957-b53d-824c57c16e64";
-                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_1cee23c5-0ddc-4957-b53d-824c57c16e64";
-                    return "operation_1cee23c5-0ddc-4957-b53d-824c57c16e64";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_06c653e7-4404-4361-8100-e2076981dfdc";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_06c653e7-4404-4361-8100-e2076981dfdc";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_06c653e7-4404-4361-8100-e2076981dfdc";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Parameter") return "parameter_06c653e7-4404-4361-8100-e2076981dfdc";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_06c653e7-4404-4361-8100-e2076981dfdc";
+                    return "operation_06c653e7-4404-4361-8100-e2076981dfdc";
                 });
             } else {
                 // Create rectangle
@@ -2104,15 +2105,15 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 .attr("x", -nodeData.width / 2)
                 .attr("y", -nodeData.height / 2)
                 .attr("class", function() { 
-                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_1cee23c5-0ddc-4957-b53d-824c57c16e64";
-                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_1cee23c5-0ddc-4957-b53d-824c57c16e64" : "operation_1cee23c5-0ddc-4957-b53d-824c57c16e64";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_06c653e7-4404-4361-8100-e2076981dfdc";
+                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_06c653e7-4404-4361-8100-e2076981dfdc" : "operation_06c653e7-4404-4361-8100-e2076981dfdc";
                 });
             }
         });
         
         // Add labels for nodes
         nodes.append("text")
-        .attr("class", "node-label_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+        .attr("class", "node-label_06c653e7-4404-4361-8100-e2076981dfdc")
         .text(function([nodeName]) { return graph_node_display_names[nodeName] || graph_node_name_to_without_suffix[nodeName] || nodeName; })
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "central");
@@ -2121,7 +2122,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         nodes.filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Parameter")));
         }).append("text")
-        .attr("class", "type-indicator_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+        .attr("class", "type-indicator_06c653e7-4404-4361-8100-e2076981dfdc")
         .attr("text-anchor", "start")
         .attr("dominant-baseline", "text-bottom")
         .attr("transform", function([nodeName, nodeData]) {
@@ -2139,7 +2140,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add info buttons to nodes (except input, output, constant, parameter)
-        inner.selectAll(".node_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+        inner.selectAll(".node_06c653e7-4404-4361-8100-e2076981dfdc")
         .filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Parameter")))
         })
@@ -2150,14 +2151,14 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
         // Add info button circle
         const infoButton = nodeGroup.append("circle")
-        .attr("class", "info-button_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+        .attr("class", "info-button_06c653e7-4404-4361-8100-e2076981dfdc")
         .attr("cx", width/2 - 7)
         .attr("cy", -height/2 + 7)
         .attr("r", 5.5);
 
         // Add info button icon
         nodeGroup.append("text")
-        .attr("class", "info-icon_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+        .attr("class", "info-icon_06c653e7-4404-4361-8100-e2076981dfdc")
         .attr("x", width/2 - 7)
         .attr("y", -height/2 + 8)
         .attr("text-anchor", "middle")
@@ -2173,16 +2174,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .on("mouseleave", removeTooltip);
 
         // Add click handler to info button
-            nodeGroup.selectAll(".info-button_1cee23c5-0ddc-4957-b53d-824c57c16e64, .info-icon_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+            nodeGroup.selectAll(".info-button_06c653e7-4404-4361-8100-e2076981dfdc, .info-icon_06c653e7-4404-4361-8100-e2076981dfdc")
             .on("click", function(event) {
                 event.stopPropagation();
-                const infoButton = nodeGroup.select(".info-button_1cee23c5-0ddc-4957-b53d-824c57c16e64").node();
+                const infoButton = nodeGroup.select(".info-button_06c653e7-4404-4361-8100-e2076981dfdc").node();
                 showPopupFromInfoButton.call(nodeGroup.node(), event, [nodeName], infoButton);
             });
         });
 
         // Add expand buttons to all module nodes (including non-expandable ones)
-        inner.selectAll(".node_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+        inner.selectAll(".node_06c653e7-4404-4361-8100-e2076981dfdc")
         .filter(function([nodeName]) {
             return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || collapsedContainers.has(nodeName)) && !isRepeatNode(nodeName);
         })
@@ -2204,7 +2205,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Add expand button circle
             const expandButton = nodeGroup.append("circle")
-            .attr("class", isExpandable ? "collapse-button_1cee23c5-0ddc-4957-b53d-824c57c16e64" : "collapse-button-disabled_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+            .attr("class", isExpandable ? "collapse-button_06c653e7-4404-4361-8100-e2076981dfdc" : "collapse-button-disabled_06c653e7-4404-4361-8100-e2076981dfdc")
             .attr("cx", -width / 2 + 7)
             .attr("cy", -height / 2 + 7)
             .attr("r", 5.5)
@@ -2213,7 +2214,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Add expand button icon
             nodeGroup.append("text")
-            .attr("class", isExpandable ? "collapse-icon_1cee23c5-0ddc-4957-b53d-824c57c16e64" : "collapse-icon-disabled_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+            .attr("class", isExpandable ? "collapse-icon_06c653e7-4404-4361-8100-e2076981dfdc" : "collapse-icon-disabled_06c653e7-4404-4361-8100-e2076981dfdc")
             .attr("x", -width / 2 + 7)
             .attr("y", -height / 2 + 7)
             .attr("text-anchor", "middle")
@@ -2233,7 +2234,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Only add click handler for expandable modules
             if (isExpandable) {
-                nodeGroup.selectAll(".collapse-button_1cee23c5-0ddc-4957-b53d-824c57c16e64, .collapse-icon_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+                nodeGroup.selectAll(".collapse-button_06c653e7-4404-4361-8100-e2076981dfdc, .collapse-icon_06c653e7-4404-4361-8100-e2076981dfdc")
                 .on("click", function(event) {
                     event.stopPropagation();
                     removeTooltip();
@@ -2334,16 +2335,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                     .scale(currentTransform.k));
             }
 
-            clickedNodeElement.classed("highlight-node_1cee23c5-0ddc-4957-b53d-824c57c16e64", true);
+            clickedNodeElement.classed("highlight-node_06c653e7-4404-4361-8100-e2076981dfdc", true);
             
             setTimeout(() => {
-                clickedNodeElement.classed("highlight-node_1cee23c5-0ddc-4957-b53d-824c57c16e64", false);
+                clickedNodeElement.classed("highlight-node_06c653e7-4404-4361-8100-e2076981dfdc", false);
             }, 2000);
 
-            const popup = d3.select("#popup_1cee23c5-0ddc-4957-b53d-824c57c16e64");
-            const moduleTemplate = d3.select("#module-template_1cee23c5-0ddc-4957-b53d-824c57c16e64");
-            const tensorOpTemplate = d3.select("#tensor-op-template_1cee23c5-0ddc-4957-b53d-824c57c16e64");
-            const noInfoMessage = d3.select("#no-info_1cee23c5-0ddc-4957-b53d-824c57c16e64");
+            const popup = d3.select("#popup_06c653e7-4404-4361-8100-e2076981dfdc");
+            const moduleTemplate = d3.select("#module-template_06c653e7-4404-4361-8100-e2076981dfdc");
+            const tensorOpTemplate = d3.select("#tensor-op-template_06c653e7-4404-4361-8100-e2076981dfdc");
+            const noInfoMessage = d3.select("#no-info_06c653e7-4404-4361-8100-e2076981dfdc");
             
             const nodeData = adj_list[nodeName];
             
@@ -2351,14 +2352,14 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (node_to_module_path[nodeName] && graph_node_name_to_without_suffix[nodeName]) {
                 popupTitle = node_to_module_path[nodeName] + "." + graph_node_name_to_without_suffix[nodeName];
             }
-            d3.select("#popup-title_1cee23c5-0ddc-4957-b53d-824c57c16e64").text(popupTitle);
+            d3.select("#popup-title_06c653e7-4404-4361-8100-e2076981dfdc").text(popupTitle);
 
             // Show attribute name if available
             const attrName = node_to_attr_name[nodeName];
-            const attrNameRow = d3.select("#attr-name-row_1cee23c5-0ddc-4957-b53d-824c57c16e64");
+            const attrNameRow = d3.select("#attr-name-row_06c653e7-4404-4361-8100-e2076981dfdc");
 
             if (attrName) {
-                d3.select("#attr-name-value_1cee23c5-0ddc-4957-b53d-824c57c16e64").text(attrName);
+                d3.select("#attr-name-value_06c653e7-4404-4361-8100-e2076981dfdc").text(attrName);
                 attrNameRow.style("display", "block");
             } else {
                 attrNameRow.style("display", "none");
@@ -2370,31 +2371,31 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             if (module_info[nodeName]) {
                 const info = module_info[nodeName];
-                moduleTemplate.style("display", "block").classed("content-shown_1cee23c5-0ddc-4957-b53d-824c57c16e64", true);
+                moduleTemplate.style("display", "block").classed("content-shown_06c653e7-4404-4361-8100-e2076981dfdc", true);
                 
-                d3.select("#module-extra-repr_1cee23c5-0ddc-4957-b53d-824c57c16e64").text(info.extra_repr || 'N/A');
+                d3.select("#module-extra-repr_06c653e7-4404-4361-8100-e2076981dfdc").text(info.extra_repr || 'N/A');
 
                 const forward_info = func_info[nodeName];
-                const attributesContainer = d3.select("#module-attributes_1cee23c5-0ddc-4957-b53d-824c57c16e64").node();
+                const attributesContainer = d3.select("#module-attributes_06c653e7-4404-4361-8100-e2076981dfdc").node();
                 attributesContainer.innerHTML = '';
                 createJsonViewer(attributesContainer, info.attributes);
 
-                const parametersContainer = d3.select("#module-parameters_1cee23c5-0ddc-4957-b53d-824c57c16e64").node();
+                const parametersContainer = d3.select("#module-parameters_06c653e7-4404-4361-8100-e2076981dfdc").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, forward_info);
             } else if (!(adj_list[nodeName] && adj_list[nodeName].node_type === "Input") && func_info[nodeName]) {
                 const info = func_info[nodeName];
-                tensorOpTemplate.style("display", "block").classed("content-shown_1cee23c5-0ddc-4957-b53d-824c57c16e64", true);
-                const parametersContainer = d3.select("#tensor-op-parameters_1cee23c5-0ddc-4957-b53d-824c57c16e64").node();
+                tensorOpTemplate.style("display", "block").classed("content-shown_06c653e7-4404-4361-8100-e2076981dfdc", true);
+                const parametersContainer = d3.select("#tensor-op-parameters_06c653e7-4404-4361-8100-e2076981dfdc").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, info);
             } else {
-                noInfoMessage.style("display", "block").classed("content-shown_1cee23c5-0ddc-4957-b53d-824c57c16e64", true);
+                noInfoMessage.style("display", "block").classed("content-shown_06c653e7-4404-4361-8100-e2076981dfdc", true);
             }
             
             // Position popup based on info button or node center
             let boundingBox, x, y;
-            const containerRect = d3.select("#graph-container_1cee23c5-0ddc-4957-b53d-824c57c16e64").node().getBoundingClientRect();
+            const containerRect = d3.select("#graph-container_06c653e7-4404-4361-8100-e2076981dfdc").node().getBoundingClientRect();
             
             if (infoButtonElement) {
                 boundingBox = infoButtonElement.getBoundingClientRect();
@@ -2410,19 +2411,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             popup.style("left", `${x}px`)
             .style("top", `${y}px`)
             .style("display", "flex");
-            d3.select("#popup-content_1cee23c5-0ddc-4957-b53d-824c57c16e64").node().scrollTop = 0;
+            d3.select("#popup-content_06c653e7-4404-4361-8100-e2076981dfdc").node().scrollTop = 0;
         }
 
         function closePopup() {
-            d3.select("#popup_1cee23c5-0ddc-4957-b53d-824c57c16e64").style("display", "none");
+            d3.select("#popup_06c653e7-4404-4361-8100-e2076981dfdc").style("display", "none");
         }
         
-        d3.select(".popup-close_1cee23c5-0ddc-4957-b53d-824c57c16e64").on("click", closePopup);
+        d3.select(".popup-close_06c653e7-4404-4361-8100-e2076981dfdc").on("click", closePopup);
         svg.on("click", closePopup);
 
-        const popup = document.getElementById(`popup_1cee23c5-0ddc-4957-b53d-824c57c16e64`);
+        const popup = document.getElementById(`popup_06c653e7-4404-4361-8100-e2076981dfdc`);
         const resizeObserver = new ResizeObserver(() => {
-            const editorContainers = popup.querySelectorAll('.json-viewer_1cee23c5-0ddc-4957-b53d-824c57c16e64');
+            const editorContainers = popup.querySelectorAll('.json-viewer_06c653e7-4404-4361-8100-e2076981dfdc');
             for (let container of editorContainers) {
                 if (container.jsonEditor) {
                     container.jsonEditor.resize();
@@ -2501,30 +2502,30 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 // Apply highlight effect to the target container
                 if (Object.keys(graphvizData.nodes).includes(lastModifiedContainer)) {
                     // Highlight the node (collapsed container)
-                    const targetElement = inner.selectAll(".node_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+                    const targetElement = inner.selectAll(".node_06c653e7-4404-4361-8100-e2076981dfdc")
                         .filter(([nodeName]) => nodeName === lastModifiedContainer);
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-node_1cee23c5-0ddc-4957-b53d-824c57c16e64", true);
+                        targetElement.classed("highlight-node_06c653e7-4404-4361-8100-e2076981dfdc", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-node_1cee23c5-0ddc-4957-b53d-824c57c16e64", false);
+                            targetElement.classed("highlight-node_06c653e7-4404-4361-8100-e2076981dfdc", false);
                         }, 2000); // Match the animation duration
                     }
                 } else if (Object.keys(graphvizData.clusters).includes(lastModifiedContainer)) {
                     // Highlight the cluster (expanded container)
-                    const targetElement = inner.selectAll(".boundary-box_1cee23c5-0ddc-4957-b53d-824c57c16e64")
+                    const targetElement = inner.selectAll(".boundary-box_06c653e7-4404-4361-8100-e2076981dfdc")
                         .filter(function([clusterName]) {
                             return clusterName === lastModifiedContainer;
                         });
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-cluster_1cee23c5-0ddc-4957-b53d-824c57c16e64", true);
+                        targetElement.classed("highlight-cluster_06c653e7-4404-4361-8100-e2076981dfdc", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-cluster_1cee23c5-0ddc-4957-b53d-824c57c16e64", false);
+                            targetElement.classed("highlight-cluster_06c653e7-4404-4361-8100-e2076981dfdc", false);
                         }, 2000); // Match the animation duration
                     }
                 }

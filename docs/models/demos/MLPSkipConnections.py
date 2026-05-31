@@ -16,6 +16,7 @@ class DeepMLP(nn.Module):
         return self.out(x3)
 
 model = DeepMLP()
+model.eval()
 example_input = torch.randn(1, 64)
 
 code_contents = """\
@@ -38,6 +39,7 @@ class DeepMLP(nn.Module):
         return self.out(x3)
 
 model = DeepMLP()
+model.eval()
 example_input = torch.randn(1, 64)
 
 trace_model(model, example_input)

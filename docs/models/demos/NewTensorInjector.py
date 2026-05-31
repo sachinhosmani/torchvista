@@ -19,6 +19,7 @@ class TensorInjector(nn.Module):
         return new_tensor
 
 model = TensorInjector()
+model.eval()
 example_input = torch.randn(1, 3, 64, 64)
 
 trace_model(model, example_input)
@@ -46,6 +47,7 @@ class TensorInjector(nn.Module):
         return new_tensor
 
 model = TensorInjector()
+model.eval()
 example_input = torch.randn(1, 3, 64, 64)
 
 trace_model(model, example_input)

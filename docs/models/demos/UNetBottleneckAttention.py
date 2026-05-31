@@ -92,6 +92,7 @@ class UNetBAM(nn.Module):
         return self.final_conv(dec1)
 
 model = UNetBAM()
+model.eval()
 example_input = torch.randn(1, 3, 256, 256)
 
 code_contents = """\
@@ -190,6 +191,7 @@ class UNetBAM(nn.Module):
         return self.final_conv(dec1)
 
 model = UNetBAM()
+model.eval()
 example_input = torch.randn(1, 3, 256, 256)
 
 trace_model(model, example_input)

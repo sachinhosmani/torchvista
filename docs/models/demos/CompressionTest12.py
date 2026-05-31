@@ -53,6 +53,7 @@ class CompressionTest12(nn.Module):
         return self.stages(x)
 
 model = CompressionTest12(dim=64, heads=4, stage_depth=1, num_stages=2)
+model.eval()
 
 example_input = torch.randn(2, 32, 64)
 
@@ -118,6 +119,7 @@ class CompressionTest12(nn.Module):
         return self.stages(x)
 
 model = CompressionTest12(dim=64, heads=4, stage_depth=1, num_stages=2)
+model.eval()
 example_input = torch.randn(2, 32, 64)
 
 trace_model(

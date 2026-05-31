@@ -18,6 +18,7 @@ class MiniInception(nn.Module):
         return self.final(torch.cat([b1, b3, b5, bp], dim=1))
 
 model = MiniInception()
+model.eval()
 example_input = torch.randn(1, 3, 32, 32)
 
 code_contents = """\
@@ -42,6 +43,7 @@ class MiniInception(nn.Module):
         return self.final(torch.cat([b1, b3, b5, bp], dim=1))
 
 model = MiniInception()
+model.eval()
 example_input = torch.randn(1, 3, 32, 32)
 
 trace_model(model, example_input)

@@ -53,6 +53,7 @@ class SimpleResNet(nn.Module):
         return self.fc(x)
 
 model = SimpleResNet()
+model.eval()
 example_input = torch.randn(1, 3, 32, 32)
 
 trace_model(model, example_input)
@@ -94,4 +95,5 @@ class SimpleResNet(nn.Module):
         return self.fc(x)
 
 model = SimpleResNet()
+model.eval()
 example_input = torch.randn(1, 3, 32, 32)

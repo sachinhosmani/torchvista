@@ -28,6 +28,7 @@ class LinearModel(nn.Module):
         return self.linear1(x) + self.linear2(x)
 
 model = LinearModel()
+model.eval()
 example_input = torch.randn(2, 10)
 
 # Visualize the forward pass
@@ -48,4 +49,5 @@ class LinearModel(nn.Module):
         return self.linear1(x) + self.linear2(x)
 
 model = LinearModel()
+model.eval()
 example_input = torch.randn(2, 10)

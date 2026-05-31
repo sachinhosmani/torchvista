@@ -52,6 +52,7 @@ class SimpleProcessor(nn.Module):
         }
 
 model = SimpleProcessor()
+model.eval()
 
 # Nested dict input - keys become node names in the visualization
 example_input = {
@@ -95,6 +96,7 @@ class SimpleProcessor(nn.Module):
         }
 
 model = SimpleProcessor()
+model.eval()
 
 example_input = {
     'visual': {

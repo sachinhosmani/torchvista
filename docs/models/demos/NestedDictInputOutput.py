@@ -67,6 +67,7 @@ nested_data_dict = {
 }
 
 model = ModelWithNestedDictInput()
+model.eval()
 
 collapse_modules_after_depth = 0
 
@@ -143,6 +144,7 @@ nested_data_dict = {
 }
 
 model = ModelWithNestedDictInput()
+model.eval()
 
 # Trace the model with nested dictionary input
 trace_model(model, nested_data_dict, collapse_modules_after_depth=0)

@@ -50,6 +50,7 @@ class CompressionTest11(nn.Module):
         return out1 + out2
 
 model = CompressionTest11()
+model.eval()
 
 example_input = torch.randn(2, 64)
 
@@ -110,6 +111,7 @@ class CompressionTest11(nn.Module):
         return out1 + out2
 
 model = CompressionTest11()
+model.eval()
 example_input = torch.randn(2, 64)
 
 trace_model(model, example_input, show_compressed_view=True, collapse_modules_after_depth=2)

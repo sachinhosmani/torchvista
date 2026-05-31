@@ -55,6 +55,7 @@ class SimpleResNet(nn.Module):
         return self.fc(x)
 
 model = SimpleResNet()
+model.eval()
 example_input = torch.randn(1, 3, 32, 32)
 
 # Expand modules up to depth 3 when first displayed
@@ -106,6 +107,7 @@ class SimpleResNet(nn.Module):
         return self.fc(x)
 
 model = SimpleResNet()
+model.eval()
 example_input = torch.randn(1, 3, 32, 32)
 
 forced_module_tracing_depth = 3

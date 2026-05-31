@@ -28,6 +28,7 @@ class TransposePropertiesModel(nn.Module):
         return out1, out2.mean(dim=0), out3
 
 model = TransposePropertiesModel()
+model.eval()
 
 example_input = (
     torch.randn(4, 8, dtype=torch.cfloat),
@@ -67,6 +68,7 @@ class TransposePropertiesModel(nn.Module):
         return out1, out2.mean(dim=0), out3
 
 model = TransposePropertiesModel()
+model.eval()
 
 example_input = (
     torch.randn(4, 8),              # 2D input for .T

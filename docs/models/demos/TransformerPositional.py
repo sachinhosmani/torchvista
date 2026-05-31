@@ -16,6 +16,7 @@ class PositionalTransformer(nn.Module):
         return self.fc(x[0])  # classification using first token
 
 model = PositionalTransformer()
+model.eval()
 example_input = torch.randn(10, 1, 20)  # (seq_len, batch_size, input_dim)
 
 code_contents = """\
@@ -38,6 +39,7 @@ class PositionalTransformer(nn.Module):
         return self.fc(x[0])
 
 model = PositionalTransformer()
+model.eval()
 example_input = torch.randn(10, 1, 20)
 
 trace_model(model, example_input)

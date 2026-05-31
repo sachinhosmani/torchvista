@@ -36,6 +36,7 @@ class DeepCNN(nn.Module):
         return self.classifier(x)
 
 model = DeepCNN()
+model.eval()
 example_input = torch.randn(1, 3, 64, 64)
 
 forced_module_tracing_depth = 4
@@ -75,6 +76,7 @@ class DeepCNN(nn.Module):
         return self.classifier(x)
 
 model = DeepCNN()
+model.eval()
 example_input = torch.randn(1, 3, 64, 64)
 
 trace_model(model, example_input, forced_module_tracing_depth=4)

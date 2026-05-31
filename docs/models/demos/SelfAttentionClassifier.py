@@ -29,6 +29,7 @@ class AttentionClassifier(nn.Module):
         return self.classifier(x.mean(dim=1))
 
 model = AttentionClassifier()
+model.eval()
 example_input = torch.randn(2, 10, 32)
 
 code_contents = """\
@@ -64,6 +65,7 @@ class AttentionClassifier(nn.Module):
         return self.classifier(x.mean(dim=1))
 
 model = AttentionClassifier()
+model.eval()
 example_input = torch.randn(2, 10, 32)
 
 trace_model(model, example_input)

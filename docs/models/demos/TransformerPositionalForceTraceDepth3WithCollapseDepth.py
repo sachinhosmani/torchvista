@@ -16,6 +16,7 @@ class PositionalTransformer(nn.Module):
         return self.fc(x[0])
 
 model = PositionalTransformer()
+model.eval()
 example_input = torch.randn(10, 1, 20)
 forced_module_tracing_depth = 3
 collapse_modules_after_depth = 3
@@ -40,6 +41,7 @@ class PositionalTransformer(nn.Module):
         return self.fc(x[0])
 
 model = PositionalTransformer()
+model.eval()
 example_input = torch.randn(10, 1, 20)
 
 trace_model(model, example_input, forced_module_tracing_depth=3, collapse_modules_after_depth=3)

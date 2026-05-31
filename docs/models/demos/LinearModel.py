@@ -10,6 +10,7 @@ class LinearModel(nn.Module):
         return self.linear(x)
 
 model = LinearModel()
+model.eval()
 
 example_input = torch.randn(2, 10)
 
@@ -27,6 +28,7 @@ class LinearModel(nn.Module):
         return self.linear(x)
 
 model = LinearModel()
+model.eval()
 example_input = torch.randn(2, 10)
 
 trace_model(model, example_input)

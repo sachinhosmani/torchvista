@@ -19,6 +19,7 @@ class UNetPP(nn.Module):
         return self.final(x01)
 
 model = UNetPP()
+model.eval()
 example_input = torch.randn(1, 1, 64, 64)
 
 code_contents = """\
@@ -44,6 +45,7 @@ class UNetPP(nn.Module):
         return self.final(x01)
 
 model = UNetPP()
+model.eval()
 example_input = torch.randn(1, 1, 64, 64)
 
 trace_model(model, example_input)

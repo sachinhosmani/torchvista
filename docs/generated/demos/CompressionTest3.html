@@ -281,6 +281,7 @@ class CompressionTest3(nn.Module):
         return x
 
 model = CompressionTest3()
+model.eval()
 example_input = torch.randn(2, 64)
 
 trace_model(model, example_input, show_compressed_view=True)
@@ -298,124 +299,124 @@ trace_model(model, example_input, show_compressed_view=True)
 
         <div class="graph-view" id="graphContainer" style="height: 100%">
             <div class="graph-box-header">Visualized Interactive Graph</div>
-            <div id="graph-container_ced9cc6e-1977-4d26-9d74-203cce31ef51">
-    <div id="graph_ced9cc6e-1977-4d26-9d74-203cce31ef51"></div>
-    <div class="logo_ced9cc6e-1977-4d26-9d74-203cce31ef51">
+            <div id="graph-container_b5517066-7526-435f-9f39-bfc104cad351">
+    <div id="graph_b5517066-7526-435f-9f39-bfc104cad351"></div>
+    <div class="logo_b5517066-7526-435f-9f39-bfc104cad351">
         <a href="https://github.com/sachinhosmani/torchvista" target="_blank" rel="noopener noreferrer">
         torchvista
         </a>
     </div>
-    <div id="popup_ced9cc6e-1977-4d26-9d74-203cce31ef51" class="popup_ced9cc6e-1977-4d26-9d74-203cce31ef51" style="display: none;">
-        <div class="popup-header_ced9cc6e-1977-4d26-9d74-203cce31ef51">
-            <h3 id="popup-title_ced9cc6e-1977-4d26-9d74-203cce31ef51"></h3>
-            <span class="popup-close_ced9cc6e-1977-4d26-9d74-203cce31ef51">✕</span>
+    <div id="popup_b5517066-7526-435f-9f39-bfc104cad351" class="popup_b5517066-7526-435f-9f39-bfc104cad351" style="display: none;">
+        <div class="popup-header_b5517066-7526-435f-9f39-bfc104cad351">
+            <h3 id="popup-title_b5517066-7526-435f-9f39-bfc104cad351"></h3>
+            <span class="popup-close_b5517066-7526-435f-9f39-bfc104cad351">✕</span>
         </div>
-        <div id="popup-content_ced9cc6e-1977-4d26-9d74-203cce31ef51" class="popup-content_ced9cc6e-1977-4d26-9d74-203cce31ef51">
-            <div id="common-info_ced9cc6e-1977-4d26-9d74-203cce31ef51">
-                <p id="attr-name-row_ced9cc6e-1977-4d26-9d74-203cce31ef51" style="display:none;">
-                    <strong>Attribute name:</strong> <code id="attr-name-value_ced9cc6e-1977-4d26-9d74-203cce31ef51" style="background:#f0f0f0; padding:2px 5px; border-radius:3px; font-family:monospace;"></code>
+        <div id="popup-content_b5517066-7526-435f-9f39-bfc104cad351" class="popup-content_b5517066-7526-435f-9f39-bfc104cad351">
+            <div id="common-info_b5517066-7526-435f-9f39-bfc104cad351">
+                <p id="attr-name-row_b5517066-7526-435f-9f39-bfc104cad351" style="display:none;">
+                    <strong>Attribute name:</strong> <code id="attr-name-value_b5517066-7526-435f-9f39-bfc104cad351" style="background:#f0f0f0; padding:2px 5px; border-radius:3px; font-family:monospace;"></code>
                 </p>
             </div>
-            <div id="module-template_ced9cc6e-1977-4d26-9d74-203cce31ef51" style="display:none;">
-                <details open id="module-parameters-details_ced9cc6e-1977-4d26-9d74-203cce31ef51">
+            <div id="module-template_b5517066-7526-435f-9f39-bfc104cad351" style="display:none;">
+                <details open id="module-parameters-details_b5517066-7526-435f-9f39-bfc104cad351">
                     <summary style="color: black"><strong>forward() Parameters</strong></summary>
-                    <div id="module-parameters_ced9cc6e-1977-4d26-9d74-203cce31ef51" class="json-viewer_ced9cc6e-1977-4d26-9d74-203cce31ef51"></div>
+                    <div id="module-parameters_b5517066-7526-435f-9f39-bfc104cad351" class="json-viewer_b5517066-7526-435f-9f39-bfc104cad351"></div>
                 </details>
-                <details open id="module-attributes-details_ced9cc6e-1977-4d26-9d74-203cce31ef51">
+                <details open id="module-attributes-details_b5517066-7526-435f-9f39-bfc104cad351">
                     <summary style="color: black"><strong>Attributes</strong></summary>
-                    <div id="module-attributes_ced9cc6e-1977-4d26-9d74-203cce31ef51" class="json-viewer_ced9cc6e-1977-4d26-9d74-203cce31ef51"></div>
+                    <div id="module-attributes_b5517066-7526-435f-9f39-bfc104cad351" class="json-viewer_b5517066-7526-435f-9f39-bfc104cad351"></div>
                 </details>
             </div>
-            <div id="tensor-op-template_ced9cc6e-1977-4d26-9d74-203cce31ef51" style="display:none;">
+            <div id="tensor-op-template_b5517066-7526-435f-9f39-bfc104cad351" style="display:none;">
                 <summary><strong>Parameters</strong></summary>
-                <div id="tensor-op-parameters_ced9cc6e-1977-4d26-9d74-203cce31ef51" class="json-viewer_ced9cc6e-1977-4d26-9d74-203cce31ef51"></div>
+                <div id="tensor-op-parameters_b5517066-7526-435f-9f39-bfc104cad351" class="json-viewer_b5517066-7526-435f-9f39-bfc104cad351"></div>
             </div>
-            <p id="no-info_ced9cc6e-1977-4d26-9d74-203cce31ef51" style="display:none;">No further information available for this node.</p>
+            <p id="no-info_b5517066-7526-435f-9f39-bfc104cad351" style="display:none;">No further information available for this node.</p>
         </div>
     </div>
 
     <style>
-        .node_ced9cc6e-1977-4d26-9d74-203cce31ef51 rect {
+        .node_b5517066-7526-435f-9f39-bfc104cad351 rect {
             stroke: #333;
             fill: #fff;
         }
-        text.node-label_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        text.node-label_b5517066-7526-435f-9f39-bfc104cad351 {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.type-indicator_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        text.type-indicator_b5517066-7526-435f-9f39-bfc104cad351 {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             cursor: default;
             user-select: none;
         }
-        text.collapse-icon_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        text.collapse-icon_b5517066-7526-435f-9f39-bfc104cad351 {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 14px;
             cursor: default;
             user-select: none;
         }
-        .edge_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        .edge_b5517066-7526-435f-9f39-bfc104cad351 {
             stroke: #797979;
             fill: none;
         }
-        .node_ced9cc6e-1977-4d26-9d74-203cce31ef51 rect.input_ced9cc6e-1977-4d26-9d74-203cce31ef51 { fill: #FF9AFF; }
-        .node_ced9cc6e-1977-4d26-9d74-203cce31ef51 rect.constant_ced9cc6e-1977-4d26-9d74-203cce31ef51 { fill: rgb(235 235 235); }
+        .node_b5517066-7526-435f-9f39-bfc104cad351 rect.input_b5517066-7526-435f-9f39-bfc104cad351 { fill: #FF9AFF; }
+        .node_b5517066-7526-435f-9f39-bfc104cad351 rect.constant_b5517066-7526-435f-9f39-bfc104cad351 { fill: rgb(235 235 235); }
 
-        .node_ced9cc6e-1977-4d26-9d74-203cce31ef51 rect.output_ced9cc6e-1977-4d26-9d74-203cce31ef51 { fill: #74e071; }
-        .node_ced9cc6e-1977-4d26-9d74-203cce31ef51 rect.failed_ced9cc6e-1977-4d26-9d74-203cce31ef51 { fill: rgb(224 15 15); }
-        .node_ced9cc6e-1977-4d26-9d74-203cce31ef51 rect.module_ced9cc6e-1977-4d26-9d74-203cce31ef51 { fill: #8BDEDB; }
-        .node_ced9cc6e-1977-4d26-9d74-203cce31ef51 rect.operation_ced9cc6e-1977-4d26-9d74-203cce31ef51 { fill: #FEBC5A; }
+        .node_b5517066-7526-435f-9f39-bfc104cad351 rect.output_b5517066-7526-435f-9f39-bfc104cad351 { fill: #74e071; }
+        .node_b5517066-7526-435f-9f39-bfc104cad351 rect.failed_b5517066-7526-435f-9f39-bfc104cad351 { fill: rgb(224 15 15); }
+        .node_b5517066-7526-435f-9f39-bfc104cad351 rect.module_b5517066-7526-435f-9f39-bfc104cad351 { fill: #8BDEDB; }
+        .node_b5517066-7526-435f-9f39-bfc104cad351 rect.operation_b5517066-7526-435f-9f39-bfc104cad351 { fill: #FEBC5A; }
 
-        .node_ced9cc6e-1977-4d26-9d74-203cce31ef51 ellipse.input_ced9cc6e-1977-4d26-9d74-203cce31ef51 { fill: #FF9AFF; }
-        .node_ced9cc6e-1977-4d26-9d74-203cce31ef51 ellipse.constant_ced9cc6e-1977-4d26-9d74-203cce31ef51 { fill: rgb(235 235 235); }
-        .node_ced9cc6e-1977-4d26-9d74-203cce31ef51 ellipse.output_ced9cc6e-1977-4d26-9d74-203cce31ef51 { fill: #74e071; }
-        .node_ced9cc6e-1977-4d26-9d74-203cce31ef51 ellipse.parameter_ced9cc6e-1977-4d26-9d74-203cce31ef51 { fill: #B9CCF3; }
-        .node_ced9cc6e-1977-4d26-9d74-203cce31ef51 ellipse.failed_ced9cc6e-1977-4d26-9d74-203cce31ef51 { fill: rgb(224 15 15); }
+        .node_b5517066-7526-435f-9f39-bfc104cad351 ellipse.input_b5517066-7526-435f-9f39-bfc104cad351 { fill: #FF9AFF; }
+        .node_b5517066-7526-435f-9f39-bfc104cad351 ellipse.constant_b5517066-7526-435f-9f39-bfc104cad351 { fill: rgb(235 235 235); }
+        .node_b5517066-7526-435f-9f39-bfc104cad351 ellipse.output_b5517066-7526-435f-9f39-bfc104cad351 { fill: #74e071; }
+        .node_b5517066-7526-435f-9f39-bfc104cad351 ellipse.parameter_b5517066-7526-435f-9f39-bfc104cad351 { fill: #B9CCF3; }
+        .node_b5517066-7526-435f-9f39-bfc104cad351 ellipse.failed_b5517066-7526-435f-9f39-bfc104cad351 { fill: rgb(224 15 15); }
 
-        .node_ced9cc6e-1977-4d26-9d74-203cce31ef51 ellipse {
+        .node_b5517066-7526-435f-9f39-bfc104cad351 ellipse {
             stroke: #333;
             stroke-width: 1px;
         }
-        .edgeLabelGroup_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        .edgeLabelGroup_b5517066-7526-435f-9f39-bfc104cad351 {
             pointer-events: none;
         }
-        #arrowhead_ced9cc6e-1977-4d26-9d74-203cce31ef51 path {
+        #arrowhead_b5517066-7526-435f-9f39-bfc104cad351 path {
             fill: #333333;;
         }
-        .node_ced9cc6e-1977-4d26-9d74-203cce31ef51 rect,
-        .node_ced9cc6e-1977-4d26-9d74-203cce31ef51 ellipse {
+        .node_b5517066-7526-435f-9f39-bfc104cad351 rect,
+        .node_b5517066-7526-435f-9f39-bfc104cad351 ellipse {
             transition: fill 0.3s ease;
         }
 
-        .node_ced9cc6e-1977-4d26-9d74-203cce31ef51 .type-indicator_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        .node_b5517066-7526-435f-9f39-bfc104cad351 .type-indicator_b5517066-7526-435f-9f39-bfc104cad351 {
             font-size: 5px;
             fill: rgba(0, 0, 0, 1.0);  /* Dark grey, semi-transparent */
             pointer-events: none;
         }
 
-        .node_ced9cc6e-1977-4d26-9d74-203cce31ef51.error_ced9cc6e-1977-4d26-9d74-203cce31ef51 rect {
+        .node_b5517066-7526-435f-9f39-bfc104cad351.error_b5517066-7526-435f-9f39-bfc104cad351 rect {
             stroke: black;
             stroke-width: 1px;
         }
 
-        .boundary-box_ced9cc6e-1977-4d26-9d74-203cce31ef51.error_ced9cc6e-1977-4d26-9d74-203cce31ef51 > rect:first-of-type {
+        .boundary-box_b5517066-7526-435f-9f39-bfc104cad351.error_b5517066-7526-435f-9f39-bfc104cad351 > rect:first-of-type {
             fill: red;
             fill-opacity: 0.2;
         }
 
-        #graph-container_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        #graph-container_b5517066-7526-435f-9f39-bfc104cad351 {
             position: relative;
             height: 95%;
             width: ${width};
             overflow: hidden;
         }
 
-        #graph_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        #graph_b5517066-7526-435f-9f39-bfc104cad351 {
             height: 100%;
         }
         
-        .popup_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        .popup_b5517066-7526-435f-9f39-bfc104cad351 {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             position: absolute;
             background: white;
@@ -430,7 +431,7 @@ trace_model(model, example_input, show_compressed_view=True)
             flex-direction: column;
         }
 
-        .popup-header_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        .popup-header_b5517066-7526-435f-9f39-bfc104cad351 {
             position: sticky;
             top: 0;
             background: white;
@@ -442,12 +443,12 @@ trace_model(model, example_input, show_compressed_view=True)
             z-index: 1;
         }
 
-        .popup_ced9cc6e-1977-4d26-9d74-203cce31ef51 h3 {
+        .popup_b5517066-7526-435f-9f39-bfc104cad351 h3 {
             margin: 0;
             font-size: 16px;
         }
 
-        .popup-content_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        .popup-content_b5517066-7526-435f-9f39-bfc104cad351 {
             padding: 10px;
             padding-bottom: 10px;
             overflow-y: auto;
@@ -455,87 +456,87 @@ trace_model(model, example_input, show_compressed_view=True)
             flex-grow: 1;
         }
 
-        .popup_ced9cc6e-1977-4d26-9d74-203cce31ef51 pre {
+        .popup_b5517066-7526-435f-9f39-bfc104cad351 pre {
             white-space: pre;
             overflow-x: auto;
         }
 
-        .popup-close_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        .popup-close_b5517066-7526-435f-9f39-bfc104cad351 {
             cursor: pointer;
             font-size: 24px;
             font-weight: bold;
             line-height: 1;
         }
 
-        #popup-title_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        #popup-title_b5517066-7526-435f-9f39-bfc104cad351 {
             font-size: 16px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             color: black;
         }
 
-        #graph-container_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        #graph-container_b5517066-7526-435f-9f39-bfc104cad351 {
             position: relative;
         }
 
-        #graph-container_ced9cc6e-1977-4d26-9d74-203cce31ef51 pre {
+        #graph-container_b5517066-7526-435f-9f39-bfc104cad351 pre {
             margin-bottom: 0;
         }
 
-        .boundary-box_ced9cc6e-1977-4d26-9d74-203cce31ef51 rect {
+        .boundary-box_b5517066-7526-435f-9f39-bfc104cad351 rect {
             pointer-events: none;
         }
-        .boundary-box_ced9cc6e-1977-4d26-9d74-203cce31ef51 text {
+        .boundary-box_b5517066-7526-435f-9f39-bfc104cad351 text {
             pointer-events: none;
             user-select: none;
         }
 
-        .boundary-box_ced9cc6e-1977-4d26-9d74-203cce31ef51 rect {
+        .boundary-box_b5517066-7526-435f-9f39-bfc104cad351 rect {
             pointer-events: none;
         }
-        .boundary-box_ced9cc6e-1977-4d26-9d74-203cce31ef51 text {
+        .boundary-box_b5517066-7526-435f-9f39-bfc104cad351 text {
             pointer-events: none;
             user-select: none;
             font-weight: bold;
         }
-        .edge-label_ced9cc6e-1977-4d26-9d74-203cce31ef51 text {
+        .edge-label_b5517066-7526-435f-9f39-bfc104cad351 text {
             pointer-events: none;
             user-select: none;
             font-size: 4px;
             font-family: "'Roboto', sans-serif";
         }
                     
-        .collapse-button_ced9cc6e-1977-4d26-9d74-203cce31ef51, .info-button_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        .collapse-button_b5517066-7526-435f-9f39-bfc104cad351, .info-button_b5517066-7526-435f-9f39-bfc104cad351 {
             fill: #fff;
             stroke: #333;
             stroke-width: 1px;
             cursor: pointer;
         }
 
-        .collapse-button_ced9cc6e-1977-4d26-9d74-203cce31ef51:hover, .info-button_ced9cc6e-1977-4d26-9d74-203cce31ef51:hover {
+        .collapse-button_b5517066-7526-435f-9f39-bfc104cad351:hover, .info-button_b5517066-7526-435f-9f39-bfc104cad351:hover {
             fill: #eee;
             cursor: pointer;
         }
 
-        .collapse-icon_ced9cc6e-1977-4d26-9d74-203cce31ef51, .info-icon_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        .collapse-icon_b5517066-7526-435f-9f39-bfc104cad351, .info-icon_b5517066-7526-435f-9f39-bfc104cad351 {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             fill: rgb(51, 51, 51);
         }
 
-        .collapse-button-disabled_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        .collapse-button-disabled_b5517066-7526-435f-9f39-bfc104cad351 {
             fill: #eee5;
             stroke: #3333334f;
             stroke-width: 1px;
             cursor: not-allowed;
         }
 
-        .collapse-button-disabled_ced9cc6e-1977-4d26-9d74-203cce31ef51:hover {
+        .collapse-button-disabled_b5517066-7526-435f-9f39-bfc104cad351:hover {
             fill: #eee6;
             cursor: not-allowed;
         }
 
-        .collapse-icon-disabled_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        .collapse-icon-disabled_b5517066-7526-435f-9f39-bfc104cad351 {
             pointer-events: none;
             user-select: none;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -544,11 +545,11 @@ trace_model(model, example_input, show_compressed_view=True)
         }
 
         /* Edge hover styles */
-        .edge-group_ced9cc6e-1977-4d26-9d74-203cce31ef51 path {
+        .edge-group_b5517066-7526-435f-9f39-bfc104cad351 path {
             pointer-events: stroke;
         }
 
-        .edge-label_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        .edge-label_b5517066-7526-435f-9f39-bfc104cad351 {
             pointer-events: all;
         }
 
@@ -588,50 +589,50 @@ trace_model(model, example_input, show_compressed_view=True)
             }
         }
 
-        .highlight-cluster_ced9cc6e-1977-4d26-9d74-203cce31ef51 > rect:first-of-type {
+        .highlight-cluster_b5517066-7526-435f-9f39-bfc104cad351 > rect:first-of-type {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        .highlight-node_ced9cc6e-1977-4d26-9d74-203cce31ef51 rect {
+        .highlight-node_b5517066-7526-435f-9f39-bfc104cad351 rect {
             animation: 
                 containerStrokeHighlight 2.0s ease-in-out forwards;
         }
 
-        text.node-label_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        text.node-label_b5517066-7526-435f-9f39-bfc104cad351 {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 0.8rem;  /* Base size using rem units for accessibility */
             cursor: default;
             user-select: none;
         }
 
-        .node_ced9cc6e-1977-4d26-9d74-203cce31ef51.constant_ced9cc6e-1977-4d26-9d74-203cce31ef51 .node-label_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        .node_b5517066-7526-435f-9f39-bfc104cad351.constant_b5517066-7526-435f-9f39-bfc104cad351 .node-label_b5517066-7526-435f-9f39-bfc104cad351 {
             font-size: 0.7rem;
         }
 
-        .popup-content_ced9cc6e-1977-4d26-9d74-203cce31ef51 summary {
+        .popup-content_b5517066-7526-435f-9f39-bfc104cad351 summary {
             cursor: pointer;
             margin: 5px;
             user-select: none;
         }
 
-        .node_ced9cc6e-1977-4d26-9d74-203cce31ef51.input_ced9cc6e-1977-4d26-9d74-203cce31ef51 rect,
-        .node_ced9cc6e-1977-4d26-9d74-203cce31ef51.output_ced9cc6e-1977-4d26-9d74-203cce31ef51 rect,
-        .node_ced9cc6e-1977-4d26-9d74-203cce31ef51.constant_ced9cc6e-1977-4d26-9d74-203cce31ef51 rect {
+        .node_b5517066-7526-435f-9f39-bfc104cad351.input_b5517066-7526-435f-9f39-bfc104cad351 rect,
+        .node_b5517066-7526-435f-9f39-bfc104cad351.output_b5517066-7526-435f-9f39-bfc104cad351 rect,
+        .node_b5517066-7526-435f-9f39-bfc104cad351.constant_b5517066-7526-435f-9f39-bfc104cad351 rect {
             stroke-width: 1px;
             rx: 8px;
             ry: 8px;
             stroke-dasharray: none;
         }
 
-        #png-error-container_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        #png-error-container_b5517066-7526-435f-9f39-bfc104cad351 {
             text-align: center;
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 14px;
         }
 
-        #png-error-message_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        #png-error-message_b5517066-7526-435f-9f39-bfc104cad351 {
             padding: 8px 16px;
             background-color: #dc3545;
             color: white;
@@ -642,13 +643,13 @@ trace_model(model, example_input, show_compressed_view=True)
             text-align: left;
         }
 
-        #png-link-container_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        #png-link-container_b5517066-7526-435f-9f39-bfc104cad351 {
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 18px;
         }
 
-        #png-download-button_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        #png-download-button_b5517066-7526-435f-9f39-bfc104cad351 {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -658,11 +659,11 @@ trace_model(model, example_input, show_compressed_view=True)
             margin-right: 8px;
         }
 
-        #png-download-button_ced9cc6e-1977-4d26-9d74-203cce31ef51:hover {
+        #png-download-button_b5517066-7526-435f-9f39-bfc104cad351:hover {
             background-color: #0056b3;
         }
 
-        #png-save-button_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        #png-save-button_b5517066-7526-435f-9f39-bfc104cad351 {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -671,18 +672,18 @@ trace_model(model, example_input, show_compressed_view=True)
             border-radius: 4px;
         }
 
-        #png-save-button_ced9cc6e-1977-4d26-9d74-203cce31ef51:hover {
+        #png-save-button_b5517066-7526-435f-9f39-bfc104cad351:hover {
             background-color: #0056b3;
         }
 
-        #svg-link-container_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        #svg-link-container_b5517066-7526-435f-9f39-bfc104cad351 {
             padding: 10px;
             border-bottom: 1px solid #ccc;
             font-size: 18px;
         }
 
 
-        #svg-download-button_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        #svg-download-button_b5517066-7526-435f-9f39-bfc104cad351 {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -692,11 +693,11 @@ trace_model(model, example_input, show_compressed_view=True)
             margin-right: 8px;
         }
 
-        #svg-download-button_ced9cc6e-1977-4d26-9d74-203cce31ef51:hover {
+        #svg-download-button_b5517066-7526-435f-9f39-bfc104cad351:hover {
             background-color: #0056b3;
         }
 
-        #svg-save-button_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        #svg-save-button_b5517066-7526-435f-9f39-bfc104cad351 {
             display: inline-block;
             padding: 8px 16px;
             background-color: #007bff;
@@ -705,11 +706,11 @@ trace_model(model, example_input, show_compressed_view=True)
             border-radius: 4px;
         }
 
-        #svg-save-button_ced9cc6e-1977-4d26-9d74-203cce31ef51:hover {
+        #svg-save-button_b5517066-7526-435f-9f39-bfc104cad351:hover {
             background-color: #0056b3;
         }
 
-        .custom-tooltip_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        .custom-tooltip_b5517066-7526-435f-9f39-bfc104cad351 {
             position: absolute;
             background: white;
             border: 1px solid #ccc;
@@ -725,7 +726,7 @@ trace_model(model, example_input, show_compressed_view=True)
             display: none;
         }
 
-        .custom-tooltip_smaller_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        .custom-tooltip_smaller_b5517066-7526-435f-9f39-bfc104cad351 {
             position: absolute;
             background: white;
             border: 1px solid #ccc;
@@ -741,16 +742,16 @@ trace_model(model, example_input, show_compressed_view=True)
             display: none;
         }
 
-        .edge_ced9cc6e-1977-4d26-9d74-203cce31ef51.implied-edge_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        .edge_b5517066-7526-435f-9f39-bfc104cad351.implied-edge_b5517066-7526-435f-9f39-bfc104cad351 {
             stroke-dasharray: 5,5;
         }
 
-        .logo_ced9cc6e-1977-4d26-9d74-203cce31ef51 {
+        .logo_b5517066-7526-435f-9f39-bfc104cad351 {
             position: absolute;
             bottom: 8px; left: 8px;
             padding: 4px 6px;
         }
-        .logo_ced9cc6e-1977-4d26-9d74-203cce31ef51 a {
+        .logo_b5517066-7526-435f-9f39-bfc104cad351 a {
             color: #a1a1a1;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             opacity: .6;
@@ -911,8 +912,8 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
 (function() {
-    const adj_list = {"input_0": {"edges": [{"target": "Linear_2", "dims": "(2, 64)", "edge_data_id": 4961459232}], "failed": false, "node_type": "Input"}, "output_0": {"edges": [], "failed": false, "node_type": "Output"}, "Linear_2": {"edges": [{"target": "output_0", "dims": "(2, 64)", "edge_data_id": 13588560928}], "failed": false, "node_type": "Module"}};
-    const module_info = {"Sequential_1": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Linear_2": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": true}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_3": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": true}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_4": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": true}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_5": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": true}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Sequential_6": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Linear_7": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": true}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_8": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": true}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_9": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": true}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_10": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": true}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Sequential_11": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Linear_12": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": true}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_13": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": true}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_14": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": true}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_15": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": true}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Sequential_16": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": true}, "extra_repr": ""}, "Linear_17": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": true}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_18": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": true}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_19": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": true}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_20": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": true}, "extra_repr": "in_features=64, out_features=64, bias=True"}};
+    const adj_list = {"output_0": {"edges": [], "failed": false, "node_type": "Output"}, "input_0": {"edges": [{"target": "Linear_2", "dims": "(2, 64)", "edge_data_id": 4423184848}], "failed": false, "node_type": "Input"}, "Linear_2": {"edges": [{"target": "output_0", "dims": "(2, 64)", "edge_data_id": 5635042976}], "failed": false, "node_type": "Module"}};
+    const module_info = {"Sequential_1": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": false}, "extra_repr": ""}, "Linear_2": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": false}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_3": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": false}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_4": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": false}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_5": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": false}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Sequential_6": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": false}, "extra_repr": ""}, "Linear_7": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": false}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_8": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": false}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_9": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": false}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_10": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": false}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Sequential_11": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": false}, "extra_repr": ""}, "Linear_12": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": false}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_13": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": false}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_14": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": false}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_15": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": false}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Sequential_16": {"type": "Sequential", "parameters": {}, "attributes": {"call_super_init": false, "dump_patches": false, "training": false}, "extra_repr": ""}, "Linear_17": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": false}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_18": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": false}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_19": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": false}, "extra_repr": "in_features=64, out_features=64, bias=True"}, "Linear_20": {"type": "Linear", "parameters": {"weight": {"shape": [64, 64], "requires_grad": true}, "bias": {"shape": [64], "requires_grad": true}}, "attributes": {"call_super_init": false, "dump_patches": false, "in_features": 64, "out_features": 64, "training": false}, "extra_repr": "in_features=64, out_features=64, bias=True"}};
     const func_info = {"Sequential_1": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_2": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_3": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_4": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_5": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Sequential_6": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_7": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_8": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_9": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_10": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Sequential_11": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_12": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_13": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_14": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_15": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Sequential_16": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_17": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_18": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_19": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}, "Linear_20": {"positional_args": [{"_type": "tensor", "shape": [2, 64], "dtype": "torch.float32"}], "keyword_args": {}}};
     const parent_module_to_nodes = {"Sequential_1": ["Linear_2", "Linear_3", "Linear_4", "Linear_5"], "Sequential_6": ["Linear_7", "Linear_8", "Linear_9", "Linear_10"], "Sequential_11": ["Linear_12", "Linear_13", "Linear_14", "Linear_15"], "Sequential_16": ["Linear_17", "Linear_18", "Linear_19", "Linear_20"]};
     const parent_module_to_depth = {"Sequential_1": 1, "Sequential_6": 1, "Sequential_11": 1, "Sequential_16": 1};
@@ -961,10 +962,10 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         removeTooltip();
         
         const tooltip = document.createElement('div');
-        tooltip.className = !smaller ? `custom-tooltip_ced9cc6e-1977-4d26-9d74-203cce31ef51` : `custom-tooltip_smaller_ced9cc6e-1977-4d26-9d74-203cce31ef51`;
+        tooltip.className = !smaller ? `custom-tooltip_b5517066-7526-435f-9f39-bfc104cad351` : `custom-tooltip_smaller_b5517066-7526-435f-9f39-bfc104cad351`;
         tooltip.textContent = text;
         
-        const container = document.getElementById(`graph-container_ced9cc6e-1977-4d26-9d74-203cce31ef51`);
+        const container = document.getElementById(`graph-container_b5517066-7526-435f-9f39-bfc104cad351`);
         container.appendChild(tooltip);
         currentTooltip = tooltip;
         
@@ -976,7 +977,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const buttonRect = buttonElement.getBoundingClientRect();
         
         // Get the container's position in screen coordinates
-        const containerRect = document.getElementById(`graph-container_ced9cc6e-1977-4d26-9d74-203cce31ef51`).getBoundingClientRect();
+        const containerRect = document.getElementById(`graph-container_b5517066-7526-435f-9f39-bfc104cad351`).getBoundingClientRect();
         
         // Calculate position relative to container
         const buttonX = buttonRect.left + (buttonRect.width / 2) - containerRect.left;
@@ -1594,7 +1595,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function reloadGraph() {
-        d3.select("#graph_ced9cc6e-1977-4d26-9d74-203cce31ef51").html("");
+        d3.select("#graph_b5517066-7526-435f-9f39-bfc104cad351").html("");
 
         if (generateImage) {
             renderGraphvizImage();
@@ -1661,16 +1662,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
     }
 
     function renderGraphvizImage() {
-        d3.select("#png-link-container_ced9cc6e-1977-4d26-9d74-203cce31ef51").remove();
+        d3.select("#png-link-container_b5517066-7526-435f-9f39-bfc104cad351").remove();
         
         function showErrorMessage(error) {
-            const parent = d3.select("#graph-container_ced9cc6e-1977-4d26-9d74-203cce31ef51").node().parentNode;
+            const parent = d3.select("#graph-container_b5517066-7526-435f-9f39-bfc104cad351").node().parentNode;
             const errorContainer = d3.select(parent)
-                .insert("div", "#graph-container_ced9cc6e-1977-4d26-9d74-203cce31ef51")
-                .attr("id", "png-error-container_ced9cc6e-1977-4d26-9d74-203cce31ef51");
+                .insert("div", "#graph-container_b5517066-7526-435f-9f39-bfc104cad351")
+                .attr("id", "png-error-container_b5517066-7526-435f-9f39-bfc104cad351");
             
             errorContainer.append("div")
-                .attr("id", "png-error-message_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+                .attr("id", "png-error-message_b5517066-7526-435f-9f39-bfc104cad351")
                 .html(`<strong>Error:</strong><br>${error.stack || error.message || error}<br><br><strong>Note:</strong> Exporting very large models as PNG is currently not supported. Please use generate_image=False, or raise an issue on https://github.com/sachinhosmani/torchvista/issues`);
         }
         
@@ -1708,21 +1709,21 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const pngUrl = URL.createObjectURL(pngBlob);
         
         // Create link container
-        const parent = d3.select("#graph-container_ced9cc6e-1977-4d26-9d74-203cce31ef51").node().parentNode;
+        const parent = d3.select("#graph-container_b5517066-7526-435f-9f39-bfc104cad351").node().parentNode;
         const linkContainer = d3.select(parent)
-            .insert("div", "#graph-container_ced9cc6e-1977-4d26-9d74-203cce31ef51")
-            .attr("id", "png-link-container_ced9cc6e-1977-4d26-9d74-203cce31ef51");
+            .insert("div", "#graph-container_b5517066-7526-435f-9f39-bfc104cad351")
+            .attr("id", "png-link-container_b5517066-7526-435f-9f39-bfc104cad351");
         
         linkContainer.append("a")
             .attr("href", pngUrl)
             .attr("target", "_blank")
-            .attr("id", "png-download-button_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+            .attr("id", "png-download-button_b5517066-7526-435f-9f39-bfc104cad351")
             .text("View PNG in New Tab");
 
         linkContainer.append("a")
             .attr("href", pngUrl)
-            .attr("download", `torchvista_graph_ced9cc6e-1977-4d26-9d74-203cce31ef51.png`)
-            .attr("id", "png-save-button_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+            .attr("download", `torchvista_graph_b5517066-7526-435f-9f39-bfc104cad351.png`)
+            .attr("id", "png-save-button_b5517066-7526-435f-9f39-bfc104cad351")
             .text("Download PNG");
             
         URL.revokeObjectURL(svgUrl);
@@ -1743,26 +1744,26 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         const svgUrl = URL.createObjectURL(svgBlob);
         
         // Create link container
-        const parent = d3.select("#graph-container_ced9cc6e-1977-4d26-9d74-203cce31ef51").node().parentNode;
+        const parent = d3.select("#graph-container_b5517066-7526-435f-9f39-bfc104cad351").node().parentNode;
         const linkContainer = d3.select(parent)
-            .insert("div", "#graph-container_ced9cc6e-1977-4d26-9d74-203cce31ef51")
-            .attr("id", "svg-link-container_ced9cc6e-1977-4d26-9d74-203cce31ef51");
+            .insert("div", "#graph-container_b5517066-7526-435f-9f39-bfc104cad351")
+            .attr("id", "svg-link-container_b5517066-7526-435f-9f39-bfc104cad351");
         
         linkContainer.append("a")
             .attr("href", svgUrl)
             .attr("target", "_blank")
-            .attr("id", "svg-download-button_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+            .attr("id", "svg-download-button_b5517066-7526-435f-9f39-bfc104cad351")
             .text("View SVG in New Tab");
 
         linkContainer.append("a")
             .attr("href", svgUrl)
-            .attr("download", `torchvista_graph_ced9cc6e-1977-4d26-9d74-203cce31ef51.svg`)
-            .attr("id", "svg-save-button_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+            .attr("download", `torchvista_graph_b5517066-7526-435f-9f39-bfc104cad351.svg`)
+            .attr("id", "svg-save-button_b5517066-7526-435f-9f39-bfc104cad351")
             .text("Download SVG");
     }
 
     function createGraph(graphvizData) {
-        const svg = d3.select("#graph_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+        const svg = d3.select("#graph_b5517066-7526-435f-9f39-bfc104cad351")
         .append("svg")
         .attr("width", "100%")
         .attr("height", "100%")
@@ -1782,7 +1783,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
         // Define arrowhead marker
         svg.append("defs").append("marker")
-        .attr("id", "arrowhead_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+        .attr("id", "arrowhead_b5517066-7526-435f-9f39-bfc104cad351")
         .attr("viewBox", "0 -5 10 10")
         .attr("refX", 8)
         .attr("refY", 0)
@@ -1794,11 +1795,11 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .attr("fill", "#333");
 
         // Draw clusters (container boxes) first so they're behind nodes
-        const clusters = inner.selectAll(".boundary-box_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+        const clusters = inner.selectAll(".boundary-box_b5517066-7526-435f-9f39-bfc104cad351")
         .data(Object.entries(graphvizData.clusters))
         .enter()
         .append("g")
-        .attr("class", "boundary-box_ced9cc6e-1977-4d26-9d74-203cce31ef51");
+        .attr("class", "boundary-box_b5517066-7526-435f-9f39-bfc104cad351");
 
         const containersWithFailedNodes = identifyContainersWithFailedNodes(adj_list, ancestor_map);
 
@@ -1808,10 +1809,10 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             const hasFailedNodes = containersWithFailedNodes.has(clusterName);
             const isRepeat = isRepeatNode(clusterName);
             if (hasFailedNodes) {
-                group.classed("error_ced9cc6e-1977-4d26-9d74-203cce31ef51", true);
+                group.classed("error_b5517066-7526-435f-9f39-bfc104cad351", true);
             }
             if (isRepeat) {
-                group.classed("repeat-container_ced9cc6e-1977-4d26-9d74-203cce31ef51", true);
+                group.classed("repeat-container_b5517066-7526-435f-9f39-bfc104cad351", true);
             }
 
             // Parse bounding box coordinates
@@ -1853,13 +1854,13 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (!isRepeatNode(clusterName)) {
                 // Add collapse/expand button
                 const collapseButton = group.append("circle")
-                .attr("class", "collapse-button_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+                .attr("class", "collapse-button_b5517066-7526-435f-9f39-bfc104cad351")
                 .attr("cx", x1 + 10)
                 .attr("cy", y1 + 10)
                 .attr("r", 5.5);
 
                 group.append("text")
-                .attr("class", "collapse-icon_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+                .attr("class", "collapse-icon_b5517066-7526-435f-9f39-bfc104cad351")
                 .attr("x", x1 + 10)
                 .attr("y", y1 + 10)
                 .attr("text-anchor", "middle")
@@ -1876,7 +1877,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add click event handler for collapse buttons
-        clusters.selectAll(".collapse-button_ced9cc6e-1977-4d26-9d74-203cce31ef51, .collapse-icon_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+        clusters.selectAll(".collapse-button_b5517066-7526-435f-9f39-bfc104cad351, .collapse-icon_b5517066-7526-435f-9f39-bfc104cad351")
         .on("click", function(event, [clusterName, clusterData]) {
             event.stopPropagation(); // Prevent event from bubbling to SVG
             removeTooltip();
@@ -1891,19 +1892,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
         
         // Create edges using the path points from Graphviz
-        const edges = inner.selectAll(".edge_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+        const edges = inner.selectAll(".edge_b5517066-7526-435f-9f39-bfc104cad351")
         .data(graphvizData.edges)
         .enter()
         .append("g")
-        .attr("class", "edge-group_ced9cc6e-1977-4d26-9d74-203cce31ef51");
+        .attr("class", "edge-group_b5517066-7526-435f-9f39-bfc104cad351");
         
         // Add the actual path
         edges.append("path")
         .attr("class", function(edge) {
             if (edge.is_implied_edge) {
-                return "edge_ced9cc6e-1977-4d26-9d74-203cce31ef51 implied-edge_ced9cc6e-1977-4d26-9d74-203cce31ef51";
+                return "edge_b5517066-7526-435f-9f39-bfc104cad351 implied-edge_b5517066-7526-435f-9f39-bfc104cad351";
             }
-            return "edge_ced9cc6e-1977-4d26-9d74-203cce31ef51";
+            return "edge_b5517066-7526-435f-9f39-bfc104cad351";
         }).attr("d", function(edge) {
             if (edge.path && edge.path.length > 0) {
                     // Create a proper SVG path using Bézier curves
@@ -1929,7 +1930,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             }
             return "";
         })
-        .attr("marker-end", "url(#arrowhead_ced9cc6e-1977-4d26-9d74-203cce31ef51)");
+        .attr("marker-end", "url(#arrowhead_b5517066-7526-435f-9f39-bfc104cad351)");
         
         // Add dimension labels on edges
         edges.each(function(edge) {
@@ -1958,7 +1959,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Create a background for the text
             const labelGroup = edgeGroup.append("g")
-            .attr("class", "edge-label_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+            .attr("class", "edge-label_b5517066-7526-435f-9f39-bfc104cad351")
             .attr("transform", `translate(${pointAtStart.x}, ${pointAtStart.y})`);
             
             const text = labelGroup.append("text")
@@ -1993,7 +1994,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         edges.each(function() {
             const edgeGroup = d3.select(this);
             const path = edgeGroup.select("path");
-            const labelGroup = edgeGroup.select(".edge-label_ced9cc6e-1977-4d26-9d74-203cce31ef51");
+            const labelGroup = edgeGroup.select(".edge-label_b5517066-7526-435f-9f39-bfc104cad351");
             const labelText = labelGroup.select("text");
             const labelBg = labelGroup.select("rect");
             const originalStrokeWidth = path.attr("stroke-width") || 1;
@@ -2062,19 +2063,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
 
         // Create nodes using positions from Graphviz
-        const nodes = inner.selectAll(".node_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+        const nodes = inner.selectAll(".node_b5517066-7526-435f-9f39-bfc104cad351")
             .data(Object.entries(graphvizData.nodes))
             .enter()
             .append("g")
             // In the createGraph function, when you're creating nodes, modify the class assignment:
             .attr("class", function([nodeName, nodeData]) {
-                let classes = "node_ced9cc6e-1977-4d26-9d74-203cce31ef51";
-                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_ced9cc6e-1977-4d26-9d74-203cce31ef51";
-                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_ced9cc6e-1977-4d26-9d74-203cce31ef51";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_ced9cc6e-1977-4d26-9d74-203cce31ef51";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_ced9cc6e-1977-4d26-9d74-203cce31ef51";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_ced9cc6e-1977-4d26-9d74-203cce31ef51";
-                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_ced9cc6e-1977-4d26-9d74-203cce31ef51";
+                let classes = "node_b5517066-7526-435f-9f39-bfc104cad351";
+                if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) classes += " error_b5517066-7526-435f-9f39-bfc104cad351";
+                if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) classes += " input_b5517066-7526-435f-9f39-bfc104cad351";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) classes += " module_b5517066-7526-435f-9f39-bfc104cad351";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) classes += " output_b5517066-7526-435f-9f39-bfc104cad351";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Operation")) classes += " operation_b5517066-7526-435f-9f39-bfc104cad351";
+                else if ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) classes += " constant_b5517066-7526-435f-9f39-bfc104cad351";
                 return classes;
             })
             .attr("transform", function([nodeName, nodeData]) {
@@ -2102,12 +2103,12 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 .attr("rx", nodeData.width / 2)
                 .attr("ry", nodeData.height / 2)
                 .attr("class", function() {
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_ced9cc6e-1977-4d26-9d74-203cce31ef51";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_ced9cc6e-1977-4d26-9d74-203cce31ef51";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_ced9cc6e-1977-4d26-9d74-203cce31ef51";
-                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Parameter") return "parameter_ced9cc6e-1977-4d26-9d74-203cce31ef51";
-                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_ced9cc6e-1977-4d26-9d74-203cce31ef51";
-                    return "operation_ced9cc6e-1977-4d26-9d74-203cce31ef51";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Input") return "input_b5517066-7526-435f-9f39-bfc104cad351";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Output") return "output_b5517066-7526-435f-9f39-bfc104cad351";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Constant") return "constant_b5517066-7526-435f-9f39-bfc104cad351";
+                    if (adj_list[nodeName] && adj_list[nodeName].node_type === "Parameter") return "parameter_b5517066-7526-435f-9f39-bfc104cad351";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_b5517066-7526-435f-9f39-bfc104cad351";
+                    return "operation_b5517066-7526-435f-9f39-bfc104cad351";
                 });
             } else {
                 // Create rectangle
@@ -2117,15 +2118,15 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 .attr("x", -nodeData.width / 2)
                 .attr("y", -nodeData.height / 2)
                 .attr("class", function() { 
-                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_ced9cc6e-1977-4d26-9d74-203cce31ef51";
-                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_ced9cc6e-1977-4d26-9d74-203cce31ef51" : "operation_ced9cc6e-1977-4d26-9d74-203cce31ef51";
+                    if ((adj_list[nodeName] && adj_list[nodeName].failed) || containersWithFailedNodes.has(nodeName)) return "failed_b5517066-7526-435f-9f39-bfc104cad351";
+                    return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || (collapsedContainers.has(nodeName))) ? "module_b5517066-7526-435f-9f39-bfc104cad351" : "operation_b5517066-7526-435f-9f39-bfc104cad351";
                 });
             }
         });
         
         // Add labels for nodes
         nodes.append("text")
-        .attr("class", "node-label_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+        .attr("class", "node-label_b5517066-7526-435f-9f39-bfc104cad351")
         .text(function([nodeName]) { return graph_node_display_names[nodeName] || graph_node_name_to_without_suffix[nodeName] || nodeName; })
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "central");
@@ -2134,7 +2135,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         nodes.filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Parameter")));
         }).append("text")
-        .attr("class", "type-indicator_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+        .attr("class", "type-indicator_b5517066-7526-435f-9f39-bfc104cad351")
         .attr("text-anchor", "start")
         .attr("dominant-baseline", "text-bottom")
         .attr("transform", function([nodeName, nodeData]) {
@@ -2152,7 +2153,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         });
 
         // Add info buttons to nodes (except input, output, constant, parameter)
-        inner.selectAll(".node_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+        inner.selectAll(".node_b5517066-7526-435f-9f39-bfc104cad351")
         .filter(function([nodeName]) {
             return !(((adj_list[nodeName] && adj_list[nodeName].node_type === "Output")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Input")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Constant")) || ((adj_list[nodeName] && adj_list[nodeName].node_type === "Parameter")))
         })
@@ -2163,14 +2164,14 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
         // Add info button circle
         const infoButton = nodeGroup.append("circle")
-        .attr("class", "info-button_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+        .attr("class", "info-button_b5517066-7526-435f-9f39-bfc104cad351")
         .attr("cx", width/2 - 7)
         .attr("cy", -height/2 + 7)
         .attr("r", 5.5);
 
         // Add info button icon
         nodeGroup.append("text")
-        .attr("class", "info-icon_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+        .attr("class", "info-icon_b5517066-7526-435f-9f39-bfc104cad351")
         .attr("x", width/2 - 7)
         .attr("y", -height/2 + 8)
         .attr("text-anchor", "middle")
@@ -2186,16 +2187,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
         .on("mouseleave", removeTooltip);
 
         // Add click handler to info button
-            nodeGroup.selectAll(".info-button_ced9cc6e-1977-4d26-9d74-203cce31ef51, .info-icon_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+            nodeGroup.selectAll(".info-button_b5517066-7526-435f-9f39-bfc104cad351, .info-icon_b5517066-7526-435f-9f39-bfc104cad351")
             .on("click", function(event) {
                 event.stopPropagation();
-                const infoButton = nodeGroup.select(".info-button_ced9cc6e-1977-4d26-9d74-203cce31ef51").node();
+                const infoButton = nodeGroup.select(".info-button_b5517066-7526-435f-9f39-bfc104cad351").node();
                 showPopupFromInfoButton.call(nodeGroup.node(), event, [nodeName], infoButton);
             });
         });
 
         // Add expand buttons to all module nodes (including non-expandable ones)
-        inner.selectAll(".node_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+        inner.selectAll(".node_b5517066-7526-435f-9f39-bfc104cad351")
         .filter(function([nodeName]) {
             return ((adj_list[nodeName] && adj_list[nodeName].node_type === "Module") || collapsedContainers.has(nodeName)) && !isRepeatNode(nodeName);
         })
@@ -2217,7 +2218,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             // Add expand button circle
             const expandButton = nodeGroup.append("circle")
-            .attr("class", isExpandable ? "collapse-button_ced9cc6e-1977-4d26-9d74-203cce31ef51" : "collapse-button-disabled_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+            .attr("class", isExpandable ? "collapse-button_b5517066-7526-435f-9f39-bfc104cad351" : "collapse-button-disabled_b5517066-7526-435f-9f39-bfc104cad351")
             .attr("cx", -width / 2 + 7)
             .attr("cy", -height / 2 + 7)
             .attr("r", 5.5)
@@ -2226,7 +2227,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Add expand button icon
             nodeGroup.append("text")
-            .attr("class", isExpandable ? "collapse-icon_ced9cc6e-1977-4d26-9d74-203cce31ef51" : "collapse-icon-disabled_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+            .attr("class", isExpandable ? "collapse-icon_b5517066-7526-435f-9f39-bfc104cad351" : "collapse-icon-disabled_b5517066-7526-435f-9f39-bfc104cad351")
             .attr("x", -width / 2 + 7)
             .attr("y", -height / 2 + 7)
             .attr("text-anchor", "middle")
@@ -2246,7 +2247,7 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
 
             // Only add click handler for expandable modules
             if (isExpandable) {
-                nodeGroup.selectAll(".collapse-button_ced9cc6e-1977-4d26-9d74-203cce31ef51, .collapse-icon_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+                nodeGroup.selectAll(".collapse-button_b5517066-7526-435f-9f39-bfc104cad351, .collapse-icon_b5517066-7526-435f-9f39-bfc104cad351")
                 .on("click", function(event) {
                     event.stopPropagation();
                     removeTooltip();
@@ -2347,16 +2348,16 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                     .scale(currentTransform.k));
             }
 
-            clickedNodeElement.classed("highlight-node_ced9cc6e-1977-4d26-9d74-203cce31ef51", true);
+            clickedNodeElement.classed("highlight-node_b5517066-7526-435f-9f39-bfc104cad351", true);
             
             setTimeout(() => {
-                clickedNodeElement.classed("highlight-node_ced9cc6e-1977-4d26-9d74-203cce31ef51", false);
+                clickedNodeElement.classed("highlight-node_b5517066-7526-435f-9f39-bfc104cad351", false);
             }, 2000);
 
-            const popup = d3.select("#popup_ced9cc6e-1977-4d26-9d74-203cce31ef51");
-            const moduleTemplate = d3.select("#module-template_ced9cc6e-1977-4d26-9d74-203cce31ef51");
-            const tensorOpTemplate = d3.select("#tensor-op-template_ced9cc6e-1977-4d26-9d74-203cce31ef51");
-            const noInfoMessage = d3.select("#no-info_ced9cc6e-1977-4d26-9d74-203cce31ef51");
+            const popup = d3.select("#popup_b5517066-7526-435f-9f39-bfc104cad351");
+            const moduleTemplate = d3.select("#module-template_b5517066-7526-435f-9f39-bfc104cad351");
+            const tensorOpTemplate = d3.select("#tensor-op-template_b5517066-7526-435f-9f39-bfc104cad351");
+            const noInfoMessage = d3.select("#no-info_b5517066-7526-435f-9f39-bfc104cad351");
             
             const nodeData = adj_list[nodeName];
             
@@ -2364,14 +2365,14 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             if (node_to_module_path[nodeName] && graph_node_name_to_without_suffix[nodeName]) {
                 popupTitle = node_to_module_path[nodeName] + "." + graph_node_name_to_without_suffix[nodeName];
             }
-            d3.select("#popup-title_ced9cc6e-1977-4d26-9d74-203cce31ef51").text(popupTitle);
+            d3.select("#popup-title_b5517066-7526-435f-9f39-bfc104cad351").text(popupTitle);
 
             // Show attribute name if available
             const attrName = node_to_attr_name[nodeName];
-            const attrNameRow = d3.select("#attr-name-row_ced9cc6e-1977-4d26-9d74-203cce31ef51");
+            const attrNameRow = d3.select("#attr-name-row_b5517066-7526-435f-9f39-bfc104cad351");
 
             if (attrName) {
-                d3.select("#attr-name-value_ced9cc6e-1977-4d26-9d74-203cce31ef51").text(attrName);
+                d3.select("#attr-name-value_b5517066-7526-435f-9f39-bfc104cad351").text(attrName);
                 attrNameRow.style("display", "block");
             } else {
                 attrNameRow.style("display", "none");
@@ -2383,31 +2384,31 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             
             if (module_info[nodeName]) {
                 const info = module_info[nodeName];
-                moduleTemplate.style("display", "block").classed("content-shown_ced9cc6e-1977-4d26-9d74-203cce31ef51", true);
+                moduleTemplate.style("display", "block").classed("content-shown_b5517066-7526-435f-9f39-bfc104cad351", true);
                 
-                d3.select("#module-extra-repr_ced9cc6e-1977-4d26-9d74-203cce31ef51").text(info.extra_repr || 'N/A');
+                d3.select("#module-extra-repr_b5517066-7526-435f-9f39-bfc104cad351").text(info.extra_repr || 'N/A');
 
                 const forward_info = func_info[nodeName];
-                const attributesContainer = d3.select("#module-attributes_ced9cc6e-1977-4d26-9d74-203cce31ef51").node();
+                const attributesContainer = d3.select("#module-attributes_b5517066-7526-435f-9f39-bfc104cad351").node();
                 attributesContainer.innerHTML = '';
                 createJsonViewer(attributesContainer, info.attributes);
 
-                const parametersContainer = d3.select("#module-parameters_ced9cc6e-1977-4d26-9d74-203cce31ef51").node();
+                const parametersContainer = d3.select("#module-parameters_b5517066-7526-435f-9f39-bfc104cad351").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, forward_info);
             } else if (!(adj_list[nodeName] && adj_list[nodeName].node_type === "Input") && func_info[nodeName]) {
                 const info = func_info[nodeName];
-                tensorOpTemplate.style("display", "block").classed("content-shown_ced9cc6e-1977-4d26-9d74-203cce31ef51", true);
-                const parametersContainer = d3.select("#tensor-op-parameters_ced9cc6e-1977-4d26-9d74-203cce31ef51").node();
+                tensorOpTemplate.style("display", "block").classed("content-shown_b5517066-7526-435f-9f39-bfc104cad351", true);
+                const parametersContainer = d3.select("#tensor-op-parameters_b5517066-7526-435f-9f39-bfc104cad351").node();
                 parametersContainer.innerHTML = '';
                 createJsonViewer(parametersContainer, info);
             } else {
-                noInfoMessage.style("display", "block").classed("content-shown_ced9cc6e-1977-4d26-9d74-203cce31ef51", true);
+                noInfoMessage.style("display", "block").classed("content-shown_b5517066-7526-435f-9f39-bfc104cad351", true);
             }
             
             // Position popup based on info button or node center
             let boundingBox, x, y;
-            const containerRect = d3.select("#graph-container_ced9cc6e-1977-4d26-9d74-203cce31ef51").node().getBoundingClientRect();
+            const containerRect = d3.select("#graph-container_b5517066-7526-435f-9f39-bfc104cad351").node().getBoundingClientRect();
             
             if (infoButtonElement) {
                 boundingBox = infoButtonElement.getBoundingClientRect();
@@ -2423,19 +2424,19 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
             popup.style("left", `${x}px`)
             .style("top", `${y}px`)
             .style("display", "flex");
-            d3.select("#popup-content_ced9cc6e-1977-4d26-9d74-203cce31ef51").node().scrollTop = 0;
+            d3.select("#popup-content_b5517066-7526-435f-9f39-bfc104cad351").node().scrollTop = 0;
         }
 
         function closePopup() {
-            d3.select("#popup_ced9cc6e-1977-4d26-9d74-203cce31ef51").style("display", "none");
+            d3.select("#popup_b5517066-7526-435f-9f39-bfc104cad351").style("display", "none");
         }
         
-        d3.select(".popup-close_ced9cc6e-1977-4d26-9d74-203cce31ef51").on("click", closePopup);
+        d3.select(".popup-close_b5517066-7526-435f-9f39-bfc104cad351").on("click", closePopup);
         svg.on("click", closePopup);
 
-        const popup = document.getElementById(`popup_ced9cc6e-1977-4d26-9d74-203cce31ef51`);
+        const popup = document.getElementById(`popup_b5517066-7526-435f-9f39-bfc104cad351`);
         const resizeObserver = new ResizeObserver(() => {
-            const editorContainers = popup.querySelectorAll('.json-viewer_ced9cc6e-1977-4d26-9d74-203cce31ef51');
+            const editorContainers = popup.querySelectorAll('.json-viewer_b5517066-7526-435f-9f39-bfc104cad351');
             for (let container of editorContainers) {
                 if (container.jsonEditor) {
                     container.jsonEditor.resize();
@@ -2514,30 +2515,30 @@ i._setHSLA(null,e,1-t)}),this.settings.alpha&&a(r,this._domA,function(e,t){i._se
                 // Apply highlight effect to the target container
                 if (Object.keys(graphvizData.nodes).includes(lastModifiedContainer)) {
                     // Highlight the node (collapsed container)
-                    const targetElement = inner.selectAll(".node_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+                    const targetElement = inner.selectAll(".node_b5517066-7526-435f-9f39-bfc104cad351")
                         .filter(([nodeName]) => nodeName === lastModifiedContainer);
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-node_ced9cc6e-1977-4d26-9d74-203cce31ef51", true);
+                        targetElement.classed("highlight-node_b5517066-7526-435f-9f39-bfc104cad351", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-node_ced9cc6e-1977-4d26-9d74-203cce31ef51", false);
+                            targetElement.classed("highlight-node_b5517066-7526-435f-9f39-bfc104cad351", false);
                         }, 2000); // Match the animation duration
                     }
                 } else if (Object.keys(graphvizData.clusters).includes(lastModifiedContainer)) {
                     // Highlight the cluster (expanded container)
-                    const targetElement = inner.selectAll(".boundary-box_ced9cc6e-1977-4d26-9d74-203cce31ef51")
+                    const targetElement = inner.selectAll(".boundary-box_b5517066-7526-435f-9f39-bfc104cad351")
                         .filter(function([clusterName]) {
                             return clusterName === lastModifiedContainer;
                         });
                         
                     if (!targetElement.empty()) {
-                        targetElement.classed("highlight-cluster_ced9cc6e-1977-4d26-9d74-203cce31ef51", true);
+                        targetElement.classed("highlight-cluster_b5517066-7526-435f-9f39-bfc104cad351", true);
                         
                         // Remove the highlight class after animation completes
                         setTimeout(() => {
-                            targetElement.classed("highlight-cluster_ced9cc6e-1977-4d26-9d74-203cce31ef51", false);
+                            targetElement.classed("highlight-cluster_b5517066-7526-435f-9f39-bfc104cad351", false);
                         }, 2000); // Match the animation duration
                     }
                 }

@@ -40,6 +40,7 @@ class TinyModelWithNestedSubmodules(nn.Module):
 
 
 model = TinyModelWithNestedSubmodules()
+model.eval()
 example_input = torch.randn(2, 32)
 
 collapse_modules_after_depth = 0
@@ -86,6 +87,7 @@ class TinyModelWithNestedSubmodules(nn.Module):
 
 # Example
 model = TinyModelWithNestedSubmodules()
+model.eval()
 
 trace_model(model, torch.randn(2, 32), show_module_attr_names=True, collapse_modules_after_depth=0, forced_module_tracing_depth=5)
 

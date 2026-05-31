@@ -33,6 +33,7 @@ class SimpleMultiPathModule(nn.Module):
         return results
 
 model = SimpleMultiPathModule()
+model.eval()
 
 x = torch.randn(3, 10)
 y = torch.randn(3, 10)
@@ -74,6 +75,7 @@ class SimpleMultiPathModule(nn.Module):
         return results
 
 model = SimpleMultiPathModule()
+model.eval()
 
 x = torch.randn(3, 10)
 y = torch.randn(3, 10)

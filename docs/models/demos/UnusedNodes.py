@@ -21,6 +21,7 @@ class MainModule(nn.Module):
         return self.dls(x)
 
 model = MainModule()
+model.eval()
 
 example_input = torch.ones(3,  4)
 
@@ -48,6 +49,7 @@ class MainModule(nn.Module):
         return self.dls(x)
 
 model = MainModule()
+model.eval()
 
 example_input = torch.ones(3,  4)
 

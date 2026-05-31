@@ -164,6 +164,7 @@ class ComplexModel(nn.Module):
         return self.final_classifier(combined) + bias + 34
 
 model = ComplexModel()
+model.eval()
 x = torch.randn(2, 3, 32, 32)
 y = torch.randn(2, 3, 32, 32)
 
@@ -338,6 +339,7 @@ class ComplexModel(nn.Module):
         return self.final_classifier(combined) + bias + 34
 
 model = ComplexModel()
+model.eval()
 x = torch.randn(2, 3, 32, 32)
 y = torch.randn(2, 3, 32, 32)
 

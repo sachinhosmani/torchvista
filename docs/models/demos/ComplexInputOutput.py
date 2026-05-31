@@ -21,6 +21,7 @@ class MyModule(nn.Module):
         
 
 model = MyModule()
+model.eval()
 example_input = {
     'tensor_1': torch.randn(2, 5),
     'inner': {
@@ -53,6 +54,7 @@ class MyModule(nn.Module):
         
 
 model = MyModule()
+model.eval()
 example_input = {
     'tensor_1': torch.randn(2, 5),
     'inner': {

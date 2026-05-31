@@ -31,6 +31,7 @@ class CompressionTest6(nn.Module):
         return x
 
 model = CompressionTest6()
+model.eval()
 example_input = torch.randn(2, 16, 256)  # (batch, seq_len, d_model)
 
 show_compressed_view = True
@@ -71,6 +72,7 @@ class CompressionTest6(nn.Module):
         return x
 
 model = CompressionTest6()
+model.eval()
 example_input = torch.randn(2, 16, 256)  # (batch, seq_len, d_model)
 
 trace_model(model, example_input, collapse_modules_after_depth=0, show_compressed_view=True)

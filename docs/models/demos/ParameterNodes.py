@@ -24,6 +24,7 @@ class ModelWithParameters(nn.Module):
         return x
 
 model = ModelWithParameters()
+model.eval()
 example_input = torch.randn(1, 64)
 
 code_contents = """\
@@ -54,6 +55,7 @@ class ModelWithParameters(nn.Module):
         return x
 
 model = ModelWithParameters()
+model.eval()
 example_input = torch.randn(1, 64)
 
 trace_model(model, example_input)

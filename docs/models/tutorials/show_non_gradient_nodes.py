@@ -55,6 +55,7 @@ class SimpleResNet(nn.Module):
         return self.fc(x)
 
 model = SimpleResNet()
+model.eval()
 example_input = {'image': torch.randn(1, 3, 32, 32)}
 
 # Hide constant tensors and scalars that don't require gradients
@@ -108,6 +109,7 @@ class SimpleResNet(nn.Module):
         return self.fc(x)
 
 model = SimpleResNet()
+model.eval()
 
 example_input = {
     'image': torch.randn(1, 3, 32, 32)

@@ -34,6 +34,7 @@ class CustomModel(nn.Module):
         return Container(x, y)
 
 model = CustomModel()
+model.eval()
 
 example_input = torch.randn(2, 4)
 
@@ -74,6 +75,7 @@ class CustomModel(nn.Module):
         return Container(x, y)
 
 model = CustomModel()
+model.eval()
 
 example_input = torch.randn(2, 4)
 

@@ -70,6 +70,7 @@ class LinearModel(nn.Module):
 # Instantiate the module and tensor input
 model = LinearModel()
 inputs = torch.randn(2, 10)
+model.eval() # Optional
 
 # Trace!
 trace_model(model, inputs)

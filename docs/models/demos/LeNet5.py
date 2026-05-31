@@ -18,6 +18,7 @@ class LeNet5(nn.Module):
         return self.classifier(self.features(x))
 
 model = LeNet5()
+model.eval()
 example_input = torch.randn(2, 1, 28, 28)
 
 
@@ -44,6 +45,7 @@ class LeNet5(nn.Module):
         return self.classifier(self.features(x))
 
 model = LeNet5()
+model.eval()
 example_input = torch.randn(2, 1, 28, 28)
 trace_model(model, example_input)
 

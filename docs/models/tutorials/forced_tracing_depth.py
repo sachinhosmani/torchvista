@@ -55,6 +55,7 @@ class SimpleResNet(nn.Module):
         return self.fc(x)
 
 model = SimpleResNet()
+model.eval()
 example_input = torch.randn(1, 3, 32, 32)
 
 # Trace up to depth 3 to see inside Conv2d, BatchNorm2d, etc.
@@ -105,6 +106,7 @@ class SimpleResNet(nn.Module):
         return self.fc(x)
 
 model = SimpleResNet()
+model.eval()
 example_input = torch.randn(1, 3, 32, 32)
 
 forced_module_tracing_depth = 3
