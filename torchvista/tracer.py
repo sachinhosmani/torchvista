@@ -98,6 +98,291 @@ with warnings.catch_warnings():
     MODULES = get_all_nn_modules() - CONTAINER_MODULES
 
 
+def extract_tensors_from_obj(obj, max_depth=5, current_depth=0, return_paths=False, path_prefix=""):
+    """Recursively extracts all tensors from any object structure.
+
+    Args:
+        obj: Any object that might contain tensors
+        max_depth: Maximum recursion depth to prevent infinite loops
+        current_depth: Current recursion depth
+        return_paths: If True, returns list of tuples [(tensor, path), ...]
+                     If False, returns list of tensors [tensor, ...]
+        path_prefix: Current path prefix (e.g., dict key). Only used when return_paths=True
+
+    Returns:
+        List of tensors or list of (tensor, path) tuples depending on return_paths
+    """
+    if obj is None:
+        return []
+    if current_depth >= max_depth:
+        return []
+
+    # Base case: object is a tensor
+    if isinstance(obj, torch.Tensor):
+        if return_paths:
+            # Ensure path is not empty (fallback to 'tensor' if path_prefix is empty)
+            path = path_prefix if path_prefix else 'tensor'
+            return [(obj, path)]
+        else:
+            return [obj]
+
+    # Recursive cases
+    results = []
+
+    # Handle lists, tuples, and other iterables
+    if isinstance(obj, (list, tuple, set)):
+        for i, item in enumerate(obj):
+            if return_paths:
+                new_path = f"{path_prefix}[{i}]" if path_prefix else f"[{i}]"
+                results.extend(extract_tensors_from_obj(item, max_depth, current_depth + 1, return_paths=True, path_prefix=new_path))
+            else:
+                results.extend(extract_tensors_from_obj(item, max_depth, current_depth + 1, return_paths=False))
+
+    # Handle dictionaries
+    elif isinstance(obj, dict):
+        for key, value in obj.items():
+            if return_paths:
+                # Sanitize key to ensure it's a valid identifier
+                # Convert key to string and handle special characters
+                key_str = str(key)
+                # Replace invalid characters with underscore
+                key_str = ''.join(c if c.isalnum() or c == '_' else '_' for c in key_str)
+                # Fallback if key becomes empty after sanitization
+                if not key_str:
+                    key_str = 'key'
+                new_path = f"{path_prefix}.{key_str}" if path_prefix else key_str
+                results.extend(extract_tensors_from_obj(value, max_depth, current_depth + 1, return_paths=True, path_prefix=new_path))
+            else:
+                results.extend(extract_tensors_from_obj(value, max_depth, current_depth + 1, return_paths=False))
+
+    # Handle custom objects with accessible attributes
+    elif hasattr(obj, '__dict__'):
+        for attr_name in dir(obj):
+            # Skip private attributes and callable methods
+            if attr_name.startswith('_') or callable(getattr(obj, attr_name, None)):
+                continue
+
+            try:
+                attr_value = getattr(obj, attr_name)
+                # Avoid problematic attributes like gradients
+                if attr_name in ['grad', 'grad_fn', '_backward_hooks']:
+                    continue
+                if return_paths:
+                    new_path = f"{path_prefix}.{attr_name}" if path_prefix else attr_name
+                    results.extend(extract_tensors_from_obj(attr_value, max_depth, current_depth + 1, return_paths=True, path_prefix=new_path))
+                else:
+                    results.extend(extract_tensors_from_obj(attr_value, max_depth, current_depth + 1, return_paths=False))
+            except:
+                # Skip attributes that cause errors
+                continue
+
+    return results
+
+
+def transform_to_nested_graph(adj_list, node_to_ancestors):
+    """
+    Transforms a flat adjacency list into a nested graph structure based on node ancestry,
+    while preserving all original node and edge information.
+
+    Args:
+        adj_list: Dict with structure {node_name: {'edges': [...], 'failed': bool, 'node_type': str}}
+        node_to_ancestors: Dict with structure {node_name: [ancestor1, ancestor2, ...]}
+                        where ancestors are ordered from immediate parent to root
+
+    Returns:
+        Nested dict where each node can contain 'subgraphs' (child modules)
+    """
+
+    # Utility function to get the element in the list before the target, if one is present
+    def get_element_before(lst, target):
+        try:
+            index = lst.index(target)
+            return lst[index - 1] if index - 1 >= 0 else None
+        except ValueError:
+            return None
+
+    # Finds the lowest common ancestor between 2 paths, assuming that the paths
+    # are ordered from bottom to top (immediate parent first)
+    def find_lca(path1, path2):
+        lca = None
+        for a, b in zip(path1[::-1], path2[::-1]):
+            if a == b:
+                lca = a
+            else:
+                break
+        return lca
+
+    # Given two nodes, determines the correct pair of "representative" nodes
+    # and returns them for linking in the nested graph
+    def get_representative_nodes(node1, node2):
+        ancestry1, ancestry2 = node_to_ancestors.get(node1, []), node_to_ancestors.get(node2, [])
+
+        # Special cases when the LCA cannot be found
+        if not ancestry1 and not ancestry2:
+            return node1, node2
+        elif not ancestry1:
+            return node1, ancestry2[-1]
+        elif not ancestry2:
+            return ancestry1[-1], node2
+        else:
+            # When LCA is likely to be present
+            lca = find_lca(ancestry1, ancestry2)
+            if not lca:
+                # This can happen if the 2 nodes have completely disjoint hierarchy paths
+                return ancestry1[-1], ancestry2[-1]
+
+            # The node just below the LCA in each node serves as the "representative" node
+            representative_node1 = get_element_before(ancestry1, lca)
+            representative_node2 = get_element_before(ancestry2, lca)
+
+            # If the two nodes are in the same subtree at the same level, they
+            # will act as their own representative nodes
+            representative_node1 = node1 if representative_node1 is None else representative_node1
+            representative_node2 = node2 if representative_node2 is None else representative_node2
+
+            return representative_node1, representative_node2
+
+    # Step 1: Create the basic structure for all nodes (including ancestors)
+    # Collect all unique nodes (actual nodes + all ancestors)
+    all_nodes = set(adj_list.keys())
+    for ancestors in node_to_ancestors.values():
+        all_nodes.update(ancestors)
+
+    # Pre-compute original incoming/outgoing dims for each node from the flat adj_list
+    # This must be done BEFORE edge redirection so we capture the true edge dimensions
+    original_incoming_dims = defaultdict(list)
+    original_outgoing_dims = defaultdict(list)
+    for source_node, node_data in adj_list.items():
+        for edge in node_data.get('edges', []):
+            target_node = edge['target']
+            dims = edge.get('dims', '')
+            original_outgoing_dims[source_node].append(dims)
+            original_incoming_dims[target_node].append(dims)
+
+    # For container nodes (ancestors), compute their original dims by looking at
+    # edges that cross their boundary. A container's incoming dims are the dims of
+    # edges entering any of its descendant nodes from outside the container.
+    # Similarly for outgoing dims.
+    def get_descendants(container_node):
+        """Get all leaf nodes that have this container in their ancestry."""
+        descendants = set()
+        for node, ancestors in node_to_ancestors.items():
+            if container_node in ancestors:
+                descendants.add(node)
+        return descendants
+
+    ancestor_nodes = all_nodes - set(adj_list.keys())
+    for container in ancestor_nodes:
+        descendants = get_descendants(container)
+        # Incoming: edges from non-descendants to descendants
+        # Deduplicate by edge_data_id so same tensor fanning out to multiple internal nodes counts once
+        seen_incoming = set()
+        for target_node in descendants:
+            for source_node, node_data in adj_list.items():
+                if source_node in descendants:
+                    continue
+                for edge in node_data.get('edges', []):
+                    if edge['target'] == target_node:
+                        edge_data_id = edge.get('edge_data_id')
+                        if edge_data_id is not None:
+                            if edge_data_id in seen_incoming:
+                                continue
+                            seen_incoming.add(edge_data_id)
+                        original_incoming_dims[container].append(edge.get('dims', ''))
+        # Outgoing: edges from descendants to non-descendants
+        # Deduplicate by edge_data_id so same tensor going to multiple external targets counts once
+        seen_outgoing = set()
+        for source_node in descendants:
+            for edge in adj_list.get(source_node, {}).get('edges', []):
+                target_node = edge['target']
+                if target_node not in descendants:
+                    edge_data_id = edge.get('edge_data_id')
+                    if edge_data_id is not None:
+                        if edge_data_id in seen_outgoing:
+                            continue
+                        seen_outgoing.add(edge_data_id)
+                    original_outgoing_dims[container].append(edge.get('dims', ''))
+
+    # Initialize nested structure for each node
+    nodes = {}
+    for node in all_nodes:
+        if node in adj_list:
+            # Copy all original data from adj_list
+            nodes[node] = {
+                'edges': [],
+                'subgraphs': {},
+                'failed': adj_list[node].get('failed', False),
+                'node_type': adj_list[node].get('node_type', NodeType.MODULE.value),
+                'original_incoming_dims': tuple(sorted(original_incoming_dims.get(node, []))),
+                'original_outgoing_dims': tuple(sorted(original_outgoing_dims.get(node, []))),
+            }
+        else:
+            # For ancestor nodes not in adj_list (container modules)
+            nodes[node] = {
+                'edges': [],
+                'subgraphs': {},
+                'failed': False,
+                'node_type': NodeType.MODULE.value,
+                'original_incoming_dims': tuple(sorted(original_incoming_dims.get(node, []))),
+                'original_outgoing_dims': tuple(sorted(original_outgoing_dims.get(node, []))),
+            }
+
+    # Step 2: Process edges and redirect them to representative nodes
+    # Track seen edges to avoid duplicates when the same tensor flows to multiple
+    # consumers inside a nested module (e.g., residual connections where x goes to
+    # both a layer and an add node). Key: (rep_source, rep_target, edge_data_id)
+    seen_edges = set()
+
+    for source_node, node_data in adj_list.items():
+        for edge in node_data['edges']:
+            target_node = edge['target']
+
+            # Get representative nodes for this edge
+            rep_source, rep_target = get_representative_nodes(source_node, target_node)
+
+            # Skip duplicate edges from the same tensor between the same representative nodes
+            edge_data_id = edge.get('edge_data_id')
+            if edge_data_id is not None:
+                edge_key = (rep_source, rep_target, edge_data_id)
+                if edge_key in seen_edges:
+                    continue
+                seen_edges.add(edge_key)
+
+            dims = edge.get('dims', '')
+
+            # Create new edge dict with all original information
+            new_edge = {
+                'target': rep_target,
+                'dims': dims,
+            }
+
+            # Preserve optional edge attributes (only if they exist and are not None)
+            if edge_data_id is not None:
+                new_edge['edge_data_id'] = edge_data_id
+            if 'is_implied_edge' in edge:
+                new_edge['is_implied_edge'] = edge['is_implied_edge']
+
+            # Add edge to representative source node
+            nodes[rep_source]['edges'].append(new_edge)
+
+    # Step 3: Build the nested hierarchy
+    # Keep track of the nodes that stay at root level
+    root = dict(nodes)
+
+    # Nest each node under its immediate parent
+    for node, ancestors in node_to_ancestors.items():
+        if ancestors:
+            # Nest this node and all its ancestors appropriately
+            for child, parent in zip([node] + list(ancestors[:-1]), ancestors):
+                if child in nodes and parent in nodes:
+                    # Move child into parent's subgraphs
+                    nodes[parent]['subgraphs'][child] = nodes[child]
+                    # Remove from root level
+                    root.pop(child, None)
+
+    return root
+
+
 def process_graph(model, inputs, adj_list, module_info, func_info, node_to_module_path, parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix, graph_node_display_names, node_to_ancestors, repeat_containers, node_to_attr_name, show_non_gradient_nodes, forced_module_tracing_depth, show_module_attr_names=False, show_compressed_view=False):
     last_successful_op = None
     current_op = None
@@ -345,86 +630,6 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
         node_to_ancestors[op_name] = module_stack[::-1]
 
         return op_name
-
-    def extract_tensors_from_obj(obj, max_depth=5, current_depth=0, return_paths=False, path_prefix=""):
-        """Recursively extracts all tensors from any object structure.
-        
-        Args:
-            obj: Any object that might contain tensors
-            max_depth: Maximum recursion depth to prevent infinite loops
-            current_depth: Current recursion depth
-            return_paths: If True, returns list of tuples [(tensor, path), ...]
-                         If False, returns list of tensors [tensor, ...]
-            path_prefix: Current path prefix (e.g., dict key). Only used when return_paths=True
-            
-        Returns:
-            List of tensors or list of (tensor, path) tuples depending on return_paths
-        """
-        if obj is None:
-            return []
-        if current_depth >= max_depth:
-            return []
-        
-        # Base case: object is a tensor
-        if isinstance(obj, torch.Tensor):
-            if return_paths:
-                # Ensure path is not empty (fallback to 'tensor' if path_prefix is empty)
-                path = path_prefix if path_prefix else 'tensor'
-                return [(obj, path)]
-            else:
-                return [obj]
-        
-        # Recursive cases
-        results = []
-        
-        # Handle lists, tuples, and other iterables
-        if isinstance(obj, (list, tuple, set)):
-            for i, item in enumerate(obj):
-                if return_paths:
-                    new_path = f"{path_prefix}[{i}]" if path_prefix else f"[{i}]"
-                    results.extend(extract_tensors_from_obj(item, max_depth, current_depth + 1, return_paths=True, path_prefix=new_path))
-                else:
-                    results.extend(extract_tensors_from_obj(item, max_depth, current_depth + 1, return_paths=False))
-        
-        # Handle dictionaries
-        elif isinstance(obj, dict):
-            for key, value in obj.items():
-                if return_paths:
-                    # Sanitize key to ensure it's a valid identifier
-                    # Convert key to string and handle special characters
-                    key_str = str(key)
-                    # Replace invalid characters with underscore
-                    key_str = ''.join(c if c.isalnum() or c == '_' else '_' for c in key_str)
-                    # Fallback if key becomes empty after sanitization
-                    if not key_str:
-                        key_str = 'key'
-                    new_path = f"{path_prefix}.{key_str}" if path_prefix else key_str
-                    results.extend(extract_tensors_from_obj(value, max_depth, current_depth + 1, return_paths=True, path_prefix=new_path))
-                else:
-                    results.extend(extract_tensors_from_obj(value, max_depth, current_depth + 1, return_paths=False))
-        
-        # Handle custom objects with accessible attributes
-        elif hasattr(obj, '__dict__'):
-            for attr_name in dir(obj):
-                # Skip private attributes and callable methods
-                if attr_name.startswith('_') or callable(getattr(obj, attr_name, None)):
-                    continue
-                
-                try:
-                    attr_value = getattr(obj, attr_name)
-                    # Avoid problematic attributes like gradients
-                    if attr_name in ['grad', 'grad_fn', '_backward_hooks']:
-                        continue
-                    if return_paths:
-                        new_path = f"{path_prefix}.{attr_name}" if path_prefix else attr_name
-                        results.extend(extract_tensors_from_obj(attr_value, max_depth, current_depth + 1, return_paths=True, path_prefix=new_path))
-                    else:
-                        results.extend(extract_tensors_from_obj(attr_value, max_depth, current_depth + 1, return_paths=False))
-                except:
-                    # Skip attributes that cause errors
-                    continue
-        
-        return results
 
     def trace_op(op_name, output, is_implied_edge=False):
         # Because some discovered operations don't get added to the adj_list in pre_trace_op
@@ -812,209 +1017,6 @@ def process_graph(model, inputs, adj_list, module_info, func_info, node_to_modul
         for node_data in adj_list.values():
             node_data['edges'] = [edge for edge in node_data['edges'] if edge['target'] in adj_list]
 
-    def transform_to_nested_graph(adj_list, node_to_ancestors):
-        """
-        Transforms a flat adjacency list into a nested graph structure based on node ancestry,
-        while preserving all original node and edge information.
-        
-        Args:
-            adj_list: Dict with structure {node_name: {'edges': [...], 'failed': bool, 'node_type': str}}
-            node_to_ancestors: Dict with structure {node_name: [ancestor1, ancestor2, ...]}
-                            where ancestors are ordered from immediate parent to root
-        
-        Returns:
-            Nested dict where each node can contain 'subgraphs' (child modules)
-        """
-        
-        # Utility function to get the element in the list before the target, if one is present
-        def get_element_before(lst, target):
-            try:
-                index = lst.index(target)
-                return lst[index - 1] if index - 1 >= 0 else None
-            except ValueError:
-                return None
-
-        # Finds the lowest common ancestor between 2 paths, assuming that the paths
-        # are ordered from bottom to top (immediate parent first)
-        def find_lca(path1, path2):
-            lca = None
-            for a, b in zip(path1[::-1], path2[::-1]):
-                if a == b:
-                    lca = a
-                else:
-                    break
-            return lca
-
-        # Given two nodes, determines the correct pair of "representative" nodes
-        # and returns them for linking in the nested graph
-        def get_representative_nodes(node1, node2):
-            ancestry1, ancestry2 = node_to_ancestors.get(node1, []), node_to_ancestors.get(node2, [])
-            
-            # Special cases when the LCA cannot be found
-            if not ancestry1 and not ancestry2:
-                return node1, node2
-            elif not ancestry1:
-                return node1, ancestry2[-1]
-            elif not ancestry2:
-                return ancestry1[-1], node2
-            else:
-                # When LCA is likely to be present
-                lca = find_lca(ancestry1, ancestry2)
-                if not lca:
-                    # This can happen if the 2 nodes have completely disjoint hierarchy paths
-                    return ancestry1[-1], ancestry2[-1]
-        
-                # The node just below the LCA in each node serves as the "representative" node
-                representative_node1 = get_element_before(ancestry1, lca)
-                representative_node2 = get_element_before(ancestry2, lca)
-                
-                # If the two nodes are in the same subtree at the same level, they
-                # will act as their own representative nodes
-                representative_node1 = node1 if representative_node1 is None else representative_node1
-                representative_node2 = node2 if representative_node2 is None else representative_node2
-                
-                return representative_node1, representative_node2
-
-        # Step 1: Create the basic structure for all nodes (including ancestors)
-        # Collect all unique nodes (actual nodes + all ancestors)
-        all_nodes = set(adj_list.keys())
-        for ancestors in node_to_ancestors.values():
-            all_nodes.update(ancestors)
-
-        # Pre-compute original incoming/outgoing dims for each node from the flat adj_list
-        # This must be done BEFORE edge redirection so we capture the true edge dimensions
-        original_incoming_dims = defaultdict(list)
-        original_outgoing_dims = defaultdict(list)
-        for source_node, node_data in adj_list.items():
-            for edge in node_data.get('edges', []):
-                target_node = edge['target']
-                dims = edge.get('dims', '')
-                original_outgoing_dims[source_node].append(dims)
-                original_incoming_dims[target_node].append(dims)
-
-        # For container nodes (ancestors), compute their original dims by looking at
-        # edges that cross their boundary. A container's incoming dims are the dims of
-        # edges entering any of its descendant nodes from outside the container.
-        # Similarly for outgoing dims.
-        def get_descendants(container_node):
-            """Get all leaf nodes that have this container in their ancestry."""
-            descendants = set()
-            for node, ancestors in node_to_ancestors.items():
-                if container_node in ancestors:
-                    descendants.add(node)
-            return descendants
-
-        ancestor_nodes = all_nodes - set(adj_list.keys())
-        for container in ancestor_nodes:
-            descendants = get_descendants(container)
-            # Incoming: edges from non-descendants to descendants
-            # Deduplicate by edge_data_id so same tensor fanning out to multiple internal nodes counts once
-            seen_incoming = set()
-            for target_node in descendants:
-                for source_node, node_data in adj_list.items():
-                    if source_node in descendants:
-                        continue
-                    for edge in node_data.get('edges', []):
-                        if edge['target'] == target_node:
-                            edge_data_id = edge.get('edge_data_id')
-                            if edge_data_id is not None:
-                                if edge_data_id in seen_incoming:
-                                    continue
-                                seen_incoming.add(edge_data_id)
-                            original_incoming_dims[container].append(edge.get('dims', ''))
-            # Outgoing: edges from descendants to non-descendants
-            # Deduplicate by edge_data_id so same tensor going to multiple external targets counts once
-            seen_outgoing = set()
-            for source_node in descendants:
-                for edge in adj_list.get(source_node, {}).get('edges', []):
-                    target_node = edge['target']
-                    if target_node not in descendants:
-                        edge_data_id = edge.get('edge_data_id')
-                        if edge_data_id is not None:
-                            if edge_data_id in seen_outgoing:
-                                continue
-                            seen_outgoing.add(edge_data_id)
-                        original_outgoing_dims[container].append(edge.get('dims', ''))
-
-        # Initialize nested structure for each node
-        nodes = {}
-        for node in all_nodes:
-            if node in adj_list:
-                # Copy all original data from adj_list
-                nodes[node] = {
-                    'edges': [],
-                    'subgraphs': {},
-                    'failed': adj_list[node].get('failed', False),
-                    'node_type': adj_list[node].get('node_type', NodeType.MODULE.value),
-                    'original_incoming_dims': tuple(sorted(original_incoming_dims.get(node, []))),
-                    'original_outgoing_dims': tuple(sorted(original_outgoing_dims.get(node, []))),
-                }
-            else:
-                # For ancestor nodes not in adj_list (container modules)
-                nodes[node] = {
-                    'edges': [],
-                    'subgraphs': {},
-                    'failed': False,
-                    'node_type': NodeType.MODULE.value,
-                    'original_incoming_dims': tuple(sorted(original_incoming_dims.get(node, []))),
-                    'original_outgoing_dims': tuple(sorted(original_outgoing_dims.get(node, []))),
-                }
-        
-        # Step 2: Process edges and redirect them to representative nodes
-        # Track seen edges to avoid duplicates when the same tensor flows to multiple
-        # consumers inside a nested module (e.g., residual connections where x goes to
-        # both a layer and an add node). Key: (rep_source, rep_target, edge_data_id)
-        seen_edges = set()
-
-        for source_node, node_data in adj_list.items():
-            for edge in node_data['edges']:
-                target_node = edge['target']
-
-                # Get representative nodes for this edge
-                rep_source, rep_target = get_representative_nodes(source_node, target_node)
-
-                # Skip duplicate edges from the same tensor between the same representative nodes
-                edge_data_id = edge.get('edge_data_id')
-                if edge_data_id is not None:
-                    edge_key = (rep_source, rep_target, edge_data_id)
-                    if edge_key in seen_edges:
-                        continue
-                    seen_edges.add(edge_key)
-
-                dims = edge.get('dims', '')
-
-                # Create new edge dict with all original information
-                new_edge = {
-                    'target': rep_target,
-                    'dims': dims,
-                }
-
-                # Preserve optional edge attributes (only if they exist and are not None)
-                if edge_data_id is not None:
-                    new_edge['edge_data_id'] = edge_data_id
-                if 'is_implied_edge' in edge:
-                    new_edge['is_implied_edge'] = edge['is_implied_edge']
-
-                # Add edge to representative source node
-                nodes[rep_source]['edges'].append(new_edge)
-
-        # Step 3: Build the nested hierarchy
-        # Keep track of the nodes that stay at root level
-        root = dict(nodes)
-        
-        # Nest each node under its immediate parent
-        for node, ancestors in node_to_ancestors.items():
-            if ancestors:
-                # Nest this node and all its ancestors appropriately
-                for child, parent in zip([node] + list(ancestors[:-1]), ancestors):
-                    if child in nodes and parent in nodes:
-                        # Move child into parent's subgraphs
-                        nodes[parent]['subgraphs'][child] = nodes[child]
-                        # Remove from root level
-                        root.pop(child, None)
-        
-        return root
-    
     def transform_to_unnested_graph(nested_graph, node_to_ancestors):
         """
         Reverses ``transform_to_nested_graph`` by flattening a nested graph back into an

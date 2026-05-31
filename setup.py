@@ -9,6 +9,9 @@ setup(
         'ipython>=7.0.0',
         'numpy>=1.18.0',
     ],
+    extras_require={
+        'test': ['pytest>=7.0'],
+    },
     python_requires='>=3.8',
     package_data={
         'torchvista': ['templates/*.html', 'assets/*'],
