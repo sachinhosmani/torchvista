@@ -105,3 +105,12 @@ trace_model(
 | `show_module_attr_names` | `bool` | `False` | Visual | Display attribute names for modules when available instead of just class names. |
 | `export_path` | `str` | `None` | Export | Custom path if exporting as a file. **Only HTML format** is currently supported with custom export paths. If only file name is specified, it will be created inside the present working directory. |
 | `show_compressed_view` (Experimental) | `bool` | `False` | Visual | Compress the graph by showing repeating nodes of the same type with identical input and output dims in single "repeat" blocks. This feature currently only recognises repeating nodes within `Sequential` and `ModuleList`. WARNING: this feature might be expensive on large models. |
+
+## Running tests
+
+Tests live under [`tests/`](tests/) and use [pytest](https://docs.pytest.org/).
+
+```bash
+pip install -e ".[test]"
+pytest
+```
