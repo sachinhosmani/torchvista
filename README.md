@@ -36,6 +36,10 @@ An interactive tool to visualize the forward pass of a PyTorch model directly in
 - Quick Google Colab tutorial 👉 [here](https://colab.research.google.com/drive/1wrWKhpvGiqHhE0Lb1HnFGeOcS4uBqGXw?usp=sharing) (must be logged in to Colab)
 - Check out demos 👉 [here](https://sachinhosmani.github.io/torchvista/demos.html)
 
+## How does it work?
+
+I wrote a technical deep-dive blog post on Towards Data Science which can be read [here](https://towardsdatascience.com/torchvista-building-an-interactive-pytorch-visualization-package-for-notebooks/). It explains how the tool works under the hood.
+
 ## ⚙️ Usage
 
 Install via pip
