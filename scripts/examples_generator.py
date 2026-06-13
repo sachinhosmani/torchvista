@@ -16,7 +16,7 @@ Tutorial files: title, intro, conclusion variables + model code
 
 Code snippets are auto-generated - no duplication needed.
 """
-from torchvista import tracer, trace_model
+from torchvista import tracer, render, trace_model
 from pathlib import Path
 import importlib.util
 import ast
@@ -213,7 +213,7 @@ def generate_demo_models(models_dict, output_subdir):
         kwargs["show_compressed_view"] = items["show_compressed_view"]
         print(f"Generating {output_subdir}/{name}...")
 
-        graph_html, exception = tracer._get_demo_html_str(model, example_input, code_contents, **kwargs)
+        graph_html, exception = render._get_demo_html_str(model, example_input, code_contents, **kwargs)
         print('exception:', exception)
         output_path = output_dir / f"{name}.html"
         output_path.write_text(graph_html)

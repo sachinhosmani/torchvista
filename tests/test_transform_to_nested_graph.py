@@ -1,5 +1,5 @@
 """Unit tests for the pure helper transform_to_nested_graph."""
-from torchvista.tracer import transform_to_nested_graph
+from torchvista.graph_transforms import transform_to_nested_graph
 
 
 def _make_node(node_type="Operation", edges=None):

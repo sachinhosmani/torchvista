@@ -1,7 +1,7 @@
 """Unit tests for the pure helper extract_tensors_from_obj."""
 import torch
 
-from torchvista.tracer import extract_tensors_from_obj
+from torchvista.tensor_utils import extract_tensors_from_obj
 
 
 class TestExtractTensorsFromObj:

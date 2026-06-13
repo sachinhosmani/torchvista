@@ -6,3 +6,4 @@ __pycache__/
 .vscode/
 .conda/
 .ipynb_checkpoints/
+.claude/

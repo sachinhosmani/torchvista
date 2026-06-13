@@ -2,7 +2,7 @@
 """
 from collections import defaultdict
 
-from torchvista.tracer import process_graph
+from torchvista.engine import process_graph
 
 
 def trace(model, inputs, *, allow_exception=False, **kwargs):
