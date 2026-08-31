@@ -63,6 +63,15 @@ def generate_html_file_action(html_str, unique_id, export_path=None):
         </div>
     """))
 
+def _custom_json_serializer(obj):
+    if isinstance(obj, torch.SymInt):
+        return {"__type__": "SymInt", "value": str(obj)}
+    if isinstance(obj, torch.SymFloat):
+        return {"_type": "SymFloat", "expr": str(obj)}
+    if isinstance(obj, torch.SymBool):
+        return {"_type": "SymBool", "expr": str(obj)}
+    raise TypeError(f'Object of type {obj.__class__.__name__} is not JSON serializable')
+
 def plot_graph(adj_list, module_info, func_info, node_to_module_path,
                parent_module_to_nodes, parent_module_to_depth, graph_node_name_to_without_suffix,
                graph_node_display_names, node_to_attr_name, ancestor_map, collapse_modules_after_depth, height, width, export_format, show_module_attr_names, repeat_containers, show_modular_view=False, export_path=None):
@@ -76,16 +85,16 @@ def plot_graph(adj_list, module_info, func_info, node_to_module_path,
     template = Template(template_str)
         
     output = template.safe_substitute({
-        'adj_list_json': json.dumps(adj_list),
-        'module_info_json': json.dumps(module_info),
-        'func_info_json': json.dumps(func_info),
-        'parent_module_to_nodes_json': json.dumps(parent_module_to_nodes),
-        'parent_module_to_depth_json': json.dumps(parent_module_to_depth),
-        'graph_node_name_to_without_suffix': json.dumps(graph_node_name_to_without_suffix),
-        'graph_node_display_names': json.dumps(graph_node_display_names),
-        'node_to_attr_name': json.dumps(node_to_attr_name),
-        'ancestor_map': json.dumps(ancestor_map),
-        'repeat_containers': json.dumps(list(repeat_containers)),
+        'adj_list_json': json.dumps(adj_list, default=_custom_json_serializer),
+        'module_info_json': json.dumps(module_info, default=_custom_json_serializer),
+        'func_info_json': json.dumps(func_info, default=_custom_json_serializer),
+        'parent_module_to_nodes_json': json.dumps(parent_module_to_nodes, default=_custom_json_serializer),
+        'parent_module_to_depth_json': json.dumps(parent_module_to_depth, default=_custom_json_serializer),
+        'graph_node_name_to_without_suffix': json.dumps(graph_node_name_to_without_suffix, default=_custom_json_serializer),
+        'graph_node_display_names': json.dumps(graph_node_display_names, default=_custom_json_serializer),
+        'node_to_attr_name': json.dumps(node_to_attr_name, default=_custom_json_serializer),
+        'ancestor_map': json.dumps(ancestor_map, default=_custom_json_serializer),
+        'repeat_containers': json.dumps(list(repeat_containers), default=_custom_json_serializer),
         'unique_id': unique_id,
         'd3_source': d3_source,
         'viz_source': viz_source,
@@ -104,6 +113,7 @@ def plot_graph(adj_list, module_info, func_info, node_to_module_path,
         generate_html_file_action(output, unique_id, export_path=export_path)
     else:
         display(HTML(output))
+
 
 def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_depth=1, show_non_gradient_nodes=True, forced_module_tracing_depth=None, show_module_attr_names=False, show_compressed_view=False):
     collapse_modules_after_depth = max(collapse_modules_after_depth, 0)
@@ -136,16 +146,16 @@ def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_dept
     template = Template(graph_template_str)
     
     graph_output = template.safe_substitute({
-        'adj_list_json': json.dumps(adj_list),
-        'module_info_json': json.dumps(module_info),
-        'func_info_json': json.dumps(func_info),
-        'parent_module_to_nodes_json': json.dumps(parent_module_to_nodes),
-        'parent_module_to_depth_json': json.dumps(parent_module_to_depth),
-        'graph_node_name_to_without_suffix': json.dumps(graph_node_name_to_without_suffix),
-        'graph_node_display_names': json.dumps(graph_node_display_names),
-        'node_to_attr_name': json.dumps(node_to_attr_name),
-        'ancestor_map': json.dumps(build_immediate_ancestor_map(node_to_ancestors, adj_list)),
-        'repeat_containers': json.dumps(list(repeat_containers)),
+        'adj_list_json': json.dumps(adj_list, default=_custom_json_serializer),
+        'module_info_json': json.dumps(module_info, default=_custom_json_serializer),
+        'func_info_json': json.dumps(func_info, default=_custom_json_serializer),
+        'parent_module_to_nodes_json': json.dumps(parent_module_to_nodes, default=_custom_json_serializer),
+        'parent_module_to_depth_json': json.dumps(parent_module_to_depth, default=_custom_json_serializer),
+        'graph_node_name_to_without_suffix': json.dumps(graph_node_name_to_without_suffix, default=_custom_json_serializer),
+        'graph_node_display_names': json.dumps(graph_node_display_names, default=_custom_json_serializer),
+        'node_to_attr_name': json.dumps(node_to_attr_name, default=_custom_json_serializer),
+        'ancestor_map': json.dumps(build_immediate_ancestor_map(node_to_ancestors, adj_list), default=_custom_json_serializer),
+        'repeat_containers': json.dumps(list(repeat_containers), default=_custom_json_serializer),
         'unique_id': unique_id,
         'd3_source': d3_source,
         'viz_source': viz_source,
@@ -168,6 +178,7 @@ def _get_demo_html_str(model, inputs, code_contents, collapse_modules_after_dept
         'error_contents': str(exception) if exception else "",
     })
     return output, exception
+
 
 def validate_export_format(export_format):
     if export_format is None:
